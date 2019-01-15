@@ -6,10 +6,11 @@ main:
 
 critic2:
   - title: Getting Started
+    url: /critic2/
     children:
       - title: "Overview"
         url: /critic2/overview/
-      - title: "Intsallation"
+      - title: "Installation"
         url: /critic2/installation/
       - title: "External Libraries"
         url: /critic2/libraries/

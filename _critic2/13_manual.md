@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Quick Start Guide"
-permalink: /critic2/quickstart/
+title: "Critic2---Reference Manual"
+permalink: /critic2/manual/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

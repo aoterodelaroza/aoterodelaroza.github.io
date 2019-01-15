@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Copyright"
-permalink: /critic2/copyright/
+title: "Critic2---Quick Start Guide"
+permalink: /critic2/quickstart/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

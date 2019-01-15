@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Overview"
-permalink: /critic2/overview/
+title: "Critic2---Frequently Asked Questions"
+permalink: /critic2/faq/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

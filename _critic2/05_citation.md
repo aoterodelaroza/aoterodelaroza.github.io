@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Summary of Commands"
-permalink: /critic2/syntax/
+title: "Critic2---Citation"
+permalink: /critic2/citation/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

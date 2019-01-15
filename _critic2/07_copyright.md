@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "External Libraries"
-permalink: /critic2/libraries/
+title: "Critic2---Copyright"
+permalink: /critic2/copyright/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

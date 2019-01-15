@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "How to..."
-permalink: /critic2/howto/
+title: "Critic2---Installation"
+permalink: /critic2/installation/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

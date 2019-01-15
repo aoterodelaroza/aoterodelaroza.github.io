@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Installation"
-permalink: /critic2/installation/
+title: "Critic2---Summary of Commands"
+permalink: /critic2/syntax/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"

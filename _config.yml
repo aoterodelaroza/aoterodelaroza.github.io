@@ -17,13 +17,11 @@ baseurl: ""
 url: "https://aoterodelaroza.github.io"
 repository: "aoterodelaroza/aoterodelaroza.github.io"
 github_username: "aoterodelaroza"
-teaser: "/assets/images/clathrate.png"
 breadcrumbs: true
 
 # Searches
 search: true
 search_full_content: true
-search_provider: lunr
 
 # Site Footer
 footer:
@@ -72,6 +70,14 @@ exclude:
   - .jekyll-assets-cache
   - LICENSE
   - README.md
+
+collections:
+  critic2:
+    output: true
+    permalink: /:critic2/:path/
+  devnotes:
+    output: true
+    permalink: /:devnotes/:path/
 
 # Defaults
 defaults:

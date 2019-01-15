@@ -1,8 +1,8 @@
 ---
 layout: single
 classes: wide
-title: "Citation"
-permalink: /critic2/citation/
+title: "Critic2---Files"
+permalink: /critic2/files/
 excerpt: "This is one of critic2's pages."
 sidebar:
   nav: "critic2"
