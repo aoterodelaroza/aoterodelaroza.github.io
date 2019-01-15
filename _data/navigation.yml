@@ -1,6 +1,8 @@
 main:
+  - title: "DevNotes"
+    url: /devnotes/
   - title: "Critic2"
-  - url: /critic2/
+    url: /critic2/
 
 critic2:
   - title: Getting Started
