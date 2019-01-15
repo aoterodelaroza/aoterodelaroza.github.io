@@ -2,6 +2,7 @@
 *~
 
 ## gem
+.bundle/
 vendor/
 Gemfile.lock
 

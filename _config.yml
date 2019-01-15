@@ -1,0 +1,93 @@
+# Theme settings
+remote_theme: mmistakes/minimal-mistakes@4.14.2
+minimal_mistakes_skin: "contrast" # "air", "aqua", "default", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+
+# Site Settings: {{ site.blah }}
+locale: "en-US"
+timezone: "Europe/Madrid"
+title: "Alberto's repos"
+title_separator: "|"
+name: "Alberto Otero de la Roza"
+email: "aoterodelaroza@example.com"
+description: >-
+  This is a collection of software developed and maintained by Alberto Otero de la Roza at
+  the university of Oviedo. Most programs and collections are for doing quantum chemistry,
+  but you can find other goodies as well.
+baseurl: ""
+url: "https://aoterodelaroza.github.io"
+repository: "aoterodelaroza/aoterodelaroza.github.io"
+github_username: "aoterodelaroza"
+teaser: "/assets/images/clathrate.png"
+breadcrumbs: true
+
+# Searches
+search: true
+search_full_content: true
+search_provider: lunr
+
+# Site Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/aoterodelaroza"
+    - label: "GitLab"
+      icon: "fab fa-fw fa-gitlab"
+      url: "https://gitlab.com/aoterodelaroza"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:aoterodelaroza@gmail.com"
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google"
+      url: "https://scholar.google.com/citations?user=GR5q_Q0AAAAJ&hl=en"
+
+
+# Navigation
+permalink: /:categories/:title/
+
+# Markdown and plugins
+markdown: kramdown
+highlighter: rouge
+excerpt_separator: "\n\n"
+plugins:
+  - jekyll-feed
+  - jekyll-include-cache
+  - jemoji
+  - jekyll-gist
+  - jekyll-sitemap
+
+# Process math
+head_scripts:
+  - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+# Excludes and includes
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .gitignore
+  - .sass-cache
+  - .asset-cache
+  - .jekyll-assets-cache
+  - LICENSE
+  - README.md
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: false
+      related: false
+
+# HTML Compression
+# - http://jch.penibelst.de/
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
