@@ -1,0 +1,11 @@
+## emacs
+*~
+
+## gem
+vendor/
+Gemfile.lock
+
+## jekyll generated
+_site
+.sass-cache
+.jekyll-metadata
