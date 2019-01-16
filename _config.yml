@@ -40,9 +40,6 @@ footer:
       url: "https://scholar.google.com/citations?user=GR5q_Q0AAAAJ&hl=en"
 
 
-# Navigation
-permalink: /:categories/:title/
-
 # Markdown and plugins
 markdown: kramdown
 highlighter: rouge
@@ -70,14 +67,16 @@ exclude:
   - .jekyll-assets-cache
   - LICENSE
   - README.md
+include:
+  - _pagesd/
+  - _critic2/
+  - _devnotes/
 
 collections:
   critic2:
     output: true
-    permalink: /:critic2/:path/
   devnotes:
     output: true
-    permalink: /:devnotes/:path/
 
 # Defaults
 defaults:
