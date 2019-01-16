@@ -1,6 +1,6 @@
 # Theme settings
 remote_theme: mmistakes/minimal-mistakes@4.14.2
-minimal_mistakes_skin: "contrast" # "air", "aqua", "default", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin: "dirt" # "air", "aqua", "contrast", "default", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings: {{ site.blah }}
 locale: "en-US"
