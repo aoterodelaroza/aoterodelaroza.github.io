@@ -40,4 +40,6 @@ critic2:
         url: /critic2/example1/
       - title: "Example 2"
         url: /critic2/example2/
+      - title: "Noexist"
+        url: /critic2/examplenoexist/
 
