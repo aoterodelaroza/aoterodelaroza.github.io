@@ -8,8 +8,8 @@ critic2:
   - title: Getting Started
     url: /critic2/
     children:
-      - title: "Overview"
-        url: /critic2/overview/
+      - title: "Download"
+        url: /critic2/
       - title: "Installation"
         url: /critic2/installation/
       - title: "External Libraries"
