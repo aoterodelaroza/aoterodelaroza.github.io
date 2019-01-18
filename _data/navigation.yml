@@ -26,7 +26,7 @@ critic2:
     children:
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
-      - title: "Summary of Commands"
+      - title: "List of Commands"
         url: /critic2/syntax/
       - title: "Reference Manual"
         url: /critic2/manual/

@@ -3,7 +3,7 @@ layout: single
 classes: wide
 title: "Critic2---Quick Start Guide"
 permalink: /critic2/quickstart/
-excerpt: "This is one of critic2's pages."
+excerpt: "Basic usage of critic2."
 sidebar:
   nav: "critic2"
 ---
