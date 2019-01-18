@@ -92,3 +92,22 @@ integrals calculated by libcint, as well as the `MOLCALC HF`
 keyword. See the [complete example](/critic2/examplenoexist/) and the
 [manual](/critic2/examplenoexist) for more information.
 
+## Libqhull
+
+The qhull library calculates convex hulls, Delaunay triangulations,
+Voronoi diagrams, and other geometry computations. In critic2, the
+qhull library is used to calculate the Wigner-Seitz (WS) cell. The
+lattice vectors that correspond to each of the WS faces are used in
+critic2 to calculate the shortest lattice translation of a given
+vector as well as in the YT integration method and other
+parts. 
+
+Critic2 ships a static (and probably old) copy of qhull but if you
+want to compile against your own, you can do so via configure:
+~~~
+./configure --with-qhull-inc=/usr/include/qhull/ --with-qhull-lib=/usr/lib/x86_64-linux-gnu
+~~~
+where the two directories are the location of the `libqhull.h` header
+file (with-qhull-inc) and the `libqhull.so` library file
+(with-qhull-lib).
+
