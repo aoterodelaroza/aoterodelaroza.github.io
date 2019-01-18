@@ -65,3 +65,30 @@ numerical integration in a molecular mesh.
 
 See the [complete example](/critic2/examplenoexist/) and the
 [manual](/critic2/examplenoexist) for more information.
+
+## Libcint
+
+[Libcint](https://github.com/sunqm/libcint) is a library for
+calculating molecular integrals between Gaussian-Type Orbitals
+(GTOs). In critic2, this library is used mostly for testing but some
+options to the MOLCALC keyword and some functions in arithmetic
+expressions require it. To compile critic2 with libcint support, do
+either of these two:
+~~~
+./configure --with-cint-shared=/opt/libcint/lib
+./configure --with-cint-static=/opt/libcint/lib
+~~~
+where `/opt/libcint/lib` is the location of the libcint static (`.a`)
+or shared (`.so`) libraries prefix where libcint was installed.  If
+compiled with the shared option, the same path needs to be available
+when critic2 is executed (for instance, through the LD_LIBRARY_PATH
+environment variable).
+
+The libcint library is used with molecular wavefunctions that provide
+the basis set information (at present, this is only for fields read
+from a Gaussian fchk file, but more will implemented). The `mep()`,
+`uslater()`, and `nheff()` chemical functions use the molecular
+integrals calculated by libcint, as well as the `MOLCALC HF`
+keyword. See the [complete example](/critic2/examplenoexist/) and the
+[manual](/critic2/examplenoexist) for more information.
+
