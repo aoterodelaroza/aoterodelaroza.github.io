@@ -44,3 +44,10 @@ critic2:
       - title: "Noexist"
         url: /critic2/examplenoexist/
 
+critic2_manual:
+  - title: "Reference Manual"
+    url: /critic2/manual/
+    children:
+      - title: "Input, output, notation"
+        url: /critic2/manual/inputoutput/
+
