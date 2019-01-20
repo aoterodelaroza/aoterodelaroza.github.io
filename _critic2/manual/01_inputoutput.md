@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Input format, output format, and notation"
+title: "Input format, output format, notation"
 permalink: /critic2/manual/inputoutput/
 excerpt: "Input format, output format, and notation for critic2."
 sidebar:
@@ -11,17 +11,16 @@ toc_label: "Input and output format, notation"
 toc_sticky: true
 ---
 
-## Notation and terms used in critic2
+## Notation and terms
 
 The input for critic2 is free-format and case-insensitive. Lines
-preceded by # are treated as comments. The input syntax is
+preceded by `#` are treated as comments. The input syntax is
 keyword-driven: the first word in any (non-blank) input line
-determines the task to be performed. In the remainder of this manual,
-these main keywords and their usage are described.
+determines the task to be performed.
 
 In this manual, keywords are written in CAPS. Input variables are
-denoted using a suffix to indicate their type: a real number (.r), an
-integer (.i) or a string (.s). Almost anywhere that a number is
+denoted using a suffix to indicate their type: a real number (`.r`), an
+integer (`.i`) or a string (`.s`). Almost anywhere that a number is
 expected, it is possible to use an arithmetic expression (see the
 `Arithmetic expressions, variables, and functions in critic2`_
 section). If an arithmetic expression is required (and not merely
@@ -141,7 +140,7 @@ UNITS {BOHR|AU|A.U.|ANG|ANGSTROM}
 ~~~
 This keyword changes the units of all distances in input and output.
 
-## Input and output for a simple crystal structure
+## Input/Output for a crystal
 
 As an example, let us consider an input for the conventional cell of
 the fluorite (CaF2) crystal:
@@ -441,7 +440,7 @@ CRITIC2 ended succesfully (0 WARNINGS, 0 COMMENTS)
 CRITIC2--2015/5/25, 13:06:32.168
 ~~~
 
-## Input and output for a simple molecular structure
+## Input/Output for a molecular
 
 Molecular structures are read in critic2 using the MOLECULE keyword. A
 simple example for a water molecule is:

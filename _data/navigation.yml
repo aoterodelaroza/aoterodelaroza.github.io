@@ -50,4 +50,31 @@ critic2_manual:
     children:
       - title: "Input, output, notation"
         url: /critic2/manual/inputoutput/
-
+      - title: "Expressions, variables, and functions"
+        url: /critic2/manual/arithmetics/
+      - title: "Crystal structure"
+        url: /critic2/manual/crystal/
+      - title: "Molecular structure"
+        url: /critic2/manual/molecule/
+      - title: "Exporting the structure"
+        url: /critic2/manual/write/
+      - title: "Loading scalar fields"
+        url: /critic2/manual/fields/
+      - title: "Graphical representations"
+        url: /critic2/manual/graphics/
+      - title: "Finding critical points"
+        url: /critic2/manual/cpsearch/
+      - title: "Plotting gradient paths"
+        url: /critic2/manual/gradientpath/
+      - title: "Plotting atomic basins"
+        url: /critic2/manual/basinplot/
+      - title: "Integrating atomic basins"
+        url: /critic2/manual/integrate/
+      - title: "NCI plots"
+        url: /critic2/manual/nciplot/
+      - title: "Structural tools"
+        url: /critic2/manual/structure/
+      - title: "STM plots"
+        url: /critic2/manual/stm/
+      - title: "Miscellaneous tools"
+        url: /critic2/manual/misc/
