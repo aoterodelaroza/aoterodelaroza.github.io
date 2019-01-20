@@ -1,7 +1,7 @@
 ---
 layout: single
 classes: wide
-title: "Critic2---List of Commands"
+title: "List of Commands"
 permalink: /critic2/syntax/
 excerpt: "List of commands used in critic2."
 sidebar:

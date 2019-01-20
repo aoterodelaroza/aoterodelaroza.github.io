@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Critic2---Interfacing with External Libraries"
+title: "Interfacing with External Libraries"
 permalink: /critic2/libraries/
 excerpt: "Enhancing critic2's capabilities by interfacing with external libraries ."
 sidebar:
@@ -57,11 +57,9 @@ LOAD benzene.wfx
 MOLCALC "xc($1,$1:g,101)+xc($1,$1:g,130)"
 ~~~
 In this case, `xc()` takes two arguments: the density and the
-gradient. Since the gradient from a molecular wavefunction is
-calculated analytical (and therefore with no significant error), we
-can use the `:g` field modifier to pass the gradient of the first
-field as the second argument to `xc()`. The MOLCALC keyword performs a
-numerical integration in a molecular mesh.
+gradient. The `:g` field modifier is used to pass the gradient of the
+first field as the second argument to `xc()`. The MOLCALC keyword
+performs a numerical integration in a molecular mesh.
 
 See the [complete example](/critic2/examplenoexist/) and the
 [manual](/critic2/examplenoexist) for more information.

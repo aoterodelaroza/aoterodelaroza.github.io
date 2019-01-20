@@ -1,7 +1,7 @@
 ---
 layout: single
 classes: wide
-title: "Critic2---Citation"
+title: "Citation"
 permalink: /critic2/citation/
 excerpt: "Please cite these references if you use critic2."
 sidebar:

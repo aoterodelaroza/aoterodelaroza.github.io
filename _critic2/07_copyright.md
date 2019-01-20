@@ -1,7 +1,7 @@
 ---
 layout: single
 classes: wide
-title: "Critic2---Copyright"
+title: "Copyright"
 permalink: /critic2/copyright/
 excerpt: "The license for the critic2 program."
 sidebar:

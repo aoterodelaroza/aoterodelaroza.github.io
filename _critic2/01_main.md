@@ -14,24 +14,22 @@ categories: critic2
 search: true
 ---
 
-Critic2 is a program for the analysis of the results of quantum
-mechanical calculations in molecules and periodic solids. 
+Critic2 is a program for the analysis of quantum mechanical
+calculation results in molecules and periodic solids.
 
 * The **development version** works only with recent compilers (see
-  [here](/critic2/examplenoexist/)) but has the latest features.
-  Current version is **1.0**.\\
-Download:
-<a href="https://github.com/aoterodelaroza/critic2/archive/1.0dev.zip" class="btn btn--success">zip</a>
-<a href="https://github.com/aoterodelaroza/critic2/archive/1.0dev.tar.gz" class="btn btn--success">tar.gz</a>
+  [here](/critic2/installation/#whichcompilerswork)) but has the latest features.\\
+  Version **1.0**: 
+  [1.0dev.zip](https://github.com/aoterodelaroza/critic2/archive/1.0dev.zip),
+  [1.0dev.tar.gz](https://github.com/aoterodelaroza/critic2/archive/1.0dev.tar.gz).
 
 * The **stable version** works with almost any f90/f03 Fortran
-  compiler. Only serious bugs will be fixed in the stable version.
-  Current version is **1.0**.\\
-Download:
-<a href="https://github.com/aoterodelaroza/critic2/archive/1.0stable.zip" class="btn btn--success">zip</a>
-<a href="https://github.com/aoterodelaroza/critic2/archive/1.0stable.tar.gz" class="btn btn--success">tar.gz</a>
+  compiler. Only serious bugs will be fixed in the stable version.\\
+  Version **1.0**: 
+  [1.0stable.zip](https://github.com/aoterodelaroza/critic2/archive/1.0stable.zip),
+  [1.0stable.tar.gz](https://github.com/aoterodelaroza/critic2/archive/1.0stable.tar.gz).
 
-Alternatively, *clone the git repository* for the latest version of the code:
+Alternatively, clone the git repository for the **latest version** of the code:
 ~~~
 git clone git@github.com:aoterodelaroza/critic2.git
 ~~~
@@ -41,7 +39,7 @@ or visit the [github page](https://github.com/aoterodelaroza/critic2).
 
 Critic2 can be used to read and transform between file formats, and
 read, analyze, and manipulate scalar fields such as the ELF or the
-electron density.  An important part of critic2 is the topological
+electron density. An important part of critic2 is the topological
 anaylisis of real-space scalar fields, which includes the
 implementation of Bader's atoms in molecules theory (QTAIM): critical
 point search, basin integration, basin plotting, etc. Other related

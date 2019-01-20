@@ -1,14 +1,12 @@
 ---
 layout: single
 classes: wide
-title: "Critic2---Installation"
+title: "Installation"
 permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."
 sidebar:
   nav: "critic2"
 ---
-
-Download the code [here](/critic2/).
 
 If you downloaded the code from the git repository, you will need to run:
 ~~~
@@ -18,22 +16,22 @@ Prepare for compilation by doing:
 ~~~
 ./configure
 ~~~
-Use `configure --help` for information about the
+Use `configure --help` for information about the different
 compilation options. The `--prefix` option sets the
-installation path; more details about configure can be found in the
+installation path. More details about configure can be found in the
 INSTALL file included in the distribution. Once critic2 is configured,
 compile the program using:
 ~~~
 make
 ~~~
-This should create the critic2 executable inside the src/
-subdirectory. The binary can be used directly (after setting the
-`CRITIC_HOME` variable) or the entire critic2 distribution can be
-installed to the "prefix" path by doing:
+This should create the `critic2` executable inside the `src/`
+subdirectory. The binary can be used directly after setting the
+`CRITIC_HOME` variable (see below) or the entire critic2 distribution can be
+installed to the `prefix` path by doing:
 ~~~
 make install
 ~~~
-Critic2 is parallelized for shared-memory architectures (unless
+Critic2 is parallelized with OpenMP for shared-memory architectures (unless
 compiled with `--disable-openmp`). You change the number of
 parallel threads by setting the `OMP_NUM_THREADS`
 environment variable. Note that the parallelization flags for
@@ -44,19 +42,20 @@ necessary to increase the stack size using, for instance:
 ~~~
 export OMP_STACKSIZE=128M
 ~~~
-This applies in particular to integrations using YT in large systems.
+This applies in particular to integrations using YT in very large
+systems.
 
 The environment variable `CRITIC_HOME` is necessary if critic2 was not
-installed with 'make install'. It must point to the root directory of
+installed with `make install`. It must point to the root directory of
 the distribution:
 ~~~
 export CRITIC_HOME=/home/alberto/programs/critic2dir
 ~~~
 This variable is necessary for critic2 to find the atomic densities,
-the cif dictionary, and other files. These should be in
-${CRITIC_HOME}/dat/.
+the cif dictionary, and other files. These files should be in
+`${CRITIC_HOME}/dat/`.
 
-## Which compilers work?
+## Which compilers work? {#whichcompilerswork}
 
 Critic2 uses some features from the more modern Fortran standards,
 which may not be available in some (most) compilers. In consequence,

@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Critic2---Reference Manual"
+title: "Reference Manual"
 permalink: /critic2/manual/
 excerpt: "The critic2 reference manual."
 sidebar:
