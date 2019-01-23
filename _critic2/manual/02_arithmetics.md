@@ -432,10 +432,13 @@ structural variables are accepted in critic2:
 * xx,yx,zx: the x,y,z coordinates of the point where the arithmetic
   expression is being evaluated (crystallographic coordinates).
 
-* xc,yc,zc: the x,y,z coordinates of the point where the arithmetic
-  expression is being evaluated. By default, the coordinates have
-  units of bohr in crystals, and are referred to the molecular center
-  and have units of angstrom in molecules. (*)
+* xc,yc,zc: the x,y,z Cartesian coordinates of the point where the
+  arithmetic expression is being evaluated. Units are bohr. (*)
+
+* xm,ym,zm: the x,y,z Cartesian coordinates of the point where the
+  arithmetic expression is being evaluated. By default, the
+  coordinates have units of bohr in crystals, and are referred to the
+  molecular center and have units of angstrom in molecules. (*)
 
 * xxr,yxr,zxr: the x,y,z coordinates of the point where the arithmetic
   expression is being evaluated (crystallographic coordinates in the

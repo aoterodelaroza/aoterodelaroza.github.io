@@ -37,8 +37,8 @@ critic2:
 
   - title: Examples
     children:
-      - title: "Example 1"
-        url: /critic2/example1/
+      - title: "Molecular calculations"
+        url: /critic2/example01/
       - title: "Example 2"
         url: /critic2/example2/
       - title: "Noexist"

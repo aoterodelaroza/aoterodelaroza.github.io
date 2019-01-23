@@ -965,6 +965,15 @@ xc(...,idx)
 @zc
 : z of the evaluation point (Cartesian).
 
+@xm
+: x of the evaluation point (Cartesian molecular).
+
+@ym
+: y of the evaluation point (Cartesian molecular).
+
+@zm
+: z of the evaluation point (Cartesian molecular).
+
 @xxr
 : x of the evaluation point (reduced crystallographic).
 
