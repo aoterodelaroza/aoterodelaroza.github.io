@@ -11,7 +11,7 @@ toc_label: "Reading a crystal structure"
 toc_sticky: true
 ---
 
-## Loading a crystal structure (CRYSTAL)
+## Loading a crystal structure (CRYSTAL) {#c2-crystal}
 
 ~~~
 CRYSTAL file.cif [datablock.s]
@@ -389,7 +389,7 @@ non-standard setting for a low-symmetry space group, or when the
 space group symmetry is given in this format instead of a space group
 label (e.g. cif files and SHELX res files).
 
-### The crystal library (CRYSTAL LIBRARY)
+### The crystal library (CRYSTAL LIBRARY) {#c2-library}
 
 A library of (simple) crystal structures is provided with critic2, and
 can be accessed using the CRYSTAL LIBRARY keyword:
@@ -425,7 +425,7 @@ A similar library exists for molecules (molecule.dat) that can be
 accessed throught the MOLECULE keyword. See `The molecular
 structure`_.   
 
-## Symmetry options
+## Symmetry options {#c2-symm}
 
 Critic2 has two symmetry modules: "spg" and "spglib". Spg accepts a
 label (for instance, "P m -3 m") and builds the symmetry from
@@ -461,7 +461,7 @@ CLEARSYM
 Clear all symmetry operations (that is, use space group P 1). It must
 be used after CRYSTAL to be effective.
 
-## Atomic charge options
+## Atomic charge options {#c2-charge}
 
 The Q (or QAT) and ZPSP keywords can be used to change the atomic
 charge and pseudopotential charge after CRYSTAL:
@@ -508,7 +508,7 @@ The keyword NOCORE clears the ZPSP values of all atoms in all fields:
 NOCORE
 ~~~
 
-## Loading multiple crystal structures
+## Loading multiple crystal structures {#c2-reset}
 
 Critic2 can only work with one structure at a given time. However,
 more than one crystal can be loaded in the same run, simply by giving

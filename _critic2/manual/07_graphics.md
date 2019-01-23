@@ -11,7 +11,7 @@ toc_label: "Graphical representations"
 toc_sticky: true
 ---
 
-## Points (POINT)
+## Points (POINT) {#c2-point}
 
 ~~~
 POINT x.r y.r z.r [ALL] [FIELD {id.s|"expr.s"}]
@@ -32,7 +32,7 @@ If FIELD is used and followed by an integer or field identifier
 arithmetic expression calculates the value of that expression at the
 point.
 
-## Lines (LINE)
+## Lines (LINE) {#c2-line}
 
 ~~~
 LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s]
@@ -54,7 +54,7 @@ gradient (GX,GY,GZ), the norm of the gradient (GMOD), the components
 of the Hessian (HXX,...) and the Laplacian of the reference (or the
 id.i) field.
 
-## Planes and contour plots (PLANE)
+## Planes and contour plots (PLANE) {#c2-plane}
 
 ~~~
 PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i 
@@ -119,7 +119,7 @@ controls how many labels are represented. Any atom or critical point
 that is at a distance less than labelz.r (default: 0.1 bohr) is shown
 as a label in the plot.
 
-## Grids (CUBE)
+## Grids (CUBE) {#c2-cube}
 
 ~~~
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"expr"]

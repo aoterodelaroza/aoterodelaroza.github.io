@@ -46,13 +46,13 @@ Key:
 * at.s   atomic symbol 
 * id.s   field identifier (string or integer)
 
-[ATOMLABEL](/critic2/manual/misc/)
+[ATOMLABEL](/critic2/manual/structure/#c2-atomlabel)
 : Relabel the atoms in the current structure.
 ~~~
 ATOMLABEL template.s
 ~~~
 
-[AUTO](/)
+[AUTO](/critic2/manual/cpsearch/#c2-auto)
 : Determine the position and properties of the critical points.
 ~~~
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
@@ -72,7 +72,7 @@ AUTO SEED POINT  [X0 x0.r y0.r z0.r]
 AUTO SEED MESH
 ~~~
 
-[BADER](/)
+[BADER](/critic2/manual/integrate/#c2-bader)
 : Integrate the attraction (atomic) basins of a field defined on a
   grid using Henkelman et al.'s method.
 ~~~
@@ -80,7 +80,7 @@ BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s]
 ~~~
 
-[BASINPLOT](/)
+[BASINPLOT](/critic2/manual/basinplot/#c2-basinplot)
 : Three-dimensional plots of the attraction basins.
 ~~~
 BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] | SPHERE [ntheta.i nphi.i]]
@@ -88,21 +88,21 @@ BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] | SPHERE [ntheta.i nphi.i]]
           [CP cp.i] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
 ~~~
 
-[BENCHMARK](/)
+[BENCHMARK](/critic2/manual/misc/#c2-control)
 : Run a benchmark test to measure the evaluation cost of the reference
   field. Mostly for debug purposes.
 ~~~
 BENCHMARK nn.i
 ~~~
 
-[BONDFACTOR](/)
+[BONDFACTOR](/critic2/manual/misc/#c2-control)
 : Two atoms are considered covalently bonded if their distance is less
   than the sum of their covalent radii times BONDFACTOR.
 ~~~
 BONDFACTOR bondfactor.r
 ~~~
 
-[BUNDLEPLOT](/)
+[BUNDLEPLOT](/critic2/manual/basinplot/#c2-basinplot)
 : Three-dimensional plot of a primary bundle.
 ~~~
 BUNDLEPLOT x.r y.r z.r 
@@ -111,19 +111,19 @@ BUNDLEPLOT x.r y.r z.r
            [ROOT root.s] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
 ~~~
 
-[CLEAR](/)
+[CLEAR](/critic2/manual/arithmetics/#c2-arithbasic)
 : Clear the value of a variable. 
 ~~~
 CLEAR {var1.s var2.s ...|ALL}
 ~~~
 
-[CLEARSYM/CLEARSYMM](/)
+[CLEARSYM/CLEARSYMM](/critic2/manual/crystal/#c2-symm)
 : Delete all symmetry operations except the identity.
 ~~~
 CLEARSYM/CLEARSYMM
 ~~~
 
-[COMPARE](/)
+[COMPARE](/critic2/manual/structure/#c2-compare)
 : Compare two or more crystal or molecular structures using powder
   diffraction patterns or radial distribution functions.
 ~~~
@@ -132,18 +132,20 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
 
-[COORD](/)
+[COORD](/critic2/manual/structure/#c2-othertool)
 : Calculate the pair and triplet coordination numbers.
-* COORD [DIST dist.r] [FAC fac.r] [RADII [IONIC|COVALENT|VDW|at1.s r1.s ...]
+~~~
+COORD [DIST dist.r] [FAC fac.r] [RADII [IONIC|COVALENT|VDW|at1.s r1.s ...]
+~~~
 
-[COUNT](/)
+[COUNT](/critic2/manual/misc/#c2-control)
 : Count the number of nodes of a field defined on a grid that are
   greater than a certain value.
 ~~~
 COUNT id.s eps.r
 ~~~
 
-[CPREPORT](/)
+[CPREPORT](/critic2/manual/cpsearch/#c2-cpreport)
 : Print additional information (including three-dimensional plots)
   about the critical point list.
 ~~~
@@ -173,7 +175,7 @@ CPREPORT file.gen
 CPREPORT [...] [GRAPH]
 ~~~
 
-[CRYSTAL](/critic2/manual/crystal/)
+[CRYSTAL](/critic2/manual/crystal/#c2-crystal)
 : Load a crystal structure.
 ~~~
 CRYSTAL/MOLECULE # molecule..endmolecule can be used to input a molecule.
@@ -214,7 +216,7 @@ ENDCRYSTAL/END
 CRYSTAL LIBRARY label.s
 ~~~
 
-[CUBE](/)
+[CUBE](/critic2/manual/graphics/#c2-cube)
 : Write a file containing the values of a field on a three-dimensional
   grid.
 ~~~
@@ -228,19 +230,19 @@ CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
 ~~~
 
-[ECHO](/)
+[ECHO](/critic2/manual/misc/#c2-control)
 : Write a message to the critic2 output.
 ~~~
 ECHO echooo.s
 ~~~
 
-[END](/)
+[END](/critic2/manual/misc/#c2-control)
 : Terminates the critic2 run.
 ~~~
 END
 ~~~
 
-[ENVIRON](/)
+[ENVIRON](/critic2/manual/structure/#c2-othertool)
 : Calculate the nearest neighbors of the atoms in the crystal
   structure.
 ~~~
@@ -248,14 +250,14 @@ ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i]
 [BY by.s/iby.i] [SHELLS]
 ~~~
 
-[EWALD](/)
+[EWALD](/critic2/manual/structure/#c2-othertool)
 : Calculate the electrostatic energy by performing an Ewald
   summation.
 ~~~
 EWALD
 ~~~
 
-[FLUXPRINT](/)
+[FLUXPRINT](/critic2/manual/gradientpath/#c2-fluxprint)
 : Three-dimensional representations of the current field's gradient
   paths.
 ~~~
@@ -275,7 +277,7 @@ FLUXPRINT
 ENDFLUXPRINT/END
 ~~~
 
-[GRDVEC](/)
+[GRDVEC](/critic2/manual/gradientpath/#c2-grdvec)
 : Two-dimensional representations of the reference field, comprising
   contour lines, gradient paths, or a combination of the two.
 ~~~
@@ -303,13 +305,13 @@ GRDVEC
 ENDGRDVEC/END
 ~~~
 
-[HIRSHFELD](/)
+[HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld)
 : Calculate the Hirshfeld (stockholder) charges.
 ~~~
 HIRSHFELD
 ~~~
 
-[IDENTIFY](/)
+[IDENTIFY](/critic2/manual/structure/#c2-othertool)
 : Identify the position of an atom or a critical point given in
   crystallographic or cartesian coordinates.
 ~~~
@@ -320,7 +322,7 @@ IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST|file.xyz]
 ENDIDENTIFY/END
 ~~~
 
-[INTEGRABLE](/)
+[INTEGRABLE](/critic2/manual/integrate/#c2-integrable)
 : Mark a field as a property to be integrated in the attraction
   basins.
 ~~~
@@ -332,40 +334,40 @@ INTEGRABLE CLEAR
 INTEGRABLE ... [NAME name.s]
 ~~~
 
-[INTEGRALS](/)
+[INTEGRALS](/critic2/manual/integrate/#c2-integrals)
 : Integrate the basins of the reference field by bisection.
 ~~~
 INTEGRALS {GAULEG ntheta.i nphi.i|LEBEDEV nleb.i}
           [CP ncp.i] [RWINT] [VERBOSE]
 ~~~
 
-[INT_RADIAL](/)
+[INT_RADIAL](/critic2/manual/misc/#c2-control)
 : Radial integration method used in bisection.
 ~~~
 INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.i] [ABSERR err.r]
 [RELERR err.r] [ERRPROP prop.i] [PREC prec.r] [NOBETA]
 ~~~
 
-[LIBRARY](/)
+[LIBRARY](/critic2/manual/crystal/#c2-library)
 : Define the path to the library file.
 ~~~
 LIBRARY {CRYSTAL|MOLECULE} path.s
 ~~~
 
-[LINE](/)
+[LINE](/critic2/manual/graphics/#c2-line)
 : Calculate the values of a field on a line.
 ~~~
 LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s] [FIELD id.s/"expr"]
      [GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] 
 ~~~
 
-[LIST](/)
+[LIST](/critic2/manual/arithmetics/#c2-arithbasic)
 : List all defined variables and named fields.
 ~~~
 LIST
 ~~~
 
-[LOAD](/)
+[LOAD](/critic2/manual/fields/#c2-load)
 : Load a scalar field.
 ~~~
 LOAD file.cube
@@ -406,31 +408,31 @@ LOAD AS CLM {ADD id1.s id2.s|SUB id1.s id2.s}
 LOAD file.pwc [file.chk]
 ~~~
 
-[MAX](/)
+[MAX](/critic2/manual/misc/#c2-control)
 : Find the maximum value of a field defined on a grid.
 ~~~
 MAX [id.s]
 ~~~
 
-[MEAN](/)
+[MEAN](/critic2/manual/misc/#c2-control)
 : Find the average of a field defined on a grid.
 ~~~
 MEAN [id.s]
 ~~~
 
-[MESHTYPE](/)
+[MESHTYPE](/critic2/manual/misc/#c2-control)
 : Type and quality of the molecular integration mesh.
 ~~~
 MESHTYPE {BECKE|FRANCHINI {1|2|3|4|5}}
 ~~~
 
-[MIN](/)
+[MIN](/critic2/manual/misc/#c2-control)
 : Find the minimum value of a field defined on a grid.
 ~~~
 MIN [id.s]
 ~~~
 
-[MOLCALC](/)
+[MOLCALC](/critic2/manual/misc/#c2-molcalc)
 : Calculate molecular properties using molecular/mesh integrations.
 ~~~
 MOLCALC [NELEC]
@@ -443,11 +445,13 @@ MOLCALC expr.s
 MOLCALC HF
 ~~~
 
-[MOLCELL](/)
+[MOLCELL](/critic2/manual/molecule/#c2-molcell)
 : Define the molecular cell.
-* MOLCELL [border.r]
+~~~
+MOLCELL [border.r]
+~~~
 
-[MOLECULE](/)
+[MOLECULE](/critic2/manual/molecule/#c2-molecule)
 : Load a molecular structure.
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
@@ -471,7 +475,7 @@ ENDMOLECULE/END
 MOLECULE LIBRARY label.s
 ~~~
 
-[NCIPLOT](/)
+[NCIPLOT](/critic2/manual/nciplot/)
 : Make a non-covalent interaction plot.
 ~~~
 NCIPLOT 
@@ -498,7 +502,7 @@ NCIPLOT
 ENDNCIPLOT/END
 ~~~
 
-[NEWCELL](/)
+[NEWCELL](/critic2/manual/structure/#c2-othertool)
 : Change the cell setting of the current crystal structure by defining
   a new unit cell.
 ~~~
@@ -507,33 +511,33 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
 NEWCELL [PRIMSTD|STANDARD|PRIMITIVE|NIGGLI|DELAUNAY]
 ~~~
 
-[NOCORE](/)
+[NOCORE](/critic2/manual/fields/#c2-addload)
 : Clears the pseudopotential charge (ZPSP) of all atoms, deactivating
   the use of the core contribution.
 ~~~
 NOCORE
 ~~~
 
-[NOSYMM/NOSYM](/)
+[NOSYMM/NOSYM](/critic2/manual/crystal/#c2-symm)
 : Deactivate the use of the symmetry module that lets critic2
   determine the space group operations of a crystal structure.
 ~~~
 NOSYMM|NOSYM
 ~~~
 
-[ODE_MODE](/)
+[ODE_MODE](/critic2/manual/misc/#c2-control)
 : Choose the numerical method for gradient path tracing.
 ~~~
 ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] [MAXERR maxerr.r] [GRADEPS gradeps.r]
 ~~~
 
-[PACKING](/)
+[PACKING](/critic2/manual/structure/#c2-othertool)
 : Calculate the packing ratio of the current crystal structure.
 ~~~
 PACKING [VDW] [PREC prec.r]
 ~~~
 
-[PLANE](/)
+[PLANE](/critic2/manual/graphics/#c2-plane)
 : Write a file containing the values of a field on a plane and,
   optionally, make a contour plot.
 ~~~
@@ -546,14 +550,14 @@ PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
       [RELIEF zmin.r zmax.r] [LABELZ labelz.r]
 ~~~
 
-[POINT](/)
+[POINT](/critic2/manual/graphics/#c2-point)
 : Write the properties (value, derivatives, related quantities) of one
   or more fields at a given point.
 ~~~
 POINT x.r y.r z.r [ALL] [FIELD {id.s/"expr"}]
 ~~~
 
-[POINTPROP](/)
+[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop)
 : Defines the list of properties to be calculated at critical
   points (AUTO) and through the use of the POINT keyword.
 ~~~
@@ -562,7 +566,7 @@ POINTPROP CLEAR
 POINTPROP
 ~~~
 
-[POWDER](/)
+[POWDER](/critic2/manual/structure/#c2-powder)
 : Calculate the powder diffraction pattern of the current crystal
   structure.
 ~~~
@@ -570,25 +574,25 @@ POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r] [FPOL fpol.r]
 [NPTS npts.i] [SIGMA sigma.r] [ROOT root.s]
 ~~~
 
-[PRECISECUBE](/)
+[PRECISECUBE](/critic2/manual/misc/#c2-control)
 : Extra precision in output cube files.
 ~~~
 PRECISECUBE|STANDARDCUBE
 ~~~
 
-[PRUNE_DISTANCE](/)
+[PRUNE_DISTANCE](/critic2/manual/misc/#c2-control)
 : Prune gradient paths for lighter output.
 ~~~
 PRUNE_DISTANCE prune.r
 ~~~
 
-[Q/QAT](/)
+[Q/QAT](/critic2/manual/crystal/#c2-charge)
 : Define the atomic charges.
 ~~~
 Q/QAT at1.s q1.r [at2.s q2.r] ...
 ~~~
 
-[QTREE](/)
+[QTREE](/critic2/manual/integrate/#c2-qtree)
 : Integrate the attractor basins using the qtree method.
 ~~~
 QTREE maxlevel.i plevel.i
@@ -626,45 +630,45 @@ SETSPH_LVL lvl.i
 VCUTOFF vcutoff.r
 ~~~
 
-[RADII](/)
+[RADII](/critic2/manual/misc/#c2-control)
 : Sets the covalent radii of atoms.
 ~~~
 RADII [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 ~~~
 
-[RDF](/)
+[RDF](/critic2/manual/structure/#c2-rdf)
 : Calculate the radial distribution function of atoms in a molecule or
   crystal.
 ~~~
 RDF [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] [ROOT root.s]
 ~~~
 
-[REFERENCE](/)
+[REFERENCE](/critic2/manual/fields/#c2-reference)
 : Mark a field as the reference field.
 ~~~
 REFERENCE id.s
 ~~~
 
-[RESET](/)
+[RESET](/critic2/manual/crystal/#c2-reset)
 : Restart the critic2 run by clearing all structural and field
   information.
 ~~~
 RESET
 ~~~
 
-[ROOT](/)
+[ROOT](/critic2/manual/misc/#c2-control)
 : Change the default prefix for the files generated by critic2.
 ~~~
 ROOT {root.s}
 ~~~
 
-[RUN/SYSTEM](/)
+[RUN/SYSTEM](/critic2/manual/misc/#c2-control)
 : Run an external command.
 ~~~
 RUN command.s
 ~~~
 
-[SETFIELD](/)
+[SETFIELD](/critic2/manual/fields/#c2-setfield)
 : Change field flags after the field was loaded.
 ~~~
 SETFIELD [id.s] [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
@@ -672,20 +676,20 @@ SETFIELD [id.s] [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
                 [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [ZPSP at1.s q1.r...]
 ~~~
 
-[SPHEREINTEGRALS](/)
+[SPHEREINTEGRALS](/critic2/manual/integrate/#c2-integrals)
 : Integrate fields on a sphere.
 ~~~
 SPHEREINTEGRALS {GAULEG [ntheta.i nphi.i]|LEBEDEV [nleb.i]}
                 [NR npts.i] [R0 r0.r] [REND rend.r] [CP ncp.i] 
 ~~~
 
-[STANDARDCUBE](/)
+[STANDARDCUBE](/critic2/manual/misc/#c2-control)
 : Normal precision in output cube files.
 ~~~
 PRECISECUBE|STANDARDCUBE
 ~~~
 
-[STM](/)
+[STM](/critic2/manual/stm/)
 : Make scanning tunneling microscopy plots.
 ~~~
 STM [CURRENT [curr.r]|HEIGHT [hei.r]] [TOP top.r] 
@@ -693,37 +697,37 @@ STM [CURRENT [curr.r]|HEIGHT [hei.r]] [TOP top.r]
     [LINE x0.r y0.r x1.r y1.r npts.i] 
 ~~~
 
-[SUM](/)
+[SUM](/critic2/manual/misc/#c2-control)
 : Sum of the values of a field defined on a grid.
 ~~~
 SUM [id.s]
 ~~~
 
-[SYMM/SYM](/)
+[SYMM/SYM](/critic2/manual/crystal/#c2-symm)
 : Activates the use of symmetry and controls the symmetry level.
 ~~~
 {SYMM|SYM} [-1|0|1]
 ~~~
 
-[SYMPREC](/)
+[SYMPREC](/critic2/manual/crystal/#c2-symm)
 : Sets the precision for the `spglib` symmetry library.
 ~~~
 SYMPREC symprec.r
 ~~~
 
-[UNITS](/)
+[UNITS](/critic2/manual/inputoutput/#c2-units)
 : Change the default units used in the input and output.
 ~~~
 UNITS {BOHR|AU|A.U.|ANG|ANGSTROM}
 ~~~
 
-[UNLOAD](/)
+[UNLOAD](/critic2/manual/fields/#c2-unload)
 : Unload a field.
 ~~~
 UNLOAD {id.s|ALL}
 ~~~
 
-[WRITE](/)
+[WRITE](/critic2/manual/write/)
 : Write the crystal structure to an external file.
 ~~~
 WRITE file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]] 
@@ -752,7 +756,7 @@ WRITE file.hsd
 WRITE file.gen
 ~~~
 
-[XDM](/)
+[XDM](/critic2/manual/misc/#c2-xdm)
 : Calculate the XDM dispersion energy and derivatives.
 ~~~
 XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s] [PDENS ipdens.s] 
@@ -762,7 +766,7 @@ XDM QE [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
 XDM a1.r a2.r chf.s
 ~~~
 
-[YT](/)
+[YT](/critic2/manual/integrate/#c2-yt)
 : Integrate the attraction (atomic) basins of a field defined on a
   grid using Yu and Trinkle's method.
 ~~~
@@ -770,7 +774,7 @@ YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s]
 ~~~
 
-[ZPSP](/)
+[ZPSP](/critic2/manual/crystal/#c2-charge)
 : Define the core contribution for an atom by setting the
   pseudopotential charge.
 ~~~

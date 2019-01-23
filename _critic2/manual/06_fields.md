@@ -11,7 +11,7 @@ toc_label: "Loading scalar fields"
 toc_sticky: true
 ---
 
-## Loading a field (LOAD)
+## Loading a field (LOAD) {#c2-load}
 
 Scalar fields are loaded with the LOAD keyword. A number of different
 field formats are supported:
@@ -372,7 +372,7 @@ passed to LOAD PROMOLECULAR as an xyz file (file.xyz) using the
 optional FRAGMENT keyword, then the sum of atomic densities is built
 using only the atoms in that fragment.
 
-## Additional LOAD options
+## Additional LOAD options {#c2-addload}
 
 The definition of a field can be supplemented by additional optional
 keywords that depend on the type of field in the input and that come
@@ -567,7 +567,7 @@ types of fields:
   SUB keywords respectively. Note that the muffin tin radii, number of
   plane-waves, etc. have to be the same for both source fields.
 
-## Changing the field options after LOAD (SETFIELD)
+## Changing the field options after LOAD (SETFIELD) {#c2-setfield}
 
 The options of a given field can be changed anywhere in the input
 after it has been loaded using the SETFIELD keyword:
@@ -580,14 +580,14 @@ SETFIELD {id.s} [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC]
 SETFIELD changes the properties of field with identifier id.s. The
 keywords have the same meaning as in the previous sections.
 
-## Unloading a field (UNLOAD)
+## Unloading a field (UNLOAD) {#c2-unload}
 
 ~~~
 UNLOAD {id.s|ALL}
 ~~~
 Unload the field id.s or all fields (keyword ALL).
 
-## The reference field (REFERENCE)
+## The reference field (REFERENCE) {#c2-reference}
 
 One of the loaded fields is chosen as the reference field. The
 reference field is used as the primary field in all computations. For

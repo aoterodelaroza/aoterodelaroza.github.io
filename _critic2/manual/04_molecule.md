@@ -11,7 +11,7 @@ toc_label: "Reading a molecular structure"
 toc_sticky: true
 ---
 
-## Loading a molecular structure (MOLECULE)
+## Loading a molecular structure (MOLECULE) {#c2-molecule}
 
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
@@ -186,7 +186,7 @@ The behavior of the LIBRARY keyword is the same as in the CRYSTAL
 case. See `The crystal library (CRYSTAL LIBRARY)`_ for more
 information. 
 
-## The molecular cell
+## The molecular cell {#c2-molcell}
 
 In molecular calculations, it is convenient to define a region of
 space, away from the molecule, that represents infinity. Critical

@@ -11,7 +11,7 @@ toc_label: "Arithemtic expressions, variables, functions"
 toc_sticky: true
 ---
 
-### Basic usage
+### Basic usage {#c2-arithbasic}
 
 In critic2, an arithmetic expression can be used almost everywhere in
 the input where a real or integer number is expected. Arithmetic

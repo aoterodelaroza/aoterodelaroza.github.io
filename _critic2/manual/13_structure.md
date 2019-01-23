@@ -11,7 +11,7 @@ toc_label: "Structural tools"
 toc_sticky: true
 ---
 
-## Relabel the atoms in the structure (ATOMLABEL)
+## Relabel the atoms in the structure (ATOMLABEL) {#c2-atomlabel}
 
 ~~~
 ATOMLABEL template.s
@@ -32,7 +32,7 @@ template are:
 
 * %l : the current atom label.
 
-## Powder diffraction (POWDER)
+## Powder diffraction (POWDER) {#c2-powder}
 
 ~~~
 POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r]
@@ -53,7 +53,7 @@ containing the 2*theta versus intensity data, and <root>_xrd.gnu,
 the gnuplot script to plot it. The name of these files can be
 changed using the ROOT keyword.
 
-## Radial distribution function (RDF)
+## Radial distribution function (RDF) {#c2-rdf}
 
 ~~~
 RDF [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] [ROOT root.s]
@@ -69,7 +69,7 @@ with sigma equal to sigma.r (default: 0.05). Two files are generated:
 `<root>_rdf.gnu`, the gnuplot script to plot it. The name of these files
 can be changed using the ROOT keyword.
 
-## Compare crystal structures (COMPARE)
+## Compare crystal structures (COMPARE) {#c2-compare}
 
 ~~~
 COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r] 
@@ -123,7 +123,7 @@ MOLECULE bleh1.xyz bleh2.wfx
 ~~~
 provided the files exist.
 
-## Other structural tools (NEWCELL, ENVIRON, PACKING, IDENTIFY, EWALD)
+## Other structural tools (NEWCELL, ENVIRON, PACKING, IDENTIFY, EWALD) {#c2-othertool}
 
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i}

@@ -11,7 +11,7 @@ toc_label: "Finding critical points"
 toc_sticky: true
 ---
 
-## Automatic determination of critical points (AUTO)
+## Automatic determination of critical points (AUTO) {#c2-auto}
 
 ~~~
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
@@ -573,7 +573,7 @@ xyz and cif: i) it prevents avogadro from calculating the molecular
 connectivity, which can be expensive in a very large system, and ii)
 it allows showing a fragment of the crystal along with the unit cell.
 
-## Requesting more information about the critical point list (CPREPORT)
+## Requesting more information about the critical point list (CPREPORT) {#c2-cpreport}
 
 ~~~
 CPREPORT {SHORT|LONG|VERYLONG|SHELLS [n.i]}
@@ -630,7 +630,7 @@ The optional GRAPH keyword can be used in combination with any of the
 file formats mentioned above. When GRAPH is used, the bond paths are
 calculated and represented.
 
-## List of properties calculated at points (POINTPROP)
+## List of properties calculated at points (POINTPROP) {#c2-pointprop}
 
 The default output for AUTO contains a list of detailed information
 at the critical points. This is an example of what this section looks

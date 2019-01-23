@@ -27,7 +27,7 @@ There are two keywords for gradient path representation in critic2:
 GRDVEC (2D gradient paths plus a contour plot) and FLUXPRINT
 (3D). 
 
-## Gradient path representations in a plane (GRDVEC)
+## Gradient path representations in a plane (GRDVEC) {#c2-grdvec}
 
 ~~~
 GRDVEC
@@ -164,7 +164,7 @@ Also, note that at most 2 gradient lines may be traced from bcps and
 rcps, either upwards or downwards. Thus, for example, BCPALL 2 2 is
 equivalent to BCPALL 2 100 or BCPALL 100 100.
 
-## Three-dimensional gradient path representations (FLUXPRINT)
+## Three-dimensional gradient path representations (FLUXPRINT) {#c2-fluxprint}
 
 ~~~
 FLUXPRINT

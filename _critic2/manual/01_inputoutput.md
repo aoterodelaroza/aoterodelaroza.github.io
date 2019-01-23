@@ -129,7 +129,7 @@ of the manual are:
   "nuclear critical point" even though it may not be associated to any
   nucleus.
 
-## Input and output units
+## Input and output units {#c2-units}
 
 The default input and output units in critic2 are bohr for crystals
 (if the structure is loaded using the CRYSTAL keyword) and angstrom

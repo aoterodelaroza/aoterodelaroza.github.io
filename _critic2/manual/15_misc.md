@@ -11,7 +11,7 @@ toc_label: "Miscellaneous tools"
 toc_sticky: true
 ---
 
-## Molecular calculations (MOLCALC)
+## Molecular calculations (MOLCALC) {#c2-molcalc}
 
 ~~~
 MOLCALC [NELEC]
@@ -60,14 +60,14 @@ molden-style files could be implemented). Gaussian wfn/wfx do not
 provide basis set shells, only primitives, so they cannot be used with
 MOLCALC HF.
 
-## Hirshfeld charges (HIRSHFELD)
+## Hirshfeld charges (HIRSHFELD) {#c2-hirshfeld}
 
 ~~~
 HIRSHFELD
 ~~~
 Calculate the Hirshfeld charges. Only for fields on a grid.
 
-## The exchange-hole dipole moment (XDM) model of dispersion
+## The exchange-hole dipole moment (XDM) model of dispersion {#c2-xdm}
 
 The XDM module calculates the dispersion energy using the
 exchange-hole dipole moment (XDM) model. See J. Chem. Phys. 127,
@@ -202,7 +202,7 @@ Only calculate the contributions to the energy coming from the C6
 term (6), from the C6 and C8 terms (8) and from C6, C8, and C10
 (10). The latter is the default.
 
-## Control commands and options
+## Control commands and options {#c2-control}
 
 ~~~
 ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] 
