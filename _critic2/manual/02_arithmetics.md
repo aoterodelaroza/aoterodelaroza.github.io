@@ -338,6 +338,11 @@ involved (see README).
 
   A.D. Becke, J. Chem. Phys. 138 (2013) 074109 and references therein.
 
+* xhole(id,x,y,z): Exchange hole with reference point at (x,y,z). The
+  coordinates are Cartesian in angstrom referred to the molecular
+  origin if the system is a molecule or crystallographic coordinates
+  if the system is a crystal.
+
 Other special labels can be used, that activate the calculation of
 properties for the reference field. These are:
 

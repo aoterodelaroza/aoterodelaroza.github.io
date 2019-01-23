@@ -844,6 +844,9 @@ xhcurv1(id), xhcurv2(id), xhcurv(id)
 dsigs1(id), dsigs2(id), dsigs(id) 
 : Same-spin pair density leading coefficient (Dsigma) (spin up, down, and average).
 
+xhole(id,x,y,z) 
+: Exchange hole with reference point at x,y,z.
+
 stress [STRESS] 
 : Schrodinger stress tensor (only for the reference field).
 
