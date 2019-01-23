@@ -88,8 +88,12 @@ which gives:
 + Integral(abs(xhole(1,@xm,@ym,@zm) + $1:up)) = 0.00000000
 ~~~
 Since the integrand is always positive, a zero integral means the two
-fields are identical. Likewise, we can verify the normalization of the
-exchange hole:
+fields are identical. The `@xm`, `@ym`, and `@zm` are *structural
+variables*. They take the value of the x, y, and z coordinates of each
+point in the molecular mesh (in this case, in angstrom, to make them
+consistent with the arguments for the `xhole` function). 
+
+Likewise, we can verify the normalization of the exchange hole:
 
 $$
 \begin{equation}
