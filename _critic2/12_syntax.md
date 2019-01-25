@@ -423,7 +423,7 @@ MEAN [id.s]
 [MESHTYPE](/critic2/manual/misc/#c2-control)
 : Type and quality of the molecular integration mesh.
 ~~~
-MESHTYPE {BECKE|FRANCHINI {1|2|3|4|5}}
+MESHTYPE {BECKE|FRANCHINI} [SMALL|NORMAL|GOOD|VERYGOOD|AMAZING]
 ~~~
 
 [MIN](/critic2/manual/misc/#c2-control)
