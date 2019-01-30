@@ -17,17 +17,17 @@ Prepare for compilation by doing:
 ./configure
 ~~~
 Use `configure --help` for information about the different
-compilation options. The `--prefix` option sets the
-installation path. More details about configure can be found in the
-INSTALL file included in the distribution. Once critic2 is configured,
+compilation options. The `--prefix` option to `configure` sets the
+installation path. More details about `configure` can be found in the
+`INSTALL` file included in the distribution. Once critic2 is configured,
 compile the program using:
 ~~~
 make
 ~~~
-This should create the `critic2` executable inside the `src/`
+This should create the critic2 executable inside the `src/`
 subdirectory. The binary can be used directly after setting the
 `CRITIC_HOME` variable (see below) or the entire critic2 distribution can be
-installed to the `prefix` path by doing:
+installed to the `prefix` directory by doing:
 ~~~
 make install
 ~~~
@@ -64,7 +64,7 @@ do, it may be broken. Two versions of critic2 are distributed. The
 **development** version, corresponding to the master branch of the
 repository, and the **stable** version, in the stable branch. Only
 patches addressing serious bugs will be introduced in the stable
-version; all new development happens in the development version.  The
+version; all new development happens in the development version. The
 stable version is compilable with all versions of gfortran starting at
 4.9. All intel fortran compiler versions from 2011 onwards also
 compile the stable code.
@@ -77,7 +77,7 @@ binary. This is the list of compilers tested:
   allocatable components in user-defined types are not supported.
 * gfortran 4.9 through 5.4 (and possibly older and newer gfortran-5):
   the code compiles correctly but there are errors allocating and
-  deallocating the global field array (sy%f) and other complex
+  deallocating the global field array (`sy%f`) and other complex
   user-defined types. The program is usable, but problems will arise
   if more than one crystal structure or more than 10 scalar fields are
   loaded.
@@ -96,7 +96,8 @@ download the stable version.** I do not think this is because of
 errors in the critic2 code (though if you find that it is, please let
 me know). If you paid for a recent version of your compiler and it
 throws an internal compiler error while trying to build critic2, you
-may want to consider submitting a bug report.
+may want to consider submitting a bug report to the compiler
+developers.
 
 If a recent compiler is not available, an alternative is to compile
 the program elsewhere with the static linking option:
