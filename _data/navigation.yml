@@ -8,7 +8,7 @@ critic2:
   - title: Getting Started
     url: /critic2/
     children:
-      - title: "Download"
+      - title: "Download & Features"
         url: /critic2/
       - title: "Installation"
         url: /critic2/installation/
