@@ -14,23 +14,28 @@ toc_label: "List of keywords"
 ## Notation
 
 * Keywords are in CAPS (except POSCAR, CONTCAR, etc.)
-* `.s`: strings, `.i`: integers, `.r`: reals, "expr": arithmetic expresions.
+* `.s`: strings, `.i`: integers, `.r`: real numbers, `expr.s`: arithmetic expressions.
 * Arithmetic expressions can be given between single quotes (''),
-double quotes (""), parentheses, or without quoting as long as
-there are no spaces. They can be used in most places that a real or
-integer can.
+double quotes (""), or without quoting as long as there are no
+spaces. They can be used in most places that a real or integer can. An
+expression input:
 ~~~
 expression.r 
 ~~~
-prints the value of the expression to the output.
+prints the value of the expression to the output. The list of
+functions that can be used in arithmetic expressions is 
+[below](/critic2/syntax/#farithmetics).
 * Variables can be used almost everywhere.  Variables are assigned:
 ~~~
 variable.s = value.r
 ~~~
-* Fields are accessed using the `$` symbol and modified with a colon
-and a field modifier (`$field:modifier`). 
+* Fields are accessed using the `$` symbol and modified with an
+optional colon and field modifier (`$field:modifier`). See 
+[below](/critic2/syntax/#fmods) for a list of field modifiers.
 * Structural variables are accessed using the `@` symbol, and they can
 be used to incorporate position-dependent quantities to the expression.
+See [below](/critic2/syntax/#structvar) for a list of structural
+variables.
 * In non-quiet mode (no -q argument), a copy of each input line
 is written to the output after a '%%' prefix.
 * Comment prefix: `#`.
@@ -38,13 +43,13 @@ is written to the output after a '%%' prefix.
 
 ## List of keywords
 
-Key:
-* nat.i  atom from the nonequivalent list (asymmetric unit)
-* ncp.i  critical point from the non-equivalent list
-* at.i   atom from the complete list (unit cell)
-* cp.i   critical point from the complete list (unit cell)
-* at.s   atomic symbol 
-* id.s   field identifier (string or integer)
+In the entries below, we use:
+* `nat.i`: atom integer ID from the nonequivalent list (asymmetric unit).
+* `ncp.i`: critical point integer ID from the non-equivalent list (asymmetric unit).
+* `at.i`: atom integer ID from the complete list (unit cell).
+* `cp.i`: critical point integer ID from the complete list (unit cell).
+* `at.s`: atomic symbol.
+* `id.s`: field identifier (string or integer ID).
 
 [ATOMLABEL](/critic2/manual/structure/#c2-atomlabel)
 : Relabel the atoms in the current structure.
@@ -68,7 +73,7 @@ AUTO SEED SPHERE [X0 x0.r y0.r z0.r] [RADIUS rad.r] [NTHETA ntheta.i]
 AUTO SEED PAIR [DIST dist.r] [NPTS n.i]
 AUTO SEED TRIPLET [DIST dist.r]
 AUTO SEED LINE [X0 x0.r y0.r z0.r] [X1 x0.r y0.r z0.r] [NPTS n.i]
-AUTO SEED POINT  [X0 x0.r y0.r z0.r]
+AUTO SEED POINT [X0 x0.r y0.r z0.r]
 AUTO SEED MESH
 ~~~
 
@@ -77,7 +82,7 @@ AUTO SEED MESH
   grid using Henkelman et al.'s method.
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-   [DISCARD expr.s]
+      [DISCARD expr.s]
 ~~~
 
 [BASINPLOT](/critic2/manual/basinplot/#c2-basinplot)
@@ -247,7 +252,7 @@ END
   structure.
 ~~~
 ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i]
-[BY by.s/iby.i] [SHELLS]
+        [BY by.s/iby.i] [SHELLS]
 ~~~
 
 [EWALD](/critic2/manual/structure/#c2-othertool)
@@ -345,7 +350,7 @@ INTEGRALS {GAULEG ntheta.i nphi.i|LEBEDEV nleb.i}
 : Radial integration method used in bisection.
 ~~~
 INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.i] [ABSERR err.r]
-[RELERR err.r] [ERRPROP prop.i] [PREC prec.r] [NOBETA]
+           [RELERR err.r] [ERRPROP prop.i] [PREC prec.r] [NOBETA]
 ~~~
 
 [LIBRARY](/critic2/manual/crystal/#c2-library)
@@ -507,7 +512,7 @@ ENDNCIPLOT/END
   a new unit cell.
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
-[ORIGIN x0.r y0.r z0.r] 
+        [ORIGIN x0.r y0.r z0.r] 
 NEWCELL [PRIMSTD|STANDARD|PRIMITIVE|NIGGLI|DELAUNAY]
 ~~~
 
@@ -571,7 +576,7 @@ POINTPROP
   structure.
 ~~~
 POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r] [FPOL fpol.r]
-[NPTS npts.i] [SIGMA sigma.r] [ROOT root.s]
+       [NPTS npts.i] [SIGMA sigma.r] [ROOT root.s]
 ~~~
 
 [PRECISECUBE](/critic2/manual/misc/#c2-control)
@@ -781,7 +786,7 @@ YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
 ZPSP at1.s q1.r [at2.s q2.r] ...
 ~~~
 
-## List of functions
+## List of functions used in arithmetic expressions {#farithmetics}
 
 Basic arithmetic functions
 : abs, exp, sqrt, floor, ceil, ceiling, round, log, log10, sin, asin,
@@ -831,7 +836,7 @@ lol(id) [lol]
 : Localized-orbital locator.
 
 lol_kir(id) [lol_kir] 
-: localized-orbital locator, with Kirzhnits k.e.d.
+: Localized-orbital locator, with Kirzhnits k.e.d.
 
 brhole_a1(id), brhole_a2(id), brhole_a(id) 
 : BR hole, A prefactor (spin up, down, and average).
@@ -866,7 +871,7 @@ nheff(id)
 xc(...,idx)
 : Exchange-correlation energy density (requires [libxc](/critic2/libraries/)).
 
-## List of field modifiers ($field:modifier)
+## List of field modifiers ($field:modifier) {#fmods}
 \:v
 : Valence-only value of the field.
 
@@ -921,10 +926,10 @@ xc(...,idx)
 \:up, :dn, :sp 
 : Alpha, beta, spin density. (only for molecular wavefunctions)
 
-## List of structural variables (@strucvar)
+## List of structural variables (@strucvar) {#structvar}
 
 @dnuc
-: distance to the closest nucleus. If used as @dnuc:n, the distance to
+: Distance to the closest nucleus. If used as @dnuc:n, the distance to
   the closest nucleus with ID n from the complete list.
 
 @xnucx
@@ -988,19 +993,19 @@ xc(...,idx)
 : z of the evaluation point (reduced crystallographic).
 
 @idnuc
-: complete-list id of the closest nucleus.
+: Complete-list id of the closest nucleus.
 
 @nidnuc
-: non-equivalent-list id of the closest nucleus.
+: Non-equivalent-list id of the closest nucleus.
 
 @rho0nuc
-: atomic density contribution from the closest nucleus. If used as
+: Atomic density contribution from the closest nucleus. If used as
   @rho0nuc:n, the atomic density contribution of the closest nucleus
   with ID n from the complete list.
 
 @spcnuc
-: species id of the closest nucleus.
+: Species id of the closest nucleus.
 
 @zatnuc
-: atomic number of the closest nucleus.
+: Atomic number of the closest nucleus.
 
