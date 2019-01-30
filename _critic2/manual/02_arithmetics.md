@@ -174,7 +174,7 @@ cube cell field "2 * $ewald"
 ~~~
 calculates a grid using 2 times the value of the Ewald potential. 
 
-### List of available functions
+### List of available functions {#availchemfun}
 
 Arithmetic expressions can use any of the functions in the critic2
 function library. These functions include the usual mathematical
@@ -356,7 +356,7 @@ to access the external LIBXC library. This is only possible if the
 LIBXC library was linked during the compilation of critic2. See `Use
 of LIBXC in arithmetic expressions`_.
 
-### Use of LIBXC in arithmetic expressions
+### Use of LIBXC in arithmetic expressions {#libxc}
 
 If critic2 is linked to the libxc library (see the README for
 instructions on how to do this) then the xc() function can be used in

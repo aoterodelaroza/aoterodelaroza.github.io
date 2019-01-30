@@ -49,11 +49,11 @@ READVIRTUAL keyword (see `Loading a field (LOAD)`_).
 
 MOLCALC HF calculates the Hartree-Fock energy from the basis set
 information in the reference field using molecular integrals, which
-are in turn calculated by the libCINT library. Using this keyword
-requires compiling with critic2 with libCINT (see the README). At this
+are in turn calculated by the libcint library. Using this keyword
+requires compiling with critic2 with libcint (see the README). At this
 moment, this keyword serves mostly for testing, debug, and development
 purposes, as it is very inefficient. The routine called by this
-keyword shows how to use libCINT inside critic. Only molecular
+keyword shows how to use libcint inside critic. Only molecular
 wavefunctions can be used with MOLCALC HF and only file formats that
 provied basis set information (right now, only Gaussian fchk, but
 molden-style files could be implemented). Gaussian wfn/wfx do not

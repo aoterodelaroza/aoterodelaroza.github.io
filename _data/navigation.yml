@@ -39,10 +39,6 @@ critic2:
     children:
       - title: "Molecular calculations"
         url: /critic2/example01/
-      - title: "Example 2"
-        url: /critic2/example2/
-      - title: "Noexist"
-        url: /critic2/examplenoexist/
 
 critic2_manual:
   - title: "Reference Manual"

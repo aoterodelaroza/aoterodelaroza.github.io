@@ -1,5 +1,6 @@
 ---
 layout: single
+classes: wide
 title: "Interfacing with External Libraries"
 permalink: /critic2/libraries/
 excerpt: "Enhancing critic2's capabilities by interfacing with external libraries ."
@@ -61,8 +62,8 @@ gradient. The `:g` field modifier is used to pass the gradient of the
 first field as the second argument to `xc()`. The MOLCALC keyword
 performs a numerical integration in a molecular mesh.
 
-See the [complete example](/critic2/examplenoexist/) and the
-[manual](/critic2/examplenoexist) for more information.
+See the [manual](/critic2/manual/arithmetics/#libxc) for more
+information.
 
 ## Libcint
 
@@ -79,16 +80,17 @@ either of these two:
 where `/opt/libcint/lib` is the location of the libcint static (`.a`)
 or shared (`.so`) libraries prefix where libcint was installed.  If
 compiled with the shared option, the same path needs to be available
-when critic2 is executed (for instance, through the LD_LIBRARY_PATH
+when critic2 is executed (for instance, through the `LD_LIBRARY_PATH`
 environment variable).
 
 The libcint library is used with molecular wavefunctions that provide
 the basis set information (at present, this is only for fields read
-from a Gaussian fchk file, but more will implemented). The `mep()`,
+from a Gaussian fchk file, but more will be implemented). The `mep()`,
 `uslater()`, and `nheff()` chemical functions use the molecular
 integrals calculated by libcint, as well as the `MOLCALC HF`
-keyword. See the [complete example](/critic2/examplenoexist/) and the
-[manual](/critic2/examplenoexist) for more information.
+keyword. See the 
+[chemical functions](/critic2/manual/arithmetics/#availchemfun) and the
+[MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual.
 
 ## Libqhull
 
@@ -98,7 +100,7 @@ qhull library is used to calculate the Wigner-Seitz (WS) cell. The
 lattice vectors that correspond to each of the WS faces are used in
 critic2 to calculate the shortest lattice translation of a given
 vector as well as in the YT integration method and other
-parts. 
+tasks. 
 
 Critic2 ships a static (and probably old) copy of qhull but if you
 want to compile against your own, you can do so via configure:
@@ -107,5 +109,6 @@ want to compile against your own, you can do so via configure:
 ~~~
 where the two directories are the location of the `libqhull.h` header
 file (with-qhull-inc) and the `libqhull.so` library file
-(with-qhull-lib).
-
+(with-qhull-lib). However, since critic2 uses qhull for very basic
+calculations only, it is recommended that you use the critic2's
+copy of the library.
