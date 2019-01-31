@@ -8,4 +8,4 @@ sidebar:
   nav: "critic2"
 ---
 
-Nothing yet.
+Nothing yet!
