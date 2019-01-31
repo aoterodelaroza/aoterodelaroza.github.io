@@ -10,28 +10,28 @@ toc_label: "Input, output, and notation"
 toc_sticky: true
 ---
 
-## Notation and terms
+## Notation Used in this Manual
 
 The input for critic2 is free-format and case-insensitive. Lines
 preceded by `#` are treated as comments. The input syntax is
 keyword-driven: the first word in any (non-blank) input line
-determines the task to be performed.
+determines the task to be carried out.
 
 In this manual, keywords are written in CAPS. Input variables are
-denoted using a suffix to indicate their type: a real number (`.r`), an
-integer (`.i`) or a string (`.s`). Almost anywhere that a number is
-expected, it is possible to use an arithmetic expression (see the
-`Arithmetic expressions, variables, and functions in critic2`_
-section). If an arithmetic expression is required (and not merely
-optional), then quotes are used (for instance, "expr.s"). When several
-alternative keywords are possible, the or symbol (|) is used. Square
-brackets ([]) denote optional keywords and curly braces ({}) are used
-for grouping.
+denoted using a suffix to indicate their type: a real number (`.r`),
+an integer (`.i`) or a string (`.s`). Almost anywhere that a number is
+expected, it is possible to use an 
+[arithmetic expression](/critic2/manual/arithmetics/). If an arithmetic expression
+is required (and not merely optional), then it should be given in
+either double or single quotes are used (for instance, "$1+$2"). When
+several alternative keywords are possible, the or symbol (|) is
+used. Square brackets ([]) denote optional keywords and curly braces
+({}) are used for grouping.
 
-Some of the sections in the rest of this manual contain an "additional
-options" subsection. These provide some independent keywords that
-control the behavior of critic2 and are meant to be used either before
-or after the keywords in the section in which they appear. For
+Some of the sections in the rest of this manual contain a subsection
+describing additional options. These provide some independent keywords
+that control the behavior of critic2 and are meant to be used either
+before or after the keywords in the section in which they appear. For
 instance, NOSYMM can be used before CRYSTAL to deactivate the
 automatic calculation of the crystal symmetry:
 ~~~
@@ -48,113 +48,124 @@ atoms. The **non-equivalent atom list** contains the atoms in the
 asymmetric unit, that is, the minimal list of atoms that generate all
 the atomic positions in the crystal by symmetry. The **cell atom
 list**, equivalently called the **complete atom list**, contains all
-atoms in the current unit cell. The non-equivalent atom list
-reproduces the complete atom list by applying all symmetry operations
-(except lattice translations) known to critic2.
+atoms in the unit cell. The non-equivalent atom list reproduces the
+complete atom list by applying all symmetry operations (other than
+pure lattice translations) known to critic2.
 
 The atoms in each of those two lists are numbered. The integer
 identifier for an atom in the non-equivalent atom list is symbolized
-in this manual as "nat.i". The integer identifier for an atom in the
-complete atom list is "at.i". The concise syntax.txt file follows the
-same notation. The distinction between atoms from the complete list
-and from the non-equivalent list is irrelevant in the case of
-molecules, because symmetry is not used (and hence both lists are the
-same).
+in this manual as `nat.i`. The integer identifier for an atom in the
+complete atom list is `at.i`. The 
+[`syntax.txt` file](/critic2/syntax/) contains a summary of all
+available keywords and follows the same notation. The distinction
+between atoms from the complete list and from the non-equivalent list
+is irrelevant in the case of molecules, because symmetry is not used
+(hence both lists are the same).
 
 In exact parallel to the atomic lists, critic2 also maintains a list
 of non-equivalent critical points (CP) and a complete (or cell) list
 of critical points found for a given scalar field. The CPs in the
 non-equivalent list reproduce all the CPs in the complete list by
-symmetry, and both lists are the exactly the same in molecules because
-symmetry is not used. The keyword definitions in this manual and in
-syntax.txt use "ncp.i" for the integer indices in the non-equivalent
-CP list, and "cp.i" for the integer identifiers in the complete CP
-list.
+symmetry, and both lists are the exact same in molecules because
+symmetry is not used. The keyword definitions use `ncp.i` for the
+integer indices in the non-equivalent CP list, and `cp.i` for the
+integer identifiers in the complete CP list.
 
-Since in critic2 atoms are considered critical points always, the
-non-equivalent (complete) atom list is a subset of the non-equivalent
-(complete) CP list. Critic2 makes sure that the integer identifier for
-all atoms in the atomic lists are the same as in the corresponding CP
-lists. For instance, if an atom has index nat.i = 2 and at.i = 5, then
-necessarily ncp.i = 2 and cp.i = 5, regardless of how many additional
-critical points have been found for this system.
+In critic2 atoms are considered critical points always (this may
+change at some point). Therefore, the non-equivalent (complete) atom
+list is a subset of the non-equivalent (complete) CP list. Critic2
+makes sure that the integer identifier for all atoms in the atom lists
+are the same as in the corresponding CP lists. For instance, if an
+atom has index `nat.i = 2` and `at.i = 5`, then necessarily `ncp.i =
+2` and `cp.i = 5`, regardless of how many additional critical points
+have been found for this system.
 
 In most critic2 keywords, atoms can be selected by their atomic symbol
-("at.s" in the syntax definitions), in which case the keyword applies
+(`at.s` in the syntax definitions), in which case the keyword applies
 to all atoms with the same atomic number unless otherwise
 stated. Atoms can also be selected by an integer identifier from the
-non-equivalent atom list ("nat.i" in the definitions) in those cases
+non-equivalent atom list (`nat.i` in the definitions) in those cases
 in which symmetry makes it irrelevant which of the symmetry-equivalent
 atoms in the cell are used. For example, the non-equivalent atom
-identifier can be used to instruct critic2 to calculate the charge
-of a certain atom. Because all symmetry-equivalent atoms have the same
-charge, it is not necessary to specify which atom from the complete
-list we want, so the non-equivalent list is used instead.
+identifier can be used to instruct critic2 to calculate the charge of
+a certain atom, since all symmetry-equivalent atoms have the same
+charge.
 
-Some additional notation and terms that will be used in the rest
-of the manual are:
+Some additional notation and terms that are used in the manual:
 
 * By **scalar field** or **field** we mean a numerical or analytical
   representation of a function that associates a scalar value to every
-  point in space. Most of the time, this function is the electron
-  density, for which special techniques are provided (for instance,
-  core augmentation in the case of valence densities, see ZPSP
-  below). However, critic2 can deal with any scalar field, and
-  examples other than the density are the ELF, the Laplacian, etc.
+  point in space. Often, this function is the electron density, for
+  which special techniques are provided (for instance, core
+  augmentation in the case of valence densities, see 
+  [ZPSP](/critic2/manual/crystal/#c2-charge).. However, critic2 can
+  deal with any scalar field, and examples other than the density are
+  the ELF, the Laplacian, etc.
 
 * The **promolecular density** is the scalar field built by using the
   sum of the in-vacuo atomic densities. This object comes up in a
-  number of contexts. For instance, NCIPLOT and HIRSHFELD use it. The
+  number of contexts. For instance, 
+  [NCIPLOT](/critic2/manual/nciplot/) and 
+  [HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld) use it. The
   promolecular density does not require any input from the user other
   than the crystal or molecular structure, and is always available
   under field identifier $0 (or $rho0).
 
-* We denote by <root> the root of the input file. That is, the name of
-  the file without the extension. If no input file is known (for
-  instance, because critic2 was run as 'critic2 < inputfile'), then
+* We denote by \<root\> the root of the input file, i.e., the name of
+  the file minus its extension. If no input file is known (for
+  instance, because critic2 is being run interactively), then
   the root defaults to "stdin". The default root can be changed with
-  the keyword ROOT (see `Control commands and options`_).
+  the keyword [ROOT](/critic2/manual/misc/#c2-control).
 
 * The critical points of a field can be classified by their **rank**
   (r) and **signature** (s). The rank is the number of non-zero
-  eigenvalues of the Hessian. In the vast majority of cases, r =
+  eigenvalues of the Hessian. In the vast majority of cases, r is
   3. The signature is the number of positive eigenvalues minus the
   number of negative eigenvalues. s = -3 is a maximum, s = -1 is a
   first-order saddle point, s = +1 is a second-order saddle point and
   s = 3 is a minimum. These four types of critical points receive
   special names: nuclear CP, bond CP, ring CP, and cage CP,
   respectively. The abbreviations ncp, bcp, rcp, and ccp are also used
-  throughout the manual and in the output. Note that a maximum is a
-  "nuclear critical point" even though it may not be associated to any
-  nucleus.
+  throughout the manual and in the output. Note that a maximum is
+  always a "nuclear critical point" even though it may not be
+  associated to any nucleus.
 
-## Input and output units {#c2-units}
+## Input and Output Units {#c2-units}
 
 The default input and output units in critic2 are bohr for crystals
-(if the structure is loaded using the CRYSTAL keyword) and angstrom
-for molecules (if the MOLECULE keyword is used). This default behavior
-can be changed with the UNITS keyword:
+(if the structure is loaded using the 
+[CRYSTAL](/critic2/manual/crystal/#c2-crystal) keyword) and angstrom
+for molecules (if the 
+[MOLECULE](/critic2/manual/molecule/#c2-molecule) keyword is
+used). In the particular case of molecules, the origin is also placed
+at the same point as in the structure provided by the user.
+
+This default behavior can be changed with the UNITS keyword:
 ~~~
 UNITS {BOHR|AU|A.U.|ANG|ANGSTROM}
 ~~~
-This keyword changes the units of all distances in input and output.
+This command changes the units of all distances in input and output to
+either bohr or angstrom.
 
-## Input/Output for a crystal
+## Simple Input and Output for a Crystal
 
 As an example, let us consider an input for the conventional cell of
-the fluorite (CaF2) crystal:
+the fluorite (CaF2) crystal. Fluorite is cubic with space group
+Fm-3m. Ca forms a face-centerd cubic lattice and F occupies all the
+tetrahedral voids. The input is:
 ~~~
 CRYSTAL
- SPG f m -3 m
- CELL 5.463 5.463 5.463 90 90 90 ANG
- NEQ 0 0 0 ca
- NEQ 1/4 1/4 1/4 f
+ SPG F m -3 m
+ CELL 5.463 5.463 5.463 90 90 90 ang
+ Ca 0   0   0
+ F  1/4 1/4 1/4
 ENDCRYSTAL
 ~~~
-The non-equivalent atom list contains two atoms: Ca at (0 0 0) with
-multiplicity 4 and F at (1/4 1/4 1/4) with multiplicity 8. The cell
-atom list contains twelve atoms: four Ca atoms at (0 0 0), (1/2 1/2
-0), etc. and eight F atoms at (1/4 1/4 1/4), (3/4 1/4 1/4), etc.
+When this structure is read, the non-equivalent atom list contains two
+atoms: Ca at (0,0,0) with multiplicity 4 and F at (1/4,1/4,1/4) with
+multiplicity 8. The cell atom list contains twelve atoms: four Ca
+atoms at (0,0,0), (1/2,1/2,0), etc. and eight F atoms at
+(1/4,1/4,1/4), (3/4,1/4,1/4), etc.
 
 The output for this example follows. First, the output gives the
 header with some information about the system, the version (the commit
@@ -190,10 +201,12 @@ number), and the location of the relevant library and density files:
 
 CRITIC2--2015/10/21, 23:08:09.362
 ~~~
+
 After the CRYSTAL keyword is read, critic2 first lists the basic
 information about the crystal (note that the input lines read are
-copied to the output preceded by the "%%" prefix), starting with the
-cell parameters and the number of atoms in the crystal motif:
+copied to the output preceded by the "%%" prefix). The output 
+starts with the cell parameters and the number of atoms in the crystal
+motif:
 ~~~
 %% CRYSTAL
 %% SPG f m -3 m
@@ -201,68 +214,95 @@ cell parameters and the number of atoms in the crystal motif:
 %% NEQ 0 0 0 ca
 %% NEQ 1/4 1/4 1/4 f
 %% ENDCRYSTAL
-* Input crystal data
+* Crystal structure
   From: <input>
-  Lattice parameters (bohr): 10.323763  10.323763  10.323763
-  Lattice parameters (ang): 5.463100  5.463100  5.463100
+  Lattice parameters (bohr): 10.323574  10.323574  10.323574
+  Lattice parameters (ang): 5.463000  5.463000  5.463000
   Lattice angles (degrees): 90.000  90.000  90.000
-  Molecular formula:
-    Ca(1) F(2)
+  Empirical formula: 
+    ca(1) f(2) 
   Number of non-equivalent atoms in the unit cell: 2
   Number of atoms in the unit cell: 12
-  Number of electrons: 152
+  Number of atomic species: 2
+  Number of electrons (with zero atomic charge): 152
 ~~~
+
+Next is the list of **atomic species**. Internally, critic2 keeps a
+list of all the types of atoms present in the crystal or
+molecule. Normally, each atomic species corresponds to a different
+element but in some cases, for instance magnetic systems, it may
+be useful to differentiate between two different atomic types with
+the same atomic number.
+~~~
++ List of atomic species: 
+# spc  Z   name    Q   ZPSP
+   1  20    ca     0.0  -- 
+   2   9     f     0.0  -- 
+~~~
+In this case, however, we have two species corresponding to Ca
+and F, each with their corresponding atomic number.
+
 Next comes the non-equivalent atom list. In this case, the whole
 crystal is generated by replicating two atoms: one Ca and one F. The
 positions, multiplicities, and the atomic numbers are indicated:
 ~~~
-+ List of non-equivalent atoms (cryst. coords.):
-# nat     x       y       z    name mult  Z
-   1   0.0000  0.0000  0.0000   ca    4  20
-   2   0.2500  0.2500  0.2500   f     8   9
++ List of non-equivalent atoms in the unit cell (cryst. coords.): 
+# nat       x              y              z        spc  name   mult  Z 
+   1   0.0000000000   0.0000000000   0.0000000000   1    ca     4  20 
+   2   0.2500000000   0.2500000000   0.2500000000   2     f     8   9 
 ~~~
+
 The next table is the complete atom list. Here, critic2 lists all the
 atoms in the unit cell: four Ca and eight F. The exact same list is
 repeated in Cartesian coordinates, referred to the internal coordinate
-framework used in critic2.
+system used in critic2. The output also indicates the matrix of 
+lattice vectors in Cartesian coordinates (repeated below).
 ~~~
 + List of atoms in the unit cell (cryst. coords.): 
-# at      x       y       z     name  Z  
-   1   0.0000  0.0000  0.0000    ca   20 
-   2   0.0000  0.5000  0.5000    ca   20 
-   3   0.5000  0.0000  0.5000    ca   20 
-   4   0.5000  0.5000  0.0000    ca   20 
-   5   0.2500  0.2500  0.2500    f    9  
-   6   0.2500  0.7500  0.7500    f    9  
-   7   0.7500  0.2500  0.7500    f    9  
-   8   0.7500  0.7500  0.2500    f    9  
-   9   0.7500  0.7500  0.7500    f    9  
-  10   0.7500  0.2500  0.2500    f    9  
-  11   0.2500  0.7500  0.2500    f    9  
-  12   0.2500  0.2500  0.7500    f    9  
+# at        x              y              z        spc  name    Z 
+   1   0.0000000000   0.0000000000   0.0000000000   1    ca    20 
+   2   0.0000000000   0.5000000000   0.5000000000   1    ca    20 
+   3   0.5000000000   0.0000000000   0.5000000000   1    ca    20 
+   4   0.5000000000   0.5000000000   0.0000000000   1    ca    20 
+   5   0.2500000000   0.2500000000   0.2500000000   2     f     9 
+   6   0.2500000000   0.7500000000   0.7500000000   2     f     9 
+   7   0.7500000000   0.2500000000   0.7500000000   2     f     9 
+   8   0.7500000000   0.7500000000   0.2500000000   2     f     9 
+   9   0.7500000000   0.7500000000   0.7500000000   2     f     9 
+  10   0.7500000000   0.2500000000   0.2500000000   2     f     9 
+  11   0.2500000000   0.7500000000   0.2500000000   2     f     9 
+  12   0.2500000000   0.2500000000   0.7500000000   2     f     9 
+
++ Lattice vectors (bohr)
+    a:   10.3235738640     0.0000000000     0.0000000000 
+    b:    0.0000000000    10.3235738640     0.0000000000 
+    c:    0.0000000000     0.0000000000    10.3235738640 
 
 + List of atoms in Cartesian coordinates (bohr): 
-# at      x       y       z     name  Z
-   1   0.0000  0.0000  0.0000    ca   20 
-   2   0.0000  5.1617  5.1617    ca   20 
-   3   5.1617  0.0000  5.1617    ca   20 
-   4   5.1617  5.1617  0.0000    ca   20 
-   5   2.5808  2.5808  2.5808    f    9
-   6   2.5808  7.7426  7.7426    f    9
-   7   7.7426  2.5808  7.7426    f    9
-   8   7.7426  7.7426  2.5808    f    9
-   9   7.7426  7.7426  7.7426    f    9
-  10   7.7426  2.5808  2.5808    f    9
-  11   2.5808  7.7426  2.5808    f    9
-  12   2.5808  2.5808  7.7426    f    9
+# at         x                y                z         spc  name    Z     dnn    
+   1     0.0000000000     0.0000000000     0.0000000000   1    ca    20    4.4702  
+   2     0.0000000000     5.1617869320     5.1617869320   1    ca    20    4.4702  
+   3     5.1617869320     0.0000000000     5.1617869320   1    ca    20    4.4702  
+   4     5.1617869320     5.1617869320     0.0000000000   1    ca    20    4.4702  
+   5     2.5808934660     2.5808934660     2.5808934660   2     f     9    4.4702  
+   6     2.5808934660     7.7426803980     7.7426803980   2     f     9    4.4702  
+   7     7.7426803980     2.5808934660     7.7426803980   2     f     9    4.4702  
+   8     7.7426803980     7.7426803980     2.5808934660   2     f     9    4.4702  
+   9     7.7426803980     7.7426803980     7.7426803980   2     f     9    4.4702  
+  10     7.7426803980     2.5808934660     2.5808934660   2     f     9    4.4702  
+  11     2.5808934660     7.7426803980     2.5808934660   2     f     9    4.4702  
+  12     2.5808934660     2.5808934660     7.7426803980   2     f     9    4.4702  
 ~~~
+
 Following this information comes the cell volume, in atomic units and
-in cubed angstrom:
+in angstrom^3:
 ~~~
-+ Cell volume (bohr^3): 1100.30746
-+ Cell volume (ang^3): 163.04874
++ Cell volume (bohr^3): 1100.24704
++ Cell volume (ang^3): 163.03979
 ~~~
-And then the list of symmetry operations:
+
+And then the list of symmetry operations and the space group and point
+group information:
 ~~~
 + List of symmetry operations (48):
   Operation 1:
@@ -279,21 +319,37 @@ And then the list of symmetry operations:
      0.000000  0.000000  1.000000  0.000000
     -1.000000  0.000000  0.000000  0.000000
 
++ List of symmetry operations in crystallographic notation:
+   1: x,y,z
+   2: -z,-x,-y
+   3: -y,x,z
+[...]
+   47: x,-z,-y
+   48: y,z,-x
+
 + List of centering vectors (4):
   Vector 1: 0.000000  0.000000  0.000000
   Vector 2: 0.000000  0.500000  0.500000
   Vector 3: 0.500000  0.000000  0.500000
   Vector 4: 0.500000  0.500000  0.000000
 
-+ Centering type (p=1,a=2,b=3,c=4,i=5,f=6,r=7): 6
++ Crystal symmetry information
+  Space group (Hermann-Mauguin): Fm-3m (number 225)
+  Space group (Hall): -F 4 2 3 (number 523)
+  Point group (Hermann-Mauguin): m-3m
+  Point group (Schoenflies): Oh
+  Holohedry: cubic
+  Laue class: m-3m
 ~~~
-The Cartesian/crystallographic transformation matrices are the
-transformation operations between the vector basis formed by the cell
-vectors (crystallographic coordiantes) and the internal Cartesian axes
-used in critic2 (Cartesian coordinates). The crystallographic to
-Cartesian matrix ("crys to car") gives the cell vectors in Cartesian
-axes. The metric tensor is the transpose of "crys to car" times "crys
-to car", and contains the scalar products between lattice vectors. 
+
+The Cartesian to crystallographic ("car to crys") transformation
+matrices are the transformation operations between the vector basis
+formed by the cell vectors (crystallographic coordiantes) and the
+internal Cartesian axes used in critic2 (Cartesian coordinates). The
+crystallographic to Cartesian matrix ("crys to car") gives the cell
+vectors in Cartesian axes. The metric tensor is the transpose of "crys
+to car" times "crys to car", and contains the scalar products between
+lattice vectors.
 ~~~
 + Car/crys coordinate transformation matrices:
   A = car to crys (xcrys = A * xcar, bohr^-1)
@@ -309,140 +365,175 @@ to car", and contains the scalar products between lattice vectors.
        0.0000000000   106.5761773245     0.0000000000 
        0.0000000000     0.0000000000   106.5761773245 
 ~~~
-Some more information about crystal symmetry follows, including the
-list of operations in chemical notation (and their principal axes),
-the crystal point group, the Laue class and the cyrstal system:
-~~~
-+ Symmetry operations (rotations) in chemical notation:
-  1    E    ( 0.00000,  0.00000,  0.00000)
-  2    S3   (-0.57735, -0.57735, -0.57735)
-  3    C4   ( 0.00000,  0.00000,  1.00000)
-  [...]
-  48   S3   (-0.57735,  0.57735, -0.57735)
 
-+ Crystal point group: Oh
-+ Number of operations (point group): 48
-+ Laue class: m-3m
-+ Crystal system: cubic
+The next block in the output gives the calculation of the discrete
+molecular units in this crystal. By default, critic2 calculates the
+full atomic connectivity graph in any given input. Based on this
+graph, critic2 determines whether the crystal is composed of molecules
+(0D), polymers (1D), slabs (2D) or if it is a three-dimensional
+periodic structure. In the case of a molecular crystal, critic2 gives
+the list of all molecules in the unit cell and assigns to them an
+identifying integer. In this case, the crystal is not molecular:
 ~~~
-The next few lines give the number of atoms contributing to the
-density in the main cell (the cell at the origin of the lattice). This
-is the set of atoms around the main cell whose in vacuo atomic density
-contribution to the main cell is more than a certain threshold. These
-"atomic environments" are used in certain applications of critic2 that
-involve quantites that break the translational symmetry of the crystal
-(e.g. calculating the promolecular density at a point in space).
-~~~
-+ Building the atomic environment of the main cell
-  Number of atoms contributing density to the main cell: 15972
-~~~
-A list of nearest-neighbor shells for all atoms in the non-equivalent
-list follows, together with information about the nearest-neighbor
-distance, the faces of the Wigner-Seitz cell (these are used to
-calculate distances between non-equivalent atoms), and, finally,
-whether the input cell is orthogonal:
-~~~
-+ Atomic environments (distances in bohr)
-#  id   atom   nneig     distance  nat   type      
-   1     ca      8       4.4702386   2    f         
-         ...    12       7.2998691   1    ca        
-         ...    24       8.5598553   2    f         
-         ...     6      10.3235739   1    ca        
-         ...    24      11.2498538   2    f         
-         ...    24      12.6437441   1    ca        
-         ...    32      13.4107158   2    f         
-         ...    12      14.5997382   1    ca        
-         ...    48      15.2687717   2    f         
-         ...    24      16.3230035   1    ca        
-   2      f      4       4.4702386   1    ca        
-         ...     6       5.1617869   2    f         
-         ...    12       7.2998691   2    f         
-         ...    12       8.5598553   1    ca        
-         ...     8       8.9404772   2    f         
-         ...     6      10.3235739   2    f         
-         ...    12      11.2498538   1    ca        
-         ...    24      11.5421065   2    f         
-         ...    24      12.6437441   2    f         
-         ...    16      13.4107158   1    ca        
++ List of fragments in the system (1)
+# Id = fragment ID. nat = number of atoms in fragment. C-o-m = center of mass (bohr).
+# Discrete = is this fragment finite?
+# Id  nat           Center of mass            Discrete  
+  1    12     0.871668    0.871668    0.871668   No
 
-+ List of half nearest neighbor distances (bohr)
-   id   atom      rnn/2    
-   1     ca      2.2351193 
-   2      f      2.2351193 
++ This is a 3D periodic structure.
+~~~
+
+In order to perform efficient calculations of distances in the
+crystal, critic2 sets up an **atomic environment**, which is
+the collection of all atoms in a number of unit cells surrounding the
+cell at the origin. These atoms are placed into bins, which are then
+used to speed up the calculation of distances and atomic contributions
+to scalar fields. The information about the atomic environments is
+given next:
+~~~
++ Atomic environment
+  Number of atoms (reduced cell/environment): 12 / 3056
+  Radius of (unit cell/environment) circumscribed sphere (bohr): 8.9405 / 67.0536
+  Maximum interaction distance (bohr): 31.4559 
+  Covering regions: 
+    Total number of regions: 216 (6 6 6)
+    Minimum region ID: -3 -3 -3
+    Maximum region ID: 2 2 2
+    Region side (bohr): 13.3037
+    Transformation origin (bohr): 5.1618,5.1618,5.1618
+    Search offsets: 2197
+    Maximum search offset: 6
+    Average number of atoms per region: 14.1481
+    Maximum number of atoms in a region: 40
+~~~
+
+Next the Wigner-Seitz (WS) cell and the reduced Delaunay cell are
+determined. This information is used in 
+the calculation of shortest distances between lattice translations of
+two atoms, and for the 
+[AUTO](/critic2/manual/cpsearch/#c2-auto) and 
+[YT](/critic2/manual/integrate/#c2-yt) tasks, among other things.
+~~~
++ Vertex of the WS cell in cryst. coords. (8)
+# id = vertex ID. xyz = vertex cryst. coords. d = vertex distance to origin (bohr).
+   id       x            y            z          d (bohr)   
+    1    0.500000     0.500000    -0.500000     8.94047722  
+    2    0.500000    -0.500000     0.500000     8.94047722  
+    3    0.500000     0.500000     0.500000     8.94047722  
+    4   -0.500000     0.500000     0.500000     8.94047722  
+    5    0.500000    -0.500000    -0.500000     8.94047722  
+    6   -0.500000     0.500000    -0.500000     8.94047722  
+    7   -0.500000    -0.500000    -0.500000     8.94047722  
+    8   -0.500000    -0.500000     0.500000     8.94047722  
+
++ Faces of the WS cell (6)
+# Face ID: vertexID1 vertexID2 ...
+   1: 3  4  8  2 
+   2: 3  4  6  1 
+   3: 3  1  5  2 
+   4: 1  6  7  5 
+   5: 2  8  7  5 
+   6: 4  8  7  6 
 
 + Lattice vectors for the Wigner-Seitz neighbors
-   1:  0  0 -1
+# FaceID: Voronoi lattice vector (cryst. coords.)
+   1:  0  0  1
    2:  0  1  0
-   3: -1  0  0
-   4:  1  0  0
-   5:  0  0  1
-   6:  0 -1  0
+   3:  1  0  0
+   4:  0  0 -1
+   5:  0 -1  0
+   6: -1  0  0
+
++ Lattice vectors for the Delaunay reduced cell (cryst. coords.)
+  a:  1  0  0
+  b:  0  1  0
+  c:  0  0  1
+  Delaunay reduced cell lengths: 10.323574 10.323574 10.323574
+  Delaunay reduced cell angles: 90.000 90.000 90.000
 
 + Is the cell orthogonal? T
++ Is the reduced cell orthogonal? T
 ~~~
+
 Critic2 always has a "reference" scalar field defined. The reference
-is the field that, for instance, provides the attraction basins
-integrated when calculating atomic charges, or whose critical points
-are determined by AUTO. In absence of any external field loaded by the
-user, critic2 defaults to using the promolecular density (the sum of
-atomic densities) as reference. The information that follows in the
-output shows how critic2 builds the promolecular density. First, the
-atomic numbers and charges are identified, the number of electrons is
-counted, and then the density tables for the appropriate atoms are
-loaded from external files:
+field is the primary target for most keywords. For instance, it
+provides the attraction basins integrated when calculating atomic
+charges, and it is the field whose critical points are determined by
+[AUTO](/critic2/manual/cpsearch/#c2-auto).  In absence of any external
+field loaded by the user, critic2 defaults to using the promolecular
+density (the sum of atomic densities) as reference.  The promolecular
+density is made available to the user through the field identifier $0
+(also, $rho0).
 ~~~
-* Atomic radial density grids
-+ List of atoms and charges:
-# nat  atom    Z    Q  ZPSP
-    1   Ca    20    0   -1
-    2    F     9    0   -1
-
-+ Number of electrons: 152
-+ Number of valence electrons: 152
-+ Number of core electrons: 0
-
-+ Reading new promolecular density grids
-+ Read density file: ca_pbe.wfc
-  Log grid (r = a*e^(b*x)) with a = 1.2394E-04, b = 2.0E-03
-  Num. grid points = 5855, rmax (bohr) = 15.0633965
-  Integrated charge = 19.9999732987
-  El. conf.: 1S(2)2S(2)2P(6)3S(2)3P(6)4S(2)
-+ Read density file: f__pbe.wfc
-  Log grid (r = a*e^(b*x)) with a = 2.7542E-04, b = 2.0E-03
-  Num. grid points = 5161, rmax (bohr) = 8.3542920
-  Integrated charge = 8.9999953160
-  El. conf.: 1S(2)2S(2)2P(5)
-
-+ Reading new core density grids
+* List of scalar fields
++ Field number 0
+  Name: <promolecular>
+  Source: <generated>
+  Type: promolecular
+  Atoms in the environment: 3056
+  Use core densities? F
+  Numerical derivatives? F
+  Nuclear CP signature: -3
+  Number of non-equivalent critical points: 2
+  Number of critical points in the unit cell: 12
+  Alias for this field (2): $0, $rho0
+  This is the REFERENCE field.
 ~~~
-Finally, the just-built promolecular density is made available to the
-user through the field identifier $0 (also, $rho0), and it is set as
-reference. A list of the current integrable properties is also
-given. This is the list of properties that would be integrated in the
-attraction basins if the user runs INTEGRALS or any of the other
-integration methods:
-~~~
-* Field number 0 is now REFERENCE.
 
-* Integrable properties list
+A list of the current integrable properties is 
+given next. This is the list of properties that would be integrated in the
+attraction basins if the user runs 
+[INTEGRALS](/critic2/manual/integrate/#c2-integrals) or any of the other
+basin integration methods. The list of integrable properties can be
+queried and modified with the [INTEGRABLE](/critic2/manual/integrate/#c2-integrable)
+keyword. Our outupt shows the default integrable properties, which are
+the atomic volume and the value and Laplacian of the reference field
+~~~
+* List of integrable properties (3)
 #  Id  Type  Field  Name
     1   v        0  Volume
-    2  fval      0  Charge
+    2  fval      0  Pop
     3  lval      0  Lap
 ~~~
+
+Next is the list of additional properties to be calculated at the 
+critical points. These are used at the end of the automatic 
+CP search with [AUTO](/critic2/manual/cpsearch/#c2-auto), and can
+be modified using the
+[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword. In our
+example, there are no additional properties.
+~~~
+* List of additional properties at critical points (0)
+~~~
+
+Each scalar field can be augmented with a core contribution. This can
+be useful in cases when the source program only provides the valence
+density, and is activated with the
+[ZPSP](/critic2/manual/crystal/#c2-charge) keyword. Next in the output
+is the list of core and pseudopotential charges for all known fields
+(in this case, the promolecular density, which has neither):
+~~~
+* List of core and pseudopotential charges for each field
+# id  type   core?  ZPSP
+  0  promol   no  
+~~~
+
 The execution finishes with a report of the warnings found and the
 timestamp. It is always a good idea to check for warnings in the
 output:
 ~~~
 CRITIC2 ended succesfully (0 WARNINGS, 0 COMMENTS)
 
-CRITIC2--2015/5/25, 13:06:32.168
+Elapsed wall time: 0s
+Elapsed CPU time: 0s
+CRITIC2--2019/1/31, 15:45:19.603
 ~~~
 
-## Input/Output for a molecular
+## Simple Input and Output for a Molecule
 
 Molecular structures are read in critic2 using the MOLECULE keyword. A
-simple example for a water molecule is:
+simple input file for a water molecule is:
 ~~~
 MOLECULE
   O 0.000000 0.000000 0.118882
@@ -461,134 +552,144 @@ The output starts off with the same header as in CRYSTAL, and then:
 %% H 0.000000 0.756653 -0.475529
 %% H 0.000000 -0.756653 -0.475529
 %% ENDMOLECULE
-* Input molecular structure
+* Molecular structure
   From: <input>
-  Encompassing cell dimensions (bohr): 20.0 22.8 21.1
-  Encompassing cell dimensions (ang): 10.5 12.0 11.1
+  Encompassing cell dimensions (bohr): 37.794523  40.654257  38.917797
+  Encompassing cell dimensions (ang): 20.000000  21.513306  20.594411
+  Empirical formula: 
+    o(1) h(2) 
   Number of atoms: 3
-  Number of electrons: 10
+  Number of atomic species: 2
+  Number of electrons (with zero atomic charge): 10
 ~~~
+
 The output shows a copy of the input lines (after the "%%" prefix),
 and some general information about the structure. Critic2 works under
-periodic boundary conditions, even for molecular structures. The
-difference is that the molecule is placed into a very large unit cell
-to mimic gas-phase conditions. However, critic2 treats the molecule in
+periodic boundary conditions, even when dealing with molecular
+structures. The molecule is placed inside a very large unit cell
+to mimic gas-phase conditions but critic2 treats the molecule in
 the same way as a crystal, converting the atomic coordinates to
-"crystallographic" coordinates inside the supercell. In the "Input
-molecular structure" output, critic2 shows the dimension of this cell
+"crystallographic" coordinates inside the supercell. In the output,
+critic2 shows the dimension of this cell 
 in bohr and angstrom, and the number of atoms and electrons in the
-molecule. Keywords are available in the MOLECULE keyword and
+molecule. Keywords are available in the 
+[MOLECULE](/critic2/manual/molecule/#c2-molecule) keyword and
 environment for changing the size and shape of the encompassing
 cell. 
 
-After that comes the list of atoms in Cartesian coordinates (angstrom
-units):
+After that comes the list of atomic species (same as in a crysatl) and
+the list of atoms in Cartesian coordinates (angstrom and referred to
+the same origin as in the input):
 ~~~
-+ List of atoms in Cartesian coordinates (ang): 
-# at      x       y       z  name  Z
-   1  0.0000  0.0000  0.1188   o   8
-   2  0.0000  0.7566 -0.4755   h   1
-   3  0.0000 -0.7566 -0.4755   h   1
-~~~
-Contrary to CRYSTAL, two atom lists (non-equivalent and complete) are
-not necessary because symmetry is automatically deactivated. So when
-using MOLECULE, at.i and nat.i in the keyword syntax are completely
-equivalent, and refer to the first column numbers in the previous
-table. 
++ List of atomic species: 
+# spc  Z   name    Q   ZPSP
+   1   8     o     0.0  -- 
+   2   1     h     0.0  -- 
 
-In molecular structures, the molecule is placed inside a big cell that
++ List of atoms in Cartesian coordinates (ang_): 
+# at         x                y                z         spc  name    Z     dnn
+   1     0.0000000000     0.0000000000     0.1188820000   1     o     8    0.9622
+   2     0.0000000000     0.7566530000    -0.4755290000   2     h     1    0.9622
+   3     0.0000000000    -0.7566530000    -0.4755290000   2     h     1    0.9622
+~~~
+The list of atoms in crysatllographic coordinates is not given when
+the structure is a molecule. Likewise, symmetry is not used in a
+molecular system and hence there is no need for a list of atoms in the
+asymmetric unit. All atoms in a molecule have multiplicity 1.
+
+The molecule is placed inside a big cell that
 tries to model the empty space around the molecule. This, however, may
 lead to some problems with critic2's methods. For instance, the
 critical point search will find that at the border of the supercell
 the density is discontinuous (because critic2 uses periodic boundary
 conditions) and report spurious CPs. Likewise, the gradient path
 tracing routines can become trapped at the border of the cell. To
-prevent this, MOLECULE defines by default a second cell, slightly
-smaller than the encompassing cell defined above. This "molecular
-cell" (see `The molecular structure`_) represents the valid
-molecular 
-space for the current structure. Regions outside the molecular cell
-(esssentially, the border of the encompassing cell) can not be
-traversed by gradient paths and can not hold any critical
-points. Essentially, the border of the encompassing cell becomes a
-representation of infinity for the gas-phase molecule under study. 
+prevent this, critic2 defines by default a second cell, slightly
+smaller than the encompassing cell defined above. This 
+[molecular cell](/critic2/manual/molecule/#c2-molcell) represents the valid
+molecular space for the current structure. Regions outside the molecular cell
+cannot be traversed by gradient paths and can not hold any critical
+points. Essentially, the outside border of the encompassing cell becomes a
+representation of infinity for the molecule under study. 
 
 The dimensions of the molecular cell are given next in the output:
 ~~~
-+ Limits of the molecular cell (in fractions of the cell).
-  The region of the encompassing cell outside the 
-  molecular cell is assumed to represent infinity (no 
-  CPs or gradient paths in it).
++ Limits of the molecular cell (in fractions of the unit cell).
+# The part of the unit cell outside the molecular cell represents
+# infinity (no CPs or gradient paths in it).
   x-axis: 0.1000 -> 0.9000
-  y-axis: 0.0875 -> 0.9125
-  z-axis: 0.0947 -> 0.9053
+  y-axis: 0.0930 -> 0.9070
+  z-axis: 0.0971 -> 0.9029
 ~~~
 where the limits are given in fractional coordinates of the
 encompassing cell. That is, the molecular cell goes from 0.1 to 0.9 of
 the encompassing cell (given above) in the x direction, etc. The
 remaining 10% of the cell in each direction becomes the forbidden zone
-for the structure.
+for this structure.
 
 After this, the output is very similar to CRYSTAL, except the output
 related to the crystal symmetry is not present. The atomic
-environments and nearest neighbor distances (all in angstrom) are
+environments and list of molecular fragments are
 shown next:
 ~~~
-+ Atomic environments (distances in ang)
-#  id   atom   nneig     distance  nat   type      
-   1      o      2       0.9622101   2    h         
-   2      h      1       0.9622101   1    o         
-         ...     1       1.5133060   3    h         
-   3      h      1       0.9622101   1    o         
-         ...     1       1.5133060   2    h         
++ List of fragments in the system (1)
+# Id = fragment ID. nat = number of atoms in fragment. C-o-m = center of mass (ang_).
+# Discrete = is this fragment finite?
+# Id  nat           Center of mass            Discrete
+  1    3      0.000000    0.000000    0.052368   Yes
 
-+ List of half nearest neighbor distances (ang)
-   id   atom      rnn/2    
-   1      o      0.4811050 
-   2      h      0.4811050 
-   3      h      0.4811050 
++ Atomic environment
+  Number of atoms (reduced cell/environment): 3 / 3
+  Radius of (unit cell/environment) circumscribed sphere (ang_): 17.9371 / 0.8129
+  Maximum interaction distance (ang_): 11.3820 
+  Covering regions: 
+    Total number of regions: 4 (1 2 2)
+    Minimum region ID: 0 -1 -1
+    Maximum region ID: 0 0 0
+    Region side (ang_): 2.6400
+    Transformation origin (ang_): 10.0000,10.7567,10.2972
+    Search offsets: 1331
+    Maximum search offset: 5
+    Average number of atoms per region: 0.7500
+    Maximum number of atoms in a region: 1
+
 ~~~
-Then the program prepares for calculating the promolecular density by
-identifying and loading the atomic density grids:
+As in the case of a crystal, critic2 calculates how many discrete
+fragments there is in this molecule. In this case, just one. The
+environment comprises the whole molecule (3 atoms).
+
+The rest of the output is completely equivalent to the crystal case
+(see the discussion above): 
 ~~~
-* Atomic radial density grids
-+ List of atomic charges and atomic numbers
-# nat  name    Z    Q  ZPSP
-    1    o     8    0   -1
-    2    h     1    0   -1
-    3    h     1    0   -1
+* List of scalar fields
++ Field number 0
+  Name: <promolecular>
+  Source: <generated>
+  Type: promolecular
+  Atoms in the environment: 3
+  Use core densities? F
+  Numerical derivatives? F
+  Nuclear CP signature: -3
+  Number of non-equivalent critical points: 3
+  Number of critical points in the unit cell: 3
+  Alias for this field (2): $0, $rho0
+  This is the REFERENCE field.
 
-+ Number of electrons: 10
-+ Number of valence electrons: 10
-+ Number of core electrons: 0
-
-* Reading new promolecular density grids
-+ Read density file: o__pbe.wfc
-  Log grid (r = a*e^(b*x)) with a = 3.0984E-04, b = 2.0E-03
-  Num. grid points = 5142, rmax (bohr) = 9.0481332
-  Integrated charge = 7.9999938286
-  El. conf.: 1S(2)2S(2)2P(4)
-+ Read density file: h__pbe.wfc
-  Log grid (r = a*e^(b*x)) with a = 2.4788E-03, b = 2.0E-03
-  Num. grid points = 4153, rmax (bohr) = 10.0141591
-  Integrated charge = 0.9999910815
-  El. conf.: 1S(1)
-
-* Reading new core density grids
-~~~
-And, finally, the promolecular density is set as the reference field
-and the default integrable properties are set:
-~~~
-* Field number 0 is now REFERENCE.
-
-* List of integrable properties
+* List of integrable properties (3)
 #  Id  Type  Field  Name
-    1   v        0  Volume
-    2  fval      0  Charge
-    3  lval      0  Lap
+    1   v        0  Volume  
+    2  fval      0  Pop  
+    3  lval      0  Lap  
+
+* List of additional properties at critical points (0)
+
+* List of core and pseudopotential charges for each field
+# id  type   core?  ZPSP
+  0  promol   no  
 
 CRITIC2 ended succesfully (0 WARNINGS, 0 COMMENTS)
 
-CRITIC2--2015/10/23, 23:18:42.312
-~~~~
-
+Elapsed wall time: 0s
+Elapsed CPU time: 0s
+CRITIC2--2019/1/31, 16:10:37.890
+~~~
