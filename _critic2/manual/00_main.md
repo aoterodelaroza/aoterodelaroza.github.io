@@ -8,7 +8,6 @@ sidebar:
 toc: true
 toc_label: "Reference manual"
 toc_sticky: true
-classes: wide
 ---
 
 ## Overview

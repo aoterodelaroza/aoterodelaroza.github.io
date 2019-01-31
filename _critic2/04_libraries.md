@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Interfacing with External Libraries"
 permalink: /critic2/libraries/
 excerpt: "Enhancing critic2's capabilities by interfacing with external libraries ."

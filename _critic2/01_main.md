@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Critic2"
 permalink: /critic2/
 excerpt: >-

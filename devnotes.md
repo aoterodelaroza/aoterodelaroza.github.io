@@ -1,6 +1,5 @@
 ---
 layout: collection
-classes: wide
 title: "Development notes"
 permalink: /devnotes/
 collection: devnotes

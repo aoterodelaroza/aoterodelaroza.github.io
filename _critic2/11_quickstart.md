@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Quick Start Guide"
 permalink: /critic2/quickstart/
 excerpt: "Basic usage of critic2."

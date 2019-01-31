@@ -2,7 +2,6 @@
 layout: splash
 permalink: /
 title: "Home"
-classes: wide
 row_critic2:
   - image_path: assets/images/critic2_pyridine.png
     title: "Critic2"

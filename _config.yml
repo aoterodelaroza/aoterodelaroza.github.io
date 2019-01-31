@@ -70,6 +70,7 @@ defaults:
       comments: false
       share: false
       related: false
+      classes: wide
 
 # HTML Compression
 # - http://jch.penibelst.de/

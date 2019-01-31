@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Files"
 permalink: /critic2/files/
 excerpt: "List of files in the critic2 program distribution."

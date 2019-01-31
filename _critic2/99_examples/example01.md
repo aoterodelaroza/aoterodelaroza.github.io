@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Example: Molecular calculations"
 permalink: /critic2/example01/
 excerpt: "Critic2 example: calculations using molecular structures and wavefunctions."

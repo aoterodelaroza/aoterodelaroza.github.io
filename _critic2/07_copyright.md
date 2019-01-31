@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Copyright"
 permalink: /critic2/copyright/
 excerpt: "The license for the critic2 program."

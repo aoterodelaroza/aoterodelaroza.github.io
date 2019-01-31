@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Installation"
 permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."

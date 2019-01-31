@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "List of Keywords"
 permalink: /critic2/syntax/
 excerpt: "List of commands used in critic2."

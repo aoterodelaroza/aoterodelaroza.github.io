@@ -1,6 +1,5 @@
 ---
 layout: single
-classes: wide
 title: "Kramdown cheat sheet"
 permalink: /devnotes/kramdown-cheatsheet/
 excerpt: "This is a cheat sheet for using the markdown syntax."
