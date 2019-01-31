@@ -23,29 +23,11 @@ breadcrumbs: true
 search: true
 search_full_content: true
 
-# Site Footer
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/aoterodelaroza"
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      url: "https://gitlab.com/aoterodelaroza"
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:aoterodelaroza@gmail.com"
-    - label: "Google Scholar"
-      icon: "fab fa-fw fa-google"
-      url: "https://scholar.google.com/citations?user=GR5q_Q0AAAAJ&hl=en"
-
-
 # Markdown and plugins
 markdown: kramdown
 highlighter: rouge
 excerpt_separator: "\n\n"
 plugins:
-  - jekyll-feed
   - jekyll-include-cache
   - jemoji
   - jekyll-gist
@@ -68,7 +50,6 @@ exclude:
   - LICENSE
   - README.md
 include:
-  - _pagesd/
   - _critic2/
   - _devnotes/
 
