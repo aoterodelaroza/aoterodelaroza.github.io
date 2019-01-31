@@ -37,40 +37,40 @@ critic2:
 
   - title: Examples
     children:
-      - title: "Molecular calculations"
+      - title: "Molecular Calculations"
         url: /critic2/example01/
 
 critic2_manual:
   - title: "Reference Manual"
     url: /critic2/manual/
     children:
-      - title: "Input, output, notation"
+      - title: "Input, Output, Notation"
         url: /critic2/manual/inputoutput/
-      - title: "Expressions, variables, and functions"
+      - title: "Expressions, Variables, Functions"
         url: /critic2/manual/arithmetics/
-      - title: "Crystal structure"
+      - title: "Crystal Structure"
         url: /critic2/manual/crystal/
-      - title: "Molecular structure"
+      - title: "Molecular Structure"
         url: /critic2/manual/molecule/
-      - title: "Exporting the structure"
+      - title: "Exporting the Structure"
         url: /critic2/manual/write/
-      - title: "Loading scalar fields"
+      - title: "Loading Scalar Fields"
         url: /critic2/manual/fields/
-      - title: "Graphical representations"
+      - title: "Graphical Representations"
         url: /critic2/manual/graphics/
-      - title: "Finding critical points"
+      - title: "Finding Critical Points"
         url: /critic2/manual/cpsearch/
-      - title: "Plotting gradient paths"
+      - title: "Plotting Gradient Paths"
         url: /critic2/manual/gradientpath/
-      - title: "Plotting atomic basins"
+      - title: "Plotting Atomic Basins"
         url: /critic2/manual/basinplot/
-      - title: "Integrating atomic basins"
+      - title: "Integrating Atomic Basins"
         url: /critic2/manual/integrate/
-      - title: "NCI plots"
+      - title: "NCI Plots"
         url: /critic2/manual/nciplot/
-      - title: "Structural tools"
+      - title: "Structural Tools"
         url: /critic2/manual/structure/
-      - title: "STM plots"
+      - title: "STM Plots"
         url: /critic2/manual/stm/
-      - title: "Miscellaneous tools"
+      - title: "Miscellaneous Tools"
         url: /critic2/manual/misc/

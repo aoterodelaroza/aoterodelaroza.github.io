@@ -1,12 +1,12 @@
 ---
 layout: single
-title: "Input format, output format, notation"
+title: "Input, Output, and Notation"
 permalink: /critic2/manual/inputoutput/
 excerpt: "Input format, output format, and notation for critic2."
 sidebar:
   nav: "critic2_manual"
 toc: true
-toc_label: "Input and output format, notation"
+toc_label: "Input, output, and notation"
 toc_sticky: true
 ---
 
