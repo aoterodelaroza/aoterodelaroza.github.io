@@ -5,7 +5,6 @@ permalink: /critic2/manual/cpsearch/
 excerpt: "Methods for finding critical points in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual cpsearch
 toc: true
 toc_label: "Finding critical points"
 toc_sticky: true

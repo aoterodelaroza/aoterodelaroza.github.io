@@ -5,7 +5,6 @@ permalink: /critic2/manual/
 excerpt: "The critic2 reference manual."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual
 toc: true
 toc_label: "Reference manual"
 toc_sticky: true

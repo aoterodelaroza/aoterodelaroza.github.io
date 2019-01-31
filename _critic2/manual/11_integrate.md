@@ -5,7 +5,6 @@ permalink: /critic2/manual/integrate/
 excerpt: "Methods for integrating atomic basins in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual integrate
 toc: true
 toc_label: "Integrating atomic basins"
 toc_sticky: true

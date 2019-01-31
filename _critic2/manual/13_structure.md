@@ -5,7 +5,6 @@ permalink: /critic2/manual/structure/
 excerpt: "Structural tools for crystallographic computations in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual structure
 toc: true
 toc_label: "Structural tools"
 toc_sticky: true

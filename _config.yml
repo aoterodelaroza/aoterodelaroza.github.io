@@ -97,6 +97,3 @@ compress_html:
   ignore:
     envs: development
 
-category_archive:
-  type: liquid
-  path: /categories/

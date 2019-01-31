@@ -5,7 +5,6 @@ permalink: /critic2/manual/nciplot/
 excerpt: "Non-covalent interaction (NCI) plots in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual nciplot
 ---
 
 ~~~

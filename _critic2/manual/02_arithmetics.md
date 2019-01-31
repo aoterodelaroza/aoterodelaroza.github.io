@@ -5,7 +5,6 @@ permalink: /critic2/manual/arithmetics/
 excerpt: "Arithmetic expressions, variables, and functions used for critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual arithmetics
 toc: true
 toc_label: "Arithemtic expressions, variables, functions"
 toc_sticky: true

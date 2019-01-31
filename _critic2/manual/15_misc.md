@@ -5,7 +5,6 @@ permalink: /critic2/manual/misc/
 excerpt: "Miscellaneous tools in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual misc
 toc: true
 toc_label: "Miscellaneous tools"
 toc_sticky: true

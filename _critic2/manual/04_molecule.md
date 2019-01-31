@@ -5,7 +5,6 @@ permalink: /critic2/manual/molecule/
 excerpt: "Reading a molecular structure in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual molecule
 toc: true
 toc_label: "Reading a molecular structure"
 toc_sticky: true

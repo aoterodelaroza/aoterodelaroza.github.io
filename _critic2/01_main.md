@@ -10,7 +10,6 @@ excerpt: >-
   critical point search, NCI plots, and much, much more.
 sidebar:
   nav: "critic2"
-categories: critic2
 search: true
 ---
 

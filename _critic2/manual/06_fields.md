@@ -5,7 +5,6 @@ permalink: /critic2/manual/fields/
 excerpt: "Load scalar fields in critic2."
 sidebar:
   nav: "critic2_manual"
-categories: critic2 manual fields
 toc: true
 toc_label: "Loading scalar fields"
 toc_sticky: true
