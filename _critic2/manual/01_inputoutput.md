@@ -147,7 +147,7 @@ UNITS {BOHR|AU|A.U.|ANG|ANGSTROM}
 This command changes the units of all distances in input and output to
 either bohr or angstrom.
 
-## Simple Input and Output for a Crystal
+## Simple Input and Output for a Crystal {#c2-simplecrystal}
 
 As an example, let us consider an input for the conventional cell of
 the fluorite (CaF2) crystal. Fluorite is cubic with space group
