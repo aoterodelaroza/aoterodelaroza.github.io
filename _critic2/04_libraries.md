@@ -10,7 +10,7 @@ toc_label: "External Libraries"
 toc_sticky: true
 ---
 
-## Libxc
+## Libxc {#c2-libxc}
 
 [Libxc](http://octopus-code.org/wiki/Libxc) is a library that
 implements exchange-correlation energies and potentials for many
@@ -64,7 +64,7 @@ performs a numerical integration in a molecular mesh.
 See the [manual](/critic2/manual/arithmetics/#libxc) for more
 information.
 
-## Libcint
+## Libcint {#c2-libcint}
 
 [Libcint](https://github.com/sunqm/libcint) is a library for
 calculating molecular integrals between Gaussian-Type Orbitals

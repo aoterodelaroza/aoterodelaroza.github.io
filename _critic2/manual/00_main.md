@@ -74,7 +74,7 @@ of examples is provided with the code (in the `examples/`
 subdirectory) and in this website. The `examples.txt` file provides a
 description of the examples.
 
-## Command-Line Options and Usage
+## Command-Line Options and Usage {#c2-commandline}
 
 Critic2 accepts a single input file (usually but not necessarily with
 extension `.cri`). The command-line syntax is:

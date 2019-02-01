@@ -391,8 +391,8 @@ LOAD file1.ion {nat1.i/at1.s} file2.ion ...
 LOAD file.xml file.bin file.hsd
 LOAD file.wfn
 LOAD file.wfx
-LOAD file.fchk
-LOAD file.molden
+LOAD file.fchk [READVIRTUAL]
+LOAD file.molden [READVIRTUAL]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
@@ -461,8 +461,8 @@ MOLCELL [border.r]
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
 MOLECULE file.wfn [border.r] [CUBIC|CUBE]
 MOLECULE file.wfx [border.r] [CUBIC|CUBE]
-MOLECULE file.fchk [border.r] [CUBIC|CUBE] [READVIRTUAL]
-MOLECULE file.molden [border.r] [CUBIC|CUBE] [READVIRTUAL]
+MOLECULE file.fchk [border.r] [CUBIC|CUBE]
+MOLECULE file.molden [border.r] [CUBIC|CUBE]
 MOLECULE file.log [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
 MOLECULE file.cube
