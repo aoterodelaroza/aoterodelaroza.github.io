@@ -530,7 +530,7 @@ Elapsed CPU time: 0s
 CRITIC2--2019/1/31, 15:45:19.603
 ~~~
 
-## Simple Input and Output for a Molecule
+## Simple Input and Output for a Molecule {#c2-simplemol}
 
 Molecular structures are read in critic2 using the MOLECULE keyword. A
 simple input file for a water molecule is:
