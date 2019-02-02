@@ -32,12 +32,11 @@ to suit their needs.
 
 The full syntax of the WRITE keyword is:
 ~~~
-WRITE file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]] 
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
-      [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
-      [NMER nmer.i]
-WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]] 
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i] 
+WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER] 
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
+	  [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
+WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER] 
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
 WRITE file.scf.in
 WRITE file.tess
@@ -158,8 +157,8 @@ read by [avogadro](https://avogadro.cc/) and its underlying engine,
 The following keyword also writes finite molecular representations of
 the structure:
 ~~~
-WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]] 
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i] 
+WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER] 
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
 ~~~
 In this case, however, the generated files are graphical

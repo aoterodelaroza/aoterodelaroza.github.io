@@ -143,7 +143,7 @@ The default integrable properties are:
   If f is a core-augmented field, only the valence Laplacian is
   integrated. 
 
-### Integrating delocalization indices in a solid with maximally localized Wannier functions
+### Integrating delocalization indices in a solid with maximally localized Wannier functions {#c2-intwandi}
 
 The keyword DELOC activates the calculation of localization and
 delocalization indices (DIs) in a crystal using the procedure
