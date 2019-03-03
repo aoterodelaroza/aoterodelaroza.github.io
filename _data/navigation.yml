@@ -36,6 +36,7 @@ critic2:
         url: /critic2/howto/
 
   - title: Examples
+    url: /critic2/example01/
     children:
       - title: "Molecular Calculations"
         url: /critic2/example01/
