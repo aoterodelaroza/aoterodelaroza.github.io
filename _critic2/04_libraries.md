@@ -4,7 +4,8 @@ title: "Interfacing with External Libraries"
 permalink: /critic2/libraries/
 excerpt: "Enhancing critic2's capabilities by interfacing with external libraries ."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 toc: true
 toc_label: "External Libraries"
 toc_sticky: true

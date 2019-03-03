@@ -4,7 +4,8 @@ title: "Citation"
 permalink: /critic2/citation/
 excerpt: "Please cite these references if you use critic2."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 ---
 
 The basic references for critic2 are:

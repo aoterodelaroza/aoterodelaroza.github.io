@@ -4,7 +4,8 @@ title: "Non-covalent interaction (NCI) plots"
 permalink: /critic2/manual/nciplot/
 excerpt: "Non-covalent interaction (NCI) plots in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Non-covalent interaction plots (NCIPLOT)a"
 toc_sticky: true

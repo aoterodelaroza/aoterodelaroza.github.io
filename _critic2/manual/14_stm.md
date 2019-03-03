@@ -4,7 +4,8 @@ title: "Scanning tunneling microscopy (STM) plots"
 permalink: /critic2/manual/stm/
 excerpt: "Scanning tunneling microscopy (STM) plots in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 ---
 
 ~~~

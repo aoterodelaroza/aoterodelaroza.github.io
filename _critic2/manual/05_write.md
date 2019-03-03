@@ -4,7 +4,8 @@ title: "Exporting the structure"
 permalink: /critic2/manual/write/
 excerpt: "Keywords for exporting crystal and molecular structures in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 ---
 
 Critic2 can be used as a converter between different crystal structure

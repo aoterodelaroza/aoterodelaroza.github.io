@@ -4,7 +4,8 @@ title: "Plotting atomic basins"
 permalink: /critic2/manual/basinplot/
 excerpt: "Methods for plotting atomic basins in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Plotting atomic basins"
 toc_sticky: true

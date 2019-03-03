@@ -4,7 +4,8 @@ title: "List of Keywords"
 permalink: /critic2/syntax/
 excerpt: "List of commands used in critic2."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 classes: wide
 toc: true
 toc_label: "List of keywords"

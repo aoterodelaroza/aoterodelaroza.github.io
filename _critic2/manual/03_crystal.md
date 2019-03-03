@@ -4,7 +4,8 @@ title: "Reading a crystal structure"
 permalink: /critic2/manual/crystal/
 excerpt: "Reading a crystal structure in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Crystal structures"
 toc_sticky: true

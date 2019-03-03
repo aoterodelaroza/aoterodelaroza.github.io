@@ -4,7 +4,8 @@ title: "Example: Molecular calculations"
 permalink: /critic2/example01/
 excerpt: "Critic2 example: calculations using molecular structures and wavefunctions."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2"
 toc: true
 toc_label: "Molecular calculations"
 ---

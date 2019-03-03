@@ -4,7 +4,8 @@ title: "Plotting gradient paths"
 permalink: /critic2/manual/gradientpath/
 excerpt: "Methods for plotting gradient paths in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Plotting gradient paths"
 toc_sticky: true

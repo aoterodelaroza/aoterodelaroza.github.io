@@ -4,7 +4,8 @@ title: "Copyright"
 permalink: /critic2/copyright/
 excerpt: "The license for the critic2 program."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 ---
 
 Copyright (c) 2013-2019 Alberto Otero de la Roza, Ángel Martín Pendás

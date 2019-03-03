@@ -4,7 +4,8 @@ title: "Graphical representations: points, lines, planes, grids"
 permalink: /critic2/manual/graphics/
 excerpt: "Make graphical representations of scalar fields and structures"
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Graphical representations"
 toc_sticky: true

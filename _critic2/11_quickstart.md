@@ -4,7 +4,8 @@ title: "Quick Start Guide"
 permalink: /critic2/quickstart/
 excerpt: "Basic usage of critic2."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 ---
 
 Critic2 reads the user commands from a single input file (the `.cri`

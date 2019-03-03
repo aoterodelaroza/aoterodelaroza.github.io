@@ -4,7 +4,8 @@ title: "Reference Manual"
 permalink: /critic2/manual/
 excerpt: "The critic2 reference manual."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Reference manual"
 toc_sticky: true

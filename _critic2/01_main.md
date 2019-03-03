@@ -8,7 +8,8 @@ excerpt: >-
   computations, input and output format conversion, Bader analysis,
   critical point search, NCI plots, and much, much more.
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 search: true
 ---
 

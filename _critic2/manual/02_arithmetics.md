@@ -4,7 +4,8 @@ title: "Arithmetic expressions, variables, and functions"
 permalink: /critic2/manual/arithmetics/
 excerpt: "Arithmetic expressions, variables, and functions used in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Arithemtic expressions, variables, functions"
 toc_sticky: true

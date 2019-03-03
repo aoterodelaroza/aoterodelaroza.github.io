@@ -4,7 +4,8 @@ title: "Reading a molecular structure"
 permalink: /critic2/manual/molecule/
 excerpt: "Reading a molecular structure in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Molecular structures"
 toc_sticky: true

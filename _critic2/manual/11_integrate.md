@@ -4,7 +4,8 @@ title: "Integrating atomic basins"
 permalink: /critic2/manual/integrate/
 excerpt: "Methods for integrating atomic basins in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Integrating atomic basins"
 toc_sticky: true

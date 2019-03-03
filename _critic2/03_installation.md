@@ -4,7 +4,8 @@ title: "Installation"
 permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 ---
 
 If you downloaded the code from the git repository, you will need to run:

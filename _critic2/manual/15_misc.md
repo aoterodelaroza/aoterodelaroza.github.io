@@ -4,7 +4,8 @@ title: "Miscellaneous tools"
 permalink: /critic2/manual/misc/
 excerpt: "Miscellaneous tools in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Miscellaneous tools"
 toc_sticky: true

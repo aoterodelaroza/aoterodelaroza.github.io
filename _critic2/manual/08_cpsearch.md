@@ -4,7 +4,8 @@ title: "Finding critical points"
 permalink: /critic2/manual/cpsearch/
 excerpt: "Methods for finding critical points in critic2."
 sidebar:
-  nav: "critic2_manual"
+  - repo: "critic2"
+    nav: "critic2_manual"
 toc: true
 toc_label: "Finding critical points"
 toc_sticky: true

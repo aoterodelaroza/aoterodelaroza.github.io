@@ -4,7 +4,8 @@ title: "Files"
 permalink: /critic2/files/
 excerpt: "List of files in the critic2 program distribution."
 sidebar:
-  nav: "critic2"
+  - repo: "critic2"
+    nav: "critic2" 
 ---
 
 This is the list of the relevant files and directories in the critic2
