@@ -11,7 +11,7 @@ toc_label: "Input, output, and notation"
 toc_sticky: true
 ---
 
-## Notation Used in this Manual
+## Notation Used in this Manual {#c2-notation}
 
 The input for critic2 is free-format and case-insensitive. Lines
 preceded by `#` are treated as comments. The input syntax is

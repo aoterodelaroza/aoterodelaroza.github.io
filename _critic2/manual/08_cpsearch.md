@@ -32,112 +32,122 @@ AUTO SEED LINE [X0 x0.r y0.r z0.r] [X1 x0.r y0.r z0.r]
 AUTO SEED POINT [X0 x0.r y0.r z0.r]
 AUTO SEED MESH
 ~~~
+
 The search for the critical points (CP) of a scalar field (the points
-where the gradient of the field vanishes) is a basic task in QTAIM. In
-critic2, this search is almost always conducted using the automatic CP
-localization algorithm via the AUTO keyword.
+where the gradient of the field vanishes) is a basic task in the
+quantum theory of atoms in molecules (QTAIM). In critic2, this search
+is almost always conducted using the automatic CP localization
+algorithm implemented in the AUTO keyword.
 
 The automatic search for critical points has two steps: seeding and
 searching. In the seeding step, a collection of points are selected in
-the unit cell that span the crystal or molecular space where CPs are
-likely to appear. In the search step, a Newton-Raphson algorithm is
-launched at each of the seeds in order to find nearby critical
-points.
+the space that spans the crystal (the unit cell) or molecular
+space. In the search step, a Newton-Raphson algorithm is launched at
+each of the seeds in order to find nearby critical points.
 
 The default seeding behavior in critic2 depends on whether the
-geometry under study is a crystal (loaded with the CRYSTAL keyword) or
-a molecule (MOLECULE keyword):
+geometry under study is a crystal (loaded with the
+[CRYSTAL](/critic2/manual/crystal/#c2-crystal) keyword) or
+a molecule ([MOLECULE](/critic2/manual/molecule/#c2-molecule)
+keyword):
 
-* In a crystal, AUTO calculates the Wigner-Seitz (WS) cell and its
-  irreducible part (the smallest piece that reproduces the WS cell by
-  symmetry). Once the irreducible WS (IWS) cell is found, seed points
-  are chosen by subdividing the edges, faces and interior of the
-  tetrahedra that the IWS comprises up to a certain subdivision level
-  (the DEPTH).
+* In a crystal, the default behavior of AUTO is to calculate the
+  Wigner-Seitz (WS) cell and its irreducible part (the smallest piece
+  of the crystal that reproduces the WS cell by symmetry). Once the
+  irreducible WS (IWS) cell is found, seed points are chosen by
+  subdividing the edges, faces and interior of the tetrahedra forming
+  the IWS comprises up to a certain subdivision level (the DEPTH).
 
 * In a molecule, a single seed is planted at the midpoint between
-  every atom pair less than 15 bohr apart.
+  every pair of atoms less than 15 bohr apart.
 
-In addition, AUTO provides multiple seeding strategies that can be
-combined by the user using the SEED keyword. These include searches
-between pairs of atoms (PAIR), atomic triplets (TRIPLET), uniform
-seeding in a sphere (SPHERE), a recursive subdivision of an octahedron
-(OH), seeding along lines (LINE) and at points (POINT), and seeding at
-a molecular integration mesh (MESH). The seed list built using these
-"seeding actions" is pruned to remove duplicates. Optionally, a
+Sometimes the default behavior will fail to locate some critical
+points. For those situations, AUTO provides multiple seeding
+strategies that can be employed by the user via the SEED
+keyword. These include searches between pairs of atoms (PAIR), atomic
+triplets (TRIPLET), uniform seeding in a sphere (SPHERE), a recursive
+subdivision of an octahedron (OH), seeding along lines (LINE) and at
+points (POINT), and seeding at a molecular integration mesh
+(MESH). The seed list built using these "seeding actions" is pruned to
+remove duplicates before the search is performed. Optionally, a
 portion of the unit cell can be selected to restrict the search in
 real space using the CLIP keyword. Once the seed list is built,
 Newton-Raphson is applied at each of the seeds on the list, making
 full use of shared-memory parallelization and crystal symmetry.
 
-The default seeding can be changed using one or more SEED
+The default seeding procedure can be changed using one or more SEED
 keywords. When a SEED keyword is used, the default seeding strategy is
 forgotten by critic2 and manual control of the seeding is used
 instead. Several SEED keywords can be used at the same time, each one
-specifying a single "seeding action" that is determined by the keyword
-immediately after SEED. This keyword can be:
+specifying a single seeding action that is determined by the keyword
+immediately following SEED. This keyword can be:
 
 * WS: a recursive subdivision of the Wigner-Seitz cell to level
-  depth.i (keyword: DEPTH, default: 1). The WS cell can be displaced
+  `depth.i` (keyword: DEPTH, default: 1). The WS cell can be displaced
   and centered somewhere in the unit cell using X0 (default: (0,0,0))
-  and scaled down to a radius of rad.r (keyword: RADIUS, default: not
-  used). The units for x0 are crystallographic coordinates in crystals
-  and molecular Cartesian coordinates in molecules (default: angstrom
-  unless changed by UNITS). For rad.r, the default units are bohr in
-  crystals and angstrom in molecules.
+  and scaled down to a radius of `rad.r` (keyword: RADIUS, default:
+  not used). The units for x0 are crystallographic coordinates in
+  crystals and molecular Cartesian coordinates in molecules (default:
+  angstrom unless changed by
+  [UNITS](/critic2/manual/inputoutput/#c2-units)). For `rad.r`, the
+  default units are bohr in crystals and angstrom in molecules.
 
-* OH: a sphere of radius rad.r (keyword RADIUS, mandatory) is built
-  around (x0.r y0.r z0.r) (keyword X0, mandatory). On the surface of
-  that sphere, points are set according to a recursive subdivision
-  algorithm that starts from a single octahedron and uses depth.r
-  recursion levels (keyword: DEPTH, default: 1). This is the same
-  procedure as the TRIANG keyword in BASINPLOT. Each resulting point
-  on the sphere surface determines a single ray along which nr.r seeds
-  are uniformly distributed (keyword: NR, mandatory), from X0 to the
+* OH: a sphere of radius `rad.r` (keyword RADIUS, mandatory) is built
+  around (`x0.r` `y0.r` `z0.r`) (keyword X0, mandatory). On the
+  surface of that sphere, points are set according to a recursive
+  subdivision algorithm that starts from a single octahedron and uses
+  `depth.r` recursion levels (keyword: DEPTH, default: 1). This is the
+  same procedure as the TRIANG keyword in
+  [BASINPLOT](/critic2/manual/basinplot/#c2-basinplot). Each resulting
+  point on the sphere surface determines a single ray along which
+  `nr.r` seeds are uniformly distributed (keyword: NR, mandatory),
+  from X0 to the surface of the sphere. The units for x0 are
+  crystallographic coordinates in crystals and molecular Cartesian
+  coordinates in molecules (default: angstrom unless changed by
+  [UNITS](/critic2/manual/inputoutput/#c2-units)). For `rad.r`, the
+  default units are bohr in crystals and angstrom in molecules.
+
+* SPHERE: a sphere of radius `rad.r` (keyword RADIUS, mandatory) is
+  built around (`x0.r` `y0.r` `z0.r`) (keyword X0, mandatory). On the
+  surface of that sphere, points are uniformly distributed, with a
+  placement algorithm that uses `nphi.i` points in the azimuthal angle
+  (keyword: NPHI, mandatory) and `ntheta.i` points in the polar angle
+  (keyword: NTHETA, mandatory). Each resulting point on the sphere
+  surface determines a single ray along which `nr.r` seeds are
+  uniformly distributed (keyword: NR, mandatory), from X0 to the
   surface of the sphere. The units for x0 are crystallographic
   coordinates in crystals and molecular Cartesian coordinates in
-  molecules (default: angstrom unless changed by UNITS). For rad.r,
-  the default units are bohr in crystals and angstrom in molecules.
-
-* SPHERE: a sphere of radius rad.r (keyword RADIUS, mandatory) is
-  built around (x0.r y0.r z0.r) (keyword X0, mandatory). On the
-  surface of that sphere, points are uniformly distributed, with a
-  placement algorithm that uses nphi.i points in the azimuthal angle
-  (keyword: NPHI, mandatory) and ntheta.i points in the polar angle
-  (keyword: NTHETA, mandatory). Each resulting point on the sphere
-  surface determines a single ray along which nr.r seeds are uniformly
-  distributed (keyword: NR, mandatory), from X0 to the surface of the
-  sphere. The units for x0 are crystallographic coordinates in
-  crystals and molecular Cartesian coordinates in molecules (default:
-  angstrom unless changed by UNITS). For rad.r, the default units are
-  bohr in crystals and angstrom in molecules.
+  molecules (default: angstrom unless changed by
+  [UNITS](/critic2/manual/inputoutput/#c2-units)). For `rad.r`, the
+  default units are bohr in crystals and angstrom in molecules.
 
 * PAIR: seeds are placed on the interatomic lines, for all atom pairs
-  at a distance less than dist.r (keyword: DIST, default: 15). The
-  number of seeds per line is n.i (keyword: NPTS, default: 1). The
+  at a distance less than `dist.r` (keyword: DIST, default: 15). The
+  number of seeds per line is `n.i` (keyword: NPTS, default: 1). The
   default units for dist.r are bohr in crystals, angstrom in
-  molecules. 
+  molecules.
 
 * TRIPLET: seeds are placed at the barycenter of every atomic triplet
   in which the three atoms are at a distance from each other less than
-  dist.r (keyword: DIST, default: 15). The default units for dist.r
-  are bohr in crystals, angstrom in molecules. 
+  `dist.r` (keyword: DIST, default: 15). The default units for
+  `dist.r` are bohr in crystals, angstrom in molecules.
 
-* LINE: place n.i seeds (keyword: NPTS, default: 1) along a line
-  between (x0.r y0.r z0.r) (keyword: X0, default: origin) and (x1.r
-  y1.r z1.r) (keyword: X1, mandatory). The units for x0 and x1 are
-  crystallographic coordinates in crystals and molecular Cartesian
-  coordinates in molecules (default: angstrom unless changed by
-  UNITS).
+* LINE: place `n.i` seeds (keyword: NPTS, default: 1) along a line
+  between (`x0.r` `y0.r` `z0.r`) (keyword: X0, default: origin) and
+  (`x1.r` `y1.r` `z1.r`) (keyword: X1, mandatory). The units for x0
+  and x1 are crystallographic coordinates in crystals and molecular
+  Cartesian coordinates in molecules (default: angstrom unless changed
+  by [UNITS](/critic2/manual/inputoutput/#c2-units)).
 
-* POINT: place a single seed at (x0.r y0.r z0.r) (keyword: X0,
+* POINT: place a single seed at (`x0.r` `y0.r` `z0.r`) (keyword: X0,
   mandatory). The units for x0 are crystallographic coordinates in
   crystals and molecular Cartesian coordinates in molecules (default:
-  angstrom unless changed by UNITS).
+  angstrom unless changed by
+  [UNITS](/critic2/manual/inputoutput/#c2-units)).
 
 * MESH: place seeds at the nodes of a molecular integration mesh. The
-  type of mesh can be controlled with the MESHTYP keyword (see
-  `Control commands and options`_).
+  type of mesh can be controlled with the
+  [MESHTYPE](/critic2/manual/misc/#c2-control) keyword.
 
 Multiple SEED keywords can be given in the same AUTO command. For
 instance:
@@ -147,8 +157,8 @@ AUTO SEED PAIR SEED WS SEED POINT 1/4 1/4 1/4
 executes three seeding actions: a search between all atoms pairs (1
 seed per pair), a recursive subdivision of the WS cell (one level),
 and a single seed at (0.25 0.25 0.25). The seed placement can be
-visualized using the optional SEEDOBJ keyword that writes an OBJ file
-(<root>_seeds.obj) containing the unit cell and all the seed
+visualized using the optional SEEDOBJ keyword. SEEDOBJ writes an OBJ
+file (`<root>_seeds.obj`) containing the unit cell and all the seed
 positions.
 
 The AUTO search can be restricted to a portion of the unit cell using
@@ -156,15 +166,16 @@ the CLIP keyword. The CLIP keyword specifies a region of real
 space. Only the seeds inside that region are used, and only the CPs
 found inside that region are accepted (although, in crystals, symmetry
 can replicate the CPs and send them outside the CLIP region; use
-CLEARSYM or NOSYMM to deactivate symmetry if necessary, see `Symmetry
-options`_). There are two possible region shapes in CLIP: a
-parallelepiped (CUBE) and a sphere (SPHERE). The parallelepiped is
-specified by giving its initial (x0) and final (x1) points. The sphere
-requires a center (x0) and a radius. The units for x0 and x1 are
-crystallographic coordinates in crystals and molecular Cartesian
-coordinates in molecules (default: angstrom unless changed by
-UNITS). For rad.r, the default units are bohr in crystals and angstrom
-in molecules.
+[CLEARSYM](/critic2/manual/crystal/#c2-symm) or
+[NOSYMM](/critic2/manual/crystal/#c2-symm) to deactivate symmetry if
+necessary). There are two possible region shapes in CLIP: a box (CUBE)
+and a sphere (SPHERE). The box is specified by giving two opposite
+corners: x0 and x1. The sphere requires a center (x0) and a
+radius. The units for x0 and x1 are crystallographic coordinates in
+crystals and molecular Cartesian coordinates in molecules (default:
+angstrom unless changed by
+[UNITS](/critic2/manual/inputoutput/#c2-units)). For `rad.r`, the
+default units are bohr in crystals and angstrom in molecules.
 
 A number of additional optional keywords control the behavior of
 AUTO. GRADEPS is the gradient norm threshold for the optimization: if
@@ -172,24 +183,24 @@ a CP is found with gradient norm less than GRADEPS (default: 1e-12),
 then it is accepted as CP.
 
 The DISCARD keyword can be used to reduce the list of critical
-points. If the expression expr.s evaluated at the critical point is
+points. If the expression `expr.s` evaluated at the critical point is
 non-zero, the critical point is discarded. A typical use for this
 keyword is when the system has a vacuum region. The (spurious)
 critical points in the vacuum region can be eliminated from the list
-by doing, for instance, DISCARD "$rho < 1e-7" to remove the critical
+by doing, for instance, `DISCARD "$rho < 1e-7"` to remove the critical
 points with density lower than 1e-7. The arithmetic expression can
 involve any number of fields, not just the reference field.
 
 If DRY (dry run) is used, then the seeding is done but the actual CP
 search is skipped. This is useful to examine the seed placement (in
 combination with SEEDOBJ) and also to print the current list of CPs at
-zero computational cost (for intsance, after a CHECK run).
+zero computational cost.
 
 CPEPS controls the minimum distance between CPs to consider them
 equivalent. The default units for CPEPS are bohr in crystals and
 angstrom in molecules. Default: 0.2 bohr. Similarly, NUCEPS controls
 the distance to consider a CP the same as a nucleus. If a CP is found
-at a distance less than neps.r from the closest nucleus, critic2
+at a distance less than `neps.r` from the closest nucleus, critic2
 considers the two are the same. The default value of NUCEPS is 0.1
 bohr, except for fields defined on a grid, where it defaults to 2
 times the maximum of the grid step in each direction. Hydrogens are
@@ -202,11 +213,11 @@ EPSDEGEN controls how degenerate critical points (i.e. one or more
 eigenvalues of the Hessian is zero) are discarded. This is important
 to get rid of critical points that appear in vacuum regions. A
 critical point is considered degenerate if any of the elements of the
-diagonal of the Hessian is less than edeg.r in absolute value.
+diagonal of the Hessian is less than `edeg.r` in absolute value.
 
 Because finding the CPs can be an expensive task in large structures,
 the CP list for the current field can be saved to a checkpoint file
-using the CHK keyword. This keyword generates a <root>.chk_cps file
+using the CHK keyword. This keyword generates a `<root>.chk_cps` file
 where the list of critical points is stored. It can be accessed in
 subsequent critic2 runs by using the CHK keyword in AUTO. For
 instance, to read the CPs from the checkpoint file and skip any
@@ -221,14 +232,13 @@ By default, checkpoint files are not used.
 In crystals, critic2 writes all the critical points found by AUTO to
 two internal lists: the "non-equivalent" list, containing only those
 CPs not equivalent by symmetry, and the "complete" list, which
-contains all the CPs in the unit cell (see `Input format, output
-format, and notation`_). In molecules, symmetry is not used, so both
-lists are the same.
+contains all the CPs in the unit cell. See the 
+[input and output notation](/critic2/manual/inputoutput/#c2-notation). 
+In molecules, symmetry is not used, so both lists are the same.
 
 The most important part of the AUTO output is the "final report",
 which gives the non-equivalent CP list and some other useful
-information. Its appearance is (the table has been simplified to fit
-the width of the page):
+information. Its appearance is (the table has been simplified):
 ~~~
 * Critical point list, final report (non-equivalent cps)
   Topological class (n|b|r|c):   2(8) 1(16) 1(16) 2( 8)
@@ -272,7 +282,9 @@ angle formed by the bond path (ring path) at the bcp (rcp).
 
 The **complete CP list** is the list of all CPs in the unit cell, and
 comes next in the output. The identifiers from this list are used as
-input for other keywords (for instance, GRDVEC or FLUXPRINT) as they
+input for other keywords (for instance, 
+[GRDVEC](/critic2/manual/gradientpath/#c2-grdvec) or 
+[FLUXPRINT](/critic2/manual/gradientpath/#c2-fluxprint)) as they
 specify a particular position in the crystal. The entries are similar
 to the non-equivalent CP list (the table has been simplified):
 ~~~
@@ -289,12 +301,12 @@ The columns are, in order, the CP identifier (cp), the identifier for
 the same CP in the non-equivalent CP list (ncp), the type of CP, the
 position in crystallographic coordinates, and the symmetry operation
 that transforms the CP from the non-equivalent CP list into the listed
-CP. 'Op.' corresponds to one of the symmetry operations listed in the
+CP. "Op." corresponds to one of the symmetry operations listed in the
 output and "lvec+cvec" is a translation. Application of the operation
-'op.' to the non-equivalent CP followed by the translation recovers
+"op." to the non-equivalent CP followed by the translation recovers
 the position of the CP in the complete list. The CPs that are at
 exactly the same position as the corresponding CPs in the
-non-equivalent list are listed first and marked with an 'x'. Note that
+non-equivalent list are listed first and marked with an "x". Note that
 for these, the operation is always 1 (the identity) and the
 translation vector is always a lattice translation.
 
@@ -321,13 +333,13 @@ vector by which it should be translated to regenerate their actual
 position. 
 
 More information about the atomic connectivity through bcps can be
-found in the "attractor connectivity matrix:
+found in the "attractor connectivity matrix":
 ~~~
 * Attractor connectivity matrix
               n(1)  n(2) 
-               Mg    O   
- n(1)    Mg     0     6   
- n(2)    O      6     0   
+               Mg     O
+ n(1)    Mg     0     6
+ n(2)    O      6     0
 ~~~
 This list gives the number of bond paths between the different types
 of non-equivalent atoms in the cell. For instance, in the example
@@ -339,8 +351,8 @@ O-O bond paths.
 The final part of the output from AUTO contains a detailed list of all
 the non-equivalent critical points found, together with an exahustive
 list of properties calculated at those points. More properties can be
-calculated by using the POINTPROP keyword (see `List of properties
-calculated at points (POINTPROP)`_):
+calculated by using the 
+[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword:
 ~~~
 * Additional properties at the critical points
 [...]
