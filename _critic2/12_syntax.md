@@ -200,6 +200,7 @@ CRYSTAL file.STRUCT_IN
 CRYSTAL file.STRUCT_OUT
 CRYSTAL file.gen
 CRYSTAL file.xsf
+CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
  SPG spgsymbol.s
