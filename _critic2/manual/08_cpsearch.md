@@ -404,8 +404,7 @@ complete list of CPs):
 Each row contains the CP identfier, the rank and signature, the type
 of critical point, the position in Cartesian coordinates (angstrom
 by default), the name, and the value, gradient and Laplacian of the
-reference field at that point. The complete CP list is exactly the
-same as the above, so it is not repeated.
+reference field at that point.
 
 The CP list is followed by the analysis of the connectivity between
 atoms via bonds and between cages via rings:
@@ -434,11 +433,12 @@ n(12)    H      0     0     0     0     0     0
  [...]
 n(12)    H      0     0     0     0     1     0   
 ~~~
-These lists have the same meaning as in the crsytal example. Finally,
-the output contains the exhaustive list of properties at the critical
-points. As in the case of crystals, the list of properties calculated
-at the critical points can be varied using the POINTPROP keyword (see
-`List of properties calculated at points (POINTPROP)`_):
+These lists have the same meaning as in the crsytal example. 
+
+Finally, the output gives an exhaustive list of properties at the
+critical points. As in the case of crystals, the list of properties
+calculated at the critical points can be varied using the 
+[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword:
 ~~~
 * Additional properties at the critical points
 [...]
@@ -460,31 +460,35 @@ at the critical points can be varied using the POINTPROP keyword (see
 [...]
 ~~~
 The only difference with the output in a crystal is that the
-coordinates are given in Cartesian and referred to the molecular
-origin, and the flatness is missing.
+coordinates are given in Cartesian (angstrom by default) and referred
+to the molecular origin. Also, the flatness is missing, because it is
+meaningless in a molecule.
 
 ### Problems finding critical points
 
-Sometimes, the zero (one) sum condition for the critical points is not
-fulfilled, which is usually caused by (often unavoidable) numerical
-shortcomings of the scalar field.
+Sometimes the zero (one) sum condition between the number of critical
+points of each type is not fulfilled. This is usually caused by
+problems in the localization of critical points that originate from
+the (often unavoidable) numerical shortcomings of the scalar field.
 
 In WIEN2k and elk densities, there might be spurious CPs at the
-surface of the muffin tin (where the density is discontinuous) that
-show up in the final report list. Every time a FPLAPW field is
-loaded, every atomic muffin is checked for discontinuities and the
-report printed to the output.
+surface of the muffin tin, where the density is discontinuous. These
+spurious CPs show up in the final report list. Every time a FPLAPW
+field is loaded, every atomic muffin is checked for discontinuities
+and the report printed to the output.
 
-In DFTB+ and other fields missing the core electrons
-(e.g. plane-wave calculations), the use of core-augmentation (ZPSP
-and CORE keywords) is recommended to prevent the appearance of
-spurious critical points close to the nuclei.
+In DFTB+ and other fields with missing core electrons (e.g. plane-wave
+calculations), the use of core-augmentation (ZPSP and CORE keywords)
+is recommended to prevent the appearance of spurious critical points
+close to the nuclei.
 
-In scalar fields with extreme variations in value (e.g. the
-Laplacian of the electron density), it is unlikely that AUTO will
-find all the core CPs. A previous version of critic2 does that
-(available upon request) but since the core CPs are not all that
-interesting, we have decided to remove that code from this version.
+In scalar fields with extreme variations in value (e.g. the Laplacian
+of the electron density), it is unlikely that AUTO will find all the
+core CPs, since they may be very close to each other or the CP may
+have a very small attraction basin in the Newton-Raphson algorithm. A
+previous version of critic2 does that (available upon request) but
+since the core CPs are not all that interesting, we have decided to
+remove that code from this version.
 
 By far, the most problematic type of field for CP localization is a
 grid of values. The difficulty is in finding a way to calculate the
@@ -501,14 +505,14 @@ always (a graphical representation can be obtained using the CPREPORT
 keyword). A finer grid may help with the CP clustering, but this will
 increase the cost of the density calculation.
 
-The region where the value of the field is very small are subject to
-the appearance of many spurious critical points, due to the very small
+Regions where the value of the field is very small are subject to the
+appearance of many spurious critical points, due to the very small
 value of the gradient. These regions typically appear in the vacuum
 region of a slab, or far away from a molecular system. To eliminate
 the critical points in these regions, use the DISCARD keyword combined
 with a threshold for the field value. For instance, to discard all
-critical points with density less (loaded in field $rho) than 1e-5,
-use DISCARD "$rho < 1e-5".
+critical points with density less (loaded in field `$rho`) than 1e-5,
+use `DISCARD "$rho < 1e-5"`.
 
 ### Visualization of critical points
 
@@ -518,9 +522,8 @@ list of critical points is very large, if you want to identify one
 particular critical point among many, or if you need to calculate
 distances between atoms and/or critical points. However, there are
 some molecular visualization programs that can be used to read the
-output of critic2, and I will describe in this section the most
-comfortable procedure (in my opinion) to do so. If you know a better
-way, please let me know.
+output of critic2, and this section describes the currently most
+comfortable procedure to do so. 
 
 The key to critical point visualization is the CPREPORT keyword. When
 used with one of the available output file formats, critic2 will write
@@ -555,9 +558,9 @@ from:
 The following comments apply to version 1.2.0 of the program (August
 2016). 
 
-Avogadro uses openbabel (http://openbabel.org/wiki/Main_Page) as the
+Avogadro uses [openbabel](http://openbabel.org/wiki/Main_Page) as the
 underlying format converter. To make avogadro understand the critical
-point types, all you need to do is modify the element.txt file that
+point types, all you need to do is modify the `element.txt` file that
 comes with openbabel, and add the critical point types at the end of
 the atomic species list:
 ~~~
@@ -570,7 +573,7 @@ the atomic species list:
 123     Xz      0.00    0.20    0.00    0.20    0       0       0.00    0       0       0.1709  1.0000  0.0000  xCP
 ~~~
 With these changes, atoms and critical points will be represented, and
-the latter will use the color scheme mentioned above. 
+the latter will use the color scheme mentioned above.
 
 The simplest file formats generated by critic2 and understood by
 avogadro are cif files (for crystals), xyz files (for molecules and
@@ -578,7 +581,7 @@ finite representations of crystals), and cml files (crystals and
 molecules). At the moment, the capabilities of avogadro to handle
 periodic systems are limited, but development is currently ongoing. To
 access the critical point labels (which correspond to the critic2
-lables), go to Display types, mark "Label", click on the Label
+labels), go to Display types, mark "Label", click on the Label
 options, and select "Text: atom number". The recommended format both
 for molecules and crystals is cml, which has several advantages over
 xyz and cif: i) it prevents avogadro from calculating the molecular
@@ -613,23 +616,26 @@ CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT [...] [GRAPH]
 ~~~
+
 CPREPORT prints additional information about the critical points to
-the output. SHORT: print the list of non-equivalent critical
-points. LONG: in a crystal, print the complete list of critical points
-in the unit cell and the connectivity in the case of bcp and rcp (when
-the graph is calculated); in a molecule, it is the same as
-SHORT. VERYLONG: detailed information at every critical point,
-including the derivatives of the reference field, the evaluation of
-all other fields, and the flatness (in a crystal only). SHELLS: local
-neighbor environment of every critical point (up to n.i shells,
-default 10). 
+the output. 
+
+* SHORT: prints the list of non-equivalent critical points. 
+* LONG: in a crystal, print the complete list of critical points in
+  the unit cell and the connectivity in the case of bcp and rcp (when
+  the graph is calculated); in a molecule, it is the same as SHORT.
+* VERYLONG: detailed information at every critical point, including
+  the derivatives of the reference field, the evaluation of all other
+  fields, and the flatness (in a crystal only).
+* SHELLS: local neighbor environment of every critical point (up to
+  `n.i` shells, default 10).
 
 In addition, any of the file formats available in the WRITE command
 can also be used in CPREPORT to write the molecular or crystal
 structure plus the critical point list in the relevant region. The
-behavior of these options is analogous to WRITE (except in that the
-critical points are written, in addition to the atoms). See `Exporting
-the structure (WRITE)`_ for more information. The critical points are
+behavior of these options is analogous to
+[WRITE](/critic2/manual/write/) (except in that the critical points
+are written, in addition to the atoms). The critical points are
 written using special symbols: Xn for a nuclear CP, Xb for a bond, Xr
 for a ring, and Xc for cage. Miscellaneous or unassigned critical
 points, and points along a gradient path are labeled Xz. Unless
@@ -667,27 +673,26 @@ like:
      1.179735612E-03  -4.510661176E-03  -4.029974096E-04
 ~~~
 For each critical point, the coordinates (Cartesian and
-crystallographic in a crysatl), the type, and the evaluation of the
-reference field and its derivatives is given. In many cases, it is
-interesting to calculate the value of a different field, or even an
-arithmetic expression involving other fields, at those critical
-points. For instance, it is relatively common to use the kinetic
-energy density at the bond critical points of the electron density as
-a measure of bond covalency.
+crystallographic in a crystal; only Cartesian in a molecule), the
+type, and the evaluation of the reference field and its derivatives is
+given. In many cases, it is of interest to calculate the value of a
+different field, or an arithmetic expression involving several
+fields, at those critical points.
 
 To obtain more information at the critical points of the reference
 field, the procedure in critic2 is to register a field or an
 arithmetic expression involving known fields in the "properties
-list", accesible using the POINTPROP keyword:
+list", accesible using the POINTPROP keyword, with syntax:
 ~~~
 POINTPROP name.s "expr.s"
 POINTPROP shorthand.s
 POINTPROP CLEAR
 POINTPROP LIST
 ~~~
-The POINTPROP keyword associates the expression "expr.s" with the name
-name.s and register that name in a list of properties. When AUTO is
-run (or CPREPORT, if the POINTPROP order comes after AUTO), those
+The POINTPROP keyword associates the expression `expr.s` with the name
+`name.s` and registers that name in a list of properties. When AUTO is
+run (or [CPREPORT](/critic2/manual/cpsearch/#c2-cpreport), 
+if the POINTPROP order comes after AUTO), those
 arithmetic expression will be applied to each of the CPs and the
 result printed in the output. For instance, if one does:
 ~~~
@@ -716,19 +721,20 @@ Then the result of AUTO for the critical point above becomes:
 ~~~
 The properties in the list are calculated at the end. The properties
 list is also used in other parts of critic2, notably in the output of
-POINT (`Points (POINT)`_).
+[POINT](/critic2/manual/graphics/#c2-point).
 
 Any arithmetic expression can be used in POINTPROP, but it is common
-to use on of the chemical functions from the critic2 function library
-(`List of available functions`_). The shorthand names for the chemical
-functions can also be used to apply those functions to the reference
-field. For instance:
+to use one of the
+[chemical functions from the critic2 function library](/critic2/manual/arithmetics/#availchemfun).
+The shorthand names for the chemical functions can also be used to
+apply those functions to the reference field. For instance:
 ~~~
 POINTPROP GTF
 ~~~
 activates the calculation of the Thomas-Fermi kinetic energy density
-(gtf function) on the reference field. POINTPROP can only be used with
-arithmetic expressions involving known fields. The keyword CLEAR
+(`gtf` function) on the reference field. POINTPROP can only be used
+with arithmetic expressions involving known fields. The keyword 
+[CLEAR](/critic2/manual/arithmetics/#c2-arithbasic)
 deletes all the properties in the list. The list of properties can be
 accesed at any time using POINTPROP LIST.
 
