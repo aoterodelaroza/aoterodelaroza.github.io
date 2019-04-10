@@ -13,16 +13,15 @@ toc_sticky: true
 
 ## Overview
 
-Critic2 provides several methods to integrate the attractor basins
-associated to the maxima of a field. In QTAIM theory, this field is
-the electron density, the attractors are (usually) nuclei and the
-basins are the atomic regions. In this case, the integrated properties
-are atomic properties (e.g. atomic charges, volumes, moments,
-etc.). The attractor basins are defined by a zero-flux condition of
-the electron density gradient: no gradient paths cross the boundary
-between attractor regions. This makes the basins local to each
-attractor, but their definition yields a relatively complex
-algorithmic problem.
+Critic2 provides several methods to integrate the attractor (Bader)
+basins associated to the maxima of a field. In QTAIM theory, this
+field is the electron density, the attractors are (usually) nuclei and
+the basins are the atomic regions. The integrated properties are
+atomic properties (e.g. atomic charges, volumes, moments, etc.). The
+attractor basins are defined by a zero-flux condition of the electron
+density: no gradient paths cross the boundary between attractor
+regions. This makes the basins local to each attractor, but their
+definition is a relatively complex algorithmic problem.
 
 The simplest way of integrating an attractor basin is bisection. A
 number of points distributed in a small sphere around the atom are
@@ -33,37 +32,44 @@ considering. If the end-point is a different attractor, then the point
 is not in the basin. By using bisection, it is possible to determine
 the basin limit (called the interatomic surface, IAS). The bisection
 algorithm is implemented in critic2, and can be accessed with the
-INTEGRALS keyword.
+INTEGRALS keyword. Bisection works best with analytical fields such as
+molecular wavefunctions or WIEN2k, but can be used with any field.
 
-An algorithm has been proposed based on the recursive subdivision of
-the irreducible Wigner-Seitz (IWS) cell, called qtree. In qtree, the
-smallest symmetry-irreducible portion of space is considered and a
-tetrahedral mesh of points is superimposed on it. The gradient path is
-traced from all those points and the points are assigned to different
-atoms (the points are 'colored'). The final integration is performed
-by quadrature. The qtree algorithm is accessed through the QTREE
-keyword.
+The [qtree algorithm](https://doi.org/10.1002/jcc.21620)
+is based on the recursive subdivision of the
+irreducible Wigner-Seitz (IWS). In qtree, the smallest
+symmetry-irreducible portion of space is considered and a tetrahedral
+mesh of points is superimposed on it. The gradient path is traced from
+all those points and the points are assigned to different atoms (the
+points are "colored"). The integration is performed by quadrature over
+the points belonging to a given basin. The qtree algorithm is accessed
+through the QTREE keyword, and is suited for small crystals and
+analytical fields (e.g. WIEN2k or elk).
 
 Lastly, integration algorithms based on grid discretization are very
 popular nowadays thanks to the widespread use of
 pseudopotential/plane-waves DFT methods. Critic2 provides the
-integration method of Yu and Trinkle (YT), described in JCP 134 (2011)
-064111. The algorithm is based on the assignment of integration
+integration [method of Yu and Trinkle (YT)](https://doi.org/10.1063/1.3553716).
+The algorithm is based on the assignment of integration
 weights to each point in the numerical grid by evaluating the flow of
 the gradient using the neighboring points. This algorithm is extremely
 efficient and robust and is strongly recommended in the case of fields
-on a grid. The keyword is YT. Another alternative for grids is the
-method proposed by Henkelman et al. (Comput. Mater. Sci. 36, 254-360
-(2006), J. Comput. Chem. 28, 899-908 (2007), J. Phys.: Condens. Matter
-21, 084204 (2009)), which is implemented in critic2 using the keyword
-BADER.
+on a grid. The associated keyword is YT. 
+
+An alternative to the YT method is the method proposed by Henkelman et
+al. ([Comput. Mater. Sci. 36, 254-360 (2006)](https://doi.org/10.1016/j.commatsci.2005.04.010), 
+[J. Comput. Chem. 28, 899-908 (2007)](https://doi.org/10.1002/jcc.20575), 
+[J. Phys.: Condens. Matter 21, 084204 (2009)](https://doi.org/10.1088/0953-8984/21/8/084204)),
+which is implemented in critic2 through the keyword BADER.
 
 The field that determines the basins being calculated is always the
-reference field (see `The reference field (REFERENCE)`_). However, it
-is in general interesting to one or more integrable properties using
-other scalar fields. For instance, we can calculate the charge inside
-an ELF basin: the ELF would be the reference field and the electron
-density would be an integrable property.
+reference field (see
+[REFERENCE](/critic2/manual/fields/#c2-reference)). In general, it is
+necessary to define one or more properties to be integrated inside the
+basins that use other scalar fields. For instance, to calculate
+the electron populatoin inside an ELF basin, the ELF would be the
+reference field and the electron density would be an integrable
+property.
 
 ## List of properties integrated in the attractor basins (INTEGRABLE) {#c2-integrable}
 
@@ -78,30 +84,29 @@ INTEGRABLE ... [NAME name.s]
 Critic2 uses an internal list of all properties that will be
 integrated in the attraction basins. This list can be modified by the
 user with the INTEGRABLE keyword. This keyword has a syntax similar to
-the list of properties calculated at the critical points (`List of
-properties calculated at points (POINTPROP)`_).
+the list of properties calculated at the critical points,
+[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop).
 
 A single INTEGRABLE command assigns a new quantity to be integrated in
 the atomic basins. The new integrable property is related to field
-id.s (given as field number or identifier). This quantity can be the
+`id.s` (given as field number or identifier). This quantity can be the
 field value itself (F), its valence component (if the field is
 core-augmented, FVAL), the gradient norm (GMOD), the Laplacian (LAP),
 or the valence-component of the Laplacian (LAPVAL). If no keyword is
-given after id.s, F is used by default.
+given after `id.s`, F is used by default.
 
 With the MULTIPOLES (or MULTIPOLE) keyword, the multipole moments of
-the field are calculated up to l=lmax.i (default: 5). This keyword
-only applies to the BADER and YT integration methods; for the others,
-it is equivalent to the field value (same as F). The units for all
-calculated multipoles are atomic units.
+the field are calculated up to an l equal to `lmax.i` (default:
+5). This keyword only applies to the BADER and YT integration methods.
+For the others, it is equivalent to the field value (same as F). The
+units for all calculated multipoles are atomic units.
 
 The keyword DELOC activates the calculation of the delocalization
-indices using field id.s via maximally localized wannier functions
-(see `Integrating delocalization indices in a solid with maximally
-localized Wannier functions`_). 
+indices using field `id.s` via 
+[maximally localized Wannier functions](/critic2/manual/integrate/#c2-intwandi).
 
 In addition, it is possible to define an integrable property using an
-expression involving more than one field (expr.s). For instance, if
+expression involving more than one field (`expr.s`). For instance, if
 the spin-up density is in field 1 and the spin-down density is in
 field 2, the atomic moments can be obtained using:
 ~~~
@@ -109,7 +114,7 @@ LOAD AS "$1+$2"
 REFERENCE 3
 INTEGRABLE "$1-$2"
 ~~~
-Note that the double quotation marks are required. 
+Note that the quotation marks are required. 
 
 The additional keyword NAME can be used with any of the options above
 to change the name of the integrable property, for easy identification
@@ -121,19 +126,19 @@ the list of integrable properties.
 
 The default integrable properties are:
 
-* Volume (1)
+* Volume (`1`).
 
-* Pop (fval): the value of the reference field is integrated. If the
+* Pop (`fval`): the value of the reference field is integrated. If the
   reference field is the density, then this is the number of electrons
   in the basin. If core augmentation is active for this field, only
   the valence contribution is integrated.
 
-* Lap (lap(fval)): the Laplacian of the reference field. The
+* Lap (`lap(fval)`): the Laplacian of the reference field. The
   integrated Laplacian has been traditionally used as a check of the
   quality of the integration because the exact integral is zero
   regardless of the basin (because of the divergence
   theorem). However, it is difficult to obtain a zero in the Laplacian
-  integral in critic2 because of numerical inaccuracies:
+  integral in critic2 in some cases because of numerical inaccuracies:
 
   - In fields based on a grid, the numerical interpolation gives a
     noisy Laplacian.
@@ -148,17 +153,18 @@ The default integrable properties are:
 
 The keyword DELOC activates the calculation of localization and
 delocalization indices (DIs) in a crystal using the procedure
-described in http://dx.doi.org/10.1021/acs.jctc.8b00549 . DIs can be
+described in the
+[literature](http://dx.doi.org/10.1021/acs.jctc.8b00549). DIs can be
 calculated only if the loaded field contains information about
 individual Kohn-Sham states and the orbital rotation that leads to the
 maximally localized Wannier functions (MLWF). This is done by using a
-field loaded from a pwc file (generated by the pw2critic.x utility in
-Quantum ESPRESSO) together with a checkpoint (chk) file from
-wannier90. The former contains the electronic wavefunctions and the
-latter the orbital rotation (`QE wavefunction plus Wannier checkpoint
-files (pwc)`_) . For maximum consistency, the pwc file can also be
-used to provide the structural information for the run via the CRYSTAL
-keyword (see `Quantum ESPRESSO wavefunction (pwc)`_).
+field loaded from a `.pwc` file (generated by the `pw2critic.x`
+utility in Quantum ESPRESSO) together with a checkpoint (chk) file
+from wannier90. The former contains the 
+[electronic wavefunctions](/critic2/manual/fields/#c2-qepwc) and 
+the latter the orbital rotation.  For maximum consistency, the pwc
+file can also be used to provide the structural information for the
+run via the [CRYSTAL keyword](/critic2/manual/crystal/#c2-crypwc).
 
 In addition to these data, the calculation of DIs has a few
 requirements: the grid must be consistent with that of the reference
@@ -168,62 +174,63 @@ A typical delocalization index calculation comprises the following
 steps:
 
 - Run a PAW calculation, then obtain an all-electron density using
-  pp.x with plot_num=21. This creates a cube file (rhoae.cube) that
-  gives the Bader basins for the calculation (the pseudo-valence
+  `pp.x` with `plot_num=21`. This creates a cube file (rhoae.cube)
+  that gives the Bader basins for the calculation (the pseudo-valence
   density is not valid for this purpose).
 
 - Run an SCF calculation with norm-conserving pseudopotentials and the
   same ecutrho as the calculation in the first step, so the two grids
   have the same sizes.
 
-- Use the open_grid.x utility in Quantum ESPRESSO to unpack the
+- Use the `open_grid.x` utility in Quantum ESPRESSO to unpack the
   symmetry of the k-point grid, in preparation for the wannier90 run
   (this would normally be accomplished by a non-SCF calculation, but
-  with open_grid.x it is easier and much faster).
+  with `open_grid.x` it is easier and much faster).
 
-- Use pw2critic.x on the output of open_grid.x to generate the pwc
+- Use `pw2critic.x` on the output of `open_grid.x` to generate the pwc
   file. 
 
-- Run wannier90 on the result of open_grid.x to generate the chk file.
+- Run wannier90 on the result of `open_grid.x` to generate the chk
+  file.
 
 - Load the all-electron density and the pwc and chk files as two
   fields in critic2. Set the former as the reference density and the
   latter as INTEGRABLE DELOC. If the system is spin-polarized, two
   checkpoint files will be necessary, one for each spin component (see
-  the FeO case in the dis_wannier example).
+  the FeO case in the [example](/critic2/example02/)).
 
 - Run YT or BADER.
 
-For detailed examples, please check the "dis_wannier" subdirectory in
-the examples/ directory of the critic2 distribution.
+See the [examples page](/critic2/example02/) for some detailed
+examples in simple cases.
 
-Additional options for the DI calculation follow.  The NOU options
-disables the use of the U matrices to calculate the MLWFs. This makes
-critic2 calculate the DI using Wannier functions calculated using a
-straight Wannier transformation from the Bloch states. This is
-naturally much slower than the maximally localized version, and should
-be used only if wannier90 failed to converge for the particular case
-under study.
+Additional options for the DI calculation follow. The NOU option
+disables the use of the U rotation matrices to calculate the
+MLWFs. This makes critic2 calculate the DI using Wannier functions
+obtained by using a straight Wannier transformation from the Bloch
+states. This is naturally much slower than the maximally localized
+version, since overlaps cannot be discarded, and should be used only
+if wannier90 failed to converge for the particular case under study.
 
 By default, two checkpoint files are generated during a DI calculation
-run. These files have the same name as the pwc file but with "-sij"
-and "-fa" suffixes. The former checkpoint file contains the atomic
-overlap matrices, and the latter, the F integrals required for the DI
-calculation. The presence of any of these two files makes critic2 read
-the information from the files and bypass the corresponding
-calculations, which are very time consuming in general. The keywords
-NOSIJCHK and NOFACHK deactivate reading and writing these checkpoint
-files. 
+run. These files have the same name as the pwc file but with `-sij`
+and `-fa` suffixes. The former checkpoint file contains the atomic
+overlap matrices, and the latter, the $$F_{AB}$$ integrals required
+for the DI calculation. The presence of any of these two files makes
+critic2 read the information from the files and bypass the
+corresponding calculations, which are quite time consuming in
+general. The keywords NOSIJCHK and NOFACHK deactivate reading and
+writing these checkpoint files.
 
 By default, the overlap between two MLWFs whose centers are a certain
 distance away are discarded. The WANCUT keyword controls this
-distance: wancut.r times the sum of their spreads. By default,
-wancut.r = 4.0. A very large wancut.r will prevent critic2 from
-discarding any overlaps. The appropriateness of the chosen WANCUT can
-be checked a posteriori by comparing the integrated electron
-population obtained by sum of the localization and delocalization
-indices to the value obtained from a straight integration of the
-electron density.
+distance: overlaps are discraded if the centers are `wancut.r` times
+the sum of their spreads away. By default, `wancut.r = 4.0`. A very
+large `wancut.r` will prevent critic2 from discarding any overlaps. The
+appropriateness of the chosen WANCUT can be checked a posteriori by
+comparing the integrated electron population obtained by sum of the
+localization and delocalization indices to the value obtained from a
+straight integration of the electron density.
 
 ## Bisection (INTEGRALS and SPHEREINTEGRALS) {#c2-integrals}
 
@@ -231,49 +238,47 @@ electron density.
 INTEGRALS {GAULEG ntheta.i nphi.i|LEBEDEV nleb.i}
           [CP ncp.i] [RWINT] [VERBOSE]
 ~~~
-Integrate the attractor basins using bisection. Ntheta.i and nphi.i
-are the number of theta (polar angle) and phi (azimuthal angle)
-points for the Gauss-Legendre quadrature, if GAULEG is used. The
-number of azimuthal angles depends on the actual value of the polar
-angle (theta) and is adapted according to the formula:
+The BISECTION keyword integrates the attractor basins using
+bisection. If the Gauss-Legendre quadrature is used (GAULEG keyword),
+`ntheta.i` and `nphi.i`  are the number of $$\theta$$ (polar
+angle) and $$\phi$$ (azimuthal angle) points.
 
-    realnphi = int(nphi.i * sin(theta)) + 1
+In the case of a Lebedev-Laikov quadrature, selected via the LEBEDEV
+keyword, only the total number of points in the spherical quadrature
+is needed. The actual value of `nleb.i` is the smallest number larger
+than the one given by the user that is included in the list: 6, 14,
+26, 38, 50, 74, 86, 110, 146, 170, 194, 230, 266, 302, 350, 434, 590,
+770, 974, 1202, 1454, 1730, 2030, 2354, 2702, 3074, 3470, 3890, 4334,
+4802, 5294, 5810.
 
-In the case of a Lebedev-Laikov quadrature, the number of points of
-the radial Gauss-Legendre grid and the octahedral grid is needed. The
-actual value of nleb.i is the smallest number larger than the one
-given by the user included in the list: 6, 14, 26, 38, 50, 74, 86,
-110, 146, 170, 194, 230, 266, 302, 350, 434, 590, 770, 974, 1202,
-1454, 1730, 2030, 2354, 2702, 3074, 3470, 3890, 4334, 4802, 5294,
-5810.
-
-By using the CP keyword, a single non-equivalent CP (ncp.i) is
+By using the CP keyword, a single non-equivalent CP (`ncp.i`) is
 integrated. Otherwise, all the CPs of the correct type (found using
 AUTO) are integrated. If RWINT is present, read (if they exist) and
-write the .int files containing the interatomic surface limit for
+write the `.int` files containing the interatomic surface limit for
 the rays associated to the chosen quadrature method.
 
-Defaults: ntheta.i = nphi.i = 50, nleb.i = 4802.
+Defaults: `ntheta.i = nphi.i = 50`, `nleb.i = 4802`.
 
 ~~~
 SPHEREINTEGRALS {GAULEG ntheta.i nphi.i|
                  LEBEDEV nleb.i} [CP ncp.i] [NR npts.i]
                 [R0 r0.r] [REND rend.r]
 ~~~
-Integrates the volume, field and Laplacian in successive spheres
-centered around each of the attractor CPs. The same considerations
-for GAULEG and LEBEDEV as in the keyword above apply.
+The SPHEREINTEGRALS keyword integrates the volume, field and Laplacian
+of the reference field in successive spheres centered around each of
+the attractor CPs. The meaning of the GAULEG and LEBEDEV keywords is
+the same as in INTEGRALS.
 
-A total number of npts.i spheres are integrated per nucleus. The grid
-is logarithmic, so that the region near the nucleus has a higher
-population of points. The grid starts at the radius r0.r and ends at
-rend.r (bohr in crystals, angstrom in molecules). If rend.r < 0 then
+A total number of `npts.i` spheres are integrated per nucleus. The
+grid is logarithmic, so that the region near the nucleus has a higher
+population of points. The grid starts at the radius `r0.r` and ends at
+`rend.r` (bohr in crystals, angstrom in molecules). If `rend.r` < 0 then
 the final radius is taken as half the nearest neighbor distance for
-each atom times abs(rend.r).
+each atom times `abs(rend.r)`.
 
-Default: npts.i = 100. In GAULEG, ntheta.i = 20 and nphi.i = 20. In
-LEBEDEV, nquad.i = 770. r0 = 1d-3 bohr. rend = rnn/2 for each CP. id.i
-= 0 (all attractors).
+Default: `npts.i = 100`. In GAULEG, `ntheta.i = 20` and `nphi.i = 20`. In
+LEBEDEV, `nleb.i = 770`. `r0.r = 1d-3` bohr. `rend.r = rnn/2` for each
+CP. `id.i = 0` (all attractors).
 
 ## Qtree (QTREE) {#c2-qtree}
 
@@ -312,15 +317,15 @@ SETSPH_LVL lvl.i
 VCUTOFF vcutoff.r
 QTREE maxlevel.i plevel.i
 ~~~
-The QTREE integration method is a new algorithm capable of calculating
-the QTAIM atomic properties in a more efficient way than the bisection
-approach. QTREE is specific to solid-state problems, and is based on a
-hierarchical subdivision of the irreducible part of the WS cell,
-employing a tetrahedral grid. The integration region is selected so as
-to maximize the use of symmetry, and partitioned into
+The QTREE integration method calculates the QTAIM atomic properties by
+discretization of the smallest part of the crystal that reproduces the
+whole system by symmetry. QTREE is specific to solid-state problems,
+and is based on a hierarchical subdivision of the irreducible part of
+the WS cell, employing a tetrahedral grid. The integration region is
+selected so as to maximize the use of symmetry, and partitioned into
 tetrahedra. These tetrahedra enter a recursive subdivision process in
 which each of them is divided in 8 at each level, up to a level given
-by the user, the maxlevel.i indicated after the QTREE keyword
+by the user, the `maxlevel.i` indicated after the QTREE keyword
 (default, 6). Every tetrahedron vertex is assigned to a non-equivalent
 atom in the unit cell by tracing a gradient path. Finally, the
 tetrahedra are integrated and the properties assigned to the

@@ -40,6 +40,8 @@ critic2:
     children:
       - title: "Molecular Calculations"
         url: /critic2/example01/
+      - title: "Delocalization indices from MLWFs"
+        url: /critic2/example02/
 
 critic2_manual:
   - title: "Reference Manual"
