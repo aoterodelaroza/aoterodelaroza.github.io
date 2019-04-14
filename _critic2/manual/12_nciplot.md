@@ -13,14 +13,15 @@ toc_sticky: true
 
 ## Introduction
 
-The non-covalent interaction plots [^nci] are graphical
+The [non-covalent interaction plots](http://dx.doi.org/10.1021/ja100936w) 
+are graphical
 representations of the regions where the densities of two interacting
 molecules overlap. The accumulation of density in the intermolecular
 space, which is related to the amount of intermolecular repulsion, can
 be used to qualitatively infer the strength of the interaction.
 The implementation of NCI plots in critic2 works with molecules and
-with periodic solids.[^ncisolids] NCI plots can be created using the
-NCIPLOT keyword:
+with [periodic solids](http://dx.doi.org/10.1039/C2CP41395G). NCI
+plots can be created using the NCIPLOT keyword:
 ~~~
 NCIPLOT
   ONAME root.s
@@ -304,5 +305,3 @@ Some tips for using the NCIPLOT keyword efficiently:
   about this. To work around this problem, use the FRAGMENT or CUBE
   keywords so an orthogonal NCI region is used.
 
-[^nci]: <http://dx.doi.org/10.1021/ja100936w>
-[^ncisolids]: <http://dx.doi.org/10.1039/C2CP41395G>
