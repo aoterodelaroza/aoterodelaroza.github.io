@@ -67,7 +67,7 @@ reference field (see
 [REFERENCE](/critic2/manual/fields/#c2-reference)). In general, it is
 necessary to define one or more properties to be integrated inside the
 basins that use other scalar fields. For instance, to calculate
-the electron populatoin inside an ELF basin, the ELF would be the
+the electron population inside an ELF basin, the ELF would be the
 reference field and the electron density would be an integrable
 property.
 
@@ -224,7 +224,7 @@ writing these checkpoint files.
 
 By default, the overlap between two MLWFs whose centers are a certain
 distance away are discarded. The WANCUT keyword controls this
-distance: overlaps are discraded if the centers are `wancut.r` times
+distance: overlaps are discarded if the centers are `wancut.r` times
 the sum of their spreads away. By default, `wancut.r = 4.0`. A very
 large `wancut.r` will prevent critic2 from discarding any overlaps. The
 appropriateness of the chosen WANCUT can be checked a posteriori by
@@ -854,7 +854,7 @@ INTEG_MODE = 12 12 12 -1 ... -1 1.
    atoms.
  
    In the current implementation of QTREE, the tetrahedron is
-   integrated as a whole. Then, the properties are equitatively
+   integrated as a whole. Then, the properties are equally
    assigned to each of the termini atoms. For instance, if the termini
    are (1 1 1 3), the properties of the tetrahedron are integrated,
    then 3/4 of them assigned to atom 1 and 1/4 to atom 3.

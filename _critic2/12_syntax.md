@@ -137,7 +137,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
 
-[COORD](/critic2/manual/structure/#c2-othertool)
+[COORD](/critic2/manual/structure/#c2-coord)
 : Calculate the pair and triplet coordination numbers.
 ~~~
 COORD [DIST dist.r] [FAC fac.r] [RADII [IONIC|COVALENT|VDW|at1.s r1.s ...]
@@ -248,7 +248,7 @@ ECHO echooo.s
 END
 ~~~
 
-[ENVIRON](/critic2/manual/structure/#c2-othertool)
+[ENVIRON](/critic2/manual/structure/#c2-environ)
 : Calculate the nearest neighbors of the atoms in the crystal
   structure.
 ~~~
@@ -256,7 +256,7 @@ ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i]
         [BY by.s/iby.i] [SHELLS]
 ~~~
 
-[EWALD](/critic2/manual/structure/#c2-othertool)
+[EWALD](/critic2/manual/structure/#c2-ewald)
 : Calculate the electrostatic energy by performing an Ewald
   summation.
 ~~~
@@ -317,7 +317,7 @@ ENDGRDVEC/END
 HIRSHFELD
 ~~~
 
-[IDENTIFY](/critic2/manual/structure/#c2-othertool)
+[IDENTIFY](/critic2/manual/structure/#c2-identify)
 : Identify the position of an atom or a critical point given in
   crystallographic or cartesian coordinates.
 ~~~
@@ -326,6 +326,7 @@ IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST|file.xyz]
   ...
   file.xyz
 ENDIDENTIFY/END
+IDENTIFY file.xyz
 ~~~
 
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable)
@@ -508,7 +509,7 @@ NCIPLOT
 ENDNCIPLOT/END
 ~~~
 
-[NEWCELL](/critic2/manual/structure/#c2-othertool)
+[NEWCELL](/critic2/manual/structure/#c2-newcell)
 : Change the cell setting of the current crystal structure by defining
   a new unit cell.
 ~~~
@@ -537,7 +538,7 @@ NOSYMM|NOSYM
 ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] [MAXERR maxerr.r] [GRADEPS gradeps.r]
 ~~~
 
-[PACKING](/critic2/manual/structure/#c2-othertool)
+[PACKING](/critic2/manual/structure/#c2-packing)
 : Calculate the packing ratio of the current crystal structure.
 ~~~
 PACKING [VDW] [PREC prec.r]

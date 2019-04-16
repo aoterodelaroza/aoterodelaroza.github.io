@@ -96,8 +96,8 @@ keyword:
 ~~~
 INCREMENTS x.r y.r z.r
 ~~~
-accpets three arguments `x.r`, `y.r`, and `z.r`, which are
-interepreted as the step lengths for the NCIPLOT grid in each
+accepts three arguments `x.r`, `y.r`, and `z.r`, which are
+interpreted as the step lengths for the NCIPLOT grid in each
 direction. The units are bohr (crystals) or angstrom (in
 molecules). The NSTEP keyword:
 ~~~
@@ -262,7 +262,7 @@ RTHRES rthres.r
 When fragments are used, the density and reduced density gradient
 grids are calculated inside a box encompassing the fragments, with an
 additional border that is `rthres.r` thick. This value has units of
-bohr in crsytals, and angstrom in molecules. The default is 2.0
+bohr in crystals, and angstrom in molecules. The default is 2.0
 bohr. Note that RTHRES can also be used to control the border around
 NCI regions defined with the CUBE keyword.
 
