@@ -5,45 +5,36 @@ main:
     url: /critic2/
 
 critic2:
-  - title: Getting Started
+  - title: "Home"
     url: /critic2/
     children:
-      - title: "Download & Features"
+      - title: "Download"
         url: /critic2/
       - title: "Installation"
         url: /critic2/installation/
-      - title: "External Libraries"
-        url: /critic2/libraries/
-      - title: "Files"
-        url: /critic2/files/
-      - title: "Citation"
-        url: /critic2/citation/
-      - title: "Copyright"
-        url: /critic2/copyright/
-
-  - title: Usage
-    url: /critic2/quickstart/
-    children:
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
       - title: "List of Keywords"
         url: /critic2/syntax/
-      - title: "Reference Manual"
-        url: /critic2/manual/
-      - title: "Frequently Asked Questions"
-        url: /critic2/faq/
-      - title: "How to..."
-        url: /critic2/howto/
 
-  - title: Examples
-    url: /critic2/example01/
-    children:
-      - title: "Molecular Calculations"
-        url: /critic2/example01/
-      - title: "Delocalization indices from MLWFs"
-        url: /critic2/example02/
+  - title: "Reference Manual"
+    url: /critic2/manual/
+
+  - title: "Examples"
+    url: /critic2/examples/
 
 critic2_manual:
+  - title: "Home"
+    url: /critic2/
+    children:
+      - title: "Download"
+        url: /critic2/
+      - title: "Installation"
+        url: /critic2/installation/
+      - title: "Quick Start Guide"
+        url: /critic2/quickstart/
+      - title: "List of Keywords"
+        url: /critic2/syntax/
   - title: "Reference Manual"
     url: /critic2/manual/
     children:
@@ -77,3 +68,27 @@ critic2_manual:
         url: /critic2/manual/stm/
       - title: "Miscellaneous Tools"
         url: /critic2/manual/misc/
+  - title: "Examples"
+    url: /critic2/examples/
+
+critic2_examples:
+  - title: "Home"
+    url: /critic2/
+    children:
+      - title: "Download"
+        url: /critic2/
+      - title: "Installation"
+        url: /critic2/installation/
+      - title: "Quick Start Guide"
+        url: /critic2/quickstart/
+      - title: "List of Keywords"
+        url: /critic2/syntax/
+  - title: "Reference Manual"
+    url: /critic2/manual/
+  - title: "Examples"
+    url: /critic2/examples/
+    children:
+      - title: "Integration Using Grids (YT/BADER)"
+        url: /critic2/examples/#c2e-integrid
+      - title: "Molecular Properties (MOLCALC)"
+        url: /critic2/examples/#c2e-integration

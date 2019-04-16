@@ -1,11 +1,11 @@
 ---
 layout: single
-title: "Example: Molecular calculations"
-permalink: /critic2/example01/
-excerpt: "Critic2 example: calculations using molecular structures and wavefunctions."
+title: "Molecular calculations"
+permalink: /critic2/examples/example_15_01_molcalc/
+excerpt: "Calculations using molecular structures and wavefunctions"
 sidebar:
   - repo: "critic2"
-    nav: "critic2"
+    nav: "critic2_examples"
 toc: true
 toc_label: "Molecular calculations"
 ---
