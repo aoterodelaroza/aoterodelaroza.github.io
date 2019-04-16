@@ -182,7 +182,7 @@ LIBRARY MOLECULE bleh.s
 The behavior of the LIBRARY keyword is the same as in
 [CRYSTAL](/critic2/manual/crystal/#c2-library).
 
-## The molecular cell {#c2-molcell}
+## The molecular cell (MOLCELL) {#c2-molcell}
 
 In molecular calculations, it is convenient to define a region of
 space away from the molecule that represents infinity. Critical points

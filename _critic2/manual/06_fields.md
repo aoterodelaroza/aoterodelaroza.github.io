@@ -497,7 +497,7 @@ of `$1`). The label for this field will written in the part of
 the output describing the field. The string should be a single
 word containing letters and numbers. You can list all available field
 identifiers using the
-[LIST](/critic2/manual/arithmetics/#c2-arithbasic) keyword.
+[LIST](/critic2/manual/arithmetics/#c2-list) keyword.
 
 ~~~
 ZPSP at1.s q1.r...

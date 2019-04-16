@@ -109,8 +109,8 @@ requested crystal fragment (indicated by the optional
 in the fragment are completed by including atoms from outside the
 fragment. Critic2 detects whether the atomic connectivity using a
 distance criterion (see the
-[BONDFACTOR](/critic2/manual/misc/#c2-control) and
-[RADII](/critic2/manual/misc/#c2-control) keywords).
+[BONDFACTOR](/critic2/manual/misc/#c2-bondfactor) and
+[RADII](/critic2/manual/misc/#c2-radii) keywords).
 
 The ONEMOTIF and ENVIRON keywords are also used in molecular
 crystals. ONEMOTIF writes all atoms in the unit cell, translated by

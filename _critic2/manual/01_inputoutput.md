@@ -116,7 +116,7 @@ Some additional notation and terms that are used in the manual:
   the file minus its extension. If no input file is known (for
   instance, because critic2 is being run interactively), then
   the root defaults to "stdin". The default root can be changed with
-  the keyword [ROOT](/critic2/manual/misc/#c2-control).
+  the keyword [ROOT](/critic2/manual/misc/#c2-root).
 
 * The critical points of a field can be classified by their **rank**
   (r) and **signature** (s). The rank is the number of non-zero

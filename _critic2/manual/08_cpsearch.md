@@ -147,7 +147,7 @@ immediately following SEED. This keyword can be:
 
 * MESH: place seeds at the nodes of a molecular integration mesh. The
   type of mesh can be controlled with the
-  [MESHTYPE](/critic2/manual/misc/#c2-control) keyword.
+  [MESHTYPE](/critic2/manual/misc/#c2-meshtype) keyword.
 
 Multiple SEED keywords can be given in the same AUTO command. For
 instance:
@@ -734,7 +734,7 @@ POINTPROP GTF
 activates the calculation of the Thomas-Fermi kinetic energy density
 (`gtf` function) on the reference field. POINTPROP can only be used
 with arithmetic expressions involving known fields. The keyword 
-[CLEAR](/critic2/manual/arithmetics/#c2-arithbasic)
+[CLEAR](/critic2/manual/arithmetics/#c2-clear)
 deletes all the properties in the list. The list of properties can be
 accesed at any time using POINTPROP LIST.
 

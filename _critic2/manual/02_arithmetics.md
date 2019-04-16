@@ -159,14 +159,20 @@ When using arithmetic expressions to create new fields, it is also possible
 to refer to coordinates in real space in those expressions by using
 [Structural variables](/critic2/manual/arithmetics/#c2-structvar).
 
+### Clear variables (CLEAR) {#c2-clear}
+
 The value of a variable can be cleared using the CLEAR keyword:
 ~~~
 CLEAR var1.s var2.s ...
 CLEAR ALL
 ~~~
 This keyword deletes the variables var1.s, var2.s, etc. or all the
-variables (ALL). At any moment, the internal list of variables can be
-printed to the output using the keyword LIST:
+variables (ALL). 
+
+### List variables (LIST) {#c2-list}
+
+At any moment, the internal list of variables can be printed to the
+output using the keyword LIST:
 ~~~
 LIST
 ~~~

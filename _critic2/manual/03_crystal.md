@@ -442,7 +442,7 @@ accessed throught the
 `molecule.dat` and `crystal.dat` are installed in the data directory
 by `make install`.
 
-## Symmetry options {#c2-symm}
+## Symmetry options (SYM/NOSYM/SYMPREC/CLEARSYM) {#c2-symm}
 
 Critic2 uses three symmetry modules: "spg", "spgr", and "spglib". Spg
 and spgr accept a label (for instance, "P m -3 m") and build the

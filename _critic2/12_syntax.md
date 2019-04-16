@@ -107,7 +107,7 @@ BENCHMARK nn.i
 BONDFACTOR bondfactor.r
 ~~~
 
-[BUNDLEPLOT](/critic2/manual/basinplot/#c2-basinplot)
+[BUNDLEPLOT](/critic2/manual/basinplot/#c2-bundleplot)
 : Three-dimensional plot of a primary bundle.
 ~~~
 BUNDLEPLOT x.r y.r z.r 
@@ -116,8 +116,8 @@ BUNDLEPLOT x.r y.r z.r
            [ROOT root.s] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
 ~~~
 
-[CLEAR](/critic2/manual/arithmetics/#c2-arithbasic)
-: Clear the value of a variable. 
+[CLEAR](/critic2/manual/arithmetics/#c2-clear)
+: Clear the value of one or more variables. 
 ~~~
 CLEAR {var1.s var2.s ...|ALL}
 ~~~
@@ -368,7 +368,7 @@ LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s] [FIELD id.s/"expr"]
      [GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] 
 ~~~
 
-[LIST](/critic2/manual/arithmetics/#c2-arithbasic)
+[LIST](/critic2/manual/arithmetics/#c2-list)
 : List all defined variables and named fields.
 ~~~
 LIST

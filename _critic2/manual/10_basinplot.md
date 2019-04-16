@@ -45,7 +45,7 @@ scalar fields measured along the basin rays.
 
 The naming scheme for the output files is `\<root\>-cp.ext` where root
 is the root of the run (the name of the input file up to the first dot
-unless changed by the [ROOT](/critic2/manual/misc/#c2-control)
+unless changed by the [ROOT](/critic2/manual/misc/#c2-root)
 keyword), `cp` is the complete CP list identifier of the attractor and
 `ext` is the extension selected with one of the format keywords
 above.
