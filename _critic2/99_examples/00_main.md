@@ -10,7 +10,7 @@ sidebar:
 
 ## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
 
-- [Integration of atomic charges and volumes with Quantum ESPRESSO, VASP, abinit,...](/critic2/examples/example_11_01_simple-integration/)
+- [Integration of atomic charges and volumes with grids](/critic2/examples/example_11_01_simple-integration/)
 
 - [Delocalization indices from maximally localized Wannier functions](/critic2/examples/example_11_10_deloc-indices/)
 

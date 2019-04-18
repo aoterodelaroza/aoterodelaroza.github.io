@@ -43,11 +43,11 @@ for the reference point: from the center of the molecule (0,0,0) to
 exactly on top of a carbon atom (0,0,1.3936). The plots written by
 critic2 are:
 
-![xhole0](/assets/critic2/example01/xhole-0.png){:width="35%"}
-![xhole1](/assets/critic2/example01/xhole-1.png){:width="35%"}
+![xhole0](/assets/critic2/example_15_01/xhole-0.png){:width="35%"}
+![xhole1](/assets/critic2/example_15_01/xhole-1.png){:width="35%"}
 
-![xhole2](/assets/critic2/example01/xhole-2.png){:width="35%"}
-![xhole3](/assets/critic2/example01/xhole-3.png){:width="35%"}
+![xhole2](/assets/critic2/example_15_01/xhole-2.png){:width="35%"}
+![xhole3](/assets/critic2/example_15_01/xhole-3.png){:width="35%"}
 
 where the blue "x" indicates the reference point. The localization
 exchange-hole is greater when one moves the reference point closer to
