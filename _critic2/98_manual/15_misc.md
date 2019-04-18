@@ -51,7 +51,7 @@ keyword).
 
 MOLCALC HF calculates the Hartree-Fock energy from the basis set
 information in the reference field using molecular integrals, which
-are in turn calculated by the [libcint library](/critic2/libraries/#c2-libcint).
+are in turn calculated by the [libcint library](/critic2/installation/#c2-libcint).
 Using this keyword requires compiling with critic2 with libcint. At
 this moment, this keyword serves mostly for testing, debug, and
 development purposes, as it is very inefficient (and not very

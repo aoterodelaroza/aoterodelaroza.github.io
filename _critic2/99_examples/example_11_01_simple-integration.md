@@ -11,7 +11,7 @@ toc_label: "Integration of Atomic Properties with Grids"
 ---
 
 <figure style="width: 15%" class="align-right">
-  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_11_01/urea_crystal.png" alt="">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_11_01/urea_crystal.png" alt="Urea">
   <figcaption style="text-align: center">The urea crystal.</figcaption>
 </figure> 
 
@@ -320,7 +320,7 @@ The interpretation of the columns is the same, but this time the
 numbers refer to each of the two urea molecules in the unit
 cell. Because they are equivalent by symmetry, their volumes and
 electron populations are the same and the charge is zero (the sum of
-the pseuopotential charges in each molecule is 24).
+the pseudopotential charges in each molecule is 24).
 
 ## Example files package
 

@@ -549,16 +549,12 @@ of doing this is to replace the critical point labels ("Xb", "Xr",...)
 with atoms we know are not present in our system (e.g. H). 
 
 However, a better method is to make the extend the list of atoms
-available to the GUI program. This can be done using avogadro, an
-open-source visualizer for crystals and molecules that can be obtained
-from:
-  
-   <http://avogadro.cc/wiki/Main_Page>
+available to the GUI program. This can be done using 
+[avogadro](http://avogadro.cc), an
+open-source visualizer for crystals and molecules.  The following
+comments apply to version 1.2.0 of the program (August 2016).
 
-The following comments apply to version 1.2.0 of the program (August
-2016). 
-
-Avogadro uses [openbabel](http://openbabel.org/wiki/Main_Page) as the
+Avogadro uses [openbabel](http://openbabel.org) as the
 underlying format converter. To make avogadro understand the critical
 point types, all you need to do is modify the `element.txt` file that
 comes with openbabel, and add the critical point types at the end of

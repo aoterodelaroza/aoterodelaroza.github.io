@@ -127,7 +127,7 @@ This is some inline math: $$e^{i\pi} = -1$$.
 HTML blocks are accepted. The markdown tag option can be used to
 modify how markdown will interpret them:
 <HR>
-<a href="http://example.com">This is a link</a>
+<a href="http://google.com">This is a link</a>
 <a href="mailto:example@example.com.com"> Mail </a>
 <B>This is bold!</B>
 
@@ -135,13 +135,13 @@ modify how markdown will interpret them:
 
 Links can be automatic, inline, or reference.
 
-This is an automatic link: <http://www.example.com>
+This is an automatic link: <http://www.google.com>
 
-This is an [inline link](http>//www.example.com) or [critic2](/critic2/)
+This is an [inline link](http://www.google.com) or [critic2](/critic2/)
 
 This is a [reference link][linkid]
 
-[linkid]: http://example.com "optional title"
+[linkid]: http://google.com "optional title"
 
 This is an image:
 ![clathrate](/assets/images/clathrate.png "title"){:height="100px" width="100px"}

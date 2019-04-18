@@ -4,6 +4,7 @@ permalink: /
 title: "Home"
 row_critic2:
   - image_path: assets/images/critic2_pyridine.png
+    alt: "Pyridine"
     title: "Critic2"
     excerpt: >-
       Analysis of the results of quantum chemical calculations in
@@ -16,6 +17,7 @@ row_critic2:
   # From https://pixabay.com/en/coffee-wood-table-wooden-espresso-1030971/
   # Free for any use; no attribution required.
   - image_path: assets/images/devnotes_coffee.jpg 
+    alt: "Coffee"
     title: "Development notes"
     excerpt: ""
     url: /devnotes/

@@ -743,7 +743,7 @@ It contains the type of wavefunction (restricted closed-shell in this
 case), the number of molecular orbitals, number of primitives, and
 number of EDFs (in case the calculation used ECPs). In fields loaded
 from a fchk and if critic2 is compiled with the
-[libcint library](/critic2/libraries/#c2-libcint), the basis set data
+[libcint library](/critic2/installation/#c2-libcint), the basis set data
 will be avilable for molecular integrals with the 
 [MOLCALC](/critic2/manual/misc/#c2-molcalc) keyword.
 

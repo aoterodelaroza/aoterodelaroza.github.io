@@ -496,7 +496,7 @@ charge (ZPSP) of the atomic species `at1.s`, `at2.s`,.... Real numbers
 for the charges and ZPSP are acceptable; the latter are internally
 converted to integers. The charges (Q) are used to calculate the
 point-charge electrostatic energy using
-[EWALDp](/critic2/manual/structure/#c2-othertool).
+[EWALD](/critic2/manual/structure/#c2-ewald).
 
 The role of ZPSP is to augment fields defined on a grid, a procedure
 called *core augmentation*. ZPSP is the pseudopotential charge, that

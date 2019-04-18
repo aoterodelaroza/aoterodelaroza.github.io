@@ -91,4 +91,4 @@ critic2_examples:
       - title: "Integration Using Grids (YT/BADER)"
         url: /critic2/examples/#c2e-integrid
       - title: "Molecular Properties (MOLCALC)"
-        url: /critic2/examples/#c2e-integration
+        url: /critic2/examples/#c2e-molcalc

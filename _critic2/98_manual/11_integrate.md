@@ -196,13 +196,9 @@ steps:
 - Load the all-electron density and the pwc and chk files as two
   fields in critic2. Set the former as the reference density and the
   latter as INTEGRABLE DELOC. If the system is spin-polarized, two
-  checkpoint files will be necessary, one for each spin component (see
-  the FeO case in the [example](/critic2/example02/)).
+  checkpoint files will be necessary, one for each spin component.
 
 - Run YT or BADER.
-
-See the [examples page](/critic2/example02/) for some detailed
-examples in simple cases.
 
 Additional options for the DI calculation follow. The NOU option
 disables the use of the U rotation matrices to calculate the

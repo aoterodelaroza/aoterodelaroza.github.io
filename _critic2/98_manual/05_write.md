@@ -143,7 +143,7 @@ calculation (see the FRAGMENT keyword) and in some
 promolecular density of a subset of the atoms. Whether the contents of
 an xyz file are recognized by critic2 as atoms belonging to the
 current system or not can be determined using the 
-[IDENTIFY](/critic2/manual/structure/#c2-othertool) keyword.
+[IDENTIFY](/critic2/manual/structure/#c2-identify) keyword.
 
 The 
 [CML (Chemical Markup Language)](https://en.wikipedia.org/wiki/Chemical_Markup_Language)
@@ -152,8 +152,8 @@ format, an XML-style file is written containing the selected crystal
 fragment. If the system is a crystal (loaded with the CRYSTAL
 keyword), then the cell geometry is written to the CML file as
 well. The CML output format is specially tailored for being easy to
-read by [avogadro](https://avogadro.cc/) and its underlying engine,
-[openbabel](http://openbabel.org/wiki/Main_Page).
+read by [avogadro](https://avogadro.cc) and its underlying engine,
+[openbabel](http://openbabel.org).
 
 The following keyword also writes finite molecular representations of
 the structure:

@@ -868,16 +868,16 @@ stress [STRESS]
 : Schrodinger stress tensor (only for the reference field).
 
 mep(id) 
-: Molecular electrostatic potential (requires [libcint](/critic2/libraries/)).
+: Molecular electrostatic potential (requires [libcint](/critic2/installation/#c2-libcint)).
 
 uslater(id) 
-: Slater potential (requires [libcint](/critic2/libraries/)).
+: Slater potential (requires [libcint](/critic2/installation/#c2-libcint)).
 
 nheff(id) 
-: Reverse-BR effective hole normalization (requires [libcint](/critic2/libraries/)).
+: Reverse-BR effective hole normalization (requires [libcint](/critic2/installation/#c2-libcint)).
 
 xc(...,idx)
-: Exchange-correlation energy density (requires [libxc](/critic2/libraries/)).
+: Exchange-correlation energy density (requires [libxc](/critic2/installation/#c2-libxc)).
 
 ## List of Field Modifiers ($field:modifier) {#fmods}
 \:v

@@ -87,7 +87,7 @@ available once the crystal or molecule structure is known. In our
 example, `$1+$2-$rho0` would represent the density difference between
 the actual density and the sum of atomic densities. Fields can also be
 referred by a name, if the 
-[ID keyword](/critic2/manual/fields/{#c2-addload}) is used. Named
+[ID keyword](/critic2/manual/fields/#c2-addload) is used. Named
 fields simplify work when you have multiple fields.
 
 It is possible to specify a field modifier right after the number or
@@ -310,7 +310,7 @@ wavefunction fields.
 The following chemical functions require both a molecular wavefunction
 and basis set information (at present, this can only be read from a
 Gaussian fchk file). In addition, it is necessary to have critic2
-compiled with the [libcint library](/critic2/libraries/#c2-libcint) to
+compiled with the [libcint library](/critic2/installation/#c2-libcint) to
 calculate the molecular integrals involved.
 
 * `mep(id)`: molecular electrostatic potential. 
@@ -332,13 +332,13 @@ properties for the reference field. These are:
   field. The virial field is the trace of this tensor.[^keith]
 
 A particular case of chemical function is `xc()`, that allows the user
-to access the [libxc library](/critic2/libraries/#c2-libxc). This is
+to access the [libxc library](/critic2/installation/#c2-libxc). This is
 only possible if the libxc library was linked in the compilation
 of critic2.
 
 ### Use of LIBXC in Arithmetic Expressions {#libxc}
 
-If critic2 is [linked to the libxc library](/critic2/libraries/#c2-libxc)
+If critic2 is [linked to the libxc library](/critic2/installation/#c2-libxc)
 then the xc() chemical function can be used in arithmetic
 expressions. xc() calculates the exchange and/or
 correlation energy density for one of the functionals in the libxc
