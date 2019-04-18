@@ -1,17 +1,17 @@
 ---
 layout: single
-title: "Arithmetic expressions, variables, and functions"
+title: "Arithmetic Expressions, Variables, and Functions"
 permalink: /critic2/manual/arithmetics/
 excerpt: "Arithmetic expressions, variables, and functions used in critic2."
 sidebar:
   - repo: "critic2"
     nav: "critic2_manual"
 toc: true
-toc_label: "Arithemtic expressions, variables, functions"
+toc_label: "Arithemtic Expressions, Variables, Functions"
 toc_sticky: true
 ---
 
-### Basic usage {#c2-arithbasic}
+### Basic Usage {#c2-arithbasic}
 
 In critic2, an arithmetic expression can be used almost everywhere in
 the input where a real or integer number is expected. Arithmetic
@@ -159,7 +159,7 @@ When using arithmetic expressions to create new fields, it is also possible
 to refer to coordinates in real space in those expressions by using
 [Structural variables](/critic2/manual/arithmetics/#c2-structvar).
 
-### Clear variables (CLEAR) {#c2-clear}
+### Clear Variables (CLEAR) {#c2-clear}
 
 The value of a variable can be cleared using the CLEAR keyword:
 ~~~
@@ -169,7 +169,7 @@ CLEAR ALL
 This keyword deletes the variables var1.s, var2.s, etc. or all the
 variables (ALL). 
 
-### List variables (LIST) {#c2-list}
+### List Variables (LIST) {#c2-list}
 
 At any moment, the internal list of variables can be printed to the
 output using the keyword LIST:
@@ -178,7 +178,7 @@ LIST
 ~~~
 The LIST keyword lists all named variables and fields.
 
-### Special fields
+### Special Fields
 
 Some special fields are defined from the crystal (or molecular)
 structure alone. For now, the only available special field is `ewald`,
@@ -191,7 +191,7 @@ cube cell field "2 * $ewald"
 ~~~
 calculates a grid using 2 times the value of the Ewald potential. 
 
-### List of available functions {#availchemfun}
+### List of Available Functions {#availchemfun}
 
 Arithmetic expressions can use any of the functions in the critic2
 function library. The list of functions includes the usual
@@ -336,7 +336,7 @@ to access the [libxc library](/critic2/libraries/#c2-libxc). This is
 only possible if the libxc library was linked in the compilation
 of critic2.
 
-### Use of LIBXC in arithmetic expressions {#libxc}
+### Use of LIBXC in Arithmetic Expressions {#libxc}
 
 If critic2 is [linked to the libxc library](/critic2/libraries/#c2-libxc)
 then the xc() chemical function can be used in arithmetic
@@ -388,7 +388,7 @@ using the `:g` field modifier:
 xc($1,$1:g,101)+xc($1,$1:g,130)
 ~~~
 
-### List of structural variables {#c2-structvar}
+### List of Structural Variables {#c2-structvar}
 
 When creating new fields as transformations of existing fields, it is
 possible to use the crystal or molecular structure (the nearest atom,

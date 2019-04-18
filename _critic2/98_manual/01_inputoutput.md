@@ -7,7 +7,7 @@ sidebar:
   - repo: "critic2"
     nav: "critic2_manual"
 toc: true
-toc_label: "Input, output, and notation"
+toc_label: "Input, Output, and Notation"
 toc_sticky: true
 ---
 

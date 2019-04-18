@@ -11,7 +11,7 @@ toc_label: "Plotting atomic basins"
 toc_sticky: true
 ---
 
-## Attractor basin plots (BASINPLOT) {#c2-basinplot}
+## Attractor Basin Plots (BASINPLOT) {#c2-basinplot}
 
 ~~~
 BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] | 
@@ -67,7 +67,7 @@ The default is the TRIANG method, `lvl.i = 3`,
 `ntheta.i = nphi.i = 5`, OBJ output, and one basin plot for
 all the non-equivalent attractors found in AUTO.
 
-## Primary bundle plots (BUNDLEPLOT) {#c2-bundleplot}
+## Primary Bundle Plots (BUNDLEPLOT) {#c2-bundleplot}
 
 ~~~
 BUNDLEPLOT x.r y.r z.r

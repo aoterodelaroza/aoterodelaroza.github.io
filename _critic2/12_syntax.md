@@ -41,7 +41,7 @@ is written to the output after a '%%' prefix.
 * Comment prefix: `#`.
 * Continuation symbol: `\`.
 
-## List of keywords
+## List of Keywords
 
 In the entries below, we use:
 * `nat.i`: atom integer ID from the nonequivalent list (asymmetric unit).
@@ -794,7 +794,7 @@ YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
 ZPSP at1.s q1.r [at2.s q2.r] ...
 ~~~
 
-## List of functions used in arithmetic expressions {#farithmetics}
+## List of Functions Used in Arithmetic Expressions {#farithmetics}
 
 Basic arithmetic functions
 : abs, exp, sqrt, floor, ceil, ceiling, round, log, log10, sin, asin,
@@ -879,7 +879,7 @@ nheff(id)
 xc(...,idx)
 : Exchange-correlation energy density (requires [libxc](/critic2/libraries/)).
 
-## List of field modifiers ($field:modifier) {#fmods}
+## List of Field Modifiers ($field:modifier) {#fmods}
 \:v
 : Valence-only value of the field.
 
@@ -934,7 +934,7 @@ xc(...,idx)
 \:up, :dn, :sp 
 : Alpha, beta, spin density. (only for molecular wavefunctions)
 
-## List of structural variables (@strucvar) {#structvar}
+## List of Structural Variables (@strucvar) {#structvar}
 
 @dnuc
 : Distance to the closest nucleus. If used as @dnuc:n, the distance to

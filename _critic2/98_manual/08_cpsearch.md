@@ -11,7 +11,7 @@ toc_label: "Finding critical points"
 toc_sticky: true
 ---
 
-## Automatic determination of critical points (AUTO) {#c2-auto}
+## Automatic Determination of Critical Points (AUTO) {#c2-auto}
 
 ~~~
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
@@ -227,7 +227,7 @@ AUTO DRY CHK
 ~~~
 By default, checkpoint files are not used.
 
-### Example output for AUTO in a crystal
+### Example Output for AUTO in a Crystal
 
 In crystals, critic2 writes all the critical points found by AUTO to
 two internal lists: the "non-equivalent" list, containing only those
@@ -384,7 +384,7 @@ at bcps or rcps. The final entry, flatness, given at the end of the
 list, is the quotient between the density minimum and the maximum
 density at the bond critical points.
 
-### Example output for AUTO in a molecule
+### Example Output for AUTO in a Molecule
 
 The output for AUTO in a molecule is similar to a crystal but simpler,
 since there is no distinction between the non-equivalent critical
@@ -464,7 +464,7 @@ coordinates are given in Cartesian (angstrom by default) and referred
 to the molecular origin. Also, the flatness is missing, because it is
 meaningless in a molecule.
 
-### Problems finding critical points
+### Problems Finding Critical Points
 
 Sometimes the zero (one) sum condition between the number of critical
 points of each type is not fulfilled. This is usually caused by
@@ -514,7 +514,7 @@ with a threshold for the field value. For instance, to discard all
 critical points with density less (loaded in field `$rho`) than 1e-5,
 use `DISCARD "$rho < 1e-5"`.
 
-### Visualization of critical points
+### Visualization of Critical Points
 
 Critic2 does not come with a graphical interface to visualize the
 results of your calculations (yet). This can be a problem when your
@@ -588,7 +588,7 @@ xyz and cif: i) it prevents avogadro from calculating the molecular
 connectivity, which can be expensive in a very large system, and ii)
 it allows showing a fragment of the crystal along with the unit cell.
 
-## Requesting more information about the critical point list (CPREPORT) {#c2-cpreport}
+## Requesting More Information About the Critical Point List (CPREPORT) {#c2-cpreport}
 
 ~~~
 CPREPORT {SHORT|LONG|VERYLONG|SHELLS [n.i]}
@@ -648,7 +648,7 @@ The optional GRAPH keyword can be used in combination with any of the
 file formats mentioned above. When GRAPH is used, the bond paths are
 calculated and represented.
 
-## List of properties calculated at points (POINTPROP) {#c2-pointprop}
+## List of Properties Calculated at Points (POINTPROP) {#c2-pointprop}
 
 The default output for AUTO contains a list of detailed information
 at the critical points. This is an example of what this section looks

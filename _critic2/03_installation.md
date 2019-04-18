@@ -7,11 +7,11 @@ sidebar:
   - repo: "critic2"
     nav: "critic2" 
 toc: true
-toc_label: "Installation of critic2"
+toc_label: "Installation of Critic2"
 toc_sticky: true
 ---
 
-## Installation instructions
+## Installation Instructions
 
 If you downloaded the code from the git repository, you will need to run:
 ~~~
@@ -60,7 +60,7 @@ This variable is necessary for critic2 to find the atomic densities,
 the cif dictionary, and other files. These files should be in
 `${CRITIC_HOME}/dat/`.
 
-## Which compilers work? {#whichcompilerswork}
+## Which Compilers Work? {#whichcompilerswork}
 
 Critic2 uses some features from the more modern Fortran standards,
 which may not be available in some (most) compilers. In consequence,
@@ -117,7 +117,7 @@ flags before configure:
 FC=gfortran F77=gfortran ./configure ...
 ~~~
 
-## External libraries
+## External Libraries
 
 ### Libxc {#c2-libxc}
 

@@ -7,7 +7,7 @@ sidebar:
   - repo: "critic2"
     nav: "critic2_manual"
 toc: true
-toc_label: "Reference manual"
+toc_label: "Reference Manual"
 toc_sticky: true
 ---
 

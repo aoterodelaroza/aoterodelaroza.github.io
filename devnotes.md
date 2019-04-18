@@ -1,6 +1,6 @@
 ---
 layout: collection
-title: "Development notes"
+title: "Development Notes"
 permalink: /devnotes/
 collection: devnotes
 entries_layout: grid

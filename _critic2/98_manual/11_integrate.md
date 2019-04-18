@@ -71,7 +71,7 @@ the electron population inside an ELF basin, the ELF would be the
 reference field and the electron density would be an integrable
 property.
 
-## List of properties integrated in the attractor basins (INTEGRABLE) {#c2-integrable}
+## List of Properties Integrated in the Attractor Basins (INTEGRABLE) {#c2-integrable}
 
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
@@ -149,7 +149,7 @@ The default integrable properties are:
   If f is a core-augmented field, only the valence Laplacian is
   integrated. 
 
-### Integrating delocalization indices in a solid with maximally localized Wannier functions {#c2-intwandi}
+### Integrating Delocalization Indices in a Solid With Maximally Localized Wannier Functions {#c2-intwandi}
 
 The keyword DELOC activates the calculation of localization and
 delocalization indices (DIs) in a crystal using the procedure
@@ -282,7 +282,7 @@ CP. `id.i = 0` (all attractors).
 
 ## Qtree (QTREE) {#c2-qtree}
 
-### General syntax
+### General Syntax
 
 The [QTREE integration method](https://doi.org/10.1002/jcc.21620)
 integrates QTAIM atomic properties by
@@ -359,7 +359,7 @@ a relatively high `plevel.i` incurs in a overhead, because the
 atom assigning procedure is not as efficient when smaller tetrahedra
 are used. 
 
-### Steps of the QTREE algorithm
+### Steps of the QTREE Algorithm
 
 1. The WS cell is constructed and split into tetrahedra, all of which
    have in common, at least, the origin of the WS cell. Then, the site
@@ -1005,7 +1005,7 @@ The default value is 0. If PLOT\_MODE is > 0, then the sticks that
 form the tetrahedra are written to `.stick` files. The PLOTSTICKS and
 NOPLOTSTICKS keywords control this behavior.
 
-### Additional considerations
+### Additional Considerations
 
 * The integration of the volume is not done using the beta-sphere /
   basin separation because the volume of each tetrahedron is exactly
@@ -1033,7 +1033,7 @@ COLOR_ALLOCATE {0|1}
   COLOR\_ALLOCATE is 1 if `maxlevel.i` is less than 9 and 0 if the
   maximum level is higher.
 
-## Yu and Trinkle (YT) {#c2-yt}
+## Yu and Trinkle method (YT) {#c2-yt}
 
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]

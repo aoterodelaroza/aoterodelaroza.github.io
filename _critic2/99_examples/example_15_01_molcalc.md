@@ -1,16 +1,16 @@
 ---
 layout: single
-title: "Molecular calculations"
+title: "Molecular Calculations"
 permalink: /critic2/examples/example_15_01_molcalc/
 excerpt: "Calculations using molecular structures and wavefunctions"
 sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
 toc: true
-toc_label: "Molecular calculations"
+toc_label: "Molecular Calculations"
 ---
 
-## Representations of the exchange hole
+## Representations of the Exchange Hole
 
 The exchange hole can be calculated in critic2 using the
 `xhole(id,x,y,z)` chemical function. This function takes four

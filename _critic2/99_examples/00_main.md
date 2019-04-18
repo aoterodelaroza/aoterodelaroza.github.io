@@ -10,7 +10,9 @@ sidebar:
 
 ## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
 
-- [Delocalization indices from maximally localized Wannier functions](/critic2/examples/example_11_01_deloc-indices/)
+- [Integration of atomic charges and volumes with Quantum ESPRESSO, VASP, abinit,...](/critic2/examples/example_11_01_simple-integration/)
+
+- [Delocalization indices from maximally localized Wannier functions](/critic2/examples/example_11_10_deloc-indices/)
 
 ## Calculation of Molecular Properties (MOLCALC) {#c2e-molcalc}
 

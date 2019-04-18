@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Kramdown cheat sheet"
+title: "Kramdown Cheat Sheet"
 permalink: /devnotes/kramdown-cheatsheet/
 excerpt: "This is a cheat sheet for using the markdown syntax."
 categories: website

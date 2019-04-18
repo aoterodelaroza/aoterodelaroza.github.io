@@ -55,7 +55,7 @@ gradient (GX,GY,GZ), the norm of the gradient (GMOD), the components
 of the Hessian (HXX,...) and the Laplacian of the reference (or the
 `id.s`) field.
 
-## Planes and contour plots (PLANE) {#c2-plane}
+## Planes and Contour Plots (PLANE) {#c2-plane}
 
 ~~~
 PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i 

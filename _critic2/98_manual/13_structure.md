@@ -11,7 +11,7 @@ toc_label: "Structural tools"
 toc_sticky: true
 ---
 
-## Relabel the atoms in the structure (ATOMLABEL) {#c2-atomlabel}
+## Relabel the Atoms in the Structure (ATOMLABEL) {#c2-atomlabel}
 
 The ATOMLABEL keyword can be used to change the atomic labels for the
 atoms in the current structure:
@@ -32,7 +32,7 @@ names. The format specifiers for this template are:
 
 * `%l`: the current atom label.
 
-## Powder diffraction (POWDER) {#c2-powder}
+## Powder Diffraction (POWDER) {#c2-powder}
 
 The keyword POWDER calculates the powder diffraction pattern for the
 current crystal structure:
@@ -55,7 +55,7 @@ containing the $$2\theta$$ versus intensity data, and
 files can be changed using the ROOT keyword. The Miller indices of the
 peaks are written to the standard output.
 
-## Radial distribution function (RDF) {#c2-rdf}
+## Radial Distribution Function (RDF) {#c2-rdf}
 
 The RDF keyword calculates the radial distribution function (RDF) for
 the current structure:
@@ -73,7 +73,7 @@ containing the rdf versus distance data, and `<root>_rdf.gnu`, the
 gnuplot script to plot it. The name of these files can be changed
 using the [ROOT](/critic2/manual/misc/#c2-root) keyword.
 
-## Compare crystal and molecular structures (COMPARE) {#c2-compare}
+## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
 The COMPARE keywords compares two or more structures:
 ~~~
@@ -133,7 +133,7 @@ COMPARE bleh1.xyz bleh2.wfx
 ~~~
 provided the files exist.
 
-## Transform the unit cell (NEWCELL) {#c2-newcell}
+## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 
 The NEWCELL keyword transforms the unit cell used to describe the
 current crystal structure to a new cell:
@@ -200,7 +200,7 @@ The origin is not translated in any of these keywords. These
 transformations use the [spglib](https://atztogo.github.io/spglib/)
 library. Please consult the spglib manual for more information.
 
-## Calculate atomic environments (ENVIRON) {#c2-environ}
+## Calculate Atomic Environments (ENVIRON) {#c2-environ}
 
 The ENVIRON keyword prints lists of neighbor atoms:
 ~~~
@@ -227,7 +227,7 @@ SHELLS is given, group the neighbors in shells by distance (1e-2
 atomic distance threshold for atoms in the same shell) and
 non-equivalent ID.
 
-## Pair and triplet coordination numbers (COORD) {#c2-coord}
+## Pair and Triplet Coordination Numbers (COORD) {#c2-coord}
 
 The COORD keyword calculates pair and triplet coordination numbers:
 ~~~
@@ -250,7 +250,7 @@ the unit cell and per atomic species. In addition, it will also list
 all coordinated triplets X-Y-Z, where Y runs over all atoms in the
 unit cell and over all atomic species.
 
-## Packing ratio (PACKING) {#c2-packing}
+## Packing Ratio (PACKING) {#c2-packing}
 The PACKING keyword computes the packing ratio of the crystal assuming
 atomic spheres with radius equal to the nearest-neighbor distance
 divided by 2:
@@ -265,7 +265,7 @@ controlling the precision of the packing ratio calculated using the
 VDW keyword. If PREC is used, expect an error in the percent packing
 ratio in the order of `prec.r`. The default `prec.r` is 0.1.
 
-## Identify atoms in the structure given their coordinates (IDENTIFY) {#c2-identify}
+## Identify Atoms in the Structure Given Their Coordinates (IDENTIFY) {#c2-identify}
 
 The IDENTIFY keyword identifies the coordinates in the user input by
 matching them against the internal list of atoms and critical points:
@@ -298,7 +298,7 @@ In addition to the identity of the points, if any, critic2 also
 provides the vertices of the cube that encompasses all the points in
 the list that did match an atom or CP.
 
-## Point-charge electrostatic energy (EWALD) {#c2-ewald}
+## Point-Charge Electrostatic Energy (EWALD) {#c2-ewald}
 
 The EWALD keyword calculates the electrostatic energy of the lattice
 of point charges using Ewald's method:

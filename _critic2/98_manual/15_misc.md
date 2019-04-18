@@ -11,7 +11,7 @@ toc_label: "Miscellaneous tools"
 toc_sticky: true
 ---
 
-## Molecular calculations (MOLCALC) {#c2-molcalc}
+## Molecular Calculations (MOLCALC) {#c2-molcalc}
 
 The MOLCALC keyword allows the (limited) calculation of molecular
 properties:
@@ -62,7 +62,7 @@ inside critic2. Only molecular wavefunctions can be used with
 implemented). Gaussian wfn/wfx do not provide basis set shells, only
 primitives, so they cannot be used with MOLCALC HF.
 
-## Hirshfeld charges (HIRSHFELD) {#c2-hirshfeld}
+## Hirshfeld Charges (HIRSHFELD) {#c2-hirshfeld}
 
 The HIRSHFELD keyword calculates the 
 [Hirshfeld charges](https://doi.org/10.1063/1.2831900) in the system:
@@ -71,7 +71,7 @@ HIRSHFELD
 ~~~
 The HIRSHFELD keyword can be used only with fields defined on a grid.
 
-## The exchange-hole dipole moment dispersion model (XDM) {#c2-xdm}
+## The Exchange-Hole Dipole Moment Dispersion Model (XDM) {#c2-xdm}
 
 The XDM keyword calculates the dispersion energy using the
 exchange-hole dipole moment (XDM) model. See 
@@ -203,14 +203,14 @@ Only calculate the contributions to the energy coming from the
 $$C_6$$ term (6), from the $$C_6$$ and $$C_8$$ terms (8) and from 
 $$C_6$$, $$C_8$$, and $$C_{10}$$ (10). The latter is the default.
 
-## Control commands and options {#c2-control}
+## Control Commands and Options {#c2-control}
 
 This section lists a number of keywords that are used to control the
 operation of critic2. In general, they should be given before the
 keywords that employ those options are used. For instance, `ODE_MODE`
 should be given before integrating by bisection.
 
-### Gradient path tracing (ODE\_MODE) {#c2-odemode}
+### Gradient Path Tracing (ODE\_MODE) {#c2-odemode}
 
 ~~~
 ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] 
@@ -236,7 +236,7 @@ This keyword applies to all gradient paths except those in qtree. The
 defaults are `BS` method with `maxstep.r` = 0.3 bohr, `gradeps.r` = 1e-7,
 and `maxerr.r` = 1e-5.
 
-### Gradient path plot pruning (PRUNE\_DISTANCE) {#c2-prunedistance}
+### Gradient Path Plot Pruning (PRUNE\_DISTANCE) {#c2-prunedistance}
 
 Plots of gradient paths are pruned so that only one point is plotted
 every certain length. The PRUNE\_DISTANCE keyword is used to control
@@ -250,7 +250,7 @@ are forced to have steps of length less than or equal to
 `prune.r`. Therefore, a very small `PRUNE_DISTANCE` will result in
 slow gradient path tracing.
 
-### Radial integration method (INT\_RADIAL) {#c2-intradial}
+### Radial Integration Method (INT\_RADIAL) {#c2-intradial}
 
 The `INT_RADIAL` keyword chooses the type of radial integration method
 used inside spheres or atomic basins:
@@ -303,7 +303,7 @@ Default: `GAULEG`, `nr.r` = 50, `aerr.r` = 1d0, `rerr.r` = 1d-12. The
 default errprop is the field value and the Laplacian. `delta.r` = 1e-5
 bohr.
 
-### Integration meshes (MESHTYPE) {#c2-meshtype}
+### Integration Meshes (MESHTYPE) {#c2-meshtype}
 
 The MESHTYPE keyword chooses the type and quality of the molecular
 integration mesh:
@@ -328,7 +328,7 @@ done yet.
 
 Default: FRANCHINI, GOOD.
 
-### Cube file precision (PRECISECUBE/STANDARDCUBE) {#c2-precisecube}
+### Cube File Precision (PRECISECUBE/STANDARDCUBE) {#c2-precisecube}
 
 The PRECISECUBE and STANDARDCUBE keywords control the precision of the
 numbers written to cube files:
@@ -344,7 +344,7 @@ use Gaussian cube files may not like this, however, so the keyword
 STANDARDCUBE is provided to make critic2 write cube files in the
 default Gaussian format.
 
-### Bond distance factor (BONDFACTOR) {#c2-bondfactor}
+### Bond Distance Factor (BONDFACTOR) {#c2-bondfactor}
 
 The BONDFACTOR keyword controls the bond detection subroutines in
 critic2:
@@ -355,7 +355,7 @@ Critic2 considers two atoms are covalently bonded if their distance is
 less than the sum of their covalent radii times `bondfactor.r` (default:
 1.4). The maximum bondfactor allowed is 2.0.
 
-### Covalent radii (RADII) {#c2-radii}
+### Covalent Radii (RADII) {#c2-radii}
 
 The keyword RADII allows changing the internal table of covalent
 radii:
@@ -367,7 +367,7 @@ atomic number `z1.i` to `rad1.r`. (Units: bohr in crystals, angstroms
 in molecules). The radii of several atoms can be changed in the same
 command.
 
-### Root of files created by critic2 (ROOT) {#c2-root}
+### Root of Files Created by Critic2 (ROOT) {#c2-root}
 
 The keyword ROOT:
 ~~~
@@ -376,7 +376,7 @@ ROOT root.s
 changes the `<root>` of the critic2 run. The root is used as prefix
 for most of the auxiliary files written by critic2.
 
-### Grid calculations (SUM,MAX,MIN,MEAN,COUNT) {#c2-gridcalc}
+### Grid Calculations (SUM,MAX,MIN,MEAN,COUNT) {#c2-gridcalc}
 
 These five keywords:
 ~~~
@@ -394,7 +394,7 @@ elements that are greater than `eps.r`. If no `id.s` is given in the
 first four commands, then the reference field is used, provided it is
 defined on a grid. 
 
-### Benchmark calculations on fields (BENCHMARK) {#c2-benchmark}
+### Benchmark Calculations on Fields (BENCHMARK) {#c2-benchmark}
 
 The BENCHMARK keyword:
 ~~~
@@ -404,14 +404,14 @@ is used to determine the average speed of the evaluation of the
 reference field using `nn.i` points (default: 10000). Mostly for debug
 and development purposes.
 
-### Run system commands (RUN/SYSTEM) {#c2-system}
+### Run System Commands (RUN/SYSTEM) {#c2-system}
 
 ~~~
 {RUN|SYSTEM} command.s
 ~~~
 Execute a shell command.
 
-### Echo a message (ECHO) {#c2-echo}
+### Echo a Message (ECHO) {#c2-echo}
 
 ~~~
 ECHO string.s
@@ -419,14 +419,14 @@ ECHO string.s
 Write the string `string.s` to the output. Useful for partitioning
 long outputs.
 
-### Terminate the run (END) {#c2-end}
+### Terminate the Run (END) {#c2-end}
 
 ~~~
 END
 ~~~
 Terminates the execution of critic2.
 
-### Expression evaluation {#c2-expression}
+### Expression Evaluation {#c2-expression}
 
 ~~~
 expression.s

@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Exporting the structure"
+title: "Exporting the Structure"
 permalink: /critic2/manual/write/
 excerpt: "Keywords for exporting crystal and molecular structures in critic2."
 sidebar:
