@@ -74,9 +74,10 @@ stable version is compilable with all versions of gfortran starting at
 4.9. All intel fortran compiler versions from 2011 onwards also
 compile the stable code.
 
-The development version can be compiled with gfortran-6 and later. All
-other compilers tested have issues, and fail to produce a working
-binary. This is the list of compilers tested:
+The development version can be compiled with gfortran-6 and later and
+with intel fortran 19.x and later. All other compilers tested have
+issues, and fail to produce a working binary. This is the list of
+compilers tested:
 
 * gfortran 4.8: critic2 cannot be compiled with this version because
   allocatable components in user-defined types are not supported.
@@ -95,14 +96,14 @@ binary. This is the list of compilers tested:
   arguments or function results does not work, and ii) internal
   compiler error when compiling meshmod.f90.
 
-In summary: **Only recent versions of gfortran are guaranteed to work
-with the development version. If you cannot use gfortran 6 or newer,
-download the stable version.** I do not think this is because of
-errors in the critic2 code (though if you find that it is, please let
-me know). If you paid for a recent version of your compiler and it
-throws an internal compiler error while trying to build critic2, you
-may want to consider submitting a bug report to the compiler
-developers.
+In summary: **Only recent versions of gfortran and ifort are
+guaranteed to work with the development version. If you cannot use
+gfortran 6 or newer or ifort 19.x or newer, download the stable
+version.** I do not think this is because of errors in the critic2
+code (though if you find that it is, please let me know). If you paid
+for a recent version of your compiler and it throws an internal
+compiler error while trying to build critic2, you may want to consider
+submitting a bug report to the compiler developers.
 
 If a recent compiler is not available, an alternative is to compile
 the program elsewhere with the static linking option:
