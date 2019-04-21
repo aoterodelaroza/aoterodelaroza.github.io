@@ -31,10 +31,10 @@ accessed with the `$1` variable. We can, for instance, plot the
 exchange hole in the molecular plane:
 ~~~
 a = 3
-plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,0.0,0.0)"    file xhole-0 contour lin 41 -0.2 0.0
-plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,0.5,0.0)"    file xhole-1 contour lin 41 -0.2 0.0
-plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,1.0,0.0)"    file xhole-2 contour lin 41 -0.2 0.0
-plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,1.3936,0.0)" file xhole-3 contour lin 41 -0.2 0.0
+plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,0.0,0.0)"    file xhole-0 contour lin 41 0.0 0.2
+plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,0.5,0.0)"    file xhole-1 contour lin 41 0.0 0.2
+plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,1.0,0.0)"    file xhole-2 contour lin 41 0.0 0.2
+plane -a -a 0  a -a 0  -a a 0  101 101 field "-xhole(1,0.0,1.3936,0.0)" file xhole-3 contour lin 41 0.0 0.2
 ~~~
 These four plots comprise a square from (-3,-3) to (+3,+3) angstrom
 with 101 points in each direction. Contour lines are represented in a
@@ -112,9 +112,37 @@ which gives:
 The small deviation from the correct value (-1) comes from grid being 
 relatively coarse.
 
+## Example files package
+
+Files: [example_15_01.tar.xz](/assets/critic2/example_15_01/example_15_01.tar.xz).
+Run the examples as follows:
+
+- If you can use Gaussian, run the SCF calculation and generate the
+  wavefunction with:
+~~~
+g16 benzene.gjf
+~~~
+  Older versions of Gaussian may also work. If you do not have Gaussian,
+  a `benzene.wfx` wavefunction is provided in the package.
+
+- Run the critic2 input file. This file contains all the tasks in this
+  example.
+
+- Generate the plots by running the executing the generated gnuplot
+  scripts:
+~~~
+gnuplot xhole-0.gnu
+gnuplot xhole-1.gnu
+gnuplot xhole-2.gnu
+gnuplot xhole-3.gnu
+~~~
+  The plots are called `xhole-*.eps`.
+
 ## Manual pages
 
 - [Chemical functions in critic2](/critic2/manual/arithmetics/#availchemfun)
+
+- [Structural variables](/critic2/manual/arithmetics/#c2-structvar)
 
 - [The MOLCALC keyword](/critic2/manual/misc/#c2-molcalc)
 
