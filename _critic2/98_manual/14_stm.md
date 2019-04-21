@@ -34,7 +34,8 @@ following requirements:
 
 * The STM plot calculation uses the reference field. 
 
-The STM keyword uses the popular Tersoff-Hamann approximation, in
+The STM keyword uses the popular 
+[Tersoff-Hamann approximation](https://doi.org/10.1103/PhysRevB.31.805), in
 which the observed current is proportional to the local density of
 states at the Fermi level:
 
