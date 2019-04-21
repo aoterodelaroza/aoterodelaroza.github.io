@@ -45,7 +45,7 @@ in the Quantum ESPRESSO distribution (in the examples of the PP
 package, example03). The surface is shown in the plot on the
 right. The first thing we have to do is run the SCF calculation on the
 surface (`alas110re.scf.in`). For simplicity, this is done with a very
-low cutoff (14~Ry). Real-life calculations would be run with a much
+low cutoff (14 Ry). Real-life calculations would be run with a much
 higher cutoff. Then, a post-SCF calculation is run with a finer
 k-point grid, additional bands and smearing in order to calculate and
 populate the surface levels slightly above the Fermi level
