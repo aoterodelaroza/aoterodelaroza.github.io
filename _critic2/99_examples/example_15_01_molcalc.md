@@ -112,3 +112,9 @@ which gives:
 The small deviation from the correct value (-1) comes from grid being 
 relatively coarse.
 
+## Manual pages
+
+- [Chemical functions in critic2](/critic2/manual/arithmetics/#availchemfun)
+
+- [The MOLCALC keyword](/critic2/manual/misc/#c2-molcalc)
+

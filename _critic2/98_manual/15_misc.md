@@ -436,3 +436,9 @@ evaluate the command as an arithmetic expression and print its
 value. Useful for simple calculations in the command line (with
 critic2 -q).
 
+## Examples
+
+- MOLCALC
+
+  + [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)
+

@@ -6,7 +6,12 @@ excerpt: "Scanning tunneling microscopy (STM) plots in critic2."
 sidebar:
   - repo: "critic2"
     nav: "critic2_manual"
+toc: true
+toc_label: "STM plots"
+toc_sticky: true
 ---
+
+## Creating STM plots (STM)
 
 The STM keyword generates plots comparable to those obtained in
 scanning tunneling microscopy (STM) experiments:
@@ -121,4 +126,8 @@ along the line are calculated. The output file is
 
 The current implementation of STM has benefited from the code and the
 guidance kindly provided by Enrico Benassi (see the THANKS file).
+
+## Examples
+
+- [Making STM plots with Quantum ESPRESSO and critic2](/critic2/examples/example_14_01_stmqe/)
 

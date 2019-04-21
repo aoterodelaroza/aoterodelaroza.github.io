@@ -374,3 +374,14 @@ critic2 urea.cri urea.cro
 abinit ## or abinis/abinip if you are running a really old version
 critic2 urea.cri
 ~~~
+
+## Manual pages
+
+- [The reference field](/critic2/manual/fields/#c2-reference)
+
+- [Yu and Trinkle method (YT)](/critic2/manual/integrate/#c2-yt)
+
+- [Henkelman et al. method (BADER)](/critic2/manual/integrate/#c2-bader)
+
+- [Marking fields or expressions as integrable quantities](/critic2/manual/integrate/#c2-integrable)
+

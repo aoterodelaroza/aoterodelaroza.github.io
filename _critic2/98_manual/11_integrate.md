@@ -1147,3 +1147,9 @@ gives less accurate integrations (at least in my experience). The
 weight cubes written by WCUBE contain zeros for the grid points
 outside the basin, and ones inside.
 
+## Examples
+
+- YT and BADER:
+
+  + [Integration of atomic charges and volumes with grids](/critic2/examples/example_11_01_simple-integration/)
+

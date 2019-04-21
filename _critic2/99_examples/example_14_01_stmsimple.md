@@ -163,3 +163,8 @@ critic2 alas110re-ch.cri
 gnuplot alas110re-ch_stm.gnu
 ~~~
 This generates the `alas110re-ch_stm.eps` file containing the plot.
+
+## Manual pages
+
+- [Scanning tunneling microscopy (STM) plots](/critic2/manual/stm/)
+
