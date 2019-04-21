@@ -14,6 +14,10 @@ sidebar:
 
 - [Delocalization indices from maximally localized Wannier functions](/critic2/examples/example_11_10_deloc-indices/)
 
+## STM plots (STM) {#c2e-stm}
+
+- [Making STM plots with Quantum ESPRESSO and critic2](/critic2/examples/example_14_01_stmqe/)
+
 ## Calculation of Molecular Properties (MOLCALC) {#c2e-molcalc}
 
 - [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)

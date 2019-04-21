@@ -90,5 +90,7 @@ critic2_examples:
     children:
       - title: "Integration Using Grids (YT/BADER)"
         url: /critic2/examples/#c2e-integrid
+      - title: "STM plots (STM)"
+        url: /critic2/examples/#c2e-stm
       - title: "Molecular Properties (MOLCALC)"
         url: /critic2/examples/#c2e-molcalc
