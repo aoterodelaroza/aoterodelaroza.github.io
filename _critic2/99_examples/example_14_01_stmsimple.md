@@ -31,7 +31,7 @@ where the sum runs only over the one-electron states that have
 energies between $$E_F-eV$$ and $$E_F$$. The LDOS corresponds to the
 electron density contributions from all states that are within $$eV$$
 of the Fermi level. In Quantum ESPRESSO, a cube file containing this
-LDOS for the chosen bias voltag can be written using `pp.x` and 
+LDOS for the chosen bias voltage can be written using `pp.x` and 
 option `plot_num=5`. 
 
 

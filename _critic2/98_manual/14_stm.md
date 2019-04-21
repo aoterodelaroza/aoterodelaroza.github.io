@@ -60,7 +60,7 @@ To use the STM keyword, the reference field must be the local density
 of states at the Fermi level $$\rho_{\rm loc}$$ calculated by your
 quantum chemistry package of choice. For instance, in Quantum
 ESPRESSO, a Gaussian cube file containing the LDOS can be obtained by
-using `plot_num=5` and a `sample_bias` equal to the bias volatge (in
+using `plot_num=5` and a `sample_bias` equal to the bias voltage (in
 Ry!).
 
 There are two main modes of operation in STM: constant current and
