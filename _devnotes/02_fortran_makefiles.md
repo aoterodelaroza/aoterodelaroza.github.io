@@ -795,7 +795,7 @@ the new targets as well.
 
 Example package: [example-06.tar.xz](/assets/devnotes/02_fortran_makefiles/example-06.tar.xz).
 
-## Submodules of submodules
+## Submodules all the way down
 
 Submodules may have other submodules as parents. In that case, the
 syntax for the submodule definition is:
