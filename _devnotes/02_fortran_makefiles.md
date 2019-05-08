@@ -20,7 +20,7 @@ provided below permits:
 - Parallelization using with make's `-j` command-line option.
 
 - Using modules, submodules, and includes with arbitrary dependencies
-  among them, even accross different subdirectories in the project
+  among them, even across different subdirectories in the project
   tree.
 
 - Packing more than one module and submodule inside the same file.
@@ -179,7 +179,7 @@ top of the object files, this generates the module interface files
 (`onemod.mod` and `twomod.mod`) and the submodule interface files
 (`onemod.smod` and `twomod.smod`). (Fun fact: `onemod.mod` and
 `onemod.smod` are the same files byte by byte, at least with
-gfrotran.) Once we have these prerequisite files, we compile the
+`gfortran`.) Once we have these prerequisite files, we compile the
 children submodules:
 ~~~
 gfortran -c one@proc.f90
@@ -296,7 +296,7 @@ make -j 2
 runs `make` with at most two threads. Parallelized builds are
 important in large programs comprising hundreds of thousands or
 millions of source code lines, where a single build from scratch can
-take a signficant amount of time.
+take a significant amount of time.
 
 Although our last example works with `make -j` (i.e. it has no race
 conditions), it was not parallelizable. The most general layout of a
@@ -797,7 +797,7 @@ SUBMODULE (ancestor:parent) name
 ~~~
 where `ancestor` is the name of the ancestor module (the module from
 which all the submodules ultimately depend) and `parent` is the name
-of the parent submodule. To copile the source containing the `name`
+of the parent submodule. To compile the source containing the `name`
 submodule, we need the `.mod` file of the ancestor module and the
 `.smod` file of the parent submodule. The latter is built as 
 `ancestor@parent.smod`.
@@ -893,7 +893,7 @@ We now have a fairly complete Makefile template that can handle some
 quite insane dependency trees. However, we have been ignoring the
 elephant in the room: How do we generate the dependency rules at the
 end of the Makefile? Last example had only four files and one include,
-and this spwaned dozens of dependency relations between existing and
+and this spawned dozens of dependency relations between existing and
 generated files. Clearly, doing this by hand is unfeasible for any
 reasonably sized project, so an automatic tool is required.
 
