@@ -12,8 +12,13 @@ toc_sticky: true
 ---
 
 These notes show how to write portable Makefiles for large modern
-Fortran (2008 standard) programs. With few restrictions, the solution
-provided below permits:
+Fortran (2018 standard) programs. 
+
+*tl;dr Put the [Makefile](/assets/devnotes/02_fortran_makefiles/Makefile)
+and the [dependency generator](/assets/devnotes/02_fortran_makefiles/makedepf08.awk)
+in the root of your project. Run `make`.*
+
+With a few restrictions, this solution permits:
 
 - Fully automatic dependency generation.
 
