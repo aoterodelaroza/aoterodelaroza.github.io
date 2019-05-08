@@ -3,7 +3,9 @@ layout: single
 title: "Kramdown Cheat Sheet"
 permalink: /devnotes/kramdown-cheatsheet/
 excerpt: "This is a cheat sheet for using the markdown syntax."
-categories: website
+class: wide
+sidebar:
+  - nav: "devnotes" 
 ---
 
 This is \`how you escape characters \`. This is a paragraph. A

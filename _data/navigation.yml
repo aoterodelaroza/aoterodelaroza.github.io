@@ -94,3 +94,14 @@ critic2_examples:
         url: /critic2/examples/#c2e-stm
       - title: "Molecular Properties (MOLCALC)"
         url: /critic2/examples/#c2e-molcalc
+
+devnotes:
+  - title: "Main"
+    url: /
+  - title: "Development notes"
+    url: /devnotes/
+    children:
+    - title: "Kramdown cheatsheet"
+      url: /devnotes/kramdown-cheatsheet/
+    - title: "Fortran makefiles"
+      url: /devnotes/modern-fortran-makefiles/
