@@ -3,7 +3,7 @@
 ## This file is frere software; distributed under GNU/GPL version 3.
 
 function dirname(file){
-    ## function dirname by Aleksey Cheusov <vle@gmx.net>, from:
+    ## function dirname by Aleksey Cheusov
     ## https://github.com/cheusov/runawk/blob/master/modules/dirname.awk
     if (!sub(/\/[^\/]*\/?$/,"",file))
         return "."

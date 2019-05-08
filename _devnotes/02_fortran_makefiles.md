@@ -22,7 +22,7 @@ With a few restrictions, this solution permits:
 
 - Fully automatic dependency generation.
 
-- Parallelization using with make's `-j` command-line option.
+- Parallelization using with make's `-j` or `-l` command-line options.
 
 - Using modules, submodules, and includes with arbitrary dependencies
   among them, even across different subdirectories in the project
@@ -30,18 +30,19 @@ With a few restrictions, this solution permits:
 
 - Packing more than one module and submodule inside the same file.
 
-- Nested includes. Includes that include modules and submodules are
-  also allowed.
+- Nested includes. Includes that include modules and submodules.
 
 ## On modules and headaches
 
 Fortran submodules were introduced in the 2008 Fortran standard and
-only recently implemented in modern Fortran compilers (`gfortran` has
-had them for a long time and `ifort` has only recently fixed important 
-submodule-related bugs). The two ideas behind submodules are: i)
-separate the interface of a module from its implementation, and ii)
-prevent circular dependencies between modules. For instance, consider
-module `one` contained in source file `one.f90`:
+only recently implemented in modern Fortran compilers (this is early
+2019, `gfortran` has had them for a long time and `ifort` has only
+recently fixed important submodule-related bugs). The two ideas behind
+submodules are: i) separate the interface of a module from its
+implementation, and ii) prevent circular dependencies between
+modules. 
+
+Consider module `one` contained in source file `one.f90`:
 ~~~ fortran
 module onemod
   implicit none
@@ -61,22 +62,21 @@ This is straightforward: Module `onemod` defines subroutine
 `addone`. When other parts of the program use `onemod`, the routine
 `addone` is available to them through host association. When `one.f90`
 is compiled, it generates a file containing the interface of the
-module. In all Fortran compilers I use (the list is pretty short:
-`gfortran` and `ifort`), this interface file has the name of module
-and extension `.mod` (`onemod.mod` in this case). The catch is that
-the `onemod.mod` file must be available to all parts of the program
-that use the module, and therefore the module must be compiled before
-them. 
+module. In all Fortran compilers I have access to (sadly, the list is
+pretty short: `gfortran` and `ifort`), this interface file has the
+name of the module and extension `.mod` (`onemod.mod` in this
+case). The catch is that the `onemod.mod` file must be available to
+all the other subprograms that use that module. Therefore the module
+must be compiled before them. 
 
-Now consider what happens if we make a change to the module. The
-change may affect the interface, in which case the `.mod` file changes
-and all other files that use the module must be recompiled. However,
-the change may affect the internals of the `addone` routine only and
-leave the interface unchanged. However, since the compiler regenerates
-the `.mod` file, the files that depend on the module are recompiled,
-even if there is no need to do so. In very large programs, this causes
-painful compilation cascades whenever you need to touch a module that
-is used in very many places.
+Now consider what happens if we make a change to the
+module. Recompilation of the source changes the `.mod` file and all
+other files that use it must be recompiled as well. However, the
+change may affect the internals of the `addone` routine only and leave
+the interface unchanged, so there may be no need to recompile the
+dependant files. In large projects, this causes painful compilation
+cascades whenever you need to work on a module that is very basic to
+the program.
 
 The second problem with modules are circular dependencies. Consider
 that we now have two modules with subroutines that call each other:
@@ -113,12 +113,12 @@ contains
   end subroutine addtwo
 end module twomod
 ~~~
-It is not possible to compilable this code as-is because trying to
+It is not possible to compile this code as-is. Trying to
 compile `two.f90` fails (missing `onemod.mod`) and the same thing
-happens for `one.f90` (missing `twomod.mod`). However, this should not
-be the case because it is the implementation of both routines that use
-the other module, not the interface, so there is no reason why this
-should not be possible.
+happens if you compile `one.f90` (missing `twomod.mod`). However, this
+should not be the case because it is the implementation of both
+routines that use the other module, not the interface, so there is no
+reason why this should not be possible.
 
 ## Introducing submodules
 
@@ -160,12 +160,12 @@ contains
 end submodule twoproc
 ~~~
 Only the module file generates the `.mod` file necessary to compile
-all the dependencies; changes to the implementation in the submodule
-do not trigger a compilation cascade. Furthermore, routines in the
-submodule can use whatever module is available as long as the parent
-module of the submodule is not used in its interface. In this case,
-the `two` submodule can use `addone` from the `onemod` module and
-likewise the `one` submodule can use `addtwo` from the `twomod`
+all the dependencies and so changes to the implementation in the
+submodule do not trigger a compilation cascade. Furthermore, routines
+in the submodule can use whatever module is available as long as the
+parent module of the submodule is not used in its interface. In this
+case, the `two` submodule can use `addone` from the `onemod` module
+and likewise the `one` submodule can use `addtwo` from the `twomod`
 module. 
 
 How does the compilation of submodules work? In this example,
@@ -179,13 +179,13 @@ modules:
 gfortran -c one.f90
 gfortran -c two.f90
 ~~~
-which do have any requirements because they do not use anyone else. On
-top of the object files, this generates the module interface files
-(`onemod.mod` and `twomod.mod`) and the submodule interface files
-(`onemod.smod` and `twomod.smod`). (Fun fact: `onemod.mod` and
-`onemod.smod` are the same files byte by byte, at least with
-`gfortran`.) Once we have these prerequisite files, we compile the
-children submodules:
+which do not have any requirements because they do not use anyone
+else. On top of the object files, this generates the module interface
+files (`onemod.mod` and `twomod.mod`) and the submodule interface
+files (`onemod.smod` and `twomod.smod`). (Fun fact: `onemod.mod` and
+`onemod.smod` are the gzip packages that are exactly equal byte by
+byte, at least with `gfortran`.) Once we have these prerequisite
+files, we compile the children submodules:
 ~~~
 gfortran -c one@proc.f90
 gfortran -c two@proc.f90
@@ -211,16 +211,16 @@ gfortran -c main.f90
 gfortran -o main main.o two.o two@proc.o one.o one@proc.o
 ~~~
 To make matters worse, submodules can depend on other submodules,
-which makes writing the Makefile rules a bit tricky. For now, let us
+which makes writing the Makefile rules a bit tricky. Let us
 start with a simple example.
 
 ## A simple Makefile for a simple program
 
 For now, let us make the simplifying assumption that file names and
-module/submodule names coincide and rename the modules names from
+module/submodule names coincide, so we rename the modules names from
 `onemod` to `one` and from `twomod` to `two`. A simple Makefile that
 compiles this program begins with the usual things: a compiler, the
-program target and linking recipe, and the clean phony target.
+program target and linking recipe, and the `clean` phony target.
 ~~~ make
 .SUFFIXES:
 FC=gfortran
@@ -236,15 +236,15 @@ clean:
 	-rm -f *.o *.mod *.smod main
 ~~~
 The first line serves to deactivate all implicit rules. `.mod` files
-are understood by make to be modula-2 source files, which can
-occasionally lead to confusing errors when it tries to generate an
+are implicitly understood by make to be modula-2 source files, which
+can occasionally lead to confusing errors when it tries to generate an
 object file from a `.mod` file using `m2c`.
 
 The object, module, and submodule files are all created or updated by
 compiling the source. Depending on the compiler version, if the module
-or submodule file already exists its date may or may not changed if
-the interface does not change. Therefore, to prevent any problems we
-should touch the target at the end of the rule to make sure its date
+or submodule file already exists its date may or may not change if
+the interface does not change. Therefore, to prevent any problems with
+`make`, we touch the target at the end of the rule to make sure its date
 is set correctly. Since we assumed that the module and submodule names
 are the same as the file name of the source, the compilation is easily
 handled by three pattern rules:
@@ -255,12 +255,12 @@ handled by three pattern rules:
 ~~~
 
 To complete the makefile, we need to establish the dependencies
-between objects, module, and submodules files. We do this by adding to
+between objects, module, and submodule files. We do this by adding to
 the above recipe the pre-requisites discussed in the previous
 section. Specifically:
 1. Creating the object file `target.o` requires having the `.mod`
    files of all the module it uses. If the source corresponds to a
-   module, then the `target.mod` file also depend on the used
+   module, then the `target.mod` file also depends on the used
    `.mod`. Furthermore, if the source corresponds to a module or
    submodule that is a parent to another submodule, then the
    `target.smod` also depends on the `.mod` file of the used module.
@@ -291,43 +291,42 @@ Example package: [example-01.tar.xz](/assets/devnotes/02_fortran_makefiles/examp
 
 ## Separating compilation from .mod and .smod generation
 
-One thing that can be improved in the previous Makefile is
-parallelization. `make` has the option of using more than one thread
-to carry out the build if the dependency graph branches out. To do
-this, we use the command-line options `-j` and `-l`. The command:
+The previous Makefile works, but one thing that needs to be improved
+is how it handles parallelization. `make` has the option of using more
+than one thread to carry out the build if the dependency graph
+branches out. To do this, we use the command-line options `-j` or
+(more rarely) `-l`. The command:
 ~~~
 make -j 2
 ~~~
 runs `make` with at most two threads. Parallelized builds are
-important in large programs comprising hundreds of thousands or
-millions of source code lines, where a single build from scratch can
-take a significant amount of time.
+important in large programs where a single build from scratch can
+from minutes to hours.
 
 Although our last example works with `make -j` (i.e. it has no race
-conditions), it was not parallelizable. The most general layout of a
+conditions), it was not parallelizable. The most usual layout of a
 large fortran program is a sequence of module file dependencies that
-go from higher to lower-level contents. Module A depends on module B,
-B on C, C on D, and so on. With our previous Makefile, compiling a
-program laid out like this would require following this chain of
-modules backwards one by one, which would preclude any
-parallelization.
+implement from complex to simple tasks. Module A implements the
+highest-level routines and depends on module B, module B on module C,
+C on D, and so on. With our previous Makefile, compiling a program
+laid out like this would require following this chain of modules
+backwards one by one, which would preclude any parallelization.
 
 An elegant solution to this problem was proposed by Dr. Joost
 VandeVondele: separate the compilation step from the generation of the
-`.mod` and `.smod` files. The essential idea is to run make in two
-passes. In a first pass, we generate all the `.mod` and `.smod` files
-using a special compiler flag that generates the interfaces but not
-the object file. This flag is `-fsyntax-only` in `gfortran` and
-`-syntax-only` in `ifort`. In the second pass, we compile the object
-file from the source as usual. The first pass is quick and cheap,
-and it is the second pass that takes most of the time. The
-dependencies between different sources are handled in the first pass
-so that, when we start the second pass, all necessary `.mod` and
-`.smod` files have been generated and we can take full advantage of
-`make`'s parallelization.
+`.mod` and `.smod` files. The idea is to run make in two passes. In a
+first pass, we generate all the `.mod` and `.smod` files using a
+special compiler flag that generates the interfaces but not the object
+file. This flag is `-fsyntax-only` in `gfortran` and `-syntax-only` in
+`ifort`. In the second pass, we compile the object file from the
+source as usual. The first pass is quick and cheap, and it is the
+second pass that takes most of the time. The dependencies between
+different sources are handled in the first pass so that, when we start
+the second pass, all necessary `.mod` and `.smod` files have been
+generated and we can take full advantage of `make`'s parallelization.
 
 To generate the `.mod` and `.smod` files in the first pass, we define
-the `MAKEMOD.f08` variable, where we use the syntax only flag:
+the `MAKEMOD.f08` variable, where we use the syntax-only flag:
 ~~~ make
 MAKEMOD.f08 = $(FC) $(FCFLAGS) $(TARGET_ARCH) -fsyntax-only -c
 ~~~
@@ -369,19 +368,18 @@ To solve this problem, we introduce the concept of an *anchor file*,
 with extension `.anc`. Each `.f90` source file has a corresponding
 anchor file with the same name. The anchor file is an empty file whose
 sole purpose is to manage the dependencies in which the source file is
-involved. A given source file can generate zero, hone or more `.mod`
-files and zero or one `.smod` files, and all these files are generated
-at the same time using the `MAKEMOD` command. To signify that all the
-`.mod` and `.smod` files have been generated correctly, the anchor
-file is touched right after `MAKEMOD` has finished:
+involved. A given source file can generate zero, one or more `.mod`
+files and zero, one, or more `.smod` files. All these files are
+generated at the same time using the `MAKEMOD` command. To signify
+that all the `.mod` and `.smod` files have been generated correctly,
+the anchor file is touched right after `MAKEMOD` has finished:
 ~~~ make
 %.anc: %.f90
 	$(MAKEMOD.f08) $<
 	@touch $@
 ~~~
-and then prerequisites are added to the `.anc` file such that all
-module and submodule files necessary for the operation of the program
-are regenerated using `MAKEMOD` if one of them is old or missing:
+Then, the anchor file is made dependant on all module and submodule
+files generated by the source file with the same name:
 ~~~ make
 one.anc: one.mod one.smod
 two.anc: two.mod two.smod
@@ -391,15 +389,15 @@ Note the empty rules at the end to prevent Makefile from crashing with
 a "no rule to make target" error if the `.mod` or `.smod` files are
 missing. This rule and these dependencies ensure that if an anchor
 file is up to date, then so are all the `.mod` and `.smod` files
-generated by the corresponding source file.
-
-Since an up-to-date anchor file implies that all the `.mod` and
-`.smod` files for the same source are current, we can replace our old
-dependency rules in terms of `.mod` and `.smod` files with references
-to the anchor files, which is far simpler in practice because the only
+generated by the corresponding source file. Therefore, a target that
+has any of these `.mod` or `.smod` files as dependencies can be
+satisfied as well by listing the associated anchor file as
+prerequisite. This is far simpler in practice because the only
 information we need to build these rules is which files compile first,
 instead of the particular `.mod` and `.smod` files that we need
-from them. In our example, the dependency rules are transformed into:
+from them.
+
+In our example, the dependency rules are transformed into:
 ~~~ make
 main.anc: one.anc
 one@proc.anc: two.anc
@@ -414,10 +412,11 @@ The second block comes from the
 module-submodule relations, and refer to the use of the corresponding
 `.smod` files.
 
-This last set of dependencies ensures that an up to date anchor file
-for a given source file implies that all `.mod` and `.smod` files
-necessary to compile it are present and current. Therefore, the
-compilation step should be:
+By using anchor-to-anchor dependency rules, we ensure that an up to
+date anchor file for a given source file implies that all `.mod` and
+`.smod` files necessary to compile it are present and
+current. Therefore, the compilation step can be handled by a simple
+pattern rule:
 ~~~ make
 %.o: %.anc
 	$(COMPILE.f08) -o $*.o $(<:.anc=.f90)
@@ -426,8 +425,8 @@ compilation step should be:
 where we take advantage of the fact that the anchor file, object, and
 source file share the same name. Note that in the case of files that
 generate no `.mod` or `.smod` files, the syntax-only `MAKEMOD` command
-is still run in order to create the anchor file. Since this process is
-quick, this is a small price to pay for keeping things organized.
+is still run in order to create the anchor file. This is a small price
+to pay for keeping things organized.
 
 The complete Makefile is:
 ~~~ make
@@ -489,8 +488,9 @@ parent.anc: included.inc
 ~~~
 If the included file contains module or submodule definitions or use
 statements, then all the dependencies those would generate are
-assigned to the parent anchor file as if the included file were
-embedded in it (which, eventually, it is).
+assigned to the anchor file of the source where the file is included
+as if the included file were embedded in it (which, eventually, it
+is).
 
 For instance, in our `one@proc.f90` submodule we move the
 implementation of the `addone` subroutine to a `one_addone.inc` and
@@ -519,14 +519,14 @@ Example package: [example-03.tar.xz](/assets/devnotes/02_fortran_makefiles/examp
 
 ## Compiling across directories and hiding .mod files
 
-If a project is large enough chances are the developments will want to
+If a project is large enough chances are the developers will want to
 keep parts of the source in different directories. Sometimes these
 directories generate a library or a program on their own, but in
-general individual modules living in different directories will use
-each other. Since recursive `make` has somewhat bad press and also a
-few limitations, it is interesting to consider the case of building a
-project with source files dispersed in a number of directories from a
-single central Makefile.
+general individual modules living in different directories may use
+each other. Since recursive `make` has somewhat bad press and also has
+a few limitations regarding dependencies between directories, it is
+interesting to consider the case of building a project with source
+files dispersed across subdirectories.
 
 To keep things simple, we will use our previous example and create two
 directories: `one/` and `two/`. Directory `one/` contains `one.f90`,
@@ -534,7 +534,7 @@ directories: `one/` and `two/`. Directory `one/` contains `one.f90`,
 `two/` contains `two.f90` and `two@proc.f90`. The program block in the
 `main.f90` file stays in the root directory.
 
-The first question is: if we compile one of the files in a
+The first question is: if we compile one of the files inside a
 subdirectory from the root of the directory tree, where will the
 generated files pop up? In the case of object files, they will be
 created where we tell the compiler via the `-o` option and they have
@@ -553,7 +553,7 @@ ifneq ($(MODDIR),)
 endif
 ~~~
 This will create the `.mod` directory in the root if the `MODDIR`
-variable is defined and if it does not already exist.  Compilers
+variable is defined and if it does not already exist. Compilers
 provide a flag to the location where the `.mod` and `.smod` files are
 both generated and read from. In `gfortran`, it is `-J` and in `ifort`
 it is `-module`. If `MODDIR` is not null the code above adds the `-J`
@@ -580,13 +580,13 @@ where we have made sure that the code still works if MODDIR is empty
 you cannot do `rm -r .`). Note that the location of the sources has
 been updated with the new directories. This ensures that the
 object files and anchor files are created in the same location as the
-source files, which the `.mod` and `.smod` files are created in
+source files, while the `.mod` and `.smod` files are created in
 `MODDIR` (or in the root of the tree, if no `MODDIR` is given).
 
 Finally, all prerequisites need to be updated accordingly. Anchor
 files have to have the corresponding directory prefix and `.mod` and
 `.smod` files need to be prefixed with `$(MODDIR)`, but otherwise the
-additional dependency rules are the same:
+dependency rules stay the same:
 ~~~ make
 main.anc: one/one.anc
 one/one@proc.anc: two/two.anc
@@ -616,8 +616,8 @@ For some desperately needed simplicity in our example, let us assume
 that the only two extensions we have are `.f90` and `.F90`. The latter
 informs the compiler that the file needs to be preprocessed. We will
 rename `two/two@proc.f90` and `one/one.f90` to the corresponding
-`.F90` versions and insert a `#define` directive that does nothing in
-them:
+`.F90` versions and insert a `#define` preprocessor directive that
+does nothing in them:
 ~~~ fortran
 #define DUMMY 1
 ~~~
@@ -642,8 +642,8 @@ endef
 ~~~
 The function replaces the known Fortran extensions with the new
 extension provided by the user in all files from the source file
-list argument. With this definition, the `OBJECTS` and `ANCHORS`
-variables become:
+list argument. With this definition, the variables that contain the
+list of object and anchor files can be written as:
 ~~~ make
 OBJECTS:=$(call source-to-extension,$(SOURCES),o)
 ANCHORS:=$(call source-to-extension,$(SOURCES),anc)
@@ -651,7 +651,8 @@ ANCHORS:=$(call source-to-extension,$(SOURCES),anc)
 
 Regarding the compilation rules, we want to create a pattern rule for
 each of the known extensions and the corresponding anchor files. we
-define the `modsource-pattern-rule` for this:
+define the `modsource-pattern-rule` function for this and then use it
+on all known extensions:
 ~~~ make
 # $(call modsource-pattern-rule,extension)
 define modsource-pattern-rule
@@ -661,10 +662,11 @@ define modsource-pattern-rule
 endef
 $(foreach ext,$(FORTEXT),$(eval $(call modsource-pattern-rule,$(ext))))
 ~~~
-and for the rule relating the objects and the anchor files, we need to
-identify the extension of the source file to compile. We do this by
-using the `wildcard` function, and assuming that there is either a
-`.f90` file or a `.F90` file, but not both (because why would you?):
+For the rule relating the objects and the anchor files, we need to
+identify the extension of the source file in order to know what to
+compile. We do this by using the `wildcard` function, and assuming
+that there is either a `.f90` file or a `.F90` file, but not both
+(because why would you?):
 ~~~ make
 %.o: %.anc
 	$(COMPILE.f08) $(OUTPUT_OPTION) $(wildcard $(addprefix $*.,$(FORTEXT)))
@@ -757,7 +759,7 @@ and then the list of dependencies has to be changed as well. When the
 `two_all.F90` file is compiled, it generates the object file (in the
 same directory), and `.mod` and `.smod` files corresponding to all
 the modules and submodules inside. These will be created inside
-`MODDIR`, and it should all work seamlessly provided we update the
+`$(MODDIR)`, and it should all work seamlessly provided we update the
 dependencies correctly. Luckily, anchor files simplify this task
 significantly. First, we update the anchor file dependencies caused by
 `USE` statements:
@@ -775,10 +777,10 @@ the anchors of their parent modules:
 one/one@proc.anc: one/one.anc
 ~~~
 We have removed the old `two/two@proc.anc: two/two.anc` dependency
-because now both parent module and submodule live in the same file
-and therefore it is up to the compiler not to mess up. Typically you
-need to define the dependent modules and submodules after their
-parents.
+because now both parent module and submodule live in the same file and
+therefore it is up to the compiler not to mess up. Typically you avoid
+errors by defining the dependent modules and submodules after their
+parents within the file.
 
 Finally, we update the list of `.mod` and `.smod` files associated
 with each anchor file:
@@ -801,11 +803,11 @@ syntax for the submodule definition is:
 SUBMODULE (ancestor:parent) name
 ~~~
 where `ancestor` is the name of the ancestor module (the module from
-which all the submodules ultimately depend) and `parent` is the name
-of the parent submodule. To compile the source containing the `name`
-submodule, we need the `.mod` file of the ancestor module and the
-`.smod` file of the parent submodule. The latter is built as 
-`ancestor@parent.smod`.
+which all the children submodules ultimately depend) and `parent` is
+the name of the parent 
+submodule. To compile the source containing the `name` submodule, we
+need the `.mod` file of the ancestor module and the `.smod` file of
+the parent submodule. The latter is built as `ancestor@parent.smod`.
 
 Let us add a file called `four.f90` to our example. This file contains
 a submodule called `foursmod` whose parent is submodule `twoproc` of
@@ -909,24 +911,27 @@ option to automatically build make-style dependency rules. The `-M`
 option is also available to `gfortran` due to it being part of the
 `gcc` bundle, and a similar option exists in `ifort`
 (`-gen-dep`). However, unlike with C code, using the `-M` option with
-Fortran code requires having the prerequisites in place beforehand,
-which in a way defeats the purpose of the flag.
+Fortran code requires having the prerequisite `.mod` and `.smod` files
+in place beforehand, which in a way defeats the purpose of the flag.
 
 Therefore, we must use a dependency generator. In the case of
-Fortran90, there are already [several options](http://fortranwiki.org/fortran/show/Build+tools)
-such as [sfmakedepend](https://marine.rutgers.edu/po/tools/perl/sfmakedepend)
-and [makedepf90](https://salsa.debian.org/science-team/makedepf90). 
-However, to my knowledge, none of them implement submodule dependency
-resolution completely. (makedepf90 seems to make some mention of
-submodules, though, so it may be in the works.) Still, writing our own
-dependency generator with AWK should not be that difficult, since we
-know the way in which modules, submodules, and includes relate to each
-other. It is important to note that the Fortran standard does not make
-a recommendation regarding (or even mention) `.mod` and `.smod` files,
-so the following is valid only for `gfortran` and `ifort`, which are
-the two compilers I have access to. If you use a different Fortran
-compiler, it may do things differently and you will have to modify the
-generator accordingly.
+Fortran90, there are already 
+[several options](http://fortranwiki.org/fortran/show/Build+tools) such as
+[sfmakedepend](https://marine.rutgers.edu/po/tools/perl/sfmakedepend)
+and [makedepf90](https://salsa.debian.org/science-team/makedepf90).
+However, to my knowledge, as of 2019 none of them implement submodule
+dependency resolution completely. (makedepf90 seems to make some
+mention of submodules, though, so it may be in the works.) Still,
+writing our own dependency generator with AWK should not be that
+difficult, since we know the way in which modules, submodules, and
+includes relate to each other. Since we do not want to write a script
+that does full parsing of the source, there will be some limitations. 
+It is also important to note that the Fortran standard does not make a
+recommendation regarding (or a even mention of) `.mod` and `.smod`
+files, so the following is valid only for `gfortran` and `ifort`,
+which are the two compilers I have access to. If you use a different
+Fortran compiler, it may do things differently and you will have to
+modify the generator accordingly.
 
 Our automatic dependency generator will be written in traditional AWK
 (without GNU extensions) and we will call it `makedepf08.awk`. The
@@ -938,22 +943,20 @@ two/two.anc:.mod/two.mod
 .mod/two.mod:
 [...]
 ~~~
-The script needs to be aware of anchor files, the `MODDIR`, and all
-possible extensions for the source files. We now consider all
-dependencies one by one. To keep our sanity, we will assume that all
-relevant lines (`MODULE`, `SUBMODULE`, `USE`) do not have
-continuations, or that the continuations occur after the important
-information (the name of the module, for instance) has been given
-already. In the following, we examine the dependencies one by one.
+In the following, we consider all types of dependency rules one by
+one. To keep our sanity, we will assume that all relevant lines
+(`MODULE`, `SUBMODULE`, `USE`) do not have continuations, or that the
+continuations occur after the important information (the name of the
+module, for instance) has been given already.
 
 ### Rule 1: the anchor of a source file depends on the mod files of its modules
 
 The first set of dependencies are those related to the generation of
-`.mod` files. A file `file.f90` may contain several modules `a`,
-`b`,... We must make the anchor file for the source `file.anc` depend
-on all the module files created by it: `a.mod`, `b.mod`,... and then
-give empty rules for each of the `.mod` files to prevent errors when
-these do not exist.
+`.mod` files. A file `file.f90` may contain several modules `foo`,
+`bar`,... We must make the anchor file for the source `file.anc`
+depend on all the module files created by it: `foo.mod`,
+`bar.mod`,... and then give empty rules for each of the `.mod` files
+to prevent errors when these files do not exist.
 
 According to the 
 [Fortran standard](http://isotc.iso.org/livelink/livelink?func=ll&objId=19442438&objAction=Open),
@@ -961,7 +964,7 @@ the syntax for the `MODULE` statement (R1405) is simply:
 ~~~ fortran
 MODULE name
 ~~~
-However, an initial `MODULE` keyword can appear in two other contexts:
+An initial `MODULE` keyword can appear in two other contexts:
 
 - As a `MODULE PROCEDURE` inside an interface block (R1506).
 
@@ -976,7 +979,8 @@ tolower($1) == "module" && tolower($0) !~ /^[^!]+(subroutine|function|procedure)
 }
 ~~~
 and save them in the `mod` array. Note that care has been taken to
-handle comments. The `file` variable is the name of the source file
+handle comments and to avoid reading the two cases above as module
+definitions. The `file` variable is the name of the source file
 being processed without the extension:
 ~~~ awk
 FNR==1{
@@ -1010,11 +1014,11 @@ one/one.anc:.mod/one.mod
 ### Rule 2: the anchor of a source file depends on the smod file of those of its modules that are ancestors of a submodule
 
 If `file.f90` contains module `foo`, compilation will always generate
-`foo.mod` but only sometimes `foo.smod`. The latter is required if a
+`foo.mod` but sometimes also `foo.smod`. The latter is required if a
 submodule has `foo` as its parent, and is automatically generated if
 the compiler reads a `MODULE SUBROUTINE` or `MODULE FUNCTION` inside
 an interface block. When this happens, the anchor file (`file.anc`)
-needs to depend on the `foo.smod` file as well as the `.mod` file per
+needs to depend on the `foo.smod` file as well as the `.mod` file from
 the previous rule.
 
 Since we do not have a proper parser, it is difficult to detect
@@ -1056,10 +1060,10 @@ ancestor of a submodule in `isancestor[]`.
 
 If a module is ancestor to a submodule, then necessarily its `.smod`
 file needs to be generated since there will be a submodule (perhaps
-not the one we are reading) that will require it. Therefore, we add a
-new rule in the `END` block of our script that says that if a 
-module is ancestor to any submodule, then its anchor depends on the
-corresponding `.smod` file:
+different from the one we are reading) that will require
+it. Therefore, we add a new rule in the `END` block of our script that
+says that if a  module is ancestor to any submodule, then its anchor
+depends on the corresponding `.smod` file:
 ~~~ awk
 for (i in mod){
     if ((i in isancestor) && isancestor[i]){
@@ -1084,16 +1088,16 @@ to the `foursmod` submodule in `four.f90`. The `one` module in
 
 ### Rule 3: the anchor of a source file depends on the smod file of those of its submodules that are parents of a submodule
 
-The `file.f90` source file contains module `foo`, which is parent and
-ancestor to submodule `bar`. Submodule `baz` is defined as:
+Say the `file.f90` source file contains module `foo`, which is parent
+and ancestor to submodule `bar`. Submodule `baz` is defined as:
 ~~~ fortran
 SUBMODULE (foo:bar) baz
-~~~ 
+~~~
 and therefore has `foo` as its ancestor module and `bar` as its parent
 submodule. When the source for `baz` is compiled, we need 
 `foo.mod` and `foo@bar.smod`. We now write the rules for generating
-the latter by making the corresponding anchor file depend on
-`foo@bar.smod`.
+the latter by making the anchor file of the containing source file
+depend on `foo@bar.smod`.
 
 To implement this rule, first we need to save the information of which
 submodule is the parent of which. We modify our submodule statement
@@ -1113,10 +1117,11 @@ tolower($1) == "submodule"{
     }
 }
 ~~~
-The only change is the conditional at the end that says that four
-fields were present (i.e. if a colon was given) then this submodule
-has a parent submodule. The name of the parent submodule is recorded
-in the usual notation and the parent submodule is flagged as such.
+The only change from the previous rule is the conditional at the end
+that says that four fields were present (i.e. if a colon was given)
+then this submodule has a parent submodule. The name of the parent
+submodule is recorded in the usual notation and the parent submodule
+is flagged as such.
 
 In the `END` block of the script, we make the anchor file of the
 parent submodule source depend on the corresponding `.smod`:
@@ -1167,12 +1172,13 @@ tolower($1) == "include"{
 The included file is extracted from the Fortran source. Note that we
 strip one character from each end with the regular expressions to
 eliminate the quotation marks and that we make sure to keep the
-capitalization of the file name. The include file path is relative to
+capitalization of the file name because the filesystem is
+case-sensitive even if Fortran is not. The include file path is relative to
 the location of the source so, in order for `make` to find it, we need
-to prepend the directory where the source file lives. The `dirname`
-function is:
+to prepend the directory where the source file lives. The following
+`dirname` function (created by Aleksey Cheusov) gives the directory
+part of a file given as an absolute or relative path:
 ~~~awk
-## Aleksey Cheusov <vle@gmx.net>
 ## https://github.com/cheusov/runawk/blob/master/modules/dirname.awk
 function dirname(file){
     if (!sub(/\/[^\/]*\/?$/,"",file))
@@ -1192,13 +1198,13 @@ for (i in include){
 ~~~
 The last thing to note is that we added the included file to the
 `ARGV` list and incremented `ARGC`. This will make our script also
-process the included file, in case it contains use statements,
-module or submodule definitions, or other included files. However, if
-this is the case, the anchor file must not correspond to the included
-file but to the original source file that did the inclusion,
-regardless of how many nested includes there are. Therefore, we need
-to modify how the file name is computed when a new source file begins
-being processed:
+process the included file, in case it contains more `USE` statements,
+module or submodule definitions, or other included files. If
+this is the case, then the anchor file must not be associated to the
+included file but to the original source file that did the inclusion,
+and this needs to happen regardless of how many nested includes there
+are. Therefore, we need to modify how the file name is computed when a
+new source file begins being processed:
 ~~~ awk
 FNR==1{
     if ((FILENAME in include) && include[FILENAME])
@@ -1226,9 +1232,10 @@ one/one@proc.anc:two/two_all.anc
 ~~~
 as they should.
 
-With this we are done with the dependencies of the anchor files. Now,
-we need to relate the anchor files to each other depending on the
-order in which the source files need to be compiled.
+With this we are done with the dependencies of the anchor files have
+with generated and included files. Now, we need to relate the anchor
+files to each other according to the order in which the source files
+need to be compiled.
 
 ### Rule 5: the anchor of a source file depends on the anchors of all the non-intrinsic modules it uses
 
@@ -1239,9 +1246,10 @@ USE [[,nature] ::] name ,...
 where `nature` can be `INTRINSIC` or `NON_INTRINSIC` and the ellipsis
 after the comma may be a rename list or an `ONLY` list.
 
-As we are reading, we have no way of knowing whether a used module is
-intrinsic or not, so what we do is we record the use and handle it in
-the `END` block, once we have the list of known modules:
+From within the script we have no way of knowing whether a used module
+is intrinsic or not, so what we do is we make a note of the module
+name in the `USE` statement and then handle it in the `END` block,
+once we have the list of known modules:
 ~~~ awk
 tolower($1) == "use"{
     name = tolower($0)
@@ -1252,11 +1260,11 @@ tolower($1) == "use"{
     fileuse[usedmod[name],name] = file
 }
 ~~~
-The first few lines strip the Fortran line down to the module name,
-then it is added to the `usedmod[]` array, which counts the number of
-times a given module has been used. The `fileuse[i,j]` array gives the
-source file that uses module `j` for the `i`th time. The rules at the
-`END` are:
+The first few lines strip the Fortran line down to the module name.
+Then this name is added to the `usedmod[]` array, which counts the
+number of times a given module has been used. The `fileuse[i,j]` array
+gives the source file that uses module `j` for the `i`th time. The
+rules at the `END` are:
 ~~~ awk
 split("", filuniq, ":")
 for (i in usedmod){
@@ -1278,11 +1286,12 @@ use it and write the corresponding relation between the anchors. The
 conditional in the inner loop makes sure that:
 
 - A use statement to a module within the same source file does not
-  generate a circular dependence (which would cause a warning).
+  generate a circular dependence (which would work but cause an
+  ugly warning).
 
 - Rules are not repeated. To do this we keep track of which rules we
   have already written using the local `filuniq` array. This is only
-  to keep things tidy and avoid obvious rule repetitions.
+  to keep things tidy and to avoid the most obvious rule repetitions.
   
 In our example, this rule generates:
 ~~~ make
@@ -1315,10 +1324,10 @@ have one ancestor module. The only cases when the rule will not be
 generated is when:
 
 - The ancestor module is unknown (good luck with that one... we'll let
-  the user handle it, though).
+  the user handle the fallout, though).
   
 - The submodule and the ancestor module are in the same file (would
-  create a circular dependency).
+  create a circular dependence).
   
 In our example,
 ~~~ make
@@ -1347,7 +1356,9 @@ for (i in smod){
 The conditional makes sure that the rule is generated if:
 
 - The parent submodule exists. If the parent and the ancestor of the
-  submodule are the same, then this is already covered by rule 6.
+  submodule are the same, then this is already covered by rule 6,
+  which is why the ancestor module was not added to `parent[]` or
+  flagged as `isparent[]`.
 
 - The submodule source file and the parent's source file are not the
   same, to avoid circular dependencies.
@@ -1364,13 +1375,16 @@ and module `twoproc` as parent. The latter lives in
 
 Combining all the bits of code, we now have a functional automatic
 dependency generator capable of handling the gnarliest of Fortran
-sources with about 100 lines of AWK code. Here is the script in its
-entirety:
+sources, with just about 100 lines of AWK code. Here is the script in
+its entirety:
 ~~~ awk
+## Copyright (c) 2019 alberto Otero de la Roza <aoterodelaroza@gmail.com>
+## This file is frere software; distributed under GNU/GPL version 3.
+
 #! /usr/bin/env -S awk --traditional -f 
 
 function dirname(file){
-    ## function dirname by Aleksey Cheusov <vle@gmx.net>, from:
+    ## function dirname by Aleksey Cheusov
     ## https://github.com/cheusov/runawk/blob/master/modules/dirname.awk
     if (!sub(/\/[^\/]*\/?$/,"",file))
         return "."
@@ -1499,14 +1513,15 @@ one/one@proc.anc:one/one_addone.inc
 Note that some of them are repeated. This is not a problem but, since
 we have taken care of writing a single rule for each
 target/prerequisite pair and the order of the rules is irrelevant in
-this case, you can `sort` and `uniq` them.
+this case, you can as easily `sort` and `uniq` them to get a tidier
+list.
 
 Example package: [example-08.tar.xz](/assets/devnotes/02_fortran_makefiles/example-08.tar.xz).
 
 ## A Makefile for all occasions
 
-The combination of Makefile and dependency generation script is
-general but has the following limitations:
+Our combination of Makefile and automatic dependency generation script
+is quite general but has the following limitations:
 
 - No continuations are allowed in `USE`, `MODULE`, `SUBMODULE`, and
   `INCLUDE` lines, except when the continuation occurs after the part
@@ -1519,15 +1534,15 @@ general but has the following limitations:
   discarded. For the same reason, continued lines that start with
   "use", "module", "submodule", or "include" are best avoided.
   
-- Two files with the same name and different extensions in the same
-  directory are not allowed.
+- Two files with the same name and different Fortran extensions in the
+  same directory are not allowed.
   
 - Since it has been tested only with `gfortran` and `ifort`, if some
   other compiler behaves differently regarding `.mod` and `.smod`
   files, the script needs to be adapted.
   
-- The way the Makefile below works, it may cause trouble if you use
-  files with blank spaces in them.
+- The way our Makefile works, it may cause trouble if you use files
+  with blank spaces in them.
 
 If we name our script `makedepf08.awk`, then a complete Makefile that
 compiles all sources in all subdirectories of a Fortran project is:
