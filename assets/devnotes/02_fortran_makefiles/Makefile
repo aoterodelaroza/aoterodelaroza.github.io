@@ -3,7 +3,8 @@
 
 ## FC=compiler
 ## FCSYNTAX=syntax-only compilation flag
-## FCMODDIR=flag to set .mod and .smod directory
+## FCMODDIR=flag to set read/write .mod and .smod directory
+## FCMODREADDIR=flag to set write-only .mod and .smod directory
 ## MODDIR=.mod and .smod directory (leave blank for root)
 FC:=gfortran
 FCSYNTAX:=-fsyntax-only
@@ -12,6 +13,7 @@ MODDIR:=.mod
 # FC:=ifort
 # FCSYNTAX:=-syntax-only
 # FCMODDIR:=-module
+# FCMODREADDIR:=-I
 # MODDIR:=.mod
 
 #### user input ends here ####
@@ -48,12 +50,20 @@ MAKEMOD.f08 = $(FC) $(FCFLAGS) $(TARGET_ARCH) $(FCSYNTAX) -c
 ## create the mod and smod directory; define slashed version of MODDIR
 ifneq ($(MODDIR),)
   $(shell $(TEST) -d $(MODDIR) || $(MKDIR) -p $(MODDIR))
-  FCFLAGS+= $(FCMODDIR) $(MODDIR)
-endif
-ifeq ($(MODDIR),)
-  MODDIRSLSH:=./
-else
   MODDIRSLSH:=$(MODDIR)/
+else
+  MODDIRSLSH:=./
+endif
+
+## create the temporary mod and smod directory
+ifneq ($(FCMODREADDIR),)
+  MODDIRTMP:=.tmp$(MODDIR)
+  $(shell $(TEST) -d $(MODDIRTMP) || $(MKDIR) -p $(MODDIRTMP))
+  MAKEMOD.f08+= $(FCMODDIR) $(MODDIR)
+  COMPILE.f08+= $(FCMODREADDIR) $(MODDIR) $(FCMODDIR) $(MODDIRTMP)
+else
+  MAKEMOD.f08+= $(FCMODDIR) $(MODDIR)
+  COMPILE.f08+= $(FCMODDIR) $(MODDIR)
 endif
 
 ## define the anchors and the objects variables
@@ -76,6 +86,7 @@ main: $(OBJECTS)
 clean:
 	-$(RM) *.mod *.smod $(OBJECTS) $(ANCHORS) main
 	-$(TEST) -d $(MODDIR) && $(RM) -r $(MODDIR)
+	-$(TEST) -d $(MODDIRTMP) && $(RM) -r $(MODDIRTMP)
 
 ## syntax-only compilation rule: all anchor files depend on their source
 # $(call modsource-pattern-rule,extension)
@@ -89,6 +100,9 @@ $(foreach ext,$(FORTEXT),$(eval $(call modsource-pattern-rule,$(ext))))
 ## compilation rule: objects depend on their anchor file
 %.o: %.anc
 	$(COMPILE.f08) $(OUTPUT_OPTION) $(wildcard $(addprefix $*.,$(FORTEXT)))
+ifdef MODDIRTMP
+	-@$(RM) $(MODDIRTMP)/*.mod $(MODDIRTMP)/*.smod
+endif
 	@touch $@
 
 ## automatically generate the dependency rules

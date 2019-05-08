@@ -467,6 +467,24 @@ one.mod one.smod two.mod two.smod:
 Note that we have also modified the `clean` recipe to delete the
 anchor files.
 
+There is one final consideration to make. When the syntax-only
+compilation of a file happens, the associated `.mod` and `.smod` files
+are generated. When the normal compilation happens, these files are
+*also* generated in addition to the object file. Therefore, there is
+the question of whether a recipe for generating an object file, which
+also writes `.mod` and `.smod` files, and a recipe for reading those
+same files that are being generated will enter a race condition if
+`make` is used in parallel mode. With `gfortran`, this is not a
+problem because it looks like the `.mod` and `.smod` files are not
+updated if they have been generated in a previous syntax-only
+compilation (which they always are). In `ifort`, this seems not to be
+the case. However, in `ifort` it is possible to separate the directory
+from where the `.mod` and `.smod` files are only read (`-I`) and the
+directory where they are read and written (`-module`). Setting the
+latter to a scratch directory in the compilation step should solve
+this problem. For now, we will use `gfortran` for simplicity but the
+final proposed Makefile takes this into account.
+
 Example package: [example-02.tar.xz](/assets/devnotes/02_fortran_makefiles/example-02.tar.xz).
 
 ## Include files
@@ -1547,6 +1565,9 @@ is quite general but has the following limitations:
 If we name our script `makedepf08.awk`, then a complete Makefile that
 compiles all sources in all subdirectories of a Fortran project is:
 ~~~ make
+## Copyright (c) 2019 alberto Otero de la Roza <aoterodelaroza@gmail.com>
+## This file is frere software; distributed under GNU/GPL version 3.
+
 FC:=gfortran
 FCSYNTAX:=-fsyntax-only
 FCMODDIR:=-J
@@ -1586,12 +1607,20 @@ MAKEMOD.f08 = $(FC) $(FCFLAGS) $(TARGET_ARCH) $(FCSYNTAX) -c
 ## create the mod and smod directory; define slashed version of MODDIR
 ifneq ($(MODDIR),)
   $(shell $(TEST) -d $(MODDIR) || $(MKDIR) -p $(MODDIR))
-  FCFLAGS+= $(FCMODDIR) $(MODDIR)
-endif
-ifeq ($(MODDIR),)
-  MODDIRSLSH:=./
-else
   MODDIRSLSH:=$(MODDIR)/
+else
+  MODDIRSLSH:=./
+endif
+
+## create the temporary mod and smod directory
+ifneq ($(FCMODREADDIR),)
+  MODDIRTMP:=.tmp$(MODDIR)
+  $(shell $(TEST) -d $(MODDIRTMP) || $(MKDIR) -p $(MODDIRTMP))
+  MAKEMOD.f08+= $(FCMODDIR) $(MODDIR)
+  COMPILE.f08+= $(FCMODREADDIR) $(MODDIR) $(FCMODDIR) $(MODDIRTMP)
+else
+  MAKEMOD.f08+= $(FCMODDIR) $(MODDIR)
+  COMPILE.f08+= $(FCMODDIR) $(MODDIR)
 endif
 
 ## define the anchors and the objects variables
@@ -1614,6 +1643,7 @@ main: $(OBJECTS)
 clean:
 	-$(RM) *.mod *.smod $(OBJECTS) $(ANCHORS) main
 	-$(TEST) -d $(MODDIR) && $(RM) -r $(MODDIR)
+	-$(TEST) -d $(MODDIRTMP) && $(RM) -r $(MODDIRTMP)
 
 ## syntax-only compilation rule: all anchor files depend on their source
 # $(call modsource-pattern-rule,extension)
@@ -1627,6 +1657,9 @@ $(foreach ext,$(FORTEXT),$(eval $(call modsource-pattern-rule,$(ext))))
 ## compilation rule: objects depend on their anchor file
 %.o: %.anc
 	$(COMPILE.f08) $(OUTPUT_OPTION) $(wildcard $(addprefix $*.,$(FORTEXT)))
+ifdef MODDIRTMP
+	-@$(RM) $(MODDIRTMP)/*.mod $(MODDIRTMP)/*.smod
+endif
 	@touch $@
 
 ## automatically generate the dependency rules
