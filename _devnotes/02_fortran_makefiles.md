@@ -32,6 +32,8 @@ With a few restrictions, this solution permits:
 
 - Nested includes. Includes that include modules and submodules.
 
+- Works for all Fortran standards from F77 up to the latest.
+
 ## On modules and headaches
 
 Fortran submodules were introduced in the 2008 Fortran standard and
