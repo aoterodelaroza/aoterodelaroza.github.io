@@ -1667,13 +1667,21 @@ endif
 ## automatically generate the dependency rules
 $(eval $(subst $( ),$(\n),$(shell $(AWK) --traditional -f makedepf08.awk $(SOURCES) | sort | uniq | $(SED) -e 's!^.mod/!$(MODDIRSLSH)!' -e 's!:.mod/!:$(MODDIRSLSH)!')))
 ~~~
-This should solve the problem of writing Makefiles for modern Fortran
-projects, at least for some time.
+A workaround the caveat mentioned above about a possible race
+condition with `ifort` is not shown here but it is implemented in the
+package files below. This should solve the problem of writing
+Makefiles for modern Fortran projects, at least for some time.
+
+Dependency generator: [makedepf08.awk](/assets/devnotes/02_fortran_makefiles/makedepf08.awk)
+
+Makefile template: [Makefile](/assets/devnotes/02_fortran_makefiles/Makefile)
 
 Example package: [example-final.tar.xz](/assets/devnotes/02_fortran_makefiles/example-final.tar.xz).
 
-## All example packages
+## All example files
 
+- [makedepf08.awk](/assets/devnotes/02_fortran_makefiles/makedepf08.awk)
+- [Makefile](/assets/devnotes/02_fortran_makefiles/Makefile)
 - [example-01.tar.xz](/assets/devnotes/02_fortran_makefiles/example-01.tar.xz).
 - [example-02.tar.xz](/assets/devnotes/02_fortran_makefiles/example-02.tar.xz).
 - [example-03.tar.xz](/assets/devnotes/02_fortran_makefiles/example-03.tar.xz).
