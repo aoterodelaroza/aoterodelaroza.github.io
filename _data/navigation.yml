@@ -105,3 +105,5 @@ devnotes:
       url: /devnotes/kramdown-cheatsheet/
     - title: "Fortran makefiles"
       url: /devnotes/modern-fortran-makefiles/
+    - title: "Space group crystal collection"
+      url: /devnotes/space-group-collection/
