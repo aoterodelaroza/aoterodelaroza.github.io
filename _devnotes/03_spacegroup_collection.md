@@ -15,7 +15,7 @@ group symbols in the table have been adapted from the internal
 database in [spglib](https://atztogo.github.io/spglib/). The
 structures are given in cif file format, without symmetry info.
 
-Work in progres...
+Work in progress...
 
 | Number | Hall            | H-M (full)              | H-M (short)      | Example                                                                                                                                                             |
 |--------+-----------------+-------------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
