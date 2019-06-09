@@ -649,6 +649,7 @@ RADII [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 ~~~
 RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
     [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
+    [HARD|SOFT]
 ~~~
 
 [REFERENCE](/critic2/manual/fields/#c2-reference)

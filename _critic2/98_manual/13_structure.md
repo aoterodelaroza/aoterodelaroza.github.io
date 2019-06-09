@@ -62,6 +62,7 @@ the current crystal or molecular structure:
 ~~~
 RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
     [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
+    [HARD|SOFT]
 ~~~
 The definition of RDF is similar to the one found in 
 [Willighagen et al., Acta Cryst. B 61 (2005) 29](https://doi.org/10.1107/S0108768104028344),
@@ -93,6 +94,14 @@ it. The name of these files can be changed using the ROOT keyword. If
 `is2.s` will contribute to the RDF. Multiple `PAIR` keywords can be
 used. The `is1.s` and `is2.s` must be the name of an atomic species in
 the system.
+
+The `HARD` and `SOFT` keywords control how peaks right outside the
+plot range are treated. In a `HARD` RDF, the peaks outside the plot
+range are not computed, and therefore the tails will not appear on the
+plot even if the corresponding peak is so close that the contribution
+to the RDF would be significant. In a `SOFT` RDF, all peaks are
+computed and represented, even if the maximum is outside the plot
+range.
 
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
