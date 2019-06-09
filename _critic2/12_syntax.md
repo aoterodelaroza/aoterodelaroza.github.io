@@ -577,8 +577,9 @@ POINTPROP
 : Calculate the powder diffraction pattern of the current crystal
   structure.
 ~~~
-POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r] [FPOL fpol.r]
-       [NPTS npts.i] [SIGMA sigma.r] [ROOT root.s]
+POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r]
+       [FPOL fpol.r] [NPTS npts.i] [SIGMA sigma.r]
+       [ROOT root.s] [HARD|SOFT]
 ~~~
 
 [PRECISECUBE](/critic2/manual/misc/#c2-precisecube)

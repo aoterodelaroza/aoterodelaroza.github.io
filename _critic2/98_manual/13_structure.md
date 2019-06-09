@@ -39,21 +39,32 @@ current crystal structure:
 ~~~
 POWDER [TH2INI t2i.r] [TH2END t2e.r] [{L|LAMBDA} l.r]
        [FPOL fpol.r] [NPTS npts.i] [SIGMA sigma.r]
-       [ROOT root.s]
+       [ROOT root.s] [HARD|SOFT]
 ~~~
 Only the $$2\theta$$ range from `t2i.r` (default: 5 degrees) to
-`t2e.r` (def: 90) will be plotted. The wavelength of the incident
-radiation is given by `l.r` (in angstrom). The polarization of the
-X-ray radiation affects the treatment of the resulting
-intensities. The default is `fpol.r = 0`, corresponding to unpolarized
-light. For synchrotron radiation, use `fpol.r = 0.95`. `npts.i` is the
-number of points in the generated spectrum. Gaussian broadening is
-used on the observed peaks, with width parameter `sigma.r` (def:
-0.05). By default, two files are generated: `<root>_xrd.dat`,
-containing the $$2\theta$$ versus intensity data, and
-`<root>_xrd.gnu`, the gnuplot script to plot it. The name of these
-files can be changed using the ROOT keyword. The Miller indices of the
-peaks are written to the standard output.
+`t2e.r` (default: 90 degrees) will be plotted. The wavelength of the
+incident radiation is given by `l.r` (in angstrom, default: 1.5406
+angstrom, corresponding to Cu-K&alpha;). The polarization of the X-ray
+radiation affects the treatment of the resulting intensities. The
+default is `fpol.r = 0`, unpolarized light. For synchrotron radiation,
+use `fpol.r = 0.95`. `npts.i` is the number of points in the generated
+spectrum (deafult: 10001). Gaussian broadening is used on the observed
+peaks, with width parameter `sigma.r` (default: 0.05 degrees).
+
+By default, two files are generated: `<root>_xrd.dat`, containing the
+$$2\theta$$ versus intensity data, and `<root>_xrd.gnu`, the gnuplot
+script to plot it. The name of these files can be changed using the
+ROOT keyword. The Miller indices of the peaks are written to the
+standard output.
+
+The `HARD` and `SOFT` keywords control how peaks right outside the
+plot range are treated. In a `HARD` powder diffraction pattern, the
+peaks outside the plot range are not computed, and therefore their
+tails will not appear on the plot even if the corresponding peak is so
+close that the contribution to the RDF would be significant. In a
+`SOFT` powder diffraction pattern, all peaks are computed and
+represented, even if the maximum is outside the plot range. Default:
+`SOFT`. 
 
 ## Radial Distribution Function (RDF) {#c2-rdf}
 
@@ -87,7 +98,7 @@ equal to `sigma.r` (default: 0.05 bohr). The default units of `RINI`,
 (this can be changed with the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
 
-Two files are generated: `<root>_rdf.dat`, containing the rdf versus
+Two files are generated: `<root>_rdf.dat`, containing the RDF versus
 distance data, and `<root>_rdf.gnu`, the gnuplot script to plot
 it. The name of these files can be changed using the ROOT keyword. If
 `PAIR` is given, only the distances between atoms of type `is1.s` and
@@ -97,11 +108,11 @@ the system.
 
 The `HARD` and `SOFT` keywords control how peaks right outside the
 plot range are treated. In a `HARD` RDF, the peaks outside the plot
-range are not computed, and therefore the tails will not appear on the
-plot even if the corresponding peak is so close that the contribution
-to the RDF would be significant. In a `SOFT` RDF, all peaks are
-computed and represented, even if the maximum is outside the plot
-range.
+range are not computed, and therefore their tails will not appear on
+the plot even if the corresponding peak is so close that the
+contribution to the RDF would be significant. In a `SOFT` RDF, all
+peaks are computed and represented, even if the maximum is outside the
+plot range. Default: `SOFT`.
 
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
