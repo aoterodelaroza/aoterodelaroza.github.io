@@ -67,16 +67,20 @@ The definition of RDF is similar to the one found in
 [Willighagen et al., Acta Cryst. B 61 (2005) 29](https://doi.org/10.1107/S0108768104028344),
 but where the atomic charges are replaced by the square root of the
 atomic number. The RDF is plotted from an initial distance `t21.r`
-bohr (default: 0) up to a maximum distance `t2e.r` bohr (default: 25
-bohr) using `npts.i` points in that interval (default:
-10001). Gaussian broadening is used with sigma equal to `sigma.r`
-(default: 0.05). Two files are generated: `<root>_rdf.dat`, containing
-the rdf versus distance data, and `<root>_rdf.gnu`, the gnuplot script
-to plot it. The name of these files can be changed using the ROOT
-keyword. If `PAIR` is given, only the distances between atoms of type
-`is1.s` and `is2.s` will contribute to the RDF. Multiple `PAIR`
-keywords can be used. The `is1.s` and `is2.s` must be the name of an
-atomic species in the system.
+(default: 0) up to a maximum distance `t2e.r` (default: 25 bohr) using
+`npts.i` points in that interval (default: 10001). Gaussian broadening
+is used with sigma equal to `sigma.r` (default: 0.05 bohr). The
+default units of `RINI`, `REND`, and `SIGMA` are bohr in crystals and
+angstrom in molecules (this can be changed with the [UNITS](/critic2/manual/inputoutput/#c2-units)
+keyword). 
+
+Two files are generated: `<root>_rdf.dat`, containing the rdf versus
+distance data, and `<root>_rdf.gnu`, the gnuplot script to plot
+it. The name of these files can be changed using the ROOT keyword. If
+`PAIR` is given, only the distances between atoms of type `is1.s` and
+`is2.s` will contribute to the RDF. Multiple `PAIR` keywords can be
+used. The `is1.s` and `is2.s` must be the name of an atomic species in
+the system.
 
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
@@ -113,8 +117,8 @@ of unsorted molecules.
 
 In sorted molecules, the root mean square (RMS) of the atomic
 positions is reported (the units are angstrom, unless changed with the
-UNITS keyword). The molecular rotation is calculated using Walker et
-al.'s quaternion algorithm 
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword). The molecular
+rotation is calculated using Walker et al.'s quaternion algorithm 
 ([Walker et al., CVGIP-Imag. Understan. 54 (1991) 358](https://doi.org/10.1016/1049-9660(91)90036-O)). 
 For the comparison to work correctly, it is necessary that the two
 molecules have the same number of atoms and that the atoms are in the
