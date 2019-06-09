@@ -58,20 +58,25 @@ peaks are written to the standard output.
 ## Radial Distribution Function (RDF) {#c2-rdf}
 
 The RDF keyword calculates the radial distribution function (RDF) for
-the current structure:
+the current crystal or molecular structure:
 ~~~
-RDF [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] [ROOT root.s]
+RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
+    [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
 ~~~
 The definition of RDF is similar to the one found in 
 [Willighagen et al., Acta Cryst. B 61 (2005) 29](https://doi.org/10.1107/S0108768104028344),
 but where the atomic charges are replaced by the square root of the
-atomic number. The RDF is plotted up to a maximum distance `t2e.r`
-bohr (default: 25 bohr) using `npts.i` points in that interval
-(default: 10001). Gaussian broadening is used with sigma equal to
-`sigma.r` (default: 0.05). Two files are generated: `<root>_rdf.dat`,
-containing the rdf versus distance data, and `<root>_rdf.gnu`, the
-gnuplot script to plot it. The name of these files can be changed
-using the [ROOT](/critic2/manual/misc/#c2-root) keyword.
+atomic number. The RDF is plotted from an initial distance `t21.r`
+bohr (default: 0) up to a maximum distance `t2e.r` bohr (default: 25
+bohr) using `npts.i` points in that interval (default:
+10001). Gaussian broadening is used with sigma equal to `sigma.r`
+(default: 0.05). Two files are generated: `<root>_rdf.dat`, containing
+the rdf versus distance data, and `<root>_rdf.gnu`, the gnuplot script
+to plot it. The name of these files can be changed using the ROOT
+keyword. If `PAIR` is given, only the distances between atoms of type
+`is1.s` and `is2.s` will contribute to the RDF. Multiple `PAIR`
+keywords can be used. The `is1.s` and `is2.s` must be the name of an
+atomic species in the system.
 
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 

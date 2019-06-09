@@ -647,7 +647,8 @@ RADII [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 : Calculate the radial distribution function of atoms in a molecule or
   crystal.
 ~~~
-RDF [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] [ROOT root.s]
+RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
+    [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
 ~~~
 
 [REFERENCE](/critic2/manual/fields/#c2-reference)
