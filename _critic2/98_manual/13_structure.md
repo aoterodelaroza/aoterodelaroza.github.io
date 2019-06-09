@@ -66,13 +66,25 @@ RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i]
 The definition of RDF is similar to the one found in 
 [Willighagen et al., Acta Cryst. B 61 (2005) 29](https://doi.org/10.1107/S0108768104028344),
 but where the atomic charges are replaced by the square root of the
-atomic number. The RDF is plotted from an initial distance `t21.r`
-(default: 0) up to a maximum distance `t2e.r` (default: 25 bohr) using
-`npts.i` points in that interval (default: 10001). Gaussian broadening
-is used with sigma equal to `sigma.r` (default: 0.05 bohr). The
-default units of `RINI`, `REND`, and `SIGMA` are bohr in crystals and
-angstrom in molecules (this can be changed with the [UNITS](/critic2/manual/inputoutput/#c2-units)
-keyword). 
+atomic number. Each pair of atoms A and B at a distance $$d_{AB}$$ in
+the system will create a peak in the RDF with a Gaussian shape:
+\begin{equation}
+I_{AB}(r) = \sqrt{Z_AZ_B}\times \exp\left(-\frac{(r-d_{AB})^2}{2\sigma^2}\right)
+\end{equation}
+The RDF is constructed from the sum of all $$I_{AB}(r)$$ functions from all
+unique atom pairs by doing:
+\begin{equation}
+{\rm RDF}(r) = \sum_{A<B} \frac{I_{AB}(r)}{r^2N_{\rm cell}}
+\end{equation}
+where $$N_{\rm cell}$$ is the number of atoms in the unit cell.
+
+The RDF is plotted from an initial distance `t21.r` (default: 0) up to
+a maximum distance `t2e.r` (default: 25 bohr) using `npts.i` points in
+that interval (default: 10001). Gaussian broadening is used with sigma
+equal to `sigma.r` (default: 0.05 bohr). The default units of `RINI`,
+`REND`, and `SIGMA` are bohr in crystals and angstrom in molecules
+(this can be changed with the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
 
 Two files are generated: `<root>_rdf.dat`, containing the rdf versus
 distance data, and `<root>_rdf.gnu`, the gnuplot script to plot
