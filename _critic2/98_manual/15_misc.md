@@ -387,12 +387,16 @@ MEAN [id.s]
 COUNT id.s eps.r
 ~~~
 are used to preform calculations using the field on a grid id.s. SUM 
-calculates the sum of the grid point values. MAX calculates the
-maximum value of all points on the grid. MIN calculates the minimum
-value. MEAN calculates the average value. COUNT counts the number of
-elements that are greater than `eps.r`. If no `id.s` is given in the
-first four commands, then the reference field is used, provided it is
-defined on a grid. 
+calculates the sum of the grid point values (in the output, SUM) and the
+integral over the unit cell (in the output, INTEGRAL). The latter is
+calculated as the sum of all grid points times the grid volume divided
+by the number of points.
+
+MAX calculates the maximum value of all points in the grid. MIN
+calculates the minimum value. MEAN calculates the average value of all
+grid points. COUNT counts the number of elements that are greater than
+`eps.r`. If no `id.s` is given in the first four commands, then the
+reference field is used, provided it is defined on a grid.
 
 ### Benchmark Calculations on Fields (BENCHMARK) {#c2-benchmark}
 
