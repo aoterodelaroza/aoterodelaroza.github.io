@@ -120,13 +120,14 @@ The additional keyword NAME can be used with any of the options above
 to change the name of the integrable property, for easy identification
 in the output.
 
-The keyword CLEAR resets the list to its initial state (volume, charge
-and Laplacian). Using the INTEGRABLE keyword will print a report on
-the list of integrable properties.
+The keyword CLEAR resets the list to its initial state (volume,
+electron population, and Laplacian in crystals; electron population
+and Laplacian in molecules). Using the INTEGRABLE keyword will print a
+report on the list of integrable properties.
 
 The default integrable properties are:
 
-* Volume (`1`).
+* Volume (`1`), in crystals only.
 
 * Pop (`fval`): the value of the reference field is integrated. If the
   reference field is the density, then this is the number of electrons
