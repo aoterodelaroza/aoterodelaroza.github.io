@@ -17,7 +17,7 @@ related to the covalent bond order. The way DIs are calculated in
 critic2 makes use of a transformation of the one-electron KS states
 to Wannier functions, in such a way that the resulting states are
 maximally localized. These 
-[maximally localized wannier functions (MLWF)](10.1103/RevModPhys.84.1419) 
+[maximally localized wannier functions (MLWF)](http://dx.doi.org/10.1103/RevModPhys.84.1419) 
 are useful for this because they allow discarding most of the atomic
 overlap integrals required for the DI calculation. The details of the
 algorithm and some examples are described in 
