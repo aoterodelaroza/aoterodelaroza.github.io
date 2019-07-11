@@ -376,11 +376,11 @@ overlap matrices (`.pwc-sij`) and the FAB integrals (`.pwc-fa`). These
 files are automatically read in second and subsequent runs.
 
 The files for this example can be found in the
-[example_11_01.tar.xz](/assets/critic2/example_11_01/example_11_01.tar.xz)
+[example_11_10.tar.xz](/assets/critic2/example_11_10/example_11_10.tar.xz)
 package, `mgo` subdirectory. The `runit.sh` script automatizes the
 steps above.
 
 ## Example files package
 
-Files: [example_11_01.tar.xz](/assets/critic2/example_11_01/example_11_01.tar.xz).
+Files: [example_11_10.tar.xz](/assets/critic2/example_11_10/example_11_10.tar.xz).
 
