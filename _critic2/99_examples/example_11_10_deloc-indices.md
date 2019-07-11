@@ -21,7 +21,7 @@ maximally localized. These
 are useful for this because they allow discarding most of the atomic
 overlap integrals required for the DI calculation. The details of the
 algorithm and some examples are described in 
-[A. Otero-de-la-Roza et al. JCTC 14 (2018) 4699](http://dx.doi.org/10.1021/acs.jctc.8b00549). 
+[JCTC 14 (2018) 4699](http://dx.doi.org/10.1021/acs.jctc.8b00549). 
 
 In the following examples, we use [Quantum
 ESPRESSO](https://www.quantum-espresso.org/) (QE) to run the SCF
