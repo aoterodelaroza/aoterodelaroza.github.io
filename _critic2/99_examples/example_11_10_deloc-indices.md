@@ -1,13 +1,13 @@
 ---
 layout: single
-title: "Delocalization Indices from Wannier Functions"
+title: "Delocalization Indices in Solids using Wannier Functions"
 permalink: /critic2/examples/example_11_10_deloc-indices/
-excerpt: "Delocalization indices from Wannier functions"
+excerpt: "Delocalization indices in Solids using Wannier Functions"
 sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
 toc: true
-toc_label: "DIs from MLWFs"
+toc_label: "DIs in Solids using MLWFs"
 ---
 
 Critic2 can calculate Bader's localization and delocalization indices
@@ -380,7 +380,198 @@ The files for this example can be found in the
 package, `mgo` subdirectory. The `runit.sh` script automatizes the
 steps above.
 
+### MgO using a non-SCF calculation instead of open_grid.x
+
+Exactly the same DI calculation can be carried out in a different way
+by using a non-self-consistent (nscf) calculation instead of the
+`open_grid.x` program. If the latter is available, there is really not
+much point in carrying out the DI calculation in this maner, save for
+testing purposes. The sequence of steps is the same as above except
+instead of running `open_grid.x`, we use `pw.x` to run:
+```
+&control
+ title='crystal',
+ prefix='crystal',
+ pseudo_dir='../../data',
+ calculation='nscf',
+ wf_collect=.true.,
+ verbosity='high',
+ outdir='.',
+/
+&system
+ ibrav=0,
+ celldm(1)=1.0,
+ nat=2,
+ ntyp=2,
+ ecutwfc=80.0,
+ ecutrho=320.0,
+ nosym=.true.,
+/
+&electrons
+ conv_thr = 1d-8,
+/
+ATOMIC_SPECIES
+o     15.999400 o.UPF
+mg    24.305000 mg.UPF
+
+ATOMIC_POSITIONS crystal
+mg       0.500000000   0.000000000   0.000000000
+o        0.000000000   0.500000000   0.500000000
+
+K_POINTS crystal
+64
+  0.00000000  0.00000000  0.00000000  1.562500e-02 
+[...]
+  0.75000000  0.75000000  0.75000000  1.562500e-02 
+
+CELL_PARAMETERS cubic
+  -0.000000000   3.901537427  -3.901537427
+   3.901540775   3.901536617  -0.000000811
+   3.901540775   0.000000811  -3.901536617
+```
+The calculation is non-self-consistent (`calculation='nscf'`) and uses
+the converged wavefunction calculated in the self-consistent step. In
+addition, the list of k-points is passed by hand, and it contains the
+64 points corresponding to an unshifted 4x4x4 grid. This list can be
+generated with the `kmesh.pl` utility from the wannier90 package:
+```
+$ kmesh.pl 4 4 4
+```
+The rest of the DI calculation is exactly the same except all mentions
+to the `crystal_open` prefix (which correspond to the output of
+`open_grid.x`) are replaced by `crystal` and the list of k-points in
+the wannier90 input must be the same as in the non-self-consistent
+calculation.
+
+## Graphite
+
+The sequence of steps for calculating the DIs in more complex systems
+is exactly the same as in MgO. Because the Wannier transformation is
+ill-defined in systems with partially ocuppied bands (metals), the
+calculation of DIs via Wannier functions does not work for
+those. However, semimetals such as graphite can be calculated without
+a problem.
+
+In the graphite example included in the files package, we use a 8x8x2
+k-point grid. The resulting DIs clearly differentiate betweens DIs for
+atoms in the same graphene layer and in different layers:
+
+```
++ Delocalization indices
+  Each block gives information about a single atom in the main cell.
+  First line: localization index. Next lines: delocaliazation index
+  with all atoms in the environment. Last line: sum of LI + 0.5 * DIs,
+  equal to the atomic population. Distances are in bohr.
+# Attractor 1 (cp=1, ncp=1, name=C, Z=6) at: 0.0000000  0.0000000  0.2500000
+# Id   cp   ncp   Name  Z    Latt. vec.     ----  Cryst. coordinates ----       Distance        LI/DI
+  Localization index.......................................................................  1.84476772
+  59   3    2      C    6    0  -1   0   0.3333333   -0.3333333    0.2500000    2.6795792    1.20502882
+  507  3    2      C    6   -1  -1   0  -0.6666667   -0.3333333    0.2500000    2.6795793    1.20297829
+  3    3    2      C    6    0   0   0   0.3333333    0.6666667    0.2500000    2.6795793    1.20496148
+  449  1    1      C    6   -1   0   0  -1.0000000    0.0000000    0.2500000    4.6411674    0.05704442
+  65   1    1      C    6    1   0   0   1.0000000    0.0000000    0.2500000    4.6411674    0.05704442
+  505  1    1      C    6   -1  -1   0  -1.0000000   -1.0000000    0.2500000    4.6411674    0.05696313
+  73   1    1      C    6    1   1   0   1.0000000    1.0000000    0.2500000    4.6411674    0.05696313
+  57   1    1      C    6    0  -1   0   0.0000000   -1.0000000    0.2500000    4.6411674    0.05679926
+  9    1    1      C    6    0   1   0   0.0000000    1.0000000    0.2500000    4.6411674    0.05679926
+  67   3    2      C    6    1   0   0   1.3333333    0.6666667    0.2500000    5.3591585    0.03623788
+  499  3    2      C    6   -1  -2   0  -0.6666667   -1.3333333    0.2500000    5.3591585    0.03538782
+  451  3    2      C    6   -1   0   0  -0.6666667    0.6666667    0.2500000    5.3591585    0.03534794
+  6    2    1      C    6    0   0  -1   0.0000000    0.0000000   -0.2500000    6.3268031    0.01795914
+  2    2    1      C    6    0   0   0   0.0000000    0.0000000    0.7500000    6.3268031    0.01796043
+  456  4    2      C    6   -1   0  -1  -0.3333333    0.3333333   -0.2500000    6.8708502    0.00629409
+  452  4    2      C    6   -1   0   0  -0.3333333    0.3333333    0.7500000    6.8708502    0.00629535
+  8    4    2      C    6    0   0  -1   0.6666667    0.3333333   -0.2500000    6.8708502    0.00629989
+  4    4    2      C    6    0   0   0   0.6666667    0.3333333    0.7500000    6.8708502    0.00629977
+  512  4    2      C    6   -1  -1  -1  -0.3333333   -0.6666667   -0.2500000    6.8708502    0.00627913
+  508  4    2      C    6   -1  -1   0  -0.3333333   -0.6666667    0.7500000    6.8708502    0.00627871
+  123  3    2      C    6    1  -1   0   1.3333333   -0.3333333    0.2500000    7.0895003    0.01039461
+  51   3    2      C    6    0  -2   0   0.3333333   -1.3333333    0.2500000    7.0895003    0.01034672
+  435  3    2      C    6   -2  -2   0  -1.6666667   -1.3333333    0.2500000    7.0895003    0.01030576
+  75   3    2      C    6    1   1   0   1.3333333    1.6666667    0.2500000    7.0895003    0.01038713
+  443  3    2      C    6   -2  -1   0  -1.6666667   -0.3333333    0.2500000    7.0895003    0.01031799
+  11   3    2      C    6    0   1   0   0.3333333    1.6666667    0.2500000    7.0895003    0.01035279
+[...]
+```
+The first three atoms are the three in-plane covalent bonds. Atoms in
+the same layer (z = 0.25) show distinctly higher DIs than atoms in
+different layers, even if they are farther away.
+
+## A molecular crystal: urea
+
+When a crystal composed of discrete units (a molecular crystal)
+is read into critic2, the program will automatically detect it and
+calculate the discrete fragment (molecules) that compose the crystal:
+```
++ List of fragments in the system (2)
+# Id = fragment ID. nat = number of atoms in fragment. C-o-m = center of mass (bohr).
+# Discrete = is this fragment finite?
+# Id  nat           Center of mass            Discrete  
+  1    8      1.000000    0.500000    0.314384   Yes
+  2    8      0.500000    1.000000    0.685616   Yes
+```
+In the example used above, the urea crystal, there are two molecules
+in the unit cell each comprising 8 atoms. 
+
+The DI calculation in a molecular crystal follows the same sequence of
+steps as in MgO. However, critic2 detects the existence of discrete
+units and offers more information. Specifically, the program
+calculates the molecular localization indices (the sum of the LIs of
+all atoms in the molecule plus the intramolecular DIs):
+```
+* Integrated molecular properties
++ Localization indices
+# Mol       LI(A)           N(A)
+  1     23.26310183     23.99999842
+  2     23.26310705     24.00000158
+```
+
+Then, critic2 also writes to the output the list of intermolecular
+delocalization indices. These are calculated as the sum of the DIs
+between all atoms in the two interacting molecules. There is a table
+of DIs for every molecule in the unit cell (two in this case) and the
+DI information is sorted by distance to this molecule, in much the
+same way as atomic DIs:
+```
++ Delocalization indices
+# Molecule 1 with 8 atoms at  1.000000   0.500000   0.314384 
+# Mol   Latt. vec.    ---- Center of mass (cryst) ----      Distance      LI/DI
+  Localization index................................................... 23.26310183
+  2      1   0   0   1.5000000    1.0000000    0.6856165    8.1298272    0.16615726
+  2      0   0   0   0.5000000    1.0000000    0.6856165    8.1298272    0.16615840
+  2      1  -1   0   1.5000000    0.0000000    0.6856165    8.1298272    0.16615814
+  2      0  -1   0   0.5000000    0.0000000    0.6856165    8.1298272    0.16615731
+  1      0   0  -1   1.0000000    0.5000000   -0.6856165    8.8514772    0.46900724
+  2      1  -1  -1   1.5000000    0.0000000   -0.3143835    9.2882471    0.07550946
+  2      1   0  -1   1.5000000    1.0000000   -0.3143835    9.2882471    0.07550956
+  2      0   0  -1   0.5000000    1.0000000   -0.3143835    9.2882471    0.07550951
+  2      0  -1  -1   0.5000000    0.0000000   -0.3143835    9.2882471    0.07550956
+  1     -1   0   0   0.0000000    0.5000000    0.3143835   10.5163259    0.01704341
+  1      0  -1   0   1.0000000   -0.5000000    0.3143835   10.5163259    0.01704340
+  1     -1   0  -1   0.0000000    0.5000000   -0.6856165   13.7456087    0.00045912
+  1      0  -1  -1   1.0000000   -0.5000000   -0.6856165   13.7456087    0.00045912
+  1     -1  -1   0   0.0000000   -0.5000000    0.3143835   14.8723308    0.00261252
+  1     -1  -1  -1   0.0000000   -0.5000000   -0.6856165   17.3070757    0.00049917
+  Total (atomic population)............................................ 23.99999842
+```
+Note that the sum of LI plus half of all DIs is the average molecular
+electron population. In this case, both molecules are neutral, since
+they are equivalent by symmetry.
+
+## A spin-polarized case: FeO
+
+
 ## Example files package
 
 Files: [example_11_10.tar.xz](/assets/critic2/example_11_10/example_11_10.tar.xz).
+
+## Manual pages
+
+- [The reference field](/critic2/manual/fields/#c2-reference)
+
+- [Yu and Trinkle method (YT)](/critic2/manual/integrate/#c2-yt)
+
+- [Loading a field](/critic2/manual/fields/#c2-load)
+
+- [Marking fields or expressions as integrable quantities](/critic2/manual/integrate/#c2-integrable)
 
