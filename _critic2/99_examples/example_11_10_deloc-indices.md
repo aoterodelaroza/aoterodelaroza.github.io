@@ -385,7 +385,7 @@ steps above.
 Exactly the same DI calculation can be carried out in a different way
 by using a non-self-consistent (nscf) calculation instead of the
 `open_grid.x` program. If the latter is available, there is really not
-much point in carrying out the DI calculation in this maner, save for
+much point in carrying out the DI calculation in this manner, save for
 testing purposes. The sequence of steps is the same as above except
 instead of running `open_grid.x`, we use `pw.x` to run:
 ```
@@ -447,13 +447,13 @@ calculation.
 
 The sequence of steps for calculating the DIs in more complex systems
 is exactly the same as in MgO. Because the Wannier transformation is
-ill-defined in systems with partially ocuppied bands (metals), the
+ill-defined in systems with partially occupied bands (metals), the
 calculation of DIs via Wannier functions does not work for
 those. However, semimetals such as graphite can be calculated without
 a problem.
 
 In the graphite example included in the files package, we use a 8x8x2
-k-point grid. The resulting DIs clearly differentiate betweens DIs for
+k-point grid. The resulting DIs clearly differentiate between DIs for
 atoms in the same graphene layer and in different layers:
 
 ```
