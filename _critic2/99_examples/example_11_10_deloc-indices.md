@@ -560,6 +560,136 @@ they are equivalent by symmetry.
 
 ## A spin-polarized case: FeO
 
+Calculating the DIs in a spin-polarized calculation is a bit more
+convoluted, but follows essentially the same procedure. In this
+example, we calculate the DIs in iron(II) oxide (FeO), which has the
+same structure type as MgO (rocksalt) but is ferromagnetic. The PAW
+and NC SCF calculations and the extraction of the density cube files
+is done in the same way as in MgO, except that the calculation is
+spin-polarized. In PAW, this is done:
+```
+ nspin=2,
+ starting_magnetization(1)=1.0,
+ occupations='smearing',
+ smearing='cold',
+ degauss=0.1,
+```
+and in the NC calculation it is essential that we have completely
+filled bands, so we fix the total magnetization based on the result of
+PAW:
+```
+ nspin=2,
+ tot_magnetization=4.0,
+```
+This results in a total of 9 bands, as shown in the NC SCF output:
+```
+     number of Kohn-Sham states=            9
+```
+With `verbosity=high`, we can verify that the spin-up channel has 9
+occupied bands and spin-down has 5 occupied and 4 unoccupied bands:
+```
+[...]
+ ------ SPIN UP ------------
+          k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
+    -8.7938   7.7292   7.8322   7.9838   8.1232   8.1283   8.1355   8.1770
+     8.1880
+     occupation numbers 
+     1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+     1.0000
+ ------ SPIN DOWN ----------
+          k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
+    -8.2542   8.7307   8.7479   8.7545  11.2368  11.3607  11.4147  12.2011
+    12.4321
+     occupation numbers 
+     1.0000   1.0000   1.0000   1.0000   1.0000   0.0000   0.0000   0.0000
+     0.0000
+[...]
+```
+
+An important difference relative to MgO happens when we calculate the
+MLWFs. The way wannier90 works is that it requires two different
+executions, one for each spin channel, where we need to indicate how
+many bands are occupied. The spin-up wannier90 input 
+(`feo_up.win`) is simple because we want to use all the occupied bands
+in the transformation. It contains:
+```
+num_wann = 9
+num_bands = 9
+[...]
+```
+and the corresponding `pw2wannier90.x` file to generate the integrals
+for wannier90 is:
+```
+&inputpp 
+ prefix='crystal_open',
+ seedname = 'feo_up',
+ spin_component="up",
+ write_mmn = .true.,
+ write_amn = .true.,
+/
+```
+The wannier90 calculation is run in the same way as before:
+```
+$ wannier90.x -pp feo_up.win
+$ pw2wannier90.x < feo.pw2wan.up.in | tee feo.pw2wan.up.out
+$ wannier90.x feo_up.win
+```
+which generates the `feo_up.chk` checkpoint file. We will read this
+file into critic2.
+
+The spin-down case is a little more complicated because only a subset
+of the bands are filled. There are two different spin-dow wannier90
+inputs: one for before and one for after `pw2wannier90.x`. The first
+input is:
+```
+num_wann = 5
+num_bands = 9
+exclude_bands : 6-9
+```
+where we indicate that, even though there are 9 bands in the
+calculation, we want to exclude bands 6 to 9, which are unoccupied. We
+write the files that request the calculation of the integrals in QE:
+```
+$ wannier90.x -pp feo_dn.win
+```
+and then we run `pw2wannier90.x` with the input:
+```
+&inputpp 
+ prefix='crystal_open',
+ seedname = 'feo_dn',
+ spin_component="down",
+ write_mmn = .true.,
+ write_amn = .true.,
+/
+```
+In the second wannier run, where the actual MLWFs are calculated, we
+only have 5 bands available, so it contains:
+```
+num_wann = 5
+num_bands = 5
+```
+To generate the MLWFs
+```
+$ pw2wannier90.x < feo.pw2wan.dn.in | tee feo.pw2wan.dn.out
+$ wannier90.x feo_dn.win
+```
+This creates the `feo_dn.chk` checkpoint file with the rotation for
+the spin-down MLWFs.
+
+Finally, we indicate that this is a spin-polarized case by passing
+both checkpoint files to critic2:
+```
+crystal feo.pwc
+load rhoae.cube id rho
+load feo.pwc feo_up.chk feo_dn.chk
+
+integrable 2
+integrable 2 deloc
+
+yt
+```
+The interpretation of the critic2 output is essentially the same as in
+the MgO case.
 
 ## Example files package
 
