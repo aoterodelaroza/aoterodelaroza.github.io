@@ -267,6 +267,7 @@ CUBE GRID ...
 CUBE ... FILE CHGCAR
 CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
+CUBE ... FILE bleh.xsf
 ~~~
 
 <a id="key-echo"></a>
