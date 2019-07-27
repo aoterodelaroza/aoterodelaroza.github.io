@@ -232,12 +232,13 @@ information required to calculate the electron density, which is why
 the `GEOMETRY.OUT` is necessary.
 
 Elk's `STATE.OUT` is version-dependent. The following versions of elk
-have been tested and work with critic2: 4.0.15, 2.3.22, 2.3.16,
-2.2.10, 2.2.9, 2.2.8, 2.2.5, 2.2.1, 2.1.25, 2.1.22, 1.4.22, 1.4.18,
-1.4.5, 1.3.31, 1.3.30, 1.3.24, 1.3.22, 1.3.20, 1.3.15, 1.3.2, 1.2.20,
-1.2.15, 1.1.4, 1.0.17, 1.0.16, and 1.0.0. If your version is not
-supported (most likely because it is newer; I tend to check this part
-of the code every aeon or so), please contact me.
+have been tested and work with critic2: 5.2.14, 5.2.10, 4.3.6, 4.0.15,
+3.3.17, 3.3.15, 3.1.12, 3.0.18, 3.0.4, 2.3.22, 2.3.16, 2.2.10, 2.2.9,
+2.2.8, 2.2.5, 2.2.1, 2.1.25, 2.1.22, 1.4.22, 1.4.18, 1.4.5, 1.3.31,
+1.3.30, 1.3.24, 1.3.22, 1.3.20, 1.3.15, 1.3.2, 1.2.20, 1.2.15, 1.1.4,
+1.0.17, 1.0.16, and 1.0.0. If your version is not supported (most
+likely because it is newer; I tend to check this part of the code
+every aeon or so), please contact me.
 
 Using a patched version of elk it is possible to generate other files
 (`OTHER.OUT`) containing the spherical harmonics/plane waves
