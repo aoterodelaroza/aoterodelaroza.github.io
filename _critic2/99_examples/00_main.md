@@ -22,3 +22,6 @@ sidebar:
 
 - [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)
 
+## Development notes
+
+- [Critic2 development notes and test files](/critic2/examples/testfiles/)
