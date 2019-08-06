@@ -96,6 +96,8 @@ critic2_examples:
         url: /critic2/examples/#c2e-stm
       - title: "Molecular Properties (MOLCALC)"
         url: /critic2/examples/#c2e-molcalc
+      - title: "Dev notes and tests"
+        url: /critic2/examples/testfiles
 
 devnotes:
   - title: "Main"

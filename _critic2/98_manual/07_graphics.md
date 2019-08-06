@@ -133,12 +133,14 @@ CUBE GRID ...
 CUBE ... FILE CHGCAR
 CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
+CUBE ... FILE bleh.xsf
 ~~~
 The CUBE keyword writes a three-dimensional grid in Gaussian cube,
-binary cube, or VASP CHGCAR formats. The limits of the grid can be set
+binary cube, VASP CHGCAR, and xsf formats. The limits of the grid can be set
 in three ways. By giving the end-points (`x0.r`, `y0.r`, `z0.r`) and
 (`x1.r`, `y1.r`, `z1.r`) it is possible to build a grid from an
-orthogonal fragment of space. The CELL keyword calculates a grid
+orthogonal fragment of space (only using the cube and bincube
+formats). The CELL keyword calculates a grid 
 spanning the entire unit cell, which may or may not be orthogonal
 depending on the structure. GRID has the same effect as CELL regarding
 the output grid geometry. If the end points are given, they must be in
@@ -148,22 +150,23 @@ the CRYSTAL keyword) or molecular Cartesian coordinates
 using the [UNITS](/critic2/manual/inputoutput/#c2-units) keyword.
 
 The number of points in the grid can also be controlled in several
-ways. If the cube limits are given explicitly or using CELL, then the
+ways. If the grid limits are given explicitly or using CELL, then the
 number of points on each axis can be indicated by giving three
 integers (`nx.i`, `ny.i`, and `nz.i`) corresponding to the number of
 points in the x-, y-, and z-axis respectively. If a single number
 (`bpp.r`) is found, then the number of points is the length of the
 axis divided by `bpp.r` (bpp is bohrs per point). The GRID keyword can
-be used to write a grid field to a cube file. This is useful when
-combined with the LOAD keyword to read, manipulate, and then save
+be used to write a grid field to a grid file directly. This is useful
+when combined with the LOAD keyword to read, manipulate, and then save
 grids to an external file. If GRID is used, both the geometry of the
 grid and the number of points are adopted from the grid field.
 
 Independently on how the grid is set up, several options control the
 behavior of CUBE. FILE sets the name of the output file (default:
-CHGCAR). If the extension of file.s is not .cube, then critic2 uses
-the vasp-style CHGCAR format for the output. HEADER writes only the
-header to the output file. FIELD sets the field to be used by the
+`<root>.cube`). critic2 uses different formats depending on the
+extension: binary cube (`.bincube`), cube (`.cube`), xsf (`.xsf`), and
+VASP-style CHGCAR (everything else). The HEADER keyword writes only
+the header to the output file. FIELD sets the field to be used by the
 field number or alias (`id.s`). Alternatively, an arithmetic
 expression can be used. Finally, a derivative of the scalar field
 (gradient, Hessian, Laplacian) can be selected instead of the value of
