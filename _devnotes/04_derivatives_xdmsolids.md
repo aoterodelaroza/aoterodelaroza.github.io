@@ -18,11 +18,11 @@ toc_sticky: true
 ---
 
 These notes describe the implementation of the XDM dispersion
-contribution to atomic forces, stress tensor, and the dynamical
-matrix, required to calculate phonon frequencies, in Quantum
-ESPRESSO. They also simplify the implementation of the same quantities
-for any energy term that is written as an absolutely convergent atomic
-pairwise summation.
+contribution to atomic forces, stress tensor, and the dynamical matrix
+(required to calculate phonon frequencies) in Quantum ESPRESSO. They
+also describe the implementation of the same quantities for any energy
+term that is written as an absolutely convergent atomic pairwise
+summation.
 
 ## Pairwise Summation in Periodic Solids
 
@@ -61,7 +61,7 @@ conveniently as:
 
 $$
 \begin{equation}
-E = -\frac{1}{2}\sum^{\rm all}_{i\neq j}{} g_{ij}(d_{ij})
+E = -\frac{1}{2}\sum^{\rm all}_{i\neq j} g_{ij}(d_{ij})
 \end{equation}
 $$
 
@@ -73,19 +73,20 @@ around it. For a shell at a distance $$d$$, the number of atoms inside
 the shell is roughly proportional to its surface ($$4\pi d^2$$) and,
 since $$g_{ij}(d_{ij})$$ decays with distance faster than
 $$d_{ij}^{-2}$$, then the contribution from atomic shells at
-increasing distance from the central atom decays as well. The
-conclusion is that a given atom only "sees" the contribution from a
-sphere of atoms up to a certain distance, what we call its *environment*.
+increasing distance from the central atom decays as well. Therefore, a
+given atom only perceives the interactions from a sphere of atoms up
+to a certain distance. This sphere of atoms is called the
+*environment* of the atom in the rest of this document.
 
-If $$N$$ is large enough, then most of the atoms in the system will
-see a full environment around them (the *bulk* atoms). The exception
-are the atoms on the edges and surface of the system. The energy
-contribution from the edge and surface atoms decreases relative to the
-bulk atoms as $$N$$ increases. This is because the number of atoms
-on the surface is proportional to $$R^2$$ and the number of atoms in
-the bulk increases as $$R^3$$, where $$R$$ is some length measure of
-the system size (e.g. its radius). Therefore, for large $$N$$, we can
-approximate the average energy per cell as:
+If $$N$$ is large enough, then most of the atoms in the system see a
+full environment around them (the *bulk* atoms). The exception are the
+atoms on the edges and surface of the system. The energy contribution
+from the edge and surface atoms decreases relative to the bulk atoms
+as $$N$$ increases. This is because the number of atoms on the surface
+is proportional to $$R^2$$ and the number of atoms in the bulk
+increases as $$R^3$$, where $$R$$ is some length measure of the system
+size (e.g. its radius). Therefore, for large $$N$$, we can approximate
+the average energy per cell as:
 
 $$
 \begin{equation}
@@ -95,12 +96,12 @@ $$
 $$
 
 The prime means that the sum includes all atoms in the whole system or
-the environment except $$i = j$$. In the second sum, we replaced the
-sum over all atoms in the system with a sum over an environment that
-is the union of the environments of all atoms in the cell over which
-index i runs. In the limit of infinite $$N$$ (the *thermodynamic
-limit*) this expression becomes exact, and we write the pairwise
-energy per cell as:
+in the environment except for $$i = j$$. In the second sum, we
+replaced the sum over all atoms in the system with a sum over an
+environment that is the union of the environments of all atoms in the
+cell over which index i runs. In the limit of infinite $$N$$ (the
+*thermodynamic limit*) this expression becomes exact, and we write the
+pairwise energy per cell as:
 
 $$
 \begin{equation}
@@ -108,14 +109,13 @@ E_{\rm cell} = \lim_{N\to\infty} \frac{E}{N} = -\frac{1}{2}\sum_i^{\rm cell}\sum
 \end{equation}
 $$
 
-Because the system is periodic, we can also write this expression as a
-double sum over atoms in the unit cell plus a sum over lattice
+Because the system is periodic, we write this expression equivalently
+as a double sum over atoms in the unit cell plus a sum over lattice
 vectors:
 
 $$
 \begin{equation}
-E_{\rm cell} = -\frac{1}{2}\sum_i^{\rm cell}\sum_j^{\rm env}{\vphantom{\sum}}^{\prime} g_{ij}(d_{ij})
-= -\frac{1}{2}\sum_{ij}^{\rm cell}\sum_a{\vphantom{\sum}}^{\prime} g_{ij}(d^a_{ij})
+E_{\rm cell} = -\frac{1}{2}\sum_{ij}^{\rm cell}\sum_a{\vphantom{\sum}}^{\prime} g_{ij}(d^a_{ij})
 \end{equation}
 $$
 
@@ -170,7 +170,7 @@ $$
 \end{align}
 $$
 
-where $$\alpha$$ is the Cartesian coordinate, one of x, y, and z. Note that:
+where $$\alpha$$ is the Cartesian coordinate (one of x, y, and z). Note that:
 
 $$
 \begin{equation}
@@ -209,8 +209,8 @@ $$a = {\bf 0}$$ in the expressions above.
 
 ## Atomic Forces
 
-The pairwise energy expression is (the "cell" subscript has been
-dropped for simplicity):
+The pairwise energy expression is (the "cell" subscript of the energy
+has been dropped for simplicity):
 
 $$
 \begin{equation}
@@ -310,7 +310,7 @@ $$a$$ is given by:
 
 $$
 \begin{equation}
-(d_{ij}^a)^2 = ({\bf x}_i - {\bf x}_j + {\bf R}) \cdot ({\bf x}_i - {\bf x}_j + {\bf R})^T
+(d_{ij}^a)^2 = ({\bf x}_i - {\bf x}_j + {\bf R}_a) \cdot ({\bf x}_i - {\bf x}_j + {\bf R}_a)^T
 \end{equation}
 $$
 
@@ -318,9 +318,9 @@ When the strain is applied, the distance becomes:
 
 $$
 \begin{equation}
-(d_{ij}^{a})^2 = ({\bf x}_i - {\bf x}_j + {\bf R})
+(d_{ij}^{a})^2 = ({\bf x}_i - {\bf x}_j + {\bf R}_a)
 ({\bf 1} + {\bf \varepsilon})({\bf 1} + {\bf \varepsilon})^T
-({\bf x}_i - {\bf x}_j + {\bf R})^T
+({\bf x}_i - {\bf x}_j + {\bf R}_a)^T
 \end{equation}
 $$
 
@@ -337,7 +337,7 @@ $$
 $$
 
 where we used the fact that $$\varepsilon = \varepsilon^T$$. This
-expression simplifies the calculation of the distance to:
+transformation simplifies the distance expression:
 
 $$
 \begin{equation}
@@ -357,7 +357,7 @@ $$
 \end{equation}
 $$
 
-Solving, we have:
+and solving, we have:
 
 $$
 \begin{equation}
@@ -366,8 +366,8 @@ $$
 \end{equation}
 $$
 
-From this, the expression of the stress tensor is obtain by
-straightforward application of the chain rule:
+From this, the stress tensor is obtain by straightforward application
+of the chain rule:
 
 $$
 \begin{equation}
@@ -388,7 +388,7 @@ $$
 ## The Dynamical Matrix
 
 Phonon eigenvectors and phonon frequencies are calculated by
-diagonilizing the dynamical matrix:
+diagonalizing the dynamical matrix:
 
 $$
 \begin{equation}
@@ -439,9 +439,9 @@ $$
 \end{equation}
 $$
 
-and so it does not make much sense to have more than one lattice
-vector involved in the IFC matrix. Using the definition of atomic
-force, we have:
+it does not make much sense to have more than one lattice vector
+indexing the IFC matrix. Using the definition of atomic force, we
+have:
 
 $$
 \begin{equation}
@@ -455,12 +455,14 @@ The atomic force is:
 $$
 \begin{equation}
 F_{i\alpha} 
-= \sum_{j=1}^{\rm env} g_{ij}^{\prime}(d^a_{ij}) \frac{({\bf x}_i - {\bf x}_j)_\alpha}{d_{ij}^a}
+= \sum_{j=1}^{\rm env} g_{ij}^{\prime}(d^a_{ij}) \frac{({\bf x}_i - {\bf x}^a_j)_\alpha}{d_{ij}^a}
 \end{equation}
 $$
 
 where in this case we sum over the environment directly instead of
-using a sum over lattice vectors. 
+using a sum over lattice vectors. We have added an $$a$$ superscript
+to environment atom j to keep track of which lattice vector it
+corresponds to.
 
 Let us first consider the case in which atom $$i$$ and atom $$j$$
 translated by $$a$$ are different. In this case, only one of the terms
@@ -528,7 +530,7 @@ h_{ij}^\prime(d_{ij}^a) \frac{({\bf x}_i - {\bf x}_j)_\alpha ({\bf x}_i - {\bf x
 $$
 
 Therefore, the same-atom IFC matrix elements can be calculated using
-the following zero-sum rule:
+the zero-sum rule:
 
 $$
 \begin{equation}
@@ -571,12 +573,13 @@ E = -\sum^{\rm all}_{i>j} g_{ij}(d_{ij})
 $$
 
 we only need the $$g_{ij}(d)$$ function, its derivative
-($$g_{ij}^{\prime}(d)$$), the 
-$$h_{ij}(d) = g_{ij}^{\prime}(d) / d$$ function, and its derivative
-($$h_{ij}^{\prime}(d)$$). These are easily obtained from a computer
-algebra program such as [maxima](http://maxima.sourceforge.net/). The
-radial functions for the D2 and XDM dispersion corrections are given
-now.
+($$g_{ij}^{\prime}(d)$$), the $$h_{ij}(d) = g_{ij}^{\prime}(d) / d$$
+function, and its derivative ($$h_{ij}^{\prime}(d)$$). These are
+easily obtained from a computer algebra program such as
+[maxima](http://maxima.sourceforge.net/) (see at the end for the
+[cantor](https://kde.org/applications/education/org.kde.cantor)
+script). The radial functions for the D2 and XDM dispersion
+corrections are given now.
 
 ### Pairwise Energy Functions for the D2 Dispersion Correction
 
@@ -628,10 +631,9 @@ $$
 ### Pairwise Energy Functions for the XDM Dispersion Correction
 
 The XDM dispersion coefficients depend on the geometry of the system
-but this dependence usually changes very slowly with the atomic
-positions and it is a good approximation to assume that the dispersion
-coefficients are constant. The pairwise energy contribution for each
-pair is:
+but they usually change very slowly when atoms move and, in general,
+it is a good approximation to assume that the dispersion coefficients
+are constant. The pairwise energy contribution for each pair is:
 
 $$
 \begin{equation}
@@ -671,12 +673,12 @@ $$
 ### Testing routines
 
 A simple way to check the consistency of the four functions ($$g$$,
-$$g^\prime$$, $$h$$, $$h^\prime$$) is to implement a small Fortran
+$$g^\prime$$, $$h$$, $$h^\prime$$) is using a small Fortran
 program that writes a table of values in a simple case
 (e.g. graphite), then use octave to verify all the values against
-numerical derivatives of $$g$$ and $$h$$. In addition, once written
-and tested, the routines can be transported as a whole into Quantum
-ESPRESSO. For D2:
+numerical derivatives of $$g$$ and $$h$$. An advantage of this method
+is that, once written and tested, the routines can be transported as a
+whole into Quantum ESPRESSO. For D2:
 ~~~ fortran
 subroutine calcgh_d2(d,g,gp,h,hp)
   implicit none
@@ -761,7 +763,7 @@ end subroutine calcgh_xdm
 ~~~
 
 The octave script to verify the consistency of the implemented
-pairwise energy functions is equally simple:
+pairwise energy functions is:
 ~~~ matlab
 load aa
 
@@ -803,4 +805,17 @@ obtained from `pw.x` must be equal.
 Program and script for testing the pairwise energy routines:
 
 - [check-calcgh.tar.xz](/assets/devnotes/04_derivatives_xdmsolids/check-calcgh.tar.xz)
+
+Cantor notebook file with the derivatives of the pairwise energy
+functions:
+
+- [distance.cws](/assets/devnotes/04_derivatives_xdmsolids/distance.cws)
+
+QE implementation of the XDM dynamical matrix contribution:
+
+- [d2ionq_xdm.f90](/assets/devnotes/04_derivatives_xdmsolids/d2ionq_xdm.f90)
+
+QE implementation of the D2 dynamical matrix contribution:
+
+- [d2ionq_mm.f90](/assets/devnotes/04_derivatives_xdmsolids/d2ionq_mm.f90)
 
