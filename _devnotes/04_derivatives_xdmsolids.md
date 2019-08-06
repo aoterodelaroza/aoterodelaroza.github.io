@@ -20,7 +20,9 @@ toc_sticky: true
 These notes describe the implementation of the XDM dispersion
 contribution to atomic forces, stress tensor, and the dynamical
 matrix, required to calculate phonon frequencies, in Quantum
-ESPRESSO.
+ESPRESSO. They also simplify the implementation of the same quantities
+for any energy term that is written as an absolutely convergent atomic
+pairwise summation.
 
 ## Pairwise Summation in Periodic Solids
 
@@ -30,10 +32,10 @@ ESPRESSO.
 </figure> 
 
 Let us consider a finite system (a molecule) that is composed of
-a number $$N$$ of repeated cells, such as the one shown in the
+$$N$$ repeated cells, such as the one shown in the
 right. We assume that the energy in this system is given by a
 sum over atomic pairs of a function $$g_{ij}(d_{ij})$$ that depends
-only on the nature of the atoms and the distance bewteen them, with
+only on the nature of the atoms and the distance between them, with
 $$
 \begin{equation}
 g_{ij}(d_{ij}) = g_{ji}(d_{ji})
@@ -79,7 +81,7 @@ If $$N$$ is large enough, then most of the atoms in the system will
 see a full environment around them (the *bulk* atoms). The exception
 are the atoms on the edges and surface of the system. The energy
 contribution from the edge and surface atoms decreases relative to the
-bulk atoms as $$N$$ increases. This is because the the number of atoms
+bulk atoms as $$N$$ increases. This is because the number of atoms
 on the surface is proportional to $$R^2$$ and the number of atoms in
 the bulk increases as $$R^3$$, where $$R$$ is some length measure of
 the system size (e.g. its radius). Therefore, for large $$N$$, we can
@@ -117,7 +119,7 @@ E_{\rm cell} = -\frac{1}{2}\sum_i^{\rm cell}\sum_j^{\rm env}{\vphantom{\sum}}^{\
 \end{equation}
 $$
 
-where $$a$$ runs over lattice vectors in the environent and the prime
+where $$a$$ runs over lattice vectors in the environment and the prime
 in the second equation indicates that the case where $$i = j$$ and $$a
 = {\bf 0}$$ is discarded. The distance with the lattice vector
 superscript is defined as:
@@ -386,7 +388,7 @@ $$
 ## The Dynamical Matrix
 
 Phonon eigenvectors and phonon frequencies are calculated by
-diagonlizing the dynamical matrix:
+diagonilizing the dynamical matrix:
 
 $$
 \begin{equation}
