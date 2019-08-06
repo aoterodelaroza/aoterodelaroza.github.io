@@ -88,6 +88,8 @@ critic2_examples:
   - title: "Examples"
     url: /critic2/examples/
     children:
+      - title: "Crystal structure tools (CRYSTAL)"
+        url: /critic2/examples/#c2e-crystal
       - title: "Integration Using Grids (YT/BADER)"
         url: /critic2/examples/#c2e-integrid
       - title: "STM plots (STM)"
@@ -107,3 +109,5 @@ devnotes:
       url: /devnotes/modern-fortran-makefiles/
     - title: "Space group crystal collection"
       url: /devnotes/space-group-collection/
+    - title: "XDM forces, stress, phonons"
+      url: /devnotes/derivatives-xdmsolids/
