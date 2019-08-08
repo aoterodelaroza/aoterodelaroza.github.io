@@ -513,7 +513,7 @@ $$
 \begin{equation}
 \Phi_{i\alpha}^{j\beta a} = h_{ij}^{\prime}(d_{ij}^a) 
 \frac{({\bf x}_i - {\bf x}_j^a)_\alpha ({\bf x}_i - {\bf x}_j^a)_\beta}{d_{ij}^a}
-+ \delta_{ij} h_{ij}(d_{ij}^a)
++ \delta_{\alpha\beta} h_{ij}(d_{ij}^a)
 \end{equation}
 $$
 
@@ -524,7 +524,7 @@ $$
 \Phi_{i\alpha}^{i\beta 0} & = -\frac{\partial F_{i\alpha}}{\partial x_{i\beta}}
 = - \sum_j^{\rm env} \left(
 h_{ij}^\prime(d_{ij}^a) \frac{({\bf x}_i - {\bf x}_j)_\alpha ({\bf x}_i - {\bf x}_j)_\beta}
-{d_{ij}^a} + \delta_{ij} h_{ij}(d_{ij}^a) \right) \\
+{d_{ij}^a} + \delta_{\alpha\beta} h_{ij}(d_{ij}^a) \right) \\
 & = - \sum_j^{\rm cell} \sum_{a}{\vphantom{\sum}}^{\prime} \Phi_{i\alpha}^{j\beta a}
 \end{align}
 $$
@@ -535,6 +535,7 @@ the zero-sum rule:
 $$
 \begin{equation}
 \sum_j^{\rm cell} \sum_a \Phi_{i\alpha}^{j\beta a} = 0
+\quad {\rm for\ all}\quad i,\alpha,\beta
 \end{equation}
 $$
 
@@ -556,7 +557,7 @@ $$
 \begin{equation}
 \Phi_{i\alpha}^{j\beta a} = h_{ij}^{\prime}(d_{ij}^a) 
 \frac{({\bf x}_i - {\bf x}_j^a)_\alpha ({\bf x}_i - {\bf x}_j^a)_\beta}{d_{ij}^a}
-+ \delta_{ij} h_{ij}(d_{ij}^a)
++ \delta_{\alpha\beta} h_{ij}(d_{ij}^a)
 \end{equation}
 $$
 
