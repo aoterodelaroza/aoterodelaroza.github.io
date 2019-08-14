@@ -20,6 +20,7 @@ MOLECULE file.wfx [border.r] [CUBIC|CUBE]
 MOLECULE file.fchk [border.r] [CUBIC|CUBE]
 MOLECULE file.molden [border.r] [CUBIC|CUBE]
 MOLECULE file.log [border.r] [CUBIC|CUBE]
+MOLECULE file.dat [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
 MOLECULE file.cube
 MOLECULE file.bincube
@@ -56,11 +57,11 @@ CRYSTAL changes some of the default behavior in critic2. Namely:
 
 * The default distance units in input and output are angstrom instead
   of bohr (use the [UNITS](/critic2/manual/inputoutput/#c2-units)
-  keyword to change this behavior). In particular, this applies to the Cartesian
-  coordinates for the atoms in the MOLECULE environment and to the
-  argument for BORDER. In the case of xyz, wfn, wfx, fchk, molden,
-  gen, and cube files, the Cartesian coordinate system in input and
-  output is the same as in the original file. The "Input
+  keyword to change this behavior). In particular, this applies to the
+  Cartesian coordinates for the atoms in the MOLECULE environment and
+  to the argument for BORDER. In the case of xyz, wfn, wfx, fchk, dat,
+  molden, gen, and cube files, the Cartesian coordinate system in
+  input and output is the same as in the original file. The "Input
   orientation" is read from Gaussian log (output) files,
 
 * The use of symmetry is automatically deactivated. All molecular
@@ -93,19 +94,19 @@ succession, same as in [CRYSTAL](/critic2/manual/crystal/#c2-crystal).
 
 A gas-phase molecule can be input using an xyz file, a Gaussian
 wfn/wfx file, a Gaussian output (log), a Gaussian formatted checkpoint
-file (fchk), or a file in molden format (psi4, ADF, etc.). The input
-molecule is enclosed in a box that is larger (default: 10 angstrom) in
-all directions than the minimal box encompassing the molecule. If the
-CUBIC (or CUBE) keyword is given, then a cubic supercell is used. The
-width of the vacumm around the molecule can be changed with the
-optional `border.r` argument (by default in angstrom, the units can be
-changed with the [UNITS](/critic2/manual/inputoutput/#c2-units)
-keyword). The molecule is automatically 
-translated to the center of the supercell. The transformation from
-fractional coordinates referred to the encompassing cell to Cartesian
-coordinates is made so that the latter correspond to the original
-coordinate system in the input file.  A molecular cell is chosen
-following the default procedure, see below.
+file (fchk), a psi4 output file (dat), or a file in molden format
+(psi4, ADF, etc.). The input molecule is enclosed in a box that is
+larger (default: 10 angstrom) in all directions than the minimal box
+encompassing the molecule. If the CUBIC (or CUBE) keyword is given,
+then a cubic supercell is used. The width of the vacumm around the
+molecule can be changed with the optional `border.r` argument (by
+default in angstrom, the units can be changed with the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword). The molecule
+is automatically translated to the center of the supercell. The
+transformation from fractional coordinates referred to the
+encompassing cell to Cartesian coordinates is made so that the latter
+correspond to the original coordinate system in the input file.  A
+molecular cell is chosen following the default procedure, see below.
 
 ### DFTB+ gen Format (gen)
 
