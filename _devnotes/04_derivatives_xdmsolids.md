@@ -192,6 +192,15 @@ $$
 \end{align}
 $$
 
+Combining the two expressions:
+
+$$
+\begin{equation}
+\frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{i\beta}} = 
+\frac{\delta_{\alpha\beta}}{d_{ij}^a} -\frac{({\bf x}_i - {\bf x}_j + {\bf R}_a)_\alpha ({\bf x}_i - {\bf x}_j + {\bf R}_a)_\beta}{(d_{ij}^a)^3}
+\end{equation}
+$$
+
 and the others can be obtained by using the index switch property of the first derivative:
 
 $$
@@ -201,6 +210,17 @@ $$
 \frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{j\beta}} & = -\frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{i\beta}} \\
 \frac{\partial^2 d_{ij}^a}{\partial x_{j\alpha} \partial x_{j\beta}} & = -\frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{j\beta}} = \frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{i\beta}} 
 \end{align}
+$$
+
+In the most general case:
+
+$$
+\begin{equation}
+\frac{\partial^2 d_{ij}^a}{\partial x_{i\alpha} \partial x_{j\beta}} = 
+(-1)^{\delta_{ij}} \left[
+\frac{({\bf x}_i - {\bf x}_j + {\bf R}_a)_\alpha ({\bf x}_i - {\bf x}_j + {\bf R}_a)_\beta}{(d_{ij}^a)^3} - \frac{\delta_{\alpha\beta}}{d_{ij}^a} 
+\right]
+\end{equation}
 $$
 
 The case where $$j$$ is an atom in the environment (instead of the
@@ -366,7 +386,7 @@ $$
 \end{equation}
 $$
 
-From this, the stress tensor is obtain by straightforward application
+From this, the stress tensor is obtained by straightforward application
 of the chain rule:
 
 $$
@@ -422,7 +442,7 @@ as:
 
 $$
 \begin{equation}
-\Phi_{i\alpha}^{j\beta a} = \frac{\partial E}{\partial x^0_{i\alpha} \partial x_{j\beta}^a}
+\Phi_{i\alpha}^{j\beta a} = \frac{\partial^2 E}{\partial x^0_{i\alpha} \partial x_{j\beta}^a}
 \end{equation}
 $$
 
@@ -434,8 +454,8 @@ symmetry:
 
 $$
 \begin{equation}
-\frac{\partial E}{\partial x^a_{i\alpha} \partial x_{j\beta}^b} =
-\frac{\partial E}{\partial x^0_{i\alpha} \partial x_{j\beta}^{b-a}}
+\frac{\partial^2 E}{\partial x^a_{i\alpha} \partial x_{j\beta}^b} =
+\frac{\partial^2 E}{\partial x^0_{i\alpha} \partial x_{j\beta}^{b-a}}
 \end{equation}
 $$
 
@@ -674,7 +694,7 @@ $$
 ### Testing routines
 
 A simple way to check the consistency of the four functions ($$g$$,
-$$g^\prime$$, $$h$$, $$h^\prime$$) is using a small Fortran
+$$g^\prime$$, $$h$$, $$h^\prime$$) is to use a small Fortran
 program that writes a table of values in a simple case
 (e.g. graphite), then use octave to verify all the values against
 numerical derivatives of $$g$$ and $$h$$. An advantage of this method
@@ -801,7 +821,7 @@ ESPRESSO directly by performing the dispersion energy sum from within
 the phonon calculation. The dispersion energy in `ph.x` and the one
 obtained from `pw.x` must be equal.
 
-## Support files
+## Supporting files
 
 Program and script for testing the pairwise energy routines:
 
