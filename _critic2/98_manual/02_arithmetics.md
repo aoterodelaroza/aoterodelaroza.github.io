@@ -11,7 +11,7 @@ toc_label: "Arithemtic Expressions, Variables, Functions"
 toc_sticky: true
 ---
 
-### Basic Usage {#c2-arithbasic}
+## Basic Usage {#c2-arithbasic}
 
 In critic2, an arithmetic expression can be used almost everywhere in
 the input where a real or integer number is expected. Arithmetic
@@ -159,7 +159,7 @@ When using arithmetic expressions to create new fields, it is also possible
 to refer to coordinates in real space in those expressions by using
 [Structural variables](/critic2/manual/arithmetics/#c2-structvar).
 
-### Clear Variables (CLEAR) {#c2-clear}
+## Clear Variables (CLEAR) {#c2-clear}
 
 The value of a variable can be cleared using the CLEAR keyword:
 ~~~
@@ -169,7 +169,7 @@ CLEAR ALL
 This keyword deletes the variables var1.s, var2.s, etc. or all the
 variables (ALL). 
 
-### List Variables (LIST) {#c2-list}
+## List Variables (LIST) {#c2-list}
 
 At any moment, the internal list of variables can be printed to the
 output using the keyword LIST:
@@ -178,7 +178,7 @@ LIST
 ~~~
 The LIST keyword lists all named variables and fields.
 
-### Special Fields
+## Special Fields
 
 Some special fields are defined from the crystal (or molecular)
 structure alone. For now, the only available special field is `ewald`,
@@ -191,7 +191,7 @@ cube cell field "2 * $ewald"
 ~~~
 calculates a grid using 2 times the value of the Ewald potential. 
 
-### List of Available Functions {#availchemfun}
+## List of Available Functions {#availchemfun}
 
 Arithmetic expressions can use any of the functions in the critic2
 function library. The list of functions includes the usual
@@ -336,7 +336,7 @@ to access the [libxc library](/critic2/installation/#c2-libxc). This is
 only possible if the libxc library was linked in the compilation
 of critic2.
 
-### Use of LIBXC in Arithmetic Expressions {#libxc}
+## Use of LIBXC in Arithmetic Expressions {#libxc}
 
 If critic2 is [linked to the libxc library](/critic2/installation/#c2-libxc)
 then the xc() chemical function can be used in arithmetic
@@ -350,7 +350,10 @@ the functional always appears **last** in the calling sequence of
 xc().
 
 The number and type of arguments to `xc(...,idx)` depend on the type
-of functional specified by the `idx` integer. These can be:
+of functional specified by the `idx` integer. This integer depends on
+the libxc version used but a full list can be obtained within critic2
+using the [LIBXC](#c2-libxc) keyword. The call to `xc()` can be one
+of:
 
 * LDA functional: `xc(rho,idx)`
 
@@ -388,7 +391,24 @@ using the `:g` field modifier:
 xc($1,$1:g,101)+xc($1,$1:g,130)
 ~~~
 
-### List of Structural Variables {#c2-structvar}
+### List available LIBXC functionals (LIBXC) {#c2-libxc}
+
+When critic2 is compiled with [libxc](/critic2/installation/#c2-libxc)
+support, the LIBXC keyword can be used to query the library for a
+list of available functoinals:
+~~~
+LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
+~~~
+By default, the LIBXC keyword gives a list of the functional IDs
+in the first column, followed by the functional name, kind, and
+family. If FLAGS is used, then flags containing additional information
+about the functional (e.g. if it provides the exchange-correlation
+energy, etc.) are given. If NAME or NAMES is used, the full name of
+the functional is printed. If REF or REFS is used, the literature
+references are also printed. The ALL option is equivalent to using
+REFS, NAMES, and FLAGS all at once.
+
+## List of Structural Variables {#c2-structvar}
 
 When creating new fields as transformations of existing fields, it is
 possible to use the crystal or molecular structure (the nearest atom,
