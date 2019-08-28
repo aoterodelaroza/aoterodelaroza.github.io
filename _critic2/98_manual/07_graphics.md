@@ -14,16 +14,21 @@ toc_sticky: true
 ## Points (POINT) {#c2-point}
 
 ~~~
-POINT x.r y.r z.r [ALL] [FIELD {id.s|"expr.s"}]
+POINT [x.r y.r z.r|file.s] [ALL] [FIELD {id.s|"expr.s"}]
 ~~~
 Calculates the value of the reference field or an arithmetic
 expression at point (`x.r`, `y.r`, `z.r`) in crystallographic
 coordinates (if the structure is a CRYSTAL) or molecular Cartesian
 coordinates (if a MOLECULE). For the latter, the default units
 are angstrom unless changed by the 
-[UNITS](/critic2/manual/inputoutput/#c2-units) keyword. If ALL is used, all
-loaded fields are evaluated. In addition, all arithmetic expressions
-that have been registered using the 
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword. If a file name
+is passed instead (`file.s`), calculate the same quantities at all the
+points specified by the file. All non-blank lines in the file that do
+not start with a comment symbol (`#`) represent a point, and only the
+first three real numbers from each line are read.
+
+If ALL is used, all loaded fields are evaluated. In addition, all
+arithmetic expressions that have been registered using the
 [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword are also
 calculated. The POINTPROP keyword combined with POINT is useful to
 evaluate chemical functions at arbitrary points in space.

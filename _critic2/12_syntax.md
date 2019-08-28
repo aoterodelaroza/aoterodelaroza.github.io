@@ -632,9 +632,9 @@ PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
 <a id="key-point"></a>
 [POINT](/critic2/manual/graphics/#c2-point)
 : Write the properties (value, derivatives, related quantities) of one
-  or more fields at a given point.
+  or more fields at a given point or set of arbitrary points.
 ~~~
-POINT x.r y.r z.r [ALL] [FIELD {id.s/"expr"}]
+POINT [x.r y.r z.r|file.s] [ALL] [FIELD {id.s/"expr"}]
 ~~~
 
 <a id="key-pointprop"></a>
