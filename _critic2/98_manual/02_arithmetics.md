@@ -272,10 +272,10 @@ wavefunctions. At present, this is only available for molecular
 wavefunction fields.
 
 * `gkin(id)` [`GKIN`]: the kinetic energy density, G-version 
-  ($$\sum_i{\bf \nabla}\psi_i\cdot{\bf \nabla}\psi_i$$).[^bader1][^bader2]
+  ($$\sum_i{\bf \nabla}\psi_i\cdot{\bf \nabla}\psi_i /2$$).[^bader1][^bader2]
 
 * `kkin(id)` [`KKIN`]: the kinetic energy density, K-version 
-  ($$\sum_i\psi_i\nabla^2\psi_i$$).[^bader1][^bader2]
+  ($$\sum_i\psi_i\nabla^2\psi_i /2$$).[^bader1][^bader2]
 
 * `vir(id)` [`VIR`]: the electronic potential energy density, also
   called the virial field.[^keith]
