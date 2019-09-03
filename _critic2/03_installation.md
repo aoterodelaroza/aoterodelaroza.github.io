@@ -122,10 +122,10 @@ FC=gfortran F77=gfortran ./configure ...
 
 ### Libxc {#c2-libxc}
 
-[Libxc](http://octopus-code.org/wiki/Libxc) is a library that
-implements exchange-correlation energies and potentials for many
-semilocal functionals (LDA, GGA and meta-GGA). In critic2, it is used
-to calculate exchange and correlation energy densities via de `xc()`
+[Libxc](https://gitlab.com/libxc/libxc) is a library that implements
+exchange-correlation energies and potentials for many semilocal
+functionals (LDA, GGA and meta-GGA). In critic2, it is used to
+calculate exchange and correlation energy densities via de `xc()`
 arithmetic expressions (see below).
 
 To compile critic2 with libxc support, you must pass the location of
