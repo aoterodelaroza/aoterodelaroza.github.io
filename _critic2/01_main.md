@@ -19,14 +19,14 @@ calculation results in molecules and periodic solids.
 * The **development version** works only with recent compilers (see
   [here](/critic2/installation/#whichcompilerswork)) but has the latest features.\\
   Version **1.0**: 
-  [critic2-1.0dev.zip](https://github.com/aoterodelaroza/critic2/archive/1.0dev.zip),
-  [critic2-1.0dev.tar.gz](https://github.com/aoterodelaroza/critic2/archive/1.0dev.tar.gz).
+  [critic2-1.0dev.zip](/assets/critic2/versions/critic2-1.0dev.zip),
+  [critic2-1.0dev.tar.gz](/assets/critic2/versions/critic2-1.0dev.tar.gz).
 
 * The **stable version** works with almost any f90/f03 Fortran
   compiler. Only serious bugs will be fixed in the stable version.\\
   Version **1.0**: 
-  [critic2-1.0stable.zip](https://github.com/aoterodelaroza/critic2/archive/1.0stable.zip),
-  [critic2-1.0stable.tar.gz](https://github.com/aoterodelaroza/critic2/archive/1.0stable.tar.gz).
+  [critic2-1.0stable.zip](/assets/critic2/versions/critic2-1.0stable.zip),
+  [critic2-1.0stable.tar.gz](/assets/critic2/versions/critic2-1.0stable.tar.gz).
 
 Alternatively, clone the git repository for the **latest version** of the code:
 ~~~
