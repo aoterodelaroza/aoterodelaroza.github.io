@@ -15,19 +15,21 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ATOMLABEL](#key-atomlabel)             | [AUTO](#key-auto)                 | [BADER](#key-bader)                   | [BASINPLOT](#key-basinplot) | [BENCHMARK](#key-benchmark) | [BONDFACTOR](#key-bondfactor) |
-| [BUNDLEPLOT](#key-bundleplot)           | [CLEAR](#key-clear)               | [CLEARSYM](#key-clearsym)             | [CLEARSYMM](#key-clearsymm) | [COMPARE](#key-compare)     | [COORD](#key-coord)           |
-| [COUNT](#key-count)                     | [CPREPORT](#key-cpreport)         | [CRYSTAL](#key-crystal)               | [CUBE](#key-cube)           | [ECHO](#key-echo)           | [END](#key-end)               |
-| [ENVIRON](#key-environ)                 | [EWALD](#key-ewald)               | [FLUXPRINT](#key-fluxprint)           | [GRDVEC](#key-grdvec)       | [HIRSHFELD](#key-hirshfeld) | [IDENTIFY](#key-identify)     |
-| [INTEGRABLE](#key-integrable)           | [INTEGRALS](#key-integrals)       | [INT_RADIAL](#key-int-radial)         | [LIBRARY](#key-library)     | [LINE](#key-line)           | [LIST](#key-list)             |
-| [LOAD](#key-load)                       | [MAX](#key-max)                   | [MEAN](#key-mean)                     | [MESHTYPE](#key-meshtype)   | [MIN](#key-min)             | [MOLCALC](#key-molcalc)       |
-| [MOLCELL](#key-molcell)                 | [MOLECULE](#key-molecule)         | [NCIPLOT](#key-nciplot)               | [NEWCELL](#key-newcell)     | [NOCORE](#key-nocore)       | [NOSYM](#key-nosym)           |
-| [NOSYMM](#key-nosymm)                   | [ODE_MODE](#key-ode-mode)         | [PACKING](#key-packing)               | [PLANE](#key-plane)         | [POINT](#key-point)         | [POINTPROP](#key-pointprop)   |
-| [POWDER](#key-powder)                   | [PRECISECUBE](#key-precisecube)   | [PRUNE_DISTANCE](#key-prune-distance) | [Q/QAT](#key-q)             | [QTREE](#key-qtree)         | [RADII](#key-radii)           |
-| [RDF](#key-rdf)                         | [REFERENCE](#key-reference)       | [RESET](#key-reset)                   | [ROOT](#key-root)           | [RUN](#key-run)             | [SETFIELD](#key-setfield)     |
-| [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)                       | [SUM](#key-sum)             | [SYM](#key-sym)             | [SYMM](#key-symm)             |
-| [SYMPREC](#key-symprec)                 | [SYSTEM](#key-system)             | [UNITS](#key-units)                   | [UNLOAD](#key-unload)       | [WRITE](#key-write)         | [XDM](#key-xdm)               |
-| [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |                                       |                             |                             |                               |
+| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)           | [BADER](#key-bader)                     | [BASINPLOT](#key-basinplot)           | [BENCHMARK](#key-benchmark) | [BONDFACTOR](#key-bondfactor) |
+| [BUNDLEPLOT](#key-bundleplot) | [CLEAR](#key-clear)         | [CLEARSYM](#key-clearsym)               | [CLEARSYMM](#key-clearsymm)           | [COMPARE](#key-compare)     | [COORD](#key-coord)           |
+| [COUNT](#key-count)           | [CPREPORT](#key-cpreport)   | [CRYSTAL](#key-crystal)                 | [CUBE](#key-cube)                     | [ECHO](#key-echo)           | [END](#key-end)               |
+| [ENVIRON](#key-environ)       | [EWALD](#key-ewald)         | [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)                 | [HIRSHFELD](#key-hirshfeld) | [IDENTIFY](#key-identify)     |
+| [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals) | [INT_RADIAL](#key-int-radial)           | [LIBRARY](#key-library)               | [LINE](#key-line)           | [LIST](#key-list)             |
+| [LIBXC](#key-libxc)           | [LOAD](#key-load)           | [MAX](#key-max)                         | [MEAN](#key-mean)                     | [MESHTYPE](#key-meshtype)   | [MIN](#key-min)               |
+| [MOLCALC](#key-molcalc)       | [MOLCELL](#key-molcell)     | [MOLECULE](#key-molecule)               | [NCIPLOT](#key-nciplot)               | [NEWCELL](#key-newcell)     | [NOCORE](#key-nocore)         |
+| [NOSYM](#key-nosym)           | [NOSYMM](#key-nosymm)       | [ODE_MODE](#key-ode-mode)               | [PACKING](#key-packing)               | [PLANE](#key-plane)         | [POINT](#key-point)           |
+| [POINTPROP](#key-pointprop)   | [POWDER](#key-powder)       | [PRECISECUBE](#key-precisecube)         | [PRUNE_DISTANCE](#key-prune-distance) | [Q/QAT](#key-q)             | [QTREE](#key-qtree)           |
+| [RADII](#key-radii)           | [RDF](#key-rdf)             | [REFERENCE](#key-reference)             | [RESET](#key-reset)                   | [ROOT](#key-root)           | [RUN](#key-run)               |
+| [SETFIELD](#key-setfield)     | [SPG](#key-spg)             | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube)     | [STM](#key-stm)             | [SUM](#key-sum)               |
+| [SYM](#key-sym)               | [SYMM](#key-symm)           | [SYMPREC](#key-symprec)                 | [SYSTEM](#key-system)                 | [UNITS](#key-units)         | [UNLOAD](#key-unload)         |
+| [WRITE](#key-write)           | [XDM](#key-xdm)             | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                     |                             |                               |
+
+
 
 ## Notation
 
@@ -235,8 +237,7 @@ CRYSTAL file.xsf
 CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
- SPG spgsymbol.s
- SPGR spgsymbol.s
+ SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG/ANGSTROM/BOHR/AU] 
  CARTESIAN [scal.r]
    [BOHR/AU]
@@ -420,6 +421,13 @@ LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s] [FIELD id.s/"expr"]
 : List all defined variables and named fields.
 ~~~
 LIST
+~~~
+
+<a id="key-libxc"></a>
+[LIBXC](/critic2/manual/arithmetics/#c2-libxc)
+: List and give information about the functionals available in the libxc library.
+~~~
+LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
 ~~~
 
 <a id="key-load"></a>
@@ -624,9 +632,9 @@ PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
 <a id="key-point"></a>
 [POINT](/critic2/manual/graphics/#c2-point)
 : Write the properties (value, derivatives, related quantities) of one
-  or more fields at a given point.
+  or more fields at a given point or set of arbitrary points.
 ~~~
-POINT x.r y.r z.r [ALL] [FIELD {id.s/"expr"}]
+POINT [x.r y.r z.r|file.s] [ALL] [FIELD {id.s/"expr"}]
 ~~~
 
 <a id="key-pointprop"></a>
@@ -762,6 +770,13 @@ RUN command.s
 SETFIELD [id.s] [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
                 [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
                 [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [ZPSP at1.s q1.r...]
+~~~
+
+<a id="key-spg"></a>
+[SPG](/critic2/manual/crystal/#c2-spg)
+: List the space group types known to critic2.
+~~~
+SPG
 ~~~
 
 <a id="key-sphereintegrals"></a>

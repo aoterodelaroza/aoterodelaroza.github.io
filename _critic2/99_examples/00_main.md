@@ -7,10 +7,8 @@ sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
 ---
-
+ 
 ## Crystal structure tools (CRYSTAL) {#c2e-crystal}
-
-- [Extracting structures from a cif file](/critic2/examples/example_03_01_ciffiles/)
 
 ## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
 

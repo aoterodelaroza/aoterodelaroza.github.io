@@ -1,0 +1,31 @@
+data_convert
+_cell_volume           159.299351
+_symmetry_space_group_name_H-M 'P 1'
+_symmetry_Int_Tables_number 1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a         6.4350000000
+_cell_length_b         6.5280000000
+_cell_length_c         4.2170000000
+_cell_angle_alpha        90.0000
+_cell_angle_beta        90.0000
+_cell_angle_gamma       115.9400
+_cell_formula_units_Z 1
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+K      K      0.00000000000000     0.50000000000000     0.50000000000000
+Yb     Yb     0.30880000000000     0.19220000000000     0.00000000000000
+Yb     Yb     0.69120000000000     0.80780000000000     0.00000000000000
+F      F      0.32900000000000     0.54300000000000     0.00000000000000
+F      F      0.67100000000000     0.45700000000000     0.00000000000000
+F      F      0.95460000000000     0.16740000000000     0.00000000000000
+F      F      0.04540000000000     0.83260000000000     0.00000000000000
+F      F      0.29320000000000     0.21120000000000     0.50000000000000
+F      F      0.70680000000000     0.78880000000000     0.50000000000000
+F      F      0.50000000000000     0.00000000000000     0.89280000000000

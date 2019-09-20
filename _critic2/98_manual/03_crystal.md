@@ -35,8 +35,7 @@ CRYSTAL file.xsf
 CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
-  SPG spg.s
-  SPGR spg.s
+  SPG [hall.i|ita.i HM|spg.s]
   CELL a.r b.r c.r alpha.r beta.r gamma.r
   CARTESIAN [scal.r]
     # comment
@@ -254,83 +253,38 @@ There are several relevant keywords in the CRYSTAL environment. A
 space group can be specified with the SPG keyword, in which case only
 the atoms in the asymmetric unit need to be given:
 ~~~
-SPG spg.s
+SPG [hall.i|ita.i HM|spg.s]
 ~~~
-The SPG keyword builds the complete set of symmetry operations in the
-crystal from the space group label alone. The space group names known
-to critic2 correspond to those given in the International Tables for
-Crystallography vol. A, in the Hermann-Mauguin notation. Each element
-in the label is separated by one or more blanks, and the input is case
-insensitive. Examples of values for `spg.s` are `F m -3 m`, `P b a 2`,
-`P 1 n 1`, `P 63 m c`.
+The SPG keyword used inside the crystal environment builds the
+complete set of symmetry operations in the crystal from the space
+group label or the space group number. The space group names known to
+critic2 correspond to those given in the International Tables for
+Crystallography vol. A, in the Hermann-Mauguin notation
+(`spg.s`). Alternatively, the numerical ID for the space group in the
+Hall notation (`hall.i`, from 1 to 530) or the ID for the group in the
+ITA notation (`ita.i`, Hermann-Mauguin, from 1 to 230) can be
+given. Using the ITA numerical ID of the group requires using the `HM`
+keyword after the number. The arguments to `SPG` are blank- and
+case-insensitive.  Examples `spg.s` labels are `F m -3 m`, `P b a 2`,
+`P 1 n 1`, and `P 63 m c`. When the SPG keyword is used, only the
+atoms in the asymmetric unit need to be given.
 
-If two origin choices are possible, then an additional token `1` or
-`2` can be appended to the space group label to choose between
-them. If no origin choice is specified, origin 1 is used by default
-(note that in most electronic structure programs, origin 2 is default,
-however). For example: `F d d d 1` (Fddd space group with origin
-choice 1), `F d d d 2` (same group with origin choice 2), `F d d d`
-(same as origin 1). 
+The complete list of space groups available to critic2 can be
+retrieved using the [SPG keyword](#c2-spg) outside the CRYSTAL
+environment. This is particularly useful when there is a choice of
+origin to be made for a particular space group or if a non-standard
+setting is needed or in the case of rhombohedral groups for choosing
+the hexagonal or rhombohedral axes.
 
-For R space groups, hexagonal and rhombohedral axes are
-possible. These can be specified by an `h` or `r` token after the
-space group label. If no `h` or `r` is given, hexagonal axes are
-used. For the hexagonal, the obverse cell is used: (0 0 0),
-(1/3,2/3,2/3), and (2/3,1/3,1/3). For instance, `R 3 h` (hexagonal
-axes), `R 3 r` (rhombohedral axes), `R 3` (same as "R 3 h").
-
-For monoclinic groups with several unique axis choices (where all
-have the same label), the tokens `b` and `c` choose between the
-unique axis b and c respectively. By default, the b unique axis is
-used. Example: `P 2 b` (unique axis b, same as `P 1 2 1`), `P 2 c`
-(unique axis c, same as `P 1 1 2`), `P 2` (same as `P 2 b` and 
-`P 1 2 1`).
-
-The space group label can also be given as a single word without
-spaces. For instance, `Fm-3m` is the same as `F m -3 m`. The space
-group number can be used as well, in which case all defaults for
-origin choice, unique axis and hexagonal/rhombohedral axes
-apply. Example: `222` is equivalent to `Pn-3n`, `Pn-3n1`, and 
-`P n -3 n 1`.
-
-If the space group is not one of the standard settings (for instance,
-`A 2/n`, also written as `A 1 2/n 1`), then the routines from the SPGR
-library are used. These routines can be accessed direclty by using the
-SPGR keyword instead of SPG:
-~~~
-SPGR spg.s
-~~~
-Even though the interpretation of the space group symbol is done by a
-different library, the result is the same: establishing the symmetry
-operations for the crystal.
-
-The notation for SPGR is slightly different and provides more
-flexibility than SPG (although space group numbers can not be
-used). The space group label in SPGR follows these conventions: 
-
-- Input space group symbol using the international Hermann-Mauguin
-  notation for the operations.
-
-- Each different symmetry element must be separated by a blank.
-
-- Characters in a symmetry element must be given as a single
-  word. This is also the case for subindices.
-
-- The bar is represented by a minus (-) preceding the symmetry operation.
-
-- Case insensitive.
-
-Examples of space groups for SPGR are `F m -3 m`, `P 21 21 21`, 
-`A 1 21/n 1`, `P 4/m m m`, and `R -3 c`.
-
-If no SPG or SPGR keyword is found in the CRYSTAL environment, then an
+If no SPG keyword is found in the CRYSTAL environment, then an
 internal routine calculates the symmetry from the atomic
-positions. (This behavior can be deactivated with the 
-[NOSYMM/NOSYM](/critic2/manual/crystal/#c2-symm) keyword.)
-In this case, all the atoms in the cell need to be given (in contrast to
-using SPG, in which case only the asymmetric unit needs to be
-given). There are two possible ways to input the cell parameters. In
-the simplest approach, the CELL keyword can be used to give the cell
+positions. (This behavior can be deactivated with the
+[NOSYMM/NOSYM](/critic2/manual/crystal/#c2-symm) keyword.)  In this
+case, all the atoms in the cell need to be given (in contrast to using
+SPG, in which case only the asymmetric unit needs to be given).
+
+There are two possible ways to input the cell parameters. In the
+simplest approach, the CELL keyword can be used to give the cell
 lengths and angles:
 ~~~
 CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG/ANGSTROM/BOHR/AU]
@@ -403,6 +357,40 @@ keyword is useful in cases when it is difficult to pass SPG a certain
 non-standard setting for a low-symmetry space group, or when the space
 group symmetry is given in this format instead of a space group label
 (e.g. cif files and SHELX res files).
+
+### List space group types (SPG) {#c2-spg}
+
+The SPG keyword (used outside the CRYSTAL environment):
+~~~
+SPG
+~~~
+lists the space group types available to critic2. A brief extract of
+its output is:
+~~~
+#Hall ITA   HM-short HM-long       choice  crys.-syst.  Hall-symbol
+[...]
+452   161   R3c      R3c            H      trigonal     [R 3 -2"c]
+453   161   R3c      R3c            R      trigonal     [P 3* -2n]
+454   162   P-31m    P-312/m               trigonal     [-P 3 2]
+[...]
+~~~
+The SPG keyword lists, in order:
+* The ID for the space group in Hall notation (from 1 to 530).
+* The ID for the space group in Hermann-Mauguin international notation
+  (from 1 to 230).
+* The short Hermann-Mauguin label for the group.
+* The long Hermann-Mauguin label for the group.
+* The particular choice of axes/origin/setting for the group. For
+  instance, H and R mean hexagonal and rhombohedral axes,
+  respectively. In monoclinic groups, choice gives the priviledged
+  axis, etc.
+* The crystal system.
+* The space group type in Hall notation.
+
+The `HM-short` and `HM-long` labels as well as the numerical Hall ID
+for the group (`Hall`) and the ITA numerical ID (`ITA`) can all be
+used in the SPG keyword inside [CRYSTAL](#c2-crystal). (Note that the
+latter requires using the additional HM keyword.)
 
 ### The Crystal Library (CRYSTAL LIBRARY) {#c2-library}
 
