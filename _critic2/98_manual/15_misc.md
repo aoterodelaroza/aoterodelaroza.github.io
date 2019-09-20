@@ -84,12 +84,14 @@ XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s]
     [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s] 
     [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s] 
     [XA1 a1.r] [XA2 a2.r] [ONLYC] [UPTO {6|8|10}]
-XDM QE [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
+XDM QE [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
 XDM a1.r a2.r chf.s
 ~~~
 There are three modes of operation for the XDM keyword. In QE, the
-coefficients are read from a Quantum ESPRESSO output (loaded using
-CRYSTAL), and the XDM energy is recalculated. If BETWEEN and AND are
+coefficients are read from a Quantum ESPRESSO output. The QE output
+file is the one given via the FILE keyword or the one loaded using
+CRYSTAL, if no FILE is given. Using the dispersion coefficients read
+from the file, the XDM energy is recalculated. If BETWEEN and AND are
 given only the dispersion interaction between those pairs of atoms is
 calculated. This keyword is used mostly for testing purposes. 
 In the GRID mode, the information necessary to calculate the XDM
