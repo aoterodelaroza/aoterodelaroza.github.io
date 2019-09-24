@@ -271,10 +271,12 @@ atoms in the asymmetric unit need to be given.
 
 The complete list of space groups available to critic2 can be
 retrieved using the [SPG keyword](#c2-spg) outside the CRYSTAL
-environment. This is particularly useful when there is a choice of
-origin to be made for a particular space group or if a non-standard
-setting is needed or in the case of rhombohedral groups for choosing
-the hexagonal or rhombohedral axes.
+environment. This list, along with example crystals, can also be found
+in the [space group crystal
+collection](/devnotes/space-group-collection/).  This is useful when
+there is a choice of origin to be made for a particular space group or
+if a non-standard setting is needed or in the case of rhombohedral
+groups for choosing the hexagonal or rhombohedral axes.
 
 If no SPG keyword is found in the CRYSTAL environment, then an
 internal routine calculates the symmetry from the atomic
@@ -390,7 +392,10 @@ The SPG keyword lists, in order:
 The `HM-short` and `HM-long` labels as well as the numerical Hall ID
 for the group (`Hall`) and the ITA numerical ID (`ITA`) can all be
 used in the SPG keyword inside [CRYSTAL](#c2-crystal). (Note that the
-latter requires using the additional HM keyword.)
+latter requires using the additional HM keyword.) A similar list can
+be found in the [space group crystal
+collection](/devnotes/space-group-collection/).
+
 
 ### The Crystal Library (CRYSTAL LIBRARY) {#c2-library}
 
