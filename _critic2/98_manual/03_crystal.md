@@ -467,7 +467,7 @@ The keyword:
 ~~~
 SYMPREC symprec.r
 ~~~
-sets the precision for the spglib symmetry module (default: 1d-4).
+sets the precision for the spglib symmetry module (default: 1d-2).
 
 And the keyword:
 ~~~
