@@ -46,7 +46,7 @@ WRITE {[file.]POSCAR|[file.]CONTCAR}
 WRITE file.abin
 WRITE file.elk
 WRITE file.gau
-WRITE file.cif
+WRITE file.cif [NOSYM|NOSYMM]
 WRITE file.d12 [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
@@ -204,16 +204,17 @@ output. This list is necessary to build the corresponding
 `POTCAR`. The atoms are always ordered in increasing atomic number. An
 abinit input file containing the input structure can be written by
 using the `.abin` extension. An elk input template can be written
-using the `.elk` extension. A simple cif file (no symmetry) is
-generated if the `.cif` extension is used.
+using the `.elk` extension. A simple cif file is generated if the
+`.cif` extension is used. If NOSYM (or NOSYMM) is used, the cif file
+is written without symmetry (i.e. in the P1 space group).
 
 A template input file for crystal14 (incomplete - no basis set
 specification) can be written with the extension `.d12`. The
 generation of these inputs uses the spglib symmetry routines to find
 the crystal symmetry, and is still experimental. You should do NEWCELL
 PRIMITIVE or NEWCELL STANDARD before writing a `.d12` file. The NOSYM
-(or NOSYMM) option before CRYSTAL writes a template in the P1 space
-group, and is probably a safer choice. 
+(or NOSYMM) option before writes a template in the P1 space group, and
+is probably a safer choice.
 
 A Gaussian input file for calculations under periodic boundary
 conditions can be written using the `.gau` extension. For a template

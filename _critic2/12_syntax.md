@@ -863,7 +863,7 @@ WRITE {[file.]POSCAR|[file.]CONTCAR}
 WRITE file.abin
 WRITE file.elk
 WRITE file.gau
-WRITE file.cif 
+WRITE file.cif [NOSYM|NOSYMM]
 WRITE file.d12 [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
