@@ -461,7 +461,7 @@ the use of symmetry. These keywords must be used before CRYSTAL to be
 effective, and they have no effect on MOLECULE (molecules never use
 symmetry). The four options to SYMM are: `0`, no symmetry (same as
 NOSYMM); `1`, full symmetry; `-1`, use full symmetry only if the
-system is small (<= 5000 atoms). The default is `-1`.
+system is small (<= 2000 atoms). The default is `-1`.
 
 The keyword:
 ~~~
