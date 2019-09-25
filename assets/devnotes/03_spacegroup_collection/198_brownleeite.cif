@@ -1,18 +1,30 @@
 data_stdin
-_cell_volume            94.694109
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         4.5580000000
 _cell_length_b         4.5580000000
 _cell_length_c         4.5580000000
 _cell_angle_alpha        90.0000
 _cell_angle_beta        90.0000
 _cell_angle_gamma        90.0000
-_cell_formula_units_Z 1
+_cell_volume            94.694109
+_space_group_crystal_system cubic
+_space_group_IT_number 198
+_space_group_name_H-M_alt 'P2_13'
+_space_group_name_Hall 'P 2ac 2ab 3'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  '-1/2-x,-y,-1/2+z'
+  '-1/2+x,-1/2-y,-z'
+  '-x,-1/2+y,-1/2-z'
+  'z,x,y'
+  '-1/2+z,-1/2-x,-y'
+  '-z,-1/2+x,-1/2-y'
+  '-1/2-z,-x,-1/2+y'
+  'y,z,x'
+  '-y,-1/2+z,-1/2-x'
+  '-1/2-y,-z,-1/2+x'
+  '-1/2+y,-1/2-z,-x'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -20,10 +32,4 @@ _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
 Mn     Mn     0.13800000000000     0.13800000000000     0.13800000000000
-Mn     Mn     0.36200000000000     0.86200000000000     0.63800000000000
-Mn     Mn     0.86200000000000     0.63800000000000     0.36200000000000
-Mn     Mn     0.63800000000000     0.36200000000000     0.86200000000000
 Si     Si     0.84500000000000     0.84500000000000     0.84500000000000
-Si     Si     0.65500000000000     0.15500000000000     0.34500000000000
-Si     Si     0.15500000000000     0.34500000000000     0.65500000000000
-Si     Si     0.34500000000000     0.65500000000000     0.15500000000000

@@ -1,18 +1,26 @@
-data_convert
-_cell_volume           178.170131
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+data_stdin
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         3.6770000000
 _cell_length_b         7.7940000000
 _cell_length_c         6.2170000000
 _cell_angle_alpha        90.0000
 _cell_angle_beta        90.0000
 _cell_angle_gamma        90.0000
-_cell_formula_units_Z 1
+_cell_volume           178.170131
+_space_group_crystal_system orthorhombic
+_space_group_IT_number 49
+_space_group_name_H-M_alt 'Pccm'
+_space_group_name_Hall '-P 2 2c'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  '-x,-y,-z'
+  '-x,y,-z'
+  'x,-y,z'
+  'x,-1/2-y,-z'
+  '-x,-1/2+y,z'
+  '-x,-1/2-y,z'
+  'x,-1/2+y,-z'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -20,16 +28,8 @@ _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
 O      O      0.99800000000000     0.00000000000000     0.31900000000000
-O      O      0.00200000000000     0.00000000000000     0.68100000000000
-O      O      0.00200000000000     0.50000000000000     0.31900000000000
-O      O      0.99800000000000     0.50000000000000     0.68100000000000
 O      O      0.50000000000000     0.25000000000000     0.50000000000000
-O      O      0.50000000000000     0.75000000000000     0.50000000000000
 Ta     Ta     0.50000000000000     0.00000000000000     0.50000000000000
-Ta     Ta     0.50000000000000     0.50000000000000     0.50000000000000
 O      O      0.50000000000000     0.00000000000000     0.00000000000000
-O      O      0.50000000000000     0.50000000000000     0.00000000000000
 Ta     Ta     0.00000000000000     0.00000000000000     0.00000000000000
-Ta     Ta     0.00000000000000     0.50000000000000     0.00000000000000
 O      O      0.00000000000000     0.25000000000000     0.00000000000000
-O      O      0.00000000000000     0.75000000000000     0.00000000000000

@@ -1,18 +1,26 @@
-data_convert
-_cell_volume           201.847298
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+data_stdin
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         4.6863000000
 _cell_length_b         4.6863000000
 _cell_length_c         9.1910000000
 _cell_angle_alpha        90.0000
 _cell_angle_beta        90.0000
 _cell_angle_gamma        90.0000
-_cell_formula_units_Z 1
+_cell_volume           201.847298
+_space_group_crystal_system tetragonal
+_space_group_IT_number 94
+_space_group_name_H-M_alt 'P4_22_12'
+_space_group_name_Hall 'P 4n 2n'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  '-1/2-y,-1/2+x,-1/2+z'
+  '-x,-y,z'
+  '-1/2+y,-1/2-x,-1/2+z'
+  '-1/2+x,-1/2-y,-1/2-z'
+  '-y,-x,-z'
+  '-1/2-x,-1/2+y,-1/2-z'
+  'y,x,-z'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -20,20 +28,6 @@ _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
 Mo     Mo     0.00000000000000     0.00000000000000     0.00000000000000
-Mo     Mo     0.50000000000000     0.50000000000000     0.50000000000000
 Li     Li     0.00000000000000     0.00000000000000     0.33700000000000
-Li     Li     0.50000000000000     0.50000000000000     0.83700000000000
-Li     Li     0.50000000000000     0.50000000000000     0.16300000000000
-Li     Li     0.00000000000000     0.00000000000000     0.66300000000000
 F      F      0.29550000000000     0.31230000000000     0.34260000000000
-F      F      0.18770000000000     0.79550000000000     0.84260000000000
-F      F      0.79550000000000     0.18770000000000     0.15740000000000
-F      F      0.31230000000000     0.29550000000000     0.65740000000000
-F      F      0.70450000000000     0.68770000000000     0.34260000000000
-F      F      0.20450000000000     0.81230000000000     0.15740000000000
-F      F      0.81230000000000     0.20450000000000     0.84260000000000
-F      F      0.68770000000000     0.70450000000000     0.65740000000000
 F      F      0.29090000000000     0.29090000000000     0.00000000000000
-F      F      0.20910000000000     0.79090000000000     0.50000000000000
-F      F      0.79090000000000     0.20910000000000     0.50000000000000
-F      F      0.70910000000000     0.70910000000000     0.00000000000000
