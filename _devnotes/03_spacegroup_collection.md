@@ -8,14 +8,16 @@ sidebar:
   - nav: "devnotes" 
 ---
 
-This is a collection of example crystals for each space group
-type. The purpose of this collection is to serve as test cases for the
-crystal symmetry tools in [critic2](/critic2/). The space group
-symbols in the table have been adapted from the internal database in
+This is a collection of example crystals for each space group type
+given in each of the ITA settings. The purpose of this set is to serve
+as test cases for the crystal symmetry tools in
+[critic2](/critic2/). The space group symbols in the table have been
+adapted from the database in
 [spglib](https://atztogo.github.io/spglib/) and from Table A1.4.2.7 in
-the International Tables for Crystallography, Volume B. The structures
-are given in cif file format, without symmetry info. The * in the
+the International Tables for Crystallography, Volume B. The * in the
 first column is the default ITA setting.
+
+Download the whole collection: [spg-collection.tar.xz](/assets/devnotes/03_spacegroup_collection/spg-collection.tar.xz).
 
 |   | Hall-num | c:n      | sys          | Hall             | H-M (full)          | H-M (short) | Example                                                                                                      |
 |---+----------+----------+--------------+------------------+---------------------+-------------+--------------------------------------------------------------------------------------------------------------|
