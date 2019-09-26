@@ -435,46 +435,47 @@ accessed throught the
 `molecule.dat` and `crystal.dat` are installed in the data directory
 by `make install`.
 
-## Symmetry Options (SYM/NOSYM/SYMPREC/CLEARSYM) {#c2-symm}
+## Symmetry Options (SYM/NOSYM) {#c2-symm}
 
-Critic2 uses three symmetry modules: "spg", "spgr", and "spglib". Spg
-and spgr accept a label (for instance, "P m -3 m") and build the
-symmetry operations from it (spgr is used if spg fails). 
-[spglib](https://atztogo.github.io/spglib/)) is a
-library by Atsushi Togo. Spglib reads the unit cell description
-(lengths, angles, and the complete list of atoms in the cell) and
-calculates all the symmetry operations. Spglib is always used,
-regardless of whether the symmetry information is read from the
-structure file (e.g. SPG keyword in CRYSTAL, or a cif file) or not. If
-the system is big or the use of symmetry is specifically deactivated
-(for instance if the crystal is too big), then the symmetry operations
-from the external source will be used, if available.
+Critic2 uses the [spglib](https://atztogo.github.io/spglib/)) library
+to calculate the symmetry operations and space group label from the
+crystal structure description. Symmetry is not used or calculated for
+molecular systems. By default, if the crystal is very big (>2000 atoms
+per unit cell), then the automatic calculation of the symmetry is
+deactivated.
 
 The treatment of symmetry in critic2 can be controlled using the
-SYMM/NOSYMM (before CRYSTAL) and CLEARSYM (after CRYSTAL) keywords.
+SYM and NOSYM keywords (or their equivalent spellings
+SYMM/NOSYMM).
 ~~~
-SYM|SYMM [-1|0|1]
+{SYMM|SYM} [-1|0|1]
+{SYMM|SYM} eps.r
+{SYMM|SYM} CLEAR
+{SYMM|SYM} RECALC
 NOSYMM|NOSYM
 ~~~
-These keywords activate (SYM or SYMM) or deactivate (NOSYMM or NOSYM)
-the use of symmetry. These keywords must be used before CRYSTAL to be
-effective, and they have no effect on MOLECULE (molecules never use
-symmetry). The four options to SYMM are: `0`, no symmetry (same as
-NOSYMM); `1`, full symmetry; `-1`, use full symmetry only if the
-system is small (<= 2000 atoms). The default is `-1`.
+Followed by an integer, SYM controls whether the symmetry operations
+and space group are calculated for new structures given via
+CRYSTAL. If the value is 1, symmetry is always calculated, regardless
+of crystal size. If 0, symmetry is never calculated. If -1, calculate
+the symmetry if the unit cell has fewer than 2000 atoms (this is the
+default). NOSYM (or NOSYMM) is equvalent to `SYM 0`.
 
-The keyword:
-~~~
-SYMPREC symprec.r
-~~~
-sets the precision for the spglib symmetry module (default: 1d-2).
+Additional keywords can be used to change the symmetry of an already
+loaded crystal. If SYM is followed by a real number (`eps.r`), then
+the precision with which the symmetry operations is determined is set
+to this value (the `eps.r` value is passed down to spglib). If a
+crystal has been loaded, then this command recalculates the symmetry
+using the new precision. The default `eps.r` is 1d-2 bohr.
 
-And the keyword:
-~~~
-CLEARSYM
-~~~
-clears all symmetry operations (that is, use space group P1). It must
-be used after CRYSTAL to be effective.
+The CLEAR keyword clears all symmetry operations (that is, use space
+group P1). The RECALC keyword recalculates the symmetry
+operations. This is useful in cases where the symmetry is read from an
+external file, such as a cif file.
+
+If the symmetry is recalculated for a loaded crystal (with the
+`eps.r`, CLEAR, or RECALC options), then all fields are unloaded and
+all critical point lists are cleared.
 
 ## Atomic Charge Options {#c2-charge}
 
