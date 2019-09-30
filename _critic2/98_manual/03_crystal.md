@@ -453,6 +453,7 @@ SYMM/NOSYMM).
 {SYMM|SYM} CLEAR
 {SYMM|SYM} RECALC
 {SYMM|SYM} ANALYSIS
+{SYMM|SYM} REFINE
 NOSYMM|NOSYM
 ~~~
 Followed by an integer, SYM controls whether the symmetry operations
@@ -474,9 +475,14 @@ group P1). The RECALC keyword recalculates the symmetry
 operations. This is useful in cases where the symmetry is read from an
 external file, such as a cif file.
 
+The REFINE keyword recalculates the atomic positions using the current
+space-group operations to have them be exactly at the corresponding
+symmetry sites. For instance, "0.333" may be converged to "0.3333333"
+in a hexagonal crystal.
+
 If the symmetry is recalculated for a loaded crystal (with the
-`eps.r`, CLEAR, or RECALC options), then all fields are unloaded and
-all critical point lists are cleared.
+`eps.r`, CLEAR, RECALC, or REFINE options), then all fields are
+unloaded and all critical point lists are cleared.
 
 The ANALYSIS keyword explores different values of the precision
 parameter (`eps.r`) and outputs the calculated space group symbol for

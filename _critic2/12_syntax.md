@@ -811,6 +811,7 @@ SUM [id.s]
 {SYMM|SYM} CLEAR
 {SYMM|SYM} RECALC
 {SYMM|SYM} ANALYSIS
+{SYMM|SYM} REFINE
 ~~~
 
 <a id="key-system"></a>
