@@ -452,6 +452,7 @@ SYMM/NOSYMM).
 {SYMM|SYM} eps.r
 {SYMM|SYM} CLEAR
 {SYMM|SYM} RECALC
+{SYMM|SYM} ANALYSIS
 NOSYMM|NOSYM
 ~~~
 Followed by an integer, SYM controls whether the symmetry operations
@@ -476,6 +477,14 @@ external file, such as a cif file.
 If the symmetry is recalculated for a loaded crystal (with the
 `eps.r`, CLEAR, or RECALC options), then all fields are unloaded and
 all critical point lists are cleared.
+
+The ANALYSIS keyword explores different values of the precision
+parameter (`eps.r`) and outputs the calculated space group symbol for
+each of them. This keyword is useful when there is a crystal that may
+have certain symmetry but there is interference from numerical or
+experimental noise in the atomic positions or cell parameters. The
+ANALYSIS keyword does not change the crystal structure or its symmetry
+operations.
 
 ## Atomic Charge Options {#c2-charge}
 

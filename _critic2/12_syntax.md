@@ -810,6 +810,7 @@ SUM [id.s]
 {SYMM|SYM} eps.r
 {SYMM|SYM} CLEAR
 {SYMM|SYM} RECALC
+{SYMM|SYM} ANALYSIS
 ~~~
 
 <a id="key-system"></a>
