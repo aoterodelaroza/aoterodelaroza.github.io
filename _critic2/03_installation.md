@@ -136,7 +136,7 @@ the library via `configure`:
 where `/opt/libxc/` is the directory that was the target for the libxc
 installation (i.e. you used `--prefix=/opt/libxc` when you configured
 the libxc library). The code in critic2 is not compatible with
-versions of libxc older than 3.0.
+versions of libxc older than 4.1.
 
 The libxc library is used in critic2 to create new scalar fields from
 the exchange and correlation energy density definitions in the library
