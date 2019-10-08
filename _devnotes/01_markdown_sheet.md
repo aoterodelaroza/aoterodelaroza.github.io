@@ -3,95 +3,75 @@ layout: single
 title: "Kramdown Cheat Sheet"
 permalink: /devnotes/kramdown-cheatsheet/
 excerpt: "This is a cheat sheet for using the markdown syntax."
-class: wide
 sidebar:
   - nav: "devnotes" 
+toc: true
+toc_label: "Kramdown cheatsheet"
+toc_sticky: true
 ---
 
-This is \`how you escape characters \`. This is a paragraph. A
-paragraph is separated from other paragraphs by a blank line.
-This is *italics* and this is **bold**.
+#### Inline formatting
 
-A blank line can be forced \\
-with a double backslash.
+| *Italics*                | `*Italics*` or `_Italics_` |
+| **Bold**                 | `**Bold**` or `__Bold__`   |
+| `Inline code`            | <code>`Inline code`</code> |
+| <code>Inline code</code> | `<code>Inline code</code>` |
+| -- (en-dash)             | `--`                       |
+| --- (em-dash)            | `---`                      |
+| ... (ellipsis)           | `...`                      |
+| <<guillemet>>            | `<<` and `>>`              |
 
-Headers can either be in settext format:
+#### Paragraph formatting and sectioning
 
-Level 1 header
-==============
+| Level 1 header  | `# header {#id}`                            |
+|                 | `header` with = underline                   |
+| Level 2 header  | `## header {#id}`                           |
+|                 | `header` with - underline                   |
+| Level 3 header  | `### header {#id}`                          |
+| Level 4 header  | `#### header {#id}`                         |
+| Block quote     | `> this is a quote`                         |
+| Line break      | `This is a\\`                               |
+|                 | `line break`                                |
+| Horizontal rule | `* * *` or `---`                            |
+| Code paragraph  | Start with four blank indentation.          |
+|                 | Delimit with `~~~`                          |
+|                 | Delimit with `~~~language` for color syntax |
+| Unordered list  | Items with `*` or `-` or `+`                |
+| Ordered list    | Number and a dot                            |
+| Definition list | Normal paragraph follwoed by `:` and space  |
+| HTML            | HTML blocks are accepted                    |
+| Footnotes       | `[^label]` and `[^label]: text` at the end  |
+| Abbreviations   | `*[label]: description` at the end          |
 
-Level 2 header
---------------
+#### Links
 
-or in atx style
+| Automatic         | `<http://www.google.com>`                   |
+| Inline (external) | `[google](http://www.google.com)`           |
+| Inline (internal) | `[critic2](/critic2/)`                      |
+| Reference         | `[google][gid]`                             |
+|                   | `[gid]: http://google.com "optional title"` |
 
-# Level 1 header
+#### Images
 
-## Level 2 header
+| Inline    | `![title](/assets/images/clathrate.png "title"){:height="100px" width="100px"}` |
+| Reference | `![clath2]`                                                                     |
+|           | `[clath2]: /assets/images/clathrate.png{:height="100px" width="100px"}`         |
 
-### Level 3 header 
+#### Tables
 
-#### Level 4 header {#id}
-
-Note that the last header has an ID.
-
-## Block quotes
-
-This is a blockquote:
-
-> O brave new world, that has such people in it.
-
-## Code formatting
-
-This is some code. It starts with a four blank indentation:
-
-    program hello
-      implicit none
-      
-      write (*,*) "Hello, world!"
-
-    end program hello
-    
-Alternatively, you can use the tilde symbol (~) to delimit a code
-block and also indicate the language for syntax highlight:
-
-~~~ fortran
-program hello
-  implicit none
-  
-  write (*,*) "Hello, world!"
-
-end program hello
 ~~~
-
-## Lists
-
-This is an unordered list:
-
-* Bleh
-* This is a multiline
-  item.
-* Blah!
-
-The *, +, and - characters can be used for an unordered list. For an
-ordered list, you use a number and a dot:
-
-1. Blah
-2. Bleh!
-
-## Definitions
-
-*Definition lists* are started when a normal paragraph is followed by
-a colon (possibly indented) and a space or a tab.
-
-Abstruse term
-: first definition, which 
-  spans two lines
-: second definition
-
-## Tables
-
-Tables:
+|---------+---------+---------|
+| Header1 | Header2 | Header3 |
+|---------|:--------|--------:|
+| 1       | 2       | 3       |
+| 4       | 5       | 6       |
+|---------+---------+---------|
+| 8       | 95      | 106     |
+| 894     | 345     | 866     |
+|=========+=========+=========|
+| Foot1   | Foot2   | Foot3   |
+|---------+---------+---------|
+~~~
 
 |---------+---------+---------|
 | Header1 | Header2 | Header3 |
@@ -105,77 +85,8 @@ Tables:
 | Foot1   | Foot2   | Foot3   |
 |---------+---------+---------|
 
-## Rules
+#### Math
 
-These are horizontal rules spanning the whole page:
-
-* * * 
-
----
-
-## Math
-
-Support for math using latex. A math block starts with two dollar
-signs. 
-$$
-\begin{equation}
-a^2 = b^2 + c^2 - 2bc\cos\alpha
-\end{equation}
-$$
-This is some inline math: $$e^{i\pi} = -1$$.
-
-## HTML
-
-HTML blocks are accepted. The markdown tag option can be used to
-modify how markdown will interpret them:
-<HR>
-<a href="http://google.com">This is a link</a>
-<a href="mailto:example@example.com.com"> Mail </a>
-<B>This is bold!</B>
-
-## Links and images
-
-Links can be automatic, inline, or reference.
-
-This is an automatic link: <http://www.google.com>
-
-This is an [inline link](http://www.google.com) or [critic2](/critic2/)
-
-This is a [reference link][linkid]
-
-[linkid]: http://google.com "optional title"
-
-This is an image:
-![clathrate](/assets/images/clathrate.png "title"){:height="100px" width="100px"}
-
-And a referenced image ![clath2]
-
-[clath2]: /assets/images/clathrate.png
-{:height="100px" width="100px"}
-
-## Emphasis
-
-Types of emphasis: *light1*, _light2_, **heavy1**, __heavy2__.
-
-## Code spans
-
-Use `<html>` for tags. Use `program bleh`{:.language-fortran} to start
-a program.
-
-## Footnotes
-
-This is a footnote [^1].
-
-[^1]: Text of the footnote.
-
-## Abbreviations
-
-Write HTML in another language.
-
-*[HTML]: HyperTextMarkupLanguage
-*[another language]: It's called Markdown
-
-## Typographic symbols
-
-Em-dash: ---. En-dash: --. Ellipsis:... . Guillemet: <<bleh>>
+| Inline  | `$$a^2 = b^2 + c^2 - 2bc\cos\alpha$$` |
+| Display | Same, in its own paragraph            |
 
