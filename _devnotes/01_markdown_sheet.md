@@ -16,32 +16,36 @@ toc_sticky: true
 | **Bold**                 | `**Bold**` or `__Bold__`   |
 | `Inline code`            | <code>`Inline code`</code> |
 | <code>Inline code</code> | `<code>Inline code</code>` |
+| \*Escaping\*             | `\*Escaping\*`             |
+| <del>Strikethrough</del> | `<del>Strikethrough</del>` |
 | -- (en-dash)             | `--`                       |
 | --- (em-dash)            | `---`                      |
 | ... (ellipsis)           | `...`                      |
 | <<guillemet>>            | `<<` and `>>`              |
+| :lollipop: :+1: (emojis) | `:lollipop: :+1:`          |
 
 #### Paragraph formatting and sectioning
 
-| Level 1 header  | `# header {#id}`                            |
-|                 | `header` with = underline                   |
-| Level 2 header  | `## header {#id}`                           |
-|                 | `header` with - underline                   |
-| Level 3 header  | `### header {#id}`                          |
-| Level 4 header  | `#### header {#id}`                         |
-| Block quote     | `> this is a quote`                         |
-| Line break      | `This is a\\`                               |
-|                 | `line break`                                |
-| Horizontal rule | `* * *` or `---`                            |
-| Code paragraph  | Start with four blank indentation.          |
-|                 | Delimit with `~~~`                          |
-|                 | Delimit with `~~~language` for color syntax |
-| Unordered list  | Items with `*` or `-` or `+`                |
-| Ordered list    | Number and a dot                            |
-| Definition list | Normal paragraph follwoed by `:` and space  |
-| HTML            | HTML blocks are accepted                    |
-| Footnotes       | `[^label]` and `[^label]: text` at the end  |
-| Abbreviations   | `*[label]: description` at the end          |
+| Level 1 header  | `# header {#id}`                                                        |
+|                 | `header` with = underline                                               |
+| Level 2 header  | `## header {#id}`                                                       |
+|                 | `header` with - underline                                               |
+| Level 3 header  | `### header {#id}`                                                      |
+| Level 4 header  | `#### header {#id}`                                                     |
+| Block quote     | `> this is a quote`                                                     |
+| Line break      | `This is a\\`                                                           |
+|                 | `line break`                                                            |
+| Horizontal rule | `* * *` or `---`                                                        |
+| Code paragraph  | Start with four blank indentation.                                      |
+|                 | Delimit with `~~~` or <code>```</code>                                  |
+|                 | Delimit with `~~~language` or <code>```language</code> for color syntax |
+| Unordered list  | Items with `*` or `-` or `+`                                            |
+| Ordered list    | Number and a dot                                                        |
+| Definition list | Normal paragraph follwoed by `:` and space                              |
+| HTML            | HTML blocks are accepted                                                |
+| Footnotes       | `[^label]` and `[^label]: text` at the end                              |
+| Abbreviations   | `*[label]: description` at the end                                      |
+| Task lists      | `- [ ] Incomplete` `- [x] Complete`                                     |
 
 #### Links
 
@@ -56,6 +60,7 @@ toc_sticky: true
 | Inline    | `![title](/assets/images/clathrate.png "title"){:height="100px" width="100px"}` |
 | Reference | `![clath2]`                                                                     |
 |           | `[clath2]: /assets/images/clathrate.png{:height="100px" width="100px"}`         |
+| External  | `![image](https://img.shields.io/badge/new-bleh-green)`                         |
 
 #### Tables
 
