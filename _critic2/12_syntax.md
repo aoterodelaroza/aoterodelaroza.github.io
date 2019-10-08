@@ -495,7 +495,7 @@ MIN [id.s]
 [MOLCALC](/critic2/manual/misc/#c2-molcalc)
 : Calculate molecular properties using molecular/mesh integrations.
 ~~~
-MOLCALC [NELEC]
+MOLCALC
 MOLCALC expr.s
 MOLCALC PEACH
   mo1a [->] mo1r k1
@@ -503,6 +503,7 @@ MOLCALC PEACH
   [...]
 ENDMOLCALC/END
 MOLCALC HF
+MOLCALC ... [ASSIGN var.s]
 ~~~
 
 <a id="key-molcell"></a>
