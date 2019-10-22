@@ -162,7 +162,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
 [COORD](/critic2/manual/structure/#c2-coord)
 : Calculate the pair and triplet coordination numbers.
 ~~~
-COORD [DIST dist.r] [FAC fac.r] [RADII [IONIC|COVALENT|VDW|at1.s r1.s ...]
+COORD [DIST dist.r] [FAC fac.r] [RADII {at1.s|z1.i} r1.s [{at2.s|z2.i} r2.s ...]]
 ~~~
 
 <a id="key-count"></a>
