@@ -20,8 +20,8 @@ LOAD file.cube
 LOAD file.bincube
 LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
            GDEN2|GDEN3|LDEN|KDEN}
-LOAD [file.]{CHGCAR|AECCAR0|AECCAR2}
-LOAD {[file.]CHG|[file.]ELFCAR}
+LOAD [file.]{CHGCAR|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
+LOAD {[file.]CHG|[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
 LOAD file.grid
@@ -173,6 +173,20 @@ LOAD VASP CHG
 I have never seen an ELFCAR that is multiplied by the volume, which
 would not make much sense anyway. So the default behavior for ELFCAR
 files is to assume that it is not.
+
+In spin-polarized and non-collinear systems, the CHGCAR and CHG
+contain more than one grid. In spin-polarized calculations, the first
+grid is the total electron density, which is follwed by the spin
+density. In non-collinear calculations, the first grid is the total
+electron density followed by the spin magnetizations in the x-, y-,
+and z- directions. You can select which of these grids to read by
+appending an integer after the file name (`iblock.i`). Optionally, use
+the keyword RHO (`iblock.i = 1`), SPIN (`iblock.i = 2`), MAGX
+(`iblock.i = 2`), MAGY (`iblock.i = 3`), or MAGZ (`iblock.i =
+4`). Similarly, the ELFCAR in a spin-polarized calculation contains
+two grids: the spin-up ELF (first block) and the spin-down ELF (second
+block). If no extra integer or keyword is passed, then the first grid
+in the file is read.
 
 ### QE Wavefunction plus Wannier Checkpoint Files (pwc) {#c2-qepwc}
 

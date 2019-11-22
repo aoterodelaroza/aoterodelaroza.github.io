@@ -15,21 +15,19 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)           | [BADER](#key-bader)                     | [BASINPLOT](#key-basinplot)           | [BENCHMARK](#key-benchmark) | [BONDFACTOR](#key-bondfactor) |
-| [BUNDLEPLOT](#key-bundleplot) | [CLEAR](#key-clear)         | [CLEARSYM](#key-clearsym)               | [CLEARSYMM](#key-clearsymm)           | [COMPARE](#key-compare)     | [COORD](#key-coord)           |
-| [COUNT](#key-count)           | [CPREPORT](#key-cpreport)   | [CRYSTAL](#key-crystal)                 | [CUBE](#key-cube)                     | [ECHO](#key-echo)           | [END](#key-end)               |
-| [ENVIRON](#key-environ)       | [EWALD](#key-ewald)         | [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)                 | [HIRSHFELD](#key-hirshfeld) | [IDENTIFY](#key-identify)     |
-| [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals) | [INT_RADIAL](#key-int-radial)           | [LIBRARY](#key-library)               | [LINE](#key-line)           | [LIST](#key-list)             |
-| [LIBXC](#key-libxc)           | [LOAD](#key-load)           | [MAX](#key-max)                         | [MEAN](#key-mean)                     | [MESHTYPE](#key-meshtype)   | [MIN](#key-min)               |
-| [MOLCALC](#key-molcalc)       | [MOLCELL](#key-molcell)     | [MOLECULE](#key-molecule)               | [NCIPLOT](#key-nciplot)               | [NEWCELL](#key-newcell)     | [NOCORE](#key-nocore)         |
-| [NOSYM](#key-nosym)           | [NOSYMM](#key-nosymm)       | [ODE_MODE](#key-ode-mode)               | [PACKING](#key-packing)               | [PLANE](#key-plane)         | [POINT](#key-point)           |
-| [POINTPROP](#key-pointprop)   | [POWDER](#key-powder)       | [PRECISECUBE](#key-precisecube)         | [PRUNE_DISTANCE](#key-prune-distance) | [Q/QAT](#key-q)             | [QTREE](#key-qtree)           |
-| [RADII](#key-radii)           | [RDF](#key-rdf)             | [REFERENCE](#key-reference)             | [RESET](#key-reset)                   | [ROOT](#key-root)           | [RUN](#key-run)               |
-| [SETFIELD](#key-setfield)     | [SPG](#key-spg)             | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube)     | [STM](#key-stm)             | [SUM](#key-sum)               |
-| [SYM](#key-sym)               | [SYMM](#key-symm)           | [SYMPREC](#key-symprec)                 | [SYSTEM](#key-system)                 | [UNITS](#key-units)         | [UNLOAD](#key-unload)         |
-| [WRITE](#key-write)           | [XDM](#key-xdm)             | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                     |                             |                               |
-
-
+| [ATOMLABEL](#key-atomlabel)             | [AUTO](#key-auto)                     | [BADER](#key-bader)         | [BASINPLOT](#key-basinplot) | [BENCHMARK](#key-benchmark)   | [BONDFACTOR](#key-bondfactor) |
+| [BUNDLEPLOT](#key-bundleplot)           | [CLEAR](#key-clear)                   | [COMPARE](#key-compare)     | [COORD](#key-coord)         | [COUNT](#key-count)           | [CPREPORT](#key-cpreport)     |
+| [CRYSTAL](#key-crystal)                 | [CUBE](#key-cube)                     | [ECHO](#key-echo)           | [END](#key-end)             | [ENVIRON](#key-environ)       | [EWALD](#key-ewald)           |
+| [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)                 | [HIRSHFELD](#key-hirshfeld) | [IDENTIFY](#key-identify)   | [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals)   |
+| [INT_RADIAL](#key-int-radial)           | [LIBRARY](#key-library)               | [LINE](#key-line)           | [LIST](#key-list)           | [LIBXC](#key-libxc)           | [LOAD](#key-load)             |
+| [MAX](#key-max)                         | [MEAN](#key-mean)                     | [MESHTYPE](#key-meshtype)   | [MIN](#key-min)             | [MOLCALC](#key-molcalc)       | [MOLCELL](#key-molcell)       |
+| [MOLECULE](#key-molecule)               | [NCIPLOT](#key-nciplot)               | [NEWCELL](#key-newcell)     | [NOCORE](#key-nocore)       | [NOSYM](#key-nosym)           | [NOSYMM](#key-nosymm)         |
+| [ODE_MODE](#key-ode-mode)               | [PACKING](#key-packing)               | [PLANE](#key-plane)         | [POINT](#key-point)         | [POINTPROP](#key-pointprop)   | [POWDER](#key-powder)         |
+| [PRECISECUBE](#key-precisecube)         | [PRUNE_DISTANCE](#key-prune-distance) | [Q/QAT](#key-q)             | [QTREE](#key-qtree)         | [RADII](#key-radii)           | [RDF](#key-rdf)               |
+| [REFERENCE](#key-reference)             | [RESET](#key-reset)                   | [ROOT](#key-root)           | [RUN](#key-run)             | [SETFIELD](#key-setfield)     | [SPG](#key-spg)               |
+| [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube)     | [STM](#key-stm)             | [SUM](#key-sum)             | [SYM](#key-sym)               | [SYMM](#key-symm)             |
+| [SYSTEM](#key-system)                   | [UNITS](#key-units)                   | [UNLOAD](#key-unload)       | [WRITE](#key-write)         | [XDM](#key-xdm)               | [YT](#key-yt)                 |
+| [ZPSP](#key-zpsp)                       |                                       |                             |                             |                               |                               |
 
 ## Notation
 
@@ -150,13 +148,6 @@ BUNDLEPLOT x.r y.r z.r
 CLEAR {var1.s var2.s ...|ALL}
 ~~~
 
-<a id="key-clearsym"></a><a id="key-clearsymm"></a>
-[CLEARSYM/CLEARSYMM](/critic2/manual/crystal/#c2-symm)
-: Delete all symmetry operations except the identity.
-~~~
-CLEARSYM/CLEARSYMM
-~~~
-
 <a id="key-compare"></a>
 [COMPARE](/critic2/manual/structure/#c2-compare)
 : Compare two or more crystal or molecular structures using powder
@@ -171,7 +162,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
 [COORD](/critic2/manual/structure/#c2-coord)
 : Calculate the pair and triplet coordination numbers.
 ~~~
-COORD [DIST dist.r] [FAC fac.r] [RADII [IONIC|COVALENT|VDW|at1.s r1.s ...]
+COORD [DIST dist.r] [FAC fac.r] [RADII {at1.s|z1.i} r1.s [{at2.s|z2.i} r2.s ...]]
 ~~~
 
 <a id="key-count"></a>
@@ -438,8 +429,8 @@ LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
 LOAD file.cube
 LOAD file.bincube
 LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
-LOAD [file.]{CHGCAR|AECCAR0|AECCAR2}
-LOAD {[file.]CHG|[file.]ELFCAR}
+LOAD [file.]{CHGCAR|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
+LOAD {[file.]CHG|[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
 LOAD file.grid
@@ -505,7 +496,7 @@ MIN [id.s]
 [MOLCALC](/critic2/manual/misc/#c2-molcalc)
 : Calculate molecular properties using molecular/mesh integrations.
 ~~~
-MOLCALC [NELEC]
+MOLCALC
 MOLCALC expr.s
 MOLCALC PEACH
   mo1a [->] mo1r k1
@@ -513,6 +504,7 @@ MOLCALC PEACH
   [...]
 ENDMOLCALC/END
 MOLCALC HF
+MOLCALC ... [ASSIGN var.s]
 ~~~
 
 <a id="key-molcell"></a>
@@ -583,7 +575,8 @@ ENDNCIPLOT/END
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
         [ORIGIN x0.r y0.r z0.r] 
-NEWCELL [PRIMSTD|STANDARD|PRIMITIVE|NIGGLI|DELAUNAY]
+NEWCELL [PRIMSTD|STANDARD|PRIMITIVE] [REFINE]
+NEWCELL [NIGGLI|DELAUNAY]
 ~~~
 
 <a id="key-nocore"></a>
@@ -816,13 +809,11 @@ SUM [id.s]
 : Activates the use of symmetry and controls the symmetry level.
 ~~~
 {SYMM|SYM} [-1|0|1]
-~~~
-
-<a id="key-symprec"></a>
-[SYMPREC](/critic2/manual/crystal/#c2-symm)
-: Sets the precision for the `spglib` symmetry library.
-~~~
-SYMPREC symprec.r
+{SYMM|SYM} eps.r
+{SYMM|SYM} CLEAR
+{SYMM|SYM} RECALC
+{SYMM|SYM} ANALYSIS
+{SYMM|SYM} REFINE
 ~~~
 
 <a id="key-system"></a>
@@ -864,7 +855,7 @@ WRITE {[file.]POSCAR|[file.]CONTCAR}
 WRITE file.abin
 WRITE file.elk
 WRITE file.gau
-WRITE file.cif 
+WRITE file.cif [NOSYM|NOSYMM]
 WRITE file.d12 [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db

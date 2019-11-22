@@ -1,18 +1,30 @@
-data_convert
-_cell_volume            84.697255
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+data_stdin
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         5.1243847544
 _cell_length_b         5.1243847544
 _cell_length_c         5.1243847544
 _cell_angle_alpha        55.2730
 _cell_angle_beta        55.2730
 _cell_angle_gamma        55.2730
-_cell_formula_units_Z 1
+_cell_volume            84.697235
+_space_group_crystal_system trigonal
+_space_group_IT_number 167
+_space_group_name_H-M_alt 'R-3c'
+_space_group_name_Hall '-R 3 2"c'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  '-x,-y,-z'
+  'y,z,x'
+  '-y,-z,-x'
+  'z,x,y'
+  '-z,-x,-y'
+  '-1/2-z,-1/2-y,-1/2-x'
+  '-1/2+z,-1/2+y,-1/2+x'
+  '-1/2-x,-1/2-z,-1/2-y'
+  '-1/2+x,-1/2+z,-1/2+y'
+  '-1/2-y,-1/2-x,-1/2-z'
+  '-1/2+y,-1/2+x,-1/2+z'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -20,12 +32,4 @@ _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
 Al     Al     0.35222000000000     0.35222000000000     0.35222000000000
-Al     Al     0.14778000000000     0.14778000000000     0.14778000000000
-Al     Al     0.64778000000000     0.64778000000000     0.64778000000000
-Al     Al     0.85222000000000     0.85222000000000     0.85222000000000
 O      O      0.94424000000000     0.55576000000000     0.25000000000000
-O      O      0.25000000000000     0.94424000000000     0.55576000000000
-O      O      0.55576000000000     0.25000000000000     0.94424000000000
-O      O      0.05576000000000     0.44424000000000     0.75000000000000
-O      O      0.75000000000000     0.05576000000000     0.44424000000000
-O      O      0.44424000000000     0.75000000000000     0.05576000000000

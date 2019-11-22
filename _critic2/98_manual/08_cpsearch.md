@@ -166,7 +166,7 @@ the CLIP keyword. The CLIP keyword specifies a region of real
 space. Only the seeds inside that region are used, and only the CPs
 found inside that region are accepted (although, in crystals, symmetry
 can replicate the CPs and send them outside the CLIP region; use
-[CLEARSYM](/critic2/manual/crystal/#c2-symm) or
+[MYM](/critic2/manual/crystal/#c2-symm) with the CLEAR keyword or
 [NOSYMM](/critic2/manual/crystal/#c2-symm) to deactivate symmetry if
 necessary). There are two possible region shapes in CLIP: a box (CUBE)
 and a sphere (SPHERE). The box is specified by giving two opposite

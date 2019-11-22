@@ -179,9 +179,10 @@ provided the files exist.
 The NEWCELL keyword transforms the unit cell used to describe the
 current crystal structure to a new cell:
 ~~~
-NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i}
-        [INV|INVERSE] [ORIGIN x0.r y0.r z0.r]
-NEWCELL [PRIMSTD|STANDARD|PRIMITIVE|NIGGLI|DELAUNAY]
+NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
+        [ORIGIN x0.r y0.r z0.r] 
+NEWCELL [PRIMSTD|STANDARD|PRIMITIVE] [REFINE]
+NEWCELL [NIGGLI|DELAUNAY]
 ~~~
 The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`), 
 (`x2.r` `y2.r` `z2.r`), and (`x3.r` `y3.r` `z3.r`) in
@@ -237,9 +238,14 @@ transformed to:
 * DELAUNAY: Delaunay-reduced cell for the current lattice. Use a
   NEWCELL PRIMITIVE first to get the primitive Delaunay cell.
 
-The origin is not translated in any of these keywords. These
-transformations use the [spglib](https://atztogo.github.io/spglib/)
-library. Please consult the spglib manual for more information.
+The origin is not translated by any of these keywords. If the REFINE
+keyword is used, then the atomic positions are idealized according to
+the space group symmetry operations. For instance, an atomic
+coordinate of 0.333 may become 0.3333333... in a hexagonal space
+group. REFINE can be used with STANDARD, PRIMITIVE, and PRIMSTD only.
+These transformations use the
+[spglib](https://atztogo.github.io/spglib/) library. Please consult
+the spglib manual for more information.
 
 ## Calculate Atomic Environments (ENVIRON) {#c2-environ}
 

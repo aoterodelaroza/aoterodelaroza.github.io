@@ -1,18 +1,22 @@
-data_convert
-_cell_volume           168.395623
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+data_stdin
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         7.4370000000
 _cell_length_b         5.1240000000
 _cell_length_c         4.4190000000
 _cell_angle_alpha        90.0000
 _cell_angle_beta        90.0000
 _cell_angle_gamma        89.9600
-_cell_formula_units_Z 1
+_cell_volume           168.395623
+_space_group_crystal_system monoclinic
+_space_group_IT_number 10
+_space_group_name_H-M_alt 'P2/m'
+_space_group_name_Hall '-P 2y'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  '-x,-y,-z'
+  '-x,-y,z'
+  'x,y,-z'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -24,6 +28,4 @@ Au     Au     0.50000000000000     0.00000000000000     0.00000000000000
 Ag     Ag     0.00000000000000     0.50000000000000     0.50000000000000
 Ag     Ag     0.50000000000000     0.50000000000000     0.50000000000000
 Te     Te     0.25090000000000     0.62770000000000     0.00000000000000
-Te     Te     0.74910000000000     0.37230000000000     0.00000000000000
 Te     Te     0.25820000000000     0.10890000000000     0.50000000000000
-Te     Te     0.74180000000000     0.89110000000000     0.50000000000000

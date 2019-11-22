@@ -1,18 +1,24 @@
-data_convert
-_cell_volume            83.751703
-_symmetry_space_group_name_H-M 'P 1'
-_symmetry_Int_Tables_number 1
-loop_
-_symmetry_equiv_pos_site_id
-_symmetry_equiv_pos_as_xyz
-1 x,y,z
+data_stdin
+_audit_creation_method 'critic2-4f1eba8'
 _cell_length_a         5.6447623195
 _cell_length_b         5.6447623195
 _cell_length_c         5.6447623195
 _cell_angle_alpha       116.6357
 _cell_angle_beta       116.6357
 _cell_angle_gamma       116.6357
-_cell_formula_units_Z 1
+_cell_volume            83.751549
+_space_group_crystal_system trigonal
+_space_group_IT_number 160
+_space_group_name_H-M_alt 'R3m'
+_space_group_name_Hall 'R 3 -2"'
+loop_
+_space_group_symop_operation_xyz
+  'x,y,z'
+  'z,x,y'
+  'y,z,x'
+  'z,y,x'
+  'y,x,z'
+  'x,z,y'
 loop_
 _atom_site_label
 _atom_site_type_symbol
@@ -20,8 +26,4 @@ _atom_site_fract_x
 _atom_site_fract_y
 _atom_site_fract_z
 Ni     Ni     0.38771000000000     0.65096000000000     0.38771000000000
-Ni     Ni     0.38771000000000     0.38771000000000     0.65096000000000
-Ni     Ni     0.65096000000000     0.38771000000000     0.38771000000000
 S      S      0.11224000000000     0.77552000000000     0.11224000000000
-S      S      0.11224000000000     0.11224000000000     0.77552000000000
-S      S      0.77552000000000     0.11224000000000     0.11224000000000

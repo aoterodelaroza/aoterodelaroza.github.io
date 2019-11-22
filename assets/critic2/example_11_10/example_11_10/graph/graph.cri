@@ -1,0 +1,8 @@
+crystal graph.pwc
+load rhoae.cube
+load graph.pwc graph.chk
+
+integrable 2
+integrable 2 deloc
+
+yt
