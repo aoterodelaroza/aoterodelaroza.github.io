@@ -610,6 +610,7 @@ CPREPORT file.fdf
 CPREPORT file.STRUCT_IN
 CPREPORT file.hsd
 CPREPORT file.gen
+CPREPORT file.json
 CPREPORT [...] [GRAPH]
 ~~~
 
@@ -639,6 +640,12 @@ special options are used to change the region being writteh by
 CPREPORT (such as MOLMOTIF, BURST, etc.), the atoms and critical
 points in the output file are in the same order as in critic2's
 complete critical point list.
+
+Critic2 can also write the structure and critical point information
+for the reference field to a JavaScript Object Notation (JSON) file by
+indicating a file with extension `.json`. The generated JSON file
+contains the system geometry, the field details, and essentialy the
+same information as in the SHORT, LONG, and VERYLONG reports.
 
 The optional GRAPH keyword can be used in combination with any of the
 file formats mentioned above. When GRAPH is used, the bond paths are
