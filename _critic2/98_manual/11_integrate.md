@@ -1034,7 +1034,7 @@ COLOR_ALLOCATE {0|1}
 
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-   [DISCARD expr.s]
+   [DISCARD expr.s] [JSON file.json]
 ~~~
 The [Yu and Trinkle (YT) method](https://doi.org/10.1063/1.3553716)
 calculates the attraction basins of the reference fields and computes
@@ -1103,6 +1103,10 @@ DISCARD "$rho < 1e-7"
 The arithmetic expression may include any field, not just the
 reference field.
 
+By using the JSON keyword a JavaScript Object Notation (JSON) file is
+created containing the molecular or crystal structure, information
+about the reference field and the results of the integration.
+
 Not all the properties defined by the 
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) keyword are
 integrated inside the basins. Only the subset of those properties that
@@ -1131,7 +1135,7 @@ The algorithm by Henkelman et al. is implemented in critic2, and can
 be used with the BADER keyword:
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-      [DISCARD expr.s]
+      [DISCARD expr.s] [JSON file.json]
 ~~~
 The BADER algorithm uses the reference field to calculate the QTAIM
 basins. This field must be defined on a grid. BADER assigns grid nodes

@@ -103,7 +103,7 @@ AUTO SEED MESH
   grid using Henkelman et al.'s method.
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-      [DISCARD expr.s]
+      [DISCARD expr.s] [JSON file.json]
 ~~~
 
 <a id="key-basinplot"></a>
@@ -884,7 +884,7 @@ XDM a1.r a2.r chf.s
   grid using Yu and Trinkle's method.
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-   [DISCARD expr.s]
+   [DISCARD expr.s] [JSON file.json]
 ~~~
 
 <a id="key-zpsp"></a>
