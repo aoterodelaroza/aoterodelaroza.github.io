@@ -134,25 +134,28 @@ CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"exp
      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER]
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r bpp.r ...
 CUBE CELL {bpp.r|nx.i ny.i nz.i} ...
-CUBE GRID ...
+CUBE GRID [SHIFT ix.i iy.i iz.i] ...
 CUBE ... FILE CHGCAR
 CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
 CUBE ... FILE bleh.xsf
 ~~~
 The CUBE keyword writes a three-dimensional grid in Gaussian cube,
-binary cube, VASP CHGCAR, and xsf formats. The limits of the grid can be set
-in three ways. By giving the end-points (`x0.r`, `y0.r`, `z0.r`) and
-(`x1.r`, `y1.r`, `z1.r`) it is possible to build a grid from an
-orthogonal fragment of space (only using the cube and bincube
-formats). The CELL keyword calculates a grid 
+binary cube, VASP CHGCAR, and xsf formats. The limits of the grid can
+be set in three ways. By giving the end-points (`x0.r`, `y0.r`,
+`z0.r`) and (`x1.r`, `y1.r`, `z1.r`) it is possible to build a grid
+from an orthogonal fragment of the system (this is only possible using
+the cube and bincube formats). The CELL keyword calculates a grid
 spanning the entire unit cell, which may or may not be orthogonal
 depending on the structure. GRID has the same effect as CELL regarding
-the output grid geometry. If the end points are given, they must be in
-crystallographic coordinates in crystals (the structure was read using
-the CRYSTAL keyword) or molecular Cartesian coordinates
-(MOLECULE). The units in the latter default to angstrom unless changed
-using the [UNITS](/critic2/manual/inputoutput/#c2-units) keyword.
+the output grid geometry. 
+
+If the end-points are given, they must be in crystallographic
+coordinates if the system is a periodic crystal (the structure was
+read using the CRYSTAL keyword) or molecular Cartesian coordinates if
+the system is a molecule (read with the MOLECULE keyword). The units
+in the latter default to angstrom unless changed using the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword.
 
 The number of points in the grid can also be controlled in several
 ways. If the grid limits are given explicitly or using CELL, then the
@@ -160,11 +163,18 @@ number of points on each axis can be indicated by giving three
 integers (`nx.i`, `ny.i`, and `nz.i`) corresponding to the number of
 points in the x-, y-, and z-axis respectively. If a single number
 (`bpp.r`) is found, then the number of points is the length of the
-axis divided by `bpp.r` (bpp is bohrs per point). The GRID keyword can
-be used to write a grid field to a grid file directly. This is useful
-when combined with the LOAD keyword to read, manipulate, and then save
-grids to an external file. If GRID is used, both the geometry of the
-grid and the number of points are adopted from the grid field.
+axis divided by `bpp.r` (bpp means "bohr per point").
+
+The GRID keyword can be used to write a given grid to a grid file
+directly. If FIELD is used in combination with GRID, then the
+indicated field or expression is used; otherwise, the reference field
+is used. The GRID keyword is useful when combined with LOAD and
+arithmetic operations to read, manipulate, and then save grids to an
+external file. If GRID is used, both the geometry of the grid and the
+number of points are taken from the parent grid field. The SHIFT
+keyword is used for shifting the origin of the grid to a different
+point. The origin of the shifted grid is the position of point `ix.i`,
+`iy.i`, `iz.i` in the old grid.
 
 Independently on how the grid is set up, several options control the
 behavior of CUBE. FILE sets the name of the output file (default:
