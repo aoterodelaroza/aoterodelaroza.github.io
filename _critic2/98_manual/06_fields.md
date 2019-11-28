@@ -53,6 +53,7 @@ LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s}
 LOAD AS LAP id.s
 LOAD AS GRAD id.s
 LOAD AS POT id.s [RY|RYDBERG]
+LOAD AS RESAMPLE id.s n1.i n2.i n3.i
 LOAD AS CLM {ADD id1.s id2.s|SUB id1.s id2.s}
 ~~~
 Critic2 loads scalar fields in "field slots": integer identifiers that
@@ -547,11 +548,11 @@ the atomic basins to get the atomic magnetic moments (see the
 The list of arithmetic operations that can be performed on fields is
 [quite large](/critic2/manual/arithmetics/). If no additional keywords
 are present between LOAD AS and the arithmetic expression (like LAP,
-GRAD, or CLM, see below), then the resulting new field can be of two
-types. If the arithmetic expression involves at least one grid, the
-resulting field will be a grid with the same number of points. If more
-than one grid appears in the expression, then the new grid size is the
-maximum of the number of points in every dimension.
+GRAD, CLM, or RESAMPLE, see below), then the resulting new field can
+be of two types. If the arithmetic expression involves at least one
+grid, the resulting field will be a grid with the same number of
+points. If more than one grid appears in the expression, then the new
+grid size is the maximum of the number of points in every dimension.
 
 If the expression contains no grid fields, then the resulting field is
 a "ghost field". A ghost field is just an arithmetic expression that
@@ -577,8 +578,8 @@ fragment of the crystal is passed as an xyz file to any of those
 keywords (with the optional FRAGMENT keyword), then only the atoms in
 the fragment contribute to the sum of atomic (or core) densities.
 
-The LAP, GRAD, POT, and CLM keywords of LOAD AS apply only to specific
-types of fields:
+The LAP, GRAD, POT, CLM, and RESAMPLE keywords of LOAD AS apply only
+to specific types of fields:
 
 * GRAD and POT only apply to grid fields. GRAD defines a new grid as
   the norm of the gradient of the grid field id.s. POT is the
@@ -601,6 +602,13 @@ types of fields:
   by using the ADD and SUB keywords respectively. Note that the muffin
   tin radii, number of plane-waves, etc. have to be the same for both
   source fields.
+
+* RESAMPLE is used to create larger grids from smaller grids via
+  Fourier transform. The RESAMPLE keyword requires a source grid field
+  (`id.s`) and the size of the new grid (the number of points in each
+  direction, `n1.i`, `n2.i`, and `n3.i`). Note that for non-smooth
+  source grids this operation may induce oscillations in the regions
+  with low field value.
 
 ## Changing the Field Options After LOAD (SETFIELD) {#c2-setfield}
 

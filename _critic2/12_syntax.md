@@ -427,7 +427,8 @@ LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
 ~~~
 LOAD file.cube
 LOAD file.bincube
-LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
+LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
+           GDEN2|GDEN3|LDEN|KDEN}
 LOAD [file.]{CHGCAR|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD {[file.]CHG|[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
@@ -444,6 +445,7 @@ LOAD file.wfn
 LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
 LOAD file.molden [READVIRTUAL]
+LOAD file.pwc [file.chk [filedn.chk]]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
@@ -454,13 +456,14 @@ LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
          [NOTESTMT] [ZPSP at1.s q1.r...]
 LOAD AS "expression.s" [n1.i n2.i n3.i|SIZEOF id.s|GHOST]
-LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s} [FRAGMENT file.xyz]
+LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s} 
+        [FRAGMENT file.xyz]
 LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s}
 LOAD AS LAP id.s
 LOAD AS GRAD id.s
 LOAD AS POT id.s [RY|RYDBERG]
+LOAD AS RESAMPLE id.s n1.i n2.i n3.i
 LOAD AS CLM {ADD id1.s id2.s|SUB id1.s id2.s}
-LOAD file.pwc [file.chk]
 ~~~
 
 <a id="key-max"></a>
