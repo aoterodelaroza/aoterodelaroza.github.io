@@ -103,7 +103,7 @@ AUTO SEED MESH
   grid using Henkelman et al.'s method.
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-      [DISCARD expr.s]
+      [DISCARD expr.s] [JSON file.json]
 ~~~
 
 <a id="key-basinplot"></a>
@@ -201,6 +201,7 @@ CPREPORT file.fdf
 CPREPORT file.STRUCT_IN
 CPREPORT file.hsd
 CPREPORT file.gen
+CPREPORT file.json
 CPREPORT [...] [GRAPH]
 ~~~
 
@@ -255,7 +256,7 @@ CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"exp
      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER]
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r bpp.r ...
 CUBE CELL {bpp.r|nx.i ny.i nz.i} ...
-CUBE GRID ...
+CUBE GRID [SHIFT ix.i iy.i iz.i] ...
 CUBE ... FILE CHGCAR
 CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
@@ -886,7 +887,7 @@ XDM a1.r a2.r chf.s
   grid using Yu and Trinkle's method.
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-   [DISCARD expr.s]
+   [DISCARD expr.s] [JSON file.json]
 ~~~
 
 <a id="key-zpsp"></a>
