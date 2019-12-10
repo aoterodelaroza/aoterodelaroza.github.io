@@ -75,7 +75,7 @@ stable version is compilable with all versions of gfortran starting at
 compile the stable code.
 
 The development version can be compiled with gfortran-6 and later and
-with intel fortran 19.x and later. All other compilers tested have
+with intel fortran 2019.5 and later. All other compilers tested have
 issues, and fail to produce a working binary. This is the list of
 compilers tested:
 
@@ -90,6 +90,9 @@ compilers tested:
 * gfortran 6.x, 7.x, 8.x: no errors.
 * ifort, all versions from 12.1 up to 18.0.3: catastrophic internal
   compiler errors of unknown origin.
+* ifort, version 2019.3: it compiles but inexplicable segmentation
+  faults with non-sensical tracebacks are thrown when using YT or
+  BADER and when loading and unloading fields.
 * Portland Group Fortran compiler (pgfortran), version 17.3. There are
   two important compiler problems: i) passing subroutines and
   functions whose interface includes multidimensional arrays as
@@ -98,7 +101,7 @@ compilers tested:
 
 In summary: **Only recent versions of gfortran and ifort are
 guaranteed to work with the development version. If you cannot use
-gfortran 6 or newer or ifort 19.x or newer, download the stable
+gfortran 6 or newer or ifort 2019.5 or newer, download the stable
 version.** I do not think this is because of errors in the critic2
 code (though if you find that it is, please let me know). If you paid
 for a recent version of your compiler and it throws an internal
