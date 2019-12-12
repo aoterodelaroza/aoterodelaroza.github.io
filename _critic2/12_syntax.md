@@ -868,6 +868,7 @@ WRITE file.fdf
 WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
+WRITE file.pyscf
 ~~~
 
 <a id="key-xdm"></a>

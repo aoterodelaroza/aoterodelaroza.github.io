@@ -56,6 +56,7 @@ WRITE file.fdf
 WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
+WRITE file.pyscf
 ~~~
 A number of file formats can be written by critic2. As in CRYSTAL and
 MOLECULE, the type of file is detected by the extension (`.xyz`,
@@ -242,4 +243,8 @@ Two inputs types for DFTB+ may be written. The `.gen` format contains
 only the structure and is meant to be used with the `GenFormat` method
 in `Geometry`. The `.hsd` writes a full input template, including the
 structure.
+
+The `.pyscf` extension writes a template python script for using with
+pyscf. The script creates an instance of a Mole object (in the case of
+a molecule) or a Cell object (if it is a crystal).
 
