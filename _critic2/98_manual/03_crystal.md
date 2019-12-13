@@ -20,36 +20,34 @@ CRYSTAL file.ins
 CRYSTAL file.cube
 CRYSTAL file.bincube
 CRYSTAL file.struct
-CRYSTAL [file.]{POSCAR,CONTCAR,CHGCAR,CHG,ELFCAR,AECCAR0,
-                AECCAR2} [at1.s at2.s ...|POTCAR]
-CRYSTAL file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
-              GDEN2|GDEN3|LDEN|KDEN}
-CRYSTAL file.OUT # elk's GEOMETRY.OUT
-CRYSTAL file.out [istruct.i] # ESPRESSO's PW output, file.scf.out
-CRYSTAL file.out # crystal's output file.out
-CRYSTAL file.in  # ESPRESSO's PW input, file.scf.in
-CRYSTAL file.STRUCT_IN
+CRYSTAL [file.]{POSCAR,CONTCAR,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR2} [at1.s at2.s ...|POTCAR]
+CRYSTAL file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
+CRYSTAL file.OUT # (GEOMETRY.OUT, elk)
+CRYSTAL file.out [istruct.i] # (file.scf.out, quantum espresso output)
+CRYSTAL file.out # (file.out, crystal output)
+CRYSTAL file.in # (file.scf.in, quantum espresso input)
+CRYSTAL file.STRUCT_IN 
 CRYSTAL file.STRUCT_OUT
 CRYSTAL file.gen
 CRYSTAL file.xsf
 CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
-  SPG [hall.i|ita.i HM|spg.s]
-  CELL a.r b.r c.r alpha.r beta.r gamma.r
-  CARTESIAN [scal.r]
-    # comment
-    [BOHR|AU]
-    [ANGSTROM|ANG]
-    x1.r y1.r z1.r
-    x2.r y2.r z2.r
-    x3.r y3.r z3.r
-  ENDCARTESIAN|END
-  NEQ x.r y.r z.r at.s [ANG|ANGSTROM] [BOHR|AU]
-  atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
-  atnumber.i x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
-  SYMM exprx.s, epxry.s, exprz.s
-ENDCRYSTAL|END
+ SPG [hall.i|ita.i HM|spg.s]
+ CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU] 
+ CARTESIAN [scal.r]
+   [BOHR/AU]
+   [ANGSTROM/ANG]
+   x1.r y1.r z1.r
+   x2.r y2.r z2.r
+   x3.r y3.r z3.r
+ ENDCARTESIAN/END
+ NEQ x.r y.r z.r at.s [ANG|ANGSTROM] [BOHR|AU]
+ atom.s x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
+ atnumber.i x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
+ ...
+ SYMM exprx.s, epxry.s, exprz.s
+ENDCRYSTAL/END
 CRYSTAL LIBRARY label.s
 ~~~
 The first line of a critic2 input usually specifies the
@@ -289,7 +287,7 @@ There are two possible ways to input the cell parameters. In the
 simplest approach, the CELL keyword can be used to give the cell
 lengths and angles:
 ~~~
-CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG/ANGSTROM/BOHR/AU]
+CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
 ~~~
 If the ANG (or ANGSTROM) keyword is used, then `a.r`, `b.r`, and `c.r`
 are in angstrom. Otherwise, cell parameters are in bohr by default (the
@@ -327,9 +325,9 @@ The NEQ keyword can be used to specify the atomic
 positions. Equivalently, one can start the line with the atomic symbol
 or the atomic number:
 ~~~
-NEQ x.r y.r z.r at.s [ANG/ANGSTROM] [BOHR/AU]
-atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
-atnumber.i x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
+NEQ x.r y.r z.r at.s [ANG|ANGSTROM] [BOHR/AU]
+atom.s x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
+atnumber.i x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
 ~~~
 NEQ adds one atom to the crystal. If symmetry is used (via SPG or
 SYMM), then only the non-equivalent atom list needs to be given (as in

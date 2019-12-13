@@ -230,7 +230,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
- CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG/ANGSTROM/BOHR/AU] 
+ CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU] 
  CARTESIAN [scal.r]
    [BOHR/AU]
    [ANGSTROM/ANG]
@@ -239,8 +239,8 @@ CRYSTAL
    x3.r y3.r z3.r
  ENDCARTESIAN/END
  NEQ x.r y.r z.r at.s [ANG|ANGSTROM] [BOHR|AU]
- atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
- atnumber.i x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
+ atom.s x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
+ atnumber.i x.r y.r z.r [ANG|ANGSTROM] [BOHR/AU]
  ...
  SYMM exprx.s, epxry.s, exprz.s
 ENDCRYSTAL/END
