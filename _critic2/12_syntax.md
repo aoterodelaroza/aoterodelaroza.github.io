@@ -217,7 +217,7 @@ CRYSTAL file.cube
 CRYSTAL file.bincube
 CRYSTAL file.struct
 CRYSTAL [file.]{POSCAR,CONTCAR,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR2} [at1.s at2.s ...|POTCAR]
-CRYSTAL file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
+CRYSTAL file_{DEN|PAWDEN|ELF|POT|VHA|VHXC|VXC|VCLMB|VPSP|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
 CRYSTAL file.OUT # (GEOMETRY.OUT, elk)
 CRYSTAL file.out [istruct.i] # (file.scf.out, quantum espresso output)
 CRYSTAL file.out # (file.out, crystal output)
