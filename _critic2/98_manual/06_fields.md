@@ -20,8 +20,8 @@ LOAD file.cube
 LOAD file.bincube
 LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
            GDEN2|GDEN3|LDEN|KDEN}
-LOAD [file.]{CHGCAR|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
-LOAD {[file.]CHG|[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
+LOAD [file.]{CHGCAR|CHG|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
+LOAD {[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
 LOAD file.grid
@@ -40,7 +40,7 @@ LOAD file.pwc [file.chk [filedn.chk]]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
-LOAD [WIEN|ELK|PI|CUBE|ABINIT|VASP|VASPCHG|QUB|XSF|ELKGRID|SIESTA|DFTB|
+LOAD [WIEN|ELK|PI|CUBE|ABINIT|VASP|VASPNOV|QUB|XSF|ELKGRID|SIESTA|DFTB|
       WFN|WFX|MOLDEN|FCHK|PWC] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
          [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
@@ -145,23 +145,22 @@ plus xc potential (prtvhxc, `_VHXC`), and the total potential (prtpot,
 
 ### VASP Files (CHGCAR, AECCAR0, AECCAR2, CHG, ELFCAR)
 
-VASP fields can come in two varieties. The `CHGCAR` and `AECCAR*`
-files give grid values in a higher precision and multiplied by the
-cell volume. These files can be read directly with LOAD. The other
-format is the `CHG`, that is also used for the `ELFCAR` (containing
-the values of the ELF function). In this case, the grid values are
-given with less precision and they may or may not be multiplied by the
-cell volume (depending on the VASP version). Both can be loaded with:
+VASP fields can come in two varieties. The `CHGCAR`, `CHG`, and
+`AECCAR*` files give grid values in a higher precision and multiplied
+by the cell volume. These files can be read directly with LOAD. The
+other format is the `ELFCAR` (containing the values of the ELF
+function). In this case, the grid values are not be multiplied by the
+cell volume. Both can be loaded with:
 ~~~
-LOAD CHG
+LOAD CHGCAR
 LOAD ELFCAR
 ~~~
 If you have a file in this format that does not conform to those
 names, you can use either the VASP (`CHGCAR`, `AECCAR*`) or the
-VASPCHG (`CHG`,`ELFCAR`) keyword to force using one of the two formats:
+VASPNOV (`ELFCAR`) keyword to force using one of the two formats:
 ~~~
 LOAD VASP STRANGE_CHG_FILE_NAME.elfcar
-LOAD VASPCHG STRANGE_CHG_FILE_NAME.chgcar
+LOAD VASPNOV STRANGE_CHG_FILE_NAME.chgcar
 ~~~
 The `CHGCAR` files are relatively safe to use, but `CHG`s data points
 may or may not be multiplied by the unit cell volume, and if you use
