@@ -25,7 +25,7 @@ LOAD {[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
 LOAD file.grid
-LOAD file.clmsum file.struct
+LOAD file.{clmsum|clmup|clmdn} file.struct
 LOAD file.{RHO,BADER,DRHO,LDOS,VT,VH}
 LOAD file.OUT
 LOAD STATE.OUT GEOMETRY.OUT
@@ -93,7 +93,7 @@ extension to decide which format should be used for the reading:
 * `.grid` for elk's grids (this requires a patch to elk, e-mail to
   request it).
 
-* `.clmsum` for WIEN2k.
+* `.clmsum`, `.clmup`, and `.clmdn` for WIEN2k.
 
 * `.RHO`, `.BADER`, `.DRHO`, `.LDOS`, `.VT`, and `.VH` for SIESTA's grids.
 
@@ -218,11 +218,11 @@ encapsulated in the `.clmsum` (for instance, the muffin tin radii are
 missing), so it is necessary to provide a second file: the `.struct`
 file.
 
-If the file extension is not `.clmsum` (e.g. `.clmup` or `.clmdn`),
-you can force critic2 to use the WIEN2k interpreter by preceding the
-file name with the keyword WIEN:
+If the file extension is not `.clmsum`, `.clmup`, or `.clmdn`, you can
+force critic2 to use the WIEN2k interpreter by preceding the file name
+with the keyword WIEN:
 ~~~
-LOAD WIEN file.clmup
+LOAD WIEN file.vtot
 ~~~
 Some of these files (e.g. potentials) may have different
 normalizations for the l=0 m=0 components in the muffins if they do

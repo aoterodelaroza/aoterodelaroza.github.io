@@ -435,7 +435,7 @@ LOAD {[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
 LOAD file.grid
-LOAD file.clmsum file.struct
+LOAD file.{clmsum|clmup|clmdn} file.struct
 LOAD file.{RHO,BADER,DRHO,LDOS,VT,VH}
 LOAD file.OUT
 LOAD STATE.OUT GEOMETRY.OUT
