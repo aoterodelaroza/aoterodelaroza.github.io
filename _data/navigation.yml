@@ -3,8 +3,12 @@ main:
     url: /devnotes/
   - title: "Critic2"
     url: /critic2/
+  - title: "Reference data"
+    url: /refdata/
 
 critic2:
+  - title: "Main"
+    url: /
   - title: "Home"
     url: /critic2/
     children:
@@ -24,6 +28,8 @@ critic2:
     url: /critic2/examples/
 
 critic2_manual:
+  - title: "Main"
+    url: /
   - title: "Home"
     url: /critic2/
     children:
@@ -72,6 +78,8 @@ critic2_manual:
     url: /critic2/examples/
 
 critic2_examples:
+  - title: "Main"
+    url: /
   - title: "Home"
     url: /critic2/
     children:
@@ -113,3 +121,9 @@ devnotes:
       url: /devnotes/space-group-collection/
     - title: "XDM forces, stress, phonons"
       url: /devnotes/derivatives-xdmsolids/
+
+refdata:
+  - title: "Main"
+    url: /
+  - title: "Reference data"
+    url: /refdata/
