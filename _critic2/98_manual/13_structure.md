@@ -67,7 +67,7 @@ represented, even if the maximum is outside the plot range. Default:
 `SOFT`. 
 
 ## Radial Distribution Function (RDF) {#c2-rdf}
-
+ 
 The RDF keyword calculates the radial distribution function (RDF) for
 the current crystal or molecular structure:
 ~~~
@@ -273,6 +273,73 @@ atomic symbol as `by.s` (converted internally to atomic number). If
 SHELLS is given, group the neighbors in shells by distance (1e-2
 atomic distance threshold for atoms in the same shell) and
 non-equivalent ID.
+
+## Effective coordination number (ECON) {#c2-econ}
+
+The coordination number of an atom is typically defined as the number
+of neighbors that are closest to that atom. This definition can be
+unsatisfactory for situations where there is a range of bond lengths
+around the central atom. To address these complex cases, the
+calculation of an effective coordination number (ECoN) was introduced
+by Hoppe in 1979. The ECoN of a given atom is calculated by assigning
+to each atom around it a weight based on their distance. The original
+procedure is described in 
+[Hoppe, Z. Kristallogr. 150 (1979) 23](http://dx.doi.org/10.1524/zkri.1979.150.14.23) 
+and examined in detail in 
+[Nespolo, Acta Cryst. B, 72 (2016) 51](http://dx.doi.org/10.1107/S2052520615019472).
+
+The implementation of ECoN in critic2 is slightly different from those
+two references in that we do not require the user to define
+coordination polyhedra for the calculation. Instead, the ECoN in
+critic2 is calculated as a formula that takes into account the
+distances from the central atom to all other atoms in the
+crystal. There are two variants of ECoN: iterative, calculated using a
+self-consistent procedure, and non-iterative.
+
+For a given atom, the ECoN is defined as:
+\begin{equation}
+{\rm ECoN} = \sum_{i} w_{i}
+\end{equation}
+where the sum runs over all the atoms in the environment of the chosen
+central atom (or a subset of atoms belonging to a certain species, see
+below). The weight of the ith atom ($$w_{i}$$) is defined as:
+\begin{equation}
+w_{i} = \exp\left[1-\left(\frac{d_{i}}{d_{\rm av}}\right)^6\right]
+\end{equation}
+with $$d_{i}$$ the distance to atom $$i$$. In the non-iterative
+variant of ECoN, $$d_{\rm av}$$ is the average distance, defined as:
+\begin{equation}
+d_{\rm av} = \frac{\sum_{i} d_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm min}}\right)^6\right]}
+{\sum_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm min}}\right)^6\right]}
+\end{equation}
+where $$d_{\rm min}$$ is the shortest distance to the central atom for
+the considered atomic species. In contrast, the iterative variant of
+ECoN calculates the average distance by solving the non-linear
+equation:
+\begin{equation}
+d_{\rm av}^{\rm it} = \frac{\sum_{i} d_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm av}^{\rm it}}\right)^6\right]}
+{\sum_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm av}^{\rm it}}\right)^6\right]}
+\end{equation}
+which is done using a self-consistent iterative procedure.
+
+A typical output for the ECoN keyword is:
+~~~
+# nid->spc   name(nid)->name(spc)     econ      1econ       nd         1nd
+   1 -> *          Ti -> *           5.9754     5.9743     3.6805     3.6804
+   1 -> 1          Ti -> Ti          4.8730     4.7197     5.8587     5.8302
+   1 -> 2          Ti -> O           5.9754     5.9742     3.6805     3.6804
+   2 -> *           O -> *           3.2704     3.2170     3.7153     3.7056
+   2 -> 1           O -> Ti          2.9877     2.9871     3.6805     3.6804
+   2 -> 2           O -> O           7.9476     6.4604     5.1286     4.9802
+~~~
+where `nid` represents the non-equivalent atom ID of the central atom
+for which the ECoN is calculated and the values corresponding to
+different `spc` are obtained by considering the distances to atoms
+belonging to those atomic species only (`spc=1`, `2`, etc.) or to all
+atoms regardless of species (`spc=*`). Critic2 reports the
+iterative ECoN (`econ`), non-iterative ECoN (`1econ`), iterative
+average bond distance (`nd`, $$d_{\rm av}^{\rm it}$$), and
+non-iterative average bond distance (`1nd`, $$d_{\rm av}$$).
 
 ## Pair and Triplet Coordination Numbers (COORD) {#c2-coord}
 
