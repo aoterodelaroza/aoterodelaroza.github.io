@@ -307,15 +307,16 @@ below). The weight of the ith atom ($$w_{i}$$) is defined as:
 w_{i} = \exp\left[1-\left(\frac{d_{i}}{d_{\rm av}}\right)^6\right]
 \end{equation}
 with $$d_{i}$$ the distance to atom $$i$$. In the non-iterative
-variant of ECoN, $$d_{\rm av}$$ is the average distance, defined as:
+variant of ECoN, $$d_{\rm av}$$ is the weighted average distance,
+defined as:
 \begin{equation}
 d_{\rm av} = \frac{\sum_{i} d_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm min}}\right)^6\right]}
 {\sum_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm min}}\right)^6\right]}
 \end{equation}
 where $$d_{\rm min}$$ is the shortest distance to the central atom for
 the considered atomic species. In contrast, the iterative variant of
-ECoN calculates the average distance by solving the non-linear
-equation:
+ECoN calculates the weighted average distance by solving the
+non-linear equation:
 \begin{equation}
 d_{\rm av}^{\rm it} = \frac{\sum_{i} d_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm av}^{\rm it}}\right)^6\right]}
 {\sum_{i}\exp\left[1-\left(\frac{d_{i}}{d_{\rm av}^{\rm it}}\right)^6\right]}
@@ -338,8 +339,8 @@ different `spc` are obtained by considering the distances to atoms
 belonging to those atomic species only (`spc=1`, `2`, etc.) or to all
 atoms regardless of species (`spc=*`). Critic2 reports the
 iterative ECoN (`econ`), non-iterative ECoN (`1econ`), iterative
-average bond distance (`nd`, $$d_{\rm av}^{\rm it}$$), and
-non-iterative average bond distance (`1nd`, $$d_{\rm av}$$).
+weighted average distance (`nd`, $$d_{\rm av}^{\rm it}$$), and
+non-iterative weighted average distance (`1nd`, $$d_{\rm av}$$).
 
 ## Pair and Triplet Coordination Numbers (COORD) {#c2-coord}
 
