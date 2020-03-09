@@ -89,19 +89,38 @@ XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s]
     [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s] 
     [XA1 a1.r] [XA2 a2.r] [ONLYC] [UPTO {6|8|10}]
 XDM QE [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
+       [NOC6] [NOC8] [NOC10] [SCALC6 s6.r] [SCALC8 s8.r] [SCALC10 s10.r]
+       [C9] [SCALC9 s9.r]
+       [DAMP a1.r a2.r] [DAMP3 a3.r a4.r] [DAMP3BJN 3|6|sqrt6]
 XDM a1.r a2.r chf.s
 ~~~
-There are three modes of operation for the XDM keyword. In QE, the
-coefficients are read from a Quantum ESPRESSO output. The QE output
-file is the one given via the FILE keyword or the one loaded using
-CRYSTAL, if no FILE is given. Using the dispersion coefficients read
-from the file, the XDM energy is recalculated. If BETWEEN and AND are
-given only the dispersion interaction between those pairs of atoms is
-calculated. This keyword is used mostly for testing purposes. 
+There are three modes of operation for the XDM keyword. 
+
+In QE, the volumes, moments, and coefficients are read from a Quantum
+ESPRESSO output. The QE output file is the one given via the FILE
+keyword or the one loaded using CRYSTAL, if no FILE is given. Using
+the dispersion coefficients read from the file, the XDM energy is
+recalculated. If BETWEEN and AND are given only the dispersion
+interaction between those pairs of atoms is calculated. This keyword
+is used mostly for testing purposes. A number of additional options
+allow controlling the expression of the XDM energy. If NOC6, NOC8, or
+NOC10 are given, omit the corresponding contribution to the pariwise
+dispersion energy. If C9 is given, calculate the three-body dispersion
+term using BJ damping. If SCALC6, SCALC8, SCALC9, or SCALC10 are
+given, scale the corresponding term by the real number directly
+following the keyword. If DAMP is given, recalculate the pairwise
+dispersion energy with the corresponding damping function
+parameters. If DAMP3 is given, use these parameters for the 3-body
+damping. Use DAMP3BJN to choose the 3-body damping function: a product
+of three BJ-3 (3), three BJ-6 (6), or the square of three BJ-6 (sqrt6)
+damping functions.
+
 In the GRID mode, the information necessary to calculate the XDM
 dispersion energy and related quantities is provided using grid
-fields. If neither QE nor GRID are given, a molecular XDM calculation
-is assumed, with damping function coefficients `a1.r` and `a2.r` and
+fields.
+
+If neither QE nor GRID are given, a molecular XDM calculation is
+assumed, with damping function coefficients `a1.r` and `a2.r` and
 functional selector `chf.s`. The latter can be either a keyword for a
 functional (`blyp`, `b3lyp`, etc.) or a number between 0 and 1
 indicating the fraction of exact exchange. The molecular XDM code can
