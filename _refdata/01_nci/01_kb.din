@@ -1,0 +1,13 @@
+---
+layout: single
+title: "Kannemann and Becke set"
+permalink: /refdata/nci/kb/
+excerpt: "Kannemann and Becke set for non-covalent binding energies."
+sidebar:
+  - repo: "refdata"
+    nav: "refdata"
+toc: false
+---
+
+Bleh
+

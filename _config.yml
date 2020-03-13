@@ -52,11 +52,14 @@ exclude:
 include:
   - _critic2/
   - _devnotes/
+  - _refdata/
 
 collections:
   critic2:
     output: true
   devnotes:
+    output: true
+  refdata:
     output: true
 
 # Defaults
