@@ -251,17 +251,19 @@ the spglib manual for more information.
 
 The ENVIRON keyword prints lists of neighbor atoms:
 ~~~
-ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i]
+ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i|CELATOM iat.i]
 [BY by.s/iby.i] [SHELLS]
 ~~~
-If POINT is given, print the atomic neighbors
-around the point with coordinates (`x0.r` `y0.r` `z0.r`) in
-crystallographic coordinates (crystal) or or molecular Cartesian
-coordinates (molecule, default units: angstrom). Instead, if ATOM is
-given, print the neighbors around atom `iat.i` from the non-equivalent
-atom list or around every atom with atomic symbol `at.s` (converted
-internally to atomic number). If neither POINT nor ATOM are given,
-print the environments of all non-equivalent atoms in the unit cell.
+If POINT is given, print the atomic neighbors around the point with
+coordinates (`x0.r` `y0.r` `z0.r`) in crystallographic coordinates
+(crystal) or or molecular Cartesian coordinates (molecule, default
+units: angstrom). Instead, if ATOM is given, print the neighbors
+around atom `iat.i` from the non-equivalent atom list or around every
+atom with atomic symbol `at.s` (converted internally to atomic
+number). If CELATOM is used, then print the environment around atom
+iat.i from the complete list.  If neither POINT nor ATOM nor CELATOM
+are given, print the environments of all non-equivalent atoms in the
+unit cell.
 
 By default, the environments extend up to 5 angstrom from the central
 point. The DIST keyword can be used to change this value (by default,

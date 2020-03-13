@@ -282,8 +282,8 @@ END
 : Calculate the nearest neighbors of the atoms in the crystal
   structure.
 ~~~
-ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i]
-        [BY by.s/iby.i] [SHELLS]
+ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i|CELATOM iat.i]
+[BY by.s/iby.i] [SHELLS]
 ~~~
 
 <a id="key-ewald"></a>
