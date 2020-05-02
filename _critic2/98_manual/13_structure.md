@@ -252,7 +252,7 @@ the spglib manual for more information.
 The ENVIRON keyword prints lists of neighbor atoms:
 ~~~
 ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i|CELATOM iat.i]
-[BY by.s/iby.i] [SHELLS]
+[BY by.s/iby.i] [SHELL|SHELLS]
 ~~~
 If POINT is given, print the atomic neighbors around the point with
 coordinates (`x0.r` `y0.r` `z0.r`) in crystallographic coordinates
@@ -272,8 +272,8 @@ keyword allows filtering the neighbor list to print only certain kinds
 of atoms. If `iby.i` is given, print only atoms whose non-equivalent ID
 is the same as `iby.i`. If `by.s` is given, print only atoms with the same
 atomic symbol as `by.s` (converted internally to atomic number). If
-SHELLS is given, group the neighbors in shells by distance (1e-2
-atomic distance threshold for atoms in the same shell) and
+SHELLS (or SHELL) is given, group the neighbors in shells by distance
+(1e-2 atomic distance threshold for atoms in the same shell) and
 non-equivalent ID.
 
 ## Effective coordination number (ECON) {#c2-econ}
