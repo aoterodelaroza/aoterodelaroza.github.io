@@ -214,12 +214,13 @@ MOLCELL [border.r]
 ~~~
 The MOLCELL keyword calculates the smallest box encompassing the
 molecule and then adds a border to it in order to build the molecular
-cell. The default border is 10 angstrom, but can be controlled by
-passing an additional numerical argument (`border.r`, in the default
-distance units for the run, angstrom if you used MOLECULE to read the
-structure). Using this keyword only makes sense if the molecule is
-placed close to the center of the cell and if there enough vacuum
-between the molecule and the cell edges to contain the molecular
-cell. In order to use MOLCELL, the input structure needs to be read
-using the MOLECULE keyword and the cell needs to be orthogonal.
+cell. The border length can be controlled by passing a
+numerical argument (`border.r`, in the default distance units for the
+run, angstrom if you used MOLECULE to read the structure). Using this
+keyword only makes sense if the molecule is placed close to the center
+of the cell and if there enough vacuum between the molecule and the
+cell edges to contain the molecular cell. If no numerical argument is
+given, `border.r` defaults to 10 angstrom. In order to use MOLCELL,
+the input structure needs to be read using the MOLECULE keyword and the
+cell needs to be orthogonal.
 

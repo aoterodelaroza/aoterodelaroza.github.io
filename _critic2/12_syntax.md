@@ -363,7 +363,7 @@ HIRSHFELD
 : Identify the position of an atom or a critical point given in
   crystallographic or cartesian coordinates.
 ~~~
-IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST|file.xyz]
+IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST]
   x y z [ANG|ANGSTROM|BOHR|AU|CRYST]
   ...
   file.xyz

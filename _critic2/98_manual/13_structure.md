@@ -387,7 +387,7 @@ ratio in the order of `prec.r`. The default `prec.r` is 0.1.
 The IDENTIFY keyword identifies the coordinates in the user input by
 matching them against the internal list of atoms and critical points:
 ~~~
-IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST|file.xyz]
+IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST]
  x.r y.r z.r [ANG|ANGSTROM|BOHR|AU|CRYST]
  ...
  file.xyz
