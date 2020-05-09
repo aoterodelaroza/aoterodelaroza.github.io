@@ -818,6 +818,7 @@ SUM [id.s]
 [SYMM/SYM](/critic2/manual/crystal/#c2-symm)
 : Activates the use of symmetry and controls the symmetry level.
 ~~~
+{SYMM|SYM}
 {SYMM|SYM} [-1|0|1]
 {SYMM|SYM} eps.r
 {SYMM|SYM} CLEAR

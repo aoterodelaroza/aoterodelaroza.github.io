@@ -445,6 +445,7 @@ The treatment of symmetry in critic2 can be controlled using the
 SYM and NOSYM keywords (or their equivalent spellings
 SYMM/NOSYMM).
 ~~~
+{SYMM|SYM}
 {SYMM|SYM} [-1|0|1]
 {SYMM|SYM} eps.r
 {SYMM|SYM} CLEAR
@@ -453,6 +454,9 @@ SYMM/NOSYMM).
 {SYMM|SYM} REFINE
 NOSYMM|NOSYM
 ~~~
+Without any other keywords, the SYM keyword writes the space group
+information for the current crystal to the output.
+
 Followed by an integer, SYM controls whether the symmetry operations
 and space group are calculated for new structures given via
 CRYSTAL. If the value is 1, symmetry is always calculated, regardless
