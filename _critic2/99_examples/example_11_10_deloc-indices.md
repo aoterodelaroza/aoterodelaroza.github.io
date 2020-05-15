@@ -230,6 +230,7 @@ coefficients from the QE files by using `pw2critic.x` (step 5):
  outdir = '.',
  prefix='crystal_open',
  seedname = 'mgo',
+ smoothgrid = .true.,
 /
 ```
 The `crystal_open` prefix is automatically created by `open_grid.x`
@@ -237,7 +238,8 @@ from the original prefix by appending `_open`. Note that `pw2critic.x`
 needs to be run *without* MPI. Using `mpirun` on it will not work. The
 execution of `pw2critic.x` creates a `.pwc` file can be read by
 critic2 and contains the reciprocal-space coefficients of the
-Kohn-Sham states.
+Kohn-Sham states. The `smoothgrid` option ensures that the grid in the
+`.pwc` file has the same dimensions as the electron density cubes.
 
 The second piece of information we need for the DI calculation is the
 rotation of the KS states to yield the MLWF. We calculate this with
