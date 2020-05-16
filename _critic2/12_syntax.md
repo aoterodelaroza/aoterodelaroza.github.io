@@ -426,7 +426,7 @@ LIST
 [LIBXC](/critic2/manual/arithmetics/#c2-libxc)
 : List and give information about the functionals available in the libxc library.
 ~~~
-LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
+LIBXC [REF|REFS] [NAME|NAMES] [FLAGS] [ALL]
 ~~~
 
 <a id="key-load"></a>

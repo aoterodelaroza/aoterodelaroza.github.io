@@ -397,7 +397,7 @@ When critic2 is compiled with [libxc](/critic2/installation/#c2-libxc)
 support, the LIBXC keyword can be used to query the library for a
 list of available functoinals:
 ~~~
-LIBXC [REF|REFS|NAME|NAMES|FLAGS|ALL]
+LIBXC [REF|REFS] [NAME|NAMES] [FLAGS] [ALL]
 ~~~
 By default, the LIBXC keyword gives a list of the functional IDs
 in the first column, followed by the functional name, kind, and
