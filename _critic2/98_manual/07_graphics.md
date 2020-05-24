@@ -135,6 +135,10 @@ CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"exp
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r bpp.r ...
 CUBE CELL {bpp.r|nx.i ny.i nz.i} ...
 CUBE GRID [SHIFT ix.i iy.i iz.i] ...
+CUBE MLWF ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
+CUBE WANNIER ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
+CUBE UNK ibnd.i ik.i [SPIN ispin.i] ...
+CUBE PSINK ibnd.i ik.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
 CUBE ... FILE CHGCAR
 CUBE ... FILE bleh.cube
 CUBE ... FILE bleh.bincube
@@ -147,8 +151,8 @@ be set in three ways. By giving the end-points (`x0.r`, `y0.r`,
 from an orthogonal fragment of the system (this is only possible using
 the cube and bincube formats). The CELL keyword calculates a grid
 spanning the entire unit cell, which may or may not be orthogonal
-depending on the structure. GRID has the same effect as CELL regarding
-the output grid geometry. 
+depending on the structure. GRID, MLWF, WANNIER, UNK, and PSIK has the
+same effect as CELL regarding the output grid geometry.
 
 If the end-points are given, they must be in crystallographic
 coordinates if the system is a periodic crystal (the structure was
@@ -175,6 +179,37 @@ number of points are taken from the parent grid field. The SHIFT
 keyword is used for shifting the origin of the grid to a different
 point. The origin of the shifted grid is the position of point `ix.i`,
 `iy.i`, `iz.i` in the old grid.
+
+The MLWF, WANNIER, UNK, and PSINK keywords are similar to GRID in that
+they dump a scalar field on a grid to a file directly. These keywords 
+only work with [Quantum ESPRESSO pwc files](/critic2/manual/fields/c2-qepwc),
+which contain the information about the Bloch states in a periodic
+solid. The meaning of these keywords is: 
+
+- MLWF writes the maximally-localized Wannier function for band
+  `ibnd.i` and lattice vector given by the integers `nRx.i`, `nRy.i`,
+  and `nRz.i` ($$w_{nR}({\mathbf r})$$). Requires the Wannier
+  checkpoint file for the Bloch coefficient rotation.
+
+- WANNIER writes a Wannier function calculated without rotation of the
+  Bloch coefficients, for band `ibnd.i` and lattice vector given by
+  the integers `nRx.i`, `nRy.i`, and `nRz.i` ($$w_{nR}({\mathbf
+  r})$$). Requires that the k-point list corresponds to a uniform
+  Monkhorst-Pack grid (i.e. no symmetry).
+
+- UNK writes the periodic part of the Bloch state with band index
+  `ibnd.i` and k-point `ik.i` ($$u_{nk}({\mathbf r})$$). The k-point
+  identifier can be found from the output when the `.pwc` file is
+  loaded. Does not require a Wannier checkpoint file.
+
+- PSINK writes the Bloch state with band index `ibnd.i` and k-point
+  `ik.i` at lattice vector `nRx.i`, `nRy.i`, and `nRz.i`
+  ($$\psi_{nk}({\mathbf r}-{\mathbf R}) = u_{nk}({\mathbf r}) e^{i{\mathbf k} ({\mathbf r}-{\mathbf R})}$$).
+  The k-point identifier can be found from the output when the `.pwc`
+  file is loaded. Does not require a Wannier checkpoint file.
+
+In a spin-polarized calculation, the spin channel can be selected
+using the SPIN keyword (1 for spin-up and 2 for spin-down).
 
 Independently on how the grid is set up, several options control the
 behavior of CUBE. FILE sets the name of the output file (default:
