@@ -1,13 +1,13 @@
 ---
 layout: single
-title: "Delocalization Indices in Solids using Wannier Functions"
+title: "Delocalization Indices in Solids"
 permalink: /critic2/examples/example_11_10_deloc-indices/
-excerpt: "Delocalization indices in Solids using Wannier Functions"
+excerpt: "Delocalization indices in Solids"
 sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
 toc: true
-toc_label: "DIs in Solids using MLWFs"
+toc_label: "DIs in Solids"
 ---
 
 Critic2 can calculate Bader's localization and delocalization indices

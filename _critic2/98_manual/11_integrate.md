@@ -76,8 +76,10 @@ property.
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i] 
-INTEGRABLE id.s DELOC [NOU] [NOSIJCHK] [NOFACHK] [WANCUT wancut.r]
+INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [WANCUT wancut.r]
 INTEGRABLE "expr.s" 
+INTEGRABLE DELOC_SIJCHK file-sij.s
+INTEGRABLE DELOC_FACHK file-fa.s
 INTEGRABLE CLEAR
 INTEGRABLE ... [NAME name.s]
 ~~~
@@ -102,8 +104,39 @@ For the others, it is equivalent to the field value (same as F). The
 units for all calculated multipoles are atomic units.
 
 The keyword DELOC activates the calculation of the delocalization
-indices using field `id.s` via 
-[maximally localized Wannier functions](/critic2/manual/integrate/#c2-intwandi).
+indices (DIs) using field `id.s`. The calculation of DIs requires that
+the field is a Quantum ESPRESSO [pwc
+file](/critic2/manual/fields/#c2-qepwc), which contains the Bloch
+states. There are two modes of operation with DELOC:
+
+- Calculate the DIs using maximally localized Wannier functions
+  (MLWF). This requires wannier90 checkpoint files to be provided with
+  the pwc file, and is the default behavior in this case. More details
+  are [given below](/critic2/manual/integrate/#c2-intwandi). The use
+  of Wannier functions can be forced using the WANNIER keyword in
+  INTEGRABLE DELOC.
+
+- Calculate the DIs using Bloch states. This is much less efficient
+  than using Wannier functions but it is simpler because it does not
+  require an additional wannier90 calculation and allows calculating
+  DIs in metals. More details are [given
+  below](/critic2/manual/integrate/#c2-intblodi). The use of Bloch
+  states can be forced using the PSINK keyword in INTEGRABLE DELOC.
+
+Also, see the
+[example](/critic2/examples/example_11_10_deloc-indices/) for the
+calculation of DIs in solids.
+
+Both ways of calculating the DIs generate by default two checkpoint
+files containing the (complex) overlap matrices (sij) or the matrix of
+atomic integrals of the exchange-correlation density (fa). The
+delocalization indices can be calculated from these files bypassing
+having to load the pwc and wannier90 checkpoint files with the
+DELOC_SIJCHK and DELOC_FACHK keywords. This is useful because the pwc
+files can be quite large, so it may be interesting to delete them
+after the sij or fa matrices are computed. Both keywords accept a
+string pointing to the corresponding file. The DI calculation from
+these matrices will typically take only a few seconds.
 
 In addition, it is possible to define an integrable property using an
 expression involving more than one field (`expr.s`). For instance, if
@@ -181,7 +214,7 @@ steps:
 
 - Run an SCF calculation with norm-conserving pseudopotentials and the
   same ecutrho as the calculation in the first step, so the two grids
-  have the same sizes.
+  have the same size.
 
 - Use the `open_grid.x` utility in Quantum ESPRESSO to unpack the
   symmetry of the k-point grid, in preparation for the wannier90 run
@@ -199,7 +232,8 @@ steps:
   latter as INTEGRABLE DELOC. If the system is spin-polarized, two
   checkpoint files will be necessary, one for each spin component.
 
-- Run YT or BADER.
+- Run YT or BADER. YT is usually more accurate but takes longer than
+  BADER.
 
 Additional options for the DI calculation follow. The NOU option
 disables the use of the U rotation matrices to calculate the
@@ -212,12 +246,14 @@ if wannier90 failed to converge for the particular case under study.
 By default, two checkpoint files are generated during a DI calculation
 run. These files have the same name as the pwc file but with `-sij`
 and `-fa` suffixes. The former checkpoint file contains the atomic
-overlap matrices, and the latter, the $$F_{AB}$$ integrals required
-for the DI calculation. The presence of any of these two files makes
-critic2 read the information from the files and bypass the
-corresponding calculations, which are quite time consuming in
-general. The keywords NOSIJCHK and NOFACHK deactivate reading and
-writing these checkpoint files.
+overlap matrices, and the latter, the exchange-correlation density
+($$F_{AB}$$) integrals required for the DI calculation. The presence
+of any of these two files makes critic2 read the information from the
+files and bypass the corresponding calculations, which are quite time
+consuming in general. The keywords NOSIJCHK and NOFACHK deactivate
+reading and writing these checkpoint files. You can calculate the DIs
+from these files directly without the pwc file using the DELOC_SIJCHK
+and DELOC_FACHK options to INTEGRABLE.
 
 By default, the overlap between two MLWFs whose centers are a certain
 distance away are discarded. The WANCUT keyword controls this
@@ -228,6 +264,74 @@ appropriateness of the chosen WANCUT can be checked a posteriori by
 comparing the integrated electron population obtained by sum of the
 localization and delocalization indices to the value obtained from a
 straight integration of the electron density.
+
+See the [example](/critic2/examples/example_11_10_deloc-indices/) for
+some sample input files and more details.
+
+### Integrating Delocalization Indices in a Solid With Bloch States {#c2-intblodi}
+
+The DIs can also be calculated without doing the transformation to
+Wannier functions, using the Bloch states provided by the
+calculation. This is typically far less efficient than using Wannier
+functions but has two advantages:
+
+- It is simpler because it does not require the additional wannier90
+  step.
+
+- Using Bloch states, DIs can be calculated in metals (the Wannier
+  transformation is ill-defined if some bands are partially
+  occupied).
+
+The calculation of DIs using Bloch states requires a `.pwc` file only,
+generated by the `pw2critic.x` utility in Quantum ESPRESSO. The pwc
+file contains [electronic
+wavefunctions](/critic2/manual/fields/#c2-qepwc) and the crystal
+structure. For maximum consistency, the pwc file should be used to
+provide the structural information for the run via the [CRYSTAL
+keyword](/critic2/manual/crystal/#c2-crypwc).
+
+In addition to these data, the calculation of DIs with Bloch states
+has a few requirements: the grid must be consistent with that of the
+reference field, and the DIs can be calculated using YT or BADER only.
+A typical delocalization index with Bloch states calculation comprises
+the following steps:
+
+- Run a PAW calculation, then obtain an all-electron density using
+  `pp.x` with `plot_num=21`. This creates a cube file (rhoae.cube)
+  that gives the Bader basins for the calculation (the pseudo-valence
+  density is not valid for this purpose).
+
+- Run an SCF calculation with norm-conserving pseudopotentials and the
+  same ecutrho as the calculation in the first step, so the two grids
+  have the same size. This calculation must be run without k-point
+  symmetry, i.e., with `nosym=.true`, and `noinv=.true.`.
+
+- Use `pw2critic.x` to generate the pwc file. 
+
+- Load the all-electron density and the pwc files as two fields in
+  critic2. Set the former as the reference density and the latter as
+  INTEGRABLE DELOC.
+
+- Run YT or BADER. YT is usually more accurate but takes longer than
+  BADER.
+
+By default, two checkpoint files are generated during a DI calculation
+run. These files have the same name as the pwc file but with `-sij`
+and `-fa` suffixes. The former checkpoint file contains the atomic
+overlap matrices, and the latter, the exchange-correlation density
+($$F_{AB}$$) integrals required for the DI calculation. The presence
+of any of these two files makes critic2 read the information from the
+files and bypass the corresponding calculations, which are quite time
+consuming in general. The keywords NOSIJCHK and NOFACHK deactivate
+reading and writing these checkpoint files. You can calculate the DIs
+from these files directly without the pwc file using the DELOC_SIJCHK
+and DELOC_FACHK options to INTEGRABLE.
+
+The keywords NOU and WANCUT have no effect on the calculation of DIs
+using Bloch states.
+
+See the [example](/critic2/examples/example_11_10_deloc-indices/) for
+some sample input files and more details.
 
 ## Bisection (INTEGRALS and SPHEREINTEGRALS) {#c2-integrals}
 
@@ -379,7 +483,7 @@ are used.
    the original WS cell in order to integrate a smaller region, using
    the WS\_SCALE keyword (most likely in combination with WS\_ORIGIN,
    to move the integration region around). If a value is given to
-   WS\_SCALE (for instace, `rws.r`), then all the vectors connecting
+   WS\_SCALE (for instance, `rws.r`), then all the vectors connecting
    the origin of the WS cell with the vertex are shrunk by a factor
    `rws.r`, and the volume of the integration region is decreased by
    a factor equal to the cube of `rws.r`. The IWS is calculated using
@@ -1070,7 +1174,7 @@ is useful for fields such as the ELF, the Laplacian, etc.
 
 The WCUBE option makes critic2 write cube files for the integration
 weights of each attractor. In YT, these weights are values zero
-(outisde the basin), one (inside the basin), or some intermediate
+(outside the basin), one (inside the basin), or some intermediate
 value near the atomic basin boundary. The generated cube files have
 names `<root>_wcube_xx.cube`, where `xx` is the attractor number.
 
