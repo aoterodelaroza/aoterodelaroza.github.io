@@ -13,24 +13,29 @@ toc_label: "DIs in Solids"
 Critic2 can calculate Bader's localization and delocalization indices
 (DI) in solids using the pseudopotentials/plane waves approach. The
 DIs are a measure of electron delocalization (sharing) between atoms,
-related to the covalent bond order. The way DIs are calculated in
-critic2 makes use of a transformation of the one-electron KS states
-to Wannier functions, in such a way that the resulting states are
-maximally localized. These 
-[maximally localized wannier functions (MLWF)](http://dx.doi.org/10.1103/RevModPhys.84.1419) 
-are useful for this because they allow discarding most of the atomic
-overlap integrals required for the DI calculation. The details of the
-algorithm and some examples are described in 
-[JCTC 14 (2018) 4699](http://dx.doi.org/10.1021/acs.jctc.8b00549). 
+related to the covalent bond order. There are two ways of calculating
+the DIs in solids using critic2. The simplest way makes use of a
+transformation of the one-electron KS states to Wannier functions, in
+such a way that the resulting states are maximally localized. These
+[maximally localized wannier functions
+(MLWF)](http://dx.doi.org/10.1103/RevModPhys.84.1419) are useful
+because they allow discarding most of the atomic overlap integrals
+required for the DI calculation. The details of the algorithm and some
+examples are described in [JCTC 14 (2018)
+4699](http://dx.doi.org/10.1021/acs.jctc.8b00549). Alternatively, it
+is possible to calculate the DIs using Bloch states. This is much
+slower than using Wannier functions but requires fewer steps (because
+you do not need to use wannier90) and can be used for metals. An
+example is given below for metallic sodium.
 
 In the following examples, we use [Quantum
 ESPRESSO](https://www.quantum-espresso.org/) (QE) to run the SCF
 calculations, [wannier90](http://www.wannier.org/) to compute the
 transformation to MLWF and the development version of critic2 to
-obtain the DIs. The tool we need to extract the KS states from the
-QE run (`pw2critic.x`) was introduced in version ~6.4, so either this
-or a more recent version is required. Any version of wannier90 from
-2.0 onwards works.
+obtain the DIs. The tool we need to extract the KS states from the QE
+run (`pw2critic.x`) was introduced in version ~6.4, so either this or
+a more recent version is required. Any version of wannier90 from 2.0
+onwards works.
 
 Each DI calculation is carried out using a sequence of steps. In
 general, you need to:
@@ -445,9 +450,9 @@ calculation.
 The sequence of steps for calculating the DIs in more complex systems
 is exactly the same as in MgO. Because the Wannier transformation is
 ill-defined in systems with partially occupied bands (metals), the
-calculation of DIs via Wannier functions does not work for
-those. However, semimetals such as graphite can be calculated without
-a problem.
+calculation of DIs via Wannier functions does not work for those (see
+below for how to use Bloch states for this). However, semimetals such
+as graphite can be calculated without a problem.
 
 In the graphite example included in the files package, we use a 8x8x2
 k-point grid. The resulting DIs clearly differentiate between DIs for
@@ -456,7 +461,7 @@ atoms in the same graphene layer and in different layers:
 ```
 + Delocalization indices
   Each block gives information about a single atom in the main cell.
-  First line: localization index. Next lines: delocaliazation index
+  First line: localization index. Next lines: delocalazation index
   with all atoms in the environment. Last line: sum of LI + 0.5 * DIs,
   equal to the atomic population. Distances are in bohr.
 # Attractor 1 (cp=1, ncp=1, name=C, Z=6) at: 0.0000000  0.0000000  0.2500000
@@ -687,6 +692,72 @@ yt
 ```
 The interpretation of the critic2 output is essentially the same as in
 the MgO case.
+
+## A metal: elemental sodium
+
+The DIs in systems that have partially filled bands (metals) cannot be
+calculated with maximally localized Wannier functions at present,
+because the Wannier transformation is ill-defined. In this case, the
+Bloch states resulting from the SCF calculation are used
+directly. This results in a substantially higher computational cost of
+the DI calculation, but the calculation process is simpler because
+wannier90 needs not be used. The DIs can always be calculated using
+Bloch states, including the examples above, although there is no
+reason to do so if MLWFs can be used.
+
+The steps to calculate DIs using Bloch states are:
+
+1. Run a PAW SCF calculation with `pw.x` to obtain the all-electron
+   density (`rhoae.cube`).
+
+2. Run a norm-conserving SCF calculation using `pw.x` and the same
+   `ecutrho` as in step 1. This will generate the KS states. This
+   calculation needs to be run without k-point symmetry (i.e. with
+   `nosym=.true.` and `noinv=.true.`).
+
+3. Use `pw2critic.x` with `smoothgrid=.true.` to obtain the `.pwc` file.
+
+4. The `.pwc` file is read in critic2 with an input like:
+
+```
+crystal na.pwc
+load rhoae.cube
+load na.pwc
+
+integrable 2
+integrable 2 deloc
+
+bader
+```
+Note that the checkpoint files in this case are absent, but the input
+is other wise the same.
+
+## DIs from a checkpoint file
+
+Carrying out the DI integration generates two checkpoint files: one
+containing the atomic overlap matrices (with extension `.pwc-sij`) and
+another with the exchange-correlation atomic integrals (extension
+`.pwc-fa`). Either of them can be used to regenerate the DIs simply
+and quickly. The `-fa` files is actually calculated from the `-sij`
+file.
+
+Because it tends to be big in some cases it is of interest to delete
+the `.pwc` file after a successful DI calculation. If you keep either
+of the checkpoints, then it is possible to re-generate the DIs without
+the `.pwc` or the wannier90 checkpoint files. You do this by doing:
+```
+crystal rhoae.cube
+load rhoae.cube
+
+integrable deloc_sijchk na.pwc-sij
+
+bader
+```
+where the integrable property points to the checkpoint file
+directly. The `-fa` checkpoint file can be used instead:
+```
+integrable deloc_fachk na.pwc-fa
+```
 
 ## Example files package
 
