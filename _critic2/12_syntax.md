@@ -459,7 +459,8 @@ LOAD file.wfn
 LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
 LOAD file.molden [READVIRTUAL]
-LOAD file.pwc [file.chk [filedn.chk]]
+LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...] 
+              [BAND b1.i b2.i ...] [ERANGE emin.r emax.r]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]

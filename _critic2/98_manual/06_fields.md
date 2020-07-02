@@ -36,7 +36,8 @@ LOAD file.wfn
 LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
 LOAD file.molden [READVIRTUAL]
-LOAD file.pwc [file.chk [filedn.chk]]
+LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...] 
+              [BAND b1.i b2.i ...] [ERANGE emin.r emax.r]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
@@ -212,6 +213,17 @@ the first checkpoint file comes from the up-spin wannier90 calculation
 and the second checkpoint file from the down-spin wannier90
 calculation. See the FeO case in the 
 [DI example](/critic2/examples/example_11_10_deloc-indices/).
+
+Instead of the total electron density, the contribution to the density
+from specific states can be selected using the SPIN, KPT, BAND, and
+ERANGE keywords. The SPIN keywords selects the total electron density
+(0), the spin-up density (1), or the spin-down density (2). This only
+works for a spin-polarized calculation. The KPT and BAND keywords
+allow selecting specific band and k-point contributions from the
+list. If these keywords are not present, all k-points and bands are
+used. The ERANGE keyword can be used to select only the states whose
+band energy is between emin.r and emax.r. Both energies must be given
+in electronvolts.
 
 ### WIEN2k (clmsum, etc.)
 
