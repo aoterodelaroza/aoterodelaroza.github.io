@@ -375,12 +375,11 @@ divided by 2:
 PACKING [VDW] [PREC prec.r]
 ~~~
 If VDW is used, then use the van der Waals radii and allow the spheres
-to overlap. This option is currently implemented by building a grid on
-the unit cell and checking whether its points are inside any atomic
-sphere, which is not very efficient. The PREC keyword allows
-controlling the precision of the packing ratio calculated using the
-VDW keyword. If PREC is used, expect an error in the percent packing
-ratio in the order of `prec.r`. The default `prec.r` is 0.1.
+to overlap. This option is implemented using a simple Monte-Carlo
+sampling of the unit cell. The PREC keyword allows
+controlling the precision of the calculation. PREC corresponds to the
+standard deviation in the van der Waals volume divided by the volume
+itself. The default `prec.r` is 0.01.
 
 ## Identify Atoms in the Structure Given Their Coordinates (IDENTIFY) {#c2-identify}
 
