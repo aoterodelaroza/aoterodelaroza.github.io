@@ -366,18 +366,21 @@ all coordinated triplets X-Y-Z, where Y runs over all atoms in the
 unit cell and over all atomic species.
 
 ## Packing Ratio (PACKING) {#c2-packing}
-The PACKING keyword computes the packing ratio of the crystal assuming
-atomic spheres with radius equal to the nearest-neighbor distance
-divided by 2:
+The PACKING keyword computes the packing ratio of the crystal.
 ~~~
-PACKING [VDW] [PREC prec.r]
+PACKING {VDW|COV|} [PREC prec.r]
 ~~~
-If VDW is used, then use the van der Waals radii and allow the spheres
-to overlap. This option is implemented using a simple Monte-Carlo
-sampling of the unit cell. The PREC keyword allows
-controlling the precision of the calculation. PREC corresponds to the
-standard deviation in the van der Waals volume divided by the volume
-itself. The default `prec.r` is 0.01.
+With VDW, use the van der Waals radii. With COV, use the covalent
+radii. If neither VDW nor COV are used, use half of the nearest
+neighbor distance (in this case, the spheres would not overlap). 
+
+In the VDW and COV cases, the calculation is donw using a Monte-Carlo
+sampling of the unit cell. The PREC keyword allows controlling the
+precision of this calculation. PREC corresponds to the standard
+deviation in the van der Waals volume divided by the volume
+itself. The default `prec.r` is 0.01. The van der Waals and covalent
+radii can be changed using the [RADII](/critic2/manual/misc/#c2-radii)
+keyword.
 
 ## Identify Atoms in the Structure Given Their Coordinates (IDENTIFY) {#c2-identify}
 
