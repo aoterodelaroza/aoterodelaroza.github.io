@@ -162,7 +162,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
 [COORD](/critic2/manual/structure/#c2-coord)
 : Calculate the pair and triplet coordination numbers.
 ~~~
-COORD [DIST dist.r] [FAC fac.r] [RADII {at1.s|z1.i} r1.s [{at2.s|z2.i} r2.s ...]]
+COORD [DIST dist.r] [FAC fac.r] 
 ~~~
 
 <a id="key-count"></a>
@@ -732,7 +732,7 @@ VCUTOFF vcutoff.r
 [RADII](/critic2/manual/misc/#c2-radii)
 : Sets the covalent radii of atoms.
 ~~~
-RADII [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
+RADII {COV|VDW|} [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 ~~~
 
 <a id="key-rdf"></a>

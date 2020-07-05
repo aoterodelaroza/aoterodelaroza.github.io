@@ -380,17 +380,23 @@ Critic2 considers two atoms are covalently bonded if their distance is
 less than the sum of their covalent radii times `bondfactor.r` (default:
 1.4). The maximum bondfactor allowed is 2.0.
 
-### Covalent Radii (RADII) {#c2-radii}
+### Covalent and van der Waals Radii (RADII) {#c2-radii}
 
 The keyword RADII allows changing the internal table of covalent
-radii:
+and van der Waals radii:
 ~~~
-RADII [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
+RADII {COV|VDW|} [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 ~~~
-RADII sets the covalent radii of atoms with atomic symbol `at1.s` or
-atomic number `z1.i` to `rad1.r`. (Units: bohr in crystals, angstroms
-in molecules). The radii of several atoms can be changed in the same
-command.
+Without any additional arguments, RADII prints the list of covalent
+and van der Waals radii to the output. With COV, the following
+arguments modify the covalent radii. With VDW, modify the van der
+Waals radii. A list of argument pairs follows, allowing the change of
+several atomic radii using the same command. The first argument in
+each pair can be either the atomic symbol `at1.s` or the atomic number
+`z1.i` of the atom whose radius we want to change. Its radius is
+changed to `rad1.r`.  (Units: by default, bohr in crystals, angstroms
+in molecules, unless the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword is used).
 
 ### Root of Files Created by Critic2 (ROOT) {#c2-root}
 

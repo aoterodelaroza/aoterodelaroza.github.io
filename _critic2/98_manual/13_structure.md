@@ -348,18 +348,16 @@ non-iterative weighted average distance (`1nd`, $$d_{\rm av}$$).
 
 The COORD keyword calculates pair and triplet coordination numbers:
 ~~~
-COORD [DIST dist.r] [FAC fac.r] [RADII {at1.s|z1.i} r1.s [{at2.s|z2.i} r2.s ...]]
+COORD [DIST dist.r] [FAC fac.r]
 ~~~
-By default two atoms are coordinated if they are
-within `fac.r` times the sum of their radii. By default, `fac.r` is equal
-to the [BONDFACTOR](/critic2/manual/misc/#c2-bondfactor)
-and the covalent radii are used (see the
-[RADII](/critic2/manual/misc/#c2-radii) keyword). The value of
-`fac.r` can be changed with the FAC keyword. The atomic radii for atomic
-species can be changed with RADII, either by giving the atomic symbol
-(`at1.s`) or the atomic number (`z1.i`) followed by the new radius
-(default: bohr in crystals and angstrom in molecules). If the DIST
-keyword is used, all atoms within a distance `dist.r` are
+By default two atoms are coordinated if they are within `fac.r` times
+the sum of their covalent radii. By default, `fac.r` is equal to the
+[BONDFACTOR](/critic2/manual/misc/#c2-bondfactor) and the internal
+list of covalent radii is used (see the
+[RADII](/critic2/manual/misc/#c2-radii) keyword). The value of `fac.r`
+can be changed with the FAC keyword. The atomic radii for atomic
+species can be changed with using the [RADII keyword](/critic2/manual/misc/#c2-radii).
+If the DIST keyword is used, all atoms within a distance `dist.r` are
 coordinated.
 
 On output, COORD will list the number of coordinated pairs per atom in
