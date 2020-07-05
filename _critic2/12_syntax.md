@@ -26,8 +26,8 @@ toc_label: "List of keywords"
 | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube)         | [PRUNE_DISTANCE](#key-prune-distance) | [Q/QAT](#key-q)             | [QTREE](#key-qtree)         | [RADII](#key-radii)           |
 | [RDF](#key-rdf)               | [REFERENCE](#key-reference)             | [RESET](#key-reset)                   | [ROOT](#key-root)           | [RUN](#key-run)             | [SETFIELD](#key-setfield)     |
 | [SPG](#key-spg)               | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube)     | [STM](#key-stm)             | [SUM](#key-sum)             | [SYM](#key-sym)               |
-| [SYMM](#key-symm)             | [SYSTEM](#key-system)                   | [UNITS](#key-units)                   | [UNLOAD](#key-unload)       | [WRITE](#key-write)         | [XDM](#key-xdm)               |
-| [YT](#key-yt)                 | [ZPSP](#key-zpsp)                       |                                       |                             |                             |                               |
+| [SYMM](#key-symm)             | [SYSTEM](#key-system)                   | [UNITS](#key-units)                   | [UNLOAD](#key-unload)       | [VDW](#key-vdw)             | [WRITE](#key-write)           |
+| [XDM](#key-xdm)               | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                     |                             |                             |                               |
 
 ## Notation
 
@@ -853,6 +853,13 @@ UNITS {BOHR|AU|A.U.|ANG|ANGSTROM}
 : Unload a field.
 ~~~
 UNLOAD {id.s|ALL}
+~~~
+
+<a id="key-vdw"></a>
+[VDW](/critic2/manual/structure/#c2-vdw)
+: Calculate the van der Waals volume of a crystal or molecule.
+~~~
+VDW [PREC prec.r]
 ~~~
 
 <a id="key-write"></a>

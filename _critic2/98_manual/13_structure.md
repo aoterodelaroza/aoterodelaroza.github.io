@@ -374,13 +374,27 @@ With VDW, use the van der Waals radii. With COV, use the covalent
 radii. If neither VDW nor COV are used, use half of the nearest
 neighbor distance (in this case, the spheres would not overlap). 
 
-In the VDW and COV cases, the calculation is donw using a Monte-Carlo
+In the VDW and COV cases, the calculation is done using a Monte-Carlo
 sampling of the unit cell. The PREC keyword allows controlling the
 precision of this calculation. PREC corresponds to the standard
 deviation in the van der Waals volume divided by the volume
 itself. The default `prec.r` is 0.01. The van der Waals and covalent
 radii can be changed using the [RADII](/critic2/manual/misc/#c2-radii)
 keyword.
+
+## Van der Waals volume (VDW) {#c2-vdw}
+The VDW keyword calculates the van der Waals volume of a crystal or
+molecule.
+~~~
+VDW [PREC prec.r]
+~~~
+The calculation is done using a Monte-Carlo sampling of the unit cell
+or the molecular volume. The PREC keyword allows controlling the
+precision of this calculation. PREC corresponds to the standard
+deviation in the van der Waals volume divided by the volume
+itself. The default `prec.r` is 0.01. The van der Waals radii are
+taken from the internal tables, and they can be changed using the
+[RADII](/critic2/manual/misc/#c2-radii) keyword.
 
 ## Identify Atoms in the Structure Given Their Coordinates (IDENTIFY) {#c2-identify}
 
