@@ -368,7 +368,7 @@ unit cell and over all atomic species.
 ## Packing Ratio (PACKING) {#c2-packing}
 The PACKING keyword computes the packing ratio of the crystal.
 ~~~
-PACKING {VDW|COV|} [PREC prec.r]
+PACKING {COV|VDW|} [PREC prec.r]
 ~~~
 With VDW, use the van der Waals radii. With COV, use the covalent
 radii. If neither VDW nor COV are used, use half of the nearest

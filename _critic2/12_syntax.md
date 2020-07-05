@@ -623,7 +623,7 @@ ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] [MAXERR maxerr.r] 
 [PACKING](/critic2/manual/structure/#c2-packing)
 : Calculate the packing ratio of the current crystal structure.
 ~~~
-PACKING [VDW] [PREC prec.r]
+PACKING {COV|VDW|} [PREC prec.r]
 ~~~
 
 <a id="key-plane"></a>
