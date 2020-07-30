@@ -202,6 +202,7 @@ CPREPORT file.STRUCT_IN
 CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT file.json
+CPREPORT file.test
 CPREPORT [...] [GRAPH]
 ~~~
 

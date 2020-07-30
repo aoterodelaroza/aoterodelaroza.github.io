@@ -611,6 +611,7 @@ CPREPORT file.STRUCT_IN
 CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT file.json
+CPREPORT file.test
 CPREPORT [...] [GRAPH]
 ~~~
 
@@ -646,6 +647,9 @@ for the reference field to a JavaScript Object Notation (JSON) file by
 indicating a file with extension `.json`. The generated JSON file
 contains the system geometry, the field details, and essentialy the
 same information as in the SHORT, LONG, and VERYLONG reports.
+
+The `.test` file format is used in critic2's internal tests. This file
+format is intended for debugging purposes only.
 
 The optional GRAPH keyword can be used in combination with any of the
 file formats mentioned above. When GRAPH is used, the bond paths are
