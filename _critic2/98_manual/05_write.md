@@ -57,6 +57,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
+WRITE file.res
 ~~~
 A number of file formats can be written by critic2. As in CRYSTAL and
 MOLECULE, the type of file is detected by the extension (`.xyz`,
@@ -205,9 +206,13 @@ output. This list is necessary to build the corresponding
 `POTCAR`. The atoms are always ordered in increasing atomic number. An
 abinit input file containing the input structure can be written by
 using the `.abin` extension. An elk input template can be written
-using the `.elk` extension. A simple cif file is generated if the
-`.cif` extension is used. If NOSYM (or NOSYMM) is used, the cif file
-is written without symmetry (i.e. in the P1 space group).
+using the `.elk` extension. 
+
+A simple cif file is generated if the `.cif` extension is used. If
+NOSYM (or NOSYMM) is used, the cif file is written without symmetry
+(i.e. in the P1 space group).  The `.res` extension writes a SHELX
+file in res format. NOSYM/NOSYMM has the same meaning as in the cif
+output.
 
 A template input file for crystal14 (incomplete - no basis set
 specification) can be written with the extension `.d12`. The

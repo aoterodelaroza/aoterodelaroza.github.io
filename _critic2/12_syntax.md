@@ -214,6 +214,8 @@ CRYSTAL/MOLECULE # molecule..endmolecule can be used to input a molecule.
 CRYSTAL file.cif [datablock.s]
 CRYSTAL file.res
 CRYSTAL file.ins
+CRYSTAL file.16
+CRYSTAL file.21
 CRYSTAL file.cube
 CRYSTAL file.bincube
 CRYSTAL file.struct
@@ -883,6 +885,7 @@ WRITE file.elk
 WRITE file.gau
 WRITE file.cif [NOSYM|NOSYMM]
 WRITE file.d12 [NOSYM|NOSYMM]
+WRITE file.res [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
 WRITE file.gin [DREIDING]
