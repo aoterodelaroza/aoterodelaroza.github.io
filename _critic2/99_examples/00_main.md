@@ -14,7 +14,7 @@ sidebar:
 
 - [Integration of atomic charges and volumes with grids](/critic2/examples/example_11_01_simple-integration/)
 
-- [Delocalization indices in solids using](/critic2/examples/example_11_10_deloc-indices/)
+- [Delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/)
 
 ## STM plots (STM) {#c2e-stm}
 
