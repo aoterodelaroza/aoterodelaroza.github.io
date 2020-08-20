@@ -16,6 +16,17 @@ row_critic2:
     btn_class: "btn--success"
   # From https://pixabay.com/en/coffee-wood-table-wooden-espresso-1030971/
   # Free for any use; no attribution required.
+  - image_path: assets/images/aggao2_efit.png
+    alt: "E-V curves"
+    title: "Gibbs2"
+    excerpt: >-
+      Calculation of thermodynamic properties of periodic solids as a
+      function of temperature and pressure in the quasiharmonic
+      approximation.
+    url: /gibbs2/
+    btn_label: "Go to the page"
+    btn_class: "btn--success"
+  # From AgGaO2 study.
   - image_path: assets/images/refdata.png
     alt: "Tripeptide"
     title: "Reference data"

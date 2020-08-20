@@ -1,10 +1,12 @@
 main:
-  - title: "DevNotes"
-    url: /devnotes/
   - title: "Critic2"
     url: /critic2/
+  - title: "Gibbs2"
+    url: /gibbs2/
   - title: "Reference data"
     url: /refdata/
+  - title: "DevNotes"
+    url: /devnotes/
 
 critic2:
   - title: "Main"
@@ -121,6 +123,12 @@ devnotes:
       url: /devnotes/space-group-collection/
     - title: "XDM forces, stress, phonons"
       url: /devnotes/derivatives-xdmsolids/
+
+gibbs2:
+  - title: "Main"
+    url: /
+  - title: "Home"
+    url: /gibbs2/
 
 refdata:
   - title: "Main"

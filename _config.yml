@@ -51,11 +51,14 @@ exclude:
   - README.md
 include:
   - _critic2/
-  - _devnotes/
+  - _gibbs2/
   - _refdata/
+  - _devnotes/
 
 collections:
   critic2:
+    output: true
+  gibbs2:
     output: true
   devnotes:
     output: true
