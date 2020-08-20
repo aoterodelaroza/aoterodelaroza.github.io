@@ -134,7 +134,13 @@ gibbs2:
         url: /gibbs2/
       - title: "Installation"
         url: /gibbs2/installation/
+      - title: "Quick Start Guide"
+        url: /gibbs2/quickstart/
+      - title: "List of Keywords"
+        url: /gibbs2/syntax/
 
+  - title: "Reference Manual"
+    url: /gibbs2/manual/
 
 refdata:
   - title: "Main"
