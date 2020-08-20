@@ -142,6 +142,24 @@ gibbs2:
   - title: "Reference Manual"
     url: /gibbs2/manual/
 
+gibbs2_manual:
+  - title: "Main"
+    url: /
+  - title: "Home"
+    url: /gibbs2/
+    children:
+      - title: "Download"
+        url: /gibbs2/
+      - title: "Installation"
+        url: /gibbs2/installation/
+      - title: "Quick Start Guide"
+        url: /gibbs2/quickstart/
+      - title: "List of Keywords"
+        url: /gibbs2/syntax/
+
+  - title: "Reference Manual"
+    url: /gibbs2/manual/
+
 refdata:
   - title: "Main"
     url: /
