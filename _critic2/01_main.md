@@ -30,7 +30,7 @@ calculation results in molecules and periodic solids.
 
 Alternatively, clone the git repository for the **latest version** of the code:
 ~~~
-git clone git@github.com:aoterodelaroza/critic2.git
+git clone https://github.com/aoterodelaroza/critic2.git
 ~~~
 or visit the [github page](https://github.com/aoterodelaroza/critic2).
 
