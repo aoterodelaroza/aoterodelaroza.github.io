@@ -129,6 +129,12 @@ gibbs2:
     url: /
   - title: "Home"
     url: /gibbs2/
+    children:
+      - title: "Download"
+        url: /gibbs2/
+      - title: "Installation"
+        url: /gibbs2/installation/
+
 
 refdata:
   - title: "Main"
