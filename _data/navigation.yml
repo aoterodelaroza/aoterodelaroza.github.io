@@ -159,6 +159,9 @@ gibbs2_manual:
 
   - title: "Reference Manual"
     url: /gibbs2/manual/
+    children:
+      - title: "Input and Output"
+        url: /gibbs2/manual/inputoutput/
 
 refdata:
   - title: "Main"
