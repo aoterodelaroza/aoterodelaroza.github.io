@@ -23,9 +23,9 @@ continued using the backslash (`\`) character.
 A simple input file corresponding to a pseudopotential/plane-waves LDA
 calculation in MgO is:
 ~~~
-mm 40.3044
-nat 2
-phase mgo
+MM 40.3044
+NAT 2
+PHASE mgo
  81.8883583665837   -73.5171659350000
  86.0358791612784   -73.5360133400000
  90.1833999559730   -73.5508544000000
@@ -46,23 +46,23 @@ phase mgo
 152.3962118763931   -73.5729658900000
 156.5437326710878   -73.5693791200000
 160.0000000000000   -73.5662512150000
-endphase
+ENDPHASE
 ~~~
-The `mm` keyword indicates the molar mass of the primitive cell in
+The MM keyword indicates the molar mass of the primitive cell in
 atomic mass units (amu). In the case of MgO, Mg weighs 24.3050 amu and
 O weighs 15.9994, and there is one atom of each in the primitive cell
-so Mg+O is 40.3044. `nat` is the total number of atoms in the
+so Mg+O is 40.3044. NAT is the total number of atoms in the
 primitive cell. 
 
-The last keyword, `phase` is the most important part of a gibbs2
-input. Every time a `phase` keyword appears, a new phase is defined in
-the input. The label immediately following `phase` is the name that
-phase will have in gibbs2. Additional options for the `phase` can be
+The last keyword, PHASE is the most important part of a gibbs2
+input. Every time a PHASE keyword appears, a new phase is defined in
+the input. The label immediately following PHASE is the name that
+phase will have in gibbs2. Additional options for the PHASE can be
 input following the label, although in this case we opted for simplicity.
 
-The `phase` keyword can either read its data (mostly the $E(V)$ curve
+The PHASE keyword can either read its data (mostly the $E(V)$ curve
 but also other information) directly from the input file, as above, or
-from an external file using the `file` option:
+from an external file using the FILE option:
 ~~~
 mm 40.3044
 nat 2
@@ -70,8 +70,8 @@ phase mgo file mgo.dat
 ~~~
 where `mgo.dat` contains the numerical rows from the example above.
 If the energy-volume data is given in the main input file, then the
-data for a given phase must end with the `endphase` keyword. Each row
-between `phase` and `endphase` corresponds to a data point. In this
+data for a given phase must end with the ENDPHASE keyword. Each row
+between PHASE and ENDPHASE corresponds to a data point. In this
 case, the data is simply the unit cell volume (in bohr^3, first
 column) and the energy per unit cell (in Hartree, second column).
 
@@ -263,7 +263,7 @@ properties given in `mgo.eos_static` are:
 |      9 | `Bpp`    | $$B'' = \frac{d^2B}{dp^2}$$                                          | Second pressure derivative of the bulk modulus                          | 1/GPa         |
 
 The list of pressures at which the properties are calculated can be
-modified using the `pressure` keyword. By default, gibbs2 calculates
+modified using the PRESSURE keyword. By default, gibbs2 calculates
 100 pressure points from zero up to the maximum pressure allowed by
 the static energies (or 500 GPa). If several phases are given in
 the input, properties are calculated for each phase in turn. In the
@@ -314,7 +314,7 @@ phases are given in the input, properties are calculated for each
 phase in turn. In the `.eos` file, each phase is indicated by a
 `# Phase` line. The pressure and temperature points at which the
 thermodynamic properties are calculated in the `.eos` file can be
-changed using the `pressure` and `temperature` keywords. By default,
+changed using the PRESSURE and TEMPERATURE keywords. By default,
 100 temperature points are used between 0 and 1.5 times the minimum
 Debye temperature.
 

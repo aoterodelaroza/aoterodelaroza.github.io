@@ -162,6 +162,8 @@ gibbs2_manual:
     children:
       - title: "Input and Output"
         url: /gibbs2/manual/inputoutput/
+      - title: "Basic Keywords"
+        url: /gibbs2/manual/basickeywords/
 
 refdata:
   - title: "Main"
