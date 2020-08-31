@@ -164,6 +164,8 @@ gibbs2_manual:
         url: /gibbs2/manual/inputoutput/
       - title: "Basic Keywords"
         url: /gibbs2/manual/basickeywords/
+      - title: "Equations of State"
+        url: /gibbs2/manual/eos/
 
 refdata:
   - title: "Main"

@@ -47,7 +47,7 @@ VFREE nat.i
 The NAT and VFREE keywords give the number of atoms in the system (NAT
 and VFREE are equivalent). Typically, the easiest choice is to set NAT
 to be the same as the number of atoms in the unit cell but another
-common choice is to use the number of atoms per unit formula. See
+common choice is to use the number of atoms per formula unit. See
 [below](#g2-vfreehow) for an explanation of how to pick NAT for your
 system.
 
@@ -176,7 +176,7 @@ the corresponding keywords:
 The use of NAT, MM, Z, and the input volumes and energies is often a
 source of confusion. The following rules apply:
 
-* NAT can be chosen as any multiple of the system's unit formula. In
+* NAT can be chosen as any multiple of the system's formula unit. In
   the output, all extensive thermodynamic properties (energy, free
   energies, entropy,...) are given per NAT atoms.
 
@@ -190,12 +190,12 @@ an NAT of 12, corresponding to a benzene molecule (C6H6). The
 primitive cell of the benzene crystal structure at ambient conditions
 (with space group Pbca) contains 48 atoms. Therefore, NAT could also be
 set to 48. Another option is to use the asymmetric unit of the crystal
-(with 6 atoms, NAT = 6) or the unit formula (CH, with
+(with 6 atoms, NAT = 6) or the formula unit (CH, with
 NAT=2). Ultimately, any NAT value that is a multiple of the number of
-atoms in the unit formula (2) is valid.
+atoms in the formula unit (2) is valid.
 
 Once NAT is set, MM is the mass corresponding to NAT atoms, in amu (or
-the molar mass in g/mol). For instance, if we used the unit formula as
+the molar mass in g/mol). For instance, if we used the formula unit as
 reference in the benzene example (CH, NAT = 2), then MM would be 
 $$m_C + m_H = 13.01864$$ amu. If, instead, we use a benzene molecule as our
 reference, then NAT = 12 (C6H6) and MM = $$6 m_C + 6 m_H = 78.1118$$
@@ -206,7 +206,7 @@ polymorphs. The aforementioned Pbca phase has 48 atoms in the unit
 cell but the P21/c polymorph has 24 atoms in the primitive cell
 only. Whatever the choice of NAT, Z*NAT must be equal to 48 for the
 Pbca phase and 24 for the P21/c phase. The following inputs for the
-study of the two phases would be valid. Per unit formula (CH)
+study of the two phases would be valid. Per formula unit (CH)
 ~~~
 NAT 2
 MM 13.01864
@@ -229,7 +229,7 @@ PHASE P21c Z 1 FILE P21c.dat
 ~~~
 In this last case the "Z 1" in the P21c phase can be omitted, since
 one is the default value. In the output, extensive properties are
-given per unit formula in the first case, per molecule in the second,
+given per formula unit in the first case, per molecule in the second,
 and per two molecules in the third cases. In all three cases,
 `Pbca.dat` and `P21c.dat` contain the volumes and energies
 corresponding to a unit cell (48 atoms in Pbca and 24 atoms in

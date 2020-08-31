@@ -336,3 +336,10 @@ column in the `.eos` file. For example, `mgo_p_03.pdf` contains the
 file. Similarly, `mgo_t_09.pdf` contains the $$B_T(T)$$ curves at
 constant pressure. 
 
+## Optional keywords
+~~~
+SET NOEFIT
+~~~
+This command instructs gibbs2 not to generate the 
+[static energy plot](#g2-efitfile) (`efit`).
+

@@ -31,7 +31,7 @@ This input gives the data for a simple calculation of the
 thermodynamic properties in MgO. The keywords are:
 
 * `nat`: the number of atoms in the system. Typically, this value is
-  the number of atoms per unit formula but it can also be per unit
+  the number of atoms per formula unit but it can also be per unit
   cell, per molecule, etc. All extensive quantities in output are
   given per `nat` atoms.
 
