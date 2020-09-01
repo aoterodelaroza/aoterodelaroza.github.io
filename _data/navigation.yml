@@ -166,6 +166,8 @@ gibbs2_manual:
         url: /gibbs2/manual/basickeywords/
       - title: "Equations of State"
         url: /gibbs2/manual/eos/
+      - title: "Temperature Models"
+        url: /gibbs2/manual/tmodels/
 
 refdata:
   - title: "Main"
