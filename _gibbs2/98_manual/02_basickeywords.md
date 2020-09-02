@@ -236,7 +236,7 @@ corresponding to a unit cell (48 atoms in Pbca and 24 atoms in
 P21c). This a natural choice, since they can be extracted without
 modification from the output of the electronic structure calculation.
 
-## Optional keywords
+## Optional keywords {#g2-optional}
 
 This section lists basic keywords that modify the conditions of the
 run but are not required for gibbs2 to operate.

@@ -11,7 +11,7 @@ toc_label: "Miscellaneous Phase Options"
 toc_sticky: true
 ---
 
-### Changing the Default Units
+### Changing the Default Units {#g2-units}
 
 By default, gibbs2 understands all the input quantities are in atomic
 units: Hartree for the energies and frequencies, bohr^3 for the
@@ -35,7 +35,7 @@ PHASE ... UNITS VOLUME ANG3 ENERGY EV
 All data is converted to atomic units internally, and the output is
 always in atomic units, except where explicitly noted.
 
-### Input of pressure-volume data
+### Input of pressure-volume data {#g2-pvdata}
 
 The PVDATA option to PHASE can be used to indicate that the input data
 is pressure-volume instead of energy-volume:
@@ -66,7 +66,7 @@ $$V_0' = V_1 + (V_1 - V_0) \times $$ `fac.r`
 
 By default, `fac.r` is 0.40.
 
-### Energy Shift
+### Energy Shift {#g2-eshift}
 
 ~~~
 PHASE ... [ESHIFT eshift.r]

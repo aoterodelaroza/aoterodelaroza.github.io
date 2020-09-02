@@ -136,7 +136,7 @@ In absence of a TMODEL keyword, the default is DEBYE.
 The following optional keywords can be used in PHASE to control how gibbs2
 carries out the equation of state fitting for a particular phase.
 
-### Debye model
+### Debye model {#g2-debye}
 ~~~
 [POISSON sigma.r]
 ~~~
@@ -144,7 +144,22 @@ The Poisson ratio of the phase. This value is used in the calculation
 of the Debye temperature when using the Debye model. The default value
 is 0.25, the Poisson ratio of a Cauchy solid.
 
-### Full QHA model
+### Debye-Einstein model {#g2-debeins}
+~~~
+FREQG0 {name.s|num.i} [FILE file.s]
+  # comment
+  freq1.r freq2.r ...
+  ...
+ENDFREQG0
+~~~
+Use this keyword to provide the optical frequencies at Gamma for the
+phase with string identifier `name.s` or integer identifier `num.i`
+The itneger corresponds to the order in which phases appear in the
+input. The frequencies are `freq1.r`, `freq2.r`,... and there must be
+exactly 3*NAT-3 of them. Optionally, the information in the
+environment can be input from an external file `file.s`.
+
+### Full QHA model {#g2-qha}
 ~~~
 [PREFIX prefix.s]
 ~~~

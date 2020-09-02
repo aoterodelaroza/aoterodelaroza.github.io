@@ -64,9 +64,9 @@ The PHASE keyword can either read its data (mostly the $E(V)$ curve
 but also other information) directly from the input file, as above, or
 from an external file using the FILE option:
 ~~~
-mm 40.3044
-nat 2
-phase mgo file mgo.dat
+MM 40.3044
+NAT 2
+PHASE mgo FILE mgo.dat
 ~~~
 where `mgo.dat` contains the numerical rows from the example above.
 If the energy-volume data is given in the main input file, then the
@@ -82,21 +82,21 @@ stability of each phase as a function of temperature and pressure.
 For instance, if we were interested in the B1 -> B2 transition in MgO,
 the input would be:
 ~~~
-phase mgo:B1
+PHASE mgo:B1
  ...
-endphase
-phase mgo:B2
+ENDPHASE
+PHASE mgo:B2
  ...
-endphase
+ENDPHASE
 ~~~
 However, phases need not correspond to different atomic arrangements
 of a solid. For instance, if we were interested in how two different
 thermal models apply to the same set of data, we could do:
 ~~~
-phase mgo:debye tmodel debye
+PHASE mgo:debye TMODEL debye
  ...
 endphase
-phase mgo:debeins tmodel debye_einstein
+PHASE mgo:debeins TMODEL debye_einstein
  ...
 endphase
 ~~~
@@ -380,7 +380,7 @@ pressure-dependence of phase stability:
   (`_ptrans.gnu`). This is essentially the pressure-temperature phase
   diagram.
 
-## Optional keywords
+## Optional keywords {#g2-setoptions}
 ~~~
 SET ROOT root.s
 ~~~

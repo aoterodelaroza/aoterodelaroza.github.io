@@ -79,13 +79,13 @@ temperature that are different from ambient conditions. In that case,
 the pressure and temperature of the EEC can be changed to match the
 experimental data with the EEC_P and EEC_T options to PHASE:
 ~~~
-EEC_P pext.r
+PHASE ... EEC ... EEC_P pext.r
 ~~~
 The EEC_P option specifies the external pressure (in GPa) of the
 experimental data from which the EEC parameters obtained. The default
 is zero.
 ~~~
-EEC_T text.r
+PHASE ... EEC ... EEC_T text.r
 ~~~
 The EEC_T option specifies the temperature (in K) of the experimental
 data from which the EEC parameters obtanied. The default is room
