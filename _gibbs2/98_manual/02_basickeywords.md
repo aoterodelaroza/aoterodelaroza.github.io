@@ -78,9 +78,9 @@ PHASE ... [FIT {POLYGIBBS|BM2|BM3|BM4|PT2|PT3|PT4|PT5|MURN|ANTONS|VINET|AP2|
           [REG {LAD|LSQ}] [FIX i1.i v1.r i2.i v2.r ...]
 PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|DEBYE_EINSTEIN|
                    DEBYE_GRUNEISEN {SLATER|DM|VZ|MFV|a.r b.r}|
-                   {QHAFULL|QHA} [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|
-                   QHA_ESPRESSO [PHFIELD ifield.i]]
-          [PREFIX prefix.s] [POISSON sigma.r] [LAUE laue.s] [FSTEP step.r]
+                   {QHAFULL|QHA}}]
+          [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|}] [PREFIX prefix.s]
+          [POISSON sigma.r] [FSTEP step.r]
 PHASE ... [ELEC SOMMERFELD FREE SOMMERFELD [icol.i] POL4 [icol1.i]] [NELEC nelec.i]
 PAHSE ... [EEC NOSCAL|PSHIFT vexp.r|BPSCAL vexp.r bexp.r|APBAF vexp.r|USE phase.i]
           [EEC_P pext.r] [EEC_T text.r] 

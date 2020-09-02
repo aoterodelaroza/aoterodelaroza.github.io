@@ -86,7 +86,7 @@ average is used. The agreement between polynomials of various degrees
 can be used as a measure of the quality of the input data.  The
 minimum and maximum degree of the polynomials that enter the
 polynomial average are controlled by the [SET MPAR and SET MPARMIN
-keywords](#g2-optional). By default, the polymials go from third
+keywords](#g2-optionalglobal). By default, the polymials go from third
 degree up to 12th degree.  In cases when the input dataset contains
 only a few points, the default maximum strain polynomial degree is
 lower to prevent overfitting.
@@ -126,7 +126,7 @@ are:
 | AP2     | Holzapfel's AP2   |     3 | $$E_0,V_0,B_0,B_0'$$              | $$E(V) = E_0 + 9B_0V_0 \Big\{\left[\Gamma(-2,c_0\eta)-\Gamma(-2,c_0)\right] c_0^2 e^{c_0} + \left[\Gamma(-1,c_0\eta)-\Gamma(-1,c_0)\right] c_0(c_2-1) e^{c_0} - \left[\Gamma( 0,c_0\eta)-\Gamma( 0,c_0)\right] 2c_2 e^{c_0} + \frac{c_2}{c_0} \left[e^{c_0(1-\eta)}-1\right] \Big\}$$ |
 
 Note that the AP2 EOS requires setting the number of electrons for the
-system with the [NELECTRON keyword](#g2-optional). Also, the BM2, BM3,
+system with the [NELECTRON keyword](#g2-optionalglobal). Also, the BM2, BM3,
 etc. EOS are different from the equivalent strain polynomial versions
 (STRAIN BM 2, STRAIN BM 3, etc.) only in that a non-linear
 least-squares fit is used. The use of the strain polynomial versions
@@ -139,10 +139,9 @@ available mostly for testing and backwards-compatibility. POLYGIBBS
 may remove points from the energy-volume grid, and is known to be
 unstable in some cases.
 
-## Optional keywords  {#g2-optional}
-
-The following optional keywords can be used to control how gibbs2
-carries out the equation of state fitting:
+## Optional PHASE options  {#g2-optionalphase}
+The following optional keywords can be used in PHASE to control how gibbs2
+carries out the equation of state fitting for a particular phase:
 ~~~
 REG {LAD|LSQ}
 ~~~
@@ -167,6 +166,10 @@ $$V_0$$ (2), $$B_0$$ (3), $$B_0'$$ (4), $$B_0''$$ (5), or $$B_0'''$$
 (6). The value at which the corresponding parameter is fixed comes
 after the integer identifier (`v1.r`). Multiple identifier/value pairs
 can be given.
+
+## Optional global keywords {#g2-optionalglobal}
+The following optional keywords can be used in the gibbs2 input to
+control the EOS fitting for all phases:
 ~~~
 NELECTRONS nelec.i
 ~~~

@@ -26,7 +26,7 @@ change in volume.
 
 A complete statically constrained QHA calculation requires the
 energy-volume curve and the phonon density of states calculated at
-each of the volumes. In many cases, this is unfeasable due to
+each of the volumes. In many cases, this is unfeasible due to
 computational limitations. Simpler temperature models can be used in
 this case. It is important to note that these simplified thermal
 models have their limitations, so it is fundamental to check whether
@@ -49,9 +49,9 @@ to the PHASE keyword:
 ~~~
 PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|DEBYE_EINSTEIN|
                    DEBYE_GRUNEISEN {SLATER|DM|VZ|MFV|a.r b.r}|
-                   {QHAFULL|QHA} [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|
-                   QHA_ESPRESSO [PHFIELD ifield.i]]
-          [PREFIX prefix.s] [POISSON sigma.r] [LAUE laue.s] [FSTEP step.r]
+                   {QHAFULL|QHA}}]
+          [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|}] [PREFIX prefix.s]
+          [POISSON sigma.r] [FSTEP step.r]
 ~~~
 The temperature model is selected with one of the following keywords:
 
@@ -102,7 +102,7 @@ The temperature model is selected with one of the following keywords:
   deltas representing the optical part of the phonon spectrum. The
   Debye model is applied as in DEBYE, including Slater's formula, but
   only for the acoustic branches. This model requires the frequencies
-  at the Brillouine zone center (the Gamma point) at the equilibrium
+  at the Brillouin zone center (the Gamma point) at the equilibrium
   or experimental geometry. These are input using the FREQG0
   keyword.
 
@@ -119,3 +119,106 @@ The temperature model is selected with one of the following keywords:
   file is read as well as the various units can be changed with
   additional [optional keywords](#g2-optional).
 
+  It is often the case that some points in the energy-volume grid have
+  a substantial amount of their phonon density of states in the
+  negative-frequency region. This could be due to numerical error in
+  the calculation (if the phDOS decays exponentially below zero) but
+  more often it indicates that those points are dynamically unstable
+  (i.e. a symmetry-breaking relaxation starting at that point would
+  decrease the enthalpy). By default, gibbs2 eliminates
+  ("deactivates") the points with substantial negative-frequency phDOS
+  from the energy-volume grid so they do not interfere with the
+  calculation of thermodynamic properties.
+
+In absence of a TMODEL keyword, the default is DEBYE.
+
+## Optional PHASE options  {#g2-optional}
+The following optional keywords can be used in PHASE to control how gibbs2
+carries out the equation of state fitting for a particular phase.
+
+### Debye model
+~~~
+[POISSON sigma.r]
+~~~
+The Poisson ratio of the phase. This value is used in the calculation
+of the Debye temperature when using the Debye model. The default value
+is 0.25, the Poisson ratio of a Cauchy solid.
+
+### Full QHA model
+~~~
+[PREFIX prefix.s]
+~~~
+Indicates the prefix used to find files containing the vibrational
+density of states or frequencies. For instance, this input:
+~~~
+PHASE MgO FILE mgo.dat PREFIX ../mgo-b1 TMODEL QHA [...]
+~~~
+reads the energy-volume data and the location of the phonon density of
+states files from the external file `mgo.dat`. This file may contain:
+~~~
+81.8883583665837   -73.5171659350000 001/001.phdos
+86.0358791612784   -73.5360133400000 002/002.phdos
+[...]
+~~~
+The path to the phDOS files is build by concatenating the prefix
+(`../mgo-b1`) with the names of the files
+(`001/001.phdos`). In this case, gibbs2 expects the phDOS files to be
+at `../mgo-b1/001/001.phdos`,  `../mgo-b1/002/002.phdos`, etc. An
+absolute path may also be used in PREFIX. By default, PREFIX is the
+current directory (`.`).
+~~~
+[PHFIELD ifield.i]
+~~~
+Indicates which column in the external data file contains the location
+of the phDOS files. By default, they assumed to be in the third column
+(as in the example above).
+~~~
+[DOSFIELD i1.i i2.i]
+~~~
+Indicates which columns gibbs2 reads from each individual phDOS
+file. By default, the first column (`i1.i`) is interpreted as the
+frequencies and the second column (`i2.i`) as the density of states.
+~~~
+[FSTEP step.r]
+~~~
+In the QHA thermal model, gibbs2 needs to interpolate the phonon DOS
+at arbitrary volumes. To do this, all phDOS read from input need to be
+expressed on the same frequency grid. By default, the step of this
+grid is the difference in frequency between the two highest
+frequencies at the first volume in the grid. By using FSTEP, the user
+can set an explicit value for the phDOS step, equal to `step.r`.
+
+## Optional global keywords {#g2-optionalglobal}
+The following optional keywords can be used in the gibbs2 input to
+control the EOS fitting for all phases. All the following keywords
+apply to the QHA model.
+~~~
+SET PHONFIT {LINEAR|SPLINE}
+~~~
+Type of interpolation of the phDOS with volume. It can be either
+linear (LINEAR) or a cubic not-a-knot spline (SPLINE). Linear
+interpolation is almost equivalent to the spline for a reasonably fine
+volume grid, and much faster, so LINEAR is the default.
+~~~
+SET IGNORE_NEG_CUTOFF inegcut.r
+~~~
+When negative phonon frequencies are passed to gibbs2, the program
+assumes that the point does not correspond to a stable structure and
+deactivates its use in the calculation of thermodynamic properties. A
+deactivated volume is dropped from the energy-volume grid, as if it
+had not been given in the input.
+
+Sometimes, small negative frequencies can be the result of numerical
+errors in the program used to calculate the phonon frequencies. This
+keyword sets a cutoff for the negative frequencies. If a frequency is
+less than -abs(`inegcut.r`), the point is deactivated. If a frequency
+is between -abs(`inegcut.r`) and 0, the point remains active, but that
+frequency is discarded (and the phDOS renormalized to the correct
+value). The units of `inegcut.r` are cm-1. The default value is 20
+cm-1.
+~~~
+SET NORENORMALIZE
+~~~
+In the QHA thermal model, eliminate the negative frequencies from the
+phonon density of states but do not renormalize. This is used for
+testing purposes only.
