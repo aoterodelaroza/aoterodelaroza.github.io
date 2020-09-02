@@ -81,9 +81,9 @@ PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|DEBYE_EINSTEIN|
                    {QHAFULL|QHA}}]
           [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|}] [PREFIX prefix.s]
           [POISSON sigma.r] [FSTEP step.r]
-PHASE ... [ELEC SOMMERFELD FREE SOMMERFELD [icol.i] POL4 [icol1.i]] [NELEC nelec.i]
-PAHSE ... [EEC NOSCAL|PSHIFT vexp.r|BPSCAL vexp.r bexp.r|APBAF vexp.r|USE phase.i]
+PHASE ... [EEC NOSCAL|PSHIFT vexp.r|BPSCAL vexp.r bexp.r|APBAF vexp.r|USE phase.i]
           [EEC_P pext.r] [EEC_T text.r] 
+PHASE ... [ELEC SOMMERFELD FREE SOMMERFELD [icol.i] POL4 [icol1.i]] [NELEC nelec.i]
 PHASE ... [INTERPOLATE f1.i [f2.i ...]] [EXTEND]
 PHASE ... [ESHIFT eshift.r] [PVDATA] [UNITS {VOLUME {BOHR|BOHR3|BOHR^3|ANG|ANG3|ANG^3}}
           {ENERGY {HY|HARTREE|HA|EV|EVOLT|ELECTRONVOLT|RY|RYDBERG}}
