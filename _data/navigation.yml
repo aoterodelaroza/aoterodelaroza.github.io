@@ -168,8 +168,16 @@ gibbs2_manual:
         url: /gibbs2/manual/eos/
       - title: "Temperature Models"
         url: /gibbs2/manual/tmodels/
-      - title: "EEC & Misc. Topics"
-        url: /gibbs2/manual/eecelec/
+      - title: "Empirical Energy Corrections"
+        url: /gibbs2/manual/eec/
+      - title: "Electronic Contributions"
+        url: /gibbs2/manual/elec/
+      - title: "Interpolation of Satellite Data"
+        url: /gibbs2/manual/interpolation/
+      - title: "Miscellaneous Phase Options"
+        url: /gibbs2/manual/misc/
+      - title: "Test Cases and Examples"
+        url: /gibbs2/manual/tests/
 
 refdata:
   - title: "Main"
