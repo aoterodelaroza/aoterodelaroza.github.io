@@ -336,7 +336,7 @@ column in the `.eos` file. For example, `mgo_p_03.pdf` contains the
 file. Similarly, `mgo_t_09.pdf` contains the $$B_T(T)$$ curves at
 constant pressure. 
 
-## Phase Transitions {#g2-ptrans}
+## Phase Transitions (tpstab, dgtp, ptrans files) {#g2-ptrans}
 
 If more than one phase is given in the input, gibbs2 can calculate
 stability diagrams and transition pressures from the data for the
