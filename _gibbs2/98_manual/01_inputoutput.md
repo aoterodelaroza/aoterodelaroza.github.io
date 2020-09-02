@@ -336,6 +336,50 @@ column in the `.eos` file. For example, `mgo_p_03.pdf` contains the
 file. Similarly, `mgo_t_09.pdf` contains the $$B_T(T)$$ curves at
 constant pressure. 
 
+## Phase Transitions {#g2-ptrans}
+
+If more than one phase is given in the input, gibbs2 can calculate
+stability diagrams and transition pressures from the data for the
+different phases by determining which has lowest free energy at a
+given temperature and pressure. When comparing phases with different
+number of atoms in the cell it is essential that the energy and volume
+of each phase correspond to a number of atoms equal to NAT times their
+value for the Z keyword.
+
+When more than one phase is present, gibbs2 automatically calculates
+the static transition pressures, which are written to the output:
+~~~
+* Static transition pressures (linear interpolation)
+#        Pressure range (GPa)      Stable phase
+        0.0000 -->     503.1471          b1
+      503.1471 -->     600.0000          b2
+~~~
+
+In addition, a plot is generated for the static enthalpy vs. pressure
+diagram, ending in `_dH.gnu` (the gnuplot script) and `_dH.aux` (the
+auxiliary data for the plot). This plot presents the difference in
+enthalpy between all phases and the first phase in the input as a
+function of applied pressure. Note this plot does not contain
+vibrational effects.
+
+Several additional files are written that contain the temperature- and
+pressure-dependence of phase stability:
+ 
+* A file with extension `.tpstab` is created that gives the stable
+  phase (i.e. the one that has minimum Gibbs free energy) as a
+  function of pressure and temperature. The columns are, in order:
+  temperature, pressure, identity of the stable phase, Gibbs free
+  energy, volume, and isothermal bulk modulus.
+
+* The file with extension `.dgtp` gives the difference in Gibbs free
+  energy between all the phases and the first phase, at all the
+  temperatures and pressures.
+
+* The evolution of the transition pressures with temperature is
+  represented in the `.ptrans` file and its associated gnuplot script
+  (`_ptrans.gnu`). This is essentially the pressure-temperature phase
+  diagram.
+
 ## Optional keywords
 ~~~
 SET NOEFIT
