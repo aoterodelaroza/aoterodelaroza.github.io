@@ -179,6 +179,9 @@ gibbs2_manual:
       - title: "Test Cases and Examples"
         url: /gibbs2/manual/tests/
 
+  - title: "Examples"
+    url: /gibbs2/examples/
+
 refdata:
   - title: "Main"
     url: /
