@@ -15,11 +15,18 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [DRHOUSE](#key-drhouse)         | [END](#key-end)               | [EOUTPUT](#key-eoutput) | [FREQG0](#key-freqg0)     | [INTERPOLATE](#key-interpolate) | [MM](#key-mm)       |
-| [NAT](#key-nat)                 | [NELECTRONS](#key-nelectrons) | [PHASE](#key-phase)     | [PRESSURE](#key-pressure) | [SET](#key-set)                 | [TITLE](#key-title) |
-| [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree)           | [VOLUME](#key-volume)   |                           |                                 |                     |
+| [ACTIVATE](#key-activate) | [DRHOUSE](#key-drhouse) | [END](#key-end)                 | [EOUTPUT](#key-eoutput) | [FREQG0](#key-freqg0)     | [INTERPOLATE](#key-interpolate) |
+| [MM](#key-mm)             | [NAT](#key-nat)         | [NELECTRONS](#key-nelectrons)   | [PHASE](#key-phase)     | [PRESSURE](#key-pressure) | [PRINTFREQ](#key-printfreq)     |
+| [SET](#key-set)           | [TITLE](#key-title)     | [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree)     | [VOLUME](#key-volume)     |                                 |
 
 ## List of Keywords
+
+<a id="key-activate"></a>
+[ACTIVATE](/gibbs2/manual/tmodels/#g2-optionalglobal)
+: Activate points with negative frequencies in QHA
+~~~
+ACTIVATE {ALL|v1.i v2.i v3.i...}
+~~~
 
 <a id="key-drhouse"></a>
 [DRHOUSE](/gibbs2/manual/basickeywords/#g2-optional)
@@ -43,7 +50,7 @@ EOUTPUT [vini.r vstep.r vend.r]
 ~~~
 
 <a id="key-freqg0"></a>
-[FREQG0](/gibbs2/manual/tmodels//#g2-debeins)
+[FREQG0](/gibbs2/manual/tmodels/#g2-debeins)
 : Frequencies at Gamma for the Debye-Einstein model
 ~~~
 FREQG0 {name.s|num.i} [FILE file.s]
@@ -143,6 +150,13 @@ PRESSURE
  p4.r ...
 ENDPRESSURE
 PRESSURE 0
+~~~
+
+<a id="key-printfreq"></a>
+[PRINTFREQ](/gibbs2/manual/tmodels/#g2-debeins)
+: Print frequencies at Gamma at all volumes (Debye-Einstein model)
+~~~
+PRINTFREQ|PRINTFREQS
 ~~~
 
 <a id="key-set"></a>

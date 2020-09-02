@@ -11,9 +11,9 @@ sidebar:
 Gibbs2 reads the user commands from a single input file (the `.ing`
 file). A simple input (`mgo.ing`) is:
 ~~~
-nat 2
-mm 40.3044
-phase mgo
+NAT 2
+MM 40.3044
+PHASE mgo
  81.8883583665837   -73.5171659350000
  90.1833999559730   -73.5508544000000
  98.4784415453624   -73.5712754950000
@@ -25,23 +25,26 @@ phase mgo
 148.2486910816984   -73.5763274850000
 156.5437326710878   -73.5693791200000
 160.0000000000000   -73.5662512150000
-endphase
+ENDPHASE
 ~~~
 This input gives the data for a simple calculation of the
 thermodynamic properties in MgO. The keywords are:
 
-* `nat`: the number of atoms in the system. Typically, this value is
+* [NAT](/gibbs2/manual/basickeywords/#g2-mandatory): the number of
+  atoms in the system. Typically, this value is
   the number of atoms per formula unit but it can also be per unit
   cell, per molecule, etc. All extensive quantities in output are
-  given per `nat` atoms.
+  given per NAT atoms.
 
-* `mm`: the molar mass per `nat` atoms.
+* [MM](/gibbs2/manual/basickeywords/#g2-mandatory): the molar mass per
+  NAT atoms.
 
-* `phase`: the definition of a new phase. In this case, the
-  rocksalt-type phase of MgO. A number of lines follow containing
-  pairs of volume/energy data (in bohr^3 and Hartree). The volume and
-  energy correspond to `nat` atoms. The input of data for this phase
-  ends with the keyword `endphase`.
+* [PHASE](/gibbs2/manual/basickeywords/#g2-mandatory): the definition
+  of a new phase. In this case, the rocksalt-type phase of MgO. A
+  number of lines follow containing pairs of volume/energy data (in
+  bohr^3 and Hartree). The volume and energy correspond to NAT
+  atoms. The input of data for this phase ends with the keyword
+  ENDPHASE.
 
 To run an input, do:
 ~~~
@@ -59,5 +62,6 @@ root (that is, the name up to the last `.`) as the input file.
 
 Gibbs2 accepts many keywords and commands. For a full description, see
 the [manual](/gibbs2/manual/). A summary of all available keywords can
-be found in the [syntax page](/gibbs2/syntax/).
+be found in the [syntax page](/gibbs2/syntax/). Some examples can be
+found in the [list of tests](/gibbs2/manual/tests/).
 

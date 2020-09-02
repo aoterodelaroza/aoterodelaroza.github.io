@@ -158,10 +158,16 @@ The itneger corresponds to the order in which phases appear in the
 input. The frequencies are `freq1.r`, `freq2.r`,... and there must be
 exactly 3*NAT-3 of them. Optionally, the information in the
 environment can be input from an external file `file.s`.
+~~~
+PRINTFREQ|PRINTFREQS
+~~~
+Print the calculated frequencies in the Debye-Einstein model for
+all static volumes in input. Writes a file with extension
+`.gammafreq`.
 
 ### Full QHA model {#g2-qha}
 ~~~
-[PREFIX prefix.s]
+PHASE ... [PREFIX prefix.s]
 ~~~
 Indicates the prefix used to find files containing the vibrational
 density of states or frequencies. For instance, this input:
@@ -182,19 +188,19 @@ at `../mgo-b1/001/001.phdos`,  `../mgo-b1/002/002.phdos`, etc. An
 absolute path may also be used in PREFIX. By default, PREFIX is the
 current directory (`.`).
 ~~~
-[PHFIELD ifield.i]
+PHASE ... [PHFIELD ifield.i]
 ~~~
 Indicates which column in the external data file contains the location
 of the phDOS files. By default, they assumed to be in the third column
 (as in the example above).
 ~~~
-[DOSFIELD i1.i i2.i]
+PHASE ... [DOSFIELD i1.i i2.i]
 ~~~
 Indicates which columns gibbs2 reads from each individual phDOS
 file. By default, the first column (`i1.i`) is interpreted as the
 frequencies and the second column (`i2.i`) as the density of states.
 ~~~
-[FSTEP step.r]
+PHASE ... [FSTEP step.r]
 ~~~
 In the QHA thermal model, gibbs2 needs to interpolate the phonon DOS
 at arbitrary volumes. To do this, all phDOS read from input need to be
@@ -207,6 +213,20 @@ can set an explicit value for the phDOS step, equal to `step.r`.
 The following optional keywords can be used in the gibbs2 input to
 control the EOS fitting for all phases. All the following keywords
 apply to the QHA model.
+~~~
+ACTIVATE {ALL|v1.i v2.i v3.i...}
+~~~
+In the QHA temperature model, gibbs2 automatically deactivates
+a volume when the phonon density of states in input contains
+negative frequencies. However, because of numerical errors in the
+DFPT calculation and posterior Fourier interpolation, it is
+possible to have a small region of negative frequencies. In such 
+cases, it is possible to activate manually the use of those volumes
+in the dynamic calculation with ACTIVATE. With the ALL keyword, all
+the volumes become active. Alternatively, the user can input the
+volume integer identifier (the position of the volume in the input
+grid). This identifier is written to the output when a volume is
+deactivated because of negative frequencies.
 ~~~
 SET PHONFIT {LINEAR|SPLINE}
 ~~~
