@@ -16,9 +16,10 @@ toc_sticky: true
 Gibbs2 reads its input from a single file, typically with extension
 `.ing`. This file contains keywords parsed by the program that
 indicate the details of the system under study and the tasks to
-run. The input file is free-format. Comments are preceded by a `#`
-symbol and they can be used anywhere in the input. Long lines can be
-continued using the backslash (`\`) character.
+run. The input file is free-format and case-insensitive. Comments are
+preceded by a `#` symbol and they can be used anywhere in the
+input. Long lines can be continued using the backslash (`\`)
+character.
 
 A simple input file corresponding to a pseudopotential/plane-waves LDA
 calculation in MgO is:
