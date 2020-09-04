@@ -15,9 +15,9 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ACTIVATE](#key-activate) | [DRHOUSE](#key-drhouse) | [END](#key-end)                 | [EOUTPUT](#key-eoutput) | [FREQG0](#key-freqg0)     | [INTERPOLATE](#key-interpolate) |
-| [MM](#key-mm)             | [NAT](#key-nat)         | [NELECTRONS](#key-nelectrons)   | [PHASE](#key-phase)     | [PRESSURE](#key-pressure) | [PRINTFREQ](#key-printfreq)     |
-| [SET](#key-set)           | [TITLE](#key-title)     | [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree)     | [VOLUME](#key-volume)     |                                 |
+| [ACTIVATE](#key-activate) | [DRHOUSE](#key-drhouse)         | [END](#key-end)     | [EOUTPUT](#key-eoutput)   | [INTERPOLATE](#key-interpolate) | [MM](#key-mm)   |
+| [NAT](#key-nat)           | [NELECTRONS](#key-nelectrons)   | [PHASE](#key-phase) | [PRESSURE](#key-pressure) | [PRINTFREQ](#key-printfreq)     | [SET](#key-set) |
+| [TITLE](#key-title)       | [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree) | [VOLUME](#key-volume)     |                                 |                 |
 
 ## List of Keywords
 
@@ -47,17 +47,6 @@ END
 : Write the static energy to a file
 ~~~
 EOUTPUT [vini.r vstep.r vend.r]
-~~~
-
-<a id="key-freqg0"></a>
-[FREQG0](/gibbs2/manual/tmodels/#g2-debeins)
-: Frequencies at Gamma for the Debye-Einstein model
-~~~
-FREQG0 {name.s|num.i} [FILE file.s]
-  # comment
-  freq1.r freq2.r ...
-  ...
-ENDFREQG0
 ~~~
 
 <a id="key-interpolate"></a>
@@ -111,7 +100,8 @@ PHASE ... [FIT {POLYGIBBS|BM2|BM3|BM4|PT2|PT3|PT4|PT5|MURN|ANTONS|VINET|AP2|
                 STRAIN {EULERIAN|BM|NATURAL|PT|LAGRANGIAN|LAGR|INFINITESIMAL|
                         INF|QUOTIENT|X1|X3|XINV3|X3INV|V} [order.i|0]}]
           [REG {LAD|LSQ}] [FIX i1.i v1.r i2.i v2.r ...]
-PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|DEBYE_EINSTEIN|
+PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|
+                   DEBYE_EINSTEIN [FREQG0 file.s]|
                    DEBYE_GRUNEISEN {SLATER|DM|VZ|MFV|a.r b.r}|
                    {QHAFULL|QHA}}]
           [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|}] [PREFIX prefix.s]

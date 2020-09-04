@@ -47,7 +47,8 @@ computationally expensive.
 The different temperature models are accessed using the TMODEL option
 to the PHASE keyword:
 ~~~
-PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|DEBYE_EINSTEIN|
+PHASE ... [TMODEL {STATIC|DEBYE_INPUT|DEBYE_POISSON_INPUT|DEBYE|
+                   DEBYE_EINSTEIN [FREQG0 file.s]|
                    DEBYE_GRUNEISEN {SLATER|DM|VZ|MFV|a.r b.r}|
                    {QHAFULL|QHA}}]
           [PHFIELD ifield.i] [DOSFIELD i1.i i2.i]|}] [PREFIX prefix.s]
@@ -101,10 +102,15 @@ The temperature model is selected with one of the following keywords:
 * DEBYE_EINSTEIN: Debye model for the acoustic branches and 3n-3 Dirac
   deltas representing the optical part of the phonon spectrum. The
   Debye model is applied as in DEBYE, including Slater's formula, but
-  only for the acoustic branches. This model requires the frequencies
-  at the Brillouin zone center (the Gamma point) at the equilibrium
-  or experimental geometry. These are input using the FREQG0
-  keyword.
+  only for the acoustic branches.
+
+  This model requires the frequencies at the Brillouin zone center
+  (the Gamma point). There are two options two give them to gibbs2. If
+  the FREQG0 option is used followed by a file name, the 3n-3
+  frequencies at Gamma at the equlibrium volume are read from the
+  file. Otherwise, an additional column from the external data file is
+  read. The column must contain the path of the file containing the
+  frequencies at Gamma at the corresponding volumes.
 
 * QHAFULL or QHA: full quasiharmonic approximation. This model
   implements the statically constrained quasiharmonic
@@ -146,24 +152,11 @@ is 0.25, the Poisson ratio of a Cauchy solid.
 
 ### Debye-Einstein model {#g2-debeins}
 ~~~
-FREQG0 {name.s|num.i} [FILE file.s]
-  # comment
-  freq1.r freq2.r ...
-  ...
-ENDFREQG0
-~~~
-Use this keyword to provide the optical frequencies at Gamma for the
-phase with string identifier `name.s` or integer identifier `num.i`
-The itneger corresponds to the order in which phases appear in the
-input. The frequencies are `freq1.r`, `freq2.r`,... and there must be
-exactly 3*NAT-3 of them. Optionally, the information in the
-environment can be input from an external file `file.s`.
-~~~
 PRINTFREQ|PRINTFREQS
 ~~~
 Print the calculated frequencies in the Debye-Einstein model for
 all static volumes in input. Writes a file with extension
-`.gammafreq`.
+`.gammafreq`. Only valid when FREQG0 is used.
 
 ### Full QHA model {#g2-qha}
 ~~~
