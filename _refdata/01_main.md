@@ -17,12 +17,12 @@ toc_sticky: true
 
 #### Kannemann and Becke set
 
-Systems: non-covalent binding energies of small molecular dimers.\\
-Level: mixed (see the [data page](/refdata/nci/kb/)).\\
-Source: 
-[structures](https://github.com/aoterodelaroza/refdata/tree/master/20_kb65)
+*Systems*: non-covalent binding energies of small molecular dimers.\\
+*Level*: mixed (see the [data page](/refdata/nci/kb/) for level and references).\\
+*Number*: 65 including noble-gas dimers, 49 without.\\
+*Source*: [structures](https://github.com/aoterodelaroza/refdata/tree/master/20_kb65)
 [din](https://github.com/aoterodelaroza/refdata/blob/master/10_din/kb65.din)\\
-Reference: [Kannemann and Becke, *J. Chem. Theory Comput.* **6** (2010) 1081](http://dx.doi.org/10.1021/ct900699r)
+*Reference*: [Kannemann and Becke, *J. Chem. Theory Comput.* **6** (2010) 1081](http://dx.doi.org/10.1021/ct900699r)
 
 ---
 
