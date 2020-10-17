@@ -88,7 +88,7 @@ XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s]
     [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s] 
     [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s] 
     [XA1 a1.r] [XA2 a2.r] [ONLYC] [UPTO {6|8|10}]
-XDM QE [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
+XDM [QE|POSTG] [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
        [NOC6] [NOC8] [NOC10] [SCALC6 s6.r] [SCALC8 s8.r] [SCALC10 s10.r]
        [C9] [SCALC9 s9.r]
        [DAMP a1.r a2.r] [DAMP3 a3.r a4.r] [DAMP3BJN 3|6|sqrt6]
@@ -96,10 +96,11 @@ XDM a1.r a2.r chf.s
 ~~~
 There are three modes of operation for the XDM keyword. 
 
-In QE, the volumes, moments, and coefficients are read from a Quantum
-ESPRESSO output. The QE output file is the one given via the FILE
-keyword or the one loaded using CRYSTAL, if no FILE is given. Using
-the dispersion coefficients read from the file, the XDM energy is
+In QE and POSTG, the volumes, moments, and coefficients are read from
+a Quantum ESPRESSO output file (QE) or a postg output file
+(POSTG). The output file is the one given via the FILE keyword or the
+loaded using CRYSTAL or MOLECULE, if no FILE is given. Using the
+dispersion coefficients read from the file, the XDM energy is
 recalculated. If BETWEEN and AND are given only the dispersion
 interaction between those pairs of atoms is calculated. This keyword
 is used mostly for testing purposes. A number of additional options
@@ -119,7 +120,7 @@ In the GRID mode, the information necessary to calculate the XDM
 dispersion energy and related quantities is provided using grid
 fields.
 
-If neither QE nor GRID are given, a molecular XDM calculation is
+If neither QE/POSTG nor GRID are given, a molecular XDM calculation is
 assumed, with damping function coefficients `a1.r` and `a2.r` and
 functional selector `chf.s`. The latter can be either a keyword for a
 functional (`blyp`, `b3lyp`, etc.) or a number between 0 and 1
