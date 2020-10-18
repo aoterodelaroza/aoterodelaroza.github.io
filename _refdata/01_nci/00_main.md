@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Non-covalent interaction reference data sets"
+title: "Detailed information for NCI reference data sets"
 permalink: /refdata/nci/
 sidebar:
   - repo: "refdata"
@@ -8,8 +8,6 @@ sidebar:
 search: true
 toc: false
 ---
-
-## Molecular dimer binding energies
 
 * [Kannemann-Becke set (KB49)](/refdata/nci/kb)
 
