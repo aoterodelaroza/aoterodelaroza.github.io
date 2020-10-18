@@ -545,6 +545,7 @@ MOLECULE file.fchk [border.r] [CUBIC|CUBE]
 MOLECULE file.molden [border.r] [CUBIC|CUBE]
 MOLECULE file.log [border.r] [CUBIC|CUBE]
 MOLECULE file.dat [border.r] [CUBIC|CUBE]
+MOLECULE file.pgout [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
 MOLECULE file.cube
 MOLECULE file.bincube
