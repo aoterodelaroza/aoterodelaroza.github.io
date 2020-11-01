@@ -836,6 +836,7 @@ SUM [id.s]
 {SYMM|SYM} RECALC
 {SYMM|SYM} ANALYSIS
 {SYMM|SYM} REFINE
+{SYMM|SYM} WHOLEMOLS
 ~~~
 
 <a id="key-system"></a>

@@ -466,6 +466,7 @@ SYMM/NOSYMM).
 {SYMM|SYM} RECALC
 {SYMM|SYM} ANALYSIS
 {SYMM|SYM} REFINE
+{SYMM|SYM} WHOLEMOLS
 NOSYMM|NOSYM
 ~~~
 Without any other keywords, the SYM keyword writes the space group
@@ -480,10 +481,10 @@ default). NOSYM (or NOSYMM) is equvalent to `SYM 0`.
 
 Additional keywords can be used to change the symmetry of an already
 loaded crystal. If SYM is followed by a real number (`eps.r`), then
-the precision with which the symmetry operations is determined is set
-to this value (the `eps.r` value is passed down to spglib). If a
-crystal has been loaded, then this command recalculates the symmetry
-using the new precision. The default `eps.r` is 1d-2 bohr.
+the precision with which the symmetry operations are determined is set
+to this value. If a crystal has been loaded, then this command
+recalculates the symmetry using the new precision. The default `eps.r`
+is 1d-2 bohr.
 
 The CLEAR keyword clears all symmetry operations (that is, use space
 group P1). The RECALC keyword recalculates the symmetry
@@ -492,12 +493,17 @@ external file, such as a cif file.
 
 The REFINE keyword recalculates the atomic positions using the current
 space-group operations to have them be exactly at the corresponding
-symmetry sites. For instance, "0.333" may be converged to "0.3333333"
+symmetry sites. For instance, "0.333" may be converted to "0.3333333"
 in a hexagonal crystal.
 
+The WHOLEMOLS keyword must be applied to molecular crystals. It
+eliminates symmetry operations from the space group in such a way that
+the asymmetric unit is composed of whole molecules. This is useful
+when generating `.res` files as input for the DMACRYS program.
+
 If the symmetry is recalculated for a loaded crystal (with the
-`eps.r`, CLEAR, RECALC, or REFINE options), then all fields are
-unloaded and all critical point lists are cleared.
+`eps.r`, CLEAR, RECALC, REFINE, or WHOLEMOLS options), then all fields
+are unloaded and all critical point lists are cleared.
 
 The ANALYSIS keyword explores different values of the precision
 parameter (`eps.r`) and outputs the calculated space group symbol for
