@@ -214,13 +214,24 @@ NOSYM (or NOSYMM) is used, the cif file is written without symmetry
 file in res format. NOSYM/NOSYMM has the same meaning as in the cif
 output.
 
-A template input file for crystal14 (incomplete - no basis set
-specification) can be written with the extension `.d12`. The
-generation of these inputs uses the spglib symmetry routines to find
-the crystal symmetry, and is still experimental. You should do NEWCELL
-PRIMITIVE or NEWCELL STANDARD before writing a `.d12` file. The NOSYM
-(or NOSYMM) option before writes a template in the P1 space group, and
-is probably a safer choice.
+A template input file for crystal14 and crystal17 (incomplete - no
+basis set specification) can be written with the extension `.d12`. If
+the crystal structure is written without symmetry (by using the
+`NOSYM` or `NOSYMM` keywords), then the `.d12` file contains the
+complete structure specification. Otherwise, the `.d12` file uses the
+`EXTERNAL` keyword to specify the geometry, and an additional
+`.fort.34` file with the same root is created. This file contains the
+symmetry operations as well as the crystal geometry, and it should be
+renamed to just `fort.34` before the crystal calculation is run.  In
+addition, crystal17 (and probably earlier versions) has a lot of
+trouble interpreting the symmetry operations in the trigonal crystal
+system when the rhombohedral setting is used. Critic2 deactivates the
+use of symmetry by default in space groups 146 (R3), 148 (R-3), 155
+(R32), 160 (R3m), 161 (R3c), 166 (R-3m), and 167 (R-3c) in the
+rhombohedral setting. If you have a structure in one of these space
+groups, please consider transforming to the hexagonal setting using 
+[NEWCELL STANDARD](/critic2/manual/structure/#c2-newcell) before
+writing the `.d12` input file.
 
 A Gaussian input file for calculations under periodic boundary
 conditions can be written using the `.gau` extension. For a template
