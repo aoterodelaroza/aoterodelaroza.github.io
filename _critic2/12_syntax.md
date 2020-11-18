@@ -461,14 +461,15 @@ LOAD file.xml file.bin file.hsd
 LOAD file.wfn
 LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
-LOAD file.molden [READVIRTUAL]
+LOAD file.molden [READVIRTUAL] [ORCA|PSI4]
+LOAD file.molden.input [READVIRTUAL]
 LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...] 
               [BAND b1.i b2.i ...] [ERANGE emin.r emax.r]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
 LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|ELKGRID|SIESTA|DFTB|
-      WFN|WFX|MOLDEN|FCHK|PWC] file
+      WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|FCHK|PWC] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
          [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
