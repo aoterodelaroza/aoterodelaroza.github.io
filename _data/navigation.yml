@@ -123,6 +123,8 @@ devnotes:
       url: /devnotes/space-group-collection/
     - title: "XDM forces, stress, phonons"
       url: /devnotes/derivatives-xdmsolids/
+    - title: "Molecular wavefunctions"
+      url: /devnotes/critic2-molwfns/
 
 gibbs2:
   - title: "Main"
