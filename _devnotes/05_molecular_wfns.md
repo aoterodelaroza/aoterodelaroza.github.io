@@ -295,6 +295,29 @@ The Gaussian wfn and wfx file formats contain exactly the information
 described above, so reading the wavefunction information from them is
 straightforward (versioning and formatting problems notwithstanding).
 
+### Orca Wfn File
+
+The structure of these files seems to be the same as in Gaussian, but
+early versions of orca are a little finnicky. In particular, version
+4.0.2 has the following issues:
+
+* There can be lines such as `CENTRE ASSIGNMENT` that have no
+  information associated with them, and this can throw off the parser
+  in critic2.
+  
+* g orbitals are not written to orca wfn files.
+
+* Unrestricted wavefunctions are not written.
+
+Some or all of these issues seem to have been fixed in version 4.2.
+
+### Orca Wfx File
+
+These are written by orca 4.2 but not by orca 4.0.2. They seem to
+follow the same format as Gaussian and no problems reading these files
+have been found. Orca seems to refuse writing a wfx file if the
+calculation contains ECPs.
+
 ## Gaussian Formatted Checkpoint File (fchk)
 
 * The primitive order is:
@@ -419,26 +442,3 @@ N(l,\alpha_k) = \frac{2^{l+3/4} \alpha_k^{l/2+3/4}}{\pi^{3/4} \sqrt{(2l-1)!!}}
   explicitly. Therefore, reading this input file is a lot more
   straightforward than the GTF counterparts.
   
-## Orca Wfn File (wfn)
-
-The structure of these files seems to be the same as in Gaussian, but
-early versions of orca are a little finnicky. In particular, version
-4.0.2 has the following issues:
-
-* There can be lines such as `CENTRE ASSIGNMENT` that have no
-  information associated with them, and this can throw off the parser
-  in critic2.
-  
-* g orbitals are not written to orca wfn files.
-
-* Unrestricted wavefunctions are not written.
-
-Some or all of these issues seem to have been fixed in version 4.2.
-
-## Orca Wfx File (wfx)
-
-These are written by orca 4.2 but not by orca 4.0.2. They seem to
-follow the same format as Gaussian and no problems reading these files
-have been found. Orca seems to refuse writing a wfx file if the
-calculation contains ECPs.
-
