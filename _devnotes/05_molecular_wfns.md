@@ -268,7 +268,7 @@ solution.
 
 ## Wavefunction File Formats in Critic2
 
-### Current Implementation Status
+### Current Implementation Status {#dev-impl}
 
 | Program  | Format | Works with at least these versions...                         |
 |----------+--------+---------------------------------------------------------------|
