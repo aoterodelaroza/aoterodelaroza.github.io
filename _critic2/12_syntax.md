@@ -360,7 +360,7 @@ ENDGRDVEC/END
 
 <a id="key-hirshfeld"></a>
 [HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld)
-: Calculate the Hirshfeld (stockholder) charges.
+: Calculate the Hirshfeld (stockholder) atomic volumes and electron populations.
 ~~~
 HIRSHFELD
 ~~~

@@ -471,7 +471,9 @@ calculates the Voronoi charge of atom 1. Likewise,
 LOAD AS "@rho0nuc:1/$0 * $1" ID hirsh
 SUM hirsh
 ~~~
-calculates the Hirshfeld charge. Structural variables are also useful
+calculates the Hirshfeld charge (although it is probably more
+convenient to use the [HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld)
+keyword. Structural variables are also useful
 in molecules in combination with the
 [MOLCALC](/critic2/manual/misc/#c2-molcalc)
 keyword. For instance, to calculate the dipole moment of a neutral

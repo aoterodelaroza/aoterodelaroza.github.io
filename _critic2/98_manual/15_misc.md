@@ -69,11 +69,15 @@ to a variable (`var.s`).
 ## Hirshfeld Charges (HIRSHFELD) {#c2-hirshfeld}
 
 The HIRSHFELD keyword calculates the 
-[Hirshfeld charges](https://doi.org/10.1063/1.2831900) in the system:
+[Hirshfeld atomic volumes and charges](https://doi.org/10.1063/1.2831900) 
+(strictly, electron populations) in the system:
 ~~~
 HIRSHFELD
 ~~~
-The HIRSHFELD keyword can be used only with fields defined on a grid.
+The HIRSHFELD keyword assumes the reference field contains the
+electron density. It has two variants. If the field is a grid and
+structure is a crystal, then the integration is carried out on the
+grid. Otherwise, an integration mesh is used.
 
 ## The Exchange-Hole Dipole Moment Dispersion Model (XDM) {#c2-xdm}
 
