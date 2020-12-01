@@ -79,6 +79,87 @@ electron density. It has two variants. If the field is a grid and
 structure is a crystal, then the integration is carried out on the
 grid. Otherwise, an integration mesh is used.
 
+## Characterization of Sigma-holes in Molecules (SIGMAHOLE) {#c2-sigmahole}
+
+The SIGMAHOLE keyword calculates the properties of a $$\sigma$$-hole
+in a molecule. The $$\sigma$$-hole is the region of positive
+electrostatic potential on an electronegative atom, opposite a
+$$\sigma$$-bond. Typically, but not always, the electronegative atom
+is a halogen, in which case the molecule can engage in a halogen
+bond. The syntax of the SIGMAHOLE keyword is:
+~~~
+SIGMAHOLE ib.i ix.i [NPTS nu.i nv.i] [ISOVAL rho.r] [MAXANG ang.r]
+~~~
+The calculated properties are those described in 
+[Kolar and Hobza, Chem. Rev. 116 (2016) 5155](http://dx.doi.org/10.1021/acs.chemrev.5b00560) 
+(see Figure 7). Namely:
+
+- `dist`: The distance between the electronegative atom (X) and the
+  $$\sigma$$-hole.
+  
+- $$l_{\sigma}$$ (linearity): the angle between the $$\sigma$$-hole,
+  the electronegative atom (X), and the atom to which X is bonded (the
+  basal atom, B).
+
+- $$m_{\sigma}$$ (magnitude): the value of the electrostatic potential
+  at the $$\sigma$$-hole.
+
+- $$r_{\sigma}$$ (range): the distance between the electronegative
+  atom and the point at which the electrostatic potential changes
+  sign, in the direction of the $$\sigma$$-hole. Only defined in case
+  of a $$\sigma$$-hole with positive electrostatic potential.
+  
+- $$s_{\sigma}$$ (size): the are of the density isosurface associated
+  with the $$\sigma$$-hole that has positive electrostatic
+  potential. Only defined in case of a $$\sigma$$-hole with positive
+  electrostatic potential.
+
+The SIGMAHOLE keyword can only be used in molecular systems. The
+calculation of the density and the electrostatic potential is carried
+out using the reference field, which should be a molecular
+wavefunction with basis set information. In addition, the calculation
+of the electrostatic potential requires compiling critic2 with the
+[LIBCINT library](/critic2/installation/#c2-libcint).
+
+The SIGMAHOLE keyword must be followed by two integers, which identify
+the basal (`ib.i`, B) and the electronegative (`ix.i`, X) atoms in the
+molecule. A number of rays starting at the electronegative atom are
+traced, distributed in such a way that each occupies the same amount
+of solid angle. The rays subtend an angle with the B-X line that
+ranges between 180 degrees and 180 minus `ang.r` degrees, where
+`ang.r` is the option to MAXANG. By default, its value is 90 degrees
+(i.e. a hemi-sphere). The number of rays traced in the u (azimuthal)
+and v (polar) parameters is controlled by the NPTS keyword. These
+should be high enough that the calculation of the relevant properties
+is essentially converged (default: 101 each).
+
+The point is found along each ray where the electron density is equal
+to the `rho.r` isovalue. This value can be controlled with the ISOVAL
+keyword; it is 0.001 a.u. by default. The electrostatic potential is
+calculated at this point, and a two-dimensional mapping of the
+electrostatic potential on the density contour is assembled. From
+this mapping, the properties above are calculated. Note that more than
+one $$\sigma$$-hole can be found. In the case of multiple
+$$\sigma$$-holes, if the positive-potential regions are in contact,
+the calculation of $$s_{\sigma}$$ is not done. Also, it is important
+that the $$\sigma$$-hole does not exceed the maximum angle (MAXANG)
+and that NPTS is sufficiently high to have an accurate $$s_{\sigma}$$
+value.
+
+In addition to the list of $$\sigma$$-hole properties, SIGMAHOLE also
+writes two files for plotting the electrostatic potential mapped on
+the density isosurface. The `root_sigmahole.dat` file (`root` is the
+[default prefix](/critic2/manual/misc/#c2-root) of the run) contains
+the isosurface data. Each row is one traced ray. The columns are:
+values of the u and v parameters, $$\theta$$ and $$\phi$$ spherical
+coordinates, the Cartesian coordinates of the point (in the local
+Cartesian frame), the distance of the isosurface to the
+electronegative atom, and the value of the electrostatic potential. A
+template gnuplot script, `root_sigmahole.gnu`, is generated to aid in
+the visualization of the data file. It is recommended that this plot
+is always checked to make sure that the calculated properties in the
+table make sense.
+
 ## The Exchange-Hole Dipole Moment Dispersion Model (XDM) {#c2-xdm}
 
 The XDM keyword calculates the dispersion energy using the
