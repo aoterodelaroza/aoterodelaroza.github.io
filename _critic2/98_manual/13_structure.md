@@ -119,7 +119,7 @@ plot range. Default: `SOFT`.
 The COMPARE keywords compares two or more structures:
 ~~~
 COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r] 
-        [SIGMA sigma.r] [POWDER|RDF] 
+        [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
 If the structures are crystals, COMPARE finds
@@ -160,14 +160,20 @@ Whether the molecular or the crystal comparison is used depends on the
 file formats passed to COMPARE. If the MOLECULE/CRYSTAL keyword is
 used then the molecule/crystal comparison code is used.
 
+If more than two structures are used in COMPARE, critic2 will
+calculate the similarity measure between each pair of structures and
+present the resulting similarity matrix. If the REDUCE keyword is used
+a threshold (`eps.r`) is used to determine whether two structures are
+equal or not. Critic2 then prints a list of unique structures and
+repeated structures in the output.
+
 The structures can be given by passing an external file to
 COMPARE. The syntax is the same as in CRYSTAL and MOLECULE: the file
 format is identified using the file extension. If a dot (".") is used
 instead of a file name, use the current structure (previously loaded
-with CRYSTAL/MOLECULE).
-
-The COMPARE keyword does not require a previous CRYSTAL or MOLECULE
-keyword. Hence, valid critic2 inputs would be:
+with CRYSTAL/MOLECULE). The COMPARE keyword does not require a
+previous CRYSTAL or MOLECULE keyword. Hence, valid critic2 inputs
+would be:
 ~~~
 COMPARE bleh1.scf.in bleh2.cif
 COMPARE bleh1.xyz bleh2.wfx

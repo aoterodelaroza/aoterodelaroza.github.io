@@ -154,7 +154,7 @@ CLEAR {var1.s var2.s ...|ALL}
   diffraction patterns or radial distribution functions.
 ~~~
 COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r] 
-        [SIGMA sigma.r] [POWDER|RDF] 
+        [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
 
