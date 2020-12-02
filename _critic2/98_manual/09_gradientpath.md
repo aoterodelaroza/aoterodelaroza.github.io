@@ -95,13 +95,13 @@ angstrom (molecules) unless changed by the
 The plot plane may contain regions that are traversed by gradient
 lines originating at critical points located inside the plane but
 outside the plot region. If this is the case, the OUTCP option allows
-the user to extend the plane when considering which origins to be
-included. The `sx.r` and `sy.r` are scale parameters. The x-axis
-extends $$(s_x-1)\times l_x$$ in each direction, where $$s_x$$ is `sx.r` and
-$$l_x$$ is the length of the x-axis. The `sy.r` variable works the
-same way. The plane determined by the vectors given in PLANE acts as a
-clipping plane while the scaled plane determines the gradient path
-origins.
+the user to extend the plane for the CP labels. The `sx.r` and `sy.r`
+in OUTCP are scale parameters for the plane, same as in SCALE, but
+only apply to CP labels. The x-axis extends $$(s_x-1)\times l_x$$ in
+each direction, where $$s_x$$ is `sx.r` and $$l_x$$ is the length of
+the x-axis. The `sy.r` variable works the same way. The plane
+determined by the vectors given in PLANE acts as a clipping plane
+while the scaled plane determines the gradient path origins.
 
 With HMAX, you can set the maximum distance from a CP to the plane
 to be included in the plot (units: bohr in crystals, angstrom in
