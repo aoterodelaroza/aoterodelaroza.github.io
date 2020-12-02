@@ -366,10 +366,8 @@ slow gradient path tracing.
 The `INT_RADIAL` keyword chooses the type of radial integration method
 used inside spheres or atomic basins:
 ~~~
-INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.r]
-           [ABSERR aerr.r] [RELERR rerr.r]
-           [ERRPROP prop.i]
-           [PREC delta.r]
+INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.i] [ABSERR err.r]
+           [RELERR err.r] [ERRPROP prop.i] [PREC prec.r]
 ~~~
 The `TYPE` keyword selects the quadrature method:
 

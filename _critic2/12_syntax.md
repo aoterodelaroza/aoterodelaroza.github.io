@@ -406,7 +406,7 @@ INTEGRALS {GAULEG ntheta.i nphi.i|LEBEDEV nleb.i}
 : Radial integration method used in bisection.
 ~~~
 INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.i] [ABSERR err.r]
-           [RELERR err.r] [ERRPROP prop.i] [PREC prec.r] [NOBETA]
+           [RELERR err.r] [ERRPROP prop.i] [PREC prec.r]
 ~~~
 
 <a id="key-library"></a>
