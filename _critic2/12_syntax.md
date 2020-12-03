@@ -735,7 +735,7 @@ VCUTOFF vcutoff.r
 
 <a id="key-radii"></a>
 [RADII](/critic2/manual/misc/#c2-radii)
-: Sets the covalent radii of atoms.
+: Sets the covalent and van der Waals radii of atoms.
 ~~~
 RADII {COV|VDW|} [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 ~~~
