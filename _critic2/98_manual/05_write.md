@@ -39,7 +39,7 @@ WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER]
 WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER] 
       [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
-WRITE file.scf.in
+WRITE file.scf.in [rklength.r]
 WRITE file.tess
 WRITE file.cri|file.incritic
 WRITE {[file.]POSCAR|[file.]CONTCAR}
@@ -195,7 +195,10 @@ uses its own internal `CELL_PARAMETERS` matrix, which may result in
 Quantum ESPRESSO failing to recognize the crystal symmetry. By
 default, the crystal cell used by critic2 is written to the QE input
 template. To reduce the cell to a primitive, use NEWCELL with the
-PRIMITIVE keyword before writing the file.
+PRIMITIVE keyword before writing the file. The optional parameter to
+the QE input writer (`rklength.i`) is the length parameter (rk-length)
+that determines the density of the k-point grid (using VASP's
+formula).
 
 A tessel input (extension `.tess`) and a critic2 input using the (.cri
 or .incritic) can be written. Tessel is a program for graphical
