@@ -388,7 +388,7 @@ CP. `id.i = 0` (all attractors).
 The [QTREE integration method](https://doi.org/10.1002/jcc.21620)
 integrates QTAIM atomic properties by
 discretization of the smallest part of the crystal that reproduces the
-whole system by symmetry. QTREE is specific to solid-state problems,
+whole system by symmetry. QTREE is specific for periodic crystals,
 and its use is recommended with fields not given on a grid. For fields
 on a grid, either
 [BADER](/critic2/manual/integrate/#c2-bader) or
@@ -396,48 +396,24 @@ on a grid, either
 is based on a hierarchical subdivision of the irreducible part of
 the WS cell, employing a tetrahedral grid. The integration region is
 selected so as to maximize the use of symmetry, and partitioned into
-tetrahedra. The syntax of QTREE consists of a series of keywords that
-are used before the eventual QTREE command, which actually performs
-the integration. The commands before QTREE control the behavior and
-the options for the integration.
+tetrahedra. The syntax of QTREE consists of the maximum subdivision
+level (`maxlevel.i`), perhaps followed by the pre-splitting level
+(`plevel.i`), and then a series of optional keywords that control the
+behavior and the options for the integration.
 ~~~
-QTREE_MINL minl.i
-GRADIENT_MODE gmode.i
-QTREE_ODE_MODE omode.i
-STEPSIZE step.r
-ODE_ABSERR abserr.r
-INTEG_MODE level.i imode.i
-INTEG_SCHEME ischeme.i
-KEASTNUM k.i
-PLOT_MODE plmode.i
-PROP_MODE prmode.i
-MPSTEP inistep.i
-QTREEFAC f.r
-CUB_ABS abs.r
-CUB_REL rel.r
-CUB_MPTS mpts.i
-AUTOSPH {1|2}
-SPHFACTOR {ncp.i fac.r|at.s fac.r}
-SPHINTFACTOR atom.i fac.r
-DOCONTACTS
-NOCONTACTS
-WS_ORIGIN x.r y.r z.r
-WS_SCALE scale.r
-WS_EPS_VOL eps_vol.r
-KILLEXT
-NOKILLEXT
-CHECKBETA
-NOCHECKBETA
-PLOTSTICKS
-NOPLOTSTICKS
-COLOR_ALLOCATE {0|1}
-SETSPH_LVL lvl.i
-VCUTOFF vcutoff.r
-QTREE [maxlevel.i [plevel.i]]
+QTREE [maxlevel.i [plevel.i]] [MINL minl.i] [GRADIENT_MODE gmode.i]
+      [QTREE_ODE_MODE omode.i] [STEPSIZE step.r] [ODE_ABSERR abserr.r]
+      [INTEG_MODE level.i imode.i] [INTEG_SCHEME ischeme.i] [KEASTNUM k.i]
+      [PLOT_MODE plmode.i] [PROP_MODE prmode.i] [MPSTEP inistep.i]
+      [QTREEFAC f.r] [CUB_ABS abs.r] [CUB_REL rel.r] [CUB_MPTS mpts.i]
+      [SPHFACTOR {ncp.i fac.r|at.s fac.r}] [SPHINTFACTOR atom.i fac.r]
+      [DOCONTACTS] [WS_ORIGIN x.r y.r z.r] [WS_SCALE scale.r]
+      [NOKILLEXT] [AUTOSPH {1|2}] [CHECKBETA] [NOPLOTSTICKS]
+      [COLOR_ALLOCATE {0|1}] [SETSPH_LVL lvl.i] [VCUTOFF vcutoff.r]
 ~~~
 In QTREE, the tetrahedra that comprise the IWS enter a recursive
-subdivision process in which each of them is divided in 8 at each
-level, up to a level given by the user. This subdivision level is
+subdivision process in which each of the tetrahedra is divided in 8 at
+each level, up to a level given by the user. This subdivision level is
 controlled by the `maxlevel.i` argument given after the QTREE keyword
 (default, 6). Every tetrahedron vertex is assigned to a non-equivalent
 atom in the unit cell by tracing a gradient path and identifying its
@@ -446,7 +422,7 @@ the tetrahedra are integrated and the properties assigned to the
 corresponding atoms. The space near the atoms is integrated using a
 beta-sphere, which improves the accuracy of the integration.
 
-In the simplest approach, qtree can be executed using:
+In the simplest (and most common) approach, qtree can be executed using:
 ~~~
 QTREE [maxlevel.i [plevel.i]]
 ~~~
@@ -456,7 +432,7 @@ initial tetrahedra list is split into smaller tetrahedra `plevel.i`
 times. This can be useful in cases where a very high accuracy (and
 therefore a very high level) is required, but there is not enough
 memory available to advance to higher `maxlevel.i`. However, using
-a relatively high `plevel.i` incurs in a overhead, because the
+a relatively high `plevel.i` incurs an overhead, because the
 atom assigning procedure is not as efficient when smaller tetrahedra
 are used. 
 
@@ -529,12 +505,10 @@ are used.
    beta-sphere is completely contained inside the basin of the
    atom. This may turn out not to be true for the default beta-sphere
    radius (specially for cations in ionic systems). In these cases, the
-   keyword SPHFACTOR is used. Some examples of the use of this keyword
-   are:
+   keyword SPHFACTOR is used. An example of the use of this keyword
+   is:
 ~~~
 SPHFACTOR 1 0.70   # Make b_1 = 0.70 * rNN2(1) (atom type 1)
-SPHFACTOR 0 0.60   # Make b_i = 0.60 * rNN2(i) for all atoms
-SPHFACTOR Si 0.60  # Make b_i = 0.60 for all Si atoms
 ~~~
    If SPHFACTOR < 0, use the [method by Rodriguez et al.](https://doi.org/10.1002/jcc.21134)
    to determine the beta-sphere radii: a collection of

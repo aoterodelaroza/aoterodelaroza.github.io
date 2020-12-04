@@ -698,39 +698,15 @@ Q/QAT at1.s q1.r [at2.s q2.r] ...
 [QTREE](/critic2/manual/integrate/#c2-qtree)
 : Integrate the attractor basins using the qtree method.
 ~~~
-QTREE maxlevel.i plevel.i
-QTREE_MINL minl.i
-GRADIENT_MODE gmode.i
-QTREE_ODE_MODE omode.i
-STEPSIZE step.r
-ODE_ABSERR abserr.r
-INTEG_MODE level.i imode.i
-INTEG_SCHEME ischeme.i
-KEASTNUM k.i
-PLOT_MODE plmode.i
-PROP_MODE prmode.i
-MPSTEP inistep.i
-QTREEFAC f.r
-CUB_ABS abs.r
-CUB_REL rel.r
-CUB_MPTS mpts.i
-SPHFACTOR {ncp.i fac.r|at.s fac.r}
-SPHINTFACTOR atom.i fac.r
-DOCONTACTS 
-NOCONTACTS
-WS_ORIGIN x.r y.r z.r
-WS_SCALE scale.r
-WS_EPS_VOL eps_vol.r
-KILLEXT
-NOKILLEXT
-AUTOSPH {1|2} # default is 2
-CHECKBETA # default is nocheckbeta
-NOCHECKBETA
-PLOTSTICKS
-NOPLOTSTICKS
-COLOR_ALLOCATE {0|1}
-SETSPH_LVL lvl.i
-VCUTOFF vcutoff.r
+QTREE [maxlevel.i [plevel.i]] [MINL minl.i] [GRADIENT_MODE gmode.i]
+      [QTREE_ODE_MODE omode.i] [STEPSIZE step.r] [ODE_ABSERR abserr.r]
+      [INTEG_MODE level.i imode.i] [INTEG_SCHEME ischeme.i] [KEASTNUM k.i]
+      [PLOT_MODE plmode.i] [PROP_MODE prmode.i] [MPSTEP inistep.i]
+      [QTREEFAC f.r] [CUB_ABS abs.r] [CUB_REL rel.r] [CUB_MPTS mpts.i]
+      [SPHFACTOR {ncp.i fac.r|at.s fac.r}] [SPHINTFACTOR atom.i fac.r]
+      [DOCONTACTS] [WS_ORIGIN x.r y.r z.r] [WS_SCALE scale.r]
+      [NOKILLEXT] [AUTOSPH {1|2}] [CHECKBETA] [NOPLOTSTICKS]
+      [COLOR_ALLOCATE {0|1}] [SETSPH_LVL lvl.i] [VCUTOFF vcutoff.r]
 ~~~
 
 <a id="key-radii"></a>
