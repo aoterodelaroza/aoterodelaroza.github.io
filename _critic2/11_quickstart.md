@@ -37,16 +37,17 @@ Finally, you can just open critic2 and type commands by hand:
 critic2
 $ ...
 ~~~
-If you do this, please check out the 
-[rlwrap program](https://github.com/hanslub42/rlwrap), which 
-will make the interactive usage of critic2 much easier:
+If you do this, it is best to compile critic2 with [readline
+support](/critic2/installation/#c2-readline) or use 
+the [rlwrap program](https://github.com/hanslub42/rlwrap):
 ~~~
 rlwrap critic2
 ~~~
-Rlwrap will provide command history, emacs-style key bindings, and
-more.
+Either option will provide command history, emacs-style key bindings,
+and autocompletion features, and make the interactive usage of critic2
+much easier, 
 
-A detailed description of the keywords accepted by critic2 is given in
-the [user's guide](/critic2/manual/) and a list of commands in the
+A detailed description of the critic2 keywords is given in the 
+[user's guide](/critic2/manual/) and a list of commands in the
 [syntax](/critic2/syntax/).
 
