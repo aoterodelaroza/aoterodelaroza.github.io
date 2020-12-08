@@ -13,6 +13,44 @@ toc_sticky: true
 
 ## Installation Instructions
 
+### Build Using cmake
+
+Using cmake is the recommended installation procedure. Change to the
+critic2 root directory and make a subdirectory for the compilation:
+~~~
+mkdir build
+cd build
+~~~
+Then do:
+~~~
+cmake ..
+~~~
+There are a number of
+compilation options that can be passed to cmake, the most relevant of
+which is `-DCMAKE_INSTALL_PREFIX=prefix`, which sets the installation
+directory. You can tweak this and other compilation options using one
+of the multiple cmake interfaces, like ccmake (use `ccmake ..` from
+the `build` directory). To compile a static version of critic2, use:
+~~~
+cmake .. -DBUILD_STATIC=ON
+~~~
+This version can be copied to a different computer (with the same
+architecture), even if it does not have the compiler libraries. To
+compile a version with debug flags,
+~~~
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+~~~
+This version gives more informative errors when the program crashes.
+
+To build the program, do:
+~~~
+make
+~~~
+You can use `make -j n` to use `n` cores for the compilation. Running
+make creates the `critic2` binary in `build/src/`.
+
+### Build Using configure/make
+
 If you downloaded the code from the git repository, you will need to run:
 ~~~
 autoreconf
@@ -30,35 +68,29 @@ compile the program using:
 make
 ~~~
 This should create the critic2 executable inside the `src/`
-subdirectory. The binary can be used directly after setting the
-`CRITIC_HOME` variable (see below) or the entire critic2 distribution can be
-installed to the `prefix` directory by doing:
+subdirectory. 
+
+### Installing and Setting up the Environment
+
+Critic2 can be installed to the `prefix` directory by doing:
 ~~~
 make install
 ~~~
-Critic2 is parallelized with OpenMP for shared-memory architectures (unless
-compiled with `--disable-openmp`). You change the number of
-parallel threads by setting the `OMP_NUM_THREADS`
-environment variable. Note that the parallelization flags for
-compilers other than ifort and gfortran may not be correct.
-
-In the case of ifort (and maybe other compilers), sometimes it may be
-necessary to increase the stack size using, for instance:
-~~~
-export OMP_STACKSIZE=128M
-~~~
-This applies in particular to integrations using YT in very large
-systems.
-
-The environment variable `CRITIC_HOME` is necessary if critic2 was not
-installed with `make install`. It must point to the root directory of
-the distribution:
+However, the binary can be used directly from the source directory by
+setting the `CRITIC_HOME` environment. It must point to the root
+directory of the distribution:
 ~~~
 export CRITIC_HOME=/home/alberto/programs/critic2dir
 ~~~
 This variable is necessary for critic2 to find the atomic densities,
 the cif dictionary, and other files. These files should be in
 `${CRITIC_HOME}/dat/`.
+
+Critic2 is parallelized with OpenMP for shared-memory architectures
+(unless disabled during compilation). You change the number of
+parallel threads by setting the `OMP_NUM_THREADS` environment
+variable. Note that the parallelization flags for compilers other than
+ifort and gfortran may not be correct.
 
 ## Which Compilers Work? {#whichcompilerswork}
 
@@ -79,21 +111,24 @@ with intel fortran 2019 and later. All other compilers tested have
 issues, and fail to produce a working binary. This is the list of
 compilers tested:
 
-* gfortran 4.8: critic2 cannot be compiled with this version because
-  allocatable components in user-defined types are not supported.
+* gfortran 4.8: critic2 cannot be compiled because allocatable
+  components in user-defined types are not supported in this and older
+  versions.
 * gfortran 4.9 through 5.4 (and possibly older and newer gfortran-5):
   the code compiles correctly but there are errors allocating and
   deallocating the global field array (`sy%f`) and other complex
   user-defined types. The program is usable, but problems will arise
   if more than one crystal structure or more than 10 scalar fields are
   loaded.
-* gfortran 6.x, 7.x, 8.x: no errors.
+* gfortran 6.x and above: no errors.
 * ifort, all versions from 12.1 up to 18.0.3: catastrophic internal
   compiler errors of unknown origin.
 * ifort, version 2019.0.3.199: it compiles but inexplicable segmentation
-  faults with non-sensical tracebacks are thrown when using YT or
+  faults with nonsensical tracebacks are thrown when using YT or
   BADER and when loading and unloading fields.
-* ifort, version 2019.0.5.281: no errors.
+* ifort, version 2019.0.5.281: if aggressive optimization is used (`-O2`
+  and `-O3` flags), the compiler may freeze while compiling
+  `systemmod@proc.f90`.
 * Portland Group Fortran compiler (pgfortran), version 17.3. There are
   two important compiler problems: i) passing subroutines and
   functions whose interface includes multidimensional arrays as
@@ -123,6 +158,13 @@ FC=gfortran F77=gfortran ./configure ...
 ~~~
 
 ## External Libraries
+
+### Readline {#c2-readline}
+
+When critic2 is built using cmake, it is possible to incorporate the
+readline library. This library enables shell-like features for
+critic2's command line interface such as keyboard shortcuts, history,
+and autocompletion.
 
 ### Libxc {#c2-libxc}
 
