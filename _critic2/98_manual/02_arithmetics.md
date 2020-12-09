@@ -235,8 +235,7 @@ case).
 
 * `vtf(id)` [`VTF`]: the potential energy density calculated using the
   Thomas-Fermi kinetic energy density and the local virial theorem
-  ($$v^{\text{TF}}({\bf r}) = \frac{1}{4}\nabla^2\rho({\bf r}) 
-  - 2g^{\text{TF}}({\bf r})$$ in au).[^yangparr]
+  ($$v^{\text{TF}}({\bf r}) = \frac{1}{4}\nabla^2\rho({\bf r}) - 2g^{\text{TF}}({\bf r})$$ in au).[^yangparr]
 
 * `htf(id)` [`HTF`]: the total energy density calculated using the
   Thomas-Fermi kinetic energy density and the local virial theorem
