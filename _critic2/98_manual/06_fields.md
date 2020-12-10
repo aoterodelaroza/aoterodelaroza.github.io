@@ -456,10 +456,9 @@ Choose the grid interpolation mode in a grid field. NEAREST, use the
 field at the nearest grid point (zero first and second
 derivatives). TRILINEAR, trilinear interpolation (zero second
 derivatives). TRISPLINE, 3d-spline interpolation (adapted from the
-abinit code, this part was coded by A. Lherbier according to the
-source). If some derivatives are not available (first and second in
-NEAREST, second in TRISPLINE), they are taken as zero. TRICUBIC,
-tricubic interpolation using local information, see 
+abinit code, code by A. Lherbier). If some derivatives are not
+available (first and second in NEAREST, second in TRISPLINE), they are
+taken as zero. TRICUBIC, tricubic interpolation using local information, see 
 [Lekien and Marsden, Int. J. Numer. Meth. Eng., 63 (2005) 455-471.](https://doi.org/10.1002/nme.1296)
 
 By default, TRICUBIC is used. TRISPLINE may require a lot of memory in
@@ -469,6 +468,12 @@ of critic2 that require derivatives or interpolation at points outside
 of the grid are called. If only grid-based algorithms (e.g. YT, BADER,
 NCIPLOT with default NSTEP,...) are used then no additional memory is
 used.
+
+TRICUBIC and TRISPLINE are sensitive to rapid variations in the field
+and numerical noise, which may result in small oscillations in the
+field value. If you have a rapidly varying field, such as the ELF or
+the Laplacian close to a nucleus, you may want to consider using
+TRILINEAR instead.
 
 (Applies to: grids. Default: TRICUBIC.)
 
