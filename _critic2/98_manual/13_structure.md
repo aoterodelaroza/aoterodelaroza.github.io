@@ -282,6 +282,30 @@ SHELLS (or SHELL) is given, group the neighbors in shells by distance
 (1e-2 atomic distance threshold for atoms in the same shell) and
 non-equivalent ID.
 
+## Calculate Coordination Polyhedra (POLYHEDRA) {#c2-polyhedra}
+
+The POLYHEDRA keyword calculates the coordination polyhedra in a
+periodic solid:
+~~~
+POLYHEDRA atcenter.s atvertex.s [[rmin.r] rmax.r]
+~~~
+The polyhedra are built with atom `atcenter.s` as the center and
+`atvertex.s` as the vertices. These strings can refer to an atomic
+species, if such species exists in the current structure. If not, then
+the symbols are converted to atomic numbers, and these are used
+instead. By default, the distance range to consider the central and
+vertex atom are coordinated is from zero to the sum of covalent radii
+times the [BONDFACTOR](/critic2/manual/misc/#c2-bondfactor). If a
+single number (`rmax.r`) is indicated at the end of the POLYHEDRA
+command, then the distance range goes from zero to `rmax.r`. If two
+numbers are indicated, then the distance range goes from `rmax.r` to
+`rmin.r`.
+
+The output of the POLYHEDRA keyword contains a list of non-equivalent
+atoms of type `atcenter.s` that have a coordination polyhedron. The
+number of vertices, minimum and maximum vertex-center distance, number
+of faces, and polyhedron volume are printed.
+
 ## Effective coordination number (ECON) {#c2-econ}
 
 The coordination number of an atom is typically defined as the number
