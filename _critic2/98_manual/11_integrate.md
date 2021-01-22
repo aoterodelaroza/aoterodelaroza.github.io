@@ -1221,7 +1221,10 @@ to basins using the near-grid method incrementally described in
 [Comput. Mater. Sci. 36, 354-360 (2006)](https://doi.org/10.1016/j.commatsci.2005.04.010),
 [J. Comput. Chem. 28, 899-908 (2007)](https://doi.org/10.1002/jcc.20575), and
 [J. Phys.: Condens. Matter 21, 084204 (2009)](https://doi.org/10.1088/0953-8984/21/8/084204).
-Please, cite these references if you use this method.
+Please, cite these references if you use this method. The same method
+is implemented in the
+[bader program](http://theory.cm.utexas.edu/henkelman/code/bader/)
+available from the Henkelman research group's website.
 
 The output and the optional keywords have the same meaning as in
 YT. Using BADER as an alternative to YT is recommended in very large
