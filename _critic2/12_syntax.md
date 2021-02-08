@@ -195,7 +195,7 @@ CPREPORT file.elk
 CPREPORT file.gau
 CPREPORT file.cif
 CPREPORT file.m
-CPREPORT file.gin [DREIDING]
+CPREPORT file.gin
 CPREPORT file.lammps
 CPREPORT file.fdf
 CPREPORT file.STRUCT_IN
@@ -881,7 +881,7 @@ WRITE file.d12 [NOSYM|NOSYMM]
 WRITE file.res [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
-WRITE file.gin [DREIDING]
+WRITE file.gin
 WRITE file.lammps
 WRITE file.fdf
 WRITE file.STRUCT_IN
