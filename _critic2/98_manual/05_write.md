@@ -33,12 +33,12 @@ to suit their needs.
 
 The full syntax of the WRITE keyword is:
 ~~~
-WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER] 
-      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
-	  [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
-WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER] 
-      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
-      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
+WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER]
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
+      [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
+WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER]
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
+      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
 WRITE file.tess
 WRITE file.cri|file.incritic
@@ -65,9 +65,9 @@ MOLECULE, the type of file is detected by the extension (`.xyz`,
 
 In this command:
 ~~~
-WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER] 
-      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
-	  [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
+WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER]
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
+      [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
 ~~~
 WRITE generates an xyz file containing a finite
 piece of the crystal (if the structure was loaded with CRYSTAL) or the
@@ -75,7 +75,7 @@ molecule (resp. MOLECULE). Alternatively, if the `.gjf`
 extension is used, a template for a Gaussian input file is
 written. If cml is used, a Chemical Markup Language file (xml-style)
 is created, containing the same molecular fragment (see below). The number of
-cells used in each direction is given by `ix.i`, 
+cells used in each direction is given by `ix.i`,
 `iy.i`, and `iz.i` (default: 1, 1, 1). For the purpose of its graphical
 representation, it is sometimes convenient to include atoms that are
 almost exactly at the edge of the cell. For instance, the NaCl crystal
@@ -140,14 +140,14 @@ transformation to Cartesian coordinates in critic2, so it is possible
 to bring back all or part of these coordinates to critic2 in order to
 represent a subset of the atoms in a crystal. This is very useful
 when generating fragments for an [NCIPLOT](/critic2/manual/nciplot/)
-calculation (see the FRAGMENT keyword) and in some 
+calculation (see the FRAGMENT keyword) and in some
 [LOAD](/critic2/manual/fields/#c2-load) options to obtain the
 promolecular density of a subset of the atoms. Whether the contents of
 an xyz file are recognized by critic2 as atoms belonging to the
-current system or not can be determined using the 
+current system or not can be determined using the
 [IDENTIFY](/critic2/manual/structure/#c2-identify) keyword.
 
-The 
+The
 [CML (Chemical Markup Language)](https://en.wikipedia.org/wiki/Chemical_Markup_Language)
 format has the same options as the xyz output format. In the CML
 format, an XML-style file is written containing the selected crystal
@@ -160,9 +160,9 @@ read by [avogadro](https://avogadro.cc) and its underlying engine,
 The following keyword also writes finite molecular representations of
 the structure:
 ~~~
-WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER] 
-      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]] 
-      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
+WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER]
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
+      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 ~~~
 In this case, however, the generated files are graphical
 representations.
@@ -174,7 +174,7 @@ visualizers such as view3dscene, meshlab, blender, and others. The
 keywords have the same meaning as in the xyz format. The additional
 CELL keyword instructs critic2 to write a stick representation of the
 unit cell. In a molecular structure, the MOLCELL keyword can be used
-to represent the 
+to represent the
 [molecular cell](/critic2/manual/molecule/#c2-molcell). The
 similarly popular PLY (polygon file format or Stanford triangle
 format) and OFF (Geomview) file formats can be used as well, with the
@@ -209,7 +209,7 @@ output. This list is necessary to build the corresponding
 `POTCAR`. The atoms are always ordered in increasing atomic number. An
 abinit input file containing the input structure can be written by
 using the `.abin` extension. An elk input template can be written
-using the `.elk` extension. 
+using the `.elk` extension.
 
 A simple cif file is generated if the `.cif` extension is used. If
 NOSYM (or NOSYMM) is used, the cif file is written without symmetry
@@ -232,7 +232,7 @@ system when the rhombohedral setting is used. Critic2 deactivates the
 use of symmetry by default in space groups 146 (R3), 148 (R-3), 155
 (R32), 160 (R3m), 161 (R3c), 166 (R-3m), and 167 (R-3c) in the
 rhombohedral setting. If you have a structure in one of these space
-groups, please consider transforming to the hexagonal setting using 
+groups, please consider transforming to the hexagonal setting using
 [NEWCELL STANDARD](/critic2/manual/structure/#c2-newcell) before
 writing the `.d12` input file.
 
@@ -266,4 +266,3 @@ structure.
 The `.pyscf` extension writes a template python script for using with
 pyscf. The script creates an instance of a Mole object (in the case of
 a molecule) or a Cell object (if it is a crystal).
-

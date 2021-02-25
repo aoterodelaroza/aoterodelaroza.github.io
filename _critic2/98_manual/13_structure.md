@@ -21,7 +21,7 @@ ATOMLABEL template.s
 The template string (`template.s`) is used to build the new atomic
 names. The format specifiers for this template are:
 
-* `%aid`: the index for the atom in the non-equivalent atom list. 
+* `%aid`: the index for the atom in the non-equivalent atom list.
 
 * `%id`: the index for the atom in the non-equivalent atom list,
    counting only the atoms of the same type.
@@ -64,18 +64,18 @@ tails will not appear on the plot even if the corresponding peak is so
 close that the contribution to the RDF would be significant. In a
 `SOFT` powder diffraction pattern, all peaks are computed and
 represented, even if the maximum is outside the plot range. Default:
-`SOFT`. 
+`SOFT`.
 
 ## Radial Distribution Function (RDF) {#c2-rdf}
- 
+
 The RDF keyword calculates the radial distribution function (RDF) for
 the current crystal or molecular structure:
 ~~~
-RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
+RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i]
     [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
     [HARD|SOFT]
 ~~~
-The definition of RDF is similar to the one found in 
+The definition of RDF is similar to the one found in
 [Willighagen et al., Acta Cryst. B 61 (2005) 29](https://doi.org/10.1107/S0108768104028344),
 but where the atomic charges are replaced by the square root of the
 atomic number. Each pair of atoms A and B at a distance $$d_{AB}$$ in
@@ -118,7 +118,7 @@ plot range. Default: `SOFT`.
 
 The COMPARE keywords compares two or more structures:
 ~~~
-COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r] 
+COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
         [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
@@ -135,9 +135,9 @@ positions. If the atoms are unsorted, compare the molecules using the
 radial distribution functions.
 
 In crystals, the default is to use the powder diffraction
-patterns. Two crystal structures are exactly equal if 
+patterns. Two crystal structures are exactly equal if
 `DIFF = 0`. Maximum dissimilarity occurs when `DIFF = 1`.  The crystal
-similarity 
+similarity
 measure is calculated using the cross-correlation functions defined in
 [de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0),
 using the triangle weight. Powder diffraction patterns are calculated
@@ -150,8 +150,8 @@ of unsorted molecules.
 In sorted molecules, the root mean square (RMS) of the atomic
 positions is reported (the units are angstrom, unless changed with the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword). The molecular
-rotation is calculated using Walker et al.'s quaternion algorithm 
-([Walker et al., CVGIP-Imag. Understan. 54 (1991) 358](https://doi.org/10.1016/1049-9660(91)90036-O)). 
+rotation is calculated using Walker et al.'s quaternion algorithm
+([Walker et al., CVGIP-Imag. Understan. 54 (1991) 358](https://doi.org/10.1016/1049-9660(91)90036-O)).
 For the comparison to work correctly, it is necessary that the two
 molecules have the same number of atoms and that the atoms are in the
 same sequence.
@@ -186,11 +186,11 @@ The NEWCELL keyword transforms the unit cell used to describe the
 current crystal structure to a new cell:
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
-        [ORIGIN x0.r y0.r z0.r] 
+        [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 ~~~
-The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`), 
+The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`),
 (`x2.r` `y2.r` `z2.r`), and (`x3.r` `y3.r` `z3.r`) in
 crystallographic coordinates relative to the old unit cell. The x1,
 x2, x3 vectors must be pure translations of the old cell; either
@@ -203,7 +203,7 @@ NEWCELL unloads all fields (except the promolecular density) and
 clears the critical point list. If the INV (or INVERSE) keyword is
 used, the input vectors correspond to the crystallographic coordinates
 of the old cell in the new coordinate system. A NEWCELL transformation
-is the inverse of the same transformation using the INV keyword. 
+is the inverse of the same transformation using the INV keyword.
 Optionally, if an ORIGIN vector is given, (`x0.r` `y0.r` `z0.r`), the
 cell origin is translated to x0. The units of x0 are crystallographic
 coordinates of the original cell.
@@ -230,7 +230,7 @@ NEWCELL also admits specific keywords that perform common
 transformations to certain cells of interest. The cell can be
 transformed to:
 
-* STANDARD: standard (canonical) unit cell. 
+* STANDARD: standard (canonical) unit cell.
 
 * PRIMITIVE: standard primitive unit cell. Does not transform the cell
   if the unit cell is already primitive.
@@ -315,9 +315,9 @@ around the central atom. To address these complex cases, the
 calculation of an effective coordination number (ECoN) was introduced
 by Hoppe in 1979. The ECoN of a given atom is calculated by assigning
 to each atom around it a weight based on their distance. The original
-procedure is described in 
-[Hoppe, Z. Kristallogr. 150 (1979) 23](http://dx.doi.org/10.1524/zkri.1979.150.14.23) 
-and examined in detail in 
+procedure is described in
+[Hoppe, Z. Kristallogr. 150 (1979) 23](http://dx.doi.org/10.1524/zkri.1979.150.14.23)
+and examined in detail in
 [Nespolo, Acta Cryst. B, 72 (2016) 51](http://dx.doi.org/10.1107/S2052520615019472).
 
 The implementation of ECoN in critic2 is slightly different from those
@@ -402,7 +402,7 @@ PACKING {COV|VDW|} [PREC prec.r]
 ~~~
 With VDW, use the van der Waals radii. With COV, use the covalent
 radii. If neither VDW nor COV are used, use half of the nearest
-neighbor distance (in this case, the spheres would not overlap). 
+neighbor distance (in this case, the spheres would not overlap).
 
 In the VDW and COV cases, the calculation is done using a Monte-Carlo
 sampling of the unit cell. The PREC keyword allows controlling the
@@ -467,4 +467,35 @@ of point charges using Ewald's method:
 EWALD
 ~~~
 The atomic charges are defined using the Q keyword.
+
+## Reorder Atoms in a Molecule or Molecular Crystal (MOLREORDER) {#c2-molreorder}
+
+The MOLREORDER keyword reorders the atoms in a molecule or molecular
+crystal to have the same atomic order as a template molecule. The
+syntax is:
+~~~
+MOLREORDER template.s target.s [WRITE file.s] [EPS eps.r]
+~~~
+The template molecule is in file `template.s`. The target file
+`target.s` must contain either a molecule or a molecular crystal. If
+`target.s` is a molecule, it must contain the same number and types of
+atoms as the template. If `target.s` is a molecular crystal, its
+asymmetric unit must have an integer number of molecules (Z', see the
+WHOLEMOLS option in [SYMM/SYM](/critic2/manual/crystal/#c2-symm)). In
+addition, all molecular fragments in the crystal must have the same
+number and atom types as the template.
+
+MOLREORDER works by first calculating the RDF of each atom. Then, it
+tries to match atoms in the target structure with atoms in the
+template. This process only works if the two structures are the same
+or very similar. If there are significant differences between the two
+structures, MOLREORDER will fail at identifying the atomic permutation
+between target and template. The MOLREORDER keyword can be used
+without having any molecular or crystal structure loaded.
+
+There are two optional keywords to MOLREORDER. If WRITE is given,
+followed by a file name `file.s`, the target structure with its atoms
+in the same order as the template is written to that file. If EPS is
+given, the value of `eps.r` is used as threshold for RDF compasion
+(see the [COMPARE](#c2-compare) keyword).
 

@@ -5,7 +5,7 @@ permalink: /critic2/syntax/
 excerpt: "List of commands used in critic2."
 sidebar:
   - repo: "critic2"
-    nav: "critic2" 
+    nav: "critic2"
 classes: wide
 toc: true
 toc_label: "List of keywords"
@@ -15,19 +15,19 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)             | [BADER](#key-bader)             | [BASINPLOT](#key-basinplot)             | [BENCHMARK](#key-benchmark)       | [BONDFACTOR](#key-bondfactor) |
-| [BUNDLEPLOT](#key-bundleplot) | [CLEAR](#key-clear)           | [COMPARE](#key-compare)         | [COORD](#key-coord)                     | [COUNT](#key-count)               | [CPREPORT](#key-cpreport)     |
-| [CRYSTAL](#key-crystal)       | [CUBE](#key-cube)             | [ECHO](#key-echo)               | [ECON](#key-econ)                       | [END](#key-end)                   | [ENVIRON](#key-environ)       |
-| [EWALD](#key-ewald)           | [FLUXPRINT](#key-fluxprint)   | [GRDVEC](#key-grdvec)           | [HIRSHFELD](#key-hirshfeld)             | [IDENTIFY](#key-identify)         | [INTEGRABLE](#key-integrable) |
-| [INTEGRALS](#key-integrals)   | [INT_RADIAL](#key-int-radial) | [LIBRARY](#key-library)         | [LINE](#key-line)                       | [LIST](#key-list)                 | [LIBXC](#key-libxc)           |
-| [LOAD](#key-load)             | [MAX](#key-max)               | [MEAN](#key-mean)               | [MESHTYPE](#key-meshtype)               | [MIN](#key-min)                   | [MOLCALC](#key-molcalc)       |
-| [MOLCELL](#key-molcell)       | [MOLECULE](#key-molecule)     | [NCIPLOT](#key-nciplot)         | [NEWCELL](#key-newcell)                 | [NOCORE](#key-nocore)             | [NOSYM](#key-nosym)           |
-| [NOSYMM](#key-nosymm)         | [ODE_MODE](#key-ode-mode)     | [PACKING](#key-packing)         | [PLANE](#key-plane)                     | [POINT](#key-point)               | [POINTPROP](#key-pointprop)   |
-| [POLYHEDRA](#key-polyhedra)   | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance)   | [Q/QAT](#key-q)                   | [QTREE](#key-qtree)           |
-| [RADII](#key-radii)           | [RDF](#key-rdf)               | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     | [ROOT](#key-root)                 | [RUN](#key-run)               |
-| [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole)   | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)               |
-| [SUM](#key-sum)               | [SYM](#key-sym)               | [SYMM](#key-symm)               | [SYSTEM](#key-system)                   | [UNITS](#key-units)               | [UNLOAD](#key-unload)         |
-| [VDW](#key-vdw)               | [WRITE](#key-write)           | [XDM](#key-xdm)                 | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |                               |
+| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)             | [BADER](#key-bader)           | [BASINPLOT](#key-basinplot)     | [BENCHMARK](#key-benchmark)             | [BONDFACTOR](#key-bondfactor)     |
+| [BUNDLEPLOT](#key-bundleplot) | [CLEAR](#key-clear)           | [COMPARE](#key-compare)       | [COORD](#key-coord)             | [COUNT](#key-count)                     | [CPREPORT](#key-cpreport)         |
+| [CRYSTAL](#key-crystal)       | [CUBE](#key-cube)             | [ECHO](#key-echo)             | [ECON](#key-econ)               | [END](#key-end)                         | [ENVIRON](#key-environ)           |
+| [EWALD](#key-ewald)           | [FLUXPRINT](#key-fluxprint)   | [GRDVEC](#key-grdvec)         | [HIRSHFELD](#key-hirshfeld)     | [IDENTIFY](#key-identify)               | [INTEGRABLE](#key-integrable)     |
+| [INTEGRALS](#key-integrals)   | [INT_RADIAL](#key-int-radial) | [LIBRARY](#key-library)       | [LINE](#key-line)               | [LIST](#key-list)                       | [LIBXC](#key-libxc)               |
+| [LOAD](#key-load)             | [MAX](#key-max)               | [MEAN](#key-mean)             | [MESHTYPE](#key-meshtype)       | [MIN](#key-min)                         | [MOLCALC](#key-molcalc)           |
+| [MOLCELL](#key-molcell)       | [MOLECULE](#key-molecule)     | [MOLREORDER](#key-molreorder) | [NCIPLOT](#key-nciplot)         | [NEWCELL](#key-newcell)                 | [NOCORE](#key-nocore)             |
+| [NOSYM](#key-nosym)           | [NOSYMM](#key-nosymm)         | [ODE_MODE](#key-ode-mode)     | [PACKING](#key-packing)         | [PLANE](#key-plane)                     | [POINT](#key-point)               |
+| [POINTPROP](#key-pointprop)   | [POLYHEDRA](#key-polyhedra)   | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance)   | [Q/QAT](#key-q)                   |
+| [QTREE](#key-qtree)           | [RADII](#key-radii)           | [RDF](#key-rdf)               | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     | [ROOT](#key-root)                 |
+| [RUN](#key-run)               | [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole)   | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) |
+| [STM](#key-stm)               | [SUM](#key-sum)               | [SYM](#key-sym)               | [SYMM](#key-symm)               | [SYSTEM](#key-system)                   | [UNITS](#key-units)               |
+| [UNLOAD](#key-unload)         | [VDW](#key-vdw)               | [WRITE](#key-write)           | [XDM](#key-xdm)                 | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |
 
 ## Notation
 
@@ -38,17 +38,17 @@ double quotes (""), or without quoting as long as there are no
 spaces. They can be used in most places that a real or integer can. An
 expression input:
 ~~~
-expression.r 
+expression.r
 ~~~
 prints the value of the expression to the output. The list of
-functions that can be used in arithmetic expressions is 
+functions that can be used in arithmetic expressions is
 [below](/critic2/syntax/#farithmetics).
 * Variables can be used almost everywhere.  Variables are assigned:
 ~~~
 variable.s = value.r
 ~~~
 * Fields are accessed using the `$` symbol and modified with an
-optional colon and field modifier (`$field:modifier`). See 
+optional colon and field modifier (`$field:modifier`). See
 [below](/critic2/syntax/#fmods) for a list of field modifiers.
 * Structural variables are accessed using the `@` symbol, and they can
 be used to incorporate position-dependent quantities to the expression.
@@ -86,9 +86,9 @@ AUTO ... [CLIP CUBE x0.r y0.r z0.r x1.r y1.r z1.r]
 AUTO ... [CLIP SPHERE x0.r y0.r z0.r rad.r]
 AUTO ... [SEED ...] [SEED ...] ...
 AUTO SEED WS [DEPTH depth.i] [X0 x0.r y0.r z0.r] [RADIUS rad.r]
-AUTO SEED OH [DEPTH depth.i]  [X0 x0.r y0.r z0.r] [RADIUS rad.r] 
+AUTO SEED OH [DEPTH depth.i]  [X0 x0.r y0.r z0.r] [RADIUS rad.r]
              [NR nr.r]
-AUTO SEED SPHERE [X0 x0.r y0.r z0.r] [RADIUS rad.r] [NTHETA ntheta.i] 
+AUTO SEED SPHERE [X0 x0.r y0.r z0.r] [RADIUS rad.r] [NTHETA ntheta.i]
                  [NPHI nphi.i] [NR nr.r]
 AUTO SEED PAIR [DIST dist.r] [NPTS n.i]
 AUTO SEED TRIPLET [DIST dist.r]
@@ -111,7 +111,7 @@ BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
 : Three-dimensional plots of the attraction basins.
 ~~~
 BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] | SPHERE [ntheta.i nphi.i]]
-          [OFF|OBJ|PLY|BASIN|DBASIN [npts.i]}]  
+          [OFF|OBJ|PLY|BASIN|DBASIN [npts.i]}]
           [CP cp.i] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
 ~~~
 
@@ -135,15 +135,15 @@ BONDFACTOR bondfactor.r
 [BUNDLEPLOT](/critic2/manual/basinplot/#c2-bundleplot)
 : Three-dimensional plot of a primary bundle.
 ~~~
-BUNDLEPLOT x.r y.r z.r 
+BUNDLEPLOT x.r y.r z.r
            [CUBE [lvl.i] | TRIANG [lvl.i] | SPHERE [ntheta.i nphi.i]]
-           [OFF|OBJ|PLY|BASIN|DBASIN [npts.i]}] 
+           [OFF|OBJ|PLY|BASIN|DBASIN [npts.i]}]
            [ROOT root.s] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
 ~~~
 
 <a id="key-clear"></a>
 [CLEAR](/critic2/manual/arithmetics/#c2-clear)
-: Clear the value of one or more variables. 
+: Clear the value of one or more variables.
 ~~~
 CLEAR {var1.s var2.s ...|ALL}
 ~~~
@@ -153,7 +153,7 @@ CLEAR {var1.s var2.s ...|ALL}
 : Compare two or more crystal or molecular structures using powder
   diffraction patterns or radial distribution functions.
 ~~~
-COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r] 
+COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
         [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
         {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 ~~~
@@ -162,7 +162,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
 [COORD](/critic2/manual/structure/#c2-coord)
 : Calculate the pair and triplet coordination numbers.
 ~~~
-COORD [DIST dist.r] [FAC fac.r] 
+COORD [DIST dist.r] [FAC fac.r]
 ~~~
 
 <a id="key-count"></a>
@@ -179,13 +179,13 @@ COUNT id.s eps.r
   about the critical point list.
 ~~~
 CPREPORT {SHORT|LONG|VERYLONG|SHELLS [n.i]}
-CPREPORT file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]] 
+CPREPORT file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]]
          [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
          [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
          [NMER nmer.i]
-CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]] 
-         [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i] 
-         [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
+CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
+         [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
+         [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 CPREPORT file.scf.in
 CPREPORT file.tess
 CPREPORT file.cri|file.incritic
@@ -225,7 +225,7 @@ CRYSTAL file.OUT # (GEOMETRY.OUT, elk)
 CRYSTAL file.out [istruct.i] # (file.scf.out, quantum espresso output)
 CRYSTAL file.out # (file.out, crystal output)
 CRYSTAL file.in # (file.scf.in, quantum espresso input)
-CRYSTAL file.STRUCT_IN 
+CRYSTAL file.STRUCT_IN
 CRYSTAL file.STRUCT_OUT
 CRYSTAL file.gen
 CRYSTAL file.xsf
@@ -233,7 +233,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
- CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU] 
+ CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
  CARTESIAN [scal.r]
    [BOHR/AU]
    [ANGSTROM/ANG]
@@ -314,14 +314,14 @@ EWALD
   paths.
 ~~~
 FLUXPRINT
-  POINT {1|-1|0} x.r y.r z.r 
+  POINT {1|-1|0} x.r y.r z.r
   NCP cp.i ntheta.i nphi.i [LVEC x.i y.i z.i]
   BCP cp.i 1 [LVEC x.i y.i z.i]
   BCP cp.i {0|-1} n.i [LVEC x.i y.i z.i] [BRAINDEAD|QUOTIENT|DYNAMICAL]
   RCP cp.i -1 [LVEC x.i y.i z.i]
   RCP cp.i {0|1} n.i [LVEC x.i y.i z.i] [BRAINDEAD|QUOTIENT|DYNAMICAL]
   CCP cp.i ntheta.i nphi.i [LVEC x.i y.i z.i]
-  GRAPH igraph.i 
+  GRAPH igraph.i
   COLOR r.i g.i b.i
   TEXT|TESSEL|TESS|OBJ|PLY|OFF|CML
   SHELLS ishl.i
@@ -351,7 +351,7 @@ GRDVEC
       x.r y.r z.r
       ...
  ENDCHECK/END
- CONTOUR {F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP} 
+ CONTOUR {F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP}
    nptsu.i nptsv.i {LIN niso.i [cini.r cend.r]|
    LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
    BADER|i1.i i2.i...}
@@ -384,9 +384,9 @@ IDENTIFY file.xyz
   basins.
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
-INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i] 
+INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
 INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [WANCUT wancut.r]
-INTEGRABLE "expr.s" 
+INTEGRABLE "expr.s"
 INTEGRABLE DELOC_SIJCHK file-sij.s
 INTEGRABLE DELOC_FACHK file-fa.s
 INTEGRABLE CLEAR
@@ -421,7 +421,7 @@ LIBRARY {CRYSTAL|MOLECULE} path.s
 : Calculate the values of a field on a line.
 ~~~
 LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s] [FIELD id.s/"expr"]
-     [GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] 
+     [GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP]
 ~~~
 
 <a id="key-list"></a>
@@ -463,7 +463,7 @@ LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
 LOAD file.molden [READVIRTUAL] [ORCA|PSI4]
 LOAD file.molden.input [READVIRTUAL]
-LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...] 
+LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...]
               [BAND b1.i b2.i ...] [ERANGE emin.r emax.r]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
@@ -475,7 +475,7 @@ LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
          [NOTESTMT] [ZPSP at1.s q1.r...]
 LOAD AS "expression.s" [n1.i n2.i n3.i|SIZEOF id.s|GHOST]
-LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s} 
+LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s}
         [FRAGMENT file.xyz]
 LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s}
 LOAD AS LAP id.s
@@ -562,11 +562,18 @@ ENDMOLECULE/END
 MOLECULE LIBRARY label.s
 ~~~
 
+<a id="key-molreorder"></a>
+[MOLREORDER](/critic2/manual/structure/#c2-molreorder)
+: Reorder the atoms in a molecule or molecular crystal to match a template.
+~~~
+MOLREORDER template.s target.s [WRITE file.s] [EPS eps.r]
+~~~
+
 <a id="key-nciplot"></a>
 [NCIPLOT](/critic2/manual/nciplot/)
 : Make a non-covalent interaction plot.
 ~~~
-NCIPLOT 
+NCIPLOT
   ONAME root.s
   CUTOFFS rhocut.r dimcut.r
   RHOPARAM rhoparam.r
@@ -596,7 +603,7 @@ ENDNCIPLOT/END
   a new unit cell.
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
-        [ORIGIN x0.r y0.r z0.r] 
+        [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 ~~~
@@ -636,12 +643,12 @@ PACKING {COV|VDW|} [PREC prec.r]
 : Write a file containing the values of a field on a plane and,
   optionally, make a contour plot.
 ~~~
-PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i 
+PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
       [SCALE sx.r sy.r] [EXTENDX zx0.r zx1.r] [EXTENDY zy0.r zy1.r]
       [FILE file.s] [FIELD id.s/"expr"]
-      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] 
-	        [CONTOUR {LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
-      BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]] 
+      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP]
+            [CONTOUR {LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
+      BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]]
       [RELIEF zmin.r zmax.r] [LABELZ labelz.r]
 ~~~
 
@@ -728,7 +735,7 @@ RADII {COV|VDW|} [at1.s|z1.i] rad1.r [[at2.s|z2.i] rad2.r ...]
 : Calculate the radial distribution function of atoms in a molecule or
   crystal.
 ~~~
-RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i] 
+RDF [RINI t2i.r] [REND t2e.r] [SIGMA sigma.r] [NPTS npts.i]
     [ROOT root.s] [PAIR is1.s is2.s [PAIR is1.s is2.s ...]]
     [HARD|SOFT]
 ~~~
@@ -790,7 +797,7 @@ SPG
 : Integrate fields on a sphere.
 ~~~
 SPHEREINTEGRALS {GAULEG [ntheta.i nphi.i]|LEBEDEV [nleb.i]}
-                [NR npts.i] [R0 r0.r] [REND rend.r] [CP ncp.i] 
+                [NR npts.i] [R0 r0.r] [REND rend.r] [CP ncp.i]
 ~~~
 
 <a id="key-standardcube"></a>
@@ -804,9 +811,9 @@ PRECISECUBE|STANDARDCUBE
 [STM](/critic2/manual/stm/)
 : Make scanning tunneling microscopy plots.
 ~~~
-STM [CURRENT [curr.r]|HEIGHT [hei.r]] [TOP top.r] 
-    [{CELL|CELLS} nx.i ny.i] [NPTS n1.i n2.i] 
-    [LINE x0.r y0.r x1.r y1.r npts.i] 
+STM [CURRENT [curr.r]|HEIGHT [hei.r]] [TOP top.r]
+    [{CELL|CELLS} nx.i ny.i] [NPTS n1.i n2.i]
+    [LINE x0.r y0.r x1.r y1.r npts.i]
 ~~~
 
 <a id="key-sum"></a>
@@ -862,16 +869,16 @@ VDW [PREC prec.r]
 [WRITE](/critic2/manual/write/)
 : Write the crystal structure to an external file.
 ~~~
-WRITE file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]] 
+WRITE file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]]
       [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
       [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
       [NMER nmer.i]
-WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]] 
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i] 
-      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
+WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
+      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
+      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
 WRITE file.tess
-WRITE file.cri|file.incritic 
+WRITE file.cri|file.incritic
 WRITE {[file.]POSCAR|[file.]CONTCAR}
 WRITE file.abin
 WRITE file.elk
@@ -894,9 +901,9 @@ WRITE file.pyscf
 [XDM](/critic2/manual/misc/#c2-xdm)
 : Calculate the XDM dispersion energy and derivatives.
 ~~~
-XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s] 
-    [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s] 
-    [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s] 
+XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s]
+    [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s]
+    [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s]
     [XA1 a1.r] [XA2 a2.r] [ONLYC] [UPTO {6|8|10}]
 XDM [QE|POSTG] [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
        [NOC6] [NOC8] [NOC10] [SCALC6 s6.r] [SCALC8 s8.r] [SCALC10 s10.r]
@@ -934,74 +941,74 @@ gtf(id) [gtf]
 vtf(id) [vtf]
 : Thomas-Fermi potential energy density (uses local virial).
 
-htf(id) [htf] 
+htf(id) [htf]
 : Thomas-Fermi total energy density (uses local virial).
 
-gtf_kir(id) [gtf_kir] 
+gtf_kir(id) [gtf_kir]
 : Thomas-Fermi ked with Kirzhnits gradient correction.
 
-vtf_kir(id) [vtf_kir] 
+vtf_kir(id) [vtf_kir]
 : Thomas-Fermi potential energy density with Kirzhnits gradient correction (uses local virial).
 
-htf_kir(id) [htf_kir] 
+htf_kir(id) [htf_kir]
 : Thomas-Fermi total energy density with Kirzhnits gradient correction
   (uses local virial).
 
-gkin(id) [gkin] 
+gkin(id) [gkin]
 : Kinetic enregy density, g-version (grho * grho).
 
-kkin(id) [kkin] 
+kkin(id) [kkin]
 : Kinetic enregy density, k-version (rho * laprho).
 
-lag(id) [lag] 
+lag(id) [lag]
 : Lagrangian density (-1/4 laprho).
 
-elf(id) [elf] 
+elf(id) [elf]
 : Electron localization function.
 
-vir(id) [vir] 
+vir(id) [vir]
 : Electronic potential energy density (virial field).
 
-stress  [stress] 
+stress  [stress]
 : Schrodinger stress tensor (for the reference field only).
 
-he(id) [he] 
+he(id) [he]
 : Electronic energy density, gkin+vir.
 
-lol(id) [lol] 
+lol(id) [lol]
 : Localized-orbital locator.
 
-lol_kir(id) [lol_kir] 
+lol_kir(id) [lol_kir]
 : Localized-orbital locator, with Kirzhnits k.e.d.
 
-brhole_a1(id), brhole_a2(id), brhole_a(id) 
+brhole_a1(id), brhole_a2(id), brhole_a(id)
 : BR hole, A prefactor (spin up, down, and average).
 
-brhole_b1(id), brhole_b2(id), brhole_b(id) 
+brhole_b1(id), brhole_b2(id), brhole_b(id)
 : BR hole, hole-reference distance (spin up, down, and average).
 
-brhole_alf1(id), brhole_alf2(id), brhole_alf(id) 
+brhole_alf1(id), brhole_alf2(id), brhole_alf(id)
 : BR hole, exponent (spin up, down, and average).
 
-xhcurv1(id), xhcurv2(id), xhcurv(id) 
+xhcurv1(id), xhcurv2(id), xhcurv(id)
 : Curvature of the exchange hole at the reference point (spin up, down, and average).
 
-dsigs1(id), dsigs2(id), dsigs(id) 
+dsigs1(id), dsigs2(id), dsigs(id)
 : Same-spin pair density leading coefficient (Dsigma) (spin up, down, and average).
 
-xhole(id,x,y,z) 
+xhole(id,x,y,z)
 : Exchange hole with reference point at x,y,z.
 
-stress [STRESS] 
+stress [STRESS]
 : Schrodinger stress tensor (only for the reference field).
 
-mep(id) 
+mep(id)
 : Molecular electrostatic potential (requires [libcint](/critic2/installation/#c2-libcint)).
 
-uslater(id) 
+uslater(id)
 : Slater potential (requires [libcint](/critic2/installation/#c2-libcint)).
 
-nheff(id) 
+nheff(id)
 : Reverse-BR effective hole normalization (requires [libcint](/critic2/installation/#c2-libcint)).
 
 xc(...,idx)
@@ -1059,7 +1066,7 @@ xc(...,idx)
 \:BLUMO
 : Beta lowest-unoccupied molecular orbital (UHF). (only for molecular wavefunctions)
 
-\:up, :dn, :sp 
+\:up, :dn, :sp
 : Alpha, beta, spin density. (only for molecular wavefunctions)
 
 ## List of Structural Variables (@strucvar) {#structvar}
@@ -1144,4 +1151,3 @@ xc(...,idx)
 
 @zatnuc
 : Atomic number of the closest nucleus.
-
