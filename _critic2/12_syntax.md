@@ -217,6 +217,7 @@ CRYSTAL file.res
 CRYSTAL file.ins
 CRYSTAL file.16
 CRYSTAL file.21
+CRYSTAL file.dmain
 CRYSTAL file.cube
 CRYSTAL file.bincube
 CRYSTAL file.struct
@@ -232,7 +233,6 @@ CRYSTAL file.gen
 CRYSTAL file.xsf
 CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
-CRYSTAL file.dmain
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
