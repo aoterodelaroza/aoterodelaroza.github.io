@@ -474,7 +474,7 @@ The MOLREORDER keyword reorders the atoms in a molecule or molecular
 crystal to have the same atomic order as a template molecule. The
 syntax is:
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [EPS eps.r]
+MOLREORDER template.s target.s [WRITE file.s]
 ~~~
 The template molecule is in file `template.s`. The target file
 `target.s` must contain either a molecule or a molecular crystal. If
@@ -485,17 +485,18 @@ WHOLEMOLS option in [SYMM/SYM](/critic2/manual/crystal/#c2-symm)). In
 addition, all molecular fragments in the crystal must have the same
 number and atom types as the template.
 
-MOLREORDER works by first calculating the RDF of each atom. Then, it
-tries to match atoms in the target structure with atoms in the
-template. This process only works if the two structures are the same
-or very similar. If there are significant differences between the two
-structures, MOLREORDER will fail at identifying the atomic permutation
-between target and template. The MOLREORDER keyword can be used
+MOLREORDER works by using the weighted graph matching algorithm
+proposed in [Umeyama, S., IEEE PAMI, 10 (1988) 695-703](http://dx.doi.org/10.1109/34.6778).
+If there are significant differences between the structures being
+compared, MOLREORDER may find the wrong atomic permutation, so it is a
+good idea to always check that the RMS in the output is small. The RMS
+is obtained by calculating the rotation matrix that yields the best
+match, in the least squares sense, between the template and the
+reordered structure. The MOLREORDER keyword can be used
 without having any molecular or crystal structure loaded.
+If WRITE is given, followed by a file name `file.s`, the target
+structure with its atoms in the same order as the template is written
+to that file.
 
-There are two optional keywords to MOLREORDER. If WRITE is given,
-followed by a file name `file.s`, the target structure with its atoms
-in the same order as the template is written to that file. If EPS is
-given, the value of `eps.r` is used as threshold for RDF compasion
-(see the [COMPARE](#c2-compare) keyword).
+
 
