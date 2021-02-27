@@ -132,7 +132,9 @@ sorted, COMPARE finds the translation and rotation that brings the two
 molecules into closest
 agreement and report the root-mean-square (RMS) of the atomic
 positions. If the atoms are unsorted, compare the molecules using the
-radial distribution functions.
+radial distribution functions. If you want to compare somewhat similar
+molecules with the atoms in different orders, it is a good idea to
+sort one of them using the [MOLREORDER](/critic2/manual/structure/#c2-molreorder) keyword.
 
 In crystals, the default is to use the powder diffraction
 patterns. Two crystal structures are exactly equal if
