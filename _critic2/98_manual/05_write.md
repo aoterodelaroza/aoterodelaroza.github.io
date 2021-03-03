@@ -66,7 +66,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
-WRITE file.res
+WRITE file.fhi
 ~~~
 The WRITE keyword writes the currently loaded structure to a file.
 A number of file formats can be written by critic2. As in CRYSTAL and
@@ -328,6 +328,13 @@ structure.
 The `.pyscf` extension writes a template python script for using with
 pyscf. The script creates an instance of a Mole object (in the case of
 a molecule) or a Cell object (if it is a crystal).
+
+### FHIaims (fhi)
+
+A `geometry.in` input file for FHIaims can be generated using the
+`.fhi` extension. The file then needs to be renamed to
+`geometry.in`. The appropriate selection of keywords is used depending
+on whether the current structure is a crystal or a molecule.
 
 ## Writing a .mols File for DMACRYS/NEIGHCRYS (MAKEMOLSNC) {#c2-makemolsnc}
 ~~~

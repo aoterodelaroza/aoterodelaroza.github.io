@@ -35,6 +35,8 @@ CRYSTAL file.gen
 CRYSTAL file.xsf
 CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
+CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
+CRYSTAL file.{out,own} # (FHIaims output)
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -238,6 +240,21 @@ Quantum ESPRESSO. The `.pwc` file contains the structural information
 for the system as well as the k-point information and the converged
 Kohn-Sham states. It is mostly used in the calculation of
 delocalization indices in periodic solids.
+
+### FHI aims input (in, in.next_step, out, own) {#c2-fhi}
+
+Molecular and crystal structures can be loaded from an FHIaims
+"geometry.in" input file. Only the `atom`, `atom_frac`, and
+`lattice_vector` keywords are parsed and interpreted. If
+at least one `lattice_vector` is present, the system is assumed to be
+a crystal. Alternatively, you can also load the structure from the
+"geometry.in.next_step" file written by FHIaims during a geometry
+optimization.
+
+The crystal or molecular structure can also be loaded from an FHIaims
+output file, which is assumed to have a .out or .own extension. In the
+case of a geometry optimization, the last available geometry in the
+output file is read.
 
 ### Manual Specification of the Crystal Structure (CRYSTAL Environment)
 
