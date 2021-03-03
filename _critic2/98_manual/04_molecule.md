@@ -27,6 +27,8 @@ MOLECULE file.pgout [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
 MOLECULE file.cube
 MOLECULE file.bincube
+MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
+MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE
@@ -139,6 +141,18 @@ Critic2 can be used to convert cube files to binary format in order to
 save disk space and reading/writing time. Binary cube files have
 extension .bincube, and contain essentially the same information as a
 usual cube file.
+
+### FHIaims inputs and outputs (in, in.next_step, out, own) {#c2-fhi}
+
+Molecular (and crystal) structures can be loaded from an FHIaims
+"geometry.in" input file. Alternatively, you can also load the
+structure from the "geometry.in.next_step" file written by FHIaims
+during a geometry optimization.
+
+The molecular structure can also be loaded from an FHIaims output
+file, which is assumed to have a .out or .own extension. In the case
+of a geometry optimization, the last available geometry in the output
+file is read.
 
 ### Other Crystallographic Formats (cif, scf.in,...)
 

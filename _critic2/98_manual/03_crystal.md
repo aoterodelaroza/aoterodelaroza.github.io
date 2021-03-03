@@ -241,9 +241,9 @@ for the system as well as the k-point information and the converged
 Kohn-Sham states. It is mostly used in the calculation of
 delocalization indices in periodic solids.
 
-### FHI aims input (in, in.next_step, out, own) {#c2-fhi}
+### FHIaims inputs and outputs (in, in.next_step, out, own) {#c2-fhi}
 
-Molecular and crystal structures can be loaded from an FHIaims
+Crystal (and molecular) structures can be loaded from an FHIaims
 "geometry.in" input file. Only the `atom`, `atom_frac`, and
 `lattice_vector` keywords are parsed and interpreted. If
 at least one `lattice_vector` is present, the system is assumed to be

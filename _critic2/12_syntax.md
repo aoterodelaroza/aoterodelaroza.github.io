@@ -561,6 +561,8 @@ MOLECULE file.pgout [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
 MOLECULE file.cube
 MOLECULE file.bincube
+MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
+MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE
