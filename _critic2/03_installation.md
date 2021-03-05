@@ -5,7 +5,7 @@ permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."
 sidebar:
   - repo: "critic2"
-    nav: "critic2" 
+    nav: "critic2"
 toc: true
 toc_label: "Installation of Critic2"
 toc_sticky: true
@@ -13,7 +13,23 @@ toc_sticky: true
 
 ## Installation Instructions
 
-### Build Using cmake
+To build critic2, you will need:
+
+* A [relatively modern](#whichcompilerswork) Fortran compiler.
+
+* A C compiler.
+
+* A build system, either [cmake](#c2-usecmake) or [autoconf/automake](#c2-useconfigure).
+
+* The make program.
+
+* Optionally, a few [additional libraries](#c2-libraries).
+
+These tools may already be available on your machine but, if they are
+not, they can be typically installed using a software package
+manager (`apt`, `rpm`, etc. on Linux; [homebrew](https://brew.sh/) on macOS).
+
+### Build Using cmake {#c2-usecmake}
 
 Using cmake is the recommended installation procedure. Change to the
 critic2 root directory and make a subdirectory for the compilation:
@@ -49,7 +65,7 @@ make
 You can use `make -j n` to use `n` cores for the compilation. Running
 make creates the `critic2` binary in `build/src/`.
 
-### Build Using configure/make
+### Build Using configure/make {#c2-useconfigure}
 
 If you downloaded the code from the git repository, you will need to run:
 ~~~
@@ -68,7 +84,7 @@ compile the program using:
 make
 ~~~
 This should create the critic2 executable inside the `src/`
-subdirectory. 
+subdirectory.
 
 ### Installing and Setting up the Environment
 
@@ -159,7 +175,7 @@ FC=gfortran F77=gfortran ./configure ...
 The `BUILD_STATIC` and `CMAKE_Fortran_COMPILER` options serve the same
 purpose in a cmake build.
 
-## External Libraries
+## External Libraries {#c2-libraries}
 
 ### Readline {#c2-readline}
 
@@ -208,7 +224,7 @@ similar way, but they require additional arguments to `xc()`.
 
 Another example: if we have a molecular wavefunction for benzene in
 `benzene.wfx`, we can build a field containing the PBE energy density
-and then integrate the PBE exchange-correlation energy with: 
+and then integrate the PBE exchange-correlation energy with:
 ~~~
 MOLECULE benzene.wfx
 LOAD benzene.wfx
@@ -245,7 +261,6 @@ the basis set information (at present, this is only for fields read
 from a Gaussian fchk file, but more will be implemented). The `mep()`,
 `uslater()`, and `nheff()` chemical functions use the molecular
 integrals calculated by libcint, as well as the `MOLCALC HF`
-keyword. See the 
+keyword. See the
 [chemical functions](/critic2/manual/arithmetics/#availchemfun) and the
 [MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual.
-

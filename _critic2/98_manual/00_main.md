@@ -5,7 +5,7 @@ permalink: /critic2/manual/
 excerpt: "The critic2 reference manual."
 sidebar:
   - repo: "critic2"
-    nav: "critic2_manual"
+	nav: "critic2_manual"
 toc: true
 toc_label: "Reference Manual"
 toc_sticky: true
@@ -59,12 +59,12 @@ surrounded by a "no-go" zone, which is determined by the so-called
 work with gas-phase molecules natively use a similar approach), but
 oddities and bugs may be lurking.
 
-Critic2 is described in 
+Critic2 is described in
 [Comput. Phys. Commun. 180 (2009), 157--166](http://dx.doi.org/10.1016/j.cpc.2008.07.018)
-and 
+and
 [Comput. Phys. Commun. 185 (2014), 1007--1018](http://dx.doi.org/10.1016/j.cpc.2013.10.026).
 Please, cite these references if you find this program useful. The
-file THANKS contains a complete list of contributors and 
+file THANKS contains a complete list of contributors and
 programs from where parts of critic2 have been adapted.
 
 To download the critic2 code, please visit [this page](/critic2/).
@@ -94,7 +94,7 @@ Alternatively, you can use critic2 interactively:
 ~~~
 $ critic2
 ~~~
-and enter the commands by hand.  The 
+and enter the commands by hand.  The
 [rlwrap program](https://github.com/hanslub42/rlwrap) simplifies using critic2
 interactively considerably by providing a history facility and
 keyboard shortcuts. If you are using a linux distribution, you can
@@ -134,15 +134,14 @@ for molecules. This can be changed using the
 densities are always in atomic units (electrons/bohr^3).
 
 After reading the structure and loading the relevant fields, specific
-keywords are used to perform the required tasks. For instance, 
+keywords are used to perform the required tasks. For instance,
 [AUTO](/critic2/manual/cpsearch/#c2-auto)
-(automatic determination of critical points), 
+(automatic determination of critical points),
 [INTEGRALS](/critic2/manual/integrate/#c2-integrals)
-(atomic integration), 
+(atomic integration),
 [NCIPLOT](/critic2/manual/nciplot/)
 (non-covalent interaction index plots), etc.  A concise description of
 the critic2 keyword syntax is given in the `doc/syntax.txt` file and
 in [this page](/critic2/syntax/). If you are
 already familiar with critic2, that file will probably be more useful
 to you than this guide.
-
