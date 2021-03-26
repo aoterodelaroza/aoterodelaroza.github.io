@@ -117,7 +117,7 @@ with a `SET` keyword (this is indicated in parentheses).
          (`SET WRITELEVEL 0`)
 
 * `-q`, `--quiet`:
-	 Do not print timing information to the output.
+     Do not print timing information to the output.
 
 * `-e`, `--eos`:
          Same as `-n`, but the `.eos` (thermal equation of state) and

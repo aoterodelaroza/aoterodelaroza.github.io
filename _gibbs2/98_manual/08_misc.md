@@ -22,7 +22,7 @@ PHASE ... [UNITS {VOLUME {BOHR|BOHR3|BOHR^3|ANG|ANG3|ANG^3}}
                  {ENERGY {HY|HARTREE|HA|EV|EVOLT|ELECTRONVOLT|RY|RYDBERG}}
                  {PRESSURE {AU|A.U.|GPA}} 
                  { {FREQ|FREQUENCY} {HARTREE|HY|HA|CM-1|CM^-1|CM_1|THZ}}
-		 {EDOS {HY|HARTREE|HA|EV|EVOLT|ELECTRONVOLT|RY|RYDBERG}}]
+         {EDOS {HY|HARTREE|HA|EV|EVOLT|ELECTRONVOLT|RY|RYDBERG}}]
 ~~~
 The UNITS option to PHASE selects the units for the input volume
 (VOLUME), energy (ENERGY), pressure (PRESSURE), frequency (FREQ or

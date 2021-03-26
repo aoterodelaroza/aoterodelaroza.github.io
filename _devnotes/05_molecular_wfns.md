@@ -366,7 +366,7 @@ program is called its "dialect".
   
   - g shell: xxxx, yyyy, zzzz, xxxy, xxxz, xyyy, yyyz, xzzz, yzzz,
     xxyy, xxzz, yyzz, xxyz, xyyz, xyzz.
-	
+    
 * Spherical primitives are possible in a molden file. They are
   indicated by the "5d", "7f", "5d7f", "5d10f", and "9g" keywords,
   which is somewhat confusing. If none of these keywords are present,
@@ -374,10 +374,10 @@ program is called its "dialect".
 
   - "5d" and "5d7f" are equivalent, and they indicate that d and f
     shells are spherical.
-	
+    
   - "5d10f": the d shells are spherical but the f shells are
     Cartesian.
-	
+    
   - "7f": the f shells are spherical but the d shells are Cartesian.
 
   - "9g": the g shells are spherical.

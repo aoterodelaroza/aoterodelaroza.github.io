@@ -951,7 +951,7 @@ INTEG_MODE = 12 12 12 -1 ... -1 1.
       is not as clear as in a cubic mesh. For a given point x, the
       neighbors are calculated by first converting x to convex
       coordinates, that range from 0 to $$2^l$$, restricted to 
-	  $$x_1 + x_2 + x_3 \leq 2^l$$, where $$l$$ is the subdivision
+      $$x_1 + x_2 + x_3 \leq 2^l$$, where $$l$$ is the subdivision
       levels. The neighboring points are $$(x_1\pm 1, x_2\pm 1, x_3\pm 1)$$
       If any of these neighbors are not valid points in the
       tetrahedron, they are discarded and not checked. This is the
