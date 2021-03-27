@@ -9,7 +9,7 @@ excerpt: >-
   critical point search, NCI plots, and much, much more.
 sidebar:
   - repo: "critic2"
-    nav: "critic2" 
+    nav: "critic2"
 search: true
 ---
 
@@ -18,15 +18,15 @@ calculation results in molecules and periodic solids.
 
 * The **development version** works only with recent compilers (see
   [here](/critic2/installation/#whichcompilerswork)) but has the latest features.\\
-  Version **1.0**: 
-  [critic2-1.0dev.zip](/assets/critic2/versions/critic2-1.0dev.zip),
-  [critic2-1.0dev.tar.gz](/assets/critic2/versions/critic2-1.0dev.tar.gz).
+  Version **1.1**:
+  [critic2-1.1dev.zip](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1dev.zip),
+  [critic2-1.1dev.tar.gz](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1dev.tar.gz).
 
 * The **stable version** works with almost any f90/f03 Fortran
   compiler. Only serious bugs will be fixed in the stable version.\\
-  Version **1.0**: 
-  [critic2-1.0stable.zip](/assets/critic2/versions/critic2-1.0stable.zip),
-  [critic2-1.0stable.tar.gz](/assets/critic2/versions/critic2-1.0stable.tar.gz).
+  Version **1.1**:
+  [critic2-1.1stable.zip](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1stable.zip),
+  [critic2-1.1stable.tar.gz](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1stable.tar.gz).
 
 Alternatively, clone the git repository for the **latest version** of the code:
 ~~~
@@ -40,14 +40,14 @@ or visit the [github page](https://github.com/aoterodelaroza/critic2).
   and physics.
 
 - Read, analyze, and manipulate scalar fields such as the ELF or the
-  electron density. 
+  electron density.
 
 - Perform topological analysis of real-space scalar fields, which includes the
   implementation of Bader's atoms in molecules theory (QTAIM): critical
   point search, basin integration, basin plotting, etc.
-  
+
 - Calculation of Bader's delocalization indices in periodic solids.
-   
+
 - Calculation and integration of new scalar fields using critic2's
   powerful arithmetic expressions, useful in the development of
   quantum mechanical methods.
@@ -56,7 +56,7 @@ or visit the [github page](https://github.com/aoterodelaroza/critic2).
   interaction plots (NCIplots) in molecules and solids or the
   calculation of scanning tunneling microscopy (STM) plots.
 
-- Crystallographic calculations: space group detection (via the 
+- Crystallographic calculations: space group detection (via the
   [spglib](https://atztogo.github.io/spglib/)), unit cell
   transformation, powder diffraction and RDFs, structural comparison,
   molecule environment generation, and more.
@@ -86,10 +86,10 @@ or visit the [github page](https://github.com/aoterodelaroza/critic2).
 
 The basic references for critic2 are:
 
-* A. Otero-de-la-Roza, E. R. Johnson and V. Luaña, 
+* A. Otero-de-la-Roza, E. R. Johnson and V. Luaña,
   Comput. Phys. Commun. **185**, 1007-1018 (2014)
-  <http://dx.doi.org/10.1016/j.cpc.2013.10.026> 
-* A. Otero-de-la-Roza, M. A. Blanco, A. Martín Pendás and V. Luaña, 
+  <http://dx.doi.org/10.1016/j.cpc.2013.10.026>
+* A. Otero-de-la-Roza, M. A. Blanco, A. Martín Pendás and V. Luaña,
   Comput. Phys. Commun. **180**, 157–166 (2009)
   <http://dx.doi.org/10.1016/j.cpc.2008.07.018>
 
@@ -100,4 +100,3 @@ the manual for references pertaining particular keywords.
 
 Critic2 is distributed under the GNU/GPL v3 license. The LICENSE file
 in the root of the distribution contains a copy of the license.
-
