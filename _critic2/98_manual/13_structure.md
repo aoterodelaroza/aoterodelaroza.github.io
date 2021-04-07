@@ -503,3 +503,25 @@ to that file. In addition, if MOVEATOMS is used, the atoms in the
 structure written to `file.s` are moved to match the structure of the
 template molecule.
 
+## Calculate Dimensions of Uniform k-Point Grids {#c2-kpoints}
+
+The KPOINTS keyword:
+~~~
+KPOINTS [rk.r] [RKMAX rkmax.r]
+~~~
+calculates the number of k-points in each direction (nk1, nk2, nk3) of
+a uniform k-point grid with density given by length parameter $$R_k$$
+(`rk.r`). More k-points are allocated in short directions of the
+crystal according to [VASP's formula](https://www.vasp.at/wiki/index.php/KPOINTS):
+\begin{equation}
+n_i = \text{int}\left[\text{max}\left(1,R_k |{\rm b}_i| + \frac{1}{2}\right)\right]
+\end{equation}
+where $$n_i$$ is the number of k-points in direction i and $$|{\rm
+b}_i|$$ is the length of the ith reciprocal lattice vector.
+
+If the KPOINTS keyword is used without any further input, critic2
+lists all the distinct uniform k-point grids for values of `rk.r` from
+zero up to a value equal to `rkmax.r`, which can be modified with the
+optional RKMAX keyword (default: 100 bohr). If a number `rk.r` follows
+KPOINTS, the k-point grid dimensions are calculated only for that value.
+

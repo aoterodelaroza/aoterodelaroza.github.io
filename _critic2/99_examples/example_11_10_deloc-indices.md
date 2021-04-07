@@ -252,7 +252,7 @@ rotation of the KS states to yield the MLWF. We calculate this with
 ```
 num_wann = 4
 num_iter = 20000
-conv_tol = 1e-8
+conv_tol = 1e-4
 conv_window = 3
 
 begin unit_cell_cart
