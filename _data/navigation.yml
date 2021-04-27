@@ -5,8 +5,10 @@ main:
     url: /gibbs2/
   - title: "Reference data"
     url: /refdata/
-  - title: "DevNotes"
+  - title: "Dev Notes"
     url: /devnotes/
+  - title: "Course Notes"
+    url: /coursenotes/
 
 critic2:
   - title: "Main"
@@ -106,7 +108,7 @@ critic2_examples:
         url: /critic2/examples/#c2e-stm
       - title: "Molecular Properties (MOLCALC)"
         url: /critic2/examples/#c2e-molcalc
-      - title: "Dev notes and tests"
+      - title: "Dev docs and tests"
         url: /critic2/examples/testfiles
 
 devnotes:
@@ -125,6 +127,8 @@ devnotes:
       url: /devnotes/derivatives-xdmsolids/
     - title: "Molecular wavefunctions"
       url: /devnotes/critic2-molwfns/
+  - title: "Course notes"
+    url: /coursenotes/
 
 gibbs2:
   - title: "Main"

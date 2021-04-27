@@ -54,6 +54,7 @@ include:
   - _gibbs2/
   - _refdata/
   - _devnotes/
+  - _coursenotes/
 
 collections:
   critic2:
@@ -61,6 +62,8 @@ collections:
   gibbs2:
     output: true
   devnotes:
+    output: true
+  coursenotes:
     output: true
   refdata:
     output: true

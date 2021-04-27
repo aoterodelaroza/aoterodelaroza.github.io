@@ -2,7 +2,9 @@
 layout: splash
 permalink: /
 title: "Home"
-row_critic2:
+intro:
+  - excerpt: ""
+row_all:
   - image_path: assets/images/critic2_pyridine.png
     alt: "Pyridine"
     title: "Critic2"
@@ -12,10 +14,8 @@ row_critic2:
       computations, input and output format conversion, Bader analysis,
       critical point search, NCI plots, and much, much more.
     url: /critic2/
-    btn_label: "Go to the page"
-    btn_class: "btn--success"
-  # From https://pixabay.com/en/coffee-wood-table-wooden-espresso-1030971/
-  # Free for any use; no attribution required.
+    btn_label: "_"
+    btn_class: "btn--light-outline"
   - image_path: assets/images/aggao2_efit.png
     alt: "E-V curves"
     title: "Gibbs2"
@@ -24,27 +24,33 @@ row_critic2:
       function of temperature and pressure in the quasiharmonic
       approximation.
     url: /gibbs2/
-    btn_label: "Go to the page"
-    btn_class: "btn--success"
-  # From AgGaO2 study.
+    btn_label: "_"
+    btn_class: "btn--light-outline"
   - image_path: assets/images/refdata.png
     alt: "Tripeptide"
     title: "Reference data"
     excerpt: >-
       Repository of reference data for quantum chemistry.
     url: /refdata/
-    btn_label: "Go to the page"
-    btn_class: "btn--success"
-  # From https://pixabay.com/en/coffee-wood-table-wooden-espresso-1030971/
-  # Free for any use; no attribution required.
-  - image_path: assets/images/devnotes_coffee.jpg 
+    btn_label: "_"
+    btn_class: "btn--light-outline"
+  - image_path: assets/images/devnotes_coffee.jpg
     alt: "Coffee"
     title: "Development notes"
     excerpt: ""
     url: /devnotes/
-    btn_label: "Go to the page"
-    btn_class: "btn--success"
+    btn_label: "_"
+    btn_class: "btn--light-outline"
+  - image_path: assets/images/coursenotes_writing.jpg
+    alt: "Coffee"
+    title: "Course notes"
+    excerpt: ""
+    url: /coursenotes/
+    btn_label: "_"
+    btn_class: "btn--light-outline"
 ---
 
-{% include feature_row id="row_critic2" %}
+{% include feature_row id="intro" type="center" %}
+
+{% include feature_row id="row_all" %}
 
