@@ -267,7 +267,7 @@ an additional `.fort.34` file with the same root is created. This file
 contains the symmetry operations as well as the crystal geometry, and
 it should be renamed to just `fort.34` before the crystal calculation
 is run. Note that the `.d12` file contains only a keyword to run the
-geometry test - there is no basis set specification or any of the othe
+geometry test - there is no basis set specification or any of the other
 relevant keywords.
 
 Crystal17 (and probably earlier versions) has different tolerance
