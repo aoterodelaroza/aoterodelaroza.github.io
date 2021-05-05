@@ -456,7 +456,7 @@ collection](/devnotes/space-group-collection/).
 
 ## Symmetry Options (SYM/NOSYM) {#c2-symm}
 
-Critic2 uses the [spglib](https://atztogo.github.io/spglib/)) library
+Critic2 uses the [spglib](https://atztogo.github.io/spglib/) library
 to calculate the symmetry operations and space group label from the
 crystal structure description. Symmetry is not used or calculated for
 molecular systems. By default, if the crystal is very big (>2000 atoms
