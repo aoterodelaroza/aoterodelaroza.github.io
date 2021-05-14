@@ -503,7 +503,7 @@ to that file. In addition, if MOVEATOMS is used, the atoms in the
 structure written to `file.s` are moved to match the structure of the
 template molecule.
 
-## Calculate Dimensions of Uniform k-Point Grids {#c2-kpoints}
+## Calculate Dimensions of Uniform k-Point Grids (KPOINTS) {#c2-kpoints}
 
 The KPOINTS keyword:
 ~~~
