@@ -216,3 +216,12 @@ refdata:
       url: /refdata/#iHB100x10
     - title: "HB300SPX set (HB300SPX)"
       url: /refdata/#HB300SPX
+
+coursenotes:
+  - title: "Main"
+    url: /
+  - title: "Courses & tutorials"
+    url: /coursenotes/
+    children:
+    - title: "Connecting with SSH"
+      url: /coursenotes/remote_connection/
