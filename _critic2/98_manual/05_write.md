@@ -67,6 +67,7 @@ WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
 WRITE file.fhi
+WRITE file.frac
 ~~~
 The WRITE keyword writes the currently loaded structure to a file.
 A number of file formats can be written by critic2. As in CRYSTAL and
@@ -335,6 +336,14 @@ A `geometry.in` input file for FHIaims can be generated using the
 `.fhi` extension. The file then needs to be renamed to
 `geometry.in`. The appropriate selection of keywords is used depending
 on whether the current structure is a crystal or a molecule.
+
+### TINKER frac files (frac)
+
+A `.frac` file can be generated in TINKER format. The `.frac` file
+always contains the cell lengths and angles (even if a molecule is
+written) and the atomic connectivity calculated by critic2. The force
+field atom types in the file correspond to the "tiny" force field
+parameters in the TINKER distribution (`tiny.prm`).
 
 ## Writing a .mols File for DMACRYS/NEIGHCRYS (MAKEMOLSNC) {#c2-makemolsnc}
 ~~~

@@ -37,6 +37,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
+CRYSTAL file.frac
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -255,6 +256,15 @@ The crystal or molecular structure can also be loaded from an FHIaims
 output file, which is assumed to have a .out or .own extension. In the
 case of a geometry optimization, the last available geometry in the
 output file is read.
+
+### TINKER frac format (frac) {#c2-tinkerfrac}
+
+Crystal structures can be given in TINKER frac format. The `.frac`
+file must contain the cell parameters in the second line. This
+"complete" `.frac` file can be generated from an incomplete `.frac`
+file (i.e. where the cell lengths and angles are in a separate `.key`
+file) using TINKER's utility programs. The connectivity information is
+discarded by critic2 and recalculated from scratch.
 
 ### Manual Specification of the Crystal Structure (CRYSTAL Environment)
 

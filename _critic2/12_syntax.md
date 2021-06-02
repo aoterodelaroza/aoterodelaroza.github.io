@@ -235,6 +235,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
+CRYSTAL file.frac
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -917,6 +918,7 @@ WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
 WRITE file.fhi
+WRITE file.frac
 ~~~
 
 <a id="key-xdm"></a>
