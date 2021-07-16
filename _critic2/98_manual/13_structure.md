@@ -525,3 +525,11 @@ zero up to a value equal to `rkmax.r`, which can be modified with the
 optional RKMAX keyword (default: 100 bohr). If a number `rk.r` follows
 KPOINTS, the k-point grid dimensions are calculated only for that value.
 
+## Print the Brillouin Zone Geometry (BZ) {#c2-bz}
+
+The BZ keyword:
+~~~
+BZ
+~~~
+calculates and prints the geometry of the Brillouin cell for the
+currently loaded crystal.
