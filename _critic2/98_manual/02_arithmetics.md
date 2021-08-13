@@ -36,7 +36,7 @@ a/7 + 1
 %% a/7 + 1
    5.2857142857143
 ~~~
-In fact, by using the `-q` 
+In fact, by using the `-q`
 [command-line option](/critic2/manual/#c2-commandline), critic2 can be
 used as a simple calculator:
 ~~~
@@ -86,7 +86,7 @@ the spin density can be calculated with `$1-$2`. Field number zero
 available once the crystal or molecule structure is known. In our
 example, `$1+$2-$rho0` would represent the density difference between
 the actual density and the sum of atomic densities. Fields can also be
-referred by a name, if the 
+referred by a name, if the
 [ID keyword](/critic2/manual/fields/#c2-addload) is used. Named
 fields simplify work when you have multiple fields.
 
@@ -152,7 +152,7 @@ CUBE CELL FIELD "a*1"
 uses field number two (`a*1 = 2`) to calculate the same grid because
 this expression does not reference any field. Expressions involving
 fields can also be used in [LOAD](/critic2/manual/fields/#c2-load)
-as well as in many other keywords 
+as well as in many other keywords
 ([POINT](/critic2/manual/graphics/#c2-point), [LINE](/critic2/manual/graphics/#c2-line),
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable), etc.).
 When using arithmetic expressions to create new fields, it is also possible
@@ -167,7 +167,7 @@ CLEAR var1.s var2.s ...
 CLEAR ALL
 ~~~
 This keyword deletes the variables var1.s, var2.s, etc. or all the
-variables (ALL). 
+variables (ALL).
 
 ## List Variables (LIST) {#c2-list}
 
@@ -189,7 +189,7 @@ charges. Atomic charges can be set with the
 ~~~
 cube cell field "2 * $ewald"
 ~~~
-calculates a grid using 2 times the value of the Ewald potential. 
+calculates a grid using 2 times the value of the Ewald potential.
 
 ## List of Available Functions {#availchemfun}
 
@@ -254,26 +254,32 @@ case).
   [^kirzhnits1][^kirzhnits2][^abramov][^zhurova][^espinosa]
 
 * `htf_kir(id)` [`HTF_KIR`]: the total energy density calculated using
-  `gtf_kir(id)` and the local virial theorem 
+  `gtf_kir(id)` and the local virial theorem
   ($$h^{\text{kir}}({\bf r}) = g^{\text{kir}}({\bf r}) +
   v^{\text{kir}}({\bf r})$$).
   [^kirzhnits1][^kirzhnits2][^abramov][^zhurova][^espinosa]
 
 * `lag(id)` [`LAG`]: the Lagrangian density ($$-\frac{1}{4}\nabla^2\rho$$).
 
-* `lol_ki(id)` [`LOL_KIR`]: the localized-orbital locator (LOL) with
+* `lol_kir(id)` [`LOL_KIR`]: the localized-orbital locator (LOL) with
   the kinetic energy density calculated using the Thomas-Fermi
   approximation with Kirzhnits gradient correction.[^tsirelson]
+
+* `rdg(id)` [`RDG`]: the reduced density gradient,
+
+\begin{equation}
+s({\bf r}) = \frac{\lvert{\bf \nabla}\rho({\bf r})\rvert}{2(3\pi^2)^{1/3}\rho({\bf r})^{4/3}}
+\end{equation}
 
 The following functions require the kinetic energy density, and
 therefore can only be used with fields that provide the one-electron
 wavefunctions. At present, this is only available for molecular
 wavefunction fields.
 
-* `gkin(id)` [`GKIN`]: the kinetic energy density, G-version 
+* `gkin(id)` [`GKIN`]: the kinetic energy density, G-version
   ($$\sum_i{\bf \nabla}\psi_i\cdot{\bf \nabla}\psi_i /2$$).[^bader1][^bader2]
 
-* `kkin(id)` [`KKIN`]: the kinetic energy density, K-version 
+* `kkin(id)` [`KKIN`]: the kinetic energy density, K-version
   ($$\sum_i\psi_i\nabla^2\psi_i /2$$).[^bader1][^bader2]
 
 * `vir(id)` [`VIR`]: the electronic potential energy density, also
@@ -312,9 +318,9 @@ Gaussian fchk file). In addition, it is necessary to have critic2
 compiled with the [libcint library](/critic2/installation/#c2-libcint) to
 calculate the molecular integrals involved.
 
-* `mep(id)`: molecular electrostatic potential. 
+* `mep(id)`: molecular electrostatic potential.
 
-* `uslater(id)`: Slater potential $$U_x$$. The HF exchange energy is 
+* `uslater(id)`: Slater potential $$U_x$$. The HF exchange energy is
   $$\int\rho({\bf r})U_x({\bf r})d{\bf r}$$.[^becke3]
 
 * `nheff(id)`: reverse BR efefctive hole normalization.[^becke3]
@@ -361,7 +367,7 @@ of:
 * meta-GGA functional: `xc(rho,grad,lapl,tau,idx)`
 
 where `rho` is the electron density ($$\rho({\bf r})$$), `grad` is its
-gradient ($$\lvert\nabla\rho({\bf r})\rvert$$), `lapl` is its Laplacian 
+gradient ($$\lvert\nabla\rho({\bf r})\rvert$$), `lapl` is its Laplacian
 ($$\nabla^2\rho({\bf r})$$) and `tau` is the kinetic energy density
 ($$1/2\sum_i\lvert\nabla\psi_i\rvert^2$$). Note that
 `rho`, `grad`, `lapl`, and `tau` are **expressions**, not field
@@ -379,7 +385,7 @@ xc($1,$2,101)+xc($1,$2,130)
 Here `idx=101` is PBE exchange and `idx=130` is PBE correlation. Field
 `$1` contains the electron density and `$2` is its gradient. In fields
 given on a grid spanning the crysatl unit cell, the gradient field can
-be calculated using: 
+be calculated using:
 ~~~
 LOAD AS GRAD 1
 ~~~
