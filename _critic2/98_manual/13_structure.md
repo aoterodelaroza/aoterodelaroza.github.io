@@ -476,7 +476,7 @@ The MOLREORDER keyword reorders the atoms in a molecule or molecular
 crystal to have the same atomic order as a template molecule. The
 syntax is:
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS]
+MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [NOINV]
 ~~~
 The template molecule is in file `template.s`. The target file
 `target.s` must contain either a molecule or a molecular crystal. If
@@ -501,7 +501,8 @@ If WRITE is given, followed by a file name `file.s`, the target
 structure with its atoms in the same order as the template is written
 to that file. In addition, if MOVEATOMS is used, the atoms in the
 structure written to `file.s` are moved to match the structure of the
-template molecule.
+template molecule. If NOINV is used, inversion operations are not
+allowed.
 
 ## Calculate Dimensions of Uniform k-Point Grids (KPOINTS) {#c2-kpoints}
 
