@@ -20,7 +20,7 @@ Calculates the value of the reference field or an arithmetic
 expression at point (`x.r`, `y.r`, `z.r`) in crystallographic
 coordinates (if the structure is a CRYSTAL) or molecular Cartesian
 coordinates (if a MOLECULE). For the latter, the default units
-are angstrom unless changed by the 
+are angstrom unless changed by the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword. If a file name
 is passed instead (`file.s`), calculate the same quantities at all the
 points specified by the file. All non-blank lines in the file that do
@@ -63,12 +63,12 @@ of the Hessian (HXX,...) and the Laplacian of the reference (or the
 ## Planes and Contour Plots (PLANE) {#c2-plane}
 
 ~~~
-PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i 
+PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
       [SCALE sx.r sy.r] [EXTENDX zx0.r zx1.r] [EXTENDY zy0.r zy1.r]
       [FILE file.s] [FIELD id.s/"expr"]
-      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] 
+      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP]
       [CONTOUR {LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
-      BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]] 
+      BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]]
       [RELIEF zmin.r zmax.r] [LABELZ labelz.r]
 ~~~
 Calculate the value (or derivatives) of the reference field on a
@@ -79,9 +79,9 @@ points: the origin (`x0.r`, `y0.r`, `z0.r`), the end of the x-axis
 `z2.r`). The number of points calculated on each axis are given by
 `nx.i` (x-axis) and `ny.i` (y-axis). The units are
 crystallographic coordinates in a crystal, and molecular Cartesian
-coordinates in a molecule (default: angstrom unless the 
+coordinates in a molecule (default: angstrom unless the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword
-is used). The two axes of 
+is used). The two axes of
 the plane can be scaled using the SCALE keyword. If `sx.r` (`sy.r`) is
 given, the total length of the x-axis (y-axis) is scaled by `sx.r`
 (`sy.r`). If EXTENDX is used, extend the x-axis by `zx0.r` (initial point
@@ -107,7 +107,7 @@ LIN, the default contour values range from the minimum to the maximum
 value of the field in the plot. These quantities can be changed by
 passing the optional zmin.r and zmax.r parameters to LOG/ATAN. The
 field or any of its derivatives, selected with the [F|GX|...] keyword,
-is used for the contour plot.  The 
+is used for the contour plot.  The
 [GRDVEC](/critic2/manual/gradientpath/#c2-grdvec) keyword performs the
 same task as PLANE with the CONTOUR option, and more (e.g. tracing
 gradient paths), but is more complex to use.
@@ -132,8 +132,8 @@ shown as a label in the plot.
 ~~~
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"expr"]
      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER]
-CUBE x0.r y0.r z0.r x1.r y1.r z1.r bpp.r ...
-CUBE CELL {bpp.r|nx.i ny.i nz.i} ...
+CUBE x0.r y0.r z0.r x1.r y1.r z1.r lpp.r ...
+CUBE CELL {lpp.r|nx.i ny.i nz.i} ...
 CUBE GRID [SHIFT ix.i iy.i iz.i] ...
 CUBE MLWF ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
 CUBE WANNIER ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
@@ -166,8 +166,11 @@ ways. If the grid limits are given explicitly or using CELL, then the
 number of points on each axis can be indicated by giving three
 integers (`nx.i`, `ny.i`, and `nz.i`) corresponding to the number of
 points in the x-, y-, and z-axis respectively. If a single number
-(`bpp.r`) is found, then the number of points is the length of the
-axis divided by `bpp.r` (bpp means "bohr per point").
+(`lpp.r`) is found, then the number of points is the length of the
+axis divided by `lpp.r` (lpp means "length per point"). The 
+units for `lpp.r` are angstrom for molecules and bohr for crystals
+unless the [UNITS](/critic2/manual/inputoutput/#c2-units) keyword is
+used.
 
 The GRID keyword can be used to write a given grid to a grid file
 directly. If FIELD is used in combination with GRID, then the
@@ -181,10 +184,10 @@ point. The origin of the shifted grid is the position of point `ix.i`,
 `iy.i`, `iz.i` in the old grid.
 
 The MLWF, WANNIER, UNK, and PSINK keywords are similar to GRID in that
-they dump a scalar field on a grid to a file directly. These keywords 
+they dump a scalar field on a grid to a file directly. These keywords
 only work with [Quantum ESPRESSO pwc files](/critic2/manual/fields/c2-qepwc),
 which contain the information about the Bloch states in a periodic
-solid. The meaning of these keywords is: 
+solid. The meaning of these keywords is:
 
 - MLWF writes the maximally-localized Wannier function for band
   `ibnd.i` and lattice vector given by the integers `nRx.i`, `nRy.i`,
