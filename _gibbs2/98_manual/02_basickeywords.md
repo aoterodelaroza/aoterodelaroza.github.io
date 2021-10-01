@@ -345,6 +345,8 @@ tells gibbs2 to use only zero temperature. A single `-1` in the
 TEMPERATURE keyword tells gibbs2 to use only room temperature (298.15
 K).
 
-By default, 100 temperature points are calculate from zero up to 1.5
-times the minimum Debye temperature calculated from the static
-energy-volume data (Slater's formula).
+By default, if no TEMPERATURE keyword is given, 100 temperature points
+are calculated from zero up to a maximum temperature. The maximum
+temperature is 1.5 times the minimum Debye temperature, if the thermal
+model is based on the Debye model. Otherwise, tha maximum temperature
+is room temperature (298.15 K).
