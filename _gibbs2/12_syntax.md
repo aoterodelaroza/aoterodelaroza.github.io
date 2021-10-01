@@ -15,9 +15,9 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ACTIVATE](#key-activate) | [DRHOUSE](#key-drhouse)         | [END](#key-end)     | [EOUTPUT](#key-eoutput)   | [INTERPOLATE](#key-interpolate) | [MM](#key-mm)   |
-| [NAT](#key-nat)           | [NELECTRONS](#key-nelectrons)   | [PHASE](#key-phase) | [PRESSURE](#key-pressure) | [PRINTFREQ](#key-printfreq)     | [SET](#key-set) |
-| [TITLE](#key-title)       | [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree) | [VOLUME](#key-volume)     |                                 |                 |
+| [ACTIVATE](#key-activate)       | [END](#key-end)     | [EOUTPUT](#key-eoutput)   | [INTERPOLATE](#key-interpolate) | [MM](#key-mm)   | [NAT](#key-nat)     |
+| [NELECTRONS](#key-nelectrons)   | [PHASE](#key-phase) | [PRESSURE](#key-pressure) | [PRINTFREQ](#key-printfreq)     | [SET](#key-set) | [TITLE](#key-title) |
+| [TEMPERATURE](#key-temperature) | [VFREE](#key-vfree) | [VOLUME](#key-volume)     |                                 |                 |                     |
 
 ## List of Keywords
 
@@ -26,13 +26,6 @@ toc_label: "List of keywords"
 : Activate points with negative frequencies in QHA
 ~~~
 ACTIVATE {ALL|v1.i v2.i v3.i...}
-~~~
-
-<a id="key-drhouse"></a>
-[DRHOUSE](/gibbs2/manual/basickeywords/#g2-optional)
-: Run checks on the input data
-~~~
-DRHOUSE
 ~~~
 
 <a id="key-end"></a>

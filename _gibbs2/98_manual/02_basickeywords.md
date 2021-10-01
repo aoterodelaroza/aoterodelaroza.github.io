@@ -262,14 +262,6 @@ important to use an EOS with few parameters to extrapolate
 (e.g. BM3). The default averages of strain polynomials behave badly on
 extrapolation.
 ~~~
-DRHOUSE
-~~~
-A command to detects problems (noise, outliers,...) in the input data
-using a bootstrap technique. Random subsets of data are fitted to
-polynomials of varying degree. The statistics of this process allows
-gibbs2 to asses the quality of the data. Only for debugging and
-testing.
-~~~
 END
 ~~~
 Ends the run. This keyword is not necessary for a correct
