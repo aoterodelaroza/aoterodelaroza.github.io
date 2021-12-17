@@ -48,7 +48,7 @@ angstrom, corresponding to Cu-K&alpha;). The polarization of the X-ray
 radiation affects the treatment of the resulting intensities. The
 default is `fpol.r = 0`, unpolarized light. For synchrotron radiation,
 use `fpol.r = 0.95`. `npts.i` is the number of points in the generated
-spectrum (deafult: 10001). Gaussian broadening is used on the observed
+spectrum (default: 10001). Gaussian broadening is used on the observed
 peaks, with width parameter `sigma.r` (default: 0.05 degrees).
 
 By default, two files are generated: `<root>_xrd.dat`, containing the
@@ -507,6 +507,30 @@ structure with its atoms in the same order as the template is written
 to that file. In addition, if MOVEATOMS is used, the atoms in the
 structure written to `file.s` are moved to match the structure of the
 template molecule. If INV is used, inversion operations are allowed.
+
+## Move Atoms in a Molecular Crystal to Match Molecules (MOLMOVE) {#c2-molmove}
+
+The `MOLMOVE` keyword is used to modify the atomic positions in a
+molecular crystal in such a way that the structures of its fragments
+are identical to a set of molecules provided by the user. This is
+useful when the molecules in a molecular crystal are extracted (with
+the `NMER 1 ONEMOTIF` options of the [WRITE](/critic2/manual/write/)
+command), then their structure is modified, most commonly by running a
+geometry relaxation in the gas-phase, and then the new molecular
+structures want to be re-packed back into the molecular crystal. The
+syntax for the `MOLMOVE` keyword is:
+~~~
+MOLMOVE mol1.s mol2.s ... moln.s target.s new.s
+~~~
+The molecular crystal that needs to be modified (`target.s`) must be
+composed of a `n` fragments, and `n` molecular structures have to be
+given first (`mol1.s` to `moln.s`). The molecular structures can be
+given in any order, but their centers of mass and atomic ordering must
+be the same as the fragments in the target molecular crystal. Using
+the `NMER 1 ONEMOTIF` options to `WRITE` ensures that the order and
+centers of mass of the molecular fragments are correct. The file name
+where the repacked molecular structure will be written must be given
+at the end of the command (`new.s`).
 
 ## Calculate Dimensions of Uniform k-Point Grids (KPOINTS) {#c2-kpoints}
 
