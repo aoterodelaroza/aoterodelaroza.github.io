@@ -472,37 +472,41 @@ The atomic charges are defined using the Q keyword.
 
 ## Reorder Atoms in a Molecule or Molecular Crystal (MOLREORDER) {#c2-molreorder}
 
-The MOLREORDER keyword reorders the atoms in a molecule or molecular
-crystal to have the same atomic order as a template molecule. The
-syntax is:
+The MOLREORDER keyword reorders the atoms in a target molecule or
+molecular crystal to have the same atomic order as in a template
+molecule. The syntax is:
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [NOINV]
+MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [INV]
 ~~~
-The template molecule is in file `template.s`. The target file
-`target.s` must contain either a molecule or a molecular crystal. If
-`target.s` is a molecule, it must contain the same number and types of
-atoms as the template. If `target.s` is a molecular crystal, its
-asymmetric unit must have an integer number of molecules (Z', see the
-WHOLEMOLS option in [SYMM/SYM](/critic2/manual/crystal/#c2-symm)). In
-addition, all molecular fragments in the crystal must have the same
-number and atom types as the template.
+The template molecule is in file `template.s`. The target structure
+file `target.s` must contain either a molecule or a molecular
+crystal. If `target.s` is a molecule, it must contain the same number
+and types of atoms as the template. If `target.s` is a molecular
+crystal, its asymmetric unit must have an integer number of molecules
+(Z', see the WHOLEMOLS option in
+[SYMM/SYM](/critic2/manual/crystal/#c2-symm)). In addition, all
+molecular fragments in the crystal must have the same number and atom
+types as the template. On output, the atoms in structure `target.s`
+are reordered such that they are in the same order as `template.s`.
 
 MOLREORDER works by using the weighted graph matching algorithm
 proposed in [Umeyama, S., IEEE PAMI, 10 (1988) 695-703](http://dx.doi.org/10.1109/34.6778).
-If there are significant differences between the structures being
-compared, MOLREORDER may find the wrong atomic permutation, so it is a
-good idea to always check that the RMS in the output is small. The RMS
-is obtained by calculating the rotation matrix that yields the best
-match, in the least squares sense, between the template and the
-reordered structure. The MOLREORDER keyword can be used
-without having any molecular or crystal structure loaded.
+Umeyama's method is non-iterative, but approximate. If there are
+significant differences between the structures being compared, or if
+they are highly symmetric, MOLREORDER may find the wrong atomic
+permutation, so it is a good idea to always check that the RMS in the
+output is small.
 
-If WRITE is given, followed by a file name `file.s`, the target
+The RMS is obtained by calculating the rotation matrix that yields the
+best match, in the least squares sense, between the template and the
+reordered structure. The MOLREORDER keyword does not require having
+any molecular or crystal structure loaded.
+
+If WRITE is used followed by a file name `file.s`, the output
 structure with its atoms in the same order as the template is written
 to that file. In addition, if MOVEATOMS is used, the atoms in the
 structure written to `file.s` are moved to match the structure of the
-template molecule. If NOINV is used, inversion operations are not
-allowed.
+template molecule. If INV is used, inversion operations are allowed.
 
 ## Calculate Dimensions of Uniform k-Point Grids (KPOINTS) {#c2-kpoints}
 
