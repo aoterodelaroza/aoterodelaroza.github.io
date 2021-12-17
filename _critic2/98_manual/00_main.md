@@ -80,7 +80,7 @@ description of the examples.
 Critic2 accepts a single input file (usually but not necessarily with
 extension `.cri`). The command-line syntax is:
 ~~~
-$ critic2 [-q] [-h] [-r /path/to/critic2] [file.cri [file.cro]]
+$ critic2 [-q] [-h] [-t] [-r /path/to/critic2] [file.cri [file.cro]]
 ~~~
 If both input and output files are present, the output is redirected
 to `file.cro`. Otherwise, it is written to standard output. If no
@@ -104,16 +104,17 @@ generated, usually with the same root as `file.cri` ("file", in this
 case) or "stdin" if no input file is given.
 
 The `-h` option ("help") prints a short help message and exits. The
-`-q` option ("quiet") inhibits the initial and final messages. This is
-useful when using critic2 in a pipe command. In addition, If no `-q`
-is given, a copy of each input line read by critic2 is written to the
-output, preceded by a "%%" prefix. This helps identify the different
-parts of the output in long runs. The `-r` option tells critic2 where
-to find its data files. If /path/to/critic2 is given, the data files
-(wfc, dic, etc.) should be in /path/to/critic2/dat. Normally, the data
-directory is located automatically by critic2 either at the
-`--prefix` location indicated by the user during configuration or via
-the `CRITIC_HOME` variable (see [Installation](/critic2/installation/)).
+`-t` option is for running the tests only. The `-q` option ("quiet")
+inhibits the initial and final messages. This is useful when using
+critic2 in a pipe command. In addition, If no `-q` is given, a copy of
+each input line read by critic2 is written to the output, preceded by
+a "%%" prefix. This helps identify the different parts of the output
+in long runs. The `-r` option tells critic2 where to find its data
+files. If /path/to/critic2 is given, the data files (wfc, dic, etc.)
+should be in /path/to/critic2/dat. Normally, the data directory is
+located automatically by critic2 either at the `--prefix` location
+indicated by the user during configuration or via the `CRITIC_HOME`
+variable (see [Installation](/critic2/installation/)).
 
 The input file usually start with a specification of the crystal or
 molecular structure using the [CRYSTAL](/critic2/manual/crystal/)
