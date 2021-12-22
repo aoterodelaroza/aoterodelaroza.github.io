@@ -116,7 +116,7 @@ plot range. Default: `SOFT`.
 
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
-The COMPARE keywords compares two or more structures:
+The COMPARE keyword compares two or more structures:
 ~~~
 COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
         [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
@@ -125,7 +125,7 @@ COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
 If the structures are crystals, COMPARE finds
 the measure of similarity (DIFF) based on either their radial
 distribution functions (RDF keyword) or their powder diffraction
-patterns (POWDER). If they are molecules, all atoms in all structures
+patterns (POWDER, default). If they are molecules, all atoms in all structures
 under comparison may come in the
 same order (SORTED) or not (UNSORTED, default). If the atoms are
 sorted, COMPARE finds the translation and rotation that brings the two
@@ -134,7 +134,9 @@ agreement and report the root-mean-square (RMS) of the atomic
 positions. If the atoms are unsorted, compare the molecules using the
 radial distribution functions. If you want to compare somewhat similar
 molecules with the atoms in different orders, it is a good idea to
-sort one of them using the [MOLREORDER](/critic2/manual/structure/#c2-molreorder) keyword.
+sort one of them first using the
+[MOLREORDER](/critic2/manual/structure/#c2-molreorder) keyword, then
+running the SORTED comparison.
 
 In crystals, the default is to use the powder diffraction
 patterns. Two crystal structures are exactly equal if
@@ -472,11 +474,11 @@ The atomic charges are defined using the Q keyword.
 
 ## Reorder Atoms in a Molecule or Molecular Crystal (MOLREORDER) {#c2-molreorder}
 
-The MOLREORDER keyword reorders the atoms in a target molecule or
-molecular crystal to have the same atomic order as in a template
-molecule. The syntax is:
+The MOLREORDER keyword reorders the atoms in a target molecule or all
+the molecules in a target molecular crystal to have the same atomic
+sequence as in a template molecule. The syntax is:
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [INV]
+MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [INV] [UMEYAMA|ULLMANN]
 ~~~
 The template molecule is in file `template.s`. The target structure
 file `target.s` must contain either a molecule or a molecular
@@ -485,22 +487,37 @@ and types of atoms as the template. If `target.s` is a molecular
 crystal, its asymmetric unit must have an integer number of molecules
 (Z', see the WHOLEMOLS option in
 [SYMM/SYM](/critic2/manual/crystal/#c2-symm)). In addition, all
-molecular fragments in the crystal must have the same number and atom
-types as the template. On output, the atoms in structure `target.s`
-are reordered such that they are in the same order as `template.s`.
+molecular fragments in the target crystal must have the same number
+and atom types as the template. On output, the atoms in structure
+`target.s` are reordered such that they are in the same sequence as
+`template.s`. A dot (".") given as either the template (`template.s`)
+or target (`target.s`) files instructs critic2 to use the currently
+loaded structure (with a previous CRYSTAL/MOLECULE command).
 
-MOLREORDER works by using the weighted graph matching algorithm
-proposed in [Umeyama, S., IEEE PAMI, 10 (1988) 695-703](http://dx.doi.org/10.1109/34.6778).
-Umeyama's method is non-iterative, but approximate. If there are
-significant differences between the structures being compared, or if
-they are highly symmetric, MOLREORDER may find the wrong atomic
-permutation, so it is a good idea to always check that the RMS in the
-output is small.
+MOLREORDER can use two different algorithms to solve the atomic
+sequence reordering problem:
 
-The RMS is obtained by calculating the rotation matrix that yields the
-best match, in the least squares sense, between the template and the
-reordered structure. The MOLREORDER keyword does not require having
-any molecular or crystal structure loaded.
+* The Umeyama approach (keyword: UMEYAMA) uses a weighted graph
+  matching method based on the algorithm proposed in
+  [Umeyama, S., IEEE PAMI, 10 (1988) 695-703](http://dx.doi.org/10.1109/34.6778).
+  Umeyama's method is non-iterative, but approximate. If there are
+  significant differences between the structures being compared, or if
+  they are highly symmetric, UMEYAMA may find the wrong atomic
+  permutation, so it is a good idea to always check that the RMS in the
+  output is small.
+
+* The Ullmann approach (keyword: ULLMANN) uses a modified version of
+  Ullmann's subgraph matching algorithm ([Ullmann, J. R., J. ACM 23 (1976) 31-42](https://doi.org/10.1145/321921.321925)).
+  This method finds all possible matching sequences based on graph
+  connectivity alone, then selects the sequence with lowest RMS upon
+  molecular rotation. It is more reliable than UMEYAMA but may become
+  expensive for larger molecules. This is the default.
+
+Once the atoms are in the correct sequence, the RMS is obtained by
+calculating the rotation matrix that yields the best match, in the
+least squares sense, between the template and the reordered
+structure(s). The MOLREORDER keyword does not require having any
+molecular or crystal structure loaded.
 
 If WRITE is used followed by a file name `file.s`, the output
 structure with its atoms in the same order as the template is written
@@ -517,20 +534,21 @@ useful when the molecules in a molecular crystal are extracted (with
 the `NMER 1 ONEMOTIF` options of the [WRITE](/critic2/manual/write/)
 command), then their structure is modified, most commonly by running a
 geometry relaxation in the gas-phase, and then the new molecular
-structures want to be re-packed back into the molecular crystal. The
+structures need to be re-packed back into the crystal structure. The
 syntax for the `MOLMOVE` keyword is:
 ~~~
 MOLMOVE mol1.s mol2.s ... moln.s target.s new.s
 ~~~
 The molecular crystal that needs to be modified (`target.s`) must be
-composed of a `n` fragments, and `n` molecular structures have to be
+composed of `n` fragments, and `n` molecular structures have to be
 given first (`mol1.s` to `moln.s`). The molecular structures can be
-given in any order, but their centers of mass and atomic ordering must
+given in any order, but their centers of mass and atomic sequence must
 be the same as the fragments in the target molecular crystal. Using
-the `NMER 1 ONEMOTIF` options to `WRITE` ensures that the order and
-centers of mass of the molecular fragments are correct. The file name
-where the repacked molecular structure will be written must be given
-at the end of the command (`new.s`).
+the `NMER 1 ONEMOTIF` options to `WRITE` the molecules in a molecular
+crystal ensures that the order and centers of mass of the molecular
+fragments are correct. The file name where the repacked molecular
+structure will be written must be given at the end of the command
+(`new.s`).
 
 ## Calculate Dimensions of Uniform k-Point Grids (KPOINTS) {#c2-kpoints}
 

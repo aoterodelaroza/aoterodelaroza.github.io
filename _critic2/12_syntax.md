@@ -602,7 +602,7 @@ MOLMOVE mol1.s mol2.s ... target.s new.s
 [MOLREORDER](/critic2/manual/structure/#c2-molreorder)
 : Reorder the atoms in a molecule or molecular crystal to match a template.
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [EPS eps.r]
+MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [INV] [UMEYAMA|ULLMANN]
 ~~~
 
 <a id="key-nciplot"></a>
