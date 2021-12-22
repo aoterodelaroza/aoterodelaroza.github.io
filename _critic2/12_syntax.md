@@ -158,12 +158,12 @@ CLEAR {var1.s var2.s ...|ALL}
 
 <a id="key-compare"></a>
 [COMPARE](/critic2/manual/structure/#c2-compare)
-: Compare two or more crystal or molecular structures using powder
-  diffraction patterns or radial distribution functions.
+: Compare two or more crystal or molecular structures.
 ~~~
-COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
-        [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
-        {.|file1.s} {.|file2.s} [{.|file3.s} ...]
+COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
+COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
+COMPARE ... [POWDER|RDF] [XEND xend.r] [SIGMA sigma.r]  ## crystals
+COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 
 <a id="key-coord"></a>

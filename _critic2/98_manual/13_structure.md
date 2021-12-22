@@ -118,66 +118,85 @@ plot range. Default: `SOFT`.
 
 The COMPARE keyword compares two or more structures:
 ~~~
-COMPARE [MOLECULE|CRYSTAL] [SORTED|UNSORTED] [XEND xend.r]
-        [SIGMA sigma.r] [POWDER|RDF] [REDUCE eps.r]
-        {.|file1.s} {.|file2.s} [{.|file3.s} ...]
+COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
+COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
+COMPARE ... [POWDER|RDF] [XEND xend.r] [SIGMA sigma.r]  ## crystals
+COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
-If the structures are crystals, COMPARE finds
-the measure of similarity (DIFF) based on either their radial
-distribution functions (RDF keyword) or their powder diffraction
-patterns (POWDER, default). If they are molecules, all atoms in all structures
-under comparison may come in the
-same order (SORTED) or not (UNSORTED, default). If the atoms are
-sorted, COMPARE finds the translation and rotation that brings the two
-molecules into closest
-agreement and report the root-mean-square (RMS) of the atomic
-positions. If the atoms are unsorted, compare the molecules using the
-radial distribution functions. If you want to compare somewhat similar
-molecules with the atoms in different orders, it is a good idea to
-sort one of them first using the
-[MOLREORDER](/critic2/manual/structure/#c2-molreorder) keyword, then
-running the SORTED comparison.
+At least two structures are required for the comparison.
+The structures can be given as external files (`file1.s`,
+`file2.s`,...). The behavior is the same as in CRYSTAL and MOLECULE:
+the file format is identified using the file extension or its contents
+if the extension is not enough. If a dot (".") is used instead of a
+file name, the current structure (previously loaded with
+CRYSTAL/MOLECULE) is used.
 
-In crystals, the default is to use the powder diffraction
-patterns. Two crystal structures are exactly equal if
-`DIFF = 0`. Maximum dissimilarity occurs when `DIFF = 1`.  The crystal
-similarity
+There are two distinct modes of operation in COMPARE, depending on
+whether a molecular or crystal comparison is carried out. If the
+structures are all molecules or if the MOLECULE keyword is used, then
+the structures are compared as molecules. If any one of the structures
+is a crystal or if the CRYSTAL keyword is used, a crystal comparison
+is carried out.
+
+There are two ways of calculating a comparison between crystals, based
+on the radial distribution functions (RDF keyword) or the powder
+diffraction patterns (POWDER keyword). The default is POWDER.
+In both cases, COMPARE finds the measure of similarity (DIFF) based on
+the corresponding functions (RDF or diffractogram).
+Two crystal structures are exactly equal if `DIFF = 0`. Maximum
+dissimilarity occurs when `DIFF = 1`.  The crystal similarity
 measure is calculated using the cross-correlation functions defined in
 [de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0),
-using the triangle weight. Powder diffraction patterns are calculated
-from $$2\theta = 5$$ up to `xend.r` (default: 50). Radial distribution
-functions are calculated from zero up to `xend.r` bohr (default: 25
-bohr). SIGMA is the Gaussian broadening parameter for the powder
-diffraction or RDF peaks. The RDF defaults also apply to comparison
-of unsorted molecules.
+with the triangle weight. Powder diffraction patterns are calculated
+from $$2\theta = 5$$ up to `xend.r` (XEND keyword, default:
+50). Radial distribution functions are calculated from zero up to
+`xend.r` bohr (XEND keyword, default: 25 bohr). SIGMA is the Gaussian
+broadening parameter for the powder diffraction or RDF peaks.
 
-In sorted molecules, the root mean square (RMS) of the atomic
-positions is reported (the units are angstrom, unless changed with the
-[UNITS](/critic2/manual/inputoutput/#c2-units) keyword). The molecular
-rotation is calculated using Walker et al.'s quaternion algorithm
+For the molecular comparison, there are several options. If the SORTED
+keyword is used, the atomic sequence in each molecule is assumed to be
+the same. In this case, COMPARE finds the translation and rotation
+that brings the molecules into closest agreement with each other and
+reports the resulting root-mean-square (RMS) of the atomic positions.
+The molecular rotation is calculated using Walker et al.'s quaternion
+algorithm
 ([Walker et al., CVGIP-Imag. Understan. 54 (1991) 358](https://doi.org/10.1016/1049-9660(91)90036-O)).
 For the comparison to work correctly, it is necessary that the two
 molecules have the same number of atoms and that the atoms are in the
 same sequence.
 
-Whether the molecular or the crystal comparison is used depends on the
-file formats passed to COMPARE. If the MOLECULE/CRYSTAL keyword is
-used then the molecule/crystal comparison code is used.
+If the molecules have the same atomic connectivity (the same molecular
+diagram) but the atomic sequences are not equivalent, i.e. the atoms
+are disordered, then the ULLMANN or UMEYAMA methods can be used.  The
+Umeyama approach (keyword: UMEYAMA) uses a weighted graph
+matching method based on the algorithm proposed in
+[Umeyama, S., IEEE PAMI, 10 (1988) 695-703](http://dx.doi.org/10.1109/34.6778).
+Umeyama's method is non-iterative, but approximate. If there are
+significant differences between the structures being compared, or if
+they are highly symmetric, UMEYAMA may find the wrong atomic
+permutation, so it is a good idea to always check that the RMS in the
+output is reasonable.  The Ullmann approach (keyword: ULLMANN) uses a
+modified version of Ullmann's subgraph matching algorithm
+([Ullmann, J. R., J. ACM 23 (1976) 31-42](https://doi.org/10.1145/321921.321925)).
+This method finds all possible matching sequences based on graph
+connectivity alone, then selects the sequence with lowest RMS upon
+molecular rotation. It is more reliable than UMEYAMA but may become
+expensive for larger molecules.
 
-If more than two structures are used in COMPARE, critic2 will
-calculate the similarity measure between each pair of structures and
-present the resulting similarity matrix. If the REDUCE keyword is used
-a threshold (`eps.r`) is used to determine whether two structures are
-equal or not. Critic2 then prints a list of unique structures and
-repeated structures in the output.
+The ULLMANN method is the default if the number and types of atoms in
+the molecules being compared are the same. If this is not the case, or
+if the RDF keyword is used, then radial distribution functions are
+employed and the comparison is similar to how RDF works in crystals.
 
-The structures can be given by passing an external file to
-COMPARE. The syntax is the same as in CRYSTAL and MOLECULE: the file
-format is identified using the file extension. If a dot (".") is used
-instead of a file name, use the current structure (previously loaded
-with CRYSTAL/MOLECULE). The COMPARE keyword does not require a
-previous CRYSTAL or MOLECULE keyword. Hence, valid critic2 inputs
-would be:
+Lastly, if more than two structures are used in COMPARE, critic2 will
+compare each pair of structures and present the resulting similarity
+matrix. Alternatively, if the REDUCE keyword is used, then a threshold
+(`eps.r`) is applied to determine whether two structures are equal or
+not. Critic2 then prints a list of unique structures and repeated
+structures in the output.
+
+The COMPARE keyword does not require a previous CRYSTAL or MOLECULE
+keyword. Hence, valid critic2 inputs would be:
 ~~~
 COMPARE bleh1.scf.in bleh2.cif
 COMPARE bleh1.xyz bleh2.wfx
@@ -478,7 +497,7 @@ The MOLREORDER keyword reorders the atoms in a target molecule or all
 the molecules in a target molecular crystal to have the same atomic
 sequence as in a template molecule. The syntax is:
 ~~~
-MOLREORDER template.s target.s [WRITE file.s] [MOVEATOMS] [INV] [UMEYAMA|ULLMANN]
+MOLREORDER {.|template.s} {.|target.s} [WRITE file.s] [MOVEATOMS] [INV] [UMEYAMA|ULLMANN]
 ~~~
 The template molecule is in file `template.s`. The target structure
 file `target.s` must contain either a molecule or a molecular
