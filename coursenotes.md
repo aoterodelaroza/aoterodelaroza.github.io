@@ -16,6 +16,7 @@ the University of Oviedo.
 | Subject              | Degree    |     Years | Material                                                                |
 |----------------------+-----------+-----------+-------------------------------------------------------------------------|
 | Physical Chemistry 3 | Chemistry | 2018-2021 | [Course notes (pdf)](assets/coursenotes/courses/physchem3-2020-web.pdf) |
+| Physical Chemistry 1 | Chemistry | 2021-2022 | [Course notes (pdf)](assets/coursenotes/courses/physchem1-2021-web.pdf) |
 
 ## Online Tutorials
 
