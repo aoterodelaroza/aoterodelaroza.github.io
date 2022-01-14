@@ -931,7 +931,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
-WRITE file.fhi
+WRITE file.in ## FHIaims geometry.in
 WRITE file.frac
 ~~~
 
