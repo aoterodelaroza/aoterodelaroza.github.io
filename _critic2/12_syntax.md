@@ -15,20 +15,20 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)               | [BADER](#key-bader)                     | [BASINPLOT](#key-basinplot)       | [BENCHMARK](#key-benchmark) | [BONDFACTOR](#key-bondfactor) |
-| [BUNDLEPLOT](#key-bundleplot) | [BZ](#key-bz)                   | [CLEAR](#key-clear)                     | [COMPARE](#key-compare)           | [COORD](#key-coord)         | [COUNT](#key-count)           |
-| [CPREPORT](#key-cpreport)     | [CRYSTAL](#key-crystal)         | [CUBE](#key-cube)                       | [ECHO](#key-echo)                 | [ECON](#key-econ)           | [END](#key-end)               |
-| [ENVIRON](#key-environ)       | [EWALD](#key-ewald)             | [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)             | [HIRSHFELD](#key-hirshfeld) | [IDENTIFY](#key-identify)     |
-| [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals)     | [INT_RADIAL](#key-int-radial)           | [KPOINTS](#key-kpoints)           | [LIBRARY](#key-library)     | [LINE](#key-line)             |
-| [LIST](#key-list)             | [LIBXC](#key-libxc)             | [LOAD](#key-load)                       | [MAKEMOLSNC](#key-makemolsnc)     | [MAX](#key-max)             | [MEAN](#key-mean)             |
-| [MESHTYPE](#key-meshtype)     | [MIN](#key-min)                 | [MOLCALC](#key-molcalc)                 | [MOLCELL](#key-molcell)           | [MOLECULE](#key-molecule)   | [MOLMOVE](#key-molmove)       |
-| [MOLREORDER](#key-molreorder) | [NCIPLOT](#key-nciplot)         | [NEWCELL](#key-newcell)                 | [NOCORE](#key-nocore)             | [NOSYM](#key-nosym)         | [NOSYMM](#key-nosymm)         |
-| [ODE_MODE](#key-ode-mode)     | [PACKING](#key-packing)         | [PLANE](#key-plane)                     | [POINT](#key-point)               | [POINTPROP](#key-pointprop) | [POLYHEDRA](#key-polyhedra)   |
-| [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance)   | [Q/QAT](#key-q)                   | [QTREE](#key-qtree)         | [RADII](#key-radii)           |
-| [RDF](#key-rdf)               | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     | [ROOT](#key-root)                 | [RUN](#key-run)             | [SETFIELD](#key-setfield)     |
-| [SIGMAHOLE](#key-sigmahole)   | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)             | [SUM](#key-sum)               |
-| [SYM](#key-sym)               | [SYMM](#key-symm)               | [SYSTEM](#key-system)                   | [UNITS](#key-units)               | [UNLOAD](#key-unload)       | [VDW](#key-vdw)               |
-| [WRITE](#key-write)           | [XDM](#key-xdm)                 | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |                             |                               |
+| [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)             | [BADER](#key-bader)             | [BASINPLOT](#key-basinplot)             | [BENCHMARK](#key-benchmark)       | [BONDFACTOR](#key-bondfactor) |
+| [BUNDLEPLOT](#key-bundleplot) | [BZ](#key-bz)                 | [CLEAR](#key-clear)             | [COMPARE](#key-compare)                 | [COORD](#key-coord)               | [COUNT](#key-count)           |
+| [CPREPORT](#key-cpreport)     | [CRYSTAL](#key-crystal)       | [CUBE](#key-cube)               | [ECHO](#key-echo)                       | [ECON](#key-econ)                 | [END](#key-end)               |
+| [ENVIRON](#key-environ)       | [EWALD](#key-ewald)           | [EXIT](#key-exit)               | [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)             | [HIRSHFELD](#key-hirshfeld)   |
+| [IDENTIFY](#key-identify)     | [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals)     | [INT_RADIAL](#key-int-radial)           | [KPOINTS](#key-kpoints)           | [LIBRARY](#key-library)       |
+| [LINE](#key-line)             | [LIST](#key-list)             | [LIBXC](#key-libxc)             | [LOAD](#key-load)                       | [MAKEMOLSNC](#key-makemolsnc)     | [MAX](#key-max)               |
+| [MEAN](#key-mean)             | [MESHTYPE](#key-meshtype)     | [MIN](#key-min)                 | [MOLCALC](#key-molcalc)                 | [MOLCELL](#key-molcell)           | [MOLECULE](#key-molecule)     |
+| [MOLMOVE](#key-molmove)       | [MOLREORDER](#key-molreorder) | [NCIPLOT](#key-nciplot)         | [NEWCELL](#key-newcell)                 | [NOCORE](#key-nocore)             | [NOSYM](#key-nosym)           |
+| [NOSYMM](#key-nosymm)         | [ODE_MODE](#key-ode-mode)     | [PACKING](#key-packing)         | [PLANE](#key-plane)                     | [POINT](#key-point)               | [POINTPROP](#key-pointprop)   |
+| [POLYHEDRA](#key-polyhedra)   | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance)   | [Q/QAT](#key-q)                   | [QTREE](#key-qtree)           |
+| [RADII](#key-radii)           | [RDF](#key-rdf)               | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     | [ROOT](#key-root)                 | [RUN](#key-run)               |
+| [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole)   | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)               |
+| [SUM](#key-sum)               | [SYM](#key-sym)               | [SYMM](#key-symm)               | [SYSTEM](#key-system)                   | [UNITS](#key-units)               | [UNLOAD](#key-unload)         |
+| [VDW](#key-vdw)               | [WRITE](#key-write)           | [XDM](#key-xdm)                 | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |                               |
 
 ## Notation
 
@@ -298,7 +298,7 @@ ECON
 
 <a id="key-end"></a>
 [END](/critic2/manual/misc/#c2-end)
-: Terminates the critic2 run.
+: Terminates the critic2 run. Same as EXIT.
 ~~~
 END
 ~~~
@@ -318,6 +318,13 @@ ENVIRON [DIST dist.r] [POINT x0.r y0.r z0.r|ATOM at.s/iat.i|CELATOM iat.i]
   summation.
 ~~~
 EWALD
+~~~
+
+<a id="key-exit"></a>
+[END](/critic2/manual/misc/#c2-end)
+: Terminates the critic2 run. Same as END.
+~~~
+EXIT
 ~~~
 
 <a id="key-fluxprint"></a>

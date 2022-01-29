@@ -538,12 +538,13 @@ ECHO string.s
 Write the string `string.s` to the output. Useful for partitioning
 long outputs.
 
-### Terminate the Run (END) {#c2-end}
+### Terminate the Run (END,EXIT) {#c2-end}
 
 ~~~
 END
+EXIT
 ~~~
-Terminates the execution of critic2.
+The END or EXIT keywords terminate the execution of critic2.
 
 ### Expression Evaluation {#c2-expression}
 
