@@ -232,8 +232,8 @@ By default, checkpoint files are not used.
 In crystals, critic2 writes all the critical points found by AUTO to
 two internal lists: the "non-equivalent" list, containing only those
 CPs not equivalent by symmetry, and the "complete" list, which
-contains all the CPs in the unit cell. See the 
-[input and output notation](/critic2/manual/inputoutput/#c2-notation). 
+contains all the CPs in the unit cell. See the
+[input and output notation](/critic2/manual/inputoutput/#c2-notation).
 In molecules, symmetry is not used, so both lists are the same.
 
 The most important part of the AUTO output is the "final report",
@@ -259,14 +259,14 @@ Laplacian (lap) evaluated at the CPs. The 'topological class' gives
 the number of non-equivalent ncp, bcp, rcp, and ccp found. The values
 in parentheses correspond to the total number of CPs of each class in
 the cell. If the list is complete, then the Morse sum is zero (in a
-crystal) or one (in a molecule). 
+crystal) or one (in a molecule).
 
 Following the final report is the "analysis of system bonds" and
 "analysis of system rings":
 ~~~
 * Analysis of system bonds
 # ncp end1 end2 r1(bohr) r2(bohr) r1/r2  r1-B-r2(degree)
-  3    Mg    O   1.7789   2.1999 0.80864  179.9999  
+  3    Mg    O   1.7789   2.1999 0.80864  179.9999
 
 * Analysis of system rings
 # ncp end1 end2 r1(bohr) r2(bohr) r1/r2  r1-R-r2(degree)
@@ -282,8 +282,8 @@ angle formed by the bond path (ring path) at the bcp (rcp).
 
 The **complete CP list** is the list of all CPs in the unit cell, and
 comes next in the output. The identifiers from this list are used as
-input for other keywords (for instance, 
-[GRDVEC](/critic2/manual/gradientpath/#c2-grdvec) or 
+input for other keywords (for instance,
+[GRDVEC](/critic2/manual/gradientpath/#c2-grdvec) or
 [FLUXPRINT](/critic2/manual/gradientpath/#c2-fluxprint)) as they
 specify a particular position in the crystal. The entries are similar
 to the non-equivalent CP list (the table has been simplified):
@@ -318,7 +318,7 @@ path they represent (bcp) or with the cages linked by the ring path
 * Complete CP list, bcp and rcp connectivity table
 # (cp(end)+lvec connected to bcp/rcp)
 #cp ncp typ   position    end1 (l) end2 (l)
-1    1   n 0.00 0.00 0.00 
+1    1   n 0.00 0.00 0.00
 [...]
 9    3   b 0.50 0.50 0.77 4 (0 0 1) 5 (0 0 0)
 10   3   b 0.50 1.00 0.27 3 (0 1 0) 6 (0 1 0)
@@ -330,13 +330,13 @@ This list is similar to the complete CP list, but the two entries at
 the end (end1 and end2) give the two identifiers from the complete CP
 list that the bond or ring is connected to, as well as the lattice
 vector by which it should be translated to regenerate their actual
-position. 
+position.
 
 More information about the atomic connectivity through bcps can be
 found in the "attractor connectivity matrix":
 ~~~
 * Attractor connectivity matrix
-              n(1)  n(2) 
+              n(1)  n(2)
                Mg     O
  n(1)    Mg     0     6
  n(2)    O      6     0
@@ -351,7 +351,7 @@ O-O bond paths.
 The final part of the output from AUTO contains a detailed list of all
 the non-equivalent critical points found, together with an exahustive
 list of properties calculated at those points. More properties can be
-calculated by using the 
+calculated by using the
 [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword:
 ~~~
 * Additional properties at the critical points
@@ -393,7 +393,7 @@ together with the class, and the Poincare-Hopf sum (which is 1 for a
 complete list of CPs):
 ~~~
 * Critical point list, final report (non-equivalent cps)
-  Topological class (n|b|r|c): 12(12) 12(12) 1(1) 0(0) 
+  Topological class (n|b|r|c): 12(12) 12(12) 1(1) 0(0)
   Poincare-Hopf sum: 1
 # ncp type      position (ang_) name   f    |grad|   lap
   1  (3,-3) n  0.00  1.20  0.69  C  1.1e+2 0.0e+00 -4.3e+5
@@ -411,33 +411,33 @@ atoms via bonds and between cages via rings:
 ~~~
 * Analysis of system bonds
 # ncp end1 end2 r1(ang) r2(ang) r1/r2 r1-B-r2(degree)
- 13    C    C   0.6979  0.6979  1.000   179.8198  
+ 13    C    C   0.6979  0.6979  1.000   179.8198
  [...]
- 24    C    H   0.6959  0.3907  1.781   179.9998  
+ 24    C    H   0.6959  0.3907  1.781   179.9998
 
 * Analysis of system rings
 # ncp end1 end2 r1(ang) r2(ang) r1/r2 r1-R-r2(degree)
- 25    ??  ??   6.7788  6.7788  1.000   180.0000  
+ 25    ??  ??   6.7788  6.7788  1.000   180.0000
 ~~~
 followed by the attractor connectivity matrix:
 ~~~
 * Attractor connectivity matrix
-              n(1)  n(2)  n(3)  n(4)  n(5)  n(6) 
-               C     H     C     H     C     H   
- n(1)    C      0     1     1     0     0     0   
+              n(1)  n(2)  n(3)  n(4)  n(5)  n(6)
+               C     H     C     H     C     H
+ n(1)    C      0     1     1     0     0     0
  [...]
-n(12)    H      0     0     0     0     0     0   
-              n(7)  n(8)  n(9) n(10) n(11) n(12) 
-               C     H     C     H     C     H   
- n(1)    C      0     0     0     0     1     0   
+n(12)    H      0     0     0     0     0     0
+              n(7)  n(8)  n(9) n(10) n(11) n(12)
+               C     H     C     H     C     H
+ n(1)    C      0     0     0     0     1     0
  [...]
-n(12)    H      0     0     0     0     1     0   
+n(12)    H      0     0     0     0     1     0
 ~~~
-These lists have the same meaning as in the crsytal example. 
+These lists have the same meaning as in the crsytal example.
 
 Finally, the output gives an exhaustive list of properties at the
 critical points. As in the case of crystals, the list of properties
-calculated at the critical points can be varied using the 
+calculated at the critical points can be varied using the
 [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword:
 ~~~
 * Additional properties at the critical points
@@ -517,48 +517,41 @@ use `DISCARD "$rho < 1e-5"`.
 ### Visualization of Critical Points
 
 Critic2 does not come with a graphical interface to visualize the
-results of your calculations (yet). This can be a problem when your
+results of your calculations (yet). This can be a problem when the
 list of critical points is very large, if you want to identify one
 particular critical point among many, or if you need to calculate
 distances between atoms and/or critical points. However, there are
 some molecular visualization programs that can be used to read the
-output of critic2, and this section describes the currently most
-comfortable procedure to do so. 
+output of critic2, and this section describes the most comfortable
+procedures to do so at present.
 
 The key to critical point visualization is the CPREPORT keyword. When
 used with one of the available output file formats, critic2 will write
 the list of atoms plus the critical points in that format. The
 critical points are labeled as "Xn" (nuclear CP), "Xb" (bonds), "Xr"
-(rings), and "Xc" (cages). The color scheme for critical points is
-dark green (nCP), yellow (bCP), purple (rCP), and light red
-(cCP). Gradient paths can also be represented using the GRAPH
-keyword. Points along a gradient path use the symbol "Xz" in the
-output, and are colored in green.
-
-The list of critical points is written to the output in the same order
-as in critic2's complete critical point list, unless one of the
-special keywords to modify the plotting region is used
-(e.g. MOLMOTIF). This means that, if your graphical program gives you
-the atom labels, atom number n in the GUI will correspond exactly to
-critical point number n in critic2.
+(rings), and "Xc" (cages). The list of critical points is written to
+the output in the same order as in critic2's complete critical point
+list, unless one of the special keywords to modify the plotting region
+is used (e.g. MOLMOTIF). This means that, if your graphical program
+gives you the atom labels, atom number n in the GUI will correspond
+exactly to critical point number n in critic2.
 
 The challenege, therefore, is to make external programs understand
 that we have objects (critical points) that should be treated like
 atoms, but are not atoms. An easy (and sometimes very convenient) way
 of doing this is to replace the critical point labels ("Xb", "Xr",...)
-with atoms we know are not present in our system (e.g. H). 
+with atoms we know are not present in our system (e.g. H).
 
-However, a better method is to make the extend the list of atoms
-available to the GUI program. This can be done using 
-[avogadro](http://avogadro.cc), an
-open-source visualizer for crystals and molecules.  The following
-comments apply to version 1.2.0 of the program (August 2016).
+#### Deprecated visualization method using avogadro
 
-Avogadro uses [openbabel](http://openbabel.org) as the
-underlying format converter. To make avogadro understand the critical
-point types, all you need to do is modify the `element.txt` file that
-comes with openbabel, and add the critical point types at the end of
-the atomic species list:
+Previously, the way of visualizing the
+critical points this was using [avogadro](http://avogadro.cc), an
+open-source visualizer for crystals and molecules. Avogadro uses
+[openbabel](http://openbabel.org) as the underlying format
+converter. In order to make avogadro understand the critical point
+types, all you need to do is modify the `element.txt` file that comes
+with openbabel, and add the critical point types at the end of the
+atomic species list:
 ~~~
 [...]
 118     Uuh     0.00    1.60    0.00    0.00    6       294     0.00    0       0       0.99    0.00    0.06    Ununoctium
@@ -569,32 +562,89 @@ the atomic species list:
 123     Xz      0.00    0.20    0.00    0.20    0       0       0.00    0       0       0.1709  1.0000  0.0000  xCP
 ~~~
 With these changes, atoms and critical points will be represented, and
-the latter will use the color scheme mentioned above.
+the latter will use the color scheme above. The recommended file
+format both for molecules and crystals is cml, which has several
+advantages over xyz and cif: i) it prevents avogadro from calculating
+the molecular connectivity, which can be expensive in a very large
+system, and ii) it allows showing a fragment of the crystal along with
+the unit cell. To access the critical point labels (which correspond
+to the critic2 labels), go to Display types, mark "Label", click on
+the Label options, and select "Text: atom number".
 
-The simplest file formats generated by critic2 and understood by
-avogadro are cif files (for crystals), xyz files (for molecules and
-finite representations of crystals), and cml files (crystals and
-molecules). At the moment, the capabilities of avogadro to handle
-periodic systems are limited, but development is currently ongoing. To
-access the critical point labels (which correspond to the critic2
-labels), go to Display types, mark "Label", click on the Label
-options, and select "Text: atom number". The recommended format both
-for molecules and crystals is cml, which has several advantages over
-xyz and cif: i) it prevents avogadro from calculating the molecular
-connectivity, which can be expensive in a very large system, and ii)
-it allows showing a fragment of the crystal along with the unit cell.
+The capability of avogadro to handle periodic systems is limited, and
+more recent versions of avogadro have taken the program in a somewhat
+confusing direction, so the above may not apply in your case.
+
+#### Recommended visualization method using vmd
+
+The current best way of visualizing the critical points in your system
+is using a vmd script. Write the critical points using:
+~~~
+CPREPORT name.vmd [GRAPH]
+~~~
+where the GRAPH keyword can be used to write the bond paths. This
+command writes a vmd script (`name.vmd`) as well as the geometry of
+the molecule or crystal, including the critical point and gradient
+paths (`name.xyz`). To open this file with vmd, execute the command:
+~~~
+vmd -e name.vmd
+~~~
+or open vmd and select the "File" menu followed by "Load visualization
+state".
+
+In this representation, all atoms in the unit cell (in crystals) or in
+the molecule are shown, colored by element. Bond critical points are
+in orange, rigns are cyan, cages are red and non-nuclear maxima are
+green. Bond  paths are shown in pink. In the case of a
+crystal, the unit cell and lattice vectors are also shown. The lattice
+vectors are also known to vmd so you can repeat the unit cell in the
+"Periodic" tab of the "Graphics -> Representations" menu. The blue
+labels appearing on the plot are the atoms in the system, in the order
+in which the appear in the complete list.
+
+If you open the Representations window ("Graphics ->
+Representations"), you will see there are at most 6 representations
+(you may have fewer if the system lacks certain types of critical
+points). Types 1, 2, 3, and 4 correspond to nuclear, bond, ring, and
+cage critical points, respectively. Type 5 are the bond
+paths. The representation with "Element" coloring method are the
+atoms. You can double click any of these representations to hide some
+of these objects.
+
+Lastly, it is possible to identify a particular atom or critical
+point. To do this, select "Mouse -> Pick" and click on an atom or
+critical point. A message will be written in the vmd terminal
+containing, for instance:
+~~~
+...
+Info) name: Xr138
+...
+Info) index: 137
+...
+~~~
+which indicates that this is the ring critical point number 138 in the
+complete CP list (the critical point ID is always the index minus
+1). When picking atoms and critical points, it is a good idea to hide
+the bond path representations, to avoid misclicks.
+
+Of course, vmd gives almost infinite variety when it comes to
+tailoring your plot to suit your needs, so changing the script or the
+contents of the xyz file is encouraged. There is, in fact, no
+information about the system in the `.vmd` file other than the lattice
+vectors and unit cell information when representing a periodic
+crystal.
 
 ## Requesting More Information About the Critical Point List (CPREPORT) {#c2-cpreport}
 
 ~~~
 CPREPORT {SHORT|LONG|VERYLONG|SHELLS [n.i]}
-CPREPORT file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]] 
+CPREPORT file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]]
          [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
          [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
          [NMER nmer.i]
-CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]] 
-         [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i] 
-         [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL] 
+CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
+         [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
+         [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 CPREPORT file.scf.in
 CPREPORT file.tess
 CPREPORT file.cri|file.incritic
@@ -604,7 +654,7 @@ CPREPORT file.elk
 CPREPORT file.gau
 CPREPORT file.cif
 CPREPORT file.m
-CPREPORT file.gin 
+CPREPORT file.gin
 CPREPORT file.lammps
 CPREPORT file.fdf
 CPREPORT file.STRUCT_IN
@@ -612,13 +662,14 @@ CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT file.json
 CPREPORT file.test
+CPREPORT file.vmd
 CPREPORT [...] [GRAPH]
 ~~~
 
 CPREPORT prints additional information about the critical points to
-the output. 
+the output.
 
-* SHORT: prints the list of non-equivalent critical points. 
+* SHORT: prints the list of non-equivalent critical points.
 * LONG: in a crystal, print the complete list of critical points in
   the unit cell and the connectivity in the case of bcp and rcp (when
   the graph is calculated); in a molecule, it is the same as SHORT.
@@ -698,7 +749,7 @@ POINTPROP LIST
 ~~~
 The POINTPROP keyword associates the expression `expr.s` with the name
 `name.s` and registers that name in a list of properties. When AUTO is
-run (or [CPREPORT](/critic2/manual/cpsearch/#c2-cpreport), 
+run (or [CPREPORT](/critic2/manual/cpsearch/#c2-cpreport),
 if the POINTPROP order comes after AUTO), those
 arithmetic expression will be applied to each of the CPs and the
 result printed in the output. For instance, if one does:
@@ -740,8 +791,7 @@ POINTPROP GTF
 ~~~
 activates the calculation of the Thomas-Fermi kinetic energy density
 (`gtf` function) on the reference field. POINTPROP can only be used
-with arithmetic expressions involving known fields. The keyword 
+with arithmetic expressions involving known fields. The keyword
 [CLEAR](/critic2/manual/arithmetics/#c2-clear)
 deletes all the properties in the list. The list of properties can be
 accesed at any time using POINTPROP LIST.
-

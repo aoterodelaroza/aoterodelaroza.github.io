@@ -211,6 +211,7 @@ CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT file.json
 CPREPORT file.test
+CPREPORT file.vmd
 CPREPORT [...] [GRAPH]
 ~~~
 
