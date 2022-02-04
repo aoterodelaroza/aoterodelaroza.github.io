@@ -109,7 +109,7 @@ orca, etc.). The molden.input extension is the same as molden (used by
 orca). The input molecule is enclosed in a box that is larger
 (default: 10 angstrom) in all directions than the minimal box
 encompassing the molecule. If the CUBIC (or CUBE) keyword is given,
-then a cubic supercell is used. The width of the vacumm around the
+then a cubic supercell is used. The width of the vacuum around the
 molecule can be changed with the optional `border.r` argument (by
 default in angstrom, the units can be changed with the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword). The molecule

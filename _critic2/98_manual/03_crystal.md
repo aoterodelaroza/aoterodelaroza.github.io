@@ -478,7 +478,7 @@ where the indicated file is used instead to perform the lookup. The
 path can be absolute or relative to the execution directory.
 
 A similar library exists for molecules (`molecule.dat`) that can be
-accessed throught the
+accessed through the
 [MOLECULE](/critic2/manual/molecule/#c2-molecule) keyword. Both
 `molecule.dat` and `crystal.dat` are installed in the data directory
 by `make install`.
@@ -507,7 +507,7 @@ The SPG keyword lists, in order:
 * The long Hermann-Mauguin label for the group.
 * The particular choice of axes/origin/setting for the group. For
   instance, H and R mean hexagonal and rhombohedral axes,
-  respectively. In monoclinic groups, choice gives the priviledged
+  respectively. In monoclinic groups, choice gives the privileged
   axis, etc.
 * The crystal system.
 * The space group type in Hall notation.
