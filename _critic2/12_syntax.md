@@ -244,6 +244,9 @@ CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
 CRYSTAL file.frac
+CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
+         FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+         FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -589,6 +592,9 @@ MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
+MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
+          FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+          FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 MOLECULE
  NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
  atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]

@@ -31,6 +31,9 @@ MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
+MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
+          FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+          FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 MOLECULE
   NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
   atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
@@ -161,6 +164,42 @@ the effect discussed above. The behavior of MOLECULE in this case is
 essentially the same as in the case of a cube file: the encompassing
 cell is taken from the file, and the molecule is not translated in any
 way.
+
+### Files with other extensions
+
+If the molecular structure file you want to read does not have one of
+the above extensions but conforms to one of these formats, you can
+force critic2 to read the file using that particular format. To do
+this, you must follow the `MOLECULE` keyword with another keyword
+specifying the required format. The allowed keywords are:
+
+- `XYZ`: an `.xyz` file.
+
+- `WFN`: a `.wfn` wavefunction file.
+
+- `WFX`: a `.wfx` wavefunction file.
+
+- `FCHK`: a Gaussian formatted checkpoint file (`.fchk`).
+
+- `MOLDEN`: a Molden file (`.molden`).
+
+- `DAT`: a psi4 output file (`.dat`).
+
+- `PGOUT`: a postg output file (`.pgout`).
+
+- `GAUSSIAN`: a Gaussian output file.
+
+- `GEN`: a DFTB+ structure file (`.gen`).
+
+- `CUBE`: a cube file.
+
+- `BINCUBE`: a binary cube file.
+
+- `FHIAIMS_IN`: an FHIaims input file (`geometry.in`).
+
+- `FHIAIMS_OUT`: an FHIaims output file.
+
+- `ORCA`: an ORCA output file.
 
 ### Manual Specification of the Molecular Structure (MOLECULE Environment)
 
