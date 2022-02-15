@@ -131,7 +131,7 @@ shown as a label in the plot.
 
 ~~~
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"expr"]
-     [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER]
+     [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER] [ORTHO]
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r lpp.r ...
 CUBE CELL {lpp.r|nx.i ny.i nz.i} ...
 CUBE GRID [SHIFT ix.i iy.i iz.i] ...
@@ -148,11 +148,13 @@ The CUBE keyword writes a three-dimensional grid in Gaussian cube,
 binary cube, VASP CHGCAR, and xsf formats. The limits of the grid can
 be set in three ways. By giving the end-points (`x0.r`, `y0.r`,
 `z0.r`) and (`x1.r`, `y1.r`, `z1.r`) it is possible to build a grid
-from an orthogonal fragment of the system (this is only possible using
-the cube and bincube formats). The CELL keyword calculates a grid
-spanning the entire unit cell, which may or may not be orthogonal
-depending on the structure. GRID, MLWF, WANNIER, UNK, and PSIK has the
-same effect as CELL regarding the output grid geometry.
+from a fragment of the system (this is only possible using
+the cube and bincube formats). In crystals, this fragment has the same
+shape as the unit cell. To write an orthogonal fragment, use the
+additional ORTHO keyword. In molecules, it is always an orthogonal
+fragment. The CELL keyword calculates a grid spanning the entire unit
+cell. GRID, MLWF, WANNIER, UNK, and PSIK has the same effect as
+CELL regarding the output grid geometry.
 
 If the end-points are given, they must be in crystallographic
 coordinates if the system is a periodic crystal (the structure was
