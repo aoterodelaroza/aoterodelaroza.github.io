@@ -123,7 +123,7 @@ immediately following SEED. This keyword can be:
 
 * PAIR: seeds are placed on the interatomic lines, for all atom pairs
   at a distance less than `dist.r` (keyword: DIST, default: 15). The
-  number of seeds per line is `n.i` (keyword: NPTS, default: 1). The
+  number of seeds per line is `n.i` (keyword: NPTS, default: 5). The
   default units for dist.r are bohr in crystals, angstrom in
   molecules.
 
@@ -132,7 +132,7 @@ immediately following SEED. This keyword can be:
   `dist.r` (keyword: DIST, default: 15). The default units for
   `dist.r` are bohr in crystals, angstrom in molecules.
 
-* LINE: place `n.i` seeds (keyword: NPTS, default: 1) along a line
+* LINE: place `n.i` seeds (keyword: NPTS, default: 5) along a line
   between (`x0.r` `y0.r` `z0.r`) (keyword: X0, default: origin) and
   (`x1.r` `y1.r` `z1.r`) (keyword: X1, mandatory). The units for x0
   and x1 are crystallographic coordinates in crystals and molecular
