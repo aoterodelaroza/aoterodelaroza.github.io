@@ -187,7 +187,7 @@ COUNT id.s eps.r
   about the critical point list.
 ~~~
 CPREPORT {SHORT|LONG|VERYLONG|SHELLS [n.i]}
-CPREPORT file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]]
+CPREPORT file.{xyz,gjf,cml,vmd} [SPHERE rad.r [x0.r y0.r z0.r]]
          [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
          [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
          [NMER nmer.i]
@@ -211,7 +211,6 @@ CPREPORT file.hsd
 CPREPORT file.gen
 CPREPORT file.json
 CPREPORT file.test
-CPREPORT file.vmd
 CPREPORT [...] [GRAPH]
 ~~~
 
