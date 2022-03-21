@@ -18,6 +18,10 @@ Fortran (2018 standard) programs.
 and the [dependency generator](/assets/devnotes/02_fortran_makefiles/makedepf08.awk)
 in the root of your project. Run `make`.*
 
+*Note: these Makefiles use tools such as GNU awk (gawk), GNU find, and
+GNU make. On macOS, you may need to download the GNU versions of these
+programs for the Makefiles to work correctly.*
+
 With a few restrictions, this solution permits:
 
 - Fully automatic dependency generation.
