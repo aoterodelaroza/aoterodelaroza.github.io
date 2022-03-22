@@ -67,14 +67,17 @@ else
 endif
 
 ## define the anchors and the objects variables
-# $(call source-to-extension,source-file-list,new-extension)
-define source-to-extension
-  $(strip \
-    $(foreach ext,$(FORTEXT),\
-      $(subst .$(ext),.$2,$(filter %.$(ext),$1))))
-endef
-OBJECTS:=$(call source-to-extension,$(SOURCES),o)
-ANCHORS:=$(call source-to-extension,$(SOURCES),anc)
+# define source-to-extension
+#   $(strip \
+#     $(foreach ext,$(FORTEXT),\
+#       $(subst .$(ext),.$2,$(filter %.$(ext),$1))))
+# endef
+# OBJECTS:=$(call source-to-extension,$(SOURCES),o)
+# ANCHORS:=$(call source-to-extension,$(SOURCES),anc)
+BASESOURCE:=$(basename $(SOURCES))
+OBJECTS:=$(addsuffix .o, $(BASESOURCE))
+ANCHORS:=$(addsuffix .anc, $(BASESOURCE))
+
 
 ## default target, main and clean targets
 all: main

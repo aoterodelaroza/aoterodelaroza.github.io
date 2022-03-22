@@ -1,24 +1,24 @@
-#! /usr/bin/env -S awk --traditional -f 
+#! /usr/bin/env -S awk --traditional -f
 ## Copyright (c) 2019 alberto Otero de la Roza <aoterodelaroza@gmail.com>
-## This file is frere software; distributed under GNU/GPL version 3.
+## This file is free software; distributed under GNU/GPL version 3.
 
 function dirname(file){
     ## function dirname by Aleksey Cheusov
     ## https://github.com/cheusov/runawk/blob/master/modules/dirname.awk
     if (!sub(/\/[^\/]*\/?$/,"",file))
-        return "."
+	return "."
     else if (file != "")
-        return file
+	return file
     else
-        return "/"
+	return "/"
 }
 
 FNR==1{
     if ((FILENAME in include) && include[FILENAME])
-        file = include[FILENAME]
+	file = include[FILENAME]
     else{
-        file = FILENAME
-        sub(/.(f|F|fpp|FPP|for|FOR|ftn|FTN|f90|F90|f95|F95|f03|F03|f08|F08)$/,"",file)
+	file = FILENAME
+	sub(/.(f|F|fpp|FPP|for|FOR|ftn|FTN|f90|F90|f95|F95|f03|F03|f08|F08)$/,"",file)
     }
 }
 tolower($1) == "module" && tolower($0) !~ /^[^!]+(subroutine|function|procedure)[[:blank:]]+[^!]/{
@@ -35,8 +35,8 @@ tolower($1) == "submodule"{
     ancestor[name] = arr[2]
     isancestor[ancestor[name]] = 1
     if (n >= 4){
-        parent[name] = arr[2]"@"arr[3]
-        isparent[parent[name]] = 1
+	parent[name] = arr[2]"@"arr[3]
+	isparent[parent[name]] = 1
     }
 }
 tolower($1) == "include"{
@@ -59,47 +59,47 @@ tolower($1) == "use"{
 }
 END{
     for (i in mod){
-        ## Rule 1: the anchor of a source file depends on the mod files of its modules
-        printf("%s.anc:.mod/%s.mod\n",mod[i],i)
-        printf(".mod/%s.mod:\n",i)
-        if ((i in isancestor) && isancestor[i]){
-            ## Rule 2: the anchor of a source file depends on the smod file of those of its modules that are ancestors of a submodule
-            printf("%s.anc:.mod/%s.smod\n",mod[i],i)
-            printf(".mod/%s.smod:\n",i)
-        }
+	## Rule 1: the anchor of a source file depends on the mod files of its modules
+	printf("%s.anc:.mod/%s.mod\n",mod[i],i)
+	printf(".mod/%s.mod:\n",i)
+	if ((i in isancestor) && isancestor[i]){
+	    ## Rule 2: the anchor of a source file depends on the smod file of those of its modules that are ancestors of a submodule
+	    printf("%s.anc:.mod/%s.smod\n",mod[i],i)
+	    printf(".mod/%s.smod:\n",i)
+	}
     }
 
     for (i in smod){
-        ## Rule 3: the anchor of a source file depends on the smod file of those of its submodules that are parents of a submodule
-        if ((i in isparent) && isparent[i]){
-            printf("%s.anc:.mod/%s.smod\n",smod[i],i)
-            printf(".mod/%s.smod:\n",i)
-        }
+	## Rule 3: the anchor of a source file depends on the smod file of those of its submodules that are parents of a submodule
+	if ((i in isparent) && isparent[i]){
+	    printf("%s.anc:.mod/%s.smod\n",smod[i],i)
+	    printf(".mod/%s.smod:\n",i)
+	}
 
-        ## Rule 6: submodule anchor files depend on their ancestor's anchor files
-        if ((ancestor[i] in mod) && mod[ancestor[i]] && (smod[i] != mod[ancestor[i]]))
-            printf("%s.anc:%s.anc\n",smod[i],mod[ancestor[i]]);
+	## Rule 6: submodule anchor files depend on their ancestor's anchor files
+	if ((ancestor[i] in mod) && mod[ancestor[i]] && (smod[i] != mod[ancestor[i]]))
+	    printf("%s.anc:%s.anc\n",smod[i],mod[ancestor[i]]);
 
-        ## Rule 7: submodule anchor files depend on their parent's anchor files
-        if ((i in parent) && parent[i] && smod[i] != smod[parent[i]])
-            printf("%s.anc:%s.anc\n",smod[i],smod[parent[i]]);
+	## Rule 7: submodule anchor files depend on their parent's anchor files
+	if ((i in parent) && parent[i] && smod[i] != smod[parent[i]])
+	    printf("%s.anc:%s.anc\n",smod[i],smod[parent[i]]);
     }
 
     ## Rule 5: the anchor of a source file depends on the anchor of
-    ## all the non-intrinsic modules it uses 
+    ## all the non-intrinsic modules it uses
     split("", filuniq, ":")
     for (i in usedmod){
-        if ((i in mod) && mod[i]){
-            for (j=1;j<=usedmod[i];j++){
-                if (!filuniq[fileuse[j,i],mod[i]] && fileuse[j,i] != mod[i]){
-                    filuniq[fileuse[j,i],mod[i]] = 1
-                    printf("%s.anc:%s.anc\n",fileuse[j,i],mod[i])
-                }
-            }
-        }
+	if ((i in mod) && mod[i]){
+	    for (j=1;j<=usedmod[i];j++){
+		if (!filuniq[fileuse[j,i],mod[i]] && fileuse[j,i] != mod[i]){
+		    filuniq[fileuse[j,i],mod[i]] = 1
+		    printf("%s.anc:%s.anc\n",fileuse[j,i],mod[i])
+		}
+	    }
+	}
     }
-     
+
     ## Rule 4: the anchor of a source file depends on all its included files and their contents
     for (i in include)
-        printf("%s.anc:%s\n",include[i],i)
+	printf("%s.anc:%s\n",include[i],i)
 }
