@@ -1241,6 +1241,48 @@ Using BADER as an alternative to YT is recommended in very large
 grids because of its more efficient memory usage, but in general it
 gives less accurate integrations (at least in my experience).
 
+## Isosurface integration (ISOSURFACE) {#c2-isosurface}
+The ISOSURFACE keyword is used to integrate the volume and various
+scalar fields in the regions delimited by isosurfaces. The isosurfaces
+are determined by the reference field and a contour (isosurface) value
+set by the user. This keyword can be used only if the reference field
+is given on a grid. The syntax is:
+~~~
+ISOSURFACE {HIGHER|LOWER} isov.r] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
+           [DISCARD expr.s]
+~~~
+The ISOSURFACE keyword must be followed by either HIGHER or LOWER and
+a real number (`isov.r`). The regions to be integrated are bound by
+isosurfaces with contour value equal to `isov.r`. If HIGHER, integrate
+the regions with reference field value higher than `isov.r`. If LOWER,
+integrate the regions with value lower than `isov.r`.
+
+The WCUBE option is similar to the same option in
+[BADER](/critic2/manual/integrate/#c2-bader). WCUBE writes cube files
+containing the isosurface regions. The points in cube file
+`<root>_wcube_xx.cube` have a value of 1, if the point is inside a
+domain for isosurface `xx`, or 0 otherwise. Each point in the
+`<root>_wcube_all.cube` file has grid value equal to the integer ID of
+the isosurface domain in which it is contained, or 0 if it is not
+inside any isosurface domain.
+
+The BASINS keyword writes a graphical representation of the calculated
+isosurface domains. The format can be chosen using the OBJ, PLY, and
+OFF keywords (default: OBJ). If an integer is given after the format
+selector (`ibasin.i`), then plot only the domain for that isosurface
+ID. Otherwise, plot all of them.
+
+The DISCARD keyword accepts an arithmetic expression that is evaluated
+at every grid point. If the expression is true at a given grid point,
+then that point is not considered in the construction of the
+isosurface domains. This is useful in combination with critic2's
+[structural variables](/critic2/manual/arithmetics/#c2-structvar). For
+instance, doing:
+~~~
+DISCARD "@idnuc != 3"
+~~~
+represents only the isosurface associated with atom number 3.
+
 ## Examples
 
 - YT and BADER:
