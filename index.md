@@ -50,7 +50,7 @@ row_all:
     btn_class: "btn--light-outline"
 ---
 
-{% include feature_row id="intro" type="center" %}
+{% include feature_row_local id="intro" type="center" %}
 
-{% include feature_row id="row_all" %}
+{% include feature_row_local id="row_all" %}
 
