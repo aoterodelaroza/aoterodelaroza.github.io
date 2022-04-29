@@ -99,7 +99,7 @@ Some additional notation and terms that are used in the manual:
   point in space. Often, this function is the electron density, for
   which special techniques are provided (for instance, core
   augmentation in the case of valence densities, see
-  [ZPSP](/critic2/manual/crystal/#c2-charge).. However, critic2 can
+  [ZPSP](/critic2/manual/crystal/#c2-charge)). However, critic2 can
   deal with any scalar field, and examples other than the density are
   the ELF, the Laplacian, etc.
 
@@ -120,8 +120,8 @@ Some additional notation and terms that are used in the manual:
 
 * The critical points of a field can be classified by their **rank**
   (r) and **signature** (s). The rank is the number of non-zero
-  eigenvalues of the Hessian. In the vast majority of cases, r is
-  3. The signature is the number of positive eigenvalues minus the
+  eigenvalues of the Hessian. In the vast majority of cases, r is 3.
+  The signature is the number of positive eigenvalues minus the
   number of negative eigenvalues. s = -3 is a maximum, s = -1 is a
   first-order saddle point, s = +1 is a second-order saddle point and
   s = 3 is a minimum. These four types of critical points receive
