@@ -21,7 +21,7 @@ determines the task to be carried out.
 In this manual, keywords are written in CAPS. Input variables are
 denoted using a suffix to indicate their type: a real number (`.r`),
 an integer (`.i`) or a string (`.s`). Almost anywhere that a number is
-expected, it is possible to use an 
+expected, it is possible to use an
 [arithmetic expression](/critic2/manual/arithmetics/). If an arithmetic expression
 is required (and not merely optional), then it should be given in
 either double or single quotes are used (for instance, "$1+$2"). When
@@ -56,7 +56,7 @@ pure lattice translations) known to critic2.
 The atoms in each of those two lists are numbered. The integer
 identifier for an atom in the non-equivalent atom list is symbolized
 in this manual as `nat.i`. The integer identifier for an atom in the
-complete atom list is `at.i`. The 
+complete atom list is `at.i`. The
 [`syntax.txt` file](/critic2/syntax/) contains a summary of all
 available keywords and follows the same notation. The distinction
 between atoms from the complete list and from the non-equivalent list
@@ -98,15 +98,15 @@ Some additional notation and terms that are used in the manual:
   representation of a function that associates a scalar value to every
   point in space. Often, this function is the electron density, for
   which special techniques are provided (for instance, core
-  augmentation in the case of valence densities, see 
+  augmentation in the case of valence densities, see
   [ZPSP](/critic2/manual/crystal/#c2-charge).. However, critic2 can
   deal with any scalar field, and examples other than the density are
   the ELF, the Laplacian, etc.
 
 * The **promolecular density** is the scalar field built by using the
   sum of the in-vacuo atomic densities. This object comes up in a
-  number of contexts. For instance, 
-  [NCIPLOT](/critic2/manual/nciplot/) and 
+  number of contexts. For instance,
+  [NCIPLOT](/critic2/manual/nciplot/) and
   [HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld) use it. The
   promolecular density does not require any input from the user other
   than the crystal or molecular structure, and is always available
@@ -134,9 +134,9 @@ Some additional notation and terms that are used in the manual:
 ## Input and Output Units {#c2-units}
 
 The default input and output units in critic2 are bohr for crystals
-(if the structure is loaded using the 
+(if the structure is loaded using the
 [CRYSTAL](/critic2/manual/crystal/#c2-crystal) keyword) and angstrom
-for molecules (if the 
+for molecules (if the
 [MOLECULE](/critic2/manual/molecule/#c2-molecule) keyword is
 used). In the particular case of molecules, the origin is also placed
 at the same point as in the structure provided by the user.
@@ -152,7 +152,7 @@ either bohr or angstrom.
 
 As an example, let us consider an input for the conventional cell of
 the fluorite (CaF2) crystal. Fluorite is cubic with space group
-Fm-3m. Ca forms a face-centerd cubic lattice and F occupies all the
+Fm-3m. Ca forms a face-centered cubic lattice and F occupies all the
 tetrahedral voids. The input is:
 ~~~
 CRYSTAL
@@ -172,40 +172,31 @@ The output for this example follows. First, the output gives the
 header with some information about the system, the version (the commit
 number), and the location of the relevant library and density files:
 ~~~
-                  _   _     _          ___
-                 (_) | |   (_)        |__ \
-     ___   _ __   _  | |_   _    ___     ) |
-    / __| | '__| | | | __| | |  / __|   / /
-   | (__  | |    | | | |_  | | | (__   / /_
-    \___| |_|    |_|  \__| |_|  \___| |____|
-
-* CRITIC2: analysis of real-space scalar fields in solids
-           and molecules.
-  (c) 1996-2015 A. Otero-de-la-Roza, A. Martin-Pendas, V. Lua~na
+* CRITIC2: analysis of real-space scalar fields in solids and molecules.
+  (c) 1996-2019 A. Otero-de-la-Roza, A. Martin-Pendas, V. Lua~na
   Distributed under GNU GPL v.3 (see COPYING for details)
-  Bugs, requests, and rants: alberto@fluor.quimica.uniovi.es
+  Bugs, requests, and rants: aoterodelaroza@gmail.com
+  Website: https://aoterodelaroza.github.io/critic2/
   If you find this software useful, please cite:
-  AOR, Comput. Phys. Commun. 185 (2014) 1007-1018.
-  AOR, Comput. Phys. Commun. 180 (2009) 157-166.
+  A. Otero-de-la-Roza et al., Comput. Phys. Commun. 185 (2014) 1007-1018.
+  A. Otero-de-la-Roza et al., Comput. Phys. Commun. 180 (2009) 157-166.
 
-+ critic2, commit e7c2707
- compile host: Linux puck 4.2.0-1-amd64 #1 SMP Debian
- compile date: Wed Oct 21 18:39:47 PDT 2015
-    using f77: ifort -g
-          f90: ifort -g -FR -fopenmp
-      ldflags:
-       debug?: no
++ critic2 (development), version 1.0 (git:1.1dev-152-gb8eb182)
+		 host: Linux-5.16.0-6-amd64
+		 date: Wed 27 Apr 2022 10:20:16
  compiled dat: /usr/local/share/critic2
-      datadir: /home/alberto/git/critic2/dat
-     dic file: /home/alberto/git/critic2/dat/cif_core.dic
-...was found?:  T
+	  datadir: /home/alberto/git/critic2/dat
+	 dic file: /home/alberto/git/critic2/dat/cif/cif_core.dic
+...was found?: T
+	   spglib: 1.13.0
+		libxc: <unavailable>
 
-CRITIC2--2015/10/21, 23:08:09.362
+CRITIC2--2022/4/29, 07:03:03.280
 ~~~
 
 After the CRYSTAL keyword is read, critic2 first lists the basic
 information about the crystal (note that the input lines read are
-copied to the output preceded by the "%%" prefix). The output 
+copied to the output preceded by the "%%" prefix). The output
 starts with the cell parameters and the number of atoms in the crystal
 motif:
 ~~~
@@ -220,8 +211,8 @@ motif:
   Lattice parameters (bohr): 10.323574  10.323574  10.323574
   Lattice parameters (ang): 5.463000  5.463000  5.463000
   Lattice angles (degrees): 90.000  90.000  90.000
-  Empirical formula: 
-    ca(1) f(2) 
+  Empirical formula:
+	ca(1) f(2)
   Number of non-equivalent atoms in the unit cell: 2
   Number of atoms in the unit cell: 12
   Number of atomic species: 2
@@ -235,10 +226,10 @@ element but in some cases, for instance magnetic systems, it may
 be useful to differentiate between two different atomic types with
 the same atomic number.
 ~~~
-+ List of atomic species: 
++ List of atomic species:
 # spc  Z   name    Q   ZPSP
-   1  20    ca     0.0  -- 
-   2   9     f     0.0  -- 
+   1  20    ca     0.0  --
+   2   9     f     0.0  --
 ~~~
 In this case, however, we have two species corresponding to Ca
 and F, each with their corresponding atomic number.
@@ -247,52 +238,52 @@ Next comes the non-equivalent atom list. In this case, the whole
 crystal is generated by replicating two atoms: one Ca and one F. The
 positions, multiplicities, and the atomic numbers are indicated:
 ~~~
-+ List of non-equivalent atoms in the unit cell (cryst. coords.): 
-# nat       x              y              z        spc  name   mult  Z 
-   1   0.0000000000   0.0000000000   0.0000000000   1    ca     4  20 
-   2   0.2500000000   0.2500000000   0.2500000000   2     f     8   9 
++ List of non-equivalent atoms in the unit cell (cryst. coords.):
+# nat       x              y              z        spc  name   mult  Z
+   1   0.0000000000   0.0000000000   0.0000000000   1    ca     4  20
+   2   0.2500000000   0.2500000000   0.2500000000   2     f     8   9
 ~~~
 
 The next table is the complete atom list. Here, critic2 lists all the
 atoms in the unit cell: four Ca and eight F. The exact same list is
 repeated in Cartesian coordinates, referred to the internal coordinate
-system used in critic2. The output also indicates the matrix of 
+system used in critic2. The output also indicates the matrix of
 lattice vectors in Cartesian coordinates (repeated below).
 ~~~
-+ List of atoms in the unit cell (cryst. coords.): 
-# at        x              y              z        spc  name    Z 
-   1   0.0000000000   0.0000000000   0.0000000000   1    ca    20 
-   2   0.0000000000   0.5000000000   0.5000000000   1    ca    20 
-   3   0.5000000000   0.0000000000   0.5000000000   1    ca    20 
-   4   0.5000000000   0.5000000000   0.0000000000   1    ca    20 
-   5   0.2500000000   0.2500000000   0.2500000000   2     f     9 
-   6   0.2500000000   0.7500000000   0.7500000000   2     f     9 
-   7   0.7500000000   0.2500000000   0.7500000000   2     f     9 
-   8   0.7500000000   0.7500000000   0.2500000000   2     f     9 
-   9   0.7500000000   0.7500000000   0.7500000000   2     f     9 
-  10   0.7500000000   0.2500000000   0.2500000000   2     f     9 
-  11   0.2500000000   0.7500000000   0.2500000000   2     f     9 
-  12   0.2500000000   0.2500000000   0.7500000000   2     f     9 
++ List of atoms in the unit cell (cryst. coords.):
+# at        x              y              z        spc  name    Z
+   1   0.0000000000   0.0000000000   0.0000000000   1    ca    20
+   2   0.0000000000   0.5000000000   0.5000000000   1    ca    20
+   3   0.5000000000   0.0000000000   0.5000000000   1    ca    20
+   4   0.5000000000   0.5000000000   0.0000000000   1    ca    20
+   5   0.2500000000   0.2500000000   0.2500000000   2     f     9
+   6   0.2500000000   0.7500000000   0.7500000000   2     f     9
+   7   0.7500000000   0.2500000000   0.7500000000   2     f     9
+   8   0.7500000000   0.7500000000   0.2500000000   2     f     9
+   9   0.7500000000   0.7500000000   0.7500000000   2     f     9
+  10   0.7500000000   0.2500000000   0.2500000000   2     f     9
+  11   0.2500000000   0.7500000000   0.2500000000   2     f     9
+  12   0.2500000000   0.2500000000   0.7500000000   2     f     9
 
 + Lattice vectors (bohr)
-    a:   10.3235738640     0.0000000000     0.0000000000 
-    b:    0.0000000000    10.3235738640     0.0000000000 
-    c:    0.0000000000     0.0000000000    10.3235738640 
+	a:   10.3235738640     0.0000000000     0.0000000000
+	b:    0.0000000000    10.3235738640     0.0000000000
+	c:    0.0000000000     0.0000000000    10.3235738640
 
-+ List of atoms in Cartesian coordinates (bohr): 
-# at         x                y                z         spc  name    Z     dnn    
-   1     0.0000000000     0.0000000000     0.0000000000   1    ca    20    4.4702  
-   2     0.0000000000     5.1617869320     5.1617869320   1    ca    20    4.4702  
-   3     5.1617869320     0.0000000000     5.1617869320   1    ca    20    4.4702  
-   4     5.1617869320     5.1617869320     0.0000000000   1    ca    20    4.4702  
-   5     2.5808934660     2.5808934660     2.5808934660   2     f     9    4.4702  
-   6     2.5808934660     7.7426803980     7.7426803980   2     f     9    4.4702  
-   7     7.7426803980     2.5808934660     7.7426803980   2     f     9    4.4702  
-   8     7.7426803980     7.7426803980     2.5808934660   2     f     9    4.4702  
-   9     7.7426803980     7.7426803980     7.7426803980   2     f     9    4.4702  
-  10     7.7426803980     2.5808934660     2.5808934660   2     f     9    4.4702  
-  11     2.5808934660     7.7426803980     2.5808934660   2     f     9    4.4702  
-  12     2.5808934660     2.5808934660     7.7426803980   2     f     9    4.4702  
++ List of atoms in Cartesian coordinates (bohr):
+# at         x                y                z         spc  name    Z     dnn
+   1     0.0000000000     0.0000000000     0.0000000000   1    ca    20    4.4702
+   2     0.0000000000     5.1617869320     5.1617869320   1    ca    20    4.4702
+   3     5.1617869320     0.0000000000     5.1617869320   1    ca    20    4.4702
+   4     5.1617869320     5.1617869320     0.0000000000   1    ca    20    4.4702
+   5     2.5808934660     2.5808934660     2.5808934660   2     f     9    4.4702
+   6     2.5808934660     7.7426803980     7.7426803980   2     f     9    4.4702
+   7     7.7426803980     2.5808934660     7.7426803980   2     f     9    4.4702
+   8     7.7426803980     7.7426803980     2.5808934660   2     f     9    4.4702
+   9     7.7426803980     7.7426803980     7.7426803980   2     f     9    4.4702
+  10     7.7426803980     2.5808934660     2.5808934660   2     f     9    4.4702
+  11     2.5808934660     7.7426803980     2.5808934660   2     f     9    4.4702
+  12     2.5808934660     2.5808934660     7.7426803980   2     f     9    4.4702
 ~~~
 
 Following this information comes the cell volume, in atomic units and
@@ -307,18 +298,18 @@ group information:
 ~~~
 + List of symmetry operations (48):
   Operation 1:
-     1.000000  0.000000  0.000000  0.000000
-     0.000000  1.000000  0.000000  0.000000
-     0.000000  0.000000  1.000000  0.000000
+	 1.000000  0.000000  0.000000  0.000000
+	 0.000000  1.000000  0.000000  0.000000
+	 0.000000  0.000000  1.000000  0.000000
   Operation 2:
-     0.000000  0.000000 -1.000000  0.000000
-    -1.000000  0.000000  0.000000  0.000000
-     0.000000 -1.000000  0.000000  0.000000
+	 0.000000  0.000000 -1.000000  0.000000
+	-1.000000  0.000000  0.000000  0.000000
+	 0.000000 -1.000000  0.000000  0.000000
 [...]
   Operation 48:
-     0.000000  1.000000  0.000000  0.000000
-     0.000000  0.000000  1.000000  0.000000
-    -1.000000  0.000000  0.000000  0.000000
+	 0.000000  1.000000  0.000000  0.000000
+	 0.000000  0.000000  1.000000  0.000000
+	-1.000000  0.000000  0.000000  0.000000
 
 + List of symmetry operations in crystallographic notation:
    1: x,y,z
@@ -345,7 +336,7 @@ group information:
 
 The Cartesian to crystallographic ("car to crys") transformation
 matrices are the transformation operations between the vector basis
-formed by the cell vectors (crystallographic coordiantes) and the
+formed by the cell vectors (crystallographic coordinates) and the
 internal Cartesian axes used in critic2 (Cartesian coordinates). The
 crystallographic to Cartesian matrix ("crys to car") gives the cell
 vectors in Cartesian axes. The metric tensor is the transpose of "crys
@@ -354,17 +345,17 @@ lattice vectors.
 ~~~
 + Car/crys coordinate transformation matrices:
   A = car to crys (xcrys = A * xcar, bohr^-1)
-       0.0968656798    -0.0000000000    -0.0000000000 
-       0.0000000000     0.0968656798    -0.0000000000 
-       0.0000000000     0.0000000000     0.0968656798 
+	   0.0968656798    -0.0000000000    -0.0000000000
+	   0.0000000000     0.0968656798    -0.0000000000
+	   0.0000000000     0.0000000000     0.0968656798
   B = crys to car (xcar = B * xcrys, bohr)
-      10.3235738640     0.0000000000     0.0000000000 
-       0.0000000000    10.3235738640     0.0000000000 
-       0.0000000000     0.0000000000    10.3235738640 
+	  10.3235738640     0.0000000000     0.0000000000
+	   0.0000000000    10.3235738640     0.0000000000
+	   0.0000000000     0.0000000000    10.3235738640
   G = metric tensor (B'*B, bohr^2)
-     106.5761773245     0.0000000000     0.0000000000 
-       0.0000000000   106.5761773245     0.0000000000 
-       0.0000000000     0.0000000000   106.5761773245 
+	 106.5761773245     0.0000000000     0.0000000000
+	   0.0000000000   106.5761773245     0.0000000000
+	   0.0000000000     0.0000000000   106.5761773245
 ~~~
 
 The next block in the output gives the calculation of the discrete
@@ -379,7 +370,7 @@ identifying integer. In this case, the crystal is not molecular:
 + List of fragments in the system (1)
 # Id = fragment ID. nat = number of atoms in fragment. C-o-m = center of mass (bohr).
 # Discrete = is this fragment finite?
-# Id  nat           Center of mass            Discrete  
+# Id  nat           Center of mass            Discrete
   1    12     0.871668    0.871668    0.871668   No
 
 + This is a 3D periodic structure.
@@ -396,46 +387,46 @@ given next:
 + Atomic environment
   Number of atoms (reduced cell/environment): 12 / 3056
   Radius of (unit cell/environment) circumscribed sphere (bohr): 8.9405 / 67.0536
-  Maximum interaction distance (bohr): 31.4559 
-  Covering regions: 
-    Total number of regions: 216 (6 6 6)
-    Minimum region ID: -3 -3 -3
-    Maximum region ID: 2 2 2
-    Region side (bohr): 13.3037
-    Transformation origin (bohr): 5.1618,5.1618,5.1618
-    Search offsets: 2197
-    Maximum search offset: 6
-    Average number of atoms per region: 14.1481
-    Maximum number of atoms in a region: 40
+  Maximum interaction distance (bohr): 31.4559
+  Covering regions:
+	Total number of regions: 216 (6 6 6)
+	Minimum region ID: -3 -3 -3
+	Maximum region ID: 2 2 2
+	Region side (bohr): 13.3037
+	Transformation origin (bohr): 5.1618,5.1618,5.1618
+	Search offsets: 2197
+	Maximum search offset: 6
+	Average number of atoms per region: 14.1481
+	Maximum number of atoms in a region: 40
 ~~~
 
 Next the Wigner-Seitz (WS) cell and the reduced Delaunay cell are
-determined. This information is used in 
+determined. This information is used in
 the calculation of shortest distances between lattice translations of
-two atoms, and for the 
-[AUTO](/critic2/manual/cpsearch/#c2-auto) and 
+two atoms, and for the
+[AUTO](/critic2/manual/cpsearch/#c2-auto) and
 [YT](/critic2/manual/integrate/#c2-yt) tasks, among other things.
 ~~~
 + Vertex of the WS cell in cryst. coords. (8)
 # id = vertex ID. xyz = vertex cryst. coords. d = vertex distance to origin (bohr).
-   id       x            y            z          d (bohr)   
-    1    0.500000     0.500000    -0.500000     8.94047722  
-    2    0.500000    -0.500000     0.500000     8.94047722  
-    3    0.500000     0.500000     0.500000     8.94047722  
-    4   -0.500000     0.500000     0.500000     8.94047722  
-    5    0.500000    -0.500000    -0.500000     8.94047722  
-    6   -0.500000     0.500000    -0.500000     8.94047722  
-    7   -0.500000    -0.500000    -0.500000     8.94047722  
-    8   -0.500000    -0.500000     0.500000     8.94047722  
+   id       x            y            z          d (bohr)
+	1    0.500000     0.500000    -0.500000     8.94047722
+	2    0.500000    -0.500000     0.500000     8.94047722
+	3    0.500000     0.500000     0.500000     8.94047722
+	4   -0.500000     0.500000     0.500000     8.94047722
+	5    0.500000    -0.500000    -0.500000     8.94047722
+	6   -0.500000     0.500000    -0.500000     8.94047722
+	7   -0.500000    -0.500000    -0.500000     8.94047722
+	8   -0.500000    -0.500000     0.500000     8.94047722
 
 + Faces of the WS cell (6)
 # Face ID: vertexID1 vertexID2 ...
-   1: 3  4  8  2 
-   2: 3  4  6  1 
-   3: 3  1  5  2 
-   4: 1  6  7  5 
-   5: 2  8  7  5 
-   6: 4  8  7  6 
+   1: 3  4  8  2
+   2: 3  4  6  1
+   3: 3  1  5  2
+   4: 1  6  7  5
+   5: 2  8  7  5
+   6: 4  8  7  6
 
 + Lattice vectors for the Wigner-Seitz neighbors
 # FaceID: Voronoi lattice vector (cryst. coords.)
@@ -482,24 +473,24 @@ density is made available to the user through the field identifier $0
   This is the REFERENCE field.
 ~~~
 
-A list of the current integrable properties is 
+A list of the current integrable properties is
 given next. This is the list of properties that would be integrated in the
-attraction basins if the user runs 
+attraction basins if the user runs
 [INTEGRALS](/critic2/manual/integrate/#c2-integrals) or any of the other
 basin integration methods. The list of integrable properties can be
 queried and modified with the [INTEGRABLE](/critic2/manual/integrate/#c2-integrable)
-keyword. Our outupt shows the default integrable properties, which are
+keyword. Our output shows the default integrable properties, which are
 the atomic volume and the value and Laplacian of the reference field
 ~~~
 * List of integrable properties (3)
 #  Id  Type  Field  Name
-    1   v        0  Volume
-    2  fval      0  Pop
-    3  lval      0  Lap
+	1   v        0  Volume
+	2  fval      0  Pop
+	3  lval      0  Lap
 ~~~
 
-Next is the list of additional properties to be calculated at the 
-critical points. These are used at the end of the automatic 
+Next is the list of additional properties to be calculated at the
+critical points. These are used at the end of the automatic
 CP search with [AUTO](/critic2/manual/cpsearch/#c2-auto), and can
 be modified using the
 [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword. In our
@@ -517,14 +508,14 @@ is the list of core and pseudopotential charges for all known fields
 ~~~
 * List of core and pseudopotential charges for each field
 # id  type   core?  ZPSP
-  0  promol   no  
+  0  promol   no
 ~~~
 
 The execution finishes with a report of the warnings found and the
 timestamp. It is always a good idea to check for warnings in the
 output:
 ~~~
-CRITIC2 ended succesfully (0 WARNINGS, 0 COMMENTS)
+CRITIC2 ended successfully (0 WARNINGS, 0 COMMENTS)
 
 Elapsed wall time: 0s
 Elapsed CPU time: 0s
@@ -557,8 +548,8 @@ The output starts off with the same header as in CRYSTAL, and then:
   From: <input>
   Encompassing cell dimensions (bohr): 37.794523  40.654257  38.917797
   Encompassing cell dimensions (ang): 20.000000  21.513306  20.594411
-  Empirical formula: 
-    o(1) h(2) 
+  Empirical formula:
+	o(1) h(2)
   Number of atoms: 3
   Number of atomic species: 2
   Number of electrons (with zero atomic charge): 10
@@ -571,29 +562,29 @@ structures. The molecule is placed inside a very large unit cell
 to mimic gas-phase conditions but critic2 treats the molecule in
 the same way as a crystal, converting the atomic coordinates to
 "crystallographic" coordinates inside the supercell. In the output,
-critic2 shows the dimension of this cell 
+critic2 shows the dimension of this cell
 in bohr and angstrom, and the number of atoms and electrons in the
-molecule. Keywords are available in the 
+molecule. Keywords are available in the
 [MOLECULE](/critic2/manual/molecule/#c2-molecule) keyword and
 environment for changing the size and shape of the encompassing
-cell. 
+cell.
 
-After that comes the list of atomic species (same as in a crysatl) and
+After that comes the list of atomic species (same as in a crystal) and
 the list of atoms in Cartesian coordinates (angstrom and referred to
 the same origin as in the input):
 ~~~
-+ List of atomic species: 
++ List of atomic species:
 # spc  Z   name    Q   ZPSP
-   1   8     o     0.0  -- 
-   2   1     h     0.0  -- 
+   1   8     o     0.0  --
+   2   1     h     0.0  --
 
-+ List of atoms in Cartesian coordinates (ang_): 
++ List of atoms in Cartesian coordinates (ang_):
 # at         x                y                z         spc  name    Z     dnn
    1     0.0000000000     0.0000000000     0.1188820000   1     o     8    0.9622
    2     0.0000000000     0.7566530000    -0.4755290000   2     h     1    0.9622
    3     0.0000000000    -0.7566530000    -0.4755290000   2     h     1    0.9622
 ~~~
-The list of atoms in crysatllographic coordinates is not given when
+The list of atoms in crystallographic coordinates is not given when
 the structure is a molecule. Likewise, symmetry is not used in a
 molecular system and hence there is no need for a list of atoms in the
 asymmetric unit. All atoms in a molecule have multiplicity 1.
@@ -606,12 +597,12 @@ the density is discontinuous (because critic2 uses periodic boundary
 conditions) and report spurious CPs. Likewise, the gradient path
 tracing routines can become trapped at the border of the cell. To
 prevent this, critic2 defines by default a second cell, slightly
-smaller than the encompassing cell defined above. This 
+smaller than the encompassing cell defined above. This
 [molecular cell](/critic2/manual/molecule/#c2-molcell) represents the valid
 molecular space for the current structure. Regions outside the molecular cell
 cannot be traversed by gradient paths and can not hold any critical
 points. Essentially, the outside border of the encompassing cell becomes a
-representation of infinity for the molecule under study. 
+representation of infinity for the molecule under study.
 
 The dimensions of the molecular cell are given next in the output:
 ~~~
@@ -642,17 +633,17 @@ shown next:
 + Atomic environment
   Number of atoms (reduced cell/environment): 3 / 3
   Radius of (unit cell/environment) circumscribed sphere (ang_): 17.9371 / 0.8129
-  Maximum interaction distance (ang_): 11.3820 
-  Covering regions: 
-    Total number of regions: 4 (1 2 2)
-    Minimum region ID: 0 -1 -1
-    Maximum region ID: 0 0 0
-    Region side (ang_): 2.6400
-    Transformation origin (ang_): 10.0000,10.7567,10.2972
-    Search offsets: 1331
-    Maximum search offset: 5
-    Average number of atoms per region: 0.7500
-    Maximum number of atoms in a region: 1
+  Maximum interaction distance (ang_): 11.3820
+  Covering regions:
+	Total number of regions: 4 (1 2 2)
+	Minimum region ID: 0 -1 -1
+	Maximum region ID: 0 0 0
+	Region side (ang_): 2.6400
+	Transformation origin (ang_): 10.0000,10.7567,10.2972
+	Search offsets: 1331
+	Maximum search offset: 5
+	Average number of atoms per region: 0.7500
+	Maximum number of atoms in a region: 1
 
 ~~~
 As in the case of a crystal, critic2 calculates how many discrete
@@ -660,7 +651,7 @@ fragments there is in this molecule. In this case, just one. The
 environment comprises the whole molecule (3 atoms).
 
 The rest of the output is completely equivalent to the crystal case
-(see the discussion above): 
+(see the discussion above):
 ~~~
 * List of scalar fields
 + Field number 0
@@ -678,17 +669,17 @@ The rest of the output is completely equivalent to the crystal case
 
 * List of integrable properties (3)
 #  Id  Type  Field  Name
-    1   v        0  Volume  
-    2  fval      0  Pop  
-    3  lval      0  Lap  
+	1   v        0  Volume
+	2  fval      0  Pop
+	3  lval      0  Lap
 
 * List of additional properties at critical points (0)
 
 * List of core and pseudopotential charges for each field
 # id  type   core?  ZPSP
-  0  promol   no  
+  0  promol   no
 
-CRITIC2 ended succesfully (0 WARNINGS, 0 COMMENTS)
+CRITIC2 ended successfully (0 WARNINGS, 0 COMMENTS)
 
 Elapsed wall time: 0s
 Elapsed CPU time: 0s

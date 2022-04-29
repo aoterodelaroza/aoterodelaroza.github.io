@@ -1112,7 +1112,7 @@ COLOR_ALLOCATE {0|1}
 
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-   [DISCARD expr.s] [JSON file.json]
+   [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
 ~~~
 The [Yu and Trinkle (YT) method](https://doi.org/10.1063/1.3553716)
 calculates the attraction basins of the reference fields and computes
@@ -1185,6 +1185,17 @@ By using the JSON keyword a JavaScript Object Notation (JSON) file is
 created containing the molecular or crystal structure, information
 about the reference field and the results of the integration.
 
+The ONLY keyword restricts the integration to only the atoms given by
+the user. The integers `iat1.i`,... are maxima identifiers from the
+complete critical point list, which contains all the critical points
+in the unit cell. For atoms, the identifiers in the complete CP list
+coincide with those in the complete atom list, so `iat.1` for an atom
+is also the integer ID from the list of atoms in the unit cell (see
+the [notation](/critic2/manual/inputoutput/#c2-notation)). The ONLY
+keyword is useful for delocalization index calculations in large
+systems, where restricting the integration to only a handful of atoms
+saves computing time.
+
 Not all the properties defined by the
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) keyword are
 integrated inside the basins. Only the subset of those properties that
@@ -1213,7 +1224,7 @@ The algorithm by Henkelman et al. is implemented in critic2, and can
 be used with the BADER keyword:
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
-      [DISCARD expr.s] [JSON file.json]
+      [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
 ~~~
 The BADER algorithm uses the reference field to calculate the QTAIM
 basins. This field must be defined on a grid. BADER assigns grid nodes
@@ -1242,11 +1253,12 @@ grids because of its more efficient memory usage, but in general it
 gives less accurate integrations (at least in my experience).
 
 ## Isosurface integration (ISOSURFACE) {#c2-isosurface}
+
 The ISOSURFACE keyword is used to integrate the volume and various
-scalar fields in the regions delimited by isosurfaces. The isosurfaces
-are determined by the reference field and a contour (isosurface) value
-set by the user. This keyword can be used only if the reference field
-is given on a grid. The syntax is:
+scalar fields in regions delimited by isosurfaces of a scalar
+field. The isosurfaces are determined by the reference field and a
+contour (isosurface) value set by the user. This keyword can be used
+only if the reference field is given on a grid. The syntax is:
 ~~~
 ISOSURFACE {HIGHER|LOWER} isov.r] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
            [DISCARD expr.s]
