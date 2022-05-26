@@ -66,7 +66,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
-WRITE file.in ## FHIaims geometry.in
+WRITE file.in [rklength.r] ## FHIaims geometry.in
 WRITE file.frac
 ~~~
 The WRITE keyword writes the currently loaded structure to a file.
@@ -213,9 +213,9 @@ Quantum ESPRESSO failing to recognize the crystal symmetry. By
 default, the crystal cell used by critic2 is written to the QE input
 template. To reduce the cell to a primitive, use NEWCELL with the
 PRIMITIVE keyword before writing the file. The optional parameter to
-the QE input writer (`rklength.i`) is the length parameter (rk-length)
-that determines the density of the k-point grid (using VASP's
-formula).
+the QE input writer (`rklength.r`) is the length parameter (rk-length)
+that determines the density of the k-point grid. See the
+[KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword.
 
 ### Tessel (tess)
 
@@ -337,6 +337,13 @@ A `geometry.in` input file for FHIaims can be generated using the
 file then needs to be renamed to `geometry.in`. The appropriate
 selection of keywords is used depending on whether the current
 structure is a crystal or a molecule.
+
+If an additional real number is given (`rklength.r`), an additional
+file (`file.in_control`) containing a template `control.in` for the
+FHIaims calculation is written. The template `control.in` specifies a
+uniform k-point grid in the `k_grid` keyword with a density given by
+the length parameter `rklength.r`. See the
+[KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword for details.
 
 ### TINKER frac files (frac)
 
