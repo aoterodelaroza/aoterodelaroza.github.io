@@ -127,6 +127,8 @@ devnotes:
       url: /devnotes/derivatives-xdmsolids/
     - title: "Molecular wavefunctions"
       url: /devnotes/critic2-molwfns/
+    - title: "Raspberry Pi HPC cluster"
+      url: /devnotes/diskless-rpi-cluster/
   - title: "Course notes"
     url: /coursenotes/
 

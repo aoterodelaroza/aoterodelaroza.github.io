@@ -20,7 +20,8 @@ the University of Oviedo.
 
 ## Online Tutorials
 
-| ID | Topic                                                                        |
-|----+------------------------------------------------------------------------------|
-|  1 | [Connecting to a Remote Computer Using SSH](/coursenotes/remote_connection/) |
+| ID | Topic                                                                          |
+|----+--------------------------------------------------------------------------------|
+|  0 | [Build a Raspberry Pi 4 diskless HPC cluster](/devnotes/diskless-rpi-cluster/) |
+|  1 | [Connecting to a Remote Computer Using SSH](/coursenotes/remote_connection/)   |
 
