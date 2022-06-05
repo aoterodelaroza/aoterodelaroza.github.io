@@ -13,37 +13,41 @@ toc_label: "Raspberry Pi 4 diskless HPC cluster"
 toc_sticky: true
 ---
 
-## Introduction
+### Introduction
 
 This document describes how to build a fully functioning
 high-performance computing (HPC) cluster using Raspberry Pi 4
-single-board computers, model B. Our purpose is to create a teaching
-environment for computational science (in my case, computational
-chemistry) where students can learn about the Linux operating system
-and about the tools and workflow in scientific computing. This project
-has been funded by the Innovation in Teaching calls at the University
-of Oviedo, who provided the necessary funds to pay for the hardware.
+single-board computers, model B, circa May 2022. The purpose of the
+Raspberry Pi HPC cluster is to create a teaching environment for
+computational science (e.g. computational chemistry) where students
+can learn about the Linux operating system and the tools and workflow
+in scientific computing. This project has been funded by the 2022
+Teaching Innovation Project calls (INIE-PINN-2022-23-124538) at the
+University of Oviedo, who provided the necessary funds to acquire the
+hardware.
 
-For this installation, we will need at least two Raspberry Pi 4 (rPI)
-computers, an equivalent amount of SD cards, ethernet cables, USB-C
-cables for powering the rPIs, and an SD card reader. In addition, a
-monitor, keyboard, and mouse are required to perform the head node
-installation, as well as a desktop computer running linux to flash the
-SDs and perform other ancillary operations. If you plan on
-incorporating more than two rPIs into the cluster, you will also need
-an ethernet switch for the local network, probably a USB power bank
-for powering all the rPIs, and a case. The head node will connect to a
-wireless network (perhaps at home or at your workplace) and the rPIs
-will use their ethernet interfaces to communicate with each other in
-the local network.
+For this installation, we need at least two Raspberry Pi 4 model B
+(rPI) computers, an equivalent amount of SD cards, ethernet cables,
+USB-C cables for powering the rPIs, and an SD card reader. In
+addition, a monitor, keyboard, and mouse are required to perform the
+head node installation, as well as a desktop computer running Linux to
+flash the SDs and perform other ancillary operations. If you plan on
+incorporating more than two rPIs into the cluster, you also need an
+ethernet switch for the local network, probably a USB power bank for
+powering all the rPIs, and a case to keep things organized. The head
+node connects to a wireless network (perhaps at home or at your
+workplace) and the rPIs use their ethernet interfaces to communicate
+with each other over the local network. The instructions below apply
+to rPI 4 model B, but they can probably be adapted to other models as
+well as other computer types, single-board or not.
 
-The compute nodes in the cluster will run in diskless mode. This means
-that they will have no OS installed and instead, will boot over the
-network, with the head node acting as server. This simplifies the
-administration of a (small) cluster considerably as there will be no
-need to install an OS on the compute nodes or worry about how they are
-provisioned. In the rest of this document, commands issued as `root`
-in the head node are denoted by:
+The compute nodes in our cluster run in diskless mode. This means that
+they have no OS installed and, instead, boot over the network. The
+head node acting as server. This simplifies the administration of a
+(small) cluster considerably as there is no need to install an OS
+on the compute nodes or worry about how they are provisioned. In the
+rest of this document, commands issued as `root` in the head node are
+denoted by:
 ```
 head# <command>
 ```
@@ -51,25 +55,25 @@ Commands issued as `root` on any of the compute nodes are:
 ```
 compute# <command>
 ```
-We will modify the contents of the disk image served by the head node
-to the compute nodes by using a chroot environment. Whenever we issue
-commands inside the chroot, it will appear as:
+The contents of the disk image served to the compute nodes are
+modified by using a chroot environment on the head node. Whenever we
+issue commands inside the chroot, it appears as:
 ```
 chroot# <command>
 ```
-Lastly, commands issued on the auxiliary desktop PC are:
+Commands issued on the auxiliary desktop PC are:
 ```
 aux# <command>
 ```
+Lastly, we also sometimes issue commands as unprivileged users (for
+instance, submitting a job), which are denoted by the prompts
+`head$`, `compute$`, etc.
 
-The Debian operating system will be used for the installation. Reasons
-for this choice are that debian has an excellent and well-curated
-repository of high-quality packages, is stable and reliable, has been
-tested on the rPI architecture. The ultimate reason, however, is my
-personal preference in favor of Debian. The cluster will be running
-the SLURM scheduling system.
-
-## Installation
+The Debian operating system is used for the installation. Debian has
+an excellent and well-curated repository of high-quality packages, is
+stable and reliable, and has been tested on the rPI architecture. The
+ultimate reason for this choice, however, comes down to personal
+preference. The SLURM workload manager is used as scheduling system.
 
 ### Step 1: Flash the SD card
 
@@ -82,7 +86,7 @@ aux# unxz 20220121_raspi_4_bookworm.img.xz
 aux# dd if=20220121_raspi_4_bookworm.img of=/dev/sde
 ```
 **Warning: Make sure you get the device file correct and the SD card
-contains nothing important before flashing.**
+contains nothing you care about before flashing.**
 
 Insert the SD card into the rPI that will act as the head
 node. Connect it to the monitor, keyboard, and mouse, and boot it up
@@ -108,23 +112,22 @@ create the configuration file with your wifi ESSID and password:
 ```
 head# wpa_passphrase <ESSID> <password> > /etc/wpa_supplicant/wpa_supplicant.conf
 ```
-and then ad the following lines to the same file:
+and then add the following lines to the same file:
 ```
 #### /etc/wpa_supplicant/wpa_supplicant.conf
 ...
 ctrl_interface=/run/wpa_supplicant
 update_config=1
 ```
-For the sake of security, remove any clear-text passwords from the
-file. Now find the wireless interface name with:
+For the sake of security, make sure there are not any clear-text
+passwords in the file. Now find the wireless interface name with:
 ```
 # iw dev
 ```
 In my case, the interface is `wlan0`. Connect to the wifi and enable
 the `wpa_supplicant` on startup with:
-
 ```
-head# systemctl reenable wpa_supplicant.service
+head# systemctl enable wpa_supplicant.service
 head# service wpa_supplicant restart
 head# wpa_supplicant -B -Dwext -i wlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
 head# dhclient -v
@@ -141,7 +144,6 @@ allow-hotplug wlan0
 iface wlan0 inet dhcp
   wpa-ssid <from-wpa_supplicant.conf>
   wpa-psk <from-wpa_supplicant.conf>
-
 ```
 where the `wpa-ssid` and `wpa-psk` can be copied from the
 `wpa_supplicant.conf` configuration file above.
@@ -157,11 +159,12 @@ and finally, restart the network:
 ifdown wlan0
 ifup wlan0
 ```
+and check that it can ping the outside.
 
 ### Step 4: Configure the package manager and upgrade the system
 
 Modify the `/etc/apt/sources.list` file to set up the source of your
-packages and the particular distribution you want. I like the
+packages and the particular debian version you want. I like the
 `testing` distribution because I find it is reasonably stable but also
 has somewhat recent packages.
 ```
@@ -187,9 +190,9 @@ This may take a while.
 
 ### Step 5: Install a few basic pacakages
 
-We will need the SSH server and client for connecting to the nodes, as
-well as editors and utilities. We do not need e-mail utilities or
-`anacron`, since the system will be running continuously:
+We need the SSH server and client for connecting to the nodes, as
+well as editors and a few basic utilities. We do not need e-mail
+utilities or `anacron`, since the system will be running continuously:
 ```
 head# apt install openssh-server openssh-client
 head# apt install emacs nfs-common openssh-client openssh-server xz-utils \
@@ -210,23 +213,25 @@ from the auxiliary PC, if you have one, or generate one with
 aux# ssh-copy-id 192.168.1.135
 aux# ssh 192.168.1.135
 ```
+to simplify connecting to it.
 
 ### Step 6: Create the compute node image
 Now we start configuring the image that will be served to the compute
-nodes when they boot up. The image for the nodes will reside in
+nodes when they boot up. The image for the nodes resides in
 `/image/pi4`. If you have several kinds of rPIs (or other computers)
-you can have different images for them.
+you can have different images served for them, according to their MAC
+address.
 ```
 head# mkdir /image
 head# chmod go-rX /image
 ```
 Create the debian base system for the image by using the `debootstrap`
-program from the repo:
+program from the repository:
 ```
 head# apt install debootstrap
 head# debootstrap testing /image/pi4
 ```
-It is imporatnt that you do NOT set `go-rX` permissions on this
+It is important that you do NOT set `go-rX` permissions on this
 directory or it won't be possible to chroot into it. Lastly, copy the
 package manager configuration over to the compute node image:
 ```
@@ -235,13 +240,14 @@ head# cp /etc/apt/sources.list /image/pi4/etc/apt/sources.list
 
 ### Step 7: Configure the hostname and the names file
 
-To configure the hostname:
+To configure the hostname in the head node:
 ```
 head# echo "sebe" > /etc/hostname
 ```
 Then edit the `/etc/hosts` file and fill in the names of the head node
-and the compute nodes. In my cluster the head node will be `sebe` or
-`b01`, and the compute nodes will be `b02`, `b03`, etc.
+and the compute nodes. In my cluster the head node is `sebe` (or
+`b01` in the local network) and the compute nodes are `b02`,
+`b03`, etc.
 ```
 #### /etc/hosts
 127.0.0.1       localhost
@@ -253,7 +259,7 @@ and the compute nodes. In my cluster the head node will be `sebe` or
 ff02::1         ip6-allnodes
 ff02::2         ip6-allrouters
 ```
-Note that we will be using the IPs `10.0.0.1`, `10.0.0.2`,... for the
+Note that we are using the IPs `10.0.0.1`, `10.0.0.2`,... for the
 local network, with the first one being the IP for the head node
 (`b01`).
 
@@ -265,7 +271,7 @@ head# cp /etc/hosts /image/pi4/etc/hosts
 ### Step 8: Configure the local (wired) network
 
 To configure the local network, first find the ethernet interface name
-with:
+of the head node with:
 ```
 head# /sbin/ifconfig
 ```
@@ -280,8 +286,9 @@ iface eth0 inet	static
 
 ### Step 9: Set up and test the chroot environment
 
-To create the chroot environment, you need to mount a few directories
-from the host system:
+To create the chroot environment, you need to mount the `/dev`,
+`/proc` and `/sys` directories from the host system, in this case the
+head node:
 ```
 head# mount --rbind /dev /image/pi4/dev
 head# mount --make-rslave /image/pi4/dev
@@ -300,7 +307,8 @@ Exit the chroot with `exit` or control-d.
 
 Since we will be chrooting into the image quite a number of times, it
 is best if the system mounts the above directories automatically on
-start-up. T do this, put the following lines in the `/etc/fstab`:
+start-up. To do this, put the following lines in the head node's fstab
+file:
 ```
 #### /etc/fstab
 ...
@@ -353,9 +361,10 @@ Copy over the same bashrc to the image:
 ```
 head# cp /root/.bashrc /image/pi4/root/.bashrc
 ```
-and add the following at the end of the image bashrc:
+In the image, add the following at the end of the bashrc:
 ```
 #### /image/pi4/root/.bashrc
+...
 if [[ "$HOSTNAME" != "sebe" && "$HOSTNAME" != "b01" ]] ; then
    export PS1="\[\]\[\]\h:\W#\[\] "
 else
@@ -364,7 +373,7 @@ fi
 ````
 This way, you will be able to tell when you are in the chroot and when
 you are connected to a compute node via SSH. (Replace "sebe" and "b01"
-with your own names.)
+with your own names for the head node.)
 
 Lastly, add the following alias to your head node bashrc:
 ```
@@ -372,7 +381,7 @@ Lastly, add the following alias to your head node bashrc:
 ...
 alias pi4='chroot /image/pi4'
 ```
-This way you will be able to access the image chroot by simply doing:
+With this, you will be able to access the image chroot by simply doing:
 ```
 head# pi4
 ```
@@ -384,8 +393,8 @@ Configure the locale in the head node with:
 head# locale-gen en_US.UTF-8
 head# dpkg-reconfigure locales
 ```
-Select en_US.UTF-8 in the drop-down menu. (You can use your own locale
-instead.) Repeat in the image after installing the correponding
+Install your own locale (instead of en_US.UTF-8) and select it in the
+drop-down menu. Repeat in the image after installing the corresponding
 package:
 ```
 chroot# apt install locales
@@ -413,9 +422,9 @@ chroot# apt remove anacron
 
 ### Step 13: Blacklist the wifi and bluetooth in the image
 
-This will prevent starting unnecessary services and boot-up errors
-when we operate diskless. Add the following lines to the
-`blacklist.conf` file in the image:
+Blacklisting the wifi and bluetooth prevents starting unnecessary
+services and also boot-up errors when operating diskless. Add the
+following lines to the `blacklist.conf` file in the image:
 ```
 ### /image/pi4/etc/modprobe.d/blacklist.conf
 ...
@@ -428,8 +437,8 @@ blacklist hci_uart
 ### Step 14: Modify the initramfs in the image to be able to network boot
 
 To have the compute nodes boot over the network, we need to configure
-their initial ramdisk and filesystem for it. Modify the image
-initramfs configuration file:
+their initial ramdisk and filesystem. Modify the image initramfs
+configuration file:
 ```
 #### /image/pi4/etc/initramfs-tools/initramfs.conf
 MODULES=netboot
@@ -451,18 +460,19 @@ case, this was `/boot/initrd.img-5.17.0-1-arm64`.
 
 The compute nodes will have a read-only root filesystem (`/`), so
 temporary files cannot be written to `/tmp` in the usual way. To
-prevent this from causing errors, we will create a RAM partition for
-temporary files, so they will be written to memory instead. To do
-this, insert the following lines in the image configuration files:
+prevent this from causing errors, create a RAM partition for temporary
+files, so they will be written to memory instead. To do this, insert
+the following lines in the image configuration files:
 ```
 head# echo ASYNCMOUNTNFS=no >> /image/pi4/etc/default/rcS
 head# echo RAMTMP=yes >> /image/pi4/etc/default/tmpfs
 ```
 
 ### Step 16: Configure the FTP server
-The image will be served to the compute nodes via an FTP server
-installed on the head node. First make the directory to contain the
-served files:
+
+The image is served to the compute nodes via an FTP server installed
+on the head node. First make the directory to contain the served
+files:
 ```
 head# mkdir /srv/tftp
 ```
@@ -471,7 +481,7 @@ and then install the FTP server itself:
 head# apt install tftpd-hpa tftp-hpa
 ```
 The FTP server configuration resides in the `/etc/default/tftpd-hpa`
-file of the head node and is very simple:
+file of the head node:
 ```
 #### /etc/default/tftpd-hpa
 TFTP_USERNAME="tftp"
@@ -510,14 +520,12 @@ over the network and accessing the FTP server files correctly.
 
 First, we will allow root access to the compute nodes via SSH, for
 ease of use:
-
 ```
 #### /image/pi4/etc/ssh/sshd_config
 ...
 PermitRootLogin yes
 TCPKeepAlive yes
 ...
-####
 ```
 and then we create an ssh key for root and copy it over to the image:
 ````
@@ -543,10 +551,9 @@ aux# dd if=2020-02-13-raspbian-buster.img of=/dev/sde
 **Warning: Once again, make sure you get the device file for the SD
 card right before using dd.**
 
-Insert the new SD card into the rPI that will be used as the compute
-node, connect it to the monitor, mouse, and keyboard, and boot it
-up. Then, as root, copy the most recent EEPROM image from the firmware
-directory:
+Insert the new SD card into the compute node, connect it to the
+monitor, mouse, and keyboard, and boot it up. Then, as root, copy the
+most recent EEPROM image from the firmware directory:
 ```
 compute# cd
 compute# ls /lib/firmware/raspberrypi/bootloader/beta
@@ -579,8 +586,8 @@ the next step. In my case, the MAC address of the compute node is
 Repeat flashing the EEPROM for all the compute nodes you have. From
 the instructions above, you only need to run the `rpi-eeprom-update`
 command, since the `new.bin` image we want to flash has already been
-saved in the SD card. Remember checking and copying all the MAC
-address.
+saved in the SD card. Remember to write down the MAC addresses of all
+compute nodes.
 
 The MAC address for the head node is easily found with the same
 command:
@@ -596,8 +603,8 @@ Install the DHCP server in the head node from the package repository:
 head# apt install isc-dhcp-server
 ```
 Then configure the server by modifying first the
-`/etc/default/isc-dhcp-server` file to indicate we will only use the
-IPv4 interface:
+`/etc/default/isc-dhcp-server` file to indicate only the
+IPv4 interface is used:
 ```
 #### /etc/default/isc-dhcp-server
 INTERFACESv4="eth0"
@@ -634,7 +641,9 @@ subnet 10.0.0.0 netmask 255.0.0.0 {
 ```
 Note we used the MAC address of each node and associated the
 corresponding IPs and names to them. We also indicated the location of
-the NFS root filesystem of the compute nodes.
+the NFS root filesystem of the compute nodes. If you have different
+computers on your cluster that require different images, they can be
+served with different image directories by modifying this file.
 
 If you want to do some testing, a simple alternative that gives out
 the IPs dynamically is:
@@ -669,7 +678,7 @@ head# tail -f /var/log/syslog
 ```
 This is useful for checking what the compute nodes are doing when they
 boot up over the network. You can also use this to find the MAC
-address of the compute node rPIs, as it will be shown in the logs.
+address of the compute nodes, as it will be shown in the logs.
 
 ### Step 19: Prepare the network boot image
 
@@ -677,20 +686,22 @@ Copy the rPI firmware files over to the FTP server directory:
 ```
 head# cp /boot/firmware/* /srv/tftp
 ```
-Then edit the `cmdline.txt` file in the FTP server:
+Then edit the `cmdline.txt` file:
 ```
 #### /srv/tftp/cmdline.txt
 console=tty0 ip=dhcp root=/dev/nfs ro nfsroot=10.0.0.1:/image/pi4,vers=3,nolock panic=60 ipv6.disable=1 rootwait systemd.gpt_auto=no
 ```
-Remove the SD from the compute node, connect it to the server with an
-ethernet cable, and reboot it. Keep an eye on the syslog in
-the server to make sure the files are being served properly:
+Remove the SD card from the compute node, connect it to the server
+with an ethernet cable, and reboot it. If you have more than one
+compute nodes, then you should install the ethernet switch now and
+connect the head node and all compute nodes to it. Keep an eye on the
+syslog in the server to make sure the files are being served properly:
 ```
 head# tail -f /var/log/syslog
 ```
-The client should boot only up to some point, but it should not start
-completely because no root filesystem could be served, since the NFS
-server has not been installed yet.
+The compute node should boot only up to some point, but it should not
+start completely because no root filesystem could be served, since the
+NFS server has not been installed yet.
 
 ### Step 20: Set up the NFS server
 
@@ -754,27 +765,27 @@ login screen. Congratulations!
 
 ### Step 22: Add the users to the image
 
-The user and group IDs in the head node and the compute nodes should
-be synchronized. Although there are more heavy-duty tools for this, a
-simple way is to copy any relevant users and the root user lines, as
-well as the corresponding groups from the `/etc/passwd`,
-`/etc/shadow`, and `/etc/group` to the corresponding files in the
-`/image/pi4` directory tree. If you add a new user, you need to
-propagate the changes in those files from the head node to the image.
+The user and group IDs in the head node and the compute nodes must be
+synchronized. Although there are more heavy-duty tools for this, a
+simple way is to copy any relevant users and the root lines, as well
+as the corresponding groups from the `/etc/passwd`, `/etc/shadow`, and
+`/etc/group` to the corresponding files in the `/image/pi4` directory
+tree. If you add a new user, you need to propagate the changes in
+those files from the head node to the image.
 
-Finally, copy over the home directory for the users you created in
+Lastly, copy over the home directory for the users you created in
 step 2 over to the image:
 ```
 head# cp -r /home/user1 /image/pi4/home/
 head# ...
 ```
 
-### Step 23: Configure the fstab file and volatile directories in the image
+### Step 23: Configure the fstab file and the volatile directories in the image
 
-The root filesystem in the compute nodes will be mounted read-only, so
-we need to provide RAM mounts for every directory where the system
-will need to write. Note that the contents of the RAM mounts will
-disappear once the compute node is rebooted so things like, for
+The root filesystem in the compute nodes is mounted read-only, so we
+need to provide RAM partitions for every directory where the compute
+node's OS needs to write. Note that the contents of the RAM mounts
+will disappear once the compute node is rebooted so things like, for
 instance, log files, will not survive a reboot. First set up the
 temporary filesystems in the fstab file, so the compute node mounts
 them automatically on boot-up:
@@ -810,10 +821,10 @@ d /var/tmp           1777 root  root -
 ### Step 24: Time synchronization between head and compute nodes
 
 It is important to keep the head and compute nodes synchronized
-because files will be written by both on the shared filesystems. If
-they are not in sync, tools that depend on timestamps (like `make`)
-will have a hard time working. First install the `ntp` server in the
-head node:
+because files are written by both on the shared filesystems. If they
+are not in sync, tools that depend on timestamps (like `make`) will
+have a hard time working. First install the `ntp` server in the head
+node:
 ```
 head# apt install ntp
 ```
@@ -842,55 +853,55 @@ Reboot the compute node now. It should boot up all the way to the
 login prompt. Check the messages in the journal and verify that there
 are no outstanding errors:
 ```
-client# journalctl -xb
+compute# journalctl -xb
 ```
 Also, check the system status and verify there are no errors as well:
 ```
-client# systemctl status
-client# systemctl list-units --type=service
+compute# systemctl status
+compute# systemctl list-units --type=service
 ```
 Check if the volatile directory creation was successful with:
 ```
-client# systemctl status systemd-tmpfiles-setup.service
+compute# systemctl status systemd-tmpfiles-setup.service
 ```
 (Note: You can run the volatile directory create again at any point
 with `systemd-tmpfiles --create`.) Lastly, check if the time is
-syncrhonized between the compute node and the head node.
+synchronized between the compute node and the head node.
 ```
-client# timedatectl status
-client# timedatectl show-timesync --all
+compute# timedatectl status
+compute# timedatectl show-timesync --all
 ```
 
-### Step 26: Set up SD cards as scratch disk space in the compute nodes
+### Step 26: Set up SD cards as scratch space in the compute nodes
 
-SD cards can be mounted in the compute nodes and used as local scratch
-space for the occasional calculation. Insert the SD card in the
-compute node and do:
+The spare SD cards can be mounted in the compute nodes and used as
+additional local scratch space for the occasional calculation. Insert
+the SD card in the compute node and do:
 ```
-client# fdisk -l
+compute# fdisk -l
 ```
 to identify the local disk. To format it, use `fdisk`:
 ```
-client# fdisk
+compute# fdisk
 ```
 and choose to delete all partitions (`d`), make a new partition table
 if necessary (GPT type, with `g`). Then, make a new partition (`n`)
 and finally write the partitions and exit (`w`). Once the scratch
 partition is ready, create an EXT4 filesystem in it:
 ```
-client# mkfs.ext4 /dev/mmcblk1p1
+compute# mkfs.ext4 /dev/mmcblk1p1
 ```
 where the device file is identified from the output of `fdisk`. You
 can now try to mount it in a temporary file:
 ```
-client# cd
-client# mkdir temp
-client# mount /dev/mmcblk1p1 temp
+compute# cd /home
+compute# mkdir temp
+compute# mount /dev/mmcblk1p1 temp
 ```
 Check that the new partition works and then clean up:
 ```
-client# umount temp
-client# rm -r temp
+compute# umount temp
+compute# rm -r temp
 ```
 
 The local SD card partition will be mounted automatically in
@@ -908,8 +919,9 @@ and add the corresponding line in the image's fstab file:
 ```
 where the use of the "by-path" links ensures that the SD card is
 mounted regardless of the device name. You can check on the compute
-node the particular name your system uses. Finally, reboot the client
-and verify the disk is mounted.
+node the particular name your system uses by listing the contents of
+the `by-path` directory. Finally, reboot the client and verify the
+disk is mounted.
 
 ### Step 27: Create the scratch and opt partitions on the head node
 
@@ -917,10 +929,9 @@ Shut down both nodes and take out the SD card for the head
 node. Connect the SD card to the auxiliary desktop PC and use
 `gparted` to resize the `/` partition. Then, create two new
 partitions: one for `/opt` and one for `/scratch`. The `/opt`
-partition will hold the SLURM configuration as well as any HPC
-software you may want to install that is not available in the package
-repositories. Calculate how much room you will need for `/opt` and
-then use the rest for `/scratch`.
+partition will hold the SLURM configuration as well as any computing
+software you may want to install. Calculate how much room you will
+need for `/opt` and then use the rest for `/scratch`.
 
 Insert the SD card into the head node again and boot it up. Now you
 create the entries in the head node's fstab for the two new
@@ -943,6 +954,10 @@ Share the `/opt` partition via NFS by modifying the exports file:
 #### /etc/exports
 ...
 /opt        10.0.0.0/24(ro,sync,no_root_squash,no_subtree_check)
+```
+and re-export with:
+```
+head# exportfs -rv
 ```
 Enter the corresponding opt line in the fstab of the image, so the
 compute nodes mount it over the NFS on start-up:
@@ -1004,9 +1019,9 @@ packages:
 ```
 chroot# apt install libmunge-dev libmunge2 munge
 ```
-Configure the tmpfiles service of systemd so that munge can find its
-directories `/var/log/munge` and `/var/lib/munge` in the compute
-nodes:
+Configure new volatile directories using the tmpfiles service of
+systemd so that munge can find its directories `/var/log/munge` and
+`/var/lib/munge` in the compute nodes:
 ```
 chroot# echo "d /var/log/munge 0700 munge munge -" >> /etc/tmpfiles.d/vardirs.conf
 chroot# echo "d /var/lib/munge 0700 munge munge -" >> /etc/tmpfiles.d/vardirs.conf
@@ -1023,11 +1038,11 @@ chroot# chmod 400 /etc/munge/munge.key
 Boot up (or reboot) the compute node and check that munge is working
 by decoding a credential remotely. (You can also restart munge without
 rebooting with `systemctl restart munge` if the compute node is
-already up):
+already up.):
 ```
 head# munge -n | ssh 10.0.0.2 unmunge
 ```
-where `10.0.0.2` is the IP of the corersponding compute node.
+where `10.0.0.2` is the IP of the corresponding compute node.
 
 Finally, install the SLURM daemon in the image:
 ```
@@ -1046,7 +1061,8 @@ head# touch /opt/slurm/slurm.conf
 head# echo "include /opt/slurm/slurm.conf" > /etc/slurm/slurm.conf
 head# echo "include /opt/slurm/slurm.conf" > /image/pi4/etc/slurm/slurm.conf
 ```
-and now we put our configuration in the opt file.
+and now we put our configuration in the configuration file that
+resides in the NFS-shared opt partition instead.
 
 To make a configuration file, visit the
 [SLURM configurator](https://slurm.schedmd.com/configurator.html)
@@ -1066,9 +1082,8 @@ Replace the line in the `slurm.conf` with the relevant information
 from the output of these commands. In my cluster, I will use the head
 node (`b01`) also as a compute node, since there aren't very many
 nodes in the cluster anyway. However, I would like the head node to be
-used only when all the compute nodes are busy. For this to happen,
-rather counterintuitively, the weight of the head node needs to be
-higher:
+used only when all the compute nodes are busy. For this to happen, the
+weight of the head node needs to be higher:
 ```
 #### /opt/slurm/slurm.conf
 ...
@@ -1076,8 +1091,8 @@ NodeName=b01 CPUs=4 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=7807 weight=100
 NodeName=b02 CPUs=4 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=3789 weight=1 State=UNKNOWN
 PartitionName=pmain Nodes=ALL Default=YES MaxTime=INFINITE State=UP
 ```
-In my case, the head node has 8GB memory but the compute node only
-4GB.
+Note that, in my case, the head node has 8GB memory but the compute
+node only 4GB.
 
 Finally, set the permissions, create the SLURM working directory, and
 enable and restart the SLURM server:
@@ -1113,25 +1128,20 @@ and verify it works:
 ```
 compute# systemctl status slurmd
 ```
-(If the configuration changes, do `scontrol reconfigure` to have
-slurmd re-read the configuration file.)
-
 Finally, check that all the nodes are up by doing:
 ```
 head# sinfo -N
 ```
-A quirk of slurm is that, by default, nodes that are down (because of
+A quirk of SLURM is that, by default, nodes that are down (because of
 a crash or because they were rebooted) are not automatically brought
 back into production. They need to be resumed with:
 ```
 head# scontrol update NodeName=b02 State=RESUME
 ```
-This behavior can be changed.
-
 If you want, you can do a power cycle of the whole HPC cluster by
 shutting down all the nodes. Then boot up the head node and, once it
-is up, all the compute nodes. Resume the compute nodes and check the
-scheduler is working with `sinfo -N`.
+is up, start all the compute nodes. Resume the compute nodes and check
+the scheduler is working with `sinfo -N`.
 
 ### Step 30: submit a test job
 
@@ -1153,17 +1163,19 @@ and to submit it, do:
 head$ sbatch bleh.sub
 head$ sbatch bleh.sub
 head$ squeue
+```
+You should have seen the first job be picked by the compute node and
+the second job by the head node. Cancel them with:
+```
 head$ scancel 1
 head$ scancel 2
 ```
-You should have seen the first job be picked by the compute node and
-the second job by the head node.
 
 ### Step 31: SLURM prolog, epilog, and taskprolog scripts
 
 These scripts create the temporary directory in the scratch partition
 and set the appropriate permissions and environment variables.
-First, set up the script names in the slurm configuration:
+First, set up the script names in the SLURM configuration:
 ```
 #### /opt/slurm/slurm.conf
 ...
@@ -1174,9 +1186,12 @@ Prolog=/opt/slurm/prolog.sh
 TaskProlog=/opt/slurm/taskprolog.sh
 ...
 ```
-We will place these scripts in the shared opt partition so the compute
+We place these scripts in the shared opt partition so the compute
 nodes have access to exactly the same version as he head node. The
-scripts are:
+scripts create the `SLURM_TMPDIR` directory in the scratch partition
+(the SD card each compute node has) and set the appropriate
+environment variable. When the job finishes, the temporary directory
+is removed. They are:
 ```
 #### /opt/slurm/epilog.sh
 #! /bin/bash
@@ -1221,11 +1236,11 @@ head# scontrol reconfigure
 ### Step 32: Install Quantum ESPRESSO
 
 To show how the rPI cluster can be used to run scientific
-calculations, we will install one of the most popular packages for
-electronic structure calculations in periodic solids, Quantum
-ESPRESSO (QE). QE has been packaged in the Debian repository, so
-installing the program can be done via the package manager in the head
-node and in the chroot:
+calculations, we now install one of the most popular packages for
+electronic structure calculations in periodic solids, Quantum ESPRESSO
+(QE). QE has been packaged in the Debian repository, so installing the
+program can be done via the package manager in the head node and in
+the chroot:
 ```
 head# apt install quantum-espresso
 chroot# apt install quantum-espresso
