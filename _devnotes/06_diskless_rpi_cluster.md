@@ -188,7 +188,7 @@ head# apt full-upgrade
 ```
 This may take a while.
 
-### Step 5: Install a few basic pacakages
+### Step 5: Install a few basic packages
 
 We need the SSH server and client for connecting to the nodes, as
 well as editors and a few basic utilities. We do not need e-mail
@@ -561,7 +561,7 @@ compute# cp /lib/firmware/raspberrypi/bootloader/beta/pieeprom-2020-01-18.bin .
 ```
 and write its configuration to a file:
 ```
-compute# rpi-eeprrom-config pieeprom-2020-01-18.bin > boot.conf
+compute# rpi-eeprom-config pieeprom-2020-01-18.bin > boot.conf
 ```
 Edit the file and add the line:
 ```
@@ -572,7 +572,7 @@ BOOT_ORDER=0xf21
 to prioritize booting over the network. Then, write the image to the
 EEPROM:
 ```
-compute# rpi-eeprrom-config --out new.bin --config boot.conf pieeprom-2020-01-18.bin
+compute# rpi-eeprom-config --out new.bin --config boot.conf pieeprom-2020-01-18.bin
 compute# rpi-eeprom-update -d -f new.bin
 ```
 Lastly, find the MAC address of the compute node by doing:
@@ -1143,7 +1143,7 @@ shutting down all the nodes. Then boot up the head node and, once it
 is up, start all the compute nodes. Resume the compute nodes and check
 the scheduler is working with `sinfo -N`.
 
-### Step 30: submit a test job
+### Step 30: Submit a test job
 
 As a non-privileged user, submit a test job on the head node. The job
 can be:
