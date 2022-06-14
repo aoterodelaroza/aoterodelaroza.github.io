@@ -106,14 +106,14 @@ critic2_examples:
   - title: "Examples"
     url: /critic2/examples/
     children:
-      - title: "Crystal structure tools (CRYSTAL)"
-        url: /critic2/examples/#c2e-crystal
+      - title: "Critical points with Grids (AUTO)"
+        url: /critic2/examples/example_08_01_gridcps/
       - title: "Integration Using Grids (YT/BADER)"
-        url: /critic2/examples/#c2e-integrid
+        url: /critic2/examples/example_11_01_simple-integration/
       - title: "STM plots (STM)"
-        url: /critic2/examples/#c2e-stm
+        url: /critic2/examples/example_14_01_stmqe/
       - title: "Molecular Properties (MOLCALC)"
-        url: /critic2/examples/#c2e-molcalc
+        url: /critic2/examples/example_15_01_molcalc/
       - title: "Dev docs and tests"
         url: /critic2/examples/testfiles
 

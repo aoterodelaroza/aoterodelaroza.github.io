@@ -7,8 +7,10 @@ sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
 ---
- 
-## Crystal structure tools (CRYSTAL) {#c2e-crystal}
+
+## Locating Critical Points (AUTO)
+
+- [Locating critical points of densities given on grids](/critic2/examples/example_08_01_gridcps/)
 
 ## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
 
