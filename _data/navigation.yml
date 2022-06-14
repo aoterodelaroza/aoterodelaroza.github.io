@@ -22,6 +22,8 @@ critic2:
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
+      - title: "Software Compatibility"
+        url: /critic2/softwarecompat/
       - title: "List of Keywords"
         url: /critic2/syntax/
 
@@ -43,6 +45,8 @@ critic2_manual:
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
+      - title: "Software Compatibility"
+        url: /critic2/softwarecompat/
       - title: "List of Keywords"
         url: /critic2/syntax/
   - title: "Reference Manual"
@@ -93,6 +97,8 @@ critic2_examples:
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
+      - title: "Software Compatibility"
+        url: /critic2/softwarecompat/
       - title: "List of Keywords"
         url: /critic2/syntax/
   - title: "Reference Manual"
