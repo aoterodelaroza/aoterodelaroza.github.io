@@ -1,15 +1,15 @@
 ---
 layout: single
-title: "Raspberry Pi 4 model B diskless HPC cluster"
+title: "Building a Raspberry Pi HPC cluster"
 permalink: /devnotes/diskless-rpi-cluster/
 excerpt: >-
-  Instructions on how to build a diskless HPC cluster using Raspberry
-  Pi 4 model B computers.
+  Instructions on how to build a Raspberry Pi HPC cluster with
+  diskless Pi 4 model B computers as nodes.
 class: wide
 sidebar:
   - nav: "devnotes"
 toc: true
-toc_label: "Raspberry Pi 4 diskless HPC cluster"
+toc_label: "Raspberry Pi HPC cluster"
 toc_sticky: true
 ---
 
