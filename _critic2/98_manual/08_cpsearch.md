@@ -494,16 +494,12 @@ By far, the most problematic type of field for CP localization is a
 grid of values. The difficulty is in finding a way to calculate the
 first and second derivatives of the field at arbitrary points in space
 (i.e. doing an interpolation) in a way that is both accurate and
-smooth. Barring numerical noise from the grid, the TRICUBIC
-interpolant (which is the default) is quite adequate. Typically, all
-high-density critical points will be found. Critical points close to
-degenerate (i.e. that are near to other critical points), may appear
-as clusters, which is caused by the oscillations of the field
-derivatives in that region. It is strongly advised that the position
-of the critical points with respect to the structure is examined
-always (a graphical representation can be obtained using the CPREPORT
-keyword). A finer grid may help with the CP clustering, but this will
-increase the cost of the density calculation.
+smooth. These problems have been considered in a 2022 article
+([Otero-de-la-Roza, J. Chem. Phys. 156, 224116 (2022)](https://doi.org/10.1063/5.0090232))
+and in [this example](/critic2/examples/example_08_01_gridcps/). In
+short, if you are looking for the critical points of an all-electron
+density given on a grid, then the SMOOTHRHO interpolation is your best
+option.
 
 Regions where the value of the field is very small are subject to the
 appearance of many spurious critical points, due to the very small
@@ -794,3 +790,9 @@ with arithmetic expressions involving known fields. The keyword
 [CLEAR](/critic2/manual/arithmetics/#c2-clear)
 deletes all the properties in the list. The list of properties can be
 accesed at any time using POINTPROP LIST.
+
+## Examples
+
+- AUTO:
+
+  + [Locating Critical Points of Densities Given as Grids](/critic2/examples/example_08_01_gridcps/)
