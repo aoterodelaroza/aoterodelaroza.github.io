@@ -1260,7 +1260,7 @@ field. The isosurfaces are determined by the reference field and a
 contour (isosurface) value set by the user. This keyword can be used
 only if the reference field is given on a grid. The syntax is:
 ~~~
-ISOSURFACE {HIGHER|LOWER} isov.r] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
+ISOSURFACE {HIGHER|LOWER} isov.r [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
            [DISCARD expr.s]
 ~~~
 The ISOSURFACE keyword must be followed by either HIGHER or LOWER and

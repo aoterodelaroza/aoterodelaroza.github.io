@@ -435,7 +435,7 @@ INT_RADIAL [TYPE {GAULEG|QAGS|QNG|QAG}] [NR nr.i] [ABSERR err.r]
 [ISOSURFACE](/critic2/manual/integrate/#c2-isosurface)
 : Integration of regions bound by isosurfaces.
 ~~~
-ISOSURFACE {HIGHER|LOWER} isov.r] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
+ISOSURFACE {HIGHER|LOWER} isov.r [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]]
            [DISCARD expr.s]
 ~~~
 
