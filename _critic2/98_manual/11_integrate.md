@@ -1108,7 +1108,7 @@ COLOR_ALLOCATE {0|1}
   COLOR\_ALLOCATE is 1 if `maxlevel.i` is less than 9 and 0 if the
   maximum level is higher.
 
-## Yu and Trinkle method (YT) {#c2-yt}
+## Yu and Trinkle Grid Atomic Integration Method (YT) {#c2-yt}
 
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
@@ -1218,7 +1218,7 @@ INTEGRABLE and the field number is the way to go in such cases.
 Usage of the YT algorithm for grid fields is strongly recommended, as
 it is much more efficient, robust and accurate than the alternatives.
 
-## Henkelman et al. method (BADER) {#c2-bader}
+## Henkelman et al. Grid Atomic Integration Method (BADER) {#c2-bader}
 
 The algorithm by Henkelman et al. is implemented in critic2, and can
 be used with the BADER keyword:
@@ -1252,7 +1252,7 @@ Using BADER as an alternative to YT is recommended in very large
 grids because of its more efficient memory usage, but in general it
 gives less accurate integrations (at least in my experience).
 
-## Isosurface integration (ISOSURFACE) {#c2-isosurface}
+## Isosurface Grid Integration (ISOSURFACE) {#c2-isosurface}
 
 The ISOSURFACE keyword is used to integrate the volume and various
 scalar fields in regions delimited by isosurfaces of a scalar
@@ -1294,6 +1294,86 @@ instance, doing:
 DISCARD "@idnuc != 3"
 ~~~
 represents only the isosurface associated with atom number 3.
+
+## Hirshfeld Atomic Properties (HIRSHFELD) {#c2-hirshfeld}
+
+The [Hirshfeld property](https://doi.org/10.1063/1.2831900)
+associated with atom A for scalar field $$f({\bf r})$$ is calculated
+as:
+
+$$
+\begin{equation}
+F_{\rm A} = \int \frac{\rho_{\rm A}({\bf r})}{\rho_{\rm pro}({\bf r})}
+\times f({\bf r}) d{\bf r}
+\end{equation}
+$$
+
+where $$\rho_{\rm pro}$$ is the promolecular density (the sum of
+atomic densities) and $$\rho_{\rm A}$$ is in-vacuo atomic density for
+atom A. For instance, the Hirshfeld charge of atom A would be
+$$Z_{\rm A} - N_{\rm A}$$, where $$N_{\rm A}$$ is the Hirshfeld atomic
+integral for the all-electron density.
+
+Hirshfeld atomic properties can be calculated using the HIRSHFELD
+keyword:
+~~~
+HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
+~~~
+There are two ways in which this keyword operates. If the reference
+field is a grid, then a grid integration of all properties defined as
+[INTEGRABLE](/critic2/manual/integrate/#c2-integrable) is carried
+out. In the case of a grid integration, the input and output of
+HIRSHFELD resembles that of [YT](/critic2/manual/integrate/#c2-yt) and
+[BADER](/critic2/manual/integrate/#c2-bader). For this grid
+integration to be numerically sensible, the integrable scalar field
+must be reasonably smooth (for instance, the pseudo-density coming
+from a plane-wave calculation).
+
+The WCUBE option writes cube files for the Hirshfeld weights of each
+nucleus, with file names `<root>_wcube_xx.cube`, where `xx` is the
+atom identifier from the complete atom list. The ONLY keyword
+restricts the integration to only certain atoms, given by their
+identifiers from the complete atom list.
+
+If the reference field is not a grid, HIRSHFELD assumes the field
+contains the electron density and carries out the integration using
+the selected [molecular mesh](/critic2/manual/misc/#c2-meshtype). In
+this case, WCUBE and ONLY cannot be used, and only the volume and the
+Hirshfeld atomic electron populations are calculated.
+
+## Voronoi Atomic Properties (VORONOI) {#c2-voronoi}
+
+The [Voronoi property](https://doi.org/10.1002/jcc.10351)
+associated with atom A for scalar field $$f({\bf r})$$ is calculated
+as the integral of $$f$$ over all points in space that are closer to A
+than to any other atom (the Voronoi region). For instance, the
+[Voronoi deformation density]((https://doi.org/10.1002/jcc.10351))
+(VDD) of an atom is the integral of the electron density minus the
+promolecular density over its Voronoi region.
+
+Voronoi atomic properties can be calculated using the VORONOI keyword:
+~~~
+VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
+~~~
+Only the grid integration case has been implemented, so the reference
+field must be a grid. All properties defined as
+[INTEGRABLE](/critic2/manual/integrate/#c2-integrable) are integrated
+in the Voronoi regions, and the input and output of
+VORONOI resembles that of [YT](/critic2/manual/integrate/#c2-yt) and
+[BADER](/critic2/manual/integrate/#c2-bader). For this grid
+integration to be numerically sensible, the integrable scalar field
+must be reasonably smooth (for instance, the pseudo-density coming
+from a plane-wave calculation).
+
+The BASINS option writes a graphical representation of the Voronoi
+regions. The format can be chosen using the OBJ, PLY, and OFF keywords
+(default: OBJ). If an integer is given after the format selector
+(`ibasin.i`), then plot only the basin for that atom (identifier from
+the complete atom list). Otherwise, plot all of them. The basin
+surfaces are colored by the value of the reference field, in the
+default gnuplot scale. The ONLY keyword restricts the integration to
+only certain atoms, given by their identifiers from the complete atom
+list.
 
 ## Examples
 

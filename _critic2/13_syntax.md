@@ -28,7 +28,8 @@ toc_label: "List of keywords"
 | [POINTPROP](#key-pointprop)   | [RADII](#key-radii)           | [RDF](#key-rdf)                 | [REFERENCE](#key-reference)           | [RESET](#key-reset)                     | [ROOT](#key-root)                 |
 | [RUN](#key-run)               | [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole)     | [SPG](#key-spg)                       | [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) |
 | [STM](#key-stm)               | [SUM](#key-sum)               | [SYM](#key-sym)                 | [SYMM](#key-symm)                     | [SYSTEM](#key-system)                   | [UNITS](#key-units)               |
-| [UNLOAD](#key-unload)         | [VDW](#key-vdw)               | [WRITE](#key-write)             | [XDM](#key-xdm)                       | [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |
+| [UNLOAD](#key-unload)         | [VDW](#key-vdw)               | [VORONOI](#key-voronoi)         | [WRITE](#key-write)                   | [XDM](#key-xdm)                         | [YT](#key-yt)                     |
+| [ZPSP](#key-zpsp)             |                               |                                 |                                       |                                         |                                   |
 
 ## Notation
 
@@ -381,10 +382,10 @@ ENDGRDVEC/END
 ~~~
 
 <a id="key-hirshfeld"></a>
-[HIRSHFELD](/critic2/manual/misc/#c2-hirshfeld)
-: Calculate the Hirshfeld (stockholder) atomic volumes and electron populations.
+[HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld)
+: Calculate the Hirshfeld (stockholder) atomic properties.
 ~~~
-HIRSHFELD
+HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
 ~~~
 
 <a id="key-identify"></a>
@@ -920,6 +921,13 @@ UNLOAD {id.s|ALL}
 : Calculate the van der Waals volume of a crystal or molecule.
 ~~~
 VDW [PREC prec.r]
+~~~
+
+<a id="key-voronoi"></a>
+[VORONOI](/critic2/manual/integrate/#c2-voronoi)
+: Calculate atomic properties integrated in the atomic Voronoi regions.
+~~~
+VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
 ~~~
 
 <a id="key-write"></a>

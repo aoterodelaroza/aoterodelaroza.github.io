@@ -66,19 +66,6 @@ primitives, so they cannot be used with MOLCALC HF.
 The ASSIGN keyword can be used to save the result of the computation
 to a variable (`var.s`).
 
-## Hirshfeld Charges (HIRSHFELD) {#c2-hirshfeld}
-
-The HIRSHFELD keyword calculates the 
-[Hirshfeld atomic volumes and charges](https://doi.org/10.1063/1.2831900) 
-(strictly, electron populations) in the system:
-~~~
-HIRSHFELD
-~~~
-The HIRSHFELD keyword assumes the reference field contains the
-electron density. It has two variants. If the field is a grid and
-structure is a crystal, then the integration is carried out on the
-grid. Otherwise, an integration mesh is used.
-
 ## Characterization of Sigma-holes in Molecules (SIGMAHOLE) {#c2-sigmahole}
 
 The SIGMAHOLE keyword calculates the properties of a $$\sigma$$-hole
