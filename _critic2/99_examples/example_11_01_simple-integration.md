@@ -1,8 +1,8 @@
 ---
 layout: single
-title: "Integration of Atomic Charges and Volumes with Grids"
+title: "Integration of Atomic Properties with Grids"
 permalink: /critic2/examples/example_11_01_simple-integration/
-excerpt: "Integration of atomic charges and volumes with grids"
+excerpt: "Integration of atomic properties (charges and volumes) with grids"
 sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
@@ -10,21 +10,23 @@ toc: true
 toc_label: "Integration of Atomic Properties with Grids"
 ---
 
+## Bader Volumes and Charges {#c2-bader}
+
 <figure style="width: 15%" class="align-right">
   <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_11_01/urea_crystal.png" alt="Urea">
   <figcaption style="text-align: center">The urea crystal.</figcaption>
-</figure> 
+</figure>
 
-In this example, we examine how to compute Bader atomic charges and
-atomic volumes in periodic solids using different quantum chemistry
-software that uses plane-waves/pseudopotentials approach. For the
-integration, we will use the 
+In this example, we examine how to compute Bader atomic properties,
+specifically charges and volumes, in periodic solids using different
+electronic structure software using the plane-waves/pseudopotentials
+approach. For the integration, we use the
 [Yu-Trinkle method](/critic2/manual/integrate/#c2-yt) (YT keyword) but
-the same can be done with 
+the same can be done with
 [Henkelman et al.'s method](/critic2/manual/integrate/#c2-bader)
 (BADER keyword).
 
-As example, we will use the urea crystal. When it crystallizes, urea
+For illustration, we use the urea crystal. When it crystallizes, urea
 forms an orthorhombic molecular crystal with 16 atoms in the unit cell
 (2 molecules), shown on the right. There are chains of double hydrogen
 bonds all along the c axis, and all molecules in the crystal are
@@ -32,7 +34,7 @@ equivalent by symmetry.
 
 The input files necessary for this example can be generated from
 critic2's
-[internal library of structures](/critic2/manual/crystal/#c2-library). 
+[internal library of structures](/critic2/manual/crystal/#c2-library).
 For instance, to create a Quantum ESPRESSO input, we do:
 ~~~
 crystal library urea
@@ -47,27 +49,26 @@ crystal library urea
 write POSCAR
 write urea.abin
 ~~~
-Output formats for many other programs are 
+Output formats for many other programs are
 [supported as well](/critic2/manual/write/).
 
-## Quantum ESPRESSO
+### Quantum ESPRESSO
 
-### How it Works 
+#### How it Works
 
 [Quantum ESPRESSO](https://www.quantum-espresso.org/) does DFT
-calculations in periodic solids using plane waves and
-pseudopotentials. A typical calculation of the atomic charges has two
-steps. In the first step, you carry out the SCF calculation with the
-`pw.x` program on a `.scf.in` input file, such as the one generated in
-the example above. This generates the converged wavefunction, which is
-stored in QE's internal format.
+calculations in periodic solids using plane waves. A typical
+calculation of the atomic charges has two steps. In the first step,
+you carry out the SCF calculation with the `pw.x` program on a
+`.scf.in` input file, such as the one generated in the example
+above. This generates the converged wavefunction, which is stored in
+QE's internal format.
 
 To extract the densities you use the `pp.x` (post-process) program to
-ask QE to write the density on a three-dimensional grid. This is not
-an arbitrary choice of representation for the density: In a
+ask QE to write the density on a three-dimensional grid. (In a
 plane-waves code the density and wavefunctions are expressed naturally
-on uniform three-dimensional grids. `pp.x` generates two types of
-file formats for the 3d density grid: Gaussian cube files (`.cube`)
+as uniform three-dimensional grids.) `pp.x` generates two types of
+file formats for the 3D density grid: Gaussian cube files (`.cube`)
 and xcrysden's `.xsf` files. We will use the former, but critic2 can
 also understand and use `.xsf` files. Note that both cube and xsf
 files contain also the structural information, so you can use them to
@@ -93,7 +94,7 @@ the conversion to the all-electron wavefunctions is not lost, and
 therefore you keep the option of reconstructing the all-electron
 density. In recent versions of QE, this option is given by the
 `plot_num=21` option in `pp.x`. Here is an example input for `pp.x`
-that writes the reconstructed all-electron density to a cube file 
+that writes the reconstructed all-electron density to a cube file
 (`rhoae.cube`):
 ~~~
 &inputpp
@@ -127,12 +128,12 @@ pseudopotentials, `plot_num=0` will be the only option available to
 you and, in that case, the pseudo-density is used to calculate the
 shape of the atomic basins as well. Although not ideal, experience has
 shown that the calculated atomic charges are about the same as with
-the correct all-electron density, provided core augmentation is 
+the correct all-electron density, provided core augmentation is
 utilized.
 
 To summarize, to calculate atomic volumes and charges you do:
 
-### PAW calculation 
+#### PAW calculation
 
 If you ran a PAW calculation, get the all-electron density
 (`plot_num=21`, `rhoae.cube`) and the pseudo-density (`plot_num=0`,
@@ -148,9 +149,9 @@ yt
 The basins are given by the reference field (`rhoae.cube`, the first
 field loaded) and we define the second field (`rho.cube`) as the
 integrand. The YT keyword launches the calculation of atomic
-properties.
+properties. This is the preferred option.
 
-### PAW calculation (old QE version)
+#### PAW calculation (old QE version)
 
 If you ran a PAW calculation but your QE version is old and you do
 not have `plot_num=21`, then write the reconstructed valence density
@@ -175,7 +176,7 @@ contribution for the given number of core electrons is added by
 critic2 every time the field is evaluated using critic2's internal
 density tables.
 
-### NC or US pseudopotential calculation
+#### NC or US pseudopotential calculation
 
 If you ran a US or NC pseudopotential calculation, then you only
 have the pseudodensity (`plot_num=0`, `rho.cube`). In this case,
@@ -190,7 +191,7 @@ integrable 2
 yt
 ~~~
 
-## VASP
+### VASP
 
 To calculate Bader charges in VASP, you need to run the SCF
 calculation in the usual way, but including the following tag in the
@@ -205,7 +206,7 @@ basins, while the pseudo-density, contained in the `CHGCAR` file, is
 integrated in them.
 
 These operations can be all done within critic2 cheaply and without
-generating any additional files, using the following input:
+generating any additional files using the following input:
 ~~~
 crystal CHGCAR
 load AECCAR0
@@ -225,7 +226,7 @@ contains the all-electron density, and we set it as reference in order
 to have it generate the atomic basins. Finally, we load the `CHGCAR`
 file as field 4 and mark it as an integrand for our YT calculation.
 
-## Abinit
+### Abinit
 
 If you are using PAW datasets, then the reconstructed valence density
 can be obtained in abinit using:
@@ -234,10 +235,11 @@ prtden 2
 ~~~
 in the input file. This creates two density files: the pseudo-density
 (with suffix `_DEN`) and the reconstructed valence density
-(`_PAWDEN`). Currently, there is no way to obtain the all-electron
-density from abinit directly. In the case of a non-PAW calculation,
-using either norm-conserving or ultrasoft pseudopotentials, then
-`prtden 2` is not available and you have to use:
+(`_PAWDEN`). Currently, there is no easy way to obtain the
+all-electron density from abinit directly. In the case of a non-PAW
+calculation, using either norm-conserving or ultrasoft
+pseudopotentials, then `prtden 2` is not available and you have to
+use:
 ~~~
 prtden 1
 ~~~
@@ -264,9 +266,9 @@ loaded as the second field and integrated inside the basins.
 If you ran a non-PAW calculation, then replace the `_PAWDEN` file with
 the `_DEN` file in the input above.
 
-## Output for urea
+### Output for urea
 
-The outputs from all the calculations above are very similar. 
+The outputs from all the calculations above are very similar.
 The main table containing the results of the integration appears right
 at the end of the output:
 ~~~
@@ -293,9 +295,9 @@ at the end of the output:
 ------------------------------------------------------------------------------------------------
   Sum                            9.68231575E+02  6.44815761E+01 -1.12894416E-12  4.80003598E+01
 ~~~
-In this table, critic lists the 16 attractors it found, which in this
+In this table, critic2 lists the 16 attractors it found, which in this
 case are all associated to atoms in the system (there are no
-non-nuclear maxima). In addition, it gives the following columns: the
+non-nuclear maxima). It also gives the following columns: the
 calculated atomic volumes (`Volume`), the all-electron density
 integrated in its basins (`Pop`), the Laplacian of the all-electron
 density (`Lap`), and the integral of field number 2 (the
@@ -305,14 +307,14 @@ equals the pseudopotential charge minus the valence electron
 population. For instance, the charge for carbon in this system would
 be $$Z_{\rm psps} - N = 4 - 2.19 = 1.81$$.
 
-Because critic2 detects that urea is a molecular crystal, it will also 
+Because critic2 detects that urea is a molecular crystal, it will also
 helpfully list for you the integrated properties of the molecules as a
 whole:
 ~~~
 * Integrated molecular properties
 # (See key above for interpretation of column headings.)
 # Integrable properties 1 to 4
-# Mol     Volume            Pop             Lap             $2       
+# Mol     Volume            Pop             Lap             $2
   1     4.84115787E+02  3.22407881E+01 -1.12265058E-12  2.40001799E+01
   2     4.84115787E+02  3.22407881E+01 -6.32133235E-15  2.40001799E+01
 ~~~
@@ -322,18 +324,13 @@ cell. Because they are equivalent by symmetry, their volumes and
 electron populations are the same and the charge is zero (the sum of
 the pseudopotential charges in each molecule is 24).
 
-## Example files package
-
-Files: [example_11_01.tar.xz](/assets/critic2/example_11_01/example_11_01.tar.xz).
-Run the examples as follows:
-
 - QE/PAW calculation (`qe_paw`):
 ~~~
 ## generate the pseudopotentials first
-ld1.x < h.in 
-ld1.x < c.in 
-ld1.x < n.in 
-ld1.x < o.in 
+ld1.x < h.in
+ld1.x < c.in
+ld1.x < n.in
+ld1.x < o.in
 ## run the SCF calculation
 pw.x < urea.scf.in > urea.scf.out
 ## get the densities
@@ -346,14 +343,14 @@ critic2 urea.cri urea.cro
   If the `rhoae.cube` was not generated, you are using an old version
   of QE. In that case, edit `urea.cri`, comment out the first block
   and uncomment the second block.
-  
+
 - QE/NC or US calculation (`qe_nc` and `qe_us`):
 ~~~
 ## generate the pseudopotentials first
-ld1.x < h.in 
-ld1.x < c.in 
-ld1.x < n.in 
-ld1.x < o.in 
+ld1.x < h.in
+ld1.x < c.in
+ld1.x < n.in
+ld1.x < o.in
 ## run the SCF calculation
 pw.x < urea.scf.in > urea.scf.out
 ## get the density
@@ -375,13 +372,136 @@ abinit ## or abinis/abinip if you are running a really old version
 critic2 urea.cri
 ~~~
 
+## Hirshfeld Charges {#c2-hirshfeld}
+
+[Hirshfeld volumes and atomic charges](https://doi.org/10.1063/1.2831900)
+can be calculated by grid integration using the
+[HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld) keyword. The
+reference field must be a grid, and the integration is carried out on
+a grid with the same dimensions. For instance, for the urea example
+above calculated using QE and PAW, the Hirshfeld atomic properties can
+be obtained with:
+~~~
+crystal rho.cube
+load rho.cube
+hirshfeld
+~~~
+The result is very similar to the output of a Bader integrations:
+~~~
+* Integrated atomic properties
+# Id   cp   ncp   Name  Z   mult     Volume            Pop             Lap
+  1    1    1      C_   6   --   7.62964463E+01  3.82743786E+00  2.62543556E+00
+[...]
+  3    3    2      H_   1   --   4.72868033E+01  9.06486107E-01  9.22335042E-01
+[...]
+  11   11   4      O_   8   --   6.85164260E+01  6.22599870E+00 -2.51562267E+00
+[...]
+  13   13   5      N_   7   --   7.89839953E+01  5.16616905E+00 -1.85443836E+00
+[...]
+~~~
+where "Pop" is the integral of the reference field and "Lap" the
+integral of its Laplacian. Since the reference field is the
+pseudo-density, "Pop" is the integrated Hirshfeld electron population
+in the corresponding atoms. In this calculation, the PAW datasets used
+for C, H, N, and O have 4, 1, 5, and 6 valence electrons
+respectively. Therefore, the Hirshfeld charges are: C = 6 - 3.827 =
+2.173, H = 1 - 0.906 = 0.094, O = 6 - 6.226 = -0.226, and N = 5 -
+5.166 = -0.166.
+
+## Voronoi Deformation Density Charges {#c2-voronoi}
+
+The deformation density is the electron density minus the promolecular
+density. The [Voronoi deformation density (VDD) charges](https://doi.org/10.1002/jcc.10351)
+are calculated by integrating the deformation density in the Voronoi
+region of an atom, the set of points closer to that atom than to any
+other.
+
+Atomic integrations in the Voronoi regions can be carried out using the
+[VORONOI](/critic2/manual/integrate/#c2-voronoi) keyword. The Voronoi
+integrations are always done on grids, so the reference field must be
+a grid, and the integration is carried out on a grid of the same
+dimesions as the reference. Only smooth (slowly varying) scalar fields
+should be integrated on a grid; otherwise the numerical integration
+error will be too high.
+
+Although the deformation density can be calculated using critic2's
+promolecular density (accesible with `$0`), it is better if the
+program that generates the self-consistent density also writes a
+promolecular density calculated with the same method. Two examples of
+how to do this are given below: with Quantum ESPRESSO and with VASP.
+
+### Quantum ESPRESSO
+
+For the urea example above, using Quantum ESPRESSO and PAW, the
+deformation density can be written by using the `plot_num=9` option in
+`pp.x`. Assuming the resulting cube file is written to `rhodef.cube`,
+the VDD charges can be calculated using:
+~~~
+crystal rhodef.cube
+load rhodef.cube
+voronoi
+~~~
+The output of Voronoi is similar to the Bader integration methods:
+~~~
+* Integrated atomic properties
+# Id   cp   ncp   Name  Z   mult     Volume            Pop             Lap
+  1    1    1      C_   6   --   4.63970561E+01 -1.78359676E-01  5.87903902E-01
+[...]
+  3    3    2      H_   1   --   8.37458327E+01 -1.32918872E-01 -8.45737309E-02
+[...]
+  11   11   4      O_   8   --   5.08817985E+01  3.33187749E-01 -6.18843287E-01
+[...]
+  13   13   5      N_   7   --   3.72016928E+01  1.87642259E-01  2.14109814E-01
+[...]
+--------------------------------------------------------------------------------
+  Sum                            9.68231575E+02  1.87698750E-04 -1.15463195E-14
+~~~
+In this output, the "Pop" column is the reference field
+(`rhodef.cube`) calculated in the Voronoi regions of each atom.
+The VDD charges are minus this value, i.e.: C = 0.178,
+H = 0.133, O = -0.332, N = -0.188. It is important to check the sum of
+the VDD charges is zero, in the last row. This value is an
+indicator of the numerical error incurred by the grid integration.
+
+### VASP
+
+Using the `LAECHG` tag, it is possible to have VASP write the
+reconstructed valence density (`AECCAR2`) and the valence promolecular
+density (`AECCAR1`). To calculate the VDD charges, read both files as
+scalar fields and then take the difference (promolecular minus
+self-consistent):
+~~~
+crystal AECCAR1
+load AECCAR1
+load AECCAR2
+load as "$1-$2"
+~~~
+Then set the newly created grid as reference and integrate it in the
+Voronoi regions.
+~~~
+reference 3
+voronoi
+~~~
+The "Pop" column contains the VDD charges. As in the case of QE, it is
+important to check that the sum of the VDD charges is close to zero,
+to make sure the numerical error from the grid integration is not too
+high.
+
+## Example files package
+
+Files: [example_11_01.tar.xz](/assets/critic2/example_11_01/example_11_01.tar.xz).
+
 ## Manual pages
 
 - [The reference field](/critic2/manual/fields/#c2-reference)
+
+- [Marking fields or expressions as integrable quantities](/critic2/manual/integrate/#c2-integrable)
 
 - [Yu and Trinkle method (YT)](/critic2/manual/integrate/#c2-yt)
 
 - [Henkelman et al. method (BADER)](/critic2/manual/integrate/#c2-bader)
 
-- [Marking fields or expressions as integrable quantities](/critic2/manual/integrate/#c2-integrable)
+- [The VORONOI keyword](/critic2/manual/integrate/#c2-voronoi)
+
+- [The HIRSHFELD keyword](/critic2/manual/integrate/#c2-hirshfeld)
 

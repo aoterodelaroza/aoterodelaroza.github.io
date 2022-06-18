@@ -1218,6 +1218,9 @@ INTEGRABLE and the field number is the way to go in such cases.
 Usage of the YT algorithm for grid fields is strongly recommended, as
 it is much more efficient, robust and accurate than the alternatives.
 
+For examples see the [calculation of Bader atomic
+properties](/critic2/examples/example_11_01_simple-integration/#c2-bader).
+
 ## Henkelman et al. Grid Atomic Integration Method (BADER) {#c2-bader}
 
 The algorithm by Henkelman et al. is implemented in critic2, and can
@@ -1251,6 +1254,9 @@ YT, except in the following cases:
 Using BADER as an alternative to YT is recommended in very large
 grids because of its more efficient memory usage, but in general it
 gives less accurate integrations (at least in my experience).
+
+For examples see the [calculation of Bader atomic
+properties](/critic2/examples/example_11_01_simple-integration/#c2-bader).
 
 ## Isosurface Grid Integration (ISOSURFACE) {#c2-isosurface}
 
@@ -1341,14 +1347,17 @@ the selected [molecular mesh](/critic2/manual/misc/#c2-meshtype). In
 this case, WCUBE and ONLY cannot be used, and only the volume and the
 Hirshfeld atomic electron populations are calculated.
 
+For an example see the [calculation of Hirshfeld
+charges](/critic2/examples/example_11_01_simple-integration/#c2-hirshfeld).
+
 ## Voronoi Atomic Properties (VORONOI) {#c2-voronoi}
 
 The [Voronoi property](https://doi.org/10.1002/jcc.10351)
 associated with atom A for scalar field $$f({\bf r})$$ is calculated
 as the integral of $$f$$ over all points in space that are closer to A
 than to any other atom (the Voronoi region). For instance, the
-[Voronoi deformation density]((https://doi.org/10.1002/jcc.10351))
-(VDD) of an atom is the integral of the electron density minus the
+[Voronoi deformation density](https://doi.org/10.1002/jcc.10351) (VDD)
+of an atom is minus the integral of the electron density minus the
 promolecular density over its Voronoi region.
 
 Voronoi atomic properties can be calculated using the VORONOI keyword:
@@ -1375,8 +1384,13 @@ default gnuplot scale. The ONLY keyword restricts the integration to
 only certain atoms, given by their identifiers from the complete atom
 list.
 
+For an example see the [calculation of Voronoi deformation density
+(VDD) charges](/critic2/examples/example_11_01_simple-integration/#c2-voronoi).
+
 ## Examples
 
 - YT and BADER:
 
   + [Integration of atomic charges and volumes with grids](/critic2/examples/example_11_01_simple-integration/)
+
+  + [Calculation of delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/) for the

@@ -14,7 +14,7 @@ sidebar:
 
 ## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
 
-- [Integration of atomic charges and volumes with grids](/critic2/examples/example_11_01_simple-integration/)
+- [Integration of atomic properties with grids](/critic2/examples/example_11_01_simple-integration/)
 
 - [Delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/)
 
