@@ -20,7 +20,7 @@ LOAD file.cube
 LOAD file.bincube
 LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
            GDEN2|GDEN3|LDEN|KDEN}
-LOAD [file.]{CHGCAR|CHG|AECCAR0|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
+LOAD [file.]{CHGCAR|CHG|AECCAR0|AECCAR1|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD {[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
@@ -86,7 +86,7 @@ extension to decide which format should be used for the reading:
 
 * `_DEN`, `_PAWDEN`, `_ELF`,... for abinit grids.
 
-* `CHGCAR`, `AECCAR0`, `AECCAR2`, `CHG`, or `ELFCAR` for VASP grids.
+* `CHGCAR`, `AECCAR*`, `CHG`, or `ELFCAR` for VASP grids.
 
 * `.qub` for aimpac grids.
 
@@ -148,7 +148,7 @@ prtkden, `_KDEN`), the Hartree potential (prtvha, `_VHA`), the Hartree
 plus xc potential (prtvhxc, `_VHXC`), and the total potential (prtpot,
 `_POT`).
 
-### VASP Files (CHGCAR, AECCAR0, AECCAR2, CHG, ELFCAR)
+### VASP Files (CHGCAR, AECCAR*, CHG, ELFCAR)
 
 VASP fields can come in two varieties. The `CHGCAR`, `CHG`, and
 `AECCAR*` files give grid values in a higher precision and multiplied
