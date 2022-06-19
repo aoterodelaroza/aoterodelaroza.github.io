@@ -467,9 +467,10 @@ indicator of the numerical error incurred by the grid integration.
 
 Using the `LAECHG` tag, it is possible to have VASP write the
 reconstructed valence density (`AECCAR2`) and the valence promolecular
-density (`AECCAR1`). To calculate the VDD charges, read both files as
-scalar fields and then take the difference (promolecular minus
-self-consistent):
+density (`AECCAR1`). (For the `AECCAR1` to be written correctly,
+`ADDGRID` must not be `.TRUE.`.) To calculate the VDD charges, read
+both files as scalar fields and then take the difference (promolecular
+minus self-consistent):
 ~~~
 crystal AECCAR1
 load AECCAR1
