@@ -8,21 +8,21 @@ sidebar:
     nav: "critic2_examples"
 ---
 
-## Locating Critical Points (AUTO)
+## Critical Points
 
 - [Locating critical points of densities given on grids](/critic2/examples/example_08_01_gridcps/)
 
-## Integration of Atomic Properties Using Grids (YT/BADER) {#c2e-integrid}
+## Integration of Atomic Properties {#c2e-integrid}
 
 - [Integration of atomic properties with grids](/critic2/examples/example_11_01_simple-integration/)
 
 - [Delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/)
 
-## STM plots (STM) {#c2e-stm}
+## STM plots {#c2e-stm}
 
-- [Making STM plots with Quantum ESPRESSO and critic2](/critic2/examples/example_14_01_stmqe/)
+- [Making STM plots with Quantum ESPRESSO](/critic2/examples/example_14_01_stmqe/)
 
-## Calculation of Molecular Properties (MOLCALC) {#c2e-molcalc}
+## Calculation of Molecular Properties {#c2e-molcalc}
 
 - [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)
 

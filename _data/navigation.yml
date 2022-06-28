@@ -106,15 +106,15 @@ critic2_examples:
   - title: "Examples"
     url: /critic2/examples/
     children:
-      - title: "Critical points with Grids (AUTO)"
+      - title: "Critical points with Grids"
         url: /critic2/examples/example_08_01_gridcps/
       - title: "Atomic Integration Using Grids"
         url: /critic2/examples/example_11_01_simple-integration/
       - title: "Delocalization Indices"
         url: /critic2/examples/example_11_10_deloc-indices/
-      - title: "STM plots (STM)"
+      - title: "STM Plots"
         url: /critic2/examples/example_14_01_stmqe/
-      - title: "Molecular Properties (MOLCALC)"
+      - title: "Molecular Properties"
         url: /critic2/examples/example_15_01_molcalc/
       - title: "Dev docs and tests"
         url: /critic2/examples/testfiles
