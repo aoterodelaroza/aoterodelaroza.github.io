@@ -296,6 +296,11 @@ fragments.
 
 Some tips for using the NCIPLOT keyword efficiently:
 
+* If the reference field is a grid, the system is periodic (i.e. the
+  structure was read with CRYSTAL) and no FRAGMENT keyword is used,
+  the dimensions of the grids used in NCIPLOT are the same as the
+  reference field.
+
 * If the reference field that provides the density for NCIPLOT is a
   grid field, then it is usually much faster if core-augmentation
   (ZPSP and the CORE field option) is not used. The reason is that if
