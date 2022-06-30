@@ -18,6 +18,10 @@ sidebar:
 
 - [Delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/)
 
+## NCI plots {#c2e-nci}
+
+- [Making NCI Plots in molecules, surfaces, and solids](/critic2/examples/example_12_01_simple-nciplot/)
+
 ## STM plots {#c2e-stm}
 
 - [Making STM plots with Quantum ESPRESSO](/critic2/examples/example_14_01_stmqe/)

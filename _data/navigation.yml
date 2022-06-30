@@ -112,6 +112,8 @@ critic2_examples:
         url: /critic2/examples/example_11_01_simple-integration/
       - title: "Delocalization Indices"
         url: /critic2/examples/example_11_10_deloc-indices/
+      - title: "NCI Plots"
+        url: /critic2/examples/example_12_01_simple-nciplot/
       - title: "STM Plots"
         url: /critic2/examples/example_14_01_stmqe/
       - title: "Molecular Properties"
