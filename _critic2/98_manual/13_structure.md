@@ -114,13 +114,27 @@ contribution to the RDF would be significant. In a `SOFT` RDF, all
 peaks are computed and represented, even if the maximum is outside the
 plot range. Default: `SOFT`.
 
+## Average Minimum Distances (AMD) {#c2-amd}
+
+The AMD keyword calculates the average minimum distances
+vector. Element i in this vector corresponds to the average of all the
+i-th nearest-neighbor distances in the crystal or molecule. The AMD
+has been proposed as a way to compare crystal structures in
+[Widdowson et al., Match. Commun. Math. Comput. Chem., 87 (2022) 529](http://dx.doi.org/10.46793/match.87-3.529W).
+~~~
+AMD [nnmax.i]
+~~~
+The AMD is calculate up to a maximum number of nearest-neighbors equal
+to `nnmax.i` (default: 100). In a molecule, `nnmax.i` is capped at the
+number of atoms in the molecule minus one.
+
 ## Compare Crystal and Molecular Structures (COMPARE) {#c2-compare}
 
 The COMPARE keyword compares two or more structures:
 ~~~
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
-COMPARE ... [POWDER|RDF] [XEND xend.r] [SIGMA sigma.r]  ## crystals
+COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.
@@ -138,20 +152,31 @@ the structures are compared as molecules. If any one of the structures
 is a crystal or if the CRYSTAL keyword is used, a crystal comparison
 is carried out.
 
-There are two ways of calculating a comparison between crystals, based
-on the radial distribution functions (RDF keyword) or the powder
-diffraction patterns (POWDER keyword). The default is POWDER.
-In both cases, COMPARE finds the measure of similarity (DIFF) based on
-the corresponding functions (RDF or diffractogram).
-Two crystal structures are exactly equal if `DIFF = 0`. Maximum
-dissimilarity occurs when `DIFF = 1`.  The crystal similarity
-measure is calculated using the cross-correlation functions defined in
+There are three ways of calculating a comparison between crystals: based
+on the radial distribution functions
+([RDF](/critic2/manual/structure/#c2-rdf) keyword), the powder
+diffraction patterns ([POWDER](/critic2/manual/structure/#c2-powder)
+keyword), or the average minimum distances
+([AMD](/critic2/manual/structure/#c2-amd) keyword).
+The default is POWDER. In all cases, COMPARE finds the measure of
+similarity (DIFF) based on the corresponding functions (RDF,
+diffractogram, AMD).  Two crystal structures are exactly equal if
+`DIFF = 0`. Maximum dissimilarity occurs when `DIFF = 1`.  In the case
+of RDF and POWDER, the crystal similarity measure is calculated using
+the cross-correlation functions defined in
 [de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0),
-with the triangle weight. Powder diffraction patterns are calculated
-from $$2\theta = 5$$ up to `xend.r` (XEND keyword, default:
-50). Radial distribution functions are calculated from zero up to
-`xend.r` bohr (XEND keyword, default: 25 bohr). SIGMA is the Gaussian
-broadening parameter for the powder diffraction or RDF peaks.
+with the triangle weight. In AMD, the dissimilarity is calculated by
+default as the infinite-norm of the two AMD vectors (the maximum of
+the absolute values of the differences). This can be change to the
+1-norm (the sum of the absolute values) or the 2-norm (the Euclidean
+distance) using the NORM keyword.
+
+Powder diffraction patterns are calculated from $$2\theta = 5$$ up to
+`xend.r` (XEND keyword, default: 50). Radial distribution functions
+are calculated from zero up to `xend.r` bohr (XEND keyword, default:
+25 bohr). SIGMA is the Gaussian broadening parameter for the powder
+diffraction or RDF peaks. AMD vectors are calculated up to a maximum
+of 100 nearest neighbors.
 
 For the molecular comparison, there are several options. If the SORTED
 keyword is used, the atomic sequence in each molecule is assumed to be
