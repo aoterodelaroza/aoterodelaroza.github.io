@@ -169,7 +169,8 @@ with the triangle weight. In AMD, the dissimilarity is calculated by
 default as the infinite-norm of the two AMD vectors (the maximum of
 the absolute values of the differences). This can be change to the
 1-norm (the sum of the absolute values) or the 2-norm (the Euclidean
-distance) using the NORM keyword.
+distance) using the NORM keyword. The AMD dissimilarity is in atomic
+units (bohr).
 
 Powder diffraction patterns are calculated from $$2\theta = 5$$ up to
 `xend.r` (XEND keyword, default: 50). Radial distribution functions
