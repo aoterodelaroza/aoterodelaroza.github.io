@@ -72,7 +72,7 @@ In the entries below, we use:
 * `id.s`: field identifier (string or integer ID).
 
 <a id="key-amd"></a>
-[ATOMLABEL](/critic2/manual/structure/#c2-amd)
+[AMD](/critic2/manual/structure/#c2-amd)
 : Calculate the average minimum distances vector.
 ~~~
 AMD [nnmax.i]
