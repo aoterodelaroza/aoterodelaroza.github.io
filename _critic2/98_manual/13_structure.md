@@ -135,6 +135,7 @@ The COMPARE keyword compares two or more structures:
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
 COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
+COMPARE ... [NOH]
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.
@@ -143,7 +144,9 @@ The structures can be given as external files (`file1.s`,
 the file format is identified using the file extension or its contents
 if the extension is not enough. If a dot (".") is used instead of a
 file name, the current structure (previously loaded with
-CRYSTAL/MOLECULE) is used.
+CRYSTAL/MOLECULE) is used. If the NOH keyword is used, either with
+molecules or crystals, the hydrogen atoms are stripped from the
+structures before running the comparison.
 
 There are two distinct modes of operation in COMPARE, depending on
 whether a molecular or crystal comparison is carried out. If the
