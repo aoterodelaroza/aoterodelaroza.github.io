@@ -60,6 +60,9 @@ Arithmetic expressions can contain:
 
 * Operators: `+`, `-`, `*`, `/`, `**` or `^`, `%` (modulo)
 
+* Relational and binary operators (return 1 if true and 0 if false):
+  `<`, `>`, `==`, `<=`, `>=`, `!=`, `&&`, `||`.
+
 * [Functions](/critic2/manual/arithmetics/#availchemfun): the usual
   mathematical functions (`sin`, `exp`, etc.) as well as "chemical
   functions".
