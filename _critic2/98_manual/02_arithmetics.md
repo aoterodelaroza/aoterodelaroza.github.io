@@ -458,6 +458,14 @@ critic2:
   arithmetic expression is being evaluated (crystallographic
   coordinates in the reduced unit cell).
 
+* `x`, `y`, `z`: the x,y,z coordinates of the point where the
+  arithmetic expression is being evaluated. If the system is a
+  crystal, they are fractional coordinates (same as `xx`, `yx`,
+  `zx`). If the system is a molecule, they are Cartesian coordinates
+  referred to the molecular center and with units of angstrom (same as
+  `xm`, `ym`, `zm`). This is often the most intuitive choice of
+  coordinates.
+
 * `idnuc`: complete-list ID of the closest nucleus.[^struvar]
 
 * `nidnuc`: non-equivalent list ID of the closest nucleus.[^struvar]
