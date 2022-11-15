@@ -140,11 +140,11 @@ COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.
 The structures can be given as external files (`file1.s`,
-`file2.s`,...). The behavior is the same as in CRYSTAL and MOLECULE:
-the file format is identified using the file extension or its contents
-if the extension is not enough. If a dot (".") is used instead of a
-file name, the current structure (previously loaded with
-CRYSTAL/MOLECULE) is used.
+`file2.s`,...). The behavior regarding the input format is the same as
+in CRYSTAL and MOLECULE: the file format is identified using the file
+extension or its contents if the extension is not enough. If a dot
+(".") is used instead of a file name, the current structure
+(previously loaded with CRYSTAL/MOLECULE) is used.
 
 There are two distinct modes of operation in COMPARE, depending on
 whether a molecular or crystal comparison is carried out. If the
@@ -237,6 +237,49 @@ The ULLMANN method is the default if the number and types of atoms in
 the molecules being compared are the same. If this is not the case, or
 if the RDF keyword is used, then radial distribution functions are
 employed and the comparison is similar to how RDF works in crystals.
+
+## Compare Crystal Structures Allowing Cell Deformations (COMPAREVC) {#c2-comparevc}
+
+The COMPAREVC keyword (variable-cell compare) is used to compare two
+crystal structures allowing one of them to have its lattice deformed
+to match the lattice of the other. This is useful when comparing
+structures that have very similar motifs but slightly mismatched
+lattices as a result of, for instance, deformations caused by
+temperature or pressure effects. In particular, COMPAREVC can be used
+to compare calculated equilibrium structures with experimental
+structures.
+
+The COMPAREVC method works by exploring the set of lattice basis
+changes that transform the reduced cell of the first crystal into the
+reduced cell of the second crystal. For each transformation, the cell
+parameters are then forced to be equal, and the similarity is
+calculated using a cross-correlation function (the POWDIFF option in
+the [COMPARE](#c2-compare) keyword). The lowest POWDIFF found in this
+way is the calculated variable-cell similarity measure
+(VC-POWDIFF). The algorithm is described in detail in
+[Mayo et al., CrystEngComm (2022)](https://doi.org/10.1039/D2CE01080A).
+
+The syntax of the COMPAREVC keyword is:
+~~~
+COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAXANG ma.r]
+~~~
+The structures contained in `file1.s` and `file2.s` are compared using
+the variable-cell comparison algorithm. The behavior regarding the
+input format is the same as in CRYSTAL and MOLECULE: the file format
+is identified using the file extension or its contents if the
+extension is not enough. If a dot (".") is used instead of a file
+name, the current structure (previously loaded with CRYSTAL/MOLECULE)
+is used.
+
+There are several optional keyword to COMPAREVC. If THR is given, stop
+the comparison if the calculated similarity measure (VC-POWDIFF) is
+lower than thr.r. This is useful for speeding up calculations in which
+we set a threshold below which we accept two crystal structures are
+equal. If WRITE, write the transformed structure to a SHELX file. If
+NOH, remove the hydrogens from both structures before comparing. The
+MAXELONG and MAXANG options control the maximum elongation and maximum
+angle change allowed for the cell deformation. By default, they are
+30% and 20 degrees, respectively.
 
 ## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 
