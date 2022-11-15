@@ -133,9 +133,9 @@ number of atoms in the molecule minus one.
 The COMPARE keyword compares two or more structures:
 ~~~
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
-COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
+COMPARE ... [MOLECULE|CRYSTAL]
+COMPARE ... [REDUCE eps.r] [NOH]
 COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
-COMPARE ... [NOH]
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.
@@ -144,19 +144,38 @@ The structures can be given as external files (`file1.s`,
 the file format is identified using the file extension or its contents
 if the extension is not enough. If a dot (".") is used instead of a
 file name, the current structure (previously loaded with
-CRYSTAL/MOLECULE) is used. If the NOH keyword is used, either with
-molecules or crystals, the hydrogen atoms are stripped from the
-structures before running the comparison.
+CRYSTAL/MOLECULE) is used.
 
 There are two distinct modes of operation in COMPARE, depending on
 whether a molecular or crystal comparison is carried out. If the
 structures are all molecules or if the MOLECULE keyword is used, then
 the structures are compared as molecules. If any one of the structures
 is a crystal or if the CRYSTAL keyword is used, a crystal comparison
-is carried out.
+is done.
 
-There are three ways of calculating a comparison between crystals: based
-on the radial distribution functions
+If the NOH keyword is used, either with molecules or crystals, the
+hydrogen atoms are stripped from the structures before running the
+comparison.
+
+If more than two structures are used in COMPARE, critic2 will compare
+each pair of structures and present the resulting similarity
+matrix. Alternatively, if the REDUCE keyword is used, a threshold
+(`eps.r`) is applied to determine whether two structures are equal or
+not. Critic2 then prints a list of unique structures and repeated
+structures in the output.
+
+The COMPARE keyword does not require a previous CRYSTAL or MOLECULE
+keyword. Hence, valid critic2 inputs would be:
+~~~
+COMPARE bleh1.scf.in bleh2.cif
+COMPARE bleh1.xyz bleh2.wfx
+~~~
+provided the files exist.
+
+#### Crystal Comparison
+
+There are three ways of calculating a comparison between crystals:
+based on the radial distribution functions
 ([RDF](/critic2/manual/structure/#c2-rdf) keyword), the powder
 diffraction patterns ([POWDER](/critic2/manual/structure/#c2-powder)
 keyword), or the average minimum distances
@@ -181,6 +200,8 @@ are calculated from zero up to `xend.r` bohr (XEND keyword, default:
 25 bohr). SIGMA is the Gaussian broadening parameter for the powder
 diffraction or RDF peaks. AMD vectors are calculated up to a maximum
 of 100 nearest neighbors.
+
+#### Molecular Comparison
 
 For the molecular comparison, there are several options. If the SORTED
 keyword is used, the atomic sequence in each molecule is assumed to be
@@ -216,21 +237,6 @@ The ULLMANN method is the default if the number and types of atoms in
 the molecules being compared are the same. If this is not the case, or
 if the RDF keyword is used, then radial distribution functions are
 employed and the comparison is similar to how RDF works in crystals.
-
-Lastly, if more than two structures are used in COMPARE, critic2 will
-compare each pair of structures and present the resulting similarity
-matrix. Alternatively, if the REDUCE keyword is used, then a threshold
-(`eps.r`) is applied to determine whether two structures are equal or
-not. Critic2 then prints a list of unique structures and repeated
-structures in the output.
-
-The COMPARE keyword does not require a previous CRYSTAL or MOLECULE
-keyword. Hence, valid critic2 inputs would be:
-~~~
-COMPARE bleh1.scf.in bleh2.cif
-COMPARE bleh1.xyz bleh2.wfx
-~~~
-provided the files exist.
 
 ## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 

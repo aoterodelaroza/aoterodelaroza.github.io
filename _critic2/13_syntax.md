@@ -169,9 +169,9 @@ CLEAR {var1.s var2.s ...|ALL}
 : Compare two or more crystal or molecular structures.
 ~~~
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
-COMPARE ... [MOLECULE|CRYSTAL] [REDUCE eps.r]
+COMPARE ... [MOLECULE|CRYSTAL]
+COMPARE ... [REDUCE eps.r] [NOH]
 COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
-COMPARE ... [NOH]
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 
