@@ -172,7 +172,7 @@ COMPARE bleh1.xyz bleh2.wfx
 ~~~
 provided the files exist.
 
-#### Crystal Comparison
+### Crystal Comparison
 
 There are three ways of calculating a comparison between crystals:
 based on the radial distribution functions
@@ -201,7 +201,7 @@ are calculated from zero up to `xend.r` bohr (XEND keyword, default:
 diffraction or RDF peaks. AMD vectors are calculated up to a maximum
 of 100 nearest neighbors.
 
-#### Molecular Comparison
+### Molecular Comparison
 
 For the molecular comparison, there are several options. If the SORTED
 keyword is used, the atomic sequence in each molecule is assumed to be
