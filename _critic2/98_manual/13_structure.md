@@ -258,6 +258,8 @@ the [COMPARE](#c2-compare) keyword). The lowest POWDIFF found in this
 way is the calculated variable-cell similarity measure
 (VC-POWDIFF). The algorithm is described in detail in
 [Mayo et al., CrystEngComm (2022)](https://doi.org/10.1039/D2CE01080A).
+The COMPAREVC keyword corresponds to the VC-PWDF (variable-cell
+POWDIFF) described in the article.
 
 The syntax of the COMPAREVC keyword is:
 ~~~
