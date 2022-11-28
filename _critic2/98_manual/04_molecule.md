@@ -33,7 +33,7 @@ MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
-		  FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+		  FCHK|MOLDEN|GAUSSIAN|GJF|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
 		  FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 MOLECULE
   NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
@@ -200,6 +200,8 @@ specifying the required format. The allowed keywords are:
 - `PGOUT`: a postg output file (`.pgout`).
 
 - `GAUSSIAN`: a Gaussian output file.
+
+- `GJF`: a Gaussian input file.
 
 - `GEN`: a DFTB+ structure file (`.gen`).
 
