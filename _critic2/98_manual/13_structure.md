@@ -292,6 +292,7 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
         [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
+NEWCELL NICE [inice.i]
 ~~~
 The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`),
 (`x2.r` `y2.r` `z2.r`), and (`x3.r` `y3.r` `z3.r`) in
@@ -355,6 +356,20 @@ atomic coordinate of 0.333 may become 0.3333333... in a hexagonal
 space group. These transformations use the
 [spglib](https://atztogo.github.io/spglib/) library. Please consult
 the spglib manual for more information.
+
+The keyword `NICE` can be used to activate a mode of operation of
+`NEWCELL` that does not effect any cell transformation. Instead,
+`NICE` examines all possible supercells of the currently loaded cell
+containing a number of cells up to `inice.i` (default: 64). For a
+given integer `n` between 1 and `inice.i`, all supercells with size
+`n` (i.e. comprising `n` current cells) are examined and the
+transformation to the "nicest" supercell is reported. The niceness of
+a supercell is a number between 0 and 1 determined by the size of the
+largest sphere it can contain (higher is nicer). The nicest supercell
+possible is cubic and has a niceness of 1. In the output of `NEWCELL
+NICE`, the NEWCELL transformations for all supercells with sizes
+between 1 and `inice.i` are reported, together with their niceness and
+the radius of the largest sphere they can contain.
 
 ## Calculate Atomic Environments (ENVIRON) {#c2-environ}
 
