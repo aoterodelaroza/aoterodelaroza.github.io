@@ -20,8 +20,8 @@ toc_label: "List of keywords"
 | [COORD](#key-coord)                     | [COUNT](#key-count)               | [CPREPORT](#key-cpreport)   | [CRYSTAL](#key-crystal)       | [CUBE](#key-cube)               | [ECHO](#key-echo)                     |
 | [ECON](#key-econ)                       | [END](#key-end)                   | [ENVIRON](#key-environ)     | [EWALD](#key-ewald)           | [EXIT](#key-exit)               | [FLUXPRINT](#key-fluxprint)           |
 | [GRDVEC](#key-grdvec)                   | [HIRSHFELD](#key-hirshfeld)       | [IDENTIFY](#key-identify)   | [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals)     | [INT_RADIAL](#key-int-radial)         |
-| [ISOSURFACE](#key-isosurface)           | [KPOINTS](#key-kpoints)           | [LINE](#key-line)           | [LIST](#key-list)             | [LIBXC](#key-libxc)             | [LOAD](#key-load)                     |
-| [MAKEMOLSNC](#key-makemolsnc)           | [MAX](#key-max)                   | [LIBRARY](#key-library)     | [MEAN](#key-mean)             | [MESHTYPE](#key-meshtype)       | [MIN](#key-min)                       |
+| [ISOSURFACE](#key-isosurface)           | [KPOINTS](#key-kpoints)           | [LIBRARY](#key-library)     | [LIBXC](#key-libxc)           | [LINE](#key-line)               | [LIST](#key-list)                     |
+| [LOAD](#key-load)                       | [MAKEMOLSNC](#key-makemolsnc)     | [MAX](#key-max)             | [MEAN](#key-mean)             | [MESHTYPE](#key-meshtype)       | [MIN](#key-min)                       |
 | [MOLCALC](#key-molcalc)                 | [MOLCELL](#key-molcell)           | [MOLECULE](#key-molecule)   | [MOLMOVE](#key-molmove)       | [MOLREORDER](#key-molreorder)   | [NCIPLOT](#key-nciplot)               |
 | [NEWCELL](#key-newcell)                 | [NOCORE](#key-nocore)             | [NOSYM](#key-nosym)         | [NOSYMM](#key-nosymm)         | [ODE_MODE](#key-ode-mode)       | [PACKING](#key-packing)               |
 | [PLANE](#key-plane)                     | [POINT](#key-point)               | [POLYHEDRA](#key-polyhedra) | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance) |
@@ -470,6 +470,13 @@ KPOINTS [rk.r] [RKMAX rkmax.r]
 LIBRARY {CRYSTAL|MOLECULE} path.s
 ~~~
 
+<a id="key-libxc"></a>
+[LIBXC](/critic2/manual/arithmetics/#c2-libxc)
+: List and give information about the functionals available in the libxc library.
+~~~
+LIBXC [REF|REFS] [NAME|NAMES] [FLAGS] [ALL]
+~~~
+
 <a id="key-line"></a>
 [LINE](/critic2/manual/graphics/#c2-line)
 : Calculate the values of a field on a line.
@@ -483,13 +490,6 @@ LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s] [FIELD id.s/"expr"]
 : List all defined variables and named fields.
 ~~~
 LIST
-~~~
-
-<a id="key-libxc"></a>
-[LIBXC](/critic2/manual/arithmetics/#c2-libxc)
-: List and give information about the functionals available in the libxc library.
-~~~
-LIBXC [REF|REFS] [NAME|NAMES] [FLAGS] [ALL]
 ~~~
 
 <a id="key-load"></a>
