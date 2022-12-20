@@ -730,7 +730,7 @@ integrable 2 deloc
 bader
 ```
 Note that the checkpoint files in this case are absent, but the input
-is other wise the same.
+is otherwise the same.
 
 ## DIs from a checkpoint file
 
