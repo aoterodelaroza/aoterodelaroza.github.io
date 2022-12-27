@@ -178,7 +178,7 @@ COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAX
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 COMPARE ... [MOLECULE|CRYSTAL]
 COMPARE ... [REDUCE eps.r] [NOH]
-COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
+COMPARE ... [POWDER|RDF|AMD|EMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 

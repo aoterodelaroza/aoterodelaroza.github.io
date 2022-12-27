@@ -135,7 +135,7 @@ The COMPARE keyword compares two or more structures:
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 COMPARE ... [MOLECULE|CRYSTAL]
 COMPARE ... [REDUCE eps.r] [NOH]
-COMPARE ... [POWDER|RDF|AMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
+COMPARE ... [POWDER|RDF|AMD|EMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.
@@ -174,12 +174,13 @@ provided the files exist.
 
 ### Crystal Comparison
 
-There are three ways of calculating a comparison between crystals:
-based on the radial distribution functions
-([RDF](/critic2/manual/structure/#c2-rdf) keyword), the powder
+There are several ways of calculating a comparison between crystals:
+based on radial distribution functions
+([RDF](/critic2/manual/structure/#c2-rdf) keyword), powder
 diffraction patterns ([POWDER](/critic2/manual/structure/#c2-powder)
-keyword), or the average minimum distances
-([AMD](/critic2/manual/structure/#c2-amd) keyword).
+keyword), average minimum distances
+([AMD](/critic2/manual/structure/#c2-amd) keyword), or powder
+diffraction patterns compared with the earth mover's distance (EMD).
 The default is POWDER. In all cases, COMPARE finds the measure of
 similarity (DIFF) based on the corresponding functions (RDF,
 diffractogram, AMD).  Two crystal structures are exactly equal if
@@ -192,14 +193,15 @@ default as the infinite-norm of the two AMD vectors (the maximum of
 the absolute values of the differences). This can be change to the
 1-norm (the sum of the absolute values) or the 2-norm (the Euclidean
 distance) using the NORM keyword. The AMD dissimilarity is in atomic
-units (bohr).
+units (bohr). In EMD, discrete powder diffraction patterns are
+compared using the earth mover's distance.
 
-Powder diffraction patterns are calculated from $$2\theta = 5$$ up to
-`xend.r` (XEND keyword, default: 50). Radial distribution functions
-are calculated from zero up to `xend.r` bohr (XEND keyword, default:
-25 bohr). SIGMA is the Gaussian broadening parameter for the powder
-diffraction or RDF peaks. AMD vectors are calculated up to a maximum
-of 100 nearest neighbors.
+Powder diffraction patterns for POWDIFF and EMD are calculated from
+$$2\theta = 5$$ up to `xend.r` (XEND keyword, default: 50). Radial
+distribution functions are calculated from zero up to `xend.r` bohr
+(XEND keyword, default: 25 bohr). SIGMA is the Gaussian broadening
+parameter for the powder diffraction or RDF peaks. AMD vectors are
+calculated up to a maximum of 100 nearest neighbors.
 
 ### Molecular Comparison
 
