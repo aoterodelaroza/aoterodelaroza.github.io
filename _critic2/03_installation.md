@@ -93,8 +93,8 @@ Critic2 can be installed to the `prefix` directory by doing:
 make install
 ~~~
 However, the binary can be used directly from the source directory by
-setting the `CRITIC_HOME` environment. It must point to the root
-directory of the distribution:
+setting the `CRITIC_HOME` environment variable. It must point to the
+root directory of the distribution:
 ~~~
 export CRITIC_HOME=/home/alberto/programs/critic2dir
 ~~~
