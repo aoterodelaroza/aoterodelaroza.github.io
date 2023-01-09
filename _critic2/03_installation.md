@@ -98,9 +98,8 @@ root directory of the distribution:
 ~~~
 export CRITIC_HOME=/home/alberto/programs/critic2dir
 ~~~
-This variable is necessary for critic2 to find the atomic densities,
-the cif dictionary, and other files. These files should be in
-`${CRITIC_HOME}/dat/`.
+This variable is necessary for critic2 to find the atomic densities
+and other files. These files should be in `${CRITIC_HOME}/dat/`.
 
 Critic2 is parallelized with OpenMP for shared-memory architectures
 (unless disabled during compilation). You change the number of
