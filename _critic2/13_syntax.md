@@ -259,9 +259,11 @@ CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
 CRYSTAL file.frac
+CRYSTAL file.cell
+CRYSTAL file.geom
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
          FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-         FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
+         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -504,6 +506,7 @@ LOAD [file.]{CHGCAR|CHG|AECCAR0|AECCAR1|AECCAR2} [block.i|RHO|SPIN|MAGX|MAGY|MAG
 LOAD {[file.]ELFCAR} [block.i|RHO|SPIN|MAGX|MAGY|MAGZ]
 LOAD file.qub
 LOAD file.xsf
+LOAD file_fmt
 LOAD file.grid
 LOAD file.{clmsum|clmup|clmdn} file.struct
 LOAD file.{RHO,BADER,DRHO,LDOS,VT,VH}

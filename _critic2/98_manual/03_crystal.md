@@ -38,9 +38,11 @@ CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
 CRYSTAL file.frac
+CRYSTAL file.cell
+CRYSTAL file.geom
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
          FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-         FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
+         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -253,11 +255,11 @@ Crystal (and molecular) structures can be loaded from an FHIaims
 `lattice_vector` keywords are parsed and interpreted. If
 at least one `lattice_vector` is present, the system is assumed to be
 a crystal. Alternatively, you can also load the structure from the
-"geometry.in.next_step" file written by FHIaims during a geometry
+`geometry.in.next_step` file written by FHIaims during a geometry
 optimization.
 
 The crystal or molecular structure can also be loaded from an FHIaims
-output file, which is assumed to have a .out or .own extension. In the
+output file, which is assumed to have a `.out` or `.own` extension. In the
 case of a geometry optimization, the last available geometry in the
 output file is read.
 
@@ -269,6 +271,13 @@ file must contain the cell parameters in the second line. This
 file (i.e. where the cell lengths and angles are in a separate `.key`
 file) using TINKER's utility programs. The connectivity information is
 discarded by critic2 and recalculated from scratch.
+
+### CASTEP inputs and outputs (cell, geom) {#c2-castep}
+
+Crystal geometries can be read from CASTEP input (`.cell`) files as
+well as from the outputs of a geometry optimization (`.geom`), from
+where the last structure is read. The system is always assumed to be a
+crystal.
 
 ### Files with other extensions
 
@@ -320,6 +329,10 @@ specifying the required format. The allowed keywords are:
 - `FHIAIMS_OUT`: an FHIaims output file.
 
 - `FRAC`: a TINKER `.frac` file.
+
+- `CELL`: a CASTEP `.cell` file.
+
+- `GEOM`: a CASTEP `.geom` file.
 
 ### Manual Specification of the Crystal Structure (CRYSTAL Environment)
 
