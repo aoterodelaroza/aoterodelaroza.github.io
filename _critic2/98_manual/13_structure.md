@@ -138,13 +138,15 @@ COMPARE ... [REDUCE eps.r] [NOH]
 COMPARE ... [POWDER|RDF|AMD|EMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
-At least two structures are required for the comparison.
-The structures can be given as external files (`file1.s`,
+At least two structures are required for the comparison.  The
+structures can be given as external files (`file1.s`,
 `file2.s`,...). The behavior regarding the input format is the same as
 in CRYSTAL and MOLECULE: the file format is identified using the file
 extension or its contents if the extension is not enough. If a dot
 (".") is used instead of a file name, the current structure
-(previously loaded with CRYSTAL/MOLECULE) is used.
+(previously loaded with CRYSTAL/MOLECULE) is used. A file with
+extension `.peaks` can also be given to provide powder diffraction
+peak information directly (see below).
 
 There are two distinct modes of operation in COMPARE, depending on
 whether a molecular or crystal comparison is carried out. If the
@@ -202,6 +204,18 @@ distribution functions are calculated from zero up to `xend.r` bohr
 (XEND keyword, default: 25 bohr). SIGMA is the Gaussian broadening
 parameter for the powder diffraction or RDF peaks. AMD vectors are
 calculated up to a maximum of 100 nearest neighbors.
+
+If a file with extension `.peaks` is given and the POWDER or EMD
+crystal comparisons are used, read the diffraction peak info from the
+file. The file must give one peak per line in the format:
+~~~
+2*theta Intensity
+~~~
+where $$2\theta$$ is given in degrees and the intensity corresponds to
+the peak area. The powder diffraction pattern for the POWDER
+comparison is synthesized from this information by placing Gaussian
+functions at the peak positions with the same parameters as for the
+other structures.
 
 ### Molecular Comparison
 
