@@ -305,7 +305,7 @@ files are required: the `detailed.xml` file (written by the
 `WriteDetailedXML` option), the `eigenvec.bin` file (using the
 `WriteEigenVectors` options), and the file containing the wavefunction
 coefficients, which has been provided by the authors of the DFTB+
-package and can be [obtained online](http://www.dftb-plus.info/tools/waveplot).
+package and can be [obtained online](https://dftb.org/parameters/download)
 The DFTB type is detected by the `.xml` extension of the first file
 and, therefore, the name of these files need not be `detailed.xml` or
 `eigenvec.bin`.
