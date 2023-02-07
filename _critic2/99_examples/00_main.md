@@ -8,6 +8,10 @@ sidebar:
     nav: "critic2_examples"
 ---
 
+## Working with External Programs
+
+- [DFTB+](/critic2/examples/example_07_01_dftb+/)
+
 ## Critical Points
 
 - [Locating critical points of densities given on grids](/critic2/examples/example_08_01_gridcps/)
