@@ -89,7 +89,9 @@ wavefunction of a molecule is:
 molecule benzene.gen 2
 
 # In DFTB+, only valence electrons are used. Hence, we need core-augmentation
-# to account for the missing core density (4 electrons in this case).
+# to account for the missing core density. Set ZPSP to the number
+# of valence electrons associated with a given atom (4 for carbon,
+# 5 for nitrogen, 6 for oxygen,...)
 zpsp c 4
 
 # Load the DFTB+ wavefunction
@@ -111,7 +113,9 @@ For a crystal:
 crystal graphite.gen
 
 # In DFTB+, only valence electrons are used. Hence, we need core-augmentation
-# to account for the missing core density (4 electrons in this case).
+# to account for the missing core density. Set ZPSP to the number
+# of valence electrons associated with a given atom (4 for carbon,
+# 5 for nitrogen, 6 for oxygen,...)
 zpsp c 4
 
 # Load the DFTB+ wavefunction
