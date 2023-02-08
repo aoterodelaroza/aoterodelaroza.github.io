@@ -425,7 +425,7 @@ IDENTIFY file.xyz
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
-INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [WANCUT wancut.r]
+INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
 INTEGRABLE "expr.s"
 INTEGRABLE DELOC_SIJCHK file-sij.s
 INTEGRABLE DELOC_FACHK file-fa.s
@@ -1042,10 +1042,10 @@ htf_kir(id) [htf_kir]
   (uses local virial).
 
 gkin(id) [gkin]
-: Kinetic enregy density, g-version (grho * grho).
+: Kinetic energy density, g-version (grho * grho).
 
 kkin(id) [kkin]
-: Kinetic enregy density, k-version (rho * laprho).
+: Kinetic energy density, k-version (rho * laprho).
 
 lag(id) [lag]
 : Lagrangian density (-1/4 laprho).

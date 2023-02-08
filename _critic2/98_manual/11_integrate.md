@@ -76,7 +76,7 @@ property.
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
-INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [WANCUT wancut.r]
+INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
 INTEGRABLE "expr.s"
 INTEGRABLE DELOC_SIJCHK file-sij.s
 INTEGRABLE DELOC_FACHK file-fa.s
@@ -243,17 +243,27 @@ states. This is naturally much slower than the maximally localized
 version, since overlaps cannot be discarded, and should be used only
 if wannier90 failed to converge for the particular case under study.
 
-By default, two checkpoint files are generated during a DI calculation
-run. These files have the same name as the pwc file but with `-sij`
-and `-fa` suffixes. The former checkpoint file contains the atomic
-overlap matrices, and the latter, the exchange-correlation density
-($$F_{AB}$$) integrals required for the DI calculation. The presence
-of any of these two files makes critic2 read the information from the
-files and bypass the corresponding calculations, which are quite time
-consuming in general. The keywords NOSIJCHK and NOFACHK deactivate
-reading and writing these checkpoint files. You can calculate the DIs
-from these files directly without the pwc file using the DELOC_SIJCHK
-and DELOC_FACHK options to INTEGRABLE.
+By default, three checkpoint files are generated during or at the end
+of a DI calculation run. These files have the same name as the pwc
+file but with `-sijrestart`, `-sij`, and `-fa` suffixes. The
+`-sijrestart` file is written at certain points during the calculation
+of the atomic overlaps, and its purpose is to serve as a restart
+checkpoint in case the calculation is interrupted. If the
+`-sijrestart` file is present and valid, the atomic overlap
+calculation can be continued from the point it was last
+written. Using the NORESTART keyword prevents critic2 from reading or
+writing the `-sijrestart`.
+
+The `-sij` and `-fa` checkpoint files are written at the end of a DI
+calculation. The former contains the atomic overlap matrices, and the
+latter, the exchange-correlation density ($$F_{AB}$$) integrals
+required for the DI calculation. The presence of any of these two
+files makes critic2 read the information from the files and bypass the
+corresponding calculations altogether, which are quite time consuming
+in general. The keywords NOSIJCHK and NOFACHK deactivate reading and
+writing these checkpoint files. You can calculate the DIs from these
+files directly without the pwc file using the DELOC_SIJCHK and
+DELOC_FACHK options to INTEGRABLE.
 
 By default, the overlap between two MLWFs whose centers are a certain
 distance away are discarded. The WANCUT keyword controls this
@@ -315,17 +325,27 @@ the following steps:
 - Run YT or BADER. YT is usually more accurate but takes longer than
   BADER.
 
-By default, two checkpoint files are generated during a DI calculation
-run. These files have the same name as the pwc file but with `-sij`
-and `-fa` suffixes. The former checkpoint file contains the atomic
-overlap matrices, and the latter, the exchange-correlation density
-($$F_{AB}$$) integrals required for the DI calculation. The presence
-of any of these two files makes critic2 read the information from the
-files and bypass the corresponding calculations, which are quite time
-consuming in general. The keywords NOSIJCHK and NOFACHK deactivate
-reading and writing these checkpoint files. You can calculate the DIs
-from these files directly without the pwc file using the DELOC_SIJCHK
-and DELOC_FACHK options to INTEGRABLE.
+By default, three checkpoint files are generated during or at the end
+of a DI calculation run. These files have the same name as the pwc
+file but with `-sijrestart`, `-sij`, and `-fa` suffixes. The
+`-sijrestart` file is written at certain points during the calculation
+of the atomic overlaps, and its purpose is to serve as a restart
+checkpoint in case the calculation is interrupted. If the
+`-sijrestart` file is present and valid, the atomic overlap
+calculation can be continued from the point it was last
+written. Using the NORESTART keyword prevents critic2 from reading or
+writing the `-sijrestart`.
+
+The `-sij` and `-fa` checkpoint files are written at the end of a DI
+calculation. The former contains the atomic overlap matrices, and the
+latter, the exchange-correlation density ($$F_{AB}$$) integrals
+required for the DI calculation. The presence of any of these two
+files makes critic2 read the information from the files and bypass the
+corresponding calculations altogether, which are quite time consuming
+in general. The keywords NOSIJCHK and NOFACHK deactivate reading and
+writing these checkpoint files. You can calculate the DIs from these
+files directly without the pwc file using the DELOC_SIJCHK and
+DELOC_FACHK options to INTEGRABLE.
 
 The keywords NOU and WANCUT have no effect on the calculation of DIs
 using Bloch states.
