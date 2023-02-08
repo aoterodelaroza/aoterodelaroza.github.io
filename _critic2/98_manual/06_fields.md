@@ -318,6 +318,9 @@ slow. Molecules use real wavefunctions and they tend to be less
 crowded than crystals, so using molecular DFTB fields should be
 considerably faster.
 
+See the [DFTB+ example](/critic2/examples/example_07_01_dftb+/) for
+worked out cases.
+
 ### Gaussian-style Wavefunction Files (wfn/wfx)
 
 Gaussian-style wavefunction files can be loaded by passing a `.wfn` or

@@ -8,7 +8,7 @@ sidebar:
     nav: "critic2_examples"
 ---
 
-## Working with External Programs
+## Interfacing with External Programs
 
 - [DFTB+](/critic2/examples/example_07_01_dftb+/)
 

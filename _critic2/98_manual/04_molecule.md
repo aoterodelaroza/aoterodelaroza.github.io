@@ -139,6 +139,9 @@ keyword can be used to control the size and shape of the encompassing
 cell. The same considerations as for xyz files apply.  The coordinates
 in critic2's input and output are the same as in the gen file.
 
+See the [DFTB+ example](/critic2/examples/example_07_01_dftb+/) for
+worked out cases.
+
 ### Cube Files (cube, bincube)
 
 Cube files are also often used to describe molecular structures. For

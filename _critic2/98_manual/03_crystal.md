@@ -217,6 +217,9 @@ written during geometry optimizations using `OutputPrefix` in
 should contain the lattice vectors at the end of the file) or
 molecules.
 
+See the [DFTB+ example](/critic2/examples/example_07_01_dftb+/) for
+worked out cases.
+
 ### Xcrysden (xsf and axsf)
 
 Xcrysden generates scalar field files with extension `.xsf`, which
