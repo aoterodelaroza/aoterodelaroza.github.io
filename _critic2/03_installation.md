@@ -159,20 +159,22 @@ for a recent version of your compiler and it throws an internal
 compiler error while trying to build critic2, you may want to consider
 submitting a bug report to the compiler developers.
 
-If a recent compiler is not available, an alternative is to compile
-the program elsewhere with the static linking option:
+You can choose the compiler by setting the FC and CC environment
+variables to the path of your preferred compiler and then building in
+the usual way:
 ~~~
-LDFLAGS='-static -Wl,--whole-archive -lpthread -Wl,--no-whole-archive' ./configure ...
+export FC=/usr/bin/gfortran-6 CC=/usr/bin/gcc-6
+mkdir build
+cd build
+cmake ..
 ~~~
-provided the machine has the same architecture. (The part between the
--Wl is there to prevent statically-linked gfortran executables from
-segfaulting.) You can choose the compiler by changing the FC and F77
-flags before configure:
+Once camke generates the cache variables, the variables need not be
+set again, unless you delete the build directory. In
+autoconf/automake, you can choose the compiler by changing the FC and
+F77 flags before configure:
 ~~~
 FC=gfortran F77=gfortran ./configure ...
 ~~~
-The `BUILD_STATIC` and `CMAKE_Fortran_COMPILER` options serve the same
-purpose in a cmake build.
 
 ## External Libraries {#c2-libraries}
 
