@@ -169,6 +169,7 @@ CLEAR {var1.s var2.s ...|ALL}
 : Compare two crystal structures allowing for cell deformations.
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAXANG ma.r]
+          [MAXVOL mv.r]
 ~~~
 
 <a id="key-compare"></a>

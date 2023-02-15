@@ -280,6 +280,7 @@ POWDIFF) described in the article.
 The syntax of the COMPAREVC keyword is:
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAXANG ma.r]
+          [MAXVOL mv.r]
 ~~~
 The structures contained in `file1.s` and `file2.s` are compared using
 the variable-cell comparison algorithm. The behavior regarding the
@@ -295,9 +296,10 @@ lower than thr.r. This is useful for speeding up calculations in which
 we set a threshold below which we accept two crystal structures are
 equal. If WRITE, write the transformed structure to a SHELX file. If
 NOH, remove the hydrogens from both structures before comparing. The
-MAXELONG and MAXANG options control the maximum elongation and maximum
-angle change allowed for the cell deformation. By default, they are
-30% and 20 degrees, respectively.
+MAXELONG, MAXANG, and MAXVOL options control the maximum elongation,
+maximum angle change, and maximum volume change allowed for the cell
+deformation. By default, they are 30% (0.3), 20 degrees, and 50% (0.5)
+respectively.
 
 ## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 
