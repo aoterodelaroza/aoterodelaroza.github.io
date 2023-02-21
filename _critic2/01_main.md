@@ -33,6 +33,9 @@ Alternatively, clone the git repository for the **latest version** of the code:
 git clone https://github.com/aoterodelaroza/critic2.git
 ~~~
 or visit the [github page](https://github.com/aoterodelaroza/critic2).
+This manual and the examples refer to the latest version only. If you
+find a bug in either the stable or development versions, chances are
+it is already fixed in the github repository.
 
 ## Features
 
