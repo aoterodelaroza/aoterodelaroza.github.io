@@ -965,6 +965,7 @@ WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
       [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
+WRITE file.pwi [rklength.r]
 WRITE file.tess
 WRITE file.cri|file.incritic
 WRITE {[file.]POSCAR|[file.]CONTCAR}

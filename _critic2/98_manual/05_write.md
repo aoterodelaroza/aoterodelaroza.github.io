@@ -49,6 +49,7 @@ WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER]
       [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
+WRITE file.pwi [rklength.r]
 WRITE file.tess
 WRITE file.cri|file.incritic
 WRITE {[file.]POSCAR|[file.]CONTCAR}
@@ -195,26 +196,24 @@ similarly popular PLY (polygon file format or Stanford triangle
 format) and OFF (Geomview) file formats can be used as well, with the
 same options.
 
-### Quantum ESPRESSO (scf.in)
+### Quantum ESPRESSO (scf.in, pwi)
 
-Quantum ESPRESSO inputs can be written using the extension
-`.scf.in`. This conversion is especially useful in the case of
-low-symmetry crystals (e.g. monoclinic in a non-conventional setting)
-where the conversion from other formats, such as CIF, can be
-tricky. The QE input generation works by first determining the Bravais
-lattice from the symmetry operations. Critic2 uses 'ibrav=0' always,
-and writes a `CELL_PARAMETERS` block containing the
-crystallographic-to-Cartesian transformation matrix. QE is particular
-about how this matrix should written in order for its own symmetry
-module to work. If the crystal setting matches any of those covered in
-the QE manual, then that particular matrix is used. Otherwise, critic2
-uses its own internal `CELL_PARAMETERS` matrix, which may result in
-Quantum ESPRESSO failing to recognize the crystal symmetry. By
-default, the crystal cell used by critic2 is written to the QE input
-template. To reduce the cell to a primitive, use NEWCELL with the
-PRIMITIVE keyword before writing the file. The optional parameter to
-the QE input writer (`rklength.r`) is the length parameter (rk-length)
-that determines the density of the k-point grid. See the
+Quantum ESPRESSO inputs can be written using the extensions `.scf.in`
+or `.pwi`. Critic2 uses 'ibrav=0' always, and writes a
+`CELL_PARAMETERS` block containing the crystallographic-to-Cartesian
+transformation matrix. QE is particular about how this matrix should
+written in order for its own symmetry module to work.
+If the crystal setting matches any of those covered in the QE manual,
+then that particular matrix is used. Otherwise, critic2 uses its own
+internal `CELL_PARAMETERS` matrix, which may result in Quantum
+ESPRESSO failing to recognize the crystal symmetry.
+
+By default, the crystal cell used by critic2 is written to the QE
+input template. To reduce the cell to a primitive, use
+[NEWCELL](/critic2/manual/structure/#c2-newcell) with
+the PRIMITIVE keyword before writing the file. The optional parameter
+to the QE input writer (`rklength.r`) is the length parameter
+(rk-length) that determines the density of the k-point grid. See the
 [KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword.
 
 ### Tessel (tess)
