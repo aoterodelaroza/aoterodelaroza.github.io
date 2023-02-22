@@ -249,8 +249,10 @@ CRYSTAL [file.]{POSCAR,CONTCAR,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR1,AECCAR2} [at1.s
 CRYSTAL file_{DEN|PAWDEN|ELF|POT|VHA|VHXC|VXC|VCLMB|VPSP|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
 CRYSTAL file.OUT # (GEOMETRY.OUT, elk)
 CRYSTAL file.out [istruct.i] # (file.scf.out, quantum espresso output)
+CRYSTAL file.pwo [istruct.i]
 CRYSTAL file.out # (file.out, crystal output)
 CRYSTAL file.in # (file.scf.in, quantum espresso input)
+CRYSTAL file.pwi
 CRYSTAL file.STRUCT_IN
 CRYSTAL file.STRUCT_OUT
 CRYSTAL file.gen
