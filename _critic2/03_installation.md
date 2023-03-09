@@ -266,7 +266,7 @@ directory where the includes (`LIBCINT_INCLUDE_DIRS`) and the library
 
 The libcint library is used with molecular wavefunctions that provide
 the basis set information (at present, this is only for fields read
-from a Gaussian fchk file, but more will be implemented). The `mep()`,
+from a Gaussian-style fchk file, but more will be implemented). The `mep()`,
 `uslater()`, and `nheff()` chemical functions use the molecular
 integrals calculated by libcint, as well as the `MOLCALC HF`
 keyword. See the

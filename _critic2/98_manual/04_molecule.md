@@ -103,11 +103,11 @@ succession, same as in [CRYSTAL](/critic2/manual/crystal/#c2-crystal).
 ### Molecular File Formats (xyz, wfn, wfx, log, gjf, com, fchk, dat, out, pgout, molden, molden.input)
 
 A gas-phase molecule can be input using an xyz file, a Gaussian
-wfn/wfx file, a Gaussian output (log) or input (gjf, com), a Gaussian formatted checkpoint
-file (fchk), a psi4 output file (dat), an orca output file (out), a
-postg output file (pgout), or a file in molden format (psi4, ADF,
-orca, etc.). The molden.input extension is the same as molden (used by
-orca). The input molecule is enclosed in a box that is larger
+wfn/wfx file, a Gaussian output (log) or input (gjf, com), a Gaussian
+formatted checkpoint file (fchk), a psi4 output file (dat), an orca
+output file (out), a postg output file (pgout), or a file in molden
+format (psi4, ADF, orca, etc.). The molden.input extension is the same
+as molden (used by orca). The input molecule is enclosed in a box that is larger
 (default: 10 angstrom) in all directions than the minimal box
 encompassing the molecule. If the CUBIC (or CUBE) keyword is given,
 then a cubic supercell is used. The width of the vacuum around the

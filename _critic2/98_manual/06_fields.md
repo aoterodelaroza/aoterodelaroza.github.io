@@ -108,7 +108,8 @@ extension to decide which format should be used for the reading:
 
 * `.xml` for DFTB+'s `detailed.xml`.
 
-* `.wfn`, `.wfx`, and `.fchk` for Gaussian wavefunction files.
+* `.wfn`, `.wfx`, and `.fchk` for Gaussian wavefunction files. fchk
+  files can also be written by psi4.
 
 * `.molden` for molecular wavefunction files (molden-style format). At
   present, psi4, orca, and molden are supported. Both STO and GTO
@@ -362,7 +363,8 @@ read by critic2.
 
 Similar to wfn/wfx, formatted checkpoint files (`.fchk`) contain the
 structure and molecular wavefunction information. They are generated
-from a Gaussian checkpoint file (`.chk`) using the `formchk` utility.
+from a Gaussian checkpoint file (`.chk`) using the `formchk` utility
+but can also be written by psi4.
 They should be used preferably in combination with a preceding
 MOLECULE command on the same file. The calculation of the density and
 related properties is analytical.
