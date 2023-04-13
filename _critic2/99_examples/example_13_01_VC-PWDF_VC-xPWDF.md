@@ -141,7 +141,7 @@ Two files will be generated, a sample gnuplot command file to plot the data with
 [gnuplot](http://www.gnuplot.info/) `stdin_xrd.gnu`, and a two-column file of 2&#952; (°) and intensity `stdin_xrd.dat`.  Use a plotting program of your choice to plot the simulated powder patterns. 
 
 <figure style="width: 95%" class="align-center">
-  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_13_01/PXRD_overlay-VC.png" alt="PROGST10-PXRD overlay">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_13_01/PXRD_overlay-VC.png" alt="VC-PWDF simulated PXRD overlay">
 </figure>
 
 # Comparing experimental PXRD data with a crystal structure
