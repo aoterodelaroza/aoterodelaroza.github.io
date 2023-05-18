@@ -174,6 +174,10 @@ COMPARE bleh1.xyz bleh2.wfx
 ~~~
 provided the files exist.
 
+Examples of how to carry out structure comparisons in crystals and
+molecules are given in the
+[corresponding example](/critic2/examples/example_13_01_strcompare/).
+
 ### Crystal Comparison
 
 There are several ways of calculating a comparison between crystals:
