@@ -120,6 +120,8 @@ critic2_examples:
         url: /critic2/examples/example_14_01_stmqe/
       - title: "Molecular Properties"
         url: /critic2/examples/example_15_01_molcalc/
+      - title: "Compare Structures"
+        url: /critic2/examples/example_13_01_strcompare/
       - title: "Dev docs and tests"
         url: /critic2/examples/testfiles
 
