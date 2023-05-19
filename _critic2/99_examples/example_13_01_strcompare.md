@@ -186,7 +186,58 @@ the small rattle gives a urea structure that is essentially coincident
 with the original, whereas a big rattle results in a much higher
 value, and the uracil and urea structures have nothing in common.
 
-## Determining Symmetry-Unique Structures
+## Determining Repeated and Unique Structures
+
+An operation that is commonly carried out with the COMPARE keyword is
+to determine, from a (large) list of structures, which of them are
+unique and which are repeated. This can be easily accomplished with
+the REDUCE option to COMPARE, which works similar to normal COMPARE,
+but skips over structures that have already been determined to be
+equivalent to others in the list. For instance, if we wanted to
+compare a list of 50 very similar structures we would do:
+```
+COMPARE REDUCE 1e-6 str-001.POSCAR str-002.POSCAR str-003.POSCAR \
+  str-004.POSCAR ...
+```
+This means that two of the crystal structures in the list are
+considered equal if the difference in their powder diffraction
+patterns is less than 1e-6, calculated as in the example above. The
+output of COMPARE/REDUCE contains the following parts. First, the
+powder diffraction difference values are reported:
+```
+     DIFF              1               2               3               4               5
+  str-001.POSCAR  not-calculated   0.0007855       0.0007439       0.0007439       0.0007855
+  str-002.POSCAR   0.0007855      not-calculated   0.0000701       0.0000701      not-calculated
+  str-003.POSCAR   0.0007439       0.0000701      not-calculated  not-calculated  not-calculated
+  str-004.POSCAR   0.0007439       0.0000701      not-calculated  not-calculated  not-calculated
+...
+```
+where some of the difference values were not calculated, because some of
+the structures were determined to be equivalent to others at the
+requested level (i.e. their DIFF was lower than 1e-6). This cuts down
+the computational cost of the COMARE/REDUCE calculation significantly.
+After this, the list of unique structures is listed:
+```
++ List of unique structures (15):
+1: str-001.POSCAR with multiplicity 1
+2: str-002.POSCAR with multiplicity 4
+3: str-003.POSCAR with multiplicity 7
+6: str-006.POSCAR with multiplicity 3
+...
+```
+where the "multiplicity" is the number of repeated structures in the
+original list corresponding to the given unique representative
+structure. Lastly, the repeated structures are listed, along with
+their unique representative from the list above:
+```
++ List of repeated structures (34):
+4: str-004.POSCAR same as 3: str-003.POSCAR
+5: str-005.POSCAR same as 2: str-002.POSCAR
+9: str-009.POSCAR same as 3: str-003.POSCAR
+10: str-010.POSCAR same as 7: str-007.POSCAR
+11: str-011.POSCAR same as 6: str-006.POSCAR
+...
+```
 
 
 
