@@ -111,10 +111,11 @@ compare HIS_TYR_HIS_0-rattle.xyz HIS_TYR_HIS_0-shuf.xyz HIS_TYR_HIS_0.xyz
 ```
 This method tries to match the molecular graph of one molecule onto
 the other based on the atomic connectivity by exploring all possible
-permutations, with tricks to shorten the search. Ullmann's method can
-be expensive particularly for branching molecules with symmetric (in
-the molecular graph sense) substituents. Once the two atomic sequences
-are in the same order, the comparison proceeds as in the ordered case:
+permutations, with tricks applied to shorten the search. Ullmann's
+method can be expensive particularly for branching molecules with
+symmetric (in the molecular graph sense) substituents. Once the two
+atomic sequences are in the same order, the comparison proceeds as in
+the ordered case:
 ```
 * COMPARE: compare structures
   Molecule 1 : HIS_TYR_HIS_0-rattle.xyz
@@ -181,11 +182,12 @@ and the result is:
   urea-bigrattle.cif  0.2463948       0.2448225       0.0000000       0.8963729
   uracil.cif          0.9384096       0.9385707       0.8963729       0.0000000
 ```
-The similarity index calculated by this method goes between 0 and 1,
-which 0 being a perfect match and 1 complete dissimilarity. Note how
-the small rattle gives a urea structure that is essentially coincident
-with the original, whereas a big rattle results in a much higher
-value, and the uracil and urea structures have nothing in common.
+The similarity index calculated by this method (their POWDIFF value)
+goes between 0 and 1, which 0 being a perfect match and 1 complete
+dissimilarity. Note how the small rattle gives a urea structure that
+is essentially coincident with the original, whereas a big rattle
+results in a much higher value, and the uracil and urea structures
+have nothing in common.
 
 ## Determining Repeated and Unique Structures
 
@@ -243,19 +245,21 @@ their unique representative from the list above:
 ## Comparing Crystals Allowing for Cell Distortions (VC-PWDF)
 
 The variable-cell powder diffraction comparison (VC-PWDF) method is
-used to compared two crystal structures. It is similar to the plain
+used to compare two crystal structures. It is similar to the plain
 powder diffraction comparison method described above, but it is
-designed to give a high similarity index when one of the structures is
+designed to produce a high similarity result (a low VC-PWDF value)
+when one of the structures is
 a lattice distortion of the other. This can happen, for instance, due
 to the effect of temperature or pressure, or when comparing a
 calculated structure with an experimental one. VC-PWDF works by
 designating one of the structures as reference and the other as
-candidate, which are first both transformed into their reduced
-cells. All possible transformations of the primitive cell of the
-candidate structures are explored that brings it into (rough) agreement
+candidate; both are first transformed into their reduced
+cells. Then, all possible transformations of the primitive cell of the
+candidate structure are explored that brings it into (rough) agreement
 with the reference primitive cell. Then, the candidate adopts the cell
-parameters of the primitive cell and the powder diffractogram
-similarity index is calculated. The process is repeated for all
+parameters of the reference structure's primitive cell and the powder
+diffractogram similarity index (POWDIFF) is calculated as in the
+example above. The process is repeated for all
 possible cell transformations and the final VC-PWDF value is the
 minimum of all calculated similarity indices. The algorithm for the
 VC-PWDF method is described in detail in
@@ -264,9 +268,9 @@ VC-PWDF method is described in detail in
 Because it involves several (sometimes many) powder diffraction
 generation and comparison steps, VC-PWDF is slower than the usual
 powder diffraction comparison and it should not be used unless lattice
-distortions are expected to be important. A VC-PWDF value of 0.03 or
-lower indicates considerable similarity and a probable match, although
-user discretion is recommended.
+distortions are expected to play a role in the comparison. A VC-PWDF
+value of 0.03 or lower indicates considerable similarity and a
+probable match, although user discretion is recommended.
 
 To compare two structures using the VC-PWDF method, use the
 [COMPAREVC](/critic2/manual/comparevc/) keyword:
@@ -278,12 +282,12 @@ is the candidate, the reduced cell lattice vectors for both, the list
 of transformed candidate lattice vectors, and the calculated powder
 diffraction similarity values for each transformation. The final
 VC-PWDF value is given at the end, calculated as the minimum of the
-similarity indices for all candidates. Note that, unlike
+similarity indices for all candidate transformations. Note that, unlike
 [COMPARE](/critic2/manual/compare/),
-[COMPAREVC](/critic2/manual/comparevc/) cannot compare more than two
-structures at a time. Hence, if you want to compare a list of
+[COMPAREVC](/critic2/manual/comparevc/) cannot be used to compare more
+than two structures at a time. Hence, if you want to compare a list of
 structures, you will need to repeat COMPAREVC as many times as
-necessary.
+necessary (see the link at the end of this section).
 
 After the two crystals are compared, COMPAREVC can be used to write
 the transformed structures that most resemble each other, that is, the
@@ -293,10 +297,10 @@ ones that generated the final VC-PWDF value. This is done by using the
 COMPAREVC xtal1.cif xtal2.cif WRITE
 ~~~
 which generates two `.res` files (`<root>_structure_1.res` and
-`<root>_structure_2.res`), one of each of the crystal structures that
-yielded the VC-PWDF score. Likewise, the powder diffraction patterns
-of the original or deformed structures can be compared using the
-[POWDER](/critic2/manual/powder) command.
+`<root>_structure_2.res`), one for each of the crystal structures that
+yielded the VC-PWDF score. The powder diffraction patterns
+of the original and deformed structures can be compared using the
+[POWDER](/critic2/manual/powder) command on the corresponding files.
 
 The same method implemented in COMPAREVC can be used to compare to
 experimental powder diffraction patterns, as described in
@@ -321,9 +325,12 @@ diffractogram is plotted along with the experimental one.
 The VC-PWDF methods cannot be used reliably for disordered structures,
 and will yield low scores for certain polytype and conformational
 phase structures. In VC-xPWDF, experimental PXRD data that exhibit
-considerable baseline require pre-processing, data that show severe
-preferred orientation may yield poor results, and removing extraneous
-peaks is highly recommended.
+considerable baseline require pre-processing because critic2 onlyl
+does minimal processing of the experimental pattern (specifically, the
+minimum y value in the `.xy` file is subtracted). In addition, data
+that shows severe preferred orientation may yield poor results,
+because the peak heights deviate from those predicted by critic2, and
+pre-processing to remove extraneous peaks is highly recommended.
 
 You can find scripts and more detailed instructions on how to use
 VC-PWDF in VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
