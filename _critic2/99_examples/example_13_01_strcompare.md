@@ -15,13 +15,14 @@ toc_label: "Compare molecular and crystal structures"
 This page contains a set of examples that shows how to compare
 molecular and crystal structures using critic2.
 
-There are different comparison methods implemented, depending on
-whether molecules or crystals are being compared but, in general, they
-all render a value for the similarity of a chosen pair of structures,
-and it is up to the user to then decide whether the structures are
-considered "the same" or "different". The interface to the comparison
-methods is the [COMPARE](/critic2/manual/compare/) keyword in general
-and [COMPAREVC](/critic2/manual/comparevc/) for comparisons between
+There are different comparison methods available, depending on whether
+molecules or crystals are being compared but, in general, they all
+render a numerical value for the similarity of a chosen pair of
+structures, and it is up to the user to then decide whether the
+structures are considered "the same" or "different" for the given
+similarity value. The interface to the comparison methods is the
+[COMPARE](/critic2/manual/compare/) keyword in general and
+[COMPAREVC](/critic2/manual/comparevc/) for comparisons between
 crystal structures allowing for cell distortions. We focus on COMPARE
 for now.
 
@@ -40,7 +41,7 @@ previous [CRYSTAL](/critic2/manual/crystal/#c2-crystal) or
 ### Atoms Are in the Same Order
 
 There are several different ways of comparing molecules. The most
-important point about molecular comparison is whether the atomic
+important point to note about molecular comparison is whether the atomic
 sequence is the same in all the structures being compared, that is, if
 the atoms and their coordinates as they appear in the corresponding
 structure files can be assumed to be in the same order. If this is the
@@ -299,7 +300,7 @@ of the original or deformed structures can be compared using the
 
 The same method implemented in COMPAREVC can be used to compare to
 experimental powder diffraction patterns, as described in
-[Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2023/sc/d3sc00168g)).
+[Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2023/sc/d3sc00168g).
 This experimental VC-PWDF (VC-xPWDF) method requires the experimental
 diffraction pattern using Cu K&#945; radiation in `.xy` format
 (2&#952; (°) vs intensity), the indexed cell dimensions from the
@@ -327,11 +328,11 @@ peaks is highly recommended.
 You can find scripts and more detailed instructions on how to use
 VC-PWDF in VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
 
-### Example files package
+## Example files package
 
 Files: [example_13_01.tar.xz](/assets/critic2/example_13_01/example_13_01.tar.xz).
 
-### Manual pages
+## Manual pages
 
 - Loading crystal structures with [CRYSTAL](/critic2/manual/crystal/#c2-crystal)
 
