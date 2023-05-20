@@ -324,6 +324,9 @@ considerable baseline require pre-processing, data that show severe
 preferred orientation may yield poor results, and removing extraneous
 peaks is highly recommended.
 
+You can find scripts and more detailed instructions on how to use
+VC-PWDF in VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
+
 ### Example files package
 
 Files: [example_13_01.tar.xz](/assets/critic2/example_13_01/example_13_01.tar.xz).
