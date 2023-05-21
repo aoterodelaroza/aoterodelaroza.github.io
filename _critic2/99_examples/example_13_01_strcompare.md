@@ -136,8 +136,9 @@ original structure is the same value as above.
 ## Comparing Crystals
 
 The recommended procedure for comparing crystal structures is to use
+their simulated
 powder diffraction patterns (see the [POWDER](/critic2/manual/structure/#c2-powder)
-keyword) and then compare them using cross-correlation functions as
+keyword) and compare them using cross-correlation functions as
 described by
 [de Gelder et al.](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0).
 In this method, the powder diffractograms of the two crystals are
@@ -244,7 +245,7 @@ their unique representative from the list above:
 
 ## Comparing Crystals Allowing for Cell Distortions (VC-PWDF)
 
-The variable-cell powder diffraction comparison (VC-PWDF) method is
+The variable-cell powder difference (VC-PWDF) comparison method is
 used to compare two crystal structures. It is similar to the plain
 powder diffraction comparison method described above, but it is
 designed to produce a high similarity result (a low VC-PWDF value)
@@ -254,14 +255,14 @@ to the effect of temperature or pressure, or when comparing a
 calculated structure with an experimental one. VC-PWDF works by
 designating one of the structures as reference and the other as
 candidate; both are first transformed into their reduced
-cells. Then, all possible transformations of the primitive cell of the
-candidate structure are explored that brings it into (rough) agreement
-with the reference primitive cell. Then, the candidate adopts the cell
-parameters of the reference structure's primitive cell and the powder
-diffractogram similarity index (POWDIFF) is calculated as in the
+cells. Then, all possible transformations of the reduced cell of the
+candidate structure are explored that may bring it into (rough) agreement
+with the reference reduced cell. Then, the candidate adopts the cell
+parameters of the reference structure's reduced cell and the powder
+diffractogram dissimilarity index (POWDIFF) is calculated as in the
 example above. The process is repeated for all
 possible cell transformations and the final VC-PWDF value is the
-minimum of all calculated similarity indices. The algorithm for the
+minimum of all calculated dissimilarity indices. The algorithm for the
 VC-PWDF method is described in detail in
 [Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2022/ce/d2ce01080a).
 
@@ -280,9 +281,9 @@ COMPAREVC xtal1.cif xtal2.cif
 The output shows which structure is being used as reference and which
 is the candidate, the reduced cell lattice vectors for both, the list
 of transformed candidate lattice vectors, and the calculated powder
-diffraction similarity values for each transformation. The final
+diffraction dissimilarity values for each transformation. The final
 VC-PWDF value is given at the end, calculated as the minimum of the
-similarity indices for all candidate transformations. Note that, unlike
+dissimilarity indices for all candidate transformations. Note that, unlike
 [COMPARE](/critic2/manual/compare/),
 [COMPAREVC](/critic2/manual/comparevc/) cannot be used to compare more
 than two structures at a time. Hence, if you want to compare a list of
@@ -299,10 +300,12 @@ COMPAREVC xtal1.cif xtal2.cif WRITE
 which generates two `.res` files (`<root>_structure_1.res` and
 `<root>_structure_2.res`), one for each of the crystal structures that
 yielded the VC-PWDF score. The powder diffraction patterns
-of the original and deformed structures can be compared using the
+of the original and deformed structures can be generated and plotted for
+visual comparison using the
 [POWDER](/critic2/manual/powder) command on the corresponding files.
 
-The same method implemented in COMPAREVC can be used to compare to
+The same method implemented in COMPAREVC can be used to compare crystal
+structures to
 experimental powder diffraction patterns, as described in
 [Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2023/sc/d3sc00168g).
 This experimental VC-PWDF (VC-xPWDF) method requires the experimental
@@ -313,7 +316,7 @@ to the PXRD data. For now, it can be accessed via:
 ~~~
 TRICK COMPARE PROGST10.cif PROGST-PXRD.xy 10.3741 12.6059 13.8464 90 90.268 90
 ~~~
-where the candidate structure, diffractogram, cell lengths (in bohr)
+where the candidate structure, diffractogram, cell lengths (in Angstroms)
 and cell angles (in degrees) are given. The output is entirely
 analogous to [COMPAREVC](/critic2/manual/comparevc/). Same as with
 COMPAREVC, the WRITE keyword can be used to write the transformed
@@ -333,7 +336,7 @@ because the peak heights deviate from those predicted by critic2, and
 pre-processing to remove extraneous peaks is highly recommended.
 
 You can find scripts and more detailed instructions on how to use
-VC-PWDF in VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
+VC-PWDF and VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
 
 ## Example files package
 
