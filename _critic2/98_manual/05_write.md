@@ -344,7 +344,7 @@ uniform k-point grid in the `k_grid` keyword with a density given by
 the length parameter `rklength.r`. See the
 [KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword for details.
 
-### TINKER frac files (frac)
+### TINKER frac Files (frac)
 
 A `.frac` file can be generated in TINKER format. The `.frac` file
 always contains the cell lengths and angles (even if a molecule is

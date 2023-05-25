@@ -16,7 +16,7 @@ Scanning tunneling microscopy (STM) is an experimental technique that
 maps the structure of a material by dragging a tip across its surface.
 A small bias voltage $$V$$ is applied to the tip such that electrons
 from the surface tunnel and create a current $$I$$ across the tip that
-is measured by the instrument. In the 
+is measured by the instrument. In the
 [Tersoff-Hamann approximation](https://doi.org/10.1103/PhysRevB.31.805),
 the current is proportional to the applied bias voltage and to the
 local density of states at the Fermi level, which is defined as:
@@ -31,14 +31,14 @@ where the sum runs only over the one-electron states that have
 energies between $$E_F-eV$$ and $$E_F$$. The LDOS corresponds to the
 electron density contributions from all states that are within $$eV$$
 of the Fermi level. In Quantum ESPRESSO, a cube file containing this
-LDOS for the chosen bias voltage can be written using `pp.x` and 
-option `plot_num=5`. 
+LDOS for the chosen bias voltage can be written using `pp.x` and
+option `plot_num=5`.
 
 
 <figure style="width: 30%" class="align-right">
   <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_14_01/alas_surface.png" alt="AlAs surface">
   <figcaption style="text-align: center">The AlAs (110) surface.</figcaption>
-</figure> 
+</figure>
 
 To illustrate how this works, we use the AlAs (110) surface provided
 in the Quantum ESPRESSO distribution (in the examples of the PP
@@ -72,7 +72,7 @@ between the Fermi level and 1 eV below the Fermi level. This input
 generates the LDOS in Gaussian cube format (`ldos.cube`), which is all
 the input we need to make any STM plot in critic2.
 
-## Constant-current plots
+## Constant-Current Plots
 
 STM has two modes of operation: constant current and constant
 height. In constant current mode, the STM plot shows the distance
@@ -105,7 +105,7 @@ of the last atom before the vacuum. This reference height can be
 changed, if necessary, using the TOP keyword. This will only affect
 the scale, not the plot itself.
 
-## Constant-height plots
+## Constant-Height Plots
 
 In the constant-height mode, we choose the height above the surface
 and the STM plot represents the LDOS, which is proportional to the
@@ -120,7 +120,7 @@ is the height above the surface given as the fractional coordinate in
 the vacuum direction. If this quantity is not given, then critic2
 defaults to the height of the last atom before the vacuum plus one
 bohr in the vacuum direction. As before, we represent a 3x3
-supercell. 
+supercell.
 
 Running this input generates the same two files as in the
 constant-current case, and doing gnuplot on the `.gnu` file results
@@ -132,7 +132,7 @@ The As positioned at the corner of the unit cell is higher than the
 rest of the atoms, and it is shown as a bright spot in both STM
 plots.
 
-## Example files package
+## Example Files Package
 
 Files: [example_14_01.tar.xz](/assets/critic2/example_14_01/example_14_01.tar.xz).
 Run the examples as follows:
@@ -164,7 +164,6 @@ gnuplot alas110re-ch_stm.gnu
 ~~~
 This generates the `alas110re-ch_stm.eps` file containing the plot.
 
-## Manual pages
+## Manual Pages
 
 - [Scanning tunneling microscopy (STM) plots](/critic2/manual/stm/)
-

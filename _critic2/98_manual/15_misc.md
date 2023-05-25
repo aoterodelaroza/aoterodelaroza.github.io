@@ -57,7 +57,7 @@ Using this keyword requires compiling with critic2 with libcint. At
 this moment, this keyword serves mostly for testing, debug, and
 development purposes, as it is very inefficient (and not very
 useful). The routine called by this keyword shows how to use libcint
-inside critic2. Only molecular wavefunctions can be used with 
+inside critic2. Only molecular wavefunctions can be used with
 `MOLCALC HF` and only file formats that provide basis set information
 (right now, only Gaussian fchk, but molden-style files could be
 implemented). Gaussian wfn/wfx do not provide basis set shells, only
@@ -66,7 +66,7 @@ primitives, so they cannot be used with MOLCALC HF.
 The ASSIGN keyword can be used to save the result of the computation
 to a variable (`var.s`).
 
-## Characterization of Sigma-holes in Molecules (SIGMAHOLE) {#c2-sigmahole}
+## Characterization of Sigma-Holes in Molecules (SIGMAHOLE) {#c2-sigmahole}
 
 The SIGMAHOLE keyword calculates the properties of a $$\sigma$$-hole
 in a molecule. The $$\sigma$$-hole is the region of positive
@@ -77,13 +77,13 @@ bond. The syntax of the SIGMAHOLE keyword is:
 ~~~
 SIGMAHOLE ib.i ix.i [NPTS nu.i nv.i] [ISOVAL rho.r] [MAXANG ang.r]
 ~~~
-The calculated properties are those described in 
-[Kolar and Hobza, Chem. Rev. 116 (2016) 5155](http://dx.doi.org/10.1021/acs.chemrev.5b00560) 
+The calculated properties are those described in
+[Kolar and Hobza, Chem. Rev. 116 (2016) 5155](http://dx.doi.org/10.1021/acs.chemrev.5b00560)
 (see Figure 7). Namely:
 
 - `dist`: The distance between the electronegative atom (X) and the
   $$\sigma$$-hole.
-  
+
 - $$l_{\sigma}$$ (linearity): the angle between the $$\sigma$$-hole,
   the electronegative atom (X), and the atom to which X is bonded (the
   basal atom, B).
@@ -95,7 +95,7 @@ The calculated properties are those described in
   atom and the point at which the electrostatic potential changes
   sign, in the direction of the $$\sigma$$-hole. Only defined in case
   of a $$\sigma$$-hole with positive electrostatic potential.
-  
+
 - $$s_{\sigma}$$ (size): the are of the density isosurface associated
   with the $$\sigma$$-hole that has positive electrostatic
   potential. Only defined in case of a $$\sigma$$-hole with positive
@@ -150,15 +150,15 @@ table make sense.
 ## The Exchange-Hole Dipole Moment Dispersion Model (XDM) {#c2-xdm}
 
 The XDM keyword calculates the dispersion energy using the
-exchange-hole dipole moment (XDM) model. See 
+exchange-hole dipole moment (XDM) model. See
 [J. Chem. Phys. 127, 154108 (2007)](https://doi.org/10.1063/1.2795701),
 [J. Chem. Phys. 136, 174109 (2012)](https://doi.org/10.1063/1.4705760), and
 [J. Chem. Phys. 138, 204109 (2013)](https://doi.org/10.1063/1.4807330)
 for more details. The syntax of the XDM keyword is:
 ~~~
-XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s] 
-    [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s] 
-    [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s] 
+XDM GRID [RHO irho.s] [TAU itau.s] [ELF ielf.s]
+    [PDENS ipdens.s] [CORE icor.s] [LAP ilap.s]
+    [GRAD igrad.s] [RHOAE irhoae.s] [XB ib.s]
     [XA1 a1.r] [XA2 a2.r] [ONLYC] [UPTO {6|8|10}]
 XDM [QE|POSTG] [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
        [NOC6] [NOC8] [NOC10] [SCALC6 s6.r] [SCALC8 s8.r] [SCALC10 s10.r]
@@ -166,7 +166,7 @@ XDM [QE|POSTG] [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
        [DAMP a1.r a2.r] [DAMP3 a3.r a4.r] [DAMP3BJN 3|6|sqrt6]
 XDM a1.r a2.r chf.s
 ~~~
-There are three modes of operation for the XDM keyword. 
+There are three modes of operation for the XDM keyword.
 
 In QE and POSTG, the volumes, moments, and coefficients are read from
 a Quantum ESPRESSO output file (QE) or a postg output file
@@ -250,7 +250,7 @@ The list of requirements is:
 * XB: the exchange-hole dipole moment in the Becke-Roussel
   model. Calculated from the above unless given.
 
-Only closed-shell (non-spinpolarized) systems can be calculated for now. 
+Only closed-shell (non-spinpolarized) systems can be calculated for now.
 
 The usual way of running XDM for the first time is:
 ~~~
@@ -297,8 +297,8 @@ energy, forces, and stress. By default, they are calculated.
 ~~~
 UPTO {6|8|10}
 ~~~
-Only calculate the contributions to the energy coming from the 
-$$C_6$$ term (6), from the $$C_6$$ and $$C_8$$ terms (8) and from 
+Only calculate the contributions to the energy coming from the
+$$C_6$$ term (6), from the $$C_6$$ and $$C_8$$ terms (8) and from
 $$C_6$$, $$C_8$$, and $$C_{10}$$ (10). The latter is the default.
 
 ## Control Commands and Options {#c2-control}
@@ -311,7 +311,7 @@ should be given before integrating by bisection.
 ### Gradient Path Tracing (ODE\_MODE) {#c2-odemode}
 
 ~~~
-ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r] 
+ODE_MODE [METHOD {EULER|HEUN|BS|RKCK|DP}] [MAXSTEP maxstep.r]
          [MAXERR maxerr.r] [GRADEPS gradeps.r]
 ~~~
 The keyword `ODE_MODE` is used to control the gradient path
@@ -324,7 +324,7 @@ Runge-Kutta-Cash-Karp embedded 4-5th order method with local
 extrapolation and error estimate. `DP`, Dormand-Prince 4-5th order with
 local extrapolation and error estimate (7 evaluations per
 step). `maxstep.r` is the initial (and maximum) step size (bohr in
-crystals, angstrom in molecules), `gradeps.r` is the 
+crystals, angstrom in molecules), `gradeps.r` is the
 gradient norm termination criterion for the gradient path. `maxerr.r` is
 the maximum error in the trajectory (in bohr). `MAXERR` only affects
 methods that provide an error estimate for the predicted steps: `BS`,
@@ -373,7 +373,7 @@ The `TYPE` keyword selects the quadrature method:
 
 The number of radial integration points, if appropriate (`GAULEG`,
 `QAG`) is selected with `NR`. If the selected method is `QAG`, the
-number of points may vary from `nr.r`. The allowed intervals are: 
+number of points may vary from `nr.r`. The allowed intervals are:
 7-15, 10-21, 15-31, 20-41, 25-51, 30-61. Critic2 selects the
 appropriate interval by comparing the given `nr.r` to the lower
 limits of these intervals.
@@ -413,8 +413,8 @@ option to AUTO.
 
 - BECKE: Becke-style integration grid. Only available for molecules.
 
-- FRANCHINI: a Becke-style molecular mesh with weights and quality 
-  parameters adapted from 
+- FRANCHINI: a Becke-style molecular mesh with weights and quality
+  parameters adapted from
   [Franchini et al. J. Comput. Chem. 34 (2013) 1819](https://doi.org/10.1002/jcc.23323).
   Works with molecules and crystals.
 
@@ -488,7 +488,7 @@ MIN [id.s]
 MEAN [id.s]
 COUNT id.s eps.r
 ~~~
-are used to preform calculations using the field on a grid id.s. SUM 
+are used to preform calculations using the field on a grid id.s. SUM
 calculates the sum of the grid point values (in the output, SUM) and the
 integral over the unit cell (in the output, INTEGRAL). The latter is
 calculated as the sum of all grid points times the grid volume divided
@@ -548,4 +548,3 @@ critic2 -q).
 - MOLCALC
 
   + [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)
-

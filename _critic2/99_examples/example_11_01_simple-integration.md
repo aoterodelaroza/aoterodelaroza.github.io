@@ -133,7 +133,7 @@ utilized.
 
 To summarize, to calculate atomic volumes and charges you do:
 
-#### PAW calculation
+#### PAW Calculation
 
 If you ran a PAW calculation, get the all-electron density
 (`plot_num=21`, `rhoae.cube`) and the pseudo-density (`plot_num=0`,
@@ -151,7 +151,7 @@ field loaded) and we define the second field (`rho.cube`) as the
 integrand. The YT keyword launches the calculation of atomic
 properties. This is the preferred option.
 
-#### PAW calculation (old QE version)
+#### PAW Calculation (Old QE Version)
 
 If you ran a PAW calculation but your QE version is old and you do
 not have `plot_num=21`, then write the reconstructed valence density
@@ -176,7 +176,7 @@ contribution for the given number of core electrons is added by
 critic2 every time the field is evaluated using critic2's internal
 density tables.
 
-#### NC or US pseudopotential calculation
+#### NC or US Pseudopotential Calculation
 
 If you ran a US or NC pseudopotential calculation, then you only
 have the pseudodensity (`plot_num=0`, `rho.cube`). In this case,
@@ -266,7 +266,7 @@ loaded as the second field and integrated inside the basins.
 If you ran a non-PAW calculation, then replace the `_PAWDEN` file with
 the `_DEN` file in the input above.
 
-### Output for urea
+### Output for Urea
 
 The outputs from all the calculations above are very similar.
 The main table containing the results of the integration appears right
@@ -488,11 +488,11 @@ important to check that the sum of the VDD charges is close to zero,
 to make sure the numerical error from the grid integration is not too
 high.
 
-## Example files package
+## Example Files Package
 
 Files: [example_11_01.tar.xz](/assets/critic2/example_11_01/example_11_01.tar.xz).
 
-## Manual pages
+## Manual Pages
 
 - [The reference field](/critic2/manual/fields/#c2-reference)
 

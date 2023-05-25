@@ -11,7 +11,7 @@ toc_label: "STM plots"
 toc_sticky: true
 ---
 
-## Creating STM plots (STM)
+## Creating STM Plots (STM)
 
 The STM keyword generates plots comparable to those obtained in
 scanning tunneling microscopy (STM) experiments:
@@ -37,9 +37,9 @@ following requirements:
   the face with vacuum above it will be used (i.e. critic2 will scan
   in the positive vacuum direction).
 
-* The STM plot calculation uses the reference field. 
+* The STM plot calculation uses the reference field.
 
-The STM keyword uses the popular 
+The STM keyword uses the popular
 [Tersoff-Hamann approximation](https://doi.org/10.1103/PhysRevB.31.805), in
 which the observed current is proportional to the local density of
 states at the Fermi level:
@@ -50,7 +50,7 @@ I \approx V \rho_{\rm loc}({\bf r},V)
 \end{equation}
 $$
 
-where $$I$$ is the current, $$V$$ is the bias voltage, and 
+where $$I$$ is the current, $$V$$ is the bias voltage, and
 $$\rho_{\rm loc}$$ is the local density of states at $$E_F$$:
 
 $$
@@ -130,4 +130,3 @@ guidance kindly provided by Enrico Benassi (see the THANKS file).
 ## Examples
 
 - [Making STM plots with Quantum ESPRESSO and critic2](/critic2/examples/example_14_01_stmqe/)
-

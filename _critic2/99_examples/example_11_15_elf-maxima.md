@@ -15,7 +15,7 @@ In this example we will see how to use the basin integration methods
 localization function (ELF) in solids and molecules, and b) integrate
 the electron density in the basins associated to the ELF maxima.
 
-## ELF basins in molecules
+## ELF Basins in Molecules
 
 We start with a simple example of a molecular calculation. The
 following Gaussian input calculates the pyridine molecule using
@@ -189,7 +189,7 @@ Plot the ELF from the pyridine wfx file on the molecular plane.
 
 
 
-## to file
+## To File
 
 * elf_basins
 ** Source: Gaussian wfx, abinit, VASP.

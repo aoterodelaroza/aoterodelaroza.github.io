@@ -14,7 +14,7 @@ toc_sticky: true
 ## Attractor Basin Plots (BASINPLOT) {#c2-basinplot}
 
 ~~~
-BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] | 
+BASINPLOT [CUBE [lvl.i] | TRIANG [lvl.i] |
   SPHERE [ntheta.i nphi.i]]
   [OFF|OBJ|PLY|BASIN|DBASIN [npts.i]}]
   [CP cp.i] [PREC delta.r] [VERBOSE] [MAP id.s|"expr"]
@@ -59,11 +59,11 @@ used to create a color map of a given field (given by the field number
 or identifier `id.s`) or a field-containing expression ("expr") onto
 the surface. The color scale limits are the minimum and the maximum
 value of the field or expression on all the points of the surface. The
-mapping function is the same as in gnuplot: 
+mapping function is the same as in gnuplot:
 ($$r =\sqrt{x}$$, $$g=x^3$$, $$b=\sin(360\times x)$$, with $$x$$
 ranging from 0 to 1).
 
-The default is the TRIANG method, `lvl.i = 3`, 
+The default is the TRIANG method, `lvl.i = 3`,
 `ntheta.i = nphi.i = 5`, OBJ output, and one basin plot for
 all the non-equivalent attractors found in AUTO.
 
@@ -95,10 +95,9 @@ used to create a color map of a given field (given by the field number
 or identifier `id.s`) or a field-containing expression ("expr") onto
 the surface. The color scale limits are the minimum and the maximum
 value of the field or expression on all the points of the surface. The
-mapping function is the same as in gnuplot: 
+mapping function is the same as in gnuplot:
 ($$r =\sqrt{x}$$, $$g=x^3$$, $$b=\sin(360\times x)$$, with $$x$$
 ranging from 0 to 1).
 
 Default values: TRIANG, `lvl.i = 3`, `ntheta.i = nphi.i = 5`, OBJ output,
 `root.s = <root>-bundle`.
-

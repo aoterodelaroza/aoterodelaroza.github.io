@@ -10,7 +10,7 @@ toc: false
 toc_label: "Critic2 development notes and test files"
 ---
 
-### Elk STATE.OUT version testing
+### Elk STATE.OUT Version Testing
 
 Files: [elk_field_tests.tar.xz](/assets/critic2/example_99/elk_field_tests.tar.xz).
 

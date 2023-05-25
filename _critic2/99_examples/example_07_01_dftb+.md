@@ -50,7 +50,7 @@ write benzene.gen
 ~~~
 This is useful for setting up new DFTB+ calculations.
 
-### Reading DFTB+ wavefunctions
+### Reading DFTB+ Wavefunctions
 
 Three files are required to read a wavefunction calculated by DFTB+
 files:
@@ -125,6 +125,6 @@ load detailed.xml eigenvec.bin ../3ob-3-1/wfc.3ob-3-1.hsd core
 plane 0 0 1/4  1 0 1/4  0 1 1/4  101 101  contour log 41 file plane
 ~~~
 
-### Example files package
+### Example Files Package
 
 Files: [example_07_01.tar.xz](/assets/critic2/example_07_01/example_07_01.tar.xz).

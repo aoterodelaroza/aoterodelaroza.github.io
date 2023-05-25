@@ -172,7 +172,7 @@ cpreport benzene.vmd border molmotif graph
   <figcaption style="text-align: center">Critical points of benzene, calculated with Quantum ESPRESSO.</figcaption>
 </figure>
 
-### Using molecular cube files (Gaussian,...)
+### Using Molecular Cube Files (Gaussian,...)
 
 The SMOOTHRHO interpolation can be applied to any all-electron
 density, periodic or non-periodic. In particular, it can be used to
@@ -224,6 +224,6 @@ label delete Atoms all
 ```
 in the Tk console.
 
-### Example files package
+### Example Files Package
 
 Files: [example_08_01.tar.xz](/assets/critic2/example_08_01/example_08_01.tar.xz).

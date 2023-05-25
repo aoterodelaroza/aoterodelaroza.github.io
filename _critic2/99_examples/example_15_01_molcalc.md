@@ -17,11 +17,11 @@ The exchange hole can be calculated in critic2 using the
 arguments: the ID of the field (which must be a molecular
 wavefunction) and the coordinates of the reference point. The latter
 must be given in Cartesian coordinates referred to the molecular
-origin. 
+origin.
 
 Let us assume we have the molecular wavefunction for benzene
 calculated using Gaussian (`benzene.wfx`). We load the structure and
-the wavefunction in critic2 using: 
+the wavefunction in critic2 using:
 ~~~
 molecule benzene.wfx
 load benzene.wfx
@@ -91,7 +91,7 @@ Since the integrand is always positive, a zero integral means the two
 fields are identical. The `@xm`, `@ym`, and `@zm` are *structural
 variables*. They take the value of the x, y, and z coordinates of each
 point in the molecular mesh (in this case, in angstrom, to make them
-consistent with the arguments for the `xhole` function). 
+consistent with the arguments for the `xhole` function).
 
 Likewise, we can verify the normalization of the exchange hole:
 
@@ -109,10 +109,10 @@ which gives:
 ~~~
 + Integral(xhole(1,0.0,0.0,0.0)) = -1.00067590
 ~~~
-The small deviation from the correct value (-1) comes from grid being 
+The small deviation from the correct value (-1) comes from grid being
 relatively coarse.
 
-## Example files package
+## Example Files Package
 
 Files: [example_15_01.tar.xz](/assets/critic2/example_15_01/example_15_01.tar.xz).
 Run the examples as follows:
@@ -138,11 +138,10 @@ gnuplot xhole-3.gnu
 ~~~
   The plots are called `xhole-*.eps`.
 
-## Manual pages
+## Manual Pages
 
 - [Chemical functions in critic2](/critic2/manual/arithmetics/#availchemfun)
 
 - [Structural variables](/critic2/manual/arithmetics/#c2-structvar)
 
 - [The MOLCALC keyword](/critic2/manual/misc/#c2-molcalc)
-

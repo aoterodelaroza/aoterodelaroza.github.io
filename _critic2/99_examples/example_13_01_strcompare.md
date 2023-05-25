@@ -338,11 +338,11 @@ pre-processing to remove extraneous peaks is highly recommended.
 You can find scripts and more detailed instructions on how to use
 VC-PWDF and VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
 
-## Example files package
+## Example Files Package
 
 Files: [example_13_01.tar.xz](/assets/critic2/example_13_01/example_13_01.tar.xz).
 
-## Manual pages
+## Manual Pages
 
 - Loading crystal structures with [CRYSTAL](/critic2/manual/crystal/#c2-crystal)
 

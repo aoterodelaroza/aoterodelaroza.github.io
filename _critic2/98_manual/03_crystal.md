@@ -171,7 +171,7 @@ specified with the optional argument `datablock.s`. For instance, to
 read the `data_shelx` block, use `datablock.s = shelx`. If
 `datablock.s` is not present, then the first block is read.
 
-### SHELX res and ins files (res, ins, 16)
+### SHELX res and ins Files (res, ins, 16)
 
 RES and INS files are generated and used by SHELX (and derivatives), a
 program for the interpretation of experimental single-crystal X-ray
@@ -182,7 +182,7 @@ website. The extension `.16` corresponds to a `fort.16` file generated
 by [DMACRYS](http://www.chem.ucl.ac.uk/cposs/dmacrys/index.html),
 which also uses the SHELX format.
 
-### DMACRYS/NEIGHCRYS files (16, 21, dmain)
+### DMACRYS/NEIGHCRYS Files (16, 21, dmain)
 
 [DMACRYS](http://www.chem.ucl.ac.uk/cposs/dmacrys/index.html) is a
 program for modeling molecular crystals using rigid molecules and
@@ -254,7 +254,7 @@ for the system as well as the k-point information and the converged
 Kohn-Sham states. It is mostly used in the calculation of
 delocalization indices in periodic solids.
 
-### FHIaims inputs and outputs (in, in.next_step, out, own) {#c2-fhi}
+### FHIaims Inputs and Outputs (in, in.next_step, out, own) {#c2-fhi}
 
 Crystal (and molecular) structures can be loaded from an FHIaims
 "geometry.in" input file. Only the `atom`, `atom_frac`, and
@@ -269,7 +269,7 @@ output file, which is assumed to have a `.out` or `.own` extension. In the
 case of a geometry optimization, the last available geometry in the
 output file is read.
 
-### TINKER frac format (frac) {#c2-tinkerfrac}
+### TINKER frac Format (frac) {#c2-tinkerfrac}
 
 Crystal structures can be given in TINKER frac format. The `.frac`
 file must contain the cell parameters in the second line. This
@@ -278,14 +278,14 @@ file (i.e. where the cell lengths and angles are in a separate `.key`
 file) using TINKER's utility programs. The connectivity information is
 discarded by critic2 and recalculated from scratch.
 
-### CASTEP inputs and outputs (cell, geom) {#c2-castep}
+### CASTEP Inputs and Outputs (cell, geom) {#c2-castep}
 
 Crystal geometries can be read from CASTEP input (`.cell`) files as
 well as from the outputs of a geometry optimization (`.geom`), from
 where the last structure is read. The system is always assumed to be a
 crystal.
 
-### Files with other extensions
+### Files with Other Extensions
 
 If the crystal structure file you want to read does not have one of
 the above extensions but conforms to one of these formats, you can
@@ -502,7 +502,7 @@ accessed through the
 `molecule.dat` and `crystal.dat` are installed in the data directory
 by `make install`.
 
-## List space group types (SPG) {#c2-spg}
+## List Space Group Types (SPG) {#c2-spg}
 
 The SPG keyword (used outside the CRYSTAL environment):
 ~~~

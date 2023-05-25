@@ -33,8 +33,8 @@ MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
-		  FCHK|MOLDEN|GAUSSIAN|GJF|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-		  FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
+          FCHK|MOLDEN|GAUSSIAN|GJF|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+          FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 MOLECULE
   NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
   atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
@@ -160,7 +160,7 @@ save disk space and reading/writing time. Binary cube files have
 extension .bincube, and contain essentially the same information as a
 usual cube file.
 
-### FHIaims inputs and outputs (in, in.next_step, out, own) {#c2-fhi}
+### FHIaims Inputs and Outputs (in, in.next_step, out, own) {#c2-fhi}
 
 Molecular (and crystal) structures can be loaded from an FHIaims
 "geometry.in" input file. Alternatively, you can also load the
@@ -180,7 +180,7 @@ essentially the same as in the case of a cube file: the encompassing
 cell is taken from the file, and the molecule is not translated in any
 way.
 
-### Files with other extensions
+### Files with Other Extensions
 
 If the molecular structure file you want to read does not have one of
 the above extensions but conforms to one of these formats, you can

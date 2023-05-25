@@ -538,7 +538,7 @@ atoms, but are not atoms. An easy (and sometimes very convenient) way
 of doing this is to replace the critical point labels ("Xb", "Xr",...)
 with atoms we know are not present in our system (e.g. H).
 
-#### Deprecated visualization method using avogadro
+#### Deprecated Visualization Method Using avogadro
 
 Previously, the way of visualizing the
 critical points this was using [avogadro](http://avogadro.cc), an
@@ -571,7 +571,7 @@ The capability of avogadro to handle periodic systems is limited, and
 more recent versions of avogadro have taken the program in a somewhat
 confusing direction, so the above may not apply in your case.
 
-#### Recommended visualization method using vmd
+#### Recommended Visualization Method Using vmd
 
 The current best way of visualizing the critical points in your system
 is using a vmd script. Write the critical points using:

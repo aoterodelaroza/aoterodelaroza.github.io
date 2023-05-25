@@ -399,7 +399,7 @@ using the `:g` field modifier:
 xc($1,$1:g,101)+xc($1,$1:g,130)
 ~~~
 
-### List available LIBXC functionals (LIBXC) {#c2-libxc}
+### List Available LIBXC Functionals (LIBXC) {#c2-libxc}
 
 When critic2 is compiled with [libxc](/critic2/installation/#c2-libxc)
 support, the LIBXC keyword can be used to query the library for a

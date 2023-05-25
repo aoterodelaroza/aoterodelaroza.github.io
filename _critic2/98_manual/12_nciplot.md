@@ -13,7 +13,7 @@ toc_sticky: true
 
 ## Introduction
 
-The [non-covalent interaction plots](http://dx.doi.org/10.1021/ja100936w) 
+The [non-covalent interaction plots](http://dx.doi.org/10.1021/ja100936w)
 are graphical
 representations of the regions where the densities of two interacting
 molecules overlap. The accumulation of density in the intermolecular
@@ -119,7 +119,7 @@ domains for the whole structure results in a very busy plot. In those
 cases, it is recommended that the user focuses on the region of
 interest and discards all the other domains. The simplest way to do
 this is to restrict the NCIPLOT to a box encompassing the required
-region: 
+region:
 ~~~
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r
 ~~~
@@ -127,14 +127,14 @@ where (`x0.r` `y0.r` `z0.r`) and (`x1.r` `y1.r` `z1.r`) are the
 coordinates corresponding to the two opposite corners that determine
 the orthogonal box in which the NCI domains will be calculated. The
 coordinates are in crystallographic (crystals) or in molecular
-Cartesian coordinates (molecules, default unit: angstrom). 
+Cartesian coordinates (molecules, default unit: angstrom).
 In crystals, a region larger than one periodic cell can also be
 selected with the CUBE keyword.
 
 Another option for restricting the NCI plot to a certain region
 encompassing a number of intermolecular contacts is ues the box that
 contains a number of fragments of the crystal or molecular structure
-using: 
+using:
 ~~~
 CUBE file1.xyz file2.xyz ...
 ~~~
@@ -167,7 +167,7 @@ CUTPLOT rhoplot.r dimplot.r
 can be used to change how (and whether) the NCI domains are
 represented. When the density is greater than `rhoplot.r`, the reduced
 density gradient at that point in the `-grad.cube` file is set to
-a value of 100, effectively eliminating that point from the 
+a value of 100, effectively eliminating that point from the
 isosurface plot. In addition, the default color scale represented in
 RDG isosurfaces ranges from -`rhoplot.r` to `rhoplot.r`. The default
 value is 0.05 (densities from a loaded scalar field) or 0.07
@@ -254,7 +254,7 @@ the typical usage, WRITE generates an xyz file containing a portion
 of the crystal or molecule. Then, the user removes all the undesired
 atoms using a graphical program (like
 [avogadro](https://avogadro.cc/)). Finally, the xyz of the desired
-fragment are passed back to critic2 using the FRAGMENT keyword. 
+fragment are passed back to critic2 using the FRAGMENT keyword.
 To simplify this process, the fragment can be read directly by
 FRAGMENT from an xyz file (`file.xyz`). Note that the fragments need
 not include all atoms in the crystal or molecule, or may contain
@@ -277,7 +277,7 @@ The RHOPARAM keyword:
 RHOPARAM rhoparam.r
 ~~~
 restricts the representation of NCI domains to those regions where
-none of the fragments contributes more than `rhoparam.r` times to the 
+none of the fragments contributes more than `rhoparam.r` times to the
 total promolecular density. The default is 0.95 (i.e. a 95%). This
 keyword is useful to remove intramolecular domains within a fragment.
 
@@ -319,4 +319,3 @@ Some tips for using the NCIPLOT keyword efficiently:
 ## Examples
 
 + [Making NCI Plots in molecules, surfaces, and solids](/critic2/examples/example_12_01_simple-nciplot/)
-

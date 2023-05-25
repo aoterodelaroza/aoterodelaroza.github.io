@@ -22,11 +22,11 @@ sidebar:
 
 - [Delocalization indices in solids](/critic2/examples/example_11_10_deloc-indices/)
 
-## NCI plots {#c2e-nci}
+## NCI Plots {#c2e-nci}
 
 - [Making NCI Plots in molecules, surfaces, and solids](/critic2/examples/example_12_01_simple-nciplot/)
 
-## STM plots {#c2e-stm}
+## STM Plots {#c2e-stm}
 
 - [Making STM plots with Quantum ESPRESSO](/critic2/examples/example_14_01_stmqe/)
 
@@ -34,10 +34,10 @@ sidebar:
 
 - [Calculations using molecular structures and wavefunctions](/critic2/examples/example_15_01_molcalc/)
 
-## Structural tools {#c2e-strtools}
+## Structural Tools {#c2e-strtools}
 
 - [Compare molecular and crystal structures](/critic2/examples/example_13_01_strcompare/)
 
-## Development notes
+## Development Notes
 
 - [Critic2 development notes and test files](/critic2/examples/testfiles/)

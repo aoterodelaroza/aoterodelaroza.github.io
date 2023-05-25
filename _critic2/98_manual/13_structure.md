@@ -446,7 +446,7 @@ atoms of type `atcenter.s` that have a coordination polyhedron. The
 number of vertices, minimum and maximum vertex-center distance, number
 of faces, and polyhedron volume are printed.
 
-## Effective coordination number (ECON) {#c2-econ}
+## Effective Coordination Number (ECON) {#c2-econ}
 
 The coordination number of an atom is typically defined as the number
 of neighbors that are closest to that atom. This definition can be
@@ -552,7 +552,7 @@ itself. The default `prec.r` is 0.01. The van der Waals and covalent
 radii can be changed using the [RADII](/critic2/manual/misc/#c2-radii)
 keyword.
 
-## Van der Waals volume (VDW) {#c2-vdw}
+## Van der Waals Volume (VDW) {#c2-vdw}
 The VDW keyword calculates the van der Waals volume of a crystal or
 molecule.
 ~~~

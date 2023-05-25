@@ -182,14 +182,14 @@ number), and the location of the relevant library and density files:
   A. Otero-de-la-Roza et al., Comput. Phys. Commun. 180 (2009) 157-166.
 
 + critic2 (development), version 1.0 (git:1.1dev-152-gb8eb182)
-		 host: Linux-5.16.0-6-amd64
-		 date: Wed 27 Apr 2022 10:20:16
+         host: Linux-5.16.0-6-amd64
+         date: Wed 27 Apr 2022 10:20:16
  compiled dat: /usr/local/share/critic2
-	  datadir: /home/alberto/git/critic2/dat
-	 dic file: /home/alberto/git/critic2/dat/cif/cif_core.dic
+      datadir: /home/alberto/git/critic2/dat
+     dic file: /home/alberto/git/critic2/dat/cif/cif_core.dic
 ...was found?: T
-	   spglib: 1.13.0
-		libxc: <unavailable>
+       spglib: 1.13.0
+        libxc: <unavailable>
 
 CRITIC2--2022/4/29, 07:03:03.280
 ~~~
@@ -212,7 +212,7 @@ motif:
   Lattice parameters (ang): 5.463000  5.463000  5.463000
   Lattice angles (degrees): 90.000  90.000  90.000
   Empirical formula:
-	ca(1) f(2)
+    ca(1) f(2)
   Number of non-equivalent atoms in the unit cell: 2
   Number of atoms in the unit cell: 12
   Number of atomic species: 2
@@ -266,9 +266,9 @@ lattice vectors in Cartesian coordinates (repeated below).
   12   0.2500000000   0.2500000000   0.7500000000   2     f     9
 
 + Lattice vectors (bohr)
-	a:   10.3235738640     0.0000000000     0.0000000000
-	b:    0.0000000000    10.3235738640     0.0000000000
-	c:    0.0000000000     0.0000000000    10.3235738640
+    a:   10.3235738640     0.0000000000     0.0000000000
+    b:    0.0000000000    10.3235738640     0.0000000000
+    c:    0.0000000000     0.0000000000    10.3235738640
 
 + List of atoms in Cartesian coordinates (bohr):
 # at         x                y                z         spc  name    Z     dnn
@@ -298,18 +298,18 @@ group information:
 ~~~
 + List of symmetry operations (48):
   Operation 1:
-	 1.000000  0.000000  0.000000  0.000000
-	 0.000000  1.000000  0.000000  0.000000
-	 0.000000  0.000000  1.000000  0.000000
+     1.000000  0.000000  0.000000  0.000000
+     0.000000  1.000000  0.000000  0.000000
+     0.000000  0.000000  1.000000  0.000000
   Operation 2:
-	 0.000000  0.000000 -1.000000  0.000000
-	-1.000000  0.000000  0.000000  0.000000
-	 0.000000 -1.000000  0.000000  0.000000
+     0.000000  0.000000 -1.000000  0.000000
+    -1.000000  0.000000  0.000000  0.000000
+     0.000000 -1.000000  0.000000  0.000000
 [...]
   Operation 48:
-	 0.000000  1.000000  0.000000  0.000000
-	 0.000000  0.000000  1.000000  0.000000
-	-1.000000  0.000000  0.000000  0.000000
+     0.000000  1.000000  0.000000  0.000000
+     0.000000  0.000000  1.000000  0.000000
+    -1.000000  0.000000  0.000000  0.000000
 
 + List of symmetry operations in crystallographic notation:
    1: x,y,z
@@ -345,17 +345,17 @@ lattice vectors.
 ~~~
 + Car/crys coordinate transformation matrices:
   A = car to crys (xcrys = A * xcar, bohr^-1)
-	   0.0968656798    -0.0000000000    -0.0000000000
-	   0.0000000000     0.0968656798    -0.0000000000
-	   0.0000000000     0.0000000000     0.0968656798
+       0.0968656798    -0.0000000000    -0.0000000000
+       0.0000000000     0.0968656798    -0.0000000000
+       0.0000000000     0.0000000000     0.0968656798
   B = crys to car (xcar = B * xcrys, bohr)
-	  10.3235738640     0.0000000000     0.0000000000
-	   0.0000000000    10.3235738640     0.0000000000
-	   0.0000000000     0.0000000000    10.3235738640
+      10.3235738640     0.0000000000     0.0000000000
+       0.0000000000    10.3235738640     0.0000000000
+       0.0000000000     0.0000000000    10.3235738640
   G = metric tensor (B'*B, bohr^2)
-	 106.5761773245     0.0000000000     0.0000000000
-	   0.0000000000   106.5761773245     0.0000000000
-	   0.0000000000     0.0000000000   106.5761773245
+     106.5761773245     0.0000000000     0.0000000000
+       0.0000000000   106.5761773245     0.0000000000
+       0.0000000000     0.0000000000   106.5761773245
 ~~~
 
 The next block in the output gives the calculation of the discrete
@@ -389,15 +389,15 @@ given next:
   Radius of (unit cell/environment) circumscribed sphere (bohr): 8.9405 / 67.0536
   Maximum interaction distance (bohr): 31.4559
   Covering regions:
-	Total number of regions: 216 (6 6 6)
-	Minimum region ID: -3 -3 -3
-	Maximum region ID: 2 2 2
-	Region side (bohr): 13.3037
-	Transformation origin (bohr): 5.1618,5.1618,5.1618
-	Search offsets: 2197
-	Maximum search offset: 6
-	Average number of atoms per region: 14.1481
-	Maximum number of atoms in a region: 40
+    Total number of regions: 216 (6 6 6)
+    Minimum region ID: -3 -3 -3
+    Maximum region ID: 2 2 2
+    Region side (bohr): 13.3037
+    Transformation origin (bohr): 5.1618,5.1618,5.1618
+    Search offsets: 2197
+    Maximum search offset: 6
+    Average number of atoms per region: 14.1481
+    Maximum number of atoms in a region: 40
 ~~~
 
 Next the Wigner-Seitz (WS) cell and the reduced Delaunay cell are
@@ -410,14 +410,14 @@ two atoms, and for the
 + Vertex of the WS cell in cryst. coords. (8)
 # id = vertex ID. xyz = vertex cryst. coords. d = vertex distance to origin (bohr).
    id       x            y            z          d (bohr)
-	1    0.500000     0.500000    -0.500000     8.94047722
-	2    0.500000    -0.500000     0.500000     8.94047722
-	3    0.500000     0.500000     0.500000     8.94047722
-	4   -0.500000     0.500000     0.500000     8.94047722
-	5    0.500000    -0.500000    -0.500000     8.94047722
-	6   -0.500000     0.500000    -0.500000     8.94047722
-	7   -0.500000    -0.500000    -0.500000     8.94047722
-	8   -0.500000    -0.500000     0.500000     8.94047722
+    1    0.500000     0.500000    -0.500000     8.94047722
+    2    0.500000    -0.500000     0.500000     8.94047722
+    3    0.500000     0.500000     0.500000     8.94047722
+    4   -0.500000     0.500000     0.500000     8.94047722
+    5    0.500000    -0.500000    -0.500000     8.94047722
+    6   -0.500000     0.500000    -0.500000     8.94047722
+    7   -0.500000    -0.500000    -0.500000     8.94047722
+    8   -0.500000    -0.500000     0.500000     8.94047722
 
 + Faces of the WS cell (6)
 # Face ID: vertexID1 vertexID2 ...
@@ -484,9 +484,9 @@ the atomic volume and the value and Laplacian of the reference field
 ~~~
 * List of integrable properties (3)
 #  Id  Type  Field  Name
-	1   v        0  Volume
-	2  fval      0  Pop
-	3  lval      0  Lap
+    1   v        0  Volume
+    2  fval      0  Pop
+    3  lval      0  Lap
 ~~~
 
 Next is the list of additional properties to be calculated at the
@@ -549,7 +549,7 @@ The output starts off with the same header as in CRYSTAL, and then:
   Encompassing cell dimensions (bohr): 37.794523  40.654257  38.917797
   Encompassing cell dimensions (ang): 20.000000  21.513306  20.594411
   Empirical formula:
-	o(1) h(2)
+    o(1) h(2)
   Number of atoms: 3
   Number of atomic species: 2
   Number of electrons (with zero atomic charge): 10
@@ -635,15 +635,15 @@ shown next:
   Radius of (unit cell/environment) circumscribed sphere (ang_): 17.9371 / 0.8129
   Maximum interaction distance (ang_): 11.3820
   Covering regions:
-	Total number of regions: 4 (1 2 2)
-	Minimum region ID: 0 -1 -1
-	Maximum region ID: 0 0 0
-	Region side (ang_): 2.6400
-	Transformation origin (ang_): 10.0000,10.7567,10.2972
-	Search offsets: 1331
-	Maximum search offset: 5
-	Average number of atoms per region: 0.7500
-	Maximum number of atoms in a region: 1
+    Total number of regions: 4 (1 2 2)
+    Minimum region ID: 0 -1 -1
+    Maximum region ID: 0 0 0
+    Region side (ang_): 2.6400
+    Transformation origin (ang_): 10.0000,10.7567,10.2972
+    Search offsets: 1331
+    Maximum search offset: 5
+    Average number of atoms per region: 0.7500
+    Maximum number of atoms in a region: 1
 
 ~~~
 As in the case of a crystal, critic2 calculates how many discrete
@@ -669,9 +669,9 @@ The rest of the output is completely equivalent to the crystal case
 
 * List of integrable properties (3)
 #  Id  Type  Field  Name
-	1   v        0  Volume
-	2  fval      0  Pop
-	3  lval      0  Lap
+    1   v        0  Volume
+    2  fval      0  Pop
+    3  lval      0  Lap
 
 * List of additional properties at critical points (0)
 

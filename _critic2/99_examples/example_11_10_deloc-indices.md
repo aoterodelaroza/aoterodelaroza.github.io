@@ -80,7 +80,7 @@ the DI calculation also depends on the `ecutrho` of both SCF
 calculations. In molecular crystals, molecular localization and
 delocalization indices are also calculated.
 
-## Magnesium oxide (MgO)
+## Magnesium Oxide (MgO)
 
 The PAW calculation (step 1) with `pw.x` is straightforward:
 ```
@@ -383,7 +383,7 @@ The files for this example can be found in the
 package, `mgo` subdirectory. The `runit.sh` script automatizes the
 steps above.
 
-### MgO using a non-SCF calculation instead of open_grid.x
+### MgO Using a non-SCF Calculation Instead of open_grid.x
 
 Exactly the same DI calculation can be carried out in a different way
 by using a non-self-consistent (nscf) calculation instead of the
@@ -499,7 +499,7 @@ The first three atoms are the three in-plane covalent bonds. Atoms in
 the same layer (z = 0.25) show distinctly higher DIs than atoms in
 different layers, even if they are farther away.
 
-## A molecular crystal: urea
+## A Molecular Crystal: Urea
 
 When a crystal composed of discrete units (a molecular crystal)
 is read into critic2, the program will automatically detect it and
@@ -560,7 +560,7 @@ Note that the sum of LI plus half of all DIs is the average molecular
 electron population. In this case, both molecules are neutral, since
 they are equivalent by symmetry.
 
-## A spin-polarized case: FeO
+## A Spin-Polarized Case: FeO
 
 Calculating the DIs in a spin-polarized calculation is a bit more
 convoluted, but follows essentially the same procedure. In this
@@ -693,7 +693,7 @@ yt
 The interpretation of the critic2 output is essentially the same as in
 the MgO case.
 
-## A metal: elemental sodium
+## A Metal: Elemental Sodium
 
 The DIs in systems that have partially filled bands (metals) cannot be
 calculated with maximally localized Wannier functions at present,
@@ -732,7 +732,7 @@ bader
 Note that the checkpoint files in this case are absent, but the input
 is otherwise the same.
 
-## DIs from a checkpoint file
+## DIs from a Checkpoint File
 
 Carrying out the DI integration generates two checkpoint files: one
 containing the atomic overlap matrices (with extension `.pwc-sij`) and
@@ -759,11 +759,11 @@ directly. The `-fa` checkpoint file can be used instead:
 integrable deloc_fachk na.pwc-fa
 ```
 
-## Example files package
+## Example Files Package
 
 Files: [example_11_10.tar.xz](/assets/critic2/example_11_10/example_11_10.tar.xz).
 
-## Manual pages
+## Manual Pages
 
 - [The reference field](/critic2/manual/fields/#c2-reference)
 

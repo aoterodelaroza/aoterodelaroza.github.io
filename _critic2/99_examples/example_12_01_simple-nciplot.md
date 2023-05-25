@@ -16,7 +16,7 @@ see [Johnson et al.'s article](https://dx.doi.org/10.1021/ja100936w)
 and [this other article](https://doi.org/10.1039/C2CP41395G) for the
 implementation in solids, and the manual pages indicated at the end.
 
-## Molecules: phenol dimer
+## Molecules: Phenol Dimer
 
 NCI plots can be generated in two ways. If you have the structure and
 the self-consistent electron density, you can calculate the NCI
@@ -88,7 +88,7 @@ read from the wavefunction file, and therefore used in the NCI plot.
   <figcaption style="text-align: center">Phenol dimer NCI plot.</figcaption>
 </figure>
 
-## Surfaces: benzene on kaolinite
+## Surfaces: Benzene on Kaolinite
 
 Now we consider making the NCI plots of a molecule (benzene) on an
 inorganic surface, kaolinite (001). The equilibrium structure was
@@ -183,7 +183,7 @@ surface structure.
   <figcaption style="text-align: center">Benzene on kaolinite, adsorption on hydrophilic side.</figcaption>
 </figure>
 
-## Solids: thymine molecular crystal
+## Solids: Thymine Molecular Crystal
 
 Same as in the surface case, NCI plots of a periodic crystal are very
 busy because of the large number of NCI domains and atoms. We need to
@@ -280,11 +280,11 @@ calculated electron density if the latter is not available. To do
 this, simply remove the LOAD commands. In this case, only the
 structure of the molecular solid is needed.
 
-## Example files package
+## Example Files Package
 
 Files: [example_12_01.tar.xz](/assets/critic2/example_12_01/example_12_01.tar.xz).
 
-## Manual pages
+## Manual Pages
 
 - [The NCIPLOT keyword](/critic2/manual/nciplot/)
 
