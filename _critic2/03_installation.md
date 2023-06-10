@@ -118,13 +118,14 @@ repository, and the **stable** version, in the stable branch. Only
 patches addressing serious bugs will be introduced in the stable
 version; all new development happens in the development version. The
 stable version is compilable with all versions of gfortran starting at
-4.9. All intel fortran compiler versions from 2011 onwards also
+4.9. All Intel fortran compiler versions from 2011 onwards also
 compile the stable code.
 
 The development version can be compiled with gfortran-6 and later and
-with intel fortran 2019 and later. All other compilers tested have
-issues, and fail to produce a working binary. This is the list of
-compilers tested:
+with Intel fortran 2019 and later, although some recent versions of
+Intel fortran may cause problems if aggressive optimization is
+used. All other compilers tested have issues, and fail to produce a
+working binary. This is the list of compilers tested:
 
 * gfortran 4.8: critic2 cannot be compiled because allocatable
   components in user-defined types are not supported in this and older
