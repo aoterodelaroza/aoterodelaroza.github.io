@@ -5,7 +5,7 @@ permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."
 sidebar:
   - repo: "critic2"
-    nav: "critic2"
+	nav: "critic2"
 toc: true
 toc_label: "Installation of Critic2"
 toc_sticky: true
@@ -19,7 +19,7 @@ To build critic2, you will need:
 
 * A C compiler.
 
-* A build system, either [cmake](#c2-usecmake) or [autoconf/automake](#c2-useconfigure).
+* The [cmake](#c2-usecmake) build system.
 
 * The make program.
 
@@ -31,8 +31,9 @@ manager (`apt`, `rpm`, etc. on Linux; [homebrew](https://brew.sh/) on macOS).
 
 ### Build Using cmake {#c2-usecmake}
 
-Using cmake is the recommended installation procedure. Change to the
-critic2 root directory and make a subdirectory for the compilation:
+Using cmake is the recommended installation procedure, and the only
+way to build critic2 in recent versions. Change to the critic2 root
+directory and make a subdirectory for the compilation:
 ~~~
 mkdir build
 cd build
@@ -67,7 +68,9 @@ make creates the `critic2` binary in `build/src/`.
 
 ### Build Using configure/make {#c2-useconfigure}
 
-If you downloaded the code from the git repository, you will need to run:
+**These instructions only apply to old versions of critic2; the
+configure/make build system has been removed from the development
+version.** You need to run:
 ~~~
 autoreconf
 ~~~
@@ -170,12 +173,7 @@ cd build
 cmake ..
 ~~~
 Once camke generates the cache variables, the variables need not be
-set again, unless you delete the build directory. In
-autoconf/automake, you can choose the compiler by changing the FC and
-F77 flags before configure:
-~~~
-FC=gfortran F77=gfortran ./configure ...
-~~~
+set again, unless you delete the build directory.
 
 ## External Libraries {#c2-libraries}
 
@@ -198,7 +196,7 @@ compatible with versions of libxc older than 5.0.
 If compiling with autoconf/automake, to compile critic2 with libxc
 support, you must pass the location of the library via `configure`:
 
-    ./configure --with-libxc=/opt/libxc
+	./configure --with-libxc=/opt/libxc
 
 where `/opt/libxc/` is the directory that was the target for the libxc
 installation (i.e. you used `--prefix=/opt/libxc` when you configured
