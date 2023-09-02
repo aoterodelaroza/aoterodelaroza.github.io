@@ -5,7 +5,7 @@ permalink: /critic2/installation/
 excerpt: "Installation of the critic2 program."
 sidebar:
   - repo: "critic2"
-	nav: "critic2"
+    nav: "critic2"
 toc: true
 toc_label: "Installation of Critic2"
 toc_sticky: true
@@ -196,7 +196,7 @@ compatible with versions of libxc older than 5.0.
 If compiling with autoconf/automake, to compile critic2 with libxc
 support, you must pass the location of the library via `configure`:
 
-	./configure --with-libxc=/opt/libxc
+    ./configure --with-libxc=/opt/libxc
 
 where `/opt/libxc/` is the directory that was the target for the libxc
 installation (i.e. you used `--prefix=/opt/libxc` when you configured
