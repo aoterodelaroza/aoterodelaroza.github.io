@@ -214,7 +214,7 @@ CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
 CPREPORT file.scf.in
 CPREPORT file.tess
 CPREPORT file.cri|file.incritic
-CPREPORT {[file.]POSCAR|[file.]CONTCAR}
+CPREPORT {[file.]POSCAR|[file.]CONTCAR|file.vasp}
 CPREPORT file.abin
 CPREPORT file.elk
 CPREPORT file.gau
@@ -245,7 +245,7 @@ CRYSTAL file.dmain
 CRYSTAL file.cube
 CRYSTAL file.bincube
 CRYSTAL file.struct
-CRYSTAL [file.]{POSCAR,CONTCAR,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR1,AECCAR2} [at1.s at2.s ...|POTCAR]
+CRYSTAL [file.]{POSCAR,CONTCAR,vasp,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR1,AECCAR2} [at1.s at2.s ...|POTCAR]
 CRYSTAL file_{DEN|PAWDEN|ELF|POT|VHA|VHXC|VXC|VCLMB|VPSP|GDEN1|GDEN2|GDEN3|LDEN|KDEN}
 CRYSTAL file.OUT # (GEOMETRY.OUT, elk)
 CRYSTAL file.out [istruct.i] # (file.scf.out, quantum espresso output)
@@ -968,7 +968,7 @@ WRITE file.scf.in [rklength.r]
 WRITE file.pwi [rklength.r]
 WRITE file.tess
 WRITE file.cri|file.incritic
-WRITE {[file.]POSCAR|[file.]CONTCAR}
+WRITE {[file.]POSCAR|[file.]CONTCAR|file.vasp}
 WRITE file.abin
 WRITE file.elk
 WRITE file.gau
