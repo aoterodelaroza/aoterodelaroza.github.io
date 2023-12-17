@@ -644,7 +644,7 @@ CPREPORT file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
 CPREPORT file.scf.in
 CPREPORT file.tess
 CPREPORT file.cri|file.incritic
-CPREPORT {[file.]POSCAR|[file.]CONTCAR}
+CPREPORT {[file.]POSCAR|[file.]CONTCAR|file.vasp}
 CPREPORT file.abin
 CPREPORT file.elk
 CPREPORT file.gau
