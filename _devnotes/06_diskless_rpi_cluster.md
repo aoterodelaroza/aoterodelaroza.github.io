@@ -279,7 +279,7 @@ Mine is `eth0`. Then, create the corresponding interfaces file:
 ```
 #### /etc/network/interfaces.d/eth0
 allow-hotplug eth0
-iface eth0 inet	static
+iface eth0 inet static
   address 10.0.0.1
   netmask 255.0.0.0
 ```

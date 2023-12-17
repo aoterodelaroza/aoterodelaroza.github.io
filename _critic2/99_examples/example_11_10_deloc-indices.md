@@ -5,7 +5,7 @@ permalink: /critic2/examples/example_11_10_deloc-indices/
 excerpt: "Delocalization indices in Solids"
 sidebar:
   - repo: "critic2"
-	nav: "critic2_examples"
+    nav: "critic2_examples"
 toc: true
 toc_label: "DIs in Solids"
 ---
@@ -219,13 +219,13 @@ This will unpack the k-points from the last SCF calculation and prepare
 the wannier90 run. The execution of `open_grid.x` generates a list of
 k-points that we will use later in the wannier90 input:
 ```
-	 Writing output data file crystal_open.save/
-	 Grid of q-points
-	 Dimensions:   4   4   4
-	 Shift:        0   0   0
-	 List to be put in the .win file of wannier90: (already in crystal/fractionary coordinates):
-	0.000000000000000    0.000000000000000    0.000000000000000    0.0156250000
-	0.000000000000000   -0.000000000000000    0.250000000000000    0.0156250000
+     Writing output data file crystal_open.save/
+     Grid of q-points
+     Dimensions:   4   4   4
+     Shift:        0   0   0
+     List to be put in the .win file of wannier90: (already in crystal/fractionary coordinates):
+    0.000000000000000    0.000000000000000    0.000000000000000    0.0156250000
+    0.000000000000000   -0.000000000000000    0.250000000000000    0.0156250000
 [...]
    -0.250000000000000   -0.250000000000000    0.500000000000000    0.0156250000
    -0.250000000000000   -0.250000000000000   -0.250000000000000    0.0156250000
@@ -279,7 +279,7 @@ kmesh_tol = 1d-3
 mp_grid : 4 4 4
 
 begin kpoints
-	0.000000000000000    0.000000000000000    0.000000000000000    0.0156250000
+    0.000000000000000    0.000000000000000    0.000000000000000    0.0156250000
 [...]
    -0.250000000000000   -0.250000000000000   -0.250000000000000    0.0156250000
 end kpoints
@@ -588,26 +588,26 @@ PAW:
 ```
 This results in a total of 9 bands, as shown in the NC SCF output:
 ```
-	 number of Kohn-Sham states=            9
+     number of Kohn-Sham states=            9
 ```
 With `verbosity=high`, we can verify that the spin-up channel has 9
 occupied bands and spin-down has 5 occupied and 4 unoccupied bands:
 ```
 [...]
  ------ SPIN UP ------------
-		  k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
-	-8.7938   7.7292   7.8322   7.9838   8.1232   8.1283   8.1355   8.1770
-	 8.1880
-	 occupation numbers
-	 1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
-	 1.0000
+          k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
+    -8.7938   7.7292   7.8322   7.9838   8.1232   8.1283   8.1355   8.1770
+     8.1880
+     occupation numbers
+     1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000   1.0000
+     1.0000
  ------ SPIN DOWN ----------
-		  k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
-	-8.2542   8.7307   8.7479   8.7545  11.2368  11.3607  11.4147  12.2011
-	12.4321
-	 occupation numbers
-	 1.0000   1.0000   1.0000   1.0000   1.0000   0.0000   0.0000   0.0000
-	 0.0000
+          k = 0.0000 0.0000 0.0000 (  1639 PWs)   bands (ev):
+    -8.2542   8.7307   8.7479   8.7545  11.2368  11.3607  11.4147  12.2011
+    12.4321
+     occupation numbers
+     1.0000   1.0000   1.0000   1.0000   1.0000   0.0000   0.0000   0.0000
+     0.0000
 [...]
 ```
 
