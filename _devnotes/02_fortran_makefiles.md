@@ -5,14 +5,14 @@ permalink: /devnotes/modern-fortran-makefiles/
 excerpt: "Notes on how to write Makefiles for (modern) fortran programs. Modules, submodules, and automatic dependency generation."
 class: wide
 sidebar:
-  - nav: "devnotes" 
+  - nav: "devnotes"
 toc: true
 toc_label: "Fortran Makefiles"
 toc_sticky: true
 ---
 
 These notes show how to write portable Makefiles for large modern
-Fortran (2018 standard) programs. 
+Fortran (2018 standard) programs.
 
 *tl;dr Put the [Makefile](/assets/devnotes/02_fortran_makefiles/Makefile)
 and the [dependency generator](/assets/devnotes/02_fortran_makefiles/makedepf08.awk)
@@ -46,7 +46,7 @@ only recently implemented in modern Fortran compilers (this is early
 recently fixed important submodule-related bugs). The two ideas behind
 submodules are: i) separate the interface of a module from its
 implementation, and ii) prevent circular dependencies between
-modules. 
+modules.
 
 Consider module `one` contained in source file `one.f90`:
 ~~~ fortran
@@ -73,7 +73,7 @@ pretty short: `gfortran` and `ifort`), this interface file has the
 name of the module and extension `.mod` (`onemod.mod` in this
 case). The catch is that the `onemod.mod` file must be available to
 all the other subprograms that use that module. Therefore the module
-must be compiled before them. 
+must be compiled before them.
 
 Now consider what happens if we make a change to the
 module. Recompilation of the source changes the `.mod` file and all
@@ -149,21 +149,20 @@ end module onemod
 ~~~
 and the submodule:
 ~~~ fortran
-submodule (twomod) twoproc
+submodule (onemod) oneproc
   implicit none
 contains
-  recursive module subroutine addtwo(msg,n)
-    use onemod, only: addone
+  recursive module subroutine addone(msg,n)
+    use two, only: addtwo
     character(len=:), allocatable, intent(inout) :: msg
     integer, intent(inout) :: n
-
-    msg = msg // "2"
+    msg = msg // "1"
     if (n > 1) then
        n = n - 1
-       call addone(msg,n)
+       call addtwo(msg,n)
     end if
-  end subroutine addtwo
-end submodule twoproc
+  end subroutine addone
+end submodule oneproc
 ~~~
 Only the module file generates the `.mod` file necessary to compile
 all the dependencies and so changes to the implementation in the
@@ -172,7 +171,7 @@ in the submodule can use whatever module is available as long as the
 parent module of the submodule is not used in its interface. In this
 case, the `two` submodule can use `addone` from the `onemod` module
 and likewise the `one` submodule can use `addtwo` from the `twomod`
-module. 
+module.
 
 How does the compilation of submodules work? In this example,
 compilation of the module file (`one.f90`) generates two files: the
@@ -413,7 +412,7 @@ one@proc.anc: one.anc
 two@proc.anc: two.anc
 ~~~
 The first block comes from use statements in `main.f90`,
-`one@proc.f90`, and `two@proc.anc`, which  require the `.mod` file. 
+`one@proc.f90`, and `two@proc.anc`, which  require the `.mod` file.
 The second block comes from the
 module-submodule relations, and refer to the use of the corresponding
 `.smod` files.
@@ -436,7 +435,7 @@ to pay for keeping things organized.
 
 The complete Makefile is:
 ~~~ make
-.SUFFIXES: 
+.SUFFIXES:
 
 FC=gfortran
 COMPILE.f08 = $(FC) $(FCFLAGS) $(TARGET_ARCH) -c
@@ -449,7 +448,7 @@ main: $(subst .f90,.o,$(SOURCES))
 
 .PHONY: clean
 clean:
-    -rm -f *.o *.mod *.smod *.anc main 
+    -rm -f *.o *.mod *.smod *.anc main
 
 %.anc: %.f90
     $(MAKEMOD.f08) $<
@@ -502,7 +501,7 @@ an `INCLUDE` can be inserted:
 include "file.inc"
 ~~~
 This replaces the `INCLUDE` line with the contents of the
-referenced file. 
+referenced file.
 
 The dependency rules in the Makefile for an included file can be
 straightforwardly implemented by making the anchor of the parent file
@@ -828,7 +827,7 @@ SUBMODULE (ancestor:parent) name
 ~~~
 where `ancestor` is the name of the ancestor module (the module from
 which all the children submodules ultimately depend) and `parent` is
-the name of the parent 
+the name of the parent
 submodule. To compile the source containing the `name` submodule, we
 need the `.mod` file of the ancestor module and the `.smod` file of
 the parent submodule. The latter is built as `ancestor@parent.smod`.
@@ -855,7 +854,7 @@ contains
 end submodule foursmod
 ~~~
 and then add the interface of the provided `addfour` routine to module
-`two` in `two_all.F90`: 
+`two` in `two_all.F90`:
 ~~~ fortran
 module two
   implicit none
@@ -939,7 +938,7 @@ Fortran code requires having the prerequisite `.mod` and `.smod` files
 in place beforehand, which in a way defeats the purpose of the flag.
 
 Therefore, we must use a dependency generator. In the case of
-Fortran90, there are already 
+Fortran90, there are already
 [several options](http://fortranwiki.org/fortran/show/Build+tools) such as
 [sfmakedepend](https://marine.rutgers.edu/po/tools/perl/sfmakedepend)
 and [makedepf90](https://salsa.debian.org/science-team/makedepf90).
@@ -949,7 +948,7 @@ mention of submodules, though, so it may be in the works.) Still,
 writing our own dependency generator with AWK should not be that
 difficult, since we know the way in which modules, submodules, and
 includes relate to each other. Since we do not want to write a script
-that does full parsing of the source, there will be some limitations. 
+that does full parsing of the source, there will be some limitations.
 It is also important to note that the Fortran standard does not make a
 recommendation regarding (or a even mention of) `.mod` and `.smod`
 files, so the following is valid only for `gfortran` and `ifort`,
@@ -982,7 +981,7 @@ depend on all the module files created by it: `foo.mod`,
 `bar.mod`,... and then give empty rules for each of the `.mod` files
 to prevent errors when these files do not exist.
 
-According to the 
+According to the
 [Fortran standard](http://isotc.iso.org/livelink/livelink?func=ll&objId=19442438&objAction=Open),
 the syntax for the `MODULE` statement (R1405) is simply:
 ~~~ fortran
@@ -1047,7 +1046,7 @@ the previous rule.
 
 Since we do not have a proper parser, it is difficult to detect
 whether a `MODULE SUBROUTINE` or `MODULE FUNCTION` in the source file
-signals a child submodule (they may be inside a comment, for instance). 
+signals a child submodule (they may be inside a comment, for instance).
 What we do instead is read all the submodules and write down their
 ancestor module. The syntax of a submodule definition is
 (R1416 and ff.):
@@ -1118,7 +1117,7 @@ and ancestor to submodule `bar`. Submodule `baz` is defined as:
 SUBMODULE (foo:bar) baz
 ~~~
 and therefore has `foo` as its ancestor module and `bar` as its parent
-submodule. When the source for `baz` is compiled, we need 
+submodule. When the source for `baz` is compiled, we need
 `foo.mod` and `foo@bar.smod`. We now write the rules for generating
 the latter by making the anchor file of the containing source file
 depend on `foo@bar.smod`.
@@ -1166,7 +1165,7 @@ two/two_all.anc:.mod/two@twoproc.smod
 The `foursmod` submodule in `four.f90` has the `two` module as
 ancestor and `twoproc` as submodule, and the latter lives in
 `two/two_all.F90`. Therefore, its anchor file must depend on
-`two@twoproc.smod`. 
+`two@twoproc.smod`.
 
 ### Rule 4: the anchor of a source file depends on all its included files and their contents
 
@@ -1241,7 +1240,7 @@ FNR==1{
 ~~~
 If the new file has not been included anywhere, then we treat it
 normally. If it has, then the source file (and therefore the
-corresponding anchor file) is that of the parent file. 
+corresponding anchor file) is that of the parent file.
 
 In our example, this rule gives:
 ~~~ make
@@ -1316,7 +1315,7 @@ conditional in the inner loop makes sure that:
 - Rules are not repeated. To do this we keep track of which rules we
   have already written using the local `filuniq` array. This is only
   to keep things tidy and to avoid the most obvious rule repetitions.
-  
+
 In our example, this rule generates:
 ~~~ make
 $ makedepf08.awk *.f* */*.{f,F}*
@@ -1349,10 +1348,10 @@ generated is when:
 
 - The ancestor module is unknown (good luck with that one... we'll let
   the user handle the fallout, though).
-  
+
 - The submodule and the ancestor module are in the same file (would
   create a circular dependence).
-  
+
 In our example,
 ~~~ make
 $ makedepf08.awk *.f* */*.{f,F}*
@@ -1386,7 +1385,7 @@ The conditional makes sure that the rule is generated if:
 
 - The submodule source file and the parent's source file are not the
   same, to avoid circular dependencies.
-  
+
 Applying this code to our example, we have:
 ~~~ make
 four.anc:two/two_all.anc
@@ -1405,7 +1404,7 @@ its entirety:
 ## Copyright (c) 2019 alberto Otero de la Roza <aoterodelaroza@gmail.com>
 ## This file is frere software; distributed under GNU/GPL version 3.
 
-#! /usr/bin/env -S awk --traditional -f 
+#! /usr/bin/env -S awk --traditional -f
 
 function dirname(file){
     ## function dirname by Aleksey Cheusov
@@ -1490,7 +1489,7 @@ END{
             printf("%s.anc:%s.anc\n",smod[i],smod[parent[i]]);
     }
 
-    ## Rule 5: the anchor of a source file depends on the anchor of all the non-intrinsic modules it uses 
+    ## Rule 5: the anchor of a source file depends on the anchor of all the non-intrinsic modules it uses
     split("", filuniq, ":")
     for (i in usedmod){
         if ((i in mod) && mod[i]){
@@ -1502,7 +1501,7 @@ END{
             }
         }
     }
-     
+
     ## Rule 4: the anchor of a source file depends on all its included files and their contents
     for (i in include)
         printf("%s.anc:%s\n",include[i],i)
@@ -1557,14 +1556,14 @@ is quite general but has the following limitations:
   and this would still work because everything after the comma is
   discarded. For the same reason, continued lines that start with
   "use", "module", "submodule", or "include" are best avoided.
-  
+
 - Two files with the same name and different Fortran extensions in the
   same directory are not allowed.
-  
+
 - Since it has been tested only with `gfortran` and `ifort`, if some
   other compiler behaves differently regarding `.mod` and `.smod`
   files, the script needs to be adapted.
-  
+
 - The way our Makefile works, it may cause trouble if you use files
   with blank spaces in them.
 
@@ -1591,7 +1590,7 @@ define \n
 endef
 
 ## no implicit rules
-.SUFFIXES: 
+.SUFFIXES:
 
 ## auxiliary programs
 AWK:=awk
