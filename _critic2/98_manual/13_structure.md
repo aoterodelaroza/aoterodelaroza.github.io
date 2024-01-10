@@ -716,3 +716,24 @@ BZ
 ~~~
 calculates and prints the geometry of the Brillouin cell for the
 currently loaded crystal.
+
+## Edit the structure (EDIT) {#c2-edit}
+
+This keyword can be used to edit the currently loaded molecular or
+crystal structure. The syntax of the EDIT environment is:
+~~~
+EDIT
+  DELETE [ATOM|ATOMS] id1.i id2.i ...
+  DELETE [MOLECULE|MOLECULES] id1.i id2.i ...
+ENDEDIT
+~~~
+Each line in the `EDIT` environment carries out an edit in the
+structure. The list of possible editing actions includes:
+
+* `DELETE [ATOM|ATOMS] id1.i id2.i ...`: delete cell atoms with IDs
+  `id1.i`, `id2.i`, etc. After the atoms are deleted, recalculate the
+  symmetry operations and bond connectivity.
+
+* `DELETE [MOLECULE|MOLECULES] id1.i id2.i ...`: delete molecules with
+  IDs `id1.i`, `id2.i`, etc. After the molecules are deleted,
+  recalculate the symmetry operations and bond connectivity.
