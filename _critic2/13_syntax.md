@@ -617,6 +617,7 @@ MOLCELL [border.r]
 : Load a molecular structure.
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
+MOLECULE file.mol2 [border.r] [CUBIC|CUBE] [name.s]
 MOLECULE file.wfn [border.r] [CUBIC|CUBE]
 MOLECULE file.wfx [border.r] [CUBIC|CUBE]
 MOLECULE file.fchk [border.r] [CUBIC|CUBE]
@@ -632,7 +633,7 @@ MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
 MOLECULE file.cif
 MOLECULE ...
-MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
+MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|MOL2|WFN|WFX|
           FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
           FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
 MOLECULE
