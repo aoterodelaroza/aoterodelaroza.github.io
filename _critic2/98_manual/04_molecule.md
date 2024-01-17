@@ -16,6 +16,7 @@ toc_sticky: true
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
 MOLECULE file.mol2 [border.r] [CUBIC|CUBE] [name.s]
+MOLECULE file.pdb [border.r] [CUBIC|CUBE]
 MOLECULE file.wfn [border.r] [CUBIC|CUBE]
 MOLECULE file.wfx [border.r] [CUBIC|CUBE]
 MOLECULE file.fchk [border.r] [CUBIC|CUBE]
@@ -140,6 +141,12 @@ given, critic2 reads the first molecule in the mol2 file. If the
 optional argument `name.s` is given, read the molecule with that name
 (the name is the line after `@<TRIPOS>MOLECULE`). `name.s` is
 case-sensitive.
+
+### pdb format (pdb)
+
+This is a molecular format used by the Protein Data Bank (PDB) for
+biological molecules. Critic2 reads the molecular structure from the
+ATOM and HETATM records.
 
 ### DFTB+ gen Format (gen)
 
