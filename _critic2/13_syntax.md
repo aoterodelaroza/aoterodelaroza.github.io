@@ -439,6 +439,7 @@ IDENTIFY file.xyz
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
 INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
+                [DI3 [atom1.i [atom2.i [ix.i iy.i iz.i]]]]
 INTEGRABLE "expr.s"
 INTEGRABLE DELOC_SIJCHK file-sij.s
 INTEGRABLE DELOC_FACHK file-fa.s

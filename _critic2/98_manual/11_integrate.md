@@ -77,6 +77,7 @@ property.
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
 INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
+                [DI3 [atom1.i [atom2.i [ix.i iy.i iz.i]]]]
 INTEGRABLE "expr.s"
 INTEGRABLE DELOC_SIJCHK file-sij.s
 INTEGRABLE DELOC_FACHK file-fa.s
@@ -137,6 +138,35 @@ files can be quite large, so it may be interesting to delete them
 after the sij or fa matrices are computed. Both keywords accept a
 string pointing to the corresponding file. The DI calculation from
 these matrices will typically take only a few seconds.
+
+Critic2 can also use the calculated atomic overlap matrices to compute
+the three-center delocalization indices (DI3), see
+[this article](https://doi.org/10.1002/jcc.20468) and references
+therein. The DI3 allow a three-body decomposition of the localization
+and delocalization indices, and require only the atomic overlap
+matrix calculated for the two-center DIs. The calculation of
+three-center delocalization indices is activated using the `DI3`
+option to the `DELOC` integrable property.
+
+The cost of calculating the DI3s from the atomic overlap matrix scales
+very quickly with the number of atoms and bands in the system, and a
+full DI3 calculation produces far too much output than it is commonly
+useful. To simplify the calculation, the following options are
+possible:
+
+- `DELOC DI3 atom1.i`: calculate only the DI3s associated with the
+  attractor with index `atom1.i`. This keyword
+  ensures the partition in DI3s of all the delocalization indices in
+  which `atom1.i` is involved.
+
+- `DELOC DI3 atom1.i atom2.i ix.i iy.i iz.i`: calculate only the DI3s
+  associated with the attractor with index `atom1.i` from the main
+  cell and with attractor with index `atom2.i` translated by lattice
+  vector `ix.i iy.i iz.i`. The lattice translation vector (`ix.i iy.i
+  iz.i`) is optional. If it is not given, it is assumed to be
+  zero. This keyword ensures the partition in DI3s of the
+  delocalization index relating `atom1.i` with `atom2.i` translated by
+  vector `ix.i iy.i iz.i`.
 
 In addition, it is possible to define an integrable property using an
 expression involving more than one field (`expr.s`). For instance, if
