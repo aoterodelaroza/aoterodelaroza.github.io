@@ -261,7 +261,10 @@ compiled with the shared option, the same path needs to be available
 when critic2 is executed (for instance, through the `LD_LIBRARY_PATH`
 environment variable). If using CMAKE, you need to indicate the
 directory where the includes (`LIBCINT_INCLUDE_DIRS`) and the library
-(`LIBCINT_LIBRARY`) reside.
+(`LIBCINT_LIBRARY`) reside. For instance:
+~~~
+cmake -DLIBCINT_INCLUDE_DIRS=/home/alberto/git/libcint/build/include/ -DLIBCINT_LIBRARY=/home/alberto/git/libcint/build/libcint.a ..
+~~~
 
 The libcint library is used with molecular wavefunctions that provide
 the basis set information (at present, this is only for fields read
