@@ -193,17 +193,17 @@ calculate exchange and correlation energy densities via de `xc()`
 arithmetic expressions (see below). The code in critic2 is not
 compatible with versions of libxc older than 5.0.
 
-If compiling with autoconf/automake, to compile critic2 with libxc
-support, you must pass the location of the library via `configure`:
-
-    ./configure --with-libxc=/opt/libxc
-
-where `/opt/libxc/` is the directory that was the target for the libxc
-installation (i.e. you used `--prefix=/opt/libxc` when you configured
-the libxc library). If you use cmake, you can indicate the location of
-the include dir with the `LIBXC_INCLUDE_DIRS` variable and the
-location of the `libxc.so` and `libxcf90.so` with the
-`LIBXC_xc_LIBRARY` and `LIBXC_xcf90_LIBRARY` variables.
+If you compile using cmake, libxc should be found automatically by the
+build system if it installed in a standard location. Otherwise, you
+can indicate the location of the include directory with the
+`LIBXC_INCLUDE_DIRS` variable and the location of the `libxc.so` and
+`libxcf90.so` with the `LIBXC_xc_LIBRARY` and `LIBXC_xcf90_LIBRARY`
+variables. For instance:
+~~~
+cmake -DLIBXC_INCLUDE_DIRS=/usr/include \
+      -DLIBXC_xc_LIBRARY=/usr/lib/x86_64-linux-gnu/libxc.so \
+      -DLIBXC_xcf90_LIBRARY=/usr/lib/x86_64-linux-gnu/libxcf90.so ..
+~~~
 
 The libxc library is used in critic2 to create new scalar fields from
 the exchange and correlation energy density definitions in the library
@@ -247,23 +247,15 @@ information.
 calculating molecular integrals between Gaussian-Type Orbitals
 (GTOs). In critic2, this library is used mostly for testing but some
 options to the MOLCALC keyword and some functions in arithmetic
-expressions require it.
+expressions (e.g. the molecular electrostatic potential, mep) require
+it.
 
-If you are using autoconf/automake, compile critic2 with libcint
-support by doing either of:
-~~~
-./configure --with-cint-shared=/opt/libcint/lib
-./configure --with-cint-static=/opt/libcint/lib
-~~~
-where `/opt/libcint/lib` is the location of the libcint static (`.a`)
-or shared (`.so`) libraries prefix where libcint was installed.  If
-compiled with the shared option, the same path needs to be available
-when critic2 is executed (for instance, through the `LD_LIBRARY_PATH`
-environment variable). If using CMAKE, you need to indicate the
+To build critic2 with libcint support, you need to indicate the
 directory where the includes (`LIBCINT_INCLUDE_DIRS`) and the library
 (`LIBCINT_LIBRARY`) reside. For instance:
 ~~~
-cmake -DLIBCINT_INCLUDE_DIRS=/home/alberto/git/libcint/build/include/ -DLIBCINT_LIBRARY=/home/alberto/git/libcint/build/libcint.a ..
+cmake -DLIBCINT_INCLUDE_DIRS=/home/alberto/git/libcint/build/include/ \
+      -DLIBCINT_LIBRARY=/home/alberto/git/libcint/build/libcint.a ..
 ~~~
 
 The libcint library is used with molecular wavefunctions that provide
