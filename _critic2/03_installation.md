@@ -42,29 +42,33 @@ Then do:
 ~~~
 cmake ..
 ~~~
-There are a number of
-compilation options that can be passed to cmake, the most relevant of
-which is `-DCMAKE_INSTALL_PREFIX=prefix`, which sets the installation
-directory. You can tweak this and other compilation options using one
-of the multiple cmake interfaces, like ccmake (use `ccmake ..` from
-the `build` directory). To compile a static version of critic2, use:
-~~~
-cmake .. -DBUILD_STATIC=ON
-~~~
-This version can be copied to a different computer (with the same
-architecture), even if it does not have the compiler libraries. To
-compile a version with debug flags,
-~~~
-cmake .. -DCMAKE_BUILD_TYPE=Debug
-~~~
-This version gives more informative errors when the program crashes.
-
-To build the program, do:
+There are a number of compilation options that can be passed to cmake,
+the most relevant of which is `-DCMAKE_INSTALL_PREFIX=prefix`, which
+sets the installation directory. You can tweak this and other
+compilation options using one of the multiple cmake interfaces, like
+ccmake (use `ccmake ..` from the `build` directory). To build the
+program, do:
 ~~~
 make
 ~~~
 You can use `make -j n` to use `n` cores for the compilation. Running
 make creates the `critic2` binary in `build/src/`.
+
+Some build options for advanced users: If you need to compile a static
+version of critic2, use:
+~~~
+cmake .. -DBUILD_STATIC=ON
+~~~
+The binary generated using this option can be copied to a different
+computer (with the same architecture), even if it does not have the
+compiler libraries, but you will need static versions of all the
+libraries (with extension `.a`) for the static build to work.
+To compile a version with debug flags,
+~~~
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+~~~
+This version gives more informative errors when the program crashes,
+but it is slower.
 
 ### Build Using configure/make {#c2-useconfigure}
 
@@ -99,7 +103,7 @@ However, the binary can be used directly from the source directory by
 setting the `CRITIC_HOME` environment variable. It must point to the
 root directory of the distribution:
 ~~~
-export CRITIC_HOME=/home/alberto/programs/critic2dir
+export CRITIC_HOME=/home/alberto/programs/critic2
 ~~~
 This variable is necessary for critic2 to find the atomic densities
 and other files. These files should be in `${CRITIC_HOME}/dat/`.
@@ -107,22 +111,21 @@ and other files. These files should be in `${CRITIC_HOME}/dat/`.
 Critic2 is parallelized with OpenMP for shared-memory architectures
 (unless disabled during compilation). You change the number of
 parallel threads by setting the `OMP_NUM_THREADS` environment
-variable. Note that the parallelization flags for compilers other than
-ifort and gfortran may not be correct.
+variable.
 
 ## Which Compilers Work? {#whichcompilerswork}
 
 Critic2 uses some features from the more modern Fortran standards,
-which may not be available in some (most) compilers. In consequence,
+which may not be available in some older compilers. In consequence,
 not all compilers may be able to generate the binary and, even if they
-do, it may be broken. Two versions of critic2 are distributed. The
-**development** version, corresponding to the master branch of the
-repository, and the **stable** version, in the stable branch. Only
-patches addressing serious bugs will be introduced in the stable
-version; all new development happens in the development version. The
-stable version is compilable with all versions of gfortran starting at
-4.9. All Intel fortran compiler versions from 2011 onwards also
-compile the stable code.
+do, the binary may be broken. Two versions of critic2 are
+distributed. The **development** version, corresponding to the master
+branch of the repository, and the **stable** version, in the stable
+branch. Only patches addressing serious bugs will be introduced in the
+stable version; all new development happens in the development
+version. The stable version is compilable with all versions of
+gfortran starting at 4.9. All Intel fortran compiler versions from
+2011 onwards also compile the stable code.
 
 The development version can be compiled with gfortran-6 and later and
 with Intel fortran 2019 and later, although some recent versions of
@@ -158,10 +161,10 @@ In summary: **Only recent versions of gfortran and ifort are
 guaranteed to work with the development version. If you cannot use
 gfortran 6 or newer or ifort 2019 or newer, download the stable
 version.** I do not think this is because of errors in the critic2
-code (though if you find that it is, please let me know). If you paid
-for a recent version of your compiler and it throws an internal
-compiler error while trying to build critic2, you may want to consider
-submitting a bug report to the compiler developers.
+code (though if you find that it is, please let me know). If your
+compiler throws an internal compiler error while trying to build
+critic2, you may want to consider submitting a bug report to the
+compiler developers.
 
 You can choose the compiler by setting the FC and CC environment
 variables to the path of your preferred compiler and then building in
@@ -172,7 +175,7 @@ mkdir build
 cd build
 cmake ..
 ~~~
-Once camke generates the cache variables, the variables need not be
+Once cmake generates the cache variables, the variables need not be
 set again, unless you delete the build directory.
 
 ## External Libraries {#c2-libraries}
@@ -182,7 +185,8 @@ set again, unless you delete the build directory.
 When critic2 is built using cmake, it is possible to link against the
 readline library. This library enables shell-like features for
 critic2's command line interface such as keyboard shortcuts, history,
-and autocompletion.
+and autocompletion. You can typically find it in the repository of
+your chosen distribution.
 
 ### Libxc {#c2-libxc}
 
@@ -190,15 +194,15 @@ and autocompletion.
 exchange-correlation energies and potentials for many semilocal
 functionals (LDA, GGA and meta-GGA). In critic2, it is used to
 calculate exchange and correlation energy densities via de `xc()`
-arithmetic expressions (see below). The code in critic2 is not
-compatible with versions of libxc older than 5.0.
+arithmetic expressions (see below). Critic2 is not compatible with
+versions of libxc older than 5.0.
 
 If you compile using cmake, libxc should be found automatically by the
 build system if it installed in a standard location. Otherwise, you
 can indicate the location of the include directory with the
 `LIBXC_INCLUDE_DIRS` variable and the location of the `libxc.so` and
 `libxcf90.so` with the `LIBXC_xc_LIBRARY` and `LIBXC_xcf90_LIBRARY`
-variables. For instance:
+variables, respectively. For instance:
 ~~~
 cmake -DLIBXC_INCLUDE_DIRS=/usr/include \
       -DLIBXC_xc_LIBRARY=/usr/lib/x86_64-linux-gnu/libxc.so \
@@ -247,22 +251,19 @@ information.
 calculating molecular integrals between Gaussian-Type Orbitals
 (GTOs). In critic2, this library is used mostly for testing but some
 options to the MOLCALC keyword and some functions in arithmetic
-expressions (e.g. the molecular electrostatic potential, mep) require
-it.
+expressions require it (e.g. the molecular electrostatic potential, mep).
 
 To build critic2 with libcint support, you need to indicate the
-directory where the includes (`LIBCINT_INCLUDE_DIRS`) and the library
-(`LIBCINT_LIBRARY`) reside. For instance:
+directory where the include directory (`LIBCINT_INCLUDE_DIRS`) and the
+location of the library file (`LIBCINT_LIBRARY`). For instance:
 ~~~
 cmake -DLIBCINT_INCLUDE_DIRS=/home/alberto/git/libcint/build/include/ \
       -DLIBCINT_LIBRARY=/home/alberto/git/libcint/build/libcint.a ..
 ~~~
 
 The libcint library is used with molecular wavefunctions that provide
-the basis set information (at present, this is only for fields read
-from a Gaussian-style fchk file, but more will be implemented). The `mep()`,
-`uslater()`, and `nheff()` chemical functions use the molecular
-integrals calculated by libcint, as well as the `MOLCALC HF`
-keyword. See the
-[chemical functions](/critic2/manual/arithmetics/#availchemfun) and the
+the basis set information. The `mep()`, `uslater()`, and `nheff()`
+chemical functions use the molecular integrals calculated by libcint,
+as well as the `MOLCALC HF` keyword. See the [chemical
+functions](/critic2/manual/arithmetics/#availchemfun) and the
 [MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual.
