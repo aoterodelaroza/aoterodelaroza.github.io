@@ -226,6 +226,11 @@ contains the all-electron density, and we set it as reference in order
 to have it generate the atomic basins. Finally, we load the `CHGCAR`
 file as field 4 and mark it as an integrand for our YT calculation.
 
+**Important note:** occasionally, strange results may be obtained from
+the integration of atomic charges with VASP due to noise in the
+`AECCAR0` file. To prevent this, do not use `ADDGRID=.TRUE.` in your
+`INCAR` file.
+
 ### Abinit
 
 If you are using PAW datasets, then the reconstructed valence density

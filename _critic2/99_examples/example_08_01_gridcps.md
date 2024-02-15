@@ -89,6 +89,9 @@ reference rhoae
 auto
 cpreport covellite.vmd cell border graph
 ```
+(Occasionally, strange results may be obtained from the integration of
+atomic charges with VASP due to noise in the `AECCAR0` file. To
+prevent this, do not use `ADDGRID=.TRUE.` in your `INCAR` file.)
 
 The [CPREPORT](/critic2/manual/cpsearch/#c2-cpreport) keyword is used
 to write the set of critical points to a vmd file for visualization,
