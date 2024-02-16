@@ -478,7 +478,7 @@ field is loaded, every atomic muffin is checked for discontinuities
 and the report printed to the output.
 
 In DFTB+ and other fields with missing core electrons (e.g. plane-wave
-calculations), the use of core-augmentation (ZPSP and CORE keywords)
+calculations), the use of core-augmentation (ZPSP option to LOAD)
 is recommended to prevent the appearance of spurious critical points
 close to the nuclei.
 

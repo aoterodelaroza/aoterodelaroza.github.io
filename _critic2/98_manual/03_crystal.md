@@ -121,9 +121,7 @@ need to be provided by hand after the file name, either using a list
 of atomic symbols or the location of the `POTCAR`. Files that contain
 the word `POSCAR`, `CONTCAR`, `CHG`, `CHGCAR`, `AECCAR0`, `AECCAR1`,
 `AECCAR2`, and `ELFCAR` are also accepted (e.g. `nacl.POSCAR` or
-`POSCAR_nacl`). Note that the pseudopotential charges
-([ZPSP](/critic2/manual/crystal/#c2-charge)) are NOT read from the
-POTCAR.
+`POSCAR_nacl`).
 
 ### Elk (OUT)
 
@@ -608,49 +606,16 @@ operations.
 
 ## Atomic Charge Options {#c2-charge}
 
-The Q (or QAT) and ZPSP keywords can be used to change the atomic
-charge and pseudopotential charge after CRYSTAL:
+The Q (or QAT) keyword can be used to change the atomic charge after
+CRYSTAL or MOLECULE:
 ~~~
 {Q|QAT} at1.s q1.r [at2.s q2.r] ...
-ZPSP at1.s q1.r [at2.s q2.r] ...
 ~~~
-This command changes the atomic charge (Q, QAT) or the pseudopotential
-charge (ZPSP) of the atomic species `at1.s`, `at2.s`,.... Real numbers
-for the charges and ZPSP are acceptable; the latter are internally
-converted to integers. The charges (Q) are used to calculate the
-point-charge electrostatic energy using
+This command changes the atomic charge (Q, QAT) of the atomic species
+`at1.s`, `at2.s`,.... Real numbers for the charges are acceptable. The
+charges (Q) are used only in the calculation the point-charge
+electrostatic energy using
 [EWALD](/critic2/manual/structure/#c2-ewald).
-
-The role of ZPSP is to augment fields defined on a grid, a procedure
-called *core augmentation*. ZPSP is the pseudopotential charge, that
-is, the atomic number of the atom minus the number of electrons
-represented by the pseudopotential. For instance, `ZPSP=2` is a usual
-value for Ba. A typical way to use grids in critic2 involves loading
-the valence density or pseudo-density and augmenting it to an
-all-electron density that has maxima at the nuclear positions, which
-is important for certain applications (for instance, plotting).  While
-this procedure is not satisfactory from the theoretical point of view,
-in practice, the valence regions are mostly unaffected. Core
-augmentation needs not be used if the field is not the electron
-density or if the grid already contains the core contributions, and it
-is usually better to use the full all-electron density from the
-electronic structure code, if it is able to generate it (e.g. using
-the PAW method).
-
-Core augmentation is not active by default, even if the ZPSP keyword
-is used (using the CORE keyword during LOAD is required, see
-[here](/critic2/manual/fields/#c2-addload)). The use of ZPSP as
-above sets the pseudopotential charges for all current fields;
-particular ZPSP values for certain fields can also be given during
-LOAD. In a VASP calculation, the value of ZPSP can be found easily by
-grepping 'ZVAL' in the POTCAR file. In Quantum ESPRESSO, this
-information is in the UPF file (the "number of valence electrons"). In
-abinit, it can be found in the pseudopotential files.
-
-The keyword NOCORE clears the ZPSP values of all atoms in all fields:
-~~~
-NOCORE
-~~~
 
 ## Loading Multiple Crystal Structures {#c2-reset}
 

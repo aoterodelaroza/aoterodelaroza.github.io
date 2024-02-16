@@ -15,21 +15,20 @@ toc_label: "List of keywords"
 **Keywords**
 {:center}
 
-| [AMD](#key-amd)                         | [ATOMLABEL](#key-atomlabel)       | [AUTO](#key-auto)             | [BADER](#key-bader)         | [BASINPLOT](#key-basinplot)   | [BENCHMARK](#key-benchmark)     |
-| [BONDFACTOR](#key-bondfactor)           | [BUNDLEPLOT](#key-bundleplot)     | [BZ](#key-bz)                 | [CLEAR](#key-clear)         | [COMPARE](#key-compare)       | [COMPAREVC](#key-comparevc)     |
-| [COORD](#key-coord)                     | [COUNT](#key-count)               | [CPREPORT](#key-cpreport)     | [CRYSTAL](#key-crystal)     | [CUBE](#key-cube)             | [ECHO](#key-echo)               |
-| [ECON](#key-econ)                       | [EDIT](#key-edit)                 | [END](#key-end)               | [ENVIRON](#key-environ)     | [EWALD](#key-ewald)           | [EXIT](#key-exit)               |
-| [FLUXPRINT](#key-fluxprint)             | [GRDVEC](#key-grdvec)             | [HIRSHFELD](#key-hirshfeld)   | [IDENTIFY](#key-identify)   | [INTEGRABLE](#key-integrable) | [INTEGRALS](#key-integrals)     |
-| [INT_RADIAL](#key-int-radial)           | [ISOSURFACE](#key-isosurface)     | [KPOINTS](#key-kpoints)       | [LIBRARY](#key-library)     | [LIBXC](#key-libxc)           | [LINE](#key-line)               |
-| [LIST](#key-list)                       | [LOAD](#key-load)                 | [MAKEMOLSNC](#key-makemolsnc) | [MAX](#key-max)             | [MEAN](#key-mean)             | [MESHTYPE](#key-meshtype)       |
-| [MIN](#key-min)                         | [MOLCALC](#key-molcalc)           | [MOLCELL](#key-molcell)       | [MOLECULE](#key-molecule)   | [MOLMOVE](#key-molmove)       | [MOLREORDER](#key-molreorder)   |
-| [NCIPLOT](#key-nciplot)                 | [NEWCELL](#key-newcell)           | [NOCORE](#key-nocore)         | [NOSYM/NOSYMM](#key-nosym)  | [ODE_MODE](#key-ode-mode)     | [PACKING](#key-packing)         |
-| [PLANE](#key-plane)                     | [POINT](#key-point)               | [POINTPROP](#key-pointprop)   | [POLYHEDRA](#key-polyhedra) | [POWDER](#key-powder)         | [PRECISECUBE](#key-precisecube) |
-| [PRUNE_DISTANCE](#key-prune-distance)   | [Q/QAT](#key-q)                   | [QTREE](#key-qtree)           | [RADII](#key-radii)         | [RDF](#key-rdf)               | [REFERENCE](#key-reference)     |
-| [RESET](#key-reset)                     | [ROOT](#key-root)                 | [RUN](#key-run)               | [SETFIELD](#key-setfield)   | [SIGMAHOLE](#key-sigmahole)   | [SPG](#key-spg)                 |
-| [SPHEREINTEGRALS](#key-sphereintegrals) | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)               | [SUM](#key-sum)             | [SYM/SYMM](#key-sym)          | [SYSTEM](#key-system)           |
-| [UNITS](#key-units)                     | [UNLOAD](#key-unload)             | [VDW](#key-vdw)               | [VORONOI](#key-voronoi)     | [WRITE](#key-write)           | [XDM](#key-xdm)                 |
-| [YT](#key-yt)                           | [ZPSP](#key-zpsp)                 |                               |                             |                               |                                 |
+| [AMD](#key-amd)                   | [ATOMLABEL](#key-atomlabel)   | [AUTO](#key-auto)             | [BADER](#key-bader)         | [BASINPLOT](#key-basinplot)     | [BENCHMARK](#key-benchmark)             |
+| [BONDFACTOR](#key-bondfactor)     | [BUNDLEPLOT](#key-bundleplot) | [BZ](#key-bz)                 | [CLEAR](#key-clear)         | [COMPARE](#key-compare)         | [COMPAREVC](#key-comparevc)             |
+| [COORD](#key-coord)               | [COUNT](#key-count)           | [CPREPORT](#key-cpreport)     | [CRYSTAL](#key-crystal)     | [CUBE](#key-cube)               | [ECHO](#key-echo)                       |
+| [ECON](#key-econ)                 | [EDIT](#key-edit)             | [END](#key-end)               | [ENVIRON](#key-environ)     | [EWALD](#key-ewald)             | [EXIT](#key-exit)                       |
+| [FLUXPRINT](#key-fluxprint)       | [GRDVEC](#key-grdvec)         | [HIRSHFELD](#key-hirshfeld)   | [IDENTIFY](#key-identify)   | [INTEGRABLE](#key-integrable)   | [INTEGRALS](#key-integrals)             |
+| [INT_RADIAL](#key-int-radial)     | [ISOSURFACE](#key-isosurface) | [KPOINTS](#key-kpoints)       | [LIBRARY](#key-library)     | [LIBXC](#key-libxc)             | [LINE](#key-line)                       |
+| [LIST](#key-list)                 | [LOAD](#key-load)             | [MAKEMOLSNC](#key-makemolsnc) | [MAX](#key-max)             | [MEAN](#key-mean)               | [MESHTYPE](#key-meshtype)               |
+| [MIN](#key-min)                   | [MOLCALC](#key-molcalc)       | [MOLCELL](#key-molcell)       | [MOLECULE](#key-molecule)   | [MOLMOVE](#key-molmove)         | [MOLREORDER](#key-molreorder)           |
+| [NCIPLOT](#key-nciplot)           | [NEWCELL](#key-newcell)       | [NOSYM/NOSYMM](#key-nosym)    | [ODE_MODE](#key-ode-mode)   | [PACKING](#key-packing)         | [PLANE](#key-plane)                     |
+| [POINT](#key-point)               | [POINTPROP](#key-pointprop)   | [POLYHEDRA](#key-polyhedra)   | [POWDER](#key-powder)       | [PRECISECUBE](#key-precisecube) | [PRUNE_DISTANCE](#key-prune-distance)   |
+| [Q/QAT](#key-q)                   | [QTREE](#key-qtree)           | [RADII](#key-radii)           | [RDF](#key-rdf)             | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     |
+| [ROOT](#key-root)                 | [RUN](#key-run)               | [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole) | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) |
+| [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)               | [SUM](#key-sum)               | [SYM/SYMM](#key-sym)        | [SYSTEM](#key-system)           | [UNITS](#key-units)                     |
+| [UNLOAD](#key-unload)             | [VDW](#key-vdw)               | [VORONOI](#key-voronoi)       | [WRITE](#key-write)         | [XDM](#key-xdm)                 | [YT](#key-yt)                           |
 
 ## Notation
 
@@ -542,13 +541,13 @@ LOAD PROMOLECULAR [FRAGMENT file.xyz]
 LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|ELKGRID|SIESTA|DFTB|
       WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|FCHK|PWC] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC|SMOOTHRHO [NENV nenv.i] [FDMAX fdmax.r]]
-         [EXACT|APPROXIMATE] [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
+         [EXACT|APPROXIMATE] [RHONORM|VNORM] [NOCORE] [NUMERICAL|ANALYTICAL]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
          [NOTESTMT] [ZPSP at1.s q1.r...]
 LOAD AS "expression.s" [n1.i n2.i n3.i|SIZEOF id.s|GHOST]
 LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s}
         [FRAGMENT file.xyz]
-LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s}
+LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s} {ZPSP at1.s q1.r ...}
 LOAD AS LAP id.s
 LOAD AS GRAD id.s
 LOAD AS POT id.s [RY|RYDBERG]
@@ -700,14 +699,6 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 NEWCELL NICE [inice.i]
-~~~
-
-<a id="key-nocore"></a>
-[NOCORE](/critic2/manual/fields/#c2-addload)
-: Clears the pseudopotential charge (ZPSP) of all atoms, deactivating
-  the use of the core contribution.
-~~~
-NOCORE
 ~~~
 
 <a id="key-nosym"></a><a id="key-nosymm"></a>
@@ -868,7 +859,7 @@ RUN command.s
 : Change field flags after the field was loaded.
 ~~~
 SETFIELD [id.s] [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC] [EXACT|APPROXIMATE]
-                [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
+                [RHONORM|VNORM] [NOCORE] [NUMERICAL|ANALYTICAL]
                 [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [ZPSP at1.s q1.r...]
 ~~~
 
@@ -1023,14 +1014,6 @@ XDM a1.r a2.r chf.s
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
-~~~
-
-<a id="key-zpsp"></a>
-[ZPSP](/critic2/manual/crystal/#c2-charge)
-: Define the core contribution for an atom by setting the
-  pseudopotential charge.
-~~~
-ZPSP at1.s q1.r [at2.s q2.r] ...
 ~~~
 
 ## List of Functions Used in Arithmetic Expressions {#farithmetics}

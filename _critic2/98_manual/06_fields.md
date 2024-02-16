@@ -46,13 +46,13 @@ LOAD PROMOLECULAR [FRAGMENT file.xyz]
 LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|FMT|ELKGRID|SIESTA|DFTB|
       WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|FCHK|PWC] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC|SMOOTHRHO [NENV nenv.i] [FDMAX fdmax.r]]
-         [EXACT|APPROXIMATE] [RHONORM|VNORM] [CORE|NOCORE] [NUMERICAL|ANALYTICAL]
+         [EXACT|APPROXIMATE] [RHONORM|VNORM] [NOCORE] [NUMERICAL|ANALYTICAL]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
          [NOTESTMT] [ZPSP at1.s q1.r...]
 LOAD AS "expression.s" [n1.i n2.i n3.i|SIZEOF id.s|GHOST]
 LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s}
         [FRAGMENT file.xyz]
-LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s}
+LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s} {ZPSP at1.s q1.r ...}
 LOAD AS LAP id.s
 LOAD AS GRAD id.s
 LOAD AS POT id.s [RY|RYDBERG]
@@ -196,6 +196,9 @@ the keyword RHO (`iblock.i = 1`), SPIN (`iblock.i = 2`), MAGX
 two grids: the spin-up ELF (first block) and the spin-down ELF (second
 block). If no extra integer or keyword is passed, then the first grid
 in the file is read.
+
+Note that the pseudopotential charges (`ZPSP`) are NOT read from the
+POTCAR.
 
 ### CASTEP Files (fmt)
 
@@ -511,25 +514,10 @@ electron density when it is given on a grid, see the
 (Applies to: grids. Default: TRICUBIC.)
 
 ~~~
-CORE|NOCORE
+NOCORE
 ~~~
-The electron density from a pseudopotential/plane-waves calculation,
-given on a grid, only represents valence electrons. In order to get an
-approximation to the all-electron density, it can be augmented by
-summing the corresponding core contributions to the electron density
-at the atomic sites. The [ZPSP](/critic2/manual/crystal/#c2-charge)
-keyword is used to determine how many
-electrons are added by each core. The CORE keyword activates the use
-of core augmentation for this field. Most of the time, this procedure
-is not entirely satisfactory, and is best avoided if possible (e.g. by
-writing the all-electron density using the PAW transformation, if PAW
-is being used).
-
-Applies to: grids, although it can be used with any other
-field. Default: NOCORE. Note that for grid fields read with LOAD,
-the pseudopotential charges (ZPSP) are not set, so even if CORE is
-active, critic2 does not know how many core electrons to add. ZPSP
-values are required.
+Deactivate the core contribution to this field (see ZPSP below for
+more details).
 
 ~~~
 EXACT|APPROXIMATE
@@ -607,10 +595,22 @@ identifiers using the
 ~~~
 ZPSP at1.s q1.r...
 ~~~
-Set the pseudopotential charges for this particular field. Note that
-setting these charges does not activate core augmentation (you need CORE as
-well). The global [ZPSP](/critic2/manual/crystal/#c2-charge) keyword
-can be used to set the ZPSP for all fields.
+The electron density from a pseudopotential/plane-waves calculation,
+given on a grid, only represents valence electrons. In order to get an
+approximation to the all-electron density, it can be augmented by
+summing the corresponding core contributions to the electron density
+at the atomic sites. The ZPSP keyword is used to determine
+how many electrons are added by each nucleus. For atom `at1.s`, the
+value passed to ZPSP (`q1.r`) must correspond to the
+number of valence electrons for that atom. The use of ZPSP in LOAD
+activates the calculation of the core contribution, which is added to
+the field's value. Most of the time, core augmentation
+is not entirely satisfactory, and is best avoided if possible (e.g. by
+writing the all-electron density using the PAW transformation, if PAW
+is being used).
+
+Applies to: grids, although it can be used with any other
+field. Default: no core augmentation.
 
 ## Field Arithmetics
 
@@ -662,10 +662,13 @@ The PROMOLECULAR option to LOAD AS allows the creation of a grid out
 of the promolecular density, with `n1.i`, `n2.i`, `n3.i` points in
 each direction. Alternatively, the size of grid field `id.s` can be
 used with the SIZEOF keyword. Similarly, CORE creates a grid using
-only the core densities, as specified by the ZPSPs of the atoms. If a
-fragment of the crystal is passed as an xyz file to any of those
-keywords (with the optional FRAGMENT keyword), then only the atoms in
-the fragment contribute to the sum of atomic (or core) densities.
+only the core densities, as specified by the number of valence
+electrons (ZPSP) of the atoms, with the same syntax as the `ZPSP`
+option to LOAD (`q1.r` is the number of valence electrons of atom
+`at1.s`). In this case, the use of ZPSP is mandatory. If a fragment of
+the crystal is passed as an xyz file to any of those keywords (with
+the optional FRAGMENT keyword), then only the atoms in the fragment
+contribute to the sum of atomic (or core) densities.
 
 The LAP, GRAD, POT, CLM, and RESAMPLE keywords of LOAD AS apply only
 to specific types of fields:
@@ -705,7 +708,7 @@ The options of a given field can be changed anywhere in the input
 after it has been loaded using the SETFIELD keyword:
 ~~~
 SETFIELD {id.s} [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC|SMOOTHRHO [NENV nenv.i] [FDMAX fdmax.r]]
-   [EXACT|APPROXIMATE] [RHONORM|VNORM] [CORE|NOCORE]
+   [EXACT|APPROXIMATE] [RHONORM|VNORM] [NOCORE]
    [NUMERICAL|ANALYTICAL] [TYPNUC {-3,-1,1,3}]
    [NORMALIZE n.r] [ZPSP at1.s q1.r...]
 ~~~

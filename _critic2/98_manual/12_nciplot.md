@@ -303,7 +303,7 @@ Some tips for using the NCIPLOT keyword efficiently:
 
 * If the reference field that provides the density for NCIPLOT is a
   grid field, then it is usually much faster if core-augmentation
-  (ZPSP and the CORE field option) is not used. The reason is that if
+  (ZPSP field option) is not used. The reason is that if
   the core augmentation is not present, the reduced density gradient
   and the Hessian components are calculated by Fourier transform,
   leading to smoother derivatives.  However, not using the core

@@ -1252,10 +1252,11 @@ integrated inside the basins. Only the subset of those properties that
 are grids, have F or FVAL as the integrand and are congruent with the
 reference grid are considered. This limitation can be circumvented by
 using LOAD AS to define grid from fields or expressions that are not
-given on a grid. In addition, no core is used even if the CORE keyword
-is active. The volume is always integrated. A xyz file (`<root>_yt.xyz`)
-is always written, containing the unit cell description (with border,
-see WRITE) and the position of the maxima, labeled as XX.
+given on a grid. In addition, no core is used even if the ZPSP keyword
+has been used to activate the core augmentation. The volume is always
+integrated. A xyz file (`<root>_yt.xyz`) is always written, containing
+the unit cell description (with border, see WRITE) and the position of
+the maxima, labeled as XX.
 
 Note that in the output ("List of basins and local properties"),
 "Charge" refers not to the integrated electron density (because
