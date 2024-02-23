@@ -983,6 +983,7 @@ WRITE file.m
 WRITE file.db
 WRITE file.gin
 WRITE file.lammps
+WRITE file.cell [rklength.r]
 WRITE file.fdf
 WRITE file.STRUCT_IN
 WRITE file.hsd

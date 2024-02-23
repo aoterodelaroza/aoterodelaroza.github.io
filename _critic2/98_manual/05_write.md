@@ -62,6 +62,7 @@ WRITE file.m
 WRITE file.db
 WRITE file.gin
 WRITE file.lammps
+WRITE file.cell [rklength.r]
 WRITE file.fdf
 WRITE file.STRUCT_IN
 WRITE file.hsd
@@ -309,6 +310,14 @@ LAMMPS data file containing one unit cell (length units are
 angstrom). Only orthogonal cells are supported for now. The LAMMPS
 writer is experimental, so please exercise care and double-check the
 templates.
+
+### CASTEP (cell)
+
+With a `.cell` suffix in the file name, critic2 writes a CASTEP
+`.cell` input file. An additional optional real number (`rklength.r`)
+can be used to choose the size of the k-point grid.
+See the
+[KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword for details.
 
 ### SIESTA (fdf, STRUCT_IN)
 
