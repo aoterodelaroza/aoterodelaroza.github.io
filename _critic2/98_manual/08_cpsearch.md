@@ -16,6 +16,7 @@ toc_sticky: true
 ~~~
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
      [EPSDEGEN edeg.r] [DISCARD expr.s] [CHK] [DRY] [SEEDOBJ] ...
+AUTO ... [TYPES {nbrc}]
 AUTO ... [CLIP CUBE x0.r y0.r z0.r x1.r y1.r z1.r]
 AUTO ... [CLIP SPHERE x0.r y0.r z0.r rad.r]
 AUTO ... [SEED ...] [SEED ...] ...
@@ -190,6 +191,13 @@ critical points in the vacuum region can be eliminated from the list
 by doing, for instance, `DISCARD "$rho < 1e-7"` to remove the critical
 points with density lower than 1e-7. The arithmetic expression can
 involve any number of fields, not just the reference field.
+
+Another way to filter out CPs is the optional TYPES keyword. The TYPES
+keyword accepts a single word as argument, composed of any combination
+of the letters "n", "b", "r", and "c". Each letter corresponds to a CP
+type (nucleus, bond, ring, cage). If the TYPES keyword is given, find
+only CPs of the types given by the following word. For instance,
+"TYPES br" means "find only bonds and rings".
 
 If DRY (dry run) is used, then the seeding is done but the actual CP
 search is skipped. This is useful to examine the seed placement (in
