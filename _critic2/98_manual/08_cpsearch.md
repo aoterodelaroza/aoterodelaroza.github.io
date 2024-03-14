@@ -17,6 +17,7 @@ toc_sticky: true
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
      [EPSDEGEN edeg.r] [DISCARD expr.s] [CHK] [DRY] [SEEDOBJ] ...
 AUTO ... [TYPES {nbrc}]
+AUTO ... [DISCARD [TYPES {nbrc}] expr.s] [DISCARD ...] ...
 AUTO ... [CLIP CUBE x0.r y0.r z0.r x1.r y1.r z1.r]
 AUTO ... [CLIP SPHERE x0.r y0.r z0.r rad.r]
 AUTO ... [SEED ...] [SEED ...] ...
@@ -183,6 +184,13 @@ AUTO. GRADEPS is the gradient norm threshold for the optimization: if
 a CP is found with gradient norm less than GRADEPS (default: 1e-12),
 then it is accepted as CP.
 
+A way to filter out unwanted CPs is the optional TYPES keyword. The
+TYPES keyword accepts a single word as argument, composed of any
+combination of the letters "n", "b", "r", and "c". Each letter
+corresponds to a CP type (nucleus, bond, ring, cage). If the TYPES
+keyword is given, find only CPs of the types given by the following
+word. For instance, "TYPES br" means "find only bonds and rings".
+
 The DISCARD keyword can be used to reduce the list of critical
 points. If the expression `expr.s` evaluated at the critical point is
 non-zero, the critical point is discarded. A typical use for this
@@ -190,14 +198,14 @@ keyword is when the system has a vacuum region. The (spurious)
 critical points in the vacuum region can be eliminated from the list
 by doing, for instance, `DISCARD "$rho < 1e-7"` to remove the critical
 points with density lower than 1e-7. The arithmetic expression can
-involve any number of fields, not just the reference field.
-
-Another way to filter out CPs is the optional TYPES keyword. The TYPES
-keyword accepts a single word as argument, composed of any combination
-of the letters "n", "b", "r", and "c". Each letter corresponds to a CP
-type (nucleus, bond, ring, cage). If the TYPES keyword is given, find
-only CPs of the types given by the following word. For instance,
-"TYPES br" means "find only bonds and rings".
+involve any number of fields, not just the reference field. Several
+DISCARD expressions may be given, in which case the CP is discarded if
+any of the expressions evaluates as non-zero. The DISCARD expressions
+accept an optional TYPES keyword, with the same syntax as the global
+TYPES keyword in the preceding paragraph. TYPES is followed by a word
+composed of the letters "nbrc", indicating to which types of CPs the
+DISCARD expression applies. If TYPES is given, the DISCARD expression
+is only evaluated for those CP types.
 
 If DRY (dry run) is used, then the seeding is done but the actual CP
 search is skipped. This is useful to examine the seed placement (in

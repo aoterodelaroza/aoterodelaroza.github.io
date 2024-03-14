@@ -89,8 +89,9 @@ ATOMLABEL template.s
 : Determine the position and properties of the critical points.
 ~~~
 AUTO [GRADEPS eps.r] [CPEPS eps.r] [NUCEPS neps.r] [NUCEPSH nepsh.r]
-     [EPSDEGEN edeg.r] [DISCARD expr.s] [CHK] [DRY] [SEEDOBJ]
+     [EPSDEGEN edeg.r] [CHK] [DRY] [SEEDOBJ]
 AUTO ... [TYPES {nbrc}]
+AUTO ... [DISCARD [TYPES {nbrc}] expr.s] [DISCARD ...] ...
 AUTO ... [CLIP CUBE x0.r y0.r z0.r x1.r y1.r z1.r]
 AUTO ... [CLIP SPHERE x0.r y0.r z0.r rad.r]
 AUTO ... [SEED ...] [SEED ...] ...
