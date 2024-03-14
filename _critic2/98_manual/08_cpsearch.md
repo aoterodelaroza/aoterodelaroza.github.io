@@ -39,7 +39,11 @@ The search for the critical points (CP) of a scalar field (the points
 where the gradient of the field vanishes) is a basic task in the
 quantum theory of atoms in molecules (QTAIM). In critic2, this search
 is almost always conducted using the automatic CP localization
-algorithm implemented in the AUTO keyword.
+algorithm implemented in the AUTO keyword. The AUTO keyword finds CPs
+of the reference field (see
+[REFERENCE](/critic2/manual/fields/#c2-reference)). If more than one
+AUTO searches are carried out in the same run for the same scalar
+field, the CPs are accumulated in the CP list for that scalar field.
 
 The automatic search for critical points has two steps: seeding and
 searching. In the seeding step, a collection of points are selected in
