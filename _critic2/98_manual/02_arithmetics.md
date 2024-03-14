@@ -109,6 +109,10 @@ using the ":" character and is case insensitive. It may be one of:
 + `l`: Laplacian, $$\nabla^2 f$$.
 + `lv`: valence Laplacian (Laplacian without core augmentation).
 + `lc`: core Laplacian.
++ `h1`, `h2`, `h3`: Hessian eigenvalues in ascending order (`h1` < `h2` < `h3`).
++ `hd`: determinant of the Hessian.
++ `r`: Hessian rank (number of non-zero Hessian eigenvalues).
++ `s`: Hessian signature (sum of the signs of the Hessian eigenvalues).
 
 For instance, `$2:l` is the Laplacian of field 2 and `$rho0:xy` is the
 xy-component of the Hessian of the promolecular density. In molecular
