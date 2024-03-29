@@ -446,7 +446,7 @@ BONDFACTOR bondfactor.r
 ~~~
 Critic2 considers two atoms are covalently bonded if their distance is
 less than the sum of their covalent radii times `bondfactor.r` (default:
-1.4). The maximum bondfactor allowed is 2.0.
+1.3). The maximum bondfactor allowed is 2.0.
 
 ### Covalent and van der Waals Radii (RADII) {#c2-radii}
 
