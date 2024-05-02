@@ -28,6 +28,7 @@ LOAD file_fmt
 LOAD file.grid
 LOAD file.{clmsum|clmup|clmdn} file.struct
 LOAD file.{RHO,BADER,DRHO,LDOS,VT,VH}
+LOAD file.001
 LOAD file.OUT
 LOAD STATE.OUT GEOMETRY.OUT
 LOAD STATE.OUT GEOMETRY.OUT OTHER.OUT
@@ -43,7 +44,7 @@ LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
-LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|FMT|ELKGRID|SIESTA|DFTB|
+LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|FMT|ELKGRID|SIESTA|FPLO|DFTB|
       WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|FCHK|PWC] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC|SMOOTHRHO [NENV nenv.i] [FDMAX fdmax.r]]
          [EXACT|APPROXIMATE] [RHONORM|VNORM] [NOCORE] [NUMERICAL|ANALYTICAL]
@@ -101,6 +102,8 @@ extension to decide which format should be used for the reading:
 * `.clmsum`, `.clmup`, and `.clmdn` for WIEN2k.
 
 * `.RHO`, `.BADER`, `.DRHO`, `.LDOS`, `.VT`, and `.VH` for SIESTA's grids.
+
+* `.001` for FPLO grids.
 
 * `.OUT` for elk's STATE.OUT, ELF3D.OUT, RHO3D.OUT, etc.
 
@@ -771,19 +774,19 @@ first part looks like this:
   Interpolation mode (1=nearest,2=linear,3=spline,4=tricubic): 4
 ~~~
 The output for the other grid file formats (abinit DEN, VASP, qub,
-xsf, grid, SIESTA) is essentially the same.  This output gives the
-field integer identifier (`1` in this case), the source file, the
-type of field (grid), and a number of information specific to grid
-fields. This includes the number of points on the grid (`grid
-dimensions`), the first and last three elements, and the sum and
-sum of the squares of the elements. The `Cell integral` line is
-particularly important because it gives the integral of the grid field
-over the unit cell (i.e. $$\frac{(\sum_i f_i) V}{N}$$ with
-$$V$$ the unit cell volume and $$N$$ the total number of grid points).
-If the grid field represents the electron density, it will
-approximately sum to the number of electrons in the cell (in the example
-above, 48). The output also provides the minimum, maximum, and average
-field value on the grid, and the chosen interpolation mode.
+etc.) is essentially the same.  This output gives the field integer
+identifier (`1` in this case), the source file, the type of field
+(grid), and a number of information specific to grid fields. This
+includes the number of points on the grid (`grid dimensions`), the
+first and last three elements, and the sum and sum of the squares of
+the elements. The `Cell integral` line is particularly important
+because it gives the integral of the grid field over the unit cell
+(i.e. $$\frac{(\sum_i f_i) V}{N}$$ with $$V$$ the unit cell volume and
+$$N$$ the total number of grid points).  If the grid field represents
+the electron density, it will approximately sum to the number of
+electrons in the cell (in the example above, 48). The output also
+provides the minimum, maximum, and average field value on the grid,
+and the chosen interpolation mode.
 
 The second part of the output is common to all fields:
 ~~~
