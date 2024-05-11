@@ -88,14 +88,12 @@ wavefunction of a molecule is:
 # Read the benzene molecule from the gen file
 molecule benzene.gen 2
 
+# Load the DFTB+ wavefunction
 # In DFTB+, only valence electrons are used. Hence, we need core-augmentation
 # to account for the missing core density. Set ZPSP to the number
 # of valence electrons associated with a given atom (4 for carbon,
 # 5 for nitrogen, 6 for oxygen,...)
-zpsp c 4
-
-# Load the DFTB+ wavefunction
-load detailed.xml eigenvec.bin ../3ob-3-1/wfc.3ob-3-1.hsd core
+load detailed.xml eigenvec.bin ../3ob-3-1/wfc.3ob-3-1.hsd zpsp c 4
 
 # Find the critical points
 auto
@@ -112,14 +110,12 @@ For a crystal:
 # Read the graphite crystal from the gen file
 crystal graphite.gen
 
+# Load the DFTB+ wavefunction
 # In DFTB+, only valence electrons are used. Hence, we need core-augmentation
 # to account for the missing core density. Set ZPSP to the number
 # of valence electrons associated with a given atom (4 for carbon,
 # 5 for nitrogen, 6 for oxygen,...)
-zpsp c 4
-
-# Load the DFTB+ wavefunction
-load detailed.xml eigenvec.bin ../3ob-3-1/wfc.3ob-3-1.hsd core
+load detailed.xml eigenvec.bin ../3ob-3-1/wfc.3ob-3-1.hsd zpsp c 4
 
 # Calculate the electron density on a plane
 plane 0 0 1/4  1 0 1/4  0 1 1/4  101 101  contour log 41 file plane
