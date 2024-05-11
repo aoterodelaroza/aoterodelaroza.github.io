@@ -161,12 +161,12 @@ but using core augmentation to account for the missing core
 electrons:
 ~~~
 crystal rhoval.cube
-load rhoval.cube core zpsp c 4 o 6 n 5 h 1
+load rhoval.cube zpsp c 4 o 6 n 5 h 1
 load rho.cube
 integrable 2
 yt
 ~~~
-Core augmentation is activated with the CORE option to LOAD, and we
+Core augmentation is activated with the ZPSP option to LOAD, and we
 need to give to critic2 the pseudopotential charges for each
 atom. This value is equal to the atomic number minus the number of
 core electrons removed in the calculation. In QE, this value can be
@@ -185,7 +185,7 @@ first time. Use the core-augmented field to generate the atomic
 basins and the non-augmented field as the integrand:
 ~~~
 crystal rho.cube
-load rho.cube core zpsp c 4 o 6 n 5 h 1
+load rho.cube zpsp c 4 o 6 n 5 h 1
 load rho.cube
 integrable 2
 yt
@@ -254,7 +254,7 @@ If you have the `_PAWDEN` file, the calculation of the atomic charges
 is straightforward:
 ~~~
 crystal urea_o_DEN
-load urea_o_PAWDEN core zpsp h 1 c 4 n 5 o 6
+load urea_o_PAWDEN zpsp h 1 c 4 n 5 o 6
 load urea_o_DEN
 integrable 2
 yt
