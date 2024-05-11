@@ -122,7 +122,7 @@ crystal quartz_o_PAWDEN
 ## Load the reconstructed valence density and augment it with the core
 ## contribution. The pseudopotential charge (the number of valence
 ## electrons) is 4 for Si and 6 for O.
-load quartz_o_PAWDEN zpsp si 4 o 6 core
+load quartz_o_PAWDEN zpsp si 4 o 6
 
 ## Write the core+valence density to a cube file (rhoae.cube). We
 ## cannot interpolate from the above because it is not a pure grid
