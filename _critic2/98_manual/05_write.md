@@ -57,7 +57,7 @@ WRITE file.abin
 WRITE file.elk
 WRITE file.gau
 WRITE file.cif [NOSYM|NOSYMM]
-WRITE file.d12 [NOSYM|NOSYMM]
+WRITE file.d12 [NOSYM|NOSYMM] [NOEXTERNAL]
 WRITE file.m
 WRITE file.db
 WRITE file.gin
@@ -260,17 +260,26 @@ P1 space group).
 
 ### Crystal (d12)
 
-A template input file for crystal14 and crystal17 can be written with
-the extension `.d12`. If the crystal structure is written without
-symmetry (by using the `NOSYM` or `NOSYMM` keywords), then the `.d12`
-file contains the complete structure specification. Otherwise, the
-`.d12` file uses the `EXTERNAL` keyword to specify the geometry, and
-an additional `.fort.34` file with the same root is created. This file
-contains the symmetry operations as well as the crystal geometry, and
-it should be renamed to just `fort.34` before the crystal calculation
-is run. Note that the `.d12` file contains only a keyword to run the
-geometry test - there is no basis set specification or any of the other
-relevant keywords.
+A template input file for CRYSTAL14 and CRYSTAL17 can be written with
+the extension `.d12`. The default behavior is to write a template
+`.d12` file and the geometry details as well as the symmetry
+information to a file with extension `.fort.34` suitable for use with
+CRYSTAL's `EXTERNAL` keyword. This file must be renamed to just
+`fort.34` prior to running CRYSTAL. The `.d12` file contains only a
+keyword to run a geometry test - the input file is complete but there
+is no basis set specification or any of the other relevant keywords.
+
+Inputting symmetry to CRYSTAL is sometimes problematic
+because of the assumed crystallographic conventions. If the `NOSYM` or
+`NOSYMM` keyword is used, critic2 writes the structural information
+without symmetry entirely to the `.d12` file (without the
+`fort.34`). If the `NOEXTERNAL` keyword is used, critic2 attempts to
+write a complete `.d12` file (without `fort.34`) with
+symmetry. Because of how CRYSTAL interprets the input, this option
+does not always yield the same structure as the original, so it is
+strongly recommended that the provided input with the `TESTGEOM`
+keyword is run, and the CRYSTAL output is compared with the original
+structure using the [COMPARE](#key-compare) keyword.
 
 Crystal17 (and probably earlier versions) has different tolerance
 values for detecting and accepting symmetry operations than
