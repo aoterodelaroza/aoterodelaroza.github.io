@@ -723,17 +723,28 @@ This keyword can be used to edit the currently loaded molecular or
 crystal structure. The syntax of the EDIT environment is:
 ~~~
 EDIT
-  DELETE [ATOM|ATOMS] id1.i id2.i ...
-  DELETE [MOLECULE|MOLECULES] id1.i id2.i ...
+  DELETE {ATOM|ATOMS} id1.i id2.i ...
+  DELETE {MOLECULE|MOLECULES} id1.i id2.i ...
+  MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]
 ENDEDIT
 ~~~
 Each line in the `EDIT` environment carries out an edit in the
 structure. The list of possible editing actions includes:
 
-* `DELETE [ATOM|ATOMS] id1.i id2.i ...`: delete cell atoms with IDs
+* `DELETE {ATOM|ATOMS} id1.i id2.i ...`: delete cell atoms with IDs
   `id1.i`, `id2.i`, etc. After the atoms are deleted, recalculate the
   symmetry operations and bond connectivity.
 
-* `DELETE [MOLECULE|MOLECULES] id1.i id2.i ...`: delete molecules with
+* `DELETE {MOLECULE|MOLECULES} id1.i id2.i ...`: delete molecules with
   IDs `id1.i`, `id2.i`, etc. After the molecules are deleted,
   recalculate the symmetry operations and bond connectivity.
+
+* `MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]`: moves atom with
+  complete list ID `id.i` to position `x.r y.r z.r`. If the system is
+  a crystal, the coordinates are fractional; if it is a molecule,
+  the coordinates are Cartesian (default angstrom, unless changed with
+  [UNITS](/critic2/manual/inputoutput/#c2-units)). If `BOHR` or `ANG`,
+  interpret the coordinates as Cartesian with the corresponding
+  units. If `RELATIVE`, the coordinates indicate movement relative to
+  the atom's current position.
+
