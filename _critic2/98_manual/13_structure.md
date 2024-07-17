@@ -725,6 +725,7 @@ crystal structure. The syntax of the EDIT environment is:
 EDIT
   DELETE {ATOM|ATOMS} id1.i id2.i ...
   DELETE {MOLECULE|MOLECULES} id1.i id2.i ...
+  DELETE {HYDROGEN|HYDROGENS}
   MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]
 ENDEDIT
 ~~~
@@ -738,6 +739,8 @@ structure. The list of possible editing actions includes:
 * `DELETE {MOLECULE|MOLECULES} id1.i id2.i ...`: delete molecules with
   IDs `id1.i`, `id2.i`, etc. After the molecules are deleted,
   recalculate the symmetry operations and bond connectivity.
+
+* `DELETE {HYDROGEN|HYDROGENS}`: delete all hydrogens.
 
 * `MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]`: moves atom with
   complete list ID `id.i` to position `x.r y.r z.r`. If the system is
