@@ -727,6 +727,7 @@ EDIT
   DELETE {MOLECULE|MOLECULES} id1.i id2.i ...
   DELETE {HYDROGEN|HYDROGENS}
   MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]
+  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
 ENDEDIT
 ~~~
 Each line in the `EDIT` environment carries out an edit in the
@@ -742,12 +743,23 @@ structure. The list of possible editing actions includes:
 
 * `DELETE {HYDROGEN|HYDROGENS}`: delete all hydrogens.
 
-* `MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]`: moves atom with
-  complete list ID `id.i` to position `x.r y.r z.r`. If the system is
-  a crystal, the coordinates are fractional; if it is a molecule,
-  the coordinates are Cartesian (default angstrom, unless changed with
+* `MOVE`: moves atom with complete list ID `id.i` to position `x.r y.r
+  z.r`. If the system is a crystal, the coordinates are fractional; if
+  it is a molecule, the coordinates are Cartesian (default angstrom,
+  unless changed with
   [UNITS](/critic2/manual/inputoutput/#c2-units)). If `BOHR` or `ANG`,
   interpret the coordinates as Cartesian with the corresponding
   units. If `RELATIVE`, the coordinates indicate movement relative to
   the atom's current position.
+
+* `CELLMOVE`: modify the indicated unit cell parameter (length or
+  angle in degrees) or the unit cell volume (isotropic scaling). If
+  `r.r` and no other keyword is given, set the cell parameter to
+  `r.r`. If BOHR or ANG, use the indicated units (default: BOHR unless
+  changed with [UNITS](/critic2/manual/inputoutput/#c2-units)). If
+  modifying the volume, BOHR and ANG indicate the corresponding cubed
+  units. If RELATIVE is given, add `r.r` to the current value of the
+  parameter. If FRACTION is given, multiply the current value of the
+  parameter with `r.r`.
+
 
