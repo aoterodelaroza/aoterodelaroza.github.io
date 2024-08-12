@@ -360,7 +360,7 @@ EWALD
 ~~~
 
 <a id="key-exit"></a>
-[END](/critic2/manual/misc/#c2-end)
+[EXIT](/critic2/manual/misc/#c2-end)
 : Terminates the critic2 run. Same as END.
 ~~~
 EXIT
