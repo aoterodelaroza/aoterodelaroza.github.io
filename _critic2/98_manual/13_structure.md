@@ -135,7 +135,8 @@ The COMPARE keyword compares two or more structures:
 COMPARE {.|file1.s} {.|file2.s} [{.|file3.s} ...]
 COMPARE ... [MOLECULE|CRYSTAL]
 COMPARE ... [REDUCE eps.r] [NOH]
-COMPARE ... [POWDER|RDF|AMD|EMD] [XEND xend.r] [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
+COMPARE ... [GPWDF|POWDER|RDF|AMD|EMD] [XEND xend.r] [LAMBDA l.r]
+            [SIGMA sigma.r] [NORM 1|2|INF] ## crystals
 COMPARE ... [SORTED|RDF|ULLMANN|UMEYAMA]  ## molecules
 ~~~
 At least two structures are required for the comparison.  The
@@ -180,20 +181,34 @@ molecules are given in the
 
 ### Crystal Comparison
 
-There are several ways of calculating a comparison between crystals:
-based on radial distribution functions
-([RDF](/critic2/manual/structure/#c2-rdf) keyword), powder
-diffraction patterns ([POWDER](/critic2/manual/structure/#c2-powder)
-keyword), average minimum distances
-([AMD](/critic2/manual/structure/#c2-amd) keyword), or powder
-diffraction patterns compared with the earth mover's distance (EMD).
-The default is POWDER. In all cases, COMPARE finds the measure of
+There are several ways of comparing crystals:
+
+- `GPWDF`: compare powder diffraction patterns between crystals or
+  between a crystal and an experimental patterns using Gaussian
+  cross-correlation functions [A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
+  See also the [POWDER](/critic2/manual/structure/#c2-powder) keyword.
+  This is the default if no method is given.
+
+- `POWDER`: compare powder diffraction patterns using a triangle
+  function (de Gelder's method) [de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0).
+  See also the [POWDER](/critic2/manual/structure/#c2-powder) keyword.
+
+- `RDF`: compare radial distribution functions ([RDF](/critic2/manual/structure/#c2-rdf) keyword).
+
+- `AMD`: compare using average minimum distances ([AMD](/critic2/manual/structure/#c2-amd) keyword),
+  [Widdowson et al., Match. Commun. Math. Comput. Chem., 87 (2022) 529](https://doi.org/10.46793/match.87-3.529W).
+
+- `EMD`: powder diffraction patterns compared with the earth mover's distance (EMD),
+  [Rubner et al., Int. J. Comput. Vis. 40.2 (2000) 99-121](https://doi.org/10.1023/A:1026543900054).
+
+The default is GPWDF. In all cases, COMPARE finds the measure of
 similarity (DIFF) based on the corresponding functions (RDF,
-diffractogram, AMD).  Two crystal structures are exactly equal if
-`DIFF = 0`. Maximum dissimilarity occurs when `DIFF = 1`.  In the case
-of RDF and POWDER, the crystal similarity measure is calculated using
-the cross-correlation functions defined in
-[de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0),
+diffractogram, AMD, etc.). Two crystal structures are exactly equal if
+`DIFF = 0`. Maximum dissimilarity occurs when `DIFF = 1`.
+
+In the case of RDF and POWDER, the crystal similarity measure is
+calculated using the cross-correlation functions defined in
+[de Gelder et al., J. Comput. Chem., 22 (2001) 273](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0).
 with the triangle weight. In AMD, the dissimilarity is calculated by
 default as the infinite-norm of the two AMD vectors (the maximum of
 the absolute values of the differences). This can be change to the
@@ -202,16 +217,16 @@ distance) using the NORM keyword. The AMD dissimilarity is in atomic
 units (bohr). In EMD, discrete powder diffraction patterns are
 compared using the earth mover's distance.
 
-Powder diffraction patterns for POWDIFF and EMD are calculated from
+Powder diffraction patterns for GPWDF, POWDIFF and EMD are calculated from
 $$2\theta = 5$$ up to `xend.r` (XEND keyword, default: 50). Radial
 distribution functions are calculated from zero up to `xend.r` bohr
 (XEND keyword, default: 25 bohr). SIGMA is the Gaussian broadening
 parameter for the powder diffraction or RDF peaks. AMD vectors are
 calculated up to a maximum of 100 nearest neighbors.
 
-If a file with extension `.peaks` is given and the POWDER or EMD
-crystal comparisons are used, read the diffraction peak info from the
-file. The file must give one peak per line in the format:
+If a file with extension `.peaks` is given and the GPWDF, POWDER, or
+EMD crystal comparisons are used, read the diffraction peak info from
+the file. The file must give one peak per line in the format:
 ~~~
 2*theta Intensity
 ~~~
