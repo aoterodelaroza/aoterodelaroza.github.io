@@ -185,8 +185,17 @@ set again, unless you delete the build directory.
 When critic2 is built using cmake, it is possible to link against the
 readline library. This library enables shell-like features for
 critic2's command line interface such as keyboard shortcuts, history,
-and autocompletion. You can typically find it in the repository of
-your chosen distribution.
+and autocompletion. On linux, you can typically find it in the
+repository of your chosen distribution.
+
+### NLOPT {#c2-nlopt}
+
+[NLOPT](https://github.com/stevengj/nlopt) is a library implementing
+many local and global optimization algorithms. This library is used by
+the [COMPAREVC](/critic2/manual/structure/#c2-comparevc) keyword,
+which compares either two crystal structures or a structure and a
+diffraction patterns allowing for cell deformations. On linux, you can
+typically find it in the repository of your chosen distribution.
 
 ### Libxc {#c2-libxc}
 

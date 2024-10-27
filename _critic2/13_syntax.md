@@ -169,8 +169,11 @@ CLEAR {var1.s var2.s ...|ALL}
 [COMPAREVC](/critic2/manual/structure/#c2-comparevc)
 : Compare two crystal structures allowing for cell deformations.
 ~~~
-COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAXANG ma.r]
-          [MAXVOL mv.r]
+COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
+          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [MAXELONG maxelong.r] [MAXANG maxang.r]
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+          [MAXANG ma.r] [MAXVOL mv.r]
 ~~~
 
 <a id="key-compare"></a>
@@ -426,7 +429,7 @@ HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
 <a id="key-identify"></a>
 [IDENTIFY](/critic2/manual/structure/#c2-identify)
 : Identify the position of an atom or a critical point given in
-  crystallographic or cartesian coordinates.
+  crystallographic or Cartesian coordinates.
 ~~~
 IDENTIFY [ANG|ANGSTROM|BOHR|AU|CRYST]
   x y z [ANG|ANGSTROM|BOHR|AU|CRYST]

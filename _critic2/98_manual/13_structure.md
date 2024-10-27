@@ -277,30 +277,132 @@ employed and the comparison is similar to how RDF works in crystals.
 
 The COMPAREVC keyword (variable-cell compare) is used to compare two
 crystal structures allowing one of them to have its lattice deformed
-to match the lattice of the other. This is useful when comparing
-structures that have very similar motifs but slightly mismatched
-lattices as a result of, for instance, deformations caused by
-temperature or pressure effects. In particular, COMPAREVC can be used
-to compare calculated equilibrium structures with experimental
-structures.
+to match the lattice of the other. It can also be used to compare two
+crystal structures, or a crystal structure and an experimental powder
+diffraction pattern. Considering deformations of one of the structures
+is useful when comparing structures that have similar motifs but
+slightly mismatched lattices as a result of, for instance,
+deformations caused by temperature or pressure effects.
 
-The COMPAREVC method works by exploring the set of lattice basis
-changes that transform the reduced cell of the first crystal into the
-reduced cell of the second crystal. For each transformation, the cell
-parameters are then forced to be equal, and the similarity is
-calculated using a cross-correlation function (the POWDIFF option in
+The syntax of the COMPAREVC keyword is:
+~~~
+COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
+          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [MAXELONG maxelong.r] [MAXANG maxang.r]
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+          [MAXANG ma.r] [MAXVOL mv.r]
+~~~
+
+### Default behavior of COMPAREVC
+
+The default syntax for COMPAREVC is:
+~~~
+COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
+          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [MAXELONG maxelong.r] [MAXANG maxang.r]
+~~~
+Using this method requires compiling critic2 with the
+[NLOPT library](/critic2/installation/#c2-nlopt). If NLOPT is not
+available, the VCPWDF version of COMPAREVC is used instead (see
+below).
+
+COMPAREVC is described in
+[A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
+COMPAREVC is a method to compare two crystal structures or a crystal
+structure and an X-ray powder diffraction pattern, allowing for cell
+deformations of one of the structures in order to account for
+temperature, pressure and other effects. The two structures being
+compared are represented by their diffraction patterns, as a list of
+pairs of reflection angles and intensities (theta,I). The first
+diffraction pattern is derived from the crystal structure in
+`file1.s`. The second diffraction pattern is read from `file2.s`,
+which can be a structure or a list of diffraction peaks (with
+extension `.peaks`). The behavior regarding the input format is the
+same as in CRYSTAL and MOLECULE: the file format is identified using
+the file extension or its contents if the extension is not enough. If
+a dot (".") is used instead of a file name, the current structure
+(previously loaded with CRYSTAL/MOLECULE) is used.
+
+COMPAREVC carries out a global search over all possible deformations
+of the lattice from crystal structure 1 within a certain range of cell
+elongations (given by `maxelong.r`) and changes in cell angle
+(`maxang.r`), looking for the best possible agreement with structure 2.
+At each lattice deformation, the GPWDF similarity score
+between the powder diffraction patterns of structures 1 and 2 is
+calculated (see the [COMPARE](#c2-compare) keyword), and then
+minimized. The lowest GPWDF value found from the global search,
+corresponding to the deformation of structure 1 that best matches
+structure 2, is the final COMPAREVC similarity score.
+
+The meaning of the different options is:
+
+- `GLOBAL`: carry out a global search over deformations of structure 1
+followed by local GPWDF minimizations, as described above. This is the
+default.
+
+- `LOCAL`: minimize GPWDF as a function of lattice deformations of
+structure 1, starting only at the provided structure. This is the
+local minimization equivalent of the global minimization in `GLOBAL`.
+
+- `SP`: calculate the GPDWF index at the original structure and do not
+carry out any minimization. This is equivalent to the
+[COMPARE](#c2-compare) keyword with the GPWDF option.
+
+- `ALPHA`: width of the triangle in the Gaussian version of de
+Gelder's cross-correlation function (default: 0.5).
+
+- `MAXFEVAL`: the global search is considered to be converged if
+`MAXFEVAL` evaluations of the GPWDF index have been calculated with
+no decrease in value. Default: 5000.
+
+- `BESTEPS`: the function evaluation counter is reset every time a
+GPWDF score lower than the current lowest value is found. If the
+difference between the current GPWDF and the lowest GPWDF known is
+lower than `BESTEPS`, do not reset the counter. A higher `BESTEPS`
+makes the convergence faster but may give an inaccurate COMPAREVC
+score. Default: 1e-3.
+
+- `MAXELONG`: maximum percent change in cell lengths for structure 1
+deformations. Default: 0.10 (10%).
+
+- `MAXANG`: maximum cell angle deformations allowed for
+structure 1. Default: 5 degrees.
+
+- `QUICK`: use the quick settings for the global search:
+`BESTEPS` is 1e-3, `MAXFEVAL` is 5000, `MAXELONG` is 0.10, and
+`MAXANG` is 5. This is the default.
+
+- `SAFE`: use the safe settings for the global search:
+`BESTEPS` is 1e-4, `MAXFEVAL` is 10000, `MAXELONG` is 0.15, and
+`MAXANG` is 10.
+
+- `LAMBDA`: wavelength for the X-ray diffraction patterns calculated
+from structures. Default: 1.5406 angstrom.
+
+- `WRITE`:  write the deformed structure 1 that best matches structure
+2 in `<root>-final.res` and the calculated diffraction pattern for the
+final structure in `<root>-final.xy`. You can change the root of the
+file with the [ROOT](/critic2/manual/misc/#c2-root) keyword.
+
+### The VCPWDF method
+
+~~~
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+          [MAXANG ma.r] [MAXVOL mv.r]
+~~~
+
+The COMPAREVC/VCPWDF method works by exploring the set of lattice
+basis changes that transform the reduced cell of the first crystal
+into the reduced cell of the second crystal. For each transformation,
+the cell parameters are then forced to be equal, and the similarity is
+calculated using de Gelder's method (the POWDIFF option in
 the [COMPARE](#c2-compare) keyword). The lowest POWDIFF found in this
 way is the calculated variable-cell similarity measure
 (VC-POWDIFF). The algorithm is described in detail in
 [Mayo et al., CrystEngComm (2022)](https://doi.org/10.1039/D2CE01080A).
-The COMPAREVC keyword corresponds to the VC-PWDF (variable-cell
-POWDIFF) described in the article.
+This keyword corresponds to the VC-PWDF (variable-cell POWDIFF)
+described in the article.
 
-The syntax of the COMPAREVC keyword is:
-~~~
-COMPAREVC {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r] [MAXANG ma.r]
-          [MAXVOL mv.r]
-~~~
 The structures contained in `file1.s` and `file2.s` are compared using
 the variable-cell comparison algorithm. The behavior regarding the
 input format is the same as in CRYSTAL and MOLECULE: the file format
@@ -309,16 +411,16 @@ extension is not enough. If a dot (".") is used instead of a file
 name, the current structure (previously loaded with CRYSTAL/MOLECULE)
 is used.
 
-There are several optional keyword to COMPAREVC. If THR is given, stop
-the comparison if the calculated similarity measure (VC-POWDIFF) is
-lower than thr.r. This is useful for speeding up calculations in which
-we set a threshold below which we accept two crystal structures are
-equal. If WRITE, write the transformed structure to a SHELX file. If
-NOH, remove the hydrogens from both structures before comparing. The
-MAXELONG, MAXANG, and MAXVOL options control the maximum elongation,
-maximum angle change, and maximum volume change allowed for the cell
-deformation. By default, they are 30% (0.3), 20 degrees, and 50% (0.5)
-respectively.
+There are several optional keyword to COMPAREVC/VCPWDF. If THR is
+given, stop the comparison if the calculated similarity measure
+(VC-POWDIFF) is lower than thr.r. This is useful for speeding up
+calculations in which we set a threshold below which we accept two
+crystal structures are equal. If WRITE, write the transformed
+structure to a SHELX file. If NOH, remove the hydrogens from both
+structures before comparing. The MAXELONG, MAXANG, and MAXVOL options
+control the maximum elongation, maximum angle change, and maximum
+volume change allowed for the cell deformation. By default, they are
+30% (0.3), 20 degrees, and 50% (0.5) respectively.
 
 ## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 
