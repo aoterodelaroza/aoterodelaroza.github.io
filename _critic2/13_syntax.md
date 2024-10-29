@@ -28,7 +28,8 @@ toc_label: "List of keywords"
 | [Q/QAT](#key-q)                   | [QTREE](#key-qtree)           | [RADII](#key-radii)           | [RDF](#key-rdf)             | [REFERENCE](#key-reference)     | [RESET](#key-reset)                     |
 | [ROOT](#key-root)                 | [RUN](#key-run)               | [SETFIELD](#key-setfield)     | [SIGMAHOLE](#key-sigmahole) | [SPG](#key-spg)                 | [SPHEREINTEGRALS](#key-sphereintegrals) |
 | [STANDARDCUBE](#key-standardcube) | [STM](#key-stm)               | [SUM](#key-sum)               | [SYM/SYMM](#key-sym)        | [SYSTEM](#key-system)           | [UNITS](#key-units)                     |
-| [UNLOAD](#key-unload)             | [VDW](#key-vdw)               | [VORONOI](#key-voronoi)       | [WRITE](#key-write)         | [XDM](#key-xdm)                 | [YT](#key-yt)                           |
+| [UNLOAD](#key-unload)             | [VDW](#key-vdw)               | [VORONOI](#key-voronoi)       | [WRITE](#key-write)         | [XDM](#key-xdm)                 | [XRPD](#key-xrpd)                       |
+| [YT](#key-yt)                     |                               |                               |                             |                                 |                                         |
 
 ## Notation
 
@@ -1017,6 +1018,15 @@ XDM [QE|POSTG] [FILE file.s] [BETWEEN at1.i at1.i ... AND at1.i at2.i ...]
        [C9] [SCALC9 s9.r]
        [DAMP a1.r a2.r] [DAMP3 a3.r a4.r] [DAMP3BJN 3|6|sqrt6]
 XDM a1.r a2.r chf.s
+~~~
+
+<a id="key-xrpd"></a>
+[XRPD](/critic2/manual/structure/#c2-xrpd)
+: Fit experimental X-ray powder diffraction pattern profile and background.
+~~~
+XRPD BACKGROUND source_xy.s outbckgnd_xy.s [nknot.i]
+XRPD FIT source_xy.s [ymax_peakdetect.r] [nadj.i]
+XRPD REFIT source_xy.s source_peaks.s
 ~~~
 
 <a id="key-yt"></a>

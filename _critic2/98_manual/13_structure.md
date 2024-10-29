@@ -54,8 +54,8 @@ peaks, with width parameter `sigma.r` (default: 0.05 degrees).
 By default, two files are generated: `<root>_xrd.dat`, containing the
 $$2\theta$$ versus intensity data, and `<root>_xrd.gnu`, the gnuplot
 script to plot it. The name of these files can be changed using the
-ROOT keyword. The Miller indices of the peaks are written to the
-standard output.
+[ROOT](/critic2/manual/misc/#c2-root) keyword. The Miller indices of
+the peaks are written to the standard output.
 
 The `HARD` and `SOFT` keywords control how peaks right outside the
 plot range are treated. In a `HARD` powder diffraction pattern, the
@@ -100,7 +100,8 @@ equal to `sigma.r` (default: 0.05 bohr). The default units of `RINI`,
 
 Two files are generated: `<root>_rdf.dat`, containing the RDF versus
 distance data, and `<root>_rdf.gnu`, the gnuplot script to plot
-it. The name of these files can be changed using the ROOT keyword. If
+it. The name of these files can be changed using the
+[ROOT](/critic2/manual/misc/#c2-root) keyword. If
 `PAIR` is given, only the distances between atoms of type `is1.s` and
 `is2.s` will contribute to the RDF. Multiple `PAIR` keywords can be
 used. The `is1.s` and `is2.s` must be the name of an atomic species in
@@ -276,15 +277,17 @@ employed and the comparison is similar to how RDF works in crystals.
 ## Compare Crystal Structures Allowing Cell Deformations (COMPAREVC) {#c2-comparevc}
 
 The COMPAREVC keyword (variable-cell compare) is used to compare two
-crystal structures allowing one of them to have its lattice deformed
-to match the lattice of the other. It can also be used to compare two
 crystal structures, or a crystal structure and an experimental powder
-diffraction pattern. Considering deformations of one of the structures
-is useful when comparing structures that have similar motifs but
-slightly mismatched lattices as a result of, for instance,
-deformations caused by temperature or pressure effects.
+diffraction pattern, allowing one of structures to have its lattice
+deformed to match the other structure. Considering deformations of one
+of the structures is useful when comparing crystals that have similar
+motifs but slightly mismatched lattices as a result of, for instance,
+deformations caused by temperature, pressure, errors arising from
+approximations in computational methods, experimental uncertainties
+and other factors.
 
-The syntax of the COMPAREVC keyword is:
+There are two methods implemented in COMPAREVC: GVCPWDF (default) and
+VCPWDF. The syntax of COMPAREVC is:
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
           [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
@@ -301,27 +304,33 @@ COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
           [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
           [MAXELONG maxelong.r] [MAXANG maxang.r]
 ~~~
+which implements the GVCPWDF variant of the approach.
 Using this method requires compiling critic2 with the
 [NLOPT library](/critic2/installation/#c2-nlopt). If NLOPT is not
 available, the VCPWDF version of COMPAREVC is used instead (see
 below).
 
-COMPAREVC is described in
+This version of COMPAREVC is described in
 [A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
-COMPAREVC is a method to compare two crystal structures or a crystal
-structure and an X-ray powder diffraction pattern, allowing for cell
-deformations of one of the structures in order to account for
-temperature, pressure and other effects. The two structures being
-compared are represented by their diffraction patterns, as a list of
-pairs of reflection angles and intensities (theta,I). The first
-diffraction pattern is derived from the crystal structure in
-`file1.s`. The second diffraction pattern is read from `file2.s`,
-which can be a structure or a list of diffraction peaks (with
-extension `.peaks`). The behavior regarding the input format is the
-same as in CRYSTAL and MOLECULE: the file format is identified using
-the file extension or its contents if the extension is not enough. If
-a dot (".") is used instead of a file name, the current structure
-(previously loaded with CRYSTAL/MOLECULE) is used.
+This method is used to compare: a) two crystal structures, or b) a
+crystal structure and an X-ray powder diffraction pattern, in both
+cases allowing for cell deformations of one of the structures
+to account for temperature, pressure, and other effects that cause
+cell deformations.
+
+The two structures being compared are represented by their diffraction
+patterns, as a list of pairs of reflection angles and intensities
+$$(\theta,I)$$. The first diffraction pattern is calculated from the crystal
+structure in `file1.s`. The second diffraction pattern is derived from
+`file2.s`. If `file2.s` is a crystal structure, the $$(\theta,I)$$ are
+calculated in the same way as for the first structure. Alternatively,
+`file2.s` can be a file containing a list of diffraction peaks
+(with extension `.peaks`), generated by fitting an experimental
+patttern using the [XRPD](#c2-xrpd) keyword.
+The behavior regarding the input format is the same as in CRYSTAL: the
+file format is identified using the file extension or its contents if
+the extension is not enough. If a dot (".") is used instead of a file
+name, the current structure (previously loaded with CRYSTAL) is used.
 
 COMPAREVC carries out a global search over all possible deformations
 of the lattice from crystal structure 1 within a certain range of cell
@@ -330,11 +339,11 @@ elongations (given by `maxelong.r`) and changes in cell angle
 At each lattice deformation, the GPWDF similarity score
 between the powder diffraction patterns of structures 1 and 2 is
 calculated (see the [COMPARE](#c2-compare) keyword), and then
-minimized. The lowest GPWDF value found from the global search,
+minimized. The lowest GPWDF value found from this global search,
 corresponding to the deformation of structure 1 that best matches
 structure 2, is the final COMPAREVC similarity score.
 
-The meaning of the different options is:
+The meaning of the different options is as follows:
 
 - `GLOBAL`: carry out a global search over deformations of structure 1
 followed by local GPWDF minimizations, as described above. This is the
@@ -377,7 +386,7 @@ structure 1. Default: 5 degrees.
 `MAXANG` is 10.
 
 - `LAMBDA`: wavelength for the X-ray diffraction patterns calculated
-from structures. Default: 1.5406 angstrom.
+from structures. Default: 1.5406 angstrom (Cu K-$$\alpha$$).
 
 - `WRITE`:  write the deformed structure 1 that best matches structure
 2 in `<root>-final.res` and the calculated diffraction pattern for the
@@ -879,4 +888,64 @@ structure. The list of possible editing actions includes:
   parameter. If FRACTION is given, multiply the current value of the
   parameter with `r.r`.
 
+## Fit experimental X-ray powder diffraction patterns (XRPD) {#c2-xrpd}
 
+The XRPD keyword implements a set of tools to fit experimental X-ray
+powder diffraction patterns. This keyword is a helper for comparing
+crystal structures against experimental powder patterns using the
+[COMPAREVC](#c2-comparevc) keyword. The syntax is:
+~~~
+XRPD BACKGROUND source_xy.s outbckgnd_xy.s [nknot.i]
+XRPD FIT source_xy.s [ymax_peakdetect.r] [nadj.i]
+XRPD REFIT source_xy.s source_peaks.s
+~~~
+In all cases, the xy file (`source_xy.s`) corresponds to a
+(experimental) powder diffraction pattern, possibly a very low quality
+pattern, given as a two-column text file. The first column is the
+$$2\theta$$ and the second column is the profile intensity. Other
+columns, comments ("#"), and blank lines are ignored.
+
+There are three modes of operation in XRPD:
+
+- The BACKGROUND keyword calculates the background for the experimental
+  pattern contained in the xy file `source_xy.s` using
+  [David and Sivia's method](http://dx.doi.org/10.1107/S0021889801004332) based
+  on Bayesian analysis. The background is represented by a spline with
+  `nknot.i` knots (default: 20). The reflection angles,
+  background-subtracted pattern, the background itself, and the original pattern
+  are written in that order to `outbckgnd_xy.s`, which can then be used
+  as input for XRPD FIT.
+
+- The FIT keyword fits the input pattern using a linear
+  combination of pseudo-Voigt functions, as described in
+  [A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
+  The FIT keyword should be applied to diffraction patterns where the
+  background has been subtracted (i.e. the output xy file from the
+  BACKGROUND keyword). The method implemented in this keyword tries to
+  fit a sequence of candidate peaks to the pattern. A point in the
+  pattern is considered a candidate peak if its intensity is higher than
+  `nadj.i` adjacent points in each direction (`nadj.i` can
+  only take values 1 and 2, default: 2). All candidate peaks with
+  intensity lower than `ymax_peakdetect.r` are automatically discarded
+  (default: median of the profile intensities). In general, it is a good
+  idea to examine the input pattern and set the `ymax_peakdetect.r`
+  manually to an intensity below which no meaningful peaks (only noise)
+  are expected.
+
+  The FIT keyword writes two files. The `<root>_fit.dat` file contains
+  the fitted and the original patterns. It is a good idea to examine
+  that the two match after running the fit. The `<root>.peaks` file contains the
+  list of peaks and intensities, and can be used as input for [COMPAREVC](#c2-comparevc).
+  This allows comparing crystal structures against the powder pattern.
+  The name of these files can be changed using the
+  [ROOT](/critic2/manual/misc/#c2-root) keyword.
+
+- The REFIT keyword reads an xy file containing a background-clean
+  pattern (`source_xy.s`) and a `.peaks` file (`source_peaks.s`) and
+  refits the pattern starting from the profile contained in the peaks
+  file. This command is useful if the user decides to add or remove
+  peaks from the `.peaks` file, perhaps to manually improve the
+  agreement with the experimental xy data, perhaps to remove
+  spurious peaks, or peaks from the pressure calibrant. This keyword
+  generates a new peaks file (`<root>.peaks`) containing the refitted
+  linear combination of pseudo-Voigt functions.
