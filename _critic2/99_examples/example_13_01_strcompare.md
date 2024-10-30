@@ -5,7 +5,7 @@ permalink: /critic2/examples/example_13_01_strcompare/
 excerpt: "Compare molecular and crystal structures"
 sidebar:
   - repo: "critic2"
-	nav: "critic2_examples"
+    nav: "critic2_examples"
 toc: true
 toc_label: "Compare molecular and crystal structures"
 ---
@@ -38,7 +38,7 @@ previous [CRYSTAL](/critic2/manual/crystal/#c2-crystal) or
 
 ## Comparing Molecules
 
-### Atoms Are in the Same Order
+### Atoms are in the Same Order
 
 There are several different ways of comparing molecules. The most
 important point to note about molecular comparison is whether the atomic
@@ -80,7 +80,7 @@ with the other in the least-squares sense. The output is:
 # Assuming the atom sequence is the same in all molecules.
 # RMS of the atomic positions in bohr
    Molecule     HIS_TYR_HIS_0-sto3g.xyz HIS_TYR_HIS_0-rattle.xyz HIS_TYR_HIS_0.xyz
-	  RMS                     1               2               3
+      RMS                     1               2               3
   HIS_TYR_HIS_0-sto3g.xyz   0.0000000       2.5006092       2.4935909
   HIS_TYR_HIS_0-rattle.xyz  2.5006092       0.0000000       0.0599950
   HIS_TYR_HIS_0.xyz         2.4935909       0.0599950       0.0000000
@@ -91,7 +91,7 @@ changed using the [UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
 Note how the RMS is about 0.03 angstrom for the rattled structure,
 consistent with the rattling parameter used in ASE.
 
-### Atoms Are Not in the Same Order
+### Atoms are not in the Same Order
 
 The comparison problem becomes considerably trickier if the atomic
 sequences are not in the same order. Consider the structure:
@@ -124,7 +124,7 @@ the ordered case:
 # Using Ullmann's graph matching algorithm.
 # RMS of the atomic positions in bohr
    Molecule     HIS_TYR_HIS_0-rattle.xyz HIS_TYR_HIS_0-shuf.xyz HIS_TYR_HIS_0.xyz
-	  RMS              1               2               3
+      RMS              1               2               3
   HIS_TYR_HIS_0-rattle.xyz  0.0000000       0.0000000       0.0599950
   HIS_TYR_HIS_0-shuf.xyz    0.0000000       0.0000000       0.0599950
   HIS_TYR_HIS_0.xyz         0.0599950       0.0599950       0.0000000
@@ -180,8 +180,8 @@ and the result is:
   ... finished calculating patterns
   ... comparing pattern 1 of 4.
   ... finished comparing patterns
-	Crystal        urea.cif     urea-rattle.cif urea-bigrattle.cif   uracil.cif
-	 DIFF              1               2               3               4
+    Crystal        urea.cif     urea-rattle.cif urea-bigrattle.cif   uracil.cif
+     DIFF              1               2               3               4
   urea.cif            0.0000000       0.0000247       0.2475299       0.9747396
   urea-rattle.cif     0.0000247       0.0000000       0.2459106       0.9747785
   urea-bigrattle.cif  0.2475299       0.2459106       0.0000000       0.9495606
@@ -315,49 +315,96 @@ ones that generated the final DIFF score. This is done by using the
 ~~~
 COMPAREVC xtal1.cif xtal2.cif WRITE
 ~~~
-which generates a `.res` file (`<root>-final.res`) containing the
+which generates a `.res` file (`compare-final.res`) containing the
 deformed structure 1. In addition, a second file is written
-(`<root>-final.xy`) with the diffraction pattern for this same
+(`compare-final.xy`) with the diffraction pattern for this same
 structure. The powder diffraction patterns
 of the original structures can be generated and plotted for
 visual comparison using the
 [POWDER](/critic2/manual/powder) command on the corresponding files.
 
-## Comparing A Crystal and an Experimental Powder Diffraction Pattern Allowing for Cell Distortions (COMPAREVC)
+## Comparing a Crystal and an Experimental Powder Diffraction Pattern (COMPAREVC)
 
-The same method implemented in COMPAREVC can be used to compare crystal
-structures to
-experimental powder diffraction patterns, as described in
-[Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2023/sc/d3sc00168g).
-This experimental VC-PWDF (VC-xPWDF) method requires the experimental
-diffraction pattern using Cu K&#945; radiation in `.xy` format
-(2&#952; (°) vs intensity), the indexed cell dimensions from the
-experimental PXRD data, and the crystal structure you wish to compare
-to the PXRD data. For now, it can be accessed via:
+The same method implemented in COMPAREVC can be used to compare a
+crystal structure with an experimental powder diffraction
+pattern, even if the pattern is of very low quality. Using the
+variable-cell version of COMPARE for this is important because
+calculated and experimental powder patterns are seldom comparable, and
+one must take into account cell distortions caused by temperature,
+pressure, etc. The method is described in
+[A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
+
+To use COMPAREVC, we must first extract the list of reflections
+(angles and intensities) from the experimental pattern. This is done
+using the [XRPD](/critic2/manual/structure/#c2-xrpd) keyword. First,
+we calculate the background of the experimental pattern:
 ~~~
-TRICK COMPARE PROGST10.cif PROGST-PXRD.xy 10.3741 12.6059 13.8464 90 90.268 90
+XRPD BACKGROUND XXIX_PXRD_V4.xy background.xy
 ~~~
-where the candidate structure, diffractogram, cell lengths (in Angstroms)
-and cell angles (in degrees) are given. The output is entirely
-analogous to [COMPAREVC](/critic2/manual/comparevc/). Same as with
-COMPAREVC, the WRITE keyword can be used to write the transformed
-structure that best matches the experimental pattern.
-A VC-xPWDF score of 0.1 or less implies notable similarity but does
-not guarantee a match, so it is recommended that the simulated powder
-diffractogram is plotted along with the experimental one.
+This generates a new file (`background.xy`) containing the background,
+the original pattern, and the difference between them:
 
-The VC-PWDF methods cannot be used reliably for disordered structures,
-and will yield low scores for certain polytype and conformational
-phase structures. In VC-xPWDF, experimental PXRD data that exhibit
-considerable baseline require pre-processing because critic2 onlyl
-does minimal processing of the experimental pattern (specifically, the
-minimum y value in the `.xy` file is subtracted). In addition, data
-that shows severe preferred orientation may yield poor results,
-because the peak heights deviate from those predicted by critic2, and
-pre-processing to remove extraneous peaks is highly recommended.
+<figure style="width: 55%" class="align-center">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_13_01/background.png" alt="Experimental pattern and calculated background">
+  <figcaption style="text-align: center">Experimental pattern and calculated background</figcaption>
+</figure>
 
-You can find scripts and more detailed instructions on how to use
-VC-PWDF and VC-xPWDF at [Erin Johnson's software page](https://erin-r-johnson.github.io/software/).
+This pattern comes from the powder-assisted challength in the [seventh blind test](http://dx.doi.org/10.1107/S2052520624007492)
+and it has been deliberately made low quality for the challenge.
+
+Next, we fit the background-subtracted pattern with a linear
+combination of peak functions:
+~~~
+XRPD FIT background.xy
+~~~
+This command generats two files. The `compare.peaks` file contains the
+list of reflection angles and intensities, as well as other
+information from the fit. The `compare_fit.dat` gives the original and
+the fitted patterns, and plotting it is a good idea to examine if the
+fit is accurate:
+
+<figure style="width: 55%" class="align-center">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_13_01/fit.png" alt="Experimental and fitted patterns">
+  <figcaption style="text-align: center">Experimental and fitted patterns</figcaption>
+</figure>
+
+Although in this case it is not necessary, it is also possible to speed up
+the pattern fitting step (which may take up to several minutes in a
+more complex case) by passing to critic2 the intenstity below which
+peaks are considered random noise. For instance:
+~~~
+XRPD FIT background.xy 40
+~~~
+
+Lastly, we run the comparison of the crystal structure with the
+experimental powder pattern represented by the `.peaks` file:
+~~~
+COMPAREVC expt_relaxed.cif compare.peaks WRITE
+~~~
+The output is:
+~~~
++ SUCCESS? maximum number of evaluations reached
++ Lattice parameters:
+  Initial (1): 46.12870009 18.72174805 17.34779191 90.000000  93.220800  90.000000
+  Final (1):   47.93102211 19.00657572 17.87899276 90.622445  92.629913  89.438222
+  Relative length deformations:   0.03907160  0.01521373  0.03062066
+  Angle displacements:   0.6224  0.5909  0.5618
+  Initial volume (bohr3): 14958.0602
+  Final volume (bohr3): 16269.0233
+  Volume deformation: 0.08764258
++ DIFF = 0.0918283964
+~~~
+The low 0.09 score indicates high similarity; much lower scores
+(higher similarity) can be obtained if the patterns are of higher
+quality. The WRITE keyword used in COMPAREVC is optional, and makes
+COMPAREVC write two additional files. `compare-final.res` contains
+the deformed structure 1 with the best match, and `compare-final.xy`
+contains the powder diffraction pattern from the distorted structure:
+
+<figure style="width: 75%" class="align-center">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_13_01/final.png" alt="Experimental patterns (with and without background) and pattern from the distorted structure">
+  <figcaption style="text-align: center">Experimental patterns (with and without background) and pattern from the distorted structure</figcaption>
+</figure>
 
 ## Example Files Package
 
@@ -368,6 +415,9 @@ Files: [example_13_01.tar.xz](/assets/critic2/example_13_01/example_13_01.tar.xz
 - Loading crystal structures with [CRYSTAL](/critic2/manual/crystal/#c2-crystal)
 
 - The [POWDER](/critic2/manual/powder) keyword for simulating powder diffractograms.
+
+- The [XRPD](/critic2/manual/structure/#c2-xrpd) keyword for fitting
+  experimental powder diffraction patterns.
 
 - The [COMPARE](/critic2/manual/compare/) keyword.
 
