@@ -140,12 +140,12 @@ their simulated
 powder diffraction patterns (see the [POWDER](/critic2/manual/structure/#c2-powder)
 keyword) and compare them using cross-correlation functions as
 described by
-[de Gelder et al.](https://doi.org/10.1002/1096-987X(200102)22:3%3C273::AID-JCC1001%3E3.0.CO;2-0).
+[A. Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414](https://doi.org/10.1107/S1600576724007489).
 In this method, the powder diffractograms of the two crystals are
-calculated with some arbitrary, but reasonable, parameters for peak
-shapes and sizes, incident wavelength, etc. Unlike the molecular
-comparison, this method does not rely on the atoms being in the same
-order. In the provided example three structures are given:
+calculated and the reflections and intensities represented as Gaussian
+functions. Unlike the molecular comparison, this method does not rely
+on the atoms being in the same order, so any two structures can be
+compared directly. In the provided example three structures are given:
 
 * `uracil.cif`: the uracil structure from the critic2 structure
   library.
@@ -172,18 +172,22 @@ and the result is:
   Crystal 2 : urea-rattle.cif
   Crystal 3 : urea-bigrattle.cif
   Crystal 4 : uracil.cif
-# Using cross-correlated POWDER diffraction patterns.
+# Using cross-correlated Gaussian powder diffraction patterns (GPWDF).
 # Please cite:
-#   de Gelder et al., J. Comput. Chem., 22 (2001) 273
+#   Otero-de-la-Roza, J. Appl. Cryst. 57 (2024) 1401-1414 (doi:10.1107/S1600576724007489)
 # Two structures are exactly equal if DIFF = 0.
+  ... calculating pattern 1 of 4.
+  ... finished calculating patterns
+  ... comparing pattern 1 of 4.
+  ... finished comparing patterns
     Crystal        urea.cif     urea-rattle.cif urea-bigrattle.cif   uracil.cif
      DIFF              1               2               3               4
-  urea.cif            0.0000000       0.0000248       0.2463948       0.9384096
-  urea-rattle.cif     0.0000248       0.0000000       0.2448225       0.9385707
-  urea-bigrattle.cif  0.2463948       0.2448225       0.0000000       0.8963729
-  uracil.cif          0.9384096       0.9385707       0.8963729       0.0000000
+  urea.cif            0.0000000       0.0000247       0.2475299       0.9747396
+  urea-rattle.cif     0.0000247       0.0000000       0.2459106       0.9747785
+  urea-bigrattle.cif  0.2475299       0.2459106       0.0000000       0.9495606
+  uracil.cif          0.9747396       0.9747785       0.9495606       0.0000000
 ```
-The similarity index calculated by this method (their POWDIFF value)
+The similarity index calculated by this method (their DIFF value)
 goes between 0 and 1, which 0 being a perfect match and 1 complete
 dissimilarity. Note how the small rattle gives a urea structure that
 is essentially coincident with the original, whereas a big rattle
@@ -209,11 +213,11 @@ patterns is less than 1e-6, calculated as in the example above. The
 output of COMPARE/REDUCE contains the following parts. First, the
 powder diffraction difference values are reported:
 ```
-     DIFF              1               2               3               4               5
-  str-001.POSCAR  not-calculated   0.0007855       0.0007439       0.0007439       0.0007855
-  str-002.POSCAR   0.0007855      not-calculated   0.0000701       0.0000701      not-calculated
-  str-003.POSCAR   0.0007439       0.0000701      not-calculated  not-calculated  not-calculated
-  str-004.POSCAR   0.0007439       0.0000701      not-calculated  not-calculated  not-calculated
+   DIFF              1               2               3               4               5
+str-001.POSCAR  not-calculated   0.0007887       0.0007503       0.0007503       0.0007887
+str-002.POSCAR   0.0007887      not-calculated   0.0000703       0.0000703      not-calculated
+str-003.POSCAR   0.0007503       0.0000703      not-calculated  not-calculated  not-calculated
+str-004.POSCAR   0.0007503       0.0000703      not-calculated  not-calculated  not-calculated
 ...
 ```
 where some of the difference values were not calculated, because some of
@@ -245,26 +249,25 @@ their unique representative from the list above:
 
 ## Comparing Crystals Allowing for Cell Distortions (VC-PWDF)
 
-The variable-cell powder difference (VC-PWDF) comparison method is
-used to compare two crystal structures. It is similar to the plain
-powder diffraction comparison method described above, but it is
-designed to produce a high similarity result (a low VC-PWDF value)
-when one of the structures is
-a lattice distortion of the other. This can happen, for instance, due
-to the effect of temperature or pressure, or when comparing a
-calculated structure with an experimental one. VC-PWDF works by
-designating one of the structures as reference and the other as
-candidate; both are first transformed into their reduced
+The variable-cell comparison method (VCOMPARE) is used to compare two
+crystal structures. It is similar to the plain powder diffraction
+comparison method described above, but it is designed to produce a
+high similarity result (a low VC-PWDF value) when one of the
+structures is a lattice distortion of the other. This can happen, for
+instance, due to the effect of temperature or pressure, or when
+comparing a calculated structure with an experimental one. VC-PWDF
+works by designating one of the structures as reference and the other
+as candidate; both are first transformed into their reduced
 cells. Then, all possible transformations of the reduced cell of the
-candidate structure are explored that may bring it into (rough) agreement
-with the reference reduced cell. Then, the candidate adopts the cell
-parameters of the reference structure's reduced cell and the powder
-diffractogram dissimilarity index (POWDIFF) is calculated as in the
-example above. The process is repeated for all
-possible cell transformations and the final VC-PWDF value is the
-minimum of all calculated dissimilarity indices. The algorithm for the
-VC-PWDF method is described in detail in
-[Mayo et al.](https://pubs.rsc.org/en/content/articlehtml/2022/ce/d2ce01080a).
+candidate structure are explored that may bring it into (rough)
+agreement with the reference reduced cell. Then, the candidate adopts
+the cell parameters of the reference structure's reduced cell and the
+powder diffractogram dissimilarity index (POWDIFF) is calculated as in
+the example above. The process is repeated for all possible cell
+transformations and the final VC-PWDF value is the minimum of all
+calculated dissimilarity indices. The algorithm for the VC-PWDF method
+is described in detail in [Mayo et
+al.](https://pubs.rsc.org/en/content/articlehtml/2022/ce/d2ce01080a).
 
 Because it involves several (sometimes many) powder diffraction
 generation and comparison steps, VC-PWDF is slower than the usual
