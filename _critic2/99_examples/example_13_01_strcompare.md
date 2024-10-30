@@ -5,7 +5,7 @@ permalink: /critic2/examples/example_13_01_strcompare/
 excerpt: "Compare molecular and crystal structures"
 sidebar:
   - repo: "critic2"
-    nav: "critic2_examples"
+	nav: "critic2_examples"
 toc: true
 toc_label: "Compare molecular and crystal structures"
 ---
@@ -80,7 +80,7 @@ with the other in the least-squares sense. The output is:
 # Assuming the atom sequence is the same in all molecules.
 # RMS of the atomic positions in bohr
    Molecule     HIS_TYR_HIS_0-sto3g.xyz HIS_TYR_HIS_0-rattle.xyz HIS_TYR_HIS_0.xyz
-      RMS                     1               2               3
+	  RMS                     1               2               3
   HIS_TYR_HIS_0-sto3g.xyz   0.0000000       2.5006092       2.4935909
   HIS_TYR_HIS_0-rattle.xyz  2.5006092       0.0000000       0.0599950
   HIS_TYR_HIS_0.xyz         2.4935909       0.0599950       0.0000000
@@ -124,7 +124,7 @@ the ordered case:
 # Using Ullmann's graph matching algorithm.
 # RMS of the atomic positions in bohr
    Molecule     HIS_TYR_HIS_0-rattle.xyz HIS_TYR_HIS_0-shuf.xyz HIS_TYR_HIS_0.xyz
-      RMS              1               2               3
+	  RMS              1               2               3
   HIS_TYR_HIS_0-rattle.xyz  0.0000000       0.0000000       0.0599950
   HIS_TYR_HIS_0-shuf.xyz    0.0000000       0.0000000       0.0599950
   HIS_TYR_HIS_0.xyz         0.0599950       0.0599950       0.0000000
@@ -180,8 +180,8 @@ and the result is:
   ... finished calculating patterns
   ... comparing pattern 1 of 4.
   ... finished comparing patterns
-    Crystal        urea.cif     urea-rattle.cif urea-bigrattle.cif   uracil.cif
-     DIFF              1               2               3               4
+	Crystal        urea.cif     urea-rattle.cif urea-bigrattle.cif   uracil.cif
+	 DIFF              1               2               3               4
   urea.cif            0.0000000       0.0000247       0.2475299       0.9747396
   urea-rattle.cif     0.0000247       0.0000000       0.2459106       0.9747785
   urea-bigrattle.cif  0.2475299       0.2459106       0.0000000       0.9495606
@@ -247,65 +247,83 @@ their unique representative from the list above:
 ...
 ```
 
-## Comparing Crystals Allowing for Cell Distortions (VC-PWDF)
+## Comparing Two Crystals Allowing for Cell Distortions (COMPAREVC)
 
-The variable-cell comparison method (VCOMPARE) is used to compare two
-crystal structures. It is similar to the plain powder diffraction
-comparison method described above, but it is designed to produce a
-high similarity result (a low VC-PWDF value) when one of the
-structures is a lattice distortion of the other. This can happen, for
-instance, due to the effect of temperature or pressure, or when
-comparing a calculated structure with an experimental one. VC-PWDF
-works by designating one of the structures as reference and the other
-as candidate; both are first transformed into their reduced
-cells. Then, all possible transformations of the reduced cell of the
-candidate structure are explored that may bring it into (rough)
-agreement with the reference reduced cell. Then, the candidate adopts
-the cell parameters of the reference structure's reduced cell and the
-powder diffractogram dissimilarity index (POWDIFF) is calculated as in
-the example above. The process is repeated for all possible cell
-transformations and the final VC-PWDF value is the minimum of all
-calculated dissimilarity indices. The algorithm for the VC-PWDF method
-is described in detail in [Mayo et
-al.](https://pubs.rsc.org/en/content/articlehtml/2022/ce/d2ce01080a).
+The variable-cell comparison method
+([COMPAREVC](/critic2/manual/comparevc/)) is used to compare two
+crystal structures. It is similar to the plain
+powder-diffraction-based comparison method described above, but it is
+designed to produce a high similarity score (a low DIFF value)
+when one of the structures is a lattice distortion of the other with
+the same motif. This can happen, for instance, due to the effect of
+temperature or pressure, or when comparing a calculated structure with
+an experimental one.
 
-Because it involves several (sometimes many) powder diffraction
-generation and comparison steps, VC-PWDF is slower than the usual
-powder diffraction comparison and it should not be used unless lattice
-distortions are expected to play a role in the comparison. A VC-PWDF
-value of 0.03 or lower indicates considerable similarity and a
-probable match, although user discretion is recommended.
+COMPAREVC works by designating one of the structures as reference and
+the other as candidate. The list of reflection angles and intensities
+are calculated for both, and the similarity score is calculated (the
+DIFF value, same as in COMPARE). Then, the DIFF value is minimized as
+a function of the lattice parameters of the first structure,
+looking for the deformation that best matches the second
+structure. This process is facilitated by the fact that the
+mathematical dependence of DIFF with the lattice parameters of either
+structure is known analytically.
 
-To compare two structures using the VC-PWDF method, use the
+Finding the smallest DIFF value as a function of deformations is a
+global minimization problem. For this reason, COMPAREVC launches a
+series of optimization processes starting from different deformations
+around the initial structure of the first crystal. The lowest DIFF
+found during this exploration is the final COMPAREVC score.
+The process is described in detail in the
+[corresponding article](https://doi.org/10.1107/S1600576724007489).
+Using COMPAREVC in this way requires compiling critic2 with access to
+the [NLOPT library](/critic2/installation/#c2-nlopt).
+
+Because it involves several (many) powder diffraction generation and
+comparison steps, COMPAREVC is slower than the usual powder
+diffraction comparison and it should not be used unless lattice
+distortions are expected to play a role in the comparison. A DIFF
+value in the range of 0.05 or lower indicates considerable similarity
+and a probable match, although user discretion is recommended.
+
+To compare two structures using this method, use the
 [COMPAREVC](/critic2/manual/comparevc/) keyword:
 ~~~
 COMPAREVC xtal1.cif xtal2.cif
 ~~~
-The output shows which structure is being used as reference and which
-is the candidate, the reduced cell lattice vectors for both, the list
-of transformed candidate lattice vectors, and the calculated powder
-diffraction dissimilarity values for each transformation. The final
-VC-PWDF value is given at the end, calculated as the minimum of the
-dissimilarity indices for all candidate transformations. Note that, unlike
+The output shows the structure that is being deformed ("Crystal 1")
+and the structure used as the target of the comparison ("Crystal 2"),
+and each deformation considered together with the corresponding
+similarity score (DIFF). The global search continues until no decrease
+in the value of DIFF is found for a number of consecutive iterations
+(by default, 5000). The end result is the lattice parameters for the
+deformation of structure 1 that best matches structure 2, the change
+in volume, and the final similarity score (DIFF) from COMPAREVC. It is
+also possible to control the parameters for the global search (see the
+[COMPAREVC](/critic2/manual/comparevc/) entry in the manual).
+Note that, unlike
 [COMPARE](/critic2/manual/compare/),
 [COMPAREVC](/critic2/manual/comparevc/) cannot be used to compare more
 than two structures at a time. Hence, if you want to compare a list of
 structures, you will need to repeat COMPAREVC as many times as
-necessary (see the link at the end of this section).
+necessary.
 
 After the two crystals are compared, COMPAREVC can be used to write
 the transformed structures that most resemble each other, that is, the
-ones that generated the final VC-PWDF value. This is done by using the
+ones that generated the final DIFF score. This is done by using the
 `WRITE` option:
 ~~~
 COMPAREVC xtal1.cif xtal2.cif WRITE
 ~~~
-which generates two `.res` files (`<root>_structure_1.res` and
-`<root>_structure_2.res`), one for each of the crystal structures that
-yielded the VC-PWDF score. The powder diffraction patterns
-of the original and deformed structures can be generated and plotted for
+which generates a `.res` file (`<root>-final.res`) containing the
+deformed structure 1. In addition, a second file is written
+(`<root>-final.xy`) with the diffraction pattern for this same
+structure. The powder diffraction patterns
+of the original structures can be generated and plotted for
 visual comparison using the
 [POWDER](/critic2/manual/powder) command on the corresponding files.
+
+## Comparing A Crystal and an Experimental Powder Diffraction Pattern Allowing for Cell Distortions (COMPAREVC)
 
 The same method implemented in COMPAREVC can be used to compare crystal
 structures to
