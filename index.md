@@ -5,8 +5,8 @@ title: "Home"
 intro:
   - excerpt: ""
 row_all:
-  - image_path: assets/images/critic2_pyridine.png
-    alt: "Pyridine"
+  - image_path: assets/images/critic2_logo.png
+    alt: "Critic2 Logo"
     title: "Critic2"
     excerpt: >-
       Analysis of the results of quantum chemical calculations in
