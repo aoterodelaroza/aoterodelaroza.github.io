@@ -559,9 +559,7 @@ LOAD AS "expression.s" [n1.i n2.i n3.i|SIZEOF id.s|GHOST]
 LOAD AS PROMOLECULAR {n1.i n2.i n3.i|SIZEOF id.s}
         [FRAGMENT file.xyz]
 LOAD AS CORE {n1.i n2.i n3.i|SIZEOF id.s} {ZPSP at1.s q1.r ...}
-LOAD AS LAP id.s
-LOAD AS GRAD id.s
-LOAD AS POT id.s [RY|RYDBERG]
+LOAD AS FFT [GX|GY|GZ|HXX|HXY|HXZ|HYY|HYZ|HZZ|GMOD|LAP|POT] id.s
 LOAD AS RESAMPLE id.s n1.i n2.i n3.i
 LOAD AS CLM {ADD id1.s id2.s|SUB id1.s id2.s}
 ~~~
