@@ -627,6 +627,8 @@ MOLCELL [border.r]
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
 MOLECULE file.mol2 [border.r] [CUBIC|CUBE] [name.s]
+MOLECULE file.sdf [border.r] [CUBIC|CUBE] [ID id.i]
+MOLECULE file.mol [border.r] [CUBIC|CUBE] [ID id.i]
 MOLECULE file.pdb [border.r] [CUBIC|CUBE]
 MOLECULE file.wfn [border.r] [CUBIC|CUBE]
 MOLECULE file.wfx [border.r] [CUBIC|CUBE]

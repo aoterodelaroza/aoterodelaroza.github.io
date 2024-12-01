@@ -16,6 +16,8 @@ toc_sticky: true
 ~~~
 MOLECULE file.xyz [border.r] [CUBIC|CUBE]
 MOLECULE file.mol2 [border.r] [CUBIC|CUBE] [name.s]
+MOLECULE file.sdf [border.r] [CUBIC|CUBE] [ID id.i]
+MOLECULE file.mol [border.r] [CUBIC|CUBE] [ID id.i]
 MOLECULE file.pdb [border.r] [CUBIC|CUBE]
 MOLECULE file.wfn [border.r] [CUBIC|CUBE]
 MOLECULE file.wfx [border.r] [CUBIC|CUBE]
@@ -71,11 +73,11 @@ CRYSTAL changes some of the default behavior in critic2. Namely:
   of bohr (use the [UNITS](/critic2/manual/inputoutput/#c2-units)
   keyword to change this behavior). In particular, this applies to the
   Cartesian coordinates for the atoms in the MOLECULE environment and
-  to the argument for BORDER. In the case of xyz, mol2, wfn, wfx,
-  fchk, dat, out, pgout, molden, molden.input, gen, and cube files,
-  the Cartesian coordinate system in input and output is the same as
-  in the original file. The "Input orientation" is read from Gaussian
-  log (output) files.
+  to the argument for BORDER. In the case of xyz, mol2, sdf/mol, wfn,
+  wfx, fchk, dat, out, pgout, molden, molden.input, gen, and cube
+  files, the Cartesian coordinate system in input and output is the
+  same as in the original file. The "Input orientation" is read from
+  Gaussian log (output) files.
 
 * The use of symmetry is automatically deactivated. All molecular
   structures are run in the P1 space group (equivalent to the C1
@@ -160,6 +162,18 @@ given, critic2 reads the first molecule in the mol2 file. If the
 optional argument `name.s` is given, read the molecule with that name
 (the name is the line after `@<TRIPOS>MOLECULE`). `name.s` is
 case-sensitive.
+
+### sdf/mol format (mol,sdf)
+
+The MOL and SDF are molecular file formats used by MDL Information
+Systems (now BIOVIA). There are two different formats these files can
+use: V2000 and V3000, indicated at the end of the the fourth line in
+the file. Both are supported by critic2. A mol/sdf file may contain
+one or more molecule specifications. Each molecule is separated by
+`$$$$`. If no further information is given, critic2 reads the first
+molecule in the file. If the optional keyword ID is given with a
+positive integer argument `id.i`, read the molecule number `id.i` from
+the file.
 
 ### pdb format (pdb)
 
