@@ -1004,6 +1004,7 @@ WRITE file.gen
 WRITE file.pyscf
 WRITE file.in [rklength.r] ## FHIaims geometry.in
 WRITE file.frac
+WRITE file.pdb
 ~~~
 
 <a id="key-xdm"></a>

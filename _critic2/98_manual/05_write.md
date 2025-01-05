@@ -70,6 +70,7 @@ WRITE file.gen
 WRITE file.pyscf
 WRITE file.in [rklength.r] ## FHIaims geometry.in
 WRITE file.frac
+WRITE file.pdb
 ~~~
 The WRITE keyword writes the currently loaded structure to a file.
 A number of file formats can be written by critic2. As in CRYSTAL and
@@ -370,6 +371,14 @@ always contains the cell lengths and angles (even if a molecule is
 written) and the atomic connectivity calculated by critic2. The force
 field atom types in the file correspond to the "tiny" force field
 parameters in the TINKER distribution (`tiny.prm`).
+
+### Protein Data Bank Files (pdb)
+
+The structure can be written in the Protein Data Bank (PDB) file
+format, with extension `.pdb`. The atomic positions are written using
+only the `HETATM` keyword corresponding to unknown residues. In the
+case of crystals, the cell vectors are written using the `CRYST1` and
+`SCALEn` keywords.
 
 ## Writing a .mols File for DMACRYS/NEIGHCRYS (MAKEMOLSNC) {#c2-makemolsnc}
 ~~~
