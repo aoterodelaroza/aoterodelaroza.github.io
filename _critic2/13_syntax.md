@@ -171,9 +171,9 @@ CLEAR {var1.s var2.s ...|ALL}
 : Compare two crystal structures allowing for cell deformations.
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
-          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [LAMBDA lambda.r] [WRITE file.s] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
           [MAXELONG maxelong.r] [MAXANG maxang.r]
-COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE file.s] [NOH] [MAXELONG me.r]
           [MAXANG ma.r] [MAXVOL mv.r]
 ~~~
 

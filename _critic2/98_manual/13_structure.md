@@ -290,9 +290,9 @@ There are two methods implemented in COMPAREVC: GVCPWDF (default) and
 VCPWDF. The syntax of COMPAREVC is:
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
-          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [LAMBDA lambda.r] [WRITE file.s] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
           [MAXELONG maxelong.r] [MAXANG maxang.r]
-COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE file.s] [NOH] [MAXELONG me.r]
           [MAXANG ma.r] [MAXVOL mv.r]
 ~~~
 
@@ -301,7 +301,7 @@ COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.
 The default syntax for COMPAREVC is:
 ~~~
 COMPAREVC {.|file1.s} {.|file2.s} [SP|LOCAL|GLOBAL] [SAFE|QUICK] [ALPHA alpha.r]
-          [LAMBDA lambda.r] [WRITE] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
+          [LAMBDA lambda.r] [WRITE file.s] [MAXFEVAL maxfeval.i] [BESTEPS besteps.r]
           [MAXELONG maxelong.r] [MAXANG maxang.r]
 ~~~
 which implements the GVCPWDF variant of the approach.
@@ -388,15 +388,16 @@ structure 1. Default: 5 degrees.
 - `LAMBDA`: wavelength for the X-ray diffraction patterns calculated
 from structures. Default: 1.5406 angstrom (Cu K-$$\alpha$$).
 
-- `WRITE`:  write the deformed structure 1 that best matches structure
-2 in `<root>-final.res` and the calculated diffraction pattern for the
-final structure in `<root>-final.xy`. You can change the root of the
-file with the [ROOT](/critic2/manual/misc/#c2-root) keyword.
+- `WRITE`: write the deformed structure 1 that best matches structure
+2 in `file.s` (the format is guessed from the extension). Also, write
+the calculated diffraction pattern for the final structure in
+`<root>-final.xy`. You can change the root of the file with the
+[ROOT](/critic2/manual/misc/#c2-root) keyword.
 
 ### The VCPWDF method
 
 ~~~
-COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE] [NOH] [MAXELONG me.r]
+COMPAREVC VCPWDF {.|file1.s} {.|file2.s} [THR thr.r] [WRITE file.s] [NOH] [MAXELONG me.r]
           [MAXANG ma.r] [MAXVOL mv.r]
 ~~~
 
@@ -425,11 +426,12 @@ given, stop the comparison if the calculated similarity measure
 (VC-POWDIFF) is lower than thr.r. This is useful for speeding up
 calculations in which we set a threshold below which we accept two
 crystal structures are equal. If WRITE, write the transformed
-structure to a SHELX file. If NOH, remove the hydrogens from both
-structures before comparing. The MAXELONG, MAXANG, and MAXVOL options
-control the maximum elongation, maximum angle change, and maximum
-volume change allowed for the cell deformation. By default, they are
-30% (0.3), 20 degrees, and 50% (0.5) respectively.
+structure to file `file.s` (the format is guessed from the
+extension). If NOH, remove the hydrogens from both structures before
+comparing. The MAXELONG, MAXANG, and MAXVOL options control the
+maximum elongation, maximum angle change, and maximum volume change
+allowed for the cell deformation. By default, they are 30% (0.3), 20
+degrees, and 50% (0.5) respectively.
 
 ## Transform the Unit Cell (NEWCELL) {#c2-newcell}
 
