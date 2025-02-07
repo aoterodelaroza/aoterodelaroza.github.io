@@ -268,6 +268,12 @@ specifying the required format. The allowed keywords are:
 
 - `ORCA`: an ORCA output file.
 
+- `MOL2`: TRIPOS mol2 file
+
+- `PDB`: molecular PDB format.
+
+- `SDF`: molecular SDF format.
+
 ### Manual Specification of the Molecular Structure (MOLECULE Environment)
 
 A molecule can be specified directly in the input using the MOLECULE
