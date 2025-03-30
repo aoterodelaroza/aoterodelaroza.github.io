@@ -1004,7 +1004,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
-WRITE file.in [rklength.r] ## FHIaims geometry.in
+WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
 WRITE file.frac
 WRITE file.pdb
 ~~~

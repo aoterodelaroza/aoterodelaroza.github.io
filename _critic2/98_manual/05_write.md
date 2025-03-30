@@ -68,7 +68,7 @@ WRITE file.STRUCT_IN
 WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
-WRITE file.in [rklength.r] ## FHIaims geometry.in
+WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
 WRITE file.frac
 WRITE file.pdb
 ~~~
@@ -356,6 +356,10 @@ A `geometry.in` input file for FHIaims can be generated using the
 file then needs to be renamed to `geometry.in`. The appropriate
 selection of keywords is used depending on whether the current
 structure is a crystal or a molecule.
+
+If the structure is a crystal, the `CARTESIAN` keyword writes the
+atomic positions in Cartesian coordinates (using FHIaims' `atom`)
+instead of using fractional coordinates (`atom_frac`).
 
 If an additional real number is given (`rklength.r`), an additional
 file (`file.in_control`) containing a template `control.in` for the
