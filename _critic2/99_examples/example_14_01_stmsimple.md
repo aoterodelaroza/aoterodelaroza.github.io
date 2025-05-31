@@ -1,8 +1,8 @@
 ---
 layout: single
-title: "Making STM plots with Quantum ESPRESSO and critic2"
+title: "Making STM plots with critic2"
 permalink: /critic2/examples/example_14_01_stmqe/
-excerpt: "Making scanning tunneling microscopy (STM) plots with Quantum ESPRESSO and critic2"
+excerpt: "Making scanning tunneling microscopy (STM) plots with critic2"
 sidebar:
   - repo: "critic2"
     nav: "critic2_examples"
@@ -32,8 +32,9 @@ energies between $$E_F-eV$$ and $$E_F$$. The LDOS corresponds to the
 electron density contributions from all states that are within $$eV$$
 of the Fermi level. In Quantum ESPRESSO, a cube file containing this
 LDOS for the chosen bias voltage can be written using `pp.x` and
-option `plot_num=5`.
-
+option `plot_num=5`. The same LDOS field, called PARCHG, can be
+[obtained in VASP](https://www.vasp.at/wiki/index.php/Partial_charge_densities_and_STM_simulations).
+A PARCHG file can be read by critic2 in the same way as a CHGCAR.
 
 <figure style="width: 30%" class="align-right">
   <img src="{{ site.url }}{{ site.baseurl }}/assets/critic2/example_14_01/alas_surface.png" alt="AlAs surface">
@@ -42,7 +43,8 @@ option `plot_num=5`.
 
 To illustrate how this works, we use the AlAs (110) surface provided
 in the Quantum ESPRESSO distribution (in the examples of the PP
-package, example03). The surface is shown in the plot on the
+package, example03). The steps to generate the equivalent file using
+VASP are given in the link above. The surface is shown in the plot on the
 right. The first thing we have to do is run the SCF calculation on the
 surface (`alas110re.scf.in`). For simplicity, this is done with a very
 low cutoff (14 Ry). Real-life calculations would be run with a much
