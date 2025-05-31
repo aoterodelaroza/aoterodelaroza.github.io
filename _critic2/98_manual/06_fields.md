@@ -116,10 +116,11 @@ extension to decide which format should be used for the reading:
   files can also be written by psi4.
 
 * `.molden` for molecular wavefunction files (molden-style format). At
-  present, psi4, orca, and molden are supported. Both STO and GTO
-  molecular wavefunctions are supported. The `molden.input` extension
-  works the same as a `.molden` file, but forces the use of the orca
-  dialect (orca generates `.molden.input` files by default).
+  present, psi4, orca, xtb (same as orca), and molden are
+  supported. Both STO and GTO molecular wavefunctions are
+  supported. The `molden.input` extension works the same as a
+  `.molden` file, but forces the use of the orca dialect (orca
+  generates `.molden.input` files by default).
 
 * `.pwc` for the electron density plus Kohn-Sham state information
   from Quantum ESPRESSO, generated using the pw2critic.x program in
@@ -433,16 +434,22 @@ programs work with critic2:
   extension. These are also understood by critic2, and passing them
   directly informs critic2 that the molden file uses the ORCA dialect.
 
+- XTB, version 6.7.1 and probably others, implemented and tested
+  in 2025. The molden dialect is the same as ORCA, and the file name
+  is `molden.input`. At the time of writing, there are unresolved bugs
+  in the xtb cube calculation routine that generate the wrong
+  density.
+
 The [development notes](/devnotes/critic2-molwfns/) contain a
 [list of programs and versions](/devnotes/critic2-molwfns/#dev-impl)
 whose molden files are known to work with critic2, and some
 particularities regarding these formats.
 
 If no dialect is provided by the user, critic2 will try to "guess" the
-format of the molden file from its contents. The psi4 or orca dialects
-can be forced by using the ORCA or PSI4 keywords after the name of the
-molden file. If you try molden files from any other program, please
-let me know how it goes so I can update this manual.
+format of the molden file from its contents. The psi4 or orca/xtb
+dialects can be forced by using the ORCA or PSI4 keywords after the
+name of the molden file. If you try molden files from any other
+program, please let me know how it goes so I can update this manual.
 
 The supported wavefunction types are restricted (RHF) and unrestricted
 (UHF), both with STO and GTO primitives. Virtual orbitals can be read

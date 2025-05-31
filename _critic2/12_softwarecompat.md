@@ -101,3 +101,5 @@ the [CRYSTAL](/critic2/manual/crystal/#c2-crystal),
 | [WIEN2k](http://susi.theochem.tuwien.ac.at/)                                 | struct                                          | crystals           |                |                                                     |
 |                                                                              | clmsum,clmup,clmdn                              | crystals           | rho,arbitrary  |                                                     |
 | [Xcrysden](http://www.xcrysden.org/)                                         | xsf,axsf                                        | crystals           | grid,arbitrary |                                                     |
+| [xtb](https://github.com/grimme-lab/xtb)                                     | molden,molden.input                             | molecules          | rho,wfn,basis  |                                                     |
+|                                                                              | xyz,gen,...                                     | crystals,molecules |                |                                                     |
