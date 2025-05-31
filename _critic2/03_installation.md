@@ -210,12 +210,12 @@ If you compile using cmake, libxc should be found automatically by the
 build system if it installed in a standard location. Otherwise, you
 can indicate the location of the include directory with the
 `LIBXC_INCLUDE_DIRS` variable and the location of the `libxc.so` and
-`libxcf90.so` with the `LIBXC_xc_LIBRARY` and `LIBXC_xcf90_LIBRARY`
+`libxcf03.so` with the `LIBXC_xc_LIBRARY` and `LIBXC_xcf03_LIBRARY`
 variables, respectively. For instance:
 ~~~
 cmake -DLIBXC_INCLUDE_DIRS=/usr/include \
       -DLIBXC_xc_LIBRARY=/usr/lib/x86_64-linux-gnu/libxc.so \
-      -DLIBXC_xcf90_LIBRARY=/usr/lib/x86_64-linux-gnu/libxcf90.so ..
+      -DLIBXC_xcf03_LIBRARY=/usr/lib/x86_64-linux-gnu/libxcf03.so ..
 ~~~
 
 The libxc library is used in critic2 to create new scalar fields from
