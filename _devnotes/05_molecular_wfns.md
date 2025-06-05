@@ -281,6 +281,8 @@ solution.
 | orca     | wfn    | 4.0                                                           |
 |          | wfx    | 4.2                                                           |
 |          | molden | 4.0, 4.2                                                      |
+|----------+--------+---------------------------------------------------------------|
+| xtb      | molden | 6.7.1                                                         |
 
 The limitations for each of these formats are listed below, along with
 notes on their particularities. Primitives with angular momentum of h
