@@ -1008,6 +1008,10 @@ WRITE file.pyscf
 WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
 WRITE file.frac
 WRITE file.pdb
+WRITE BULK
+  RATTLE nstruct.i [MAG mag.r]
+  ...
+ENDWRITE/END
 ~~~
 
 <a id="key-xdm"></a>

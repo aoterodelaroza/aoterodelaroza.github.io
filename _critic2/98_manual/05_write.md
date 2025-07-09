@@ -38,7 +38,8 @@ to suit their needs.
 
 In critic2, the main keyword to export the molecular or crystal
 structure, or a transformation of those structures, is the WRITE
-keyword.
+keyword. A single WRITE writes one structure. Use WRITE BULK to write
+multiple structures.
 
 ## Writing the Structure (WRITE) {#c2-write}
 ~~~
@@ -383,6 +384,34 @@ format, with extension `.pdb`. The atomic positions are written using
 only the `HETATM` keyword corresponding to unknown residues. In the
 case of crystals, the cell vectors are written using the `CRYST1` and
 `SCALEn` keywords.
+
+## Writing Multiple Structures (WRITE BULK) {#c2-writebulk}
+~~~
+WRITE BULK
+  ROOT root.s
+  RATTLE nstruct.i [MAG mag.r]
+  ...
+ENDWRITE/END
+~~~
+The WRITE BULK keyword is used for writing multiple structures. By
+default, the name of all structures generated equals to root of the
+critic2 run (the input file base name; can be changed with the
+[ROOT](/critic2/manual/misc/#c2-root) keyword), followed by a number
+and the extension `.in`. The default format is an FHIaims
+`geometry.in` input file.
+
+The name of the generated structure files can be changed with the
+`ROOT` keyword to `WRITE BULK`. `ROOT` must be followed by a string
+(`root.s`) containing a `*` character, which is substituted by the
+corresponding structure number. The format for the generated file is
+guessed from the extension of `root.s`.
+
+Each line in the body of a WRITE BULK adds more structures to be
+written. The `RATTLE` keyword generates `nstruct.i` files with the
+same structure as the currently loaded molecule or crystal but with
+the atoms randomly displaced by a distance equal to `mag.r` (default:
+bohr for crystals and angstrom for molecules unless changed using the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
 
 ## Writing a .mols File for DMACRYS/NEIGHCRYS (MAKEMOLSNC) {#c2-makemolsnc}
 ~~~
