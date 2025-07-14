@@ -26,7 +26,7 @@ tolower($1) == "module" && tolower($0) !~ /^[^!]+(subroutine|function|procedure)
     sub(/!.*$/,"",name)
     mod[name]=file
 }
-tolower($1) == "submodule"{
+tolower($0) ~ /^[[:blank:]]*submodule/{
     gsub(/[[:blank:]]+/,"",$0)
     gsub(/!.*$/,"",$0)
     n = split(tolower($0),arr,/[):(]/)

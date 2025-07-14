@@ -1058,7 +1058,7 @@ the name of the parent submodule, and `name` is the name of the new
 submodule. If `parent` is not present, then `ancestor` is also the
 parent. We read the existing submodules in our code with:
 ~~~ awk
-tolower($1) == "submodule"{
+tolower($0) ~ /^[[:blank:]]*submodule/{
     gsub(/[[:blank:]]+/,"",$0)
     gsub(/!.*$/,"",$0)
     n = split(tolower($0),arr,/[):(]/)
@@ -1126,7 +1126,7 @@ To implement this rule, first we need to save the information of which
 submodule is the parent of which. We modify our submodule statement
 parser to do this:
 ~~~ awk
-tolower($1) == "submodule"{
+tolower($0) ~ /^[[:blank:]]*submodule/{
     gsub(/[[:blank:]]+/,"",$0)
     gsub(/!.*$/,"",$0)
     n = split(tolower($0),arr,/[):(]/)
@@ -1430,7 +1430,7 @@ tolower($1) == "module" && tolower($0) !~ /^[^!]+(subroutine|function|procedure)
     sub(/!.*$/,"",name)
     mod[name]=file
 }
-tolower($1) == "submodule"{
+tolower($0) ~ /^[[:blank:]]*submodule/{
     gsub(/[[:blank:]]+/,"",$0)
     gsub(/!.*$/,"",$0)
     n = split(tolower($0),arr,/[):(]/)
