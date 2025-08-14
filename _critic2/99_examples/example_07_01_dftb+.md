@@ -123,4 +123,4 @@ plane 0 0 1/4  1 0 1/4  0 1 1/4  101 101  contour log 41 file plane
 
 ### Example Files Package
 
-Files: [example_07_01.tar.xz](/assets/critic2/example_07_01/example_07_01_dftb+.tar.xz).
+Files: [example_07_01.tar.xz](/assets/critic2/example_07_01/example_07_01.tar.xz).

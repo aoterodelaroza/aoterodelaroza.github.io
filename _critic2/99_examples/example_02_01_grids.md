@@ -339,4 +339,4 @@ regions, and the crystal voids are therefore much larger.
 
 ### Example Files Packages
 
-Files: [example_02_01_grids.tar.xz](/assets/critic2/example_02_01/example_02_01_grids.tar.xz).
+Files: [example_02_01.tar.xz](/assets/critic2/example_02_01/example_02_01.tar.xz).
