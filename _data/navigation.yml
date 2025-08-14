@@ -108,6 +108,8 @@ critic2_examples:
     children:
       - title: "Interfacing with: DFTB+"
         url: /critic2/examples/example_07_01_dftb+/
+      - title: "Arithmetics with Grids"
+        url: /critic2/examples/example_02_01_grids/
       - title: "Critical points with Grids"
         url: /critic2/examples/example_08_01_gridcps/
       - title: "Atomic Integration Using Grids"

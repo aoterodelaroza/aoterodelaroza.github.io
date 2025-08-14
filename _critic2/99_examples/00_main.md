@@ -12,6 +12,10 @@ sidebar:
 
 - [DFTB+](/critic2/examples/example_07_01_dftb+/)
 
+## Working with Scalar Fields
+
+- [Arithmetic operations with grids](/critic2/examples/example_02_01_grids/)
+
 ## Critical Points
 
 - [Locating critical points of densities given on grids](/critic2/examples/example_08_01_gridcps/)
