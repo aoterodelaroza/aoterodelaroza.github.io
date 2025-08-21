@@ -195,7 +195,15 @@ many local and global optimization algorithms. This library is used by
 the [COMPAREVC](/critic2/manual/structure/#c2-comparevc) keyword,
 which compares either two crystal structures or a structure and a
 diffraction patterns allowing for cell deformations. On linux, you can
-typically find it in the repository of your chosen distribution.
+typically find it in the repository of your chosen distribution. To
+use a non-standard installation directory, make the
+`NLOPT_INCLUDE_DIRS` variable point to the NLOPT include directory
+(where the `nlopt.f` file can be found) and `NLOPT_LIBRARIES` point to
+the location of the shared library:
+~~~
+cmake -DNLOPT_INCLUDE_DIRS=/usr/include/ \
+      -DNLOPT_LIBRARIES=/usr/lib/x86_64-linux-gnu/libnlopt.so ..
+~~~
 
 ### Libxc {#c2-libxc}
 
@@ -203,7 +211,7 @@ typically find it in the repository of your chosen distribution.
 exchange-correlation energies and potentials for many semilocal
 functionals (LDA, GGA and meta-GGA). In critic2, it is used to
 calculate exchange and correlation energy densities via de `xc()`
-arithmetic expressions (see below). Critic2 is not compatible with
+arithmetic expressions. Critic2 is not compatible with
 versions of libxc older than 5.0.
 
 If you compile using cmake, libxc should be found automatically by the
@@ -221,46 +229,16 @@ cmake -DLIBXC_INCLUDE_DIRS=/usr/include \
 The libxc library is used in critic2 to create new scalar fields from
 the exchange and correlation energy density definitions in the library
 using a density, gradient, or kinetic energy density already available
-to critic2 as a scalar field. For instance, if `urea.rho.cube`
-contains the electron density in the urea crystal, then:
-~~~
-CRYSTAL urea.rho.cube
-LOAD urea.rho.cube
-LOAD AS "xc($1,1)+xc($1,9)"
-~~~
-defines a scalar field (number 2, `$2`) as the LDA
-exchange-correlation density. In the output, the cell integral of
-the second field:
-~~~
-  Cell integral (grid SUM) = -23.30215685
-~~~
-is the LDA exchange-correlation energy in this system. GGA and
-meta-GGA exchange-correlation energy densities can be constructed in a
-similar way, but they require additional arguments to `xc()`.
-
-Another example: if we have a molecular wavefunction for benzene in
-`benzene.wfx`, we can build a field containing the PBE energy density
-and then integrate the PBE exchange-correlation energy with:
-~~~
-MOLECULE benzene.wfx
-LOAD benzene.wfx
-MOLCALC "xc($1,$1:g,101)+xc($1,$1:g,130)"
-~~~
-In this case, `xc()` takes two arguments: the density and the
-gradient. The `:g` field modifier is used to pass the gradient of the
-first field as the second argument to `xc()`. The MOLCALC keyword
-performs a numerical integration in a molecular mesh.
-
-See the [manual](/critic2/manual/arithmetics/#libxc) for more
-information.
+to critic2 as a scalar field. See the
+[manual](/critic2/manual/arithmetics/#libxc) for more information.
 
 ### Libcint {#c2-libcint}
 
 [Libcint](https://github.com/sunqm/libcint) is a library for
 calculating molecular integrals between Gaussian-Type Orbitals
 (GTOs). In critic2, this library is used mostly for testing but some
-options to the MOLCALC keyword and some functions in arithmetic
-expressions require it (e.g. the molecular electrostatic potential, mep).
+options to the `MOLCALC` keyword and some functions in arithmetic
+expressions require it (e.g. the molecular electrostatic potential, `mep`).
 
 To build critic2 with libcint support, you need to indicate the
 directory where the include directory (`LIBCINT_INCLUDE_DIRS`) and the
@@ -269,10 +247,9 @@ location of the library file (`LIBCINT_LIBRARY`). For instance:
 cmake -DLIBCINT_INCLUDE_DIRS=/home/alberto/git/libcint/build/include/ \
       -DLIBCINT_LIBRARY=/home/alberto/git/libcint/build/libcint.a ..
 ~~~
+The shared library (`libcint.so`) can be also used.
 
-The libcint library is used with molecular wavefunctions that provide
-the basis set information. The `mep()`, `uslater()`, and `nheff()`
-chemical functions use the molecular integrals calculated by libcint,
-as well as the `MOLCALC HF` keyword. See the [chemical
+See the [chemical
 functions](/critic2/manual/arithmetics/#availchemfun) and the
-[MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual.
+[MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual for
+usage.
