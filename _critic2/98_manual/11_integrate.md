@@ -1,13 +1,13 @@
 ---
 layout: single
-title: "Integrating atomic basins"
+title: "Integrating atomic properties"
 permalink: /critic2/manual/integrate/
-excerpt: "Methods for integrating atomic basins in critic2."
+excerpt: "Methods for integrating atomic basins and other real-space regions in critic2."
 sidebar:
   - repo: "critic2"
     nav: "critic2_manual"
 toc: true
-toc_label: "Integrating atomic basins"
+toc_label: "Integrating atomic properties"
 toc_sticky: true
 ---
 
@@ -71,39 +71,94 @@ the electron population inside an ELF basin, the ELF would be the
 reference field and the electron density would be an integrable
 property.
 
-## List of Properties Integrated in the Attractor Basins (INTEGRABLE) {#c2-integrable}
+## List and Change Integrated Properties (INTEGRABLE) {#c2-integrable}
 
 ~~~
 INTEGRABLE id.s {F|FVAL|GMOD|LAP|LAPVAL} [NAME name.s]
 INTEGRABLE id.s {MULTIPOLE|MULTIPOLES} [lmax.i]
-INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
-                [DI3 [atom1.i [atom2.i [ix.i iy.i iz.i]]]]
 INTEGRABLE "expr.s"
-INTEGRABLE DELOC_SIJCHK file-sij.s
-INTEGRABLE DELOC_FACHK file-fa.s
 INTEGRABLE CLEAR
 INTEGRABLE ... [NAME name.s]
 ~~~
-Critic2 uses an internal list of all properties that will be
-integrated in the attraction basins. This list can be modified by the
-user with the INTEGRABLE keyword. This keyword has a syntax similar to
-the list of properties calculated at the critical points,
-[POINTPROP](/critic2/manual/cpsearch/#c2-pointprop).
+Critic2 uses an internal list of all properties to be
+integrated in the attraction basins ([YT](/critic2/manual/integrate/#c2-yt)
+and [BADER](/critic2/manual/integrate/#c2-bader) keywords),
+isosurface regions ([ISOSURFACE](/critic2/manual/integrate/#c2-isosurface)),
+Voronoi regions ([VORONOI](/critic2/manual/integrate/#c2-voronoi)),
+and in Hirshfeld integrations [HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld).
+This list can be modified with
+the INTEGRABLE keyword. This keyword has a syntax similar to
+the one used to change the list of properties calculated at the
+critical points, [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop).
 
-A single INTEGRABLE command assigns a new quantity to be integrated in
-the atomic basins. The new integrable property is related to field
-`id.s` (given as field number or identifier). This quantity can be the
+A single INTEGRABLE command assigns a new quantity to be
+integrated. This property is related to field
+`id.s` (given as field number or identifier), and it can be the
 field value itself (F), its valence component (if the field is
 core-augmented, FVAL), the gradient norm (GMOD), the Laplacian (LAP),
 or the valence-component of the Laplacian (LAPVAL). If no keyword is
 given after `id.s`, F is used by default.
 
 With the MULTIPOLES (or MULTIPOLE) keyword, the multipole moments of
-the field are calculated up to an l equal to `lmax.i` (default:
-5). This keyword only applies to the BADER and YT integration methods.
-For the others, it is equivalent to the field value (same as F). The
-units for all calculated multipoles are atomic units.
+the field are calculated up to an angular momentum equal to `lmax.i`
+(default: 5). This keyword only applies to the BADER and YT
+integration methods. For the others, it is equivalent to the field
+value (same as F). The units for all calculated multipoles are atomic
+units.
 
+In addition, it is possible to define an integrable property using an
+expression involving more than one field (`expr.s`). For instance, if
+the spin-up density is in field 1 and the spin-down density is in
+field 2, the atomic moments can be obtained using:
+~~~
+LOAD AS "$1+$2"
+REFERENCE 3
+INTEGRABLE "$1-$2"
+~~~
+Note that the quotation marks are required.
+
+The additional keyword NAME can be used with any of the options above
+to change the name of the integrable property, for easy identification
+in the output.
+
+The keyword CLEAR resets the list to its initial state (volume,
+electron population, and Laplacian in crystals; electron population
+and Laplacian in molecules). Using the INTEGRABLE keyword will print a
+report on the list of integrable properties.
+
+The default integrable properties are:
+
+* Volume (`1`), in crystals only.
+
+* Pop (`fval`): the value of the reference field is integrated. If the
+  reference field is the density, then this is the number of electrons
+  in the basin. If core augmentation is active for this field, only
+  the valence contribution is integrated.
+
+* Lap (`lap(fval)`): the Laplacian of the reference field. The
+  integrated Laplacian has been traditionally used as a check of the
+  quality of the integration because the exact integral is zero
+  regardless of the basin (because of the divergence
+  theorem). However, it is difficult to obtain a zero in the Laplacian
+  integral in critic2 in some cases because of numerical inaccuracies:
+
+  - In fields based on a grid, the numerical interpolation gives a
+    noisy Laplacian.
+
+  - In FPLAPW fields (WIEN2k and elk), the discontinuity at the muffin
+    surface introduce a non-zero contribution to the integral.
+
+  If f is a core-augmented field, only the valence Laplacian is
+  integrated.
+
+### Delocalization Indices in Solids {#c2-delocsols}
+
+~~~
+INTEGRABLE id.s DELOC [WANNIER] [PSINK] [NOU] [NOSIJCHK] [NOFACHK] [NORESTART] [WANCUT wancut.r]
+                [DI3 [atom1.i [atom2.i [ix.i iy.i iz.i]]]]
+INTEGRABLE DELOC_SIJCHK file-sij.s
+INTEGRABLE DELOC_FACHK file-fa.s
+~~~
 The keyword DELOC activates the calculation of the delocalization
 indices (DIs) using field `id.s`. The calculation of DIs requires that
 the field is a Quantum ESPRESSO [pwc
@@ -167,51 +222,6 @@ possible:
   zero. This keyword ensures the partition in DI3s of the
   delocalization index relating `atom1.i` with `atom2.i` translated by
   vector `ix.i iy.i iz.i`.
-
-In addition, it is possible to define an integrable property using an
-expression involving more than one field (`expr.s`). For instance, if
-the spin-up density is in field 1 and the spin-down density is in
-field 2, the atomic moments can be obtained using:
-~~~
-LOAD AS "$1+$2"
-REFERENCE 3
-INTEGRABLE "$1-$2"
-~~~
-Note that the quotation marks are required.
-
-The additional keyword NAME can be used with any of the options above
-to change the name of the integrable property, for easy identification
-in the output.
-
-The keyword CLEAR resets the list to its initial state (volume,
-electron population, and Laplacian in crystals; electron population
-and Laplacian in molecules). Using the INTEGRABLE keyword will print a
-report on the list of integrable properties.
-
-The default integrable properties are:
-
-* Volume (`1`), in crystals only.
-
-* Pop (`fval`): the value of the reference field is integrated. If the
-  reference field is the density, then this is the number of electrons
-  in the basin. If core augmentation is active for this field, only
-  the valence contribution is integrated.
-
-* Lap (`lap(fval)`): the Laplacian of the reference field. The
-  integrated Laplacian has been traditionally used as a check of the
-  quality of the integration because the exact integral is zero
-  regardless of the basin (because of the divergence
-  theorem). However, it is difficult to obtain a zero in the Laplacian
-  integral in critic2 in some cases because of numerical inaccuracies:
-
-  - In fields based on a grid, the numerical interpolation gives a
-    noisy Laplacian.
-
-  - In FPLAPW fields (WIEN2k and elk), the discontinuity at the muffin
-    surface introduce a non-zero contribution to the integral.
-
-  If f is a core-augmented field, only the valence Laplacian is
-  integrated.
 
 ### Integrating Delocalization Indices in a Solid With Maximally Localized Wannier Functions {#c2-intwandi}
 
@@ -382,6 +392,17 @@ using Bloch states.
 
 See the [example](/critic2/examples/example_11_10_deloc-indices/) for
 some sample input files and more details.
+
+### Hirshfeld Overlap Populations {#c2-hirshfeldovlp}
+
+~~~
+INTEGRABLE id.s OVERLAP
+~~~
+In the case of the calculation of Hirshfeld atomic properties
+([HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld) keyword), the
+`OVERLAP` keyword activates the calculation of the atomic overlap
+populations, related to interatomic bond orders. See
+[below](#c2-hirshfeld) for the definition.
 
 ## Bisection (INTEGRALS and SPHEREINTEGRALS) {#c2-integrals}
 
@@ -1392,13 +1413,32 @@ atom identifier from the complete atom list. The ONLY keyword
 restricts the integration to only certain atoms, given by their
 identifiers from the complete atom list.
 
-If the reference field is not a grid, HIRSHFELD assumes the field
-contains the electron density and carries out the integration using
-the selected [molecular mesh](/critic2/manual/misc/#c2-meshtype). In
-this case, WCUBE and ONLY cannot be used, and only the volume and the
-Hirshfeld atomic electron populations are calculated.
+If the reference field is not a grid, HIRSHFELD carries out the
+integration using the selected [molecular
+mesh](/critic2/manual/misc/#c2-meshtype). In this case, WCUBE and ONLY
+cannot be used, and only the volume and the Hirshfeld atomic electron
+populations are calculated.
 
-For an example see the [calculation of Hirshfeld
+It is also possible to calculate the Hirshfeld overlap populations of
+scalar field $$f({\bf r})$$, defined as:
+
+$$
+\begin{equation}
+B_{\rm A, B} = \int
+\frac{\rho_{\rm A}({\bf r})}{\rho_{\rm pro}({\bf r})}
+\frac{\rho_{\rm B}({\bf r})}{\rho_{\rm pro}({\bf r})}
+\times f({\bf r}) d{\bf r}
+\end{equation}
+$$
+
+In the case when $$f$$ is an electron density, these quantities
+represent the bond order according to the Hirshfeld partitioning. The
+calculation of Hirshfeld overlap populations is possible only with
+fields given as grids. Use the `OVERLAP` keyword in
+[INTEGRABLE](/critic2/manual/integrate/#c2-integrable) to activate
+the calculation of these properties (see [above](#c2-hirshfeldovlp)).
+
+For an example, see the [calculation of Hirshfeld
 charges](/critic2/examples/example_11_01_simple-integration/#c2-hirshfeld).
 
 ## Voronoi Atomic Properties (VORONOI) {#c2-voronoi}

@@ -50,7 +50,8 @@ it is already fixed in the github repository.
   implementation of Bader's atoms in molecules theory (QTAIM): critical
   point search, basin integration, basin plotting, etc.
 
-- Calculation of Bader's delocalization indices in periodic solids.
+- Calculation of Bader's delocalization indices in periodic solids,
+  and other similar bonding indices.
 
 - Calculation and integration of new scalar fields using critic2's
   powerful arithmetic expressions, useful in the development of
