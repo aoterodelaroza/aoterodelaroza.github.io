@@ -377,7 +377,9 @@ abinit ## or abinis/abinip if you are running a really old version
 critic2 urea.cri
 ~~~
 
-## Hirshfeld Charges {#c2-hirshfeld}
+## Hirshfeld Integration {#c2-hirshfeld}
+
+### Hirshfeld Charges {#c2-hirshfeldcharges}
 
 [Hirshfeld volumes and atomic charges](https://doi.org/10.1063/1.2831900)
 can be calculated by grid integration using the
@@ -412,6 +414,39 @@ for C, H, N, and O have 4, 1, 5, and 6 valence electrons
 respectively. Therefore, the Hirshfeld charges are: C = 6 - 3.827 =
 2.173, H = 1 - 0.906 = 0.094, O = 6 - 6.226 = -0.226, and N = 5 -
 5.166 = -0.166.
+
+### Hirshfeld Overlap Populations {#c2-hirshfeldovpop}
+
+Hirshfeld overlap populations can also be calculated with the
+[HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld) keyword. If the
+scalar field integrated is an electron density, these quantities are
+related to the interatomic bond order. To get the overlap populations
+in the urea example, we need to add them as an integrable property
+using the [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) keyword:
+~~~
+crystal rho.cube
+load rho.cube
+integrable 1 overlap
+hirshfeld
+~~~
+The calculation takes longer than in the case of the charges and
+results in one table of overlap populations for every atom in the unit
+cell. Every row corresponds to the other atom in the pair, and the
+rows are sorted by distance to the reference atom:
+~~~
+# Atom 1 (cp=1, ncp=1, name=C, Z=6) at: 0.9999968  0.4999984  0.3274749  
+# Id   cp   ncp   Name  Z    Latt. vec.     ----  Cryst. coordinates ----       Distance        Overlap
+  10   1    1      C    6    0   0   0   0.9999968    0.4999984    0.3274749    0.0000000    2.19178667 
+  149  11   4      O    8    0   0   0   0.9999968    0.4999984    0.6001924    2.4072660    0.52258093 
+  175  13   5      N    7    1   0   0   1.1470466    0.6470450    0.1776837    2.5479248    0.46667495 
+  196  15   5      N    7    0   0   0   0.8529469    0.3529485    0.1776837    2.5479453    0.46668283 
+[...]
+  128  9    3      H    1    1   0  -2   1.8548290    0.3548306   -1.0403216   15.1074645    0.00000001 
+  97   7    3      H    1    1  -1  -2   1.1451645   -0.3548371   -1.0403216   15.1074846    0.00000001 
+  Total (Hirshfeld population).............................................................  3.82945379
+~~~
+The sum of the overlap populations equals the Hirshfeld population
+(number of electrons) for that atom.
 
 ## Voronoi Deformation Density Charges {#c2-voronoi}
 

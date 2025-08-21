@@ -1438,8 +1438,10 @@ fields given as grids. Use the `OVERLAP` keyword in
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) to activate
 the calculation of these properties (see [above](#c2-hirshfeldovlp)).
 
-For an example, see the [calculation of Hirshfeld
-charges](/critic2/examples/example_11_01_simple-integration/#c2-hirshfeld).
+For an example, see the
+[calculation of Hirshfeld
+charges](/critic2/examples/example_11_01_simple-integration/#c2-hirshfeld)
+and [Hirshfeld atomic overlaps](/critic2/examples/example_11_01_simple-integration/#c2-hirshfeldovpop).
 
 ## Voronoi Atomic Properties (VORONOI) {#c2-voronoi}
 
