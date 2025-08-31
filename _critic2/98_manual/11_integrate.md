@@ -1257,8 +1257,8 @@ DISCARD "$rho < 1e-7"
 The arithmetic expression may include any field, not just the
 reference field.
 
-By using the JSON keyword a JavaScript Object Notation (JSON) file is
-created containing the molecular or crystal structure, information
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
 about the reference field and the results of the integration.
 
 The ONLY keyword restricts the integration to only the atoms given by
@@ -1405,6 +1405,7 @@ Hirshfeld atomic properties can be calculated using the HIRSHFELD
 keyword:
 ~~~
 HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
+          [JSON file.json]
 ~~~
 There are two ways in which this keyword operates. If the reference
 field is a grid, then a grid integration of all properties defined as
@@ -1430,6 +1431,10 @@ integration using the selected [molecular
 mesh](/critic2/manual/misc/#c2-meshtype). In this case, `WCUBE`,
 `ONLY`, and `ONLY_RANGE` cannot be used, and only the volume and the
 Hirshfeld atomic electron populations are calculated.
+
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
+about the reference field and the results of the integration.
 
 It is also possible to calculate the Hirshfeld overlap populations of
 scalar field $$f({\bf r})$$, defined as:
@@ -1469,7 +1474,7 @@ promolecular density over its Voronoi region.
 Voronoi atomic properties can be calculated using the VORONOI keyword:
 ~~~
 VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
-        [ONLY_RANGE iat1.i iat2.i]
+        [ONLY_RANGE iat1.i iat2.i] [JSON file.json]
 ~~~
 Only the grid integration case has been implemented, so the reference
 field must be a grid. All properties defined as
@@ -1493,6 +1498,10 @@ list. The `ONLY_RANGE` keyword can be used to specify a range of
 atoms to integrate (between `iat1.i` and `iat2.i`, both
 included). Several `ONLY` and `ONLY_RANGE` can be given in the same
 command.
+
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
+about the reference field and the results of the integration.
 
 For an example see the [calculation of Voronoi deformation density
 (VDD) charges](/critic2/examples/example_11_01_simple-integration/#c2-voronoi).

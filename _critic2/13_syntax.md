@@ -429,6 +429,7 @@ ENDGRDVEC/END
 : Calculate the Hirshfeld (stockholder) atomic properties.
 ~~~
 HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
+          [JSON file.json]
 ~~~
 
 <a id="key-identify"></a>
@@ -973,7 +974,7 @@ VDW [PREC prec.r]
 : Calculate atomic properties integrated in the atomic Voronoi regions.
 ~~~
 VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
-        [ONLY_RANGE iat1.i iat2.i]
+        [ONLY_RANGE iat1.i iat2.i] [JSON file.json]
 ~~~
 
 <a id="key-write"></a>
