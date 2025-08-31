@@ -210,6 +210,39 @@ cpreport phenol_phenol.vmd graph
   <figcaption style="text-align: center">Critical points of phenol dimer, calculated with a Gaussian cube file.</figcaption>
 </figure>
 
+### Convergence of Critical Point Properties with Grid Size
+
+One question that is often asked is what grid size should be used to
+obtain reliable properties (density, Laplacian) at the critical
+points, and whether these converge with the grid size. If the
+SMOOTHRHO interpolation method is not, it is not expected that any
+critical point properties, except perhaps for the density, converge
+with grid size. However, with SMOOTHRHO convergence happens for
+relatively sparse grids: It is not necessary to use massive density
+grids to get reliable properties.
+
+In the `qe-convergence` folder, a series of QE calculations were
+carried out for the benzene molecular crystal with increasing
+`ecutrho`. The resulting grids are correspondingly larger. The
+following table shows the electron density and Laplacian at the
+highest-density critical point, corresponding to a carbon-carbon bond.
+
+| ecutrho | Grid size     | Density (a.u.) | Laplacian (a.u.) |
+|---------+---------------+----------------+------------------|
+|     500 | (100,128,96)  |    0.315384246 |     -0.976211158 |
+|     600 | (108,144,100) |    0.315379570 |     -0.973927340 |
+|     700 | (120,150,108) |    0.315369481 |     -0.968755881 |
+|     800 | (128,160,120) |    0.315362774 |     -0.962695617 |
+|     900 | (144,180,128) |    0.315375069 |     -0.970508500 |
+|    1000 | (144,180,128) |    0.315379333 |     -0.974034357 |
+|    1100 | (150,192,144) |    0.315378013 |     -0.974432209 |
+|    1200 | (160,200,144) |    0.315375364 |     -0.970082769 |
+
+As can be seen, even with a reasonably low ecutrho the electron
+density is converged to 4-5 significant digits and the Laplacian,
+which is much harder to calculate reliably from a grid because it
+involves the second derivatives, is good to 2 significant digits.
+
 ### Visualization
 
 The pictures above can be generated using
