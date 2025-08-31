@@ -1436,8 +1436,9 @@ By using the `JSON` keyword a JavaScript Object Notation (JSON) file
 is created containing the molecular or crystal structure, information
 about the reference field and the results of the integration.
 
-It is also possible to calculate the Hirshfeld overlap populations of
-scalar field $$f({\bf r})$$, defined as:
+It is also possible to calculate the [Hirshfeld overlap
+populations](https://doi.org/10.1002/ejic.200500489) of scalar field
+$$f({\bf r})$$, defined as:
 
 $$
 \begin{equation}
