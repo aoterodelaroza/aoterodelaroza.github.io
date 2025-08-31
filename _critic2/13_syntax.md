@@ -115,6 +115,7 @@ AUTO SEED MESH
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
       [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+      [ONLY_RANGE iat1.i iat2.i]
 ~~~
 
 <a id="key-basinplot"></a>
@@ -427,7 +428,7 @@ ENDGRDVEC/END
 [HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld)
 : Calculate the Hirshfeld (stockholder) atomic properties.
 ~~~
-HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
+HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
 ~~~
 
 <a id="key-identify"></a>
@@ -972,6 +973,7 @@ VDW [PREC prec.r]
 : Calculate atomic properties integrated in the atomic Voronoi regions.
 ~~~
 VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
+        [ONLY_RANGE iat1.i iat2.i]
 ~~~
 
 <a id="key-write"></a>
@@ -1046,6 +1048,7 @@ XRPD REFIT source_xy.s source_peaks.s
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+   [ONLY_RANGE iat1.i iat2.i]
 ~~~
 
 ## List of Functions Used in Arithmetic Expressions {#farithmetics}

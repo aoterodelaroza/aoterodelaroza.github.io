@@ -1188,6 +1188,7 @@ COLOR_ALLOCATE {0|1}
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+   [ONLY_RANGE iat1.i iat2.i]
 ~~~
 The [Yu and Trinkle (YT) method](https://doi.org/10.1063/1.3553716)
 calculates the attraction basins of the reference fields and computes
@@ -1269,7 +1270,10 @@ is also the integer ID from the list of atoms in the unit cell (see
 the [notation](/critic2/manual/inputoutput/#c2-notation)). The ONLY
 keyword is useful for delocalization index calculations in large
 systems, where restricting the integration to only a handful of atoms
-saves computing time.
+saves computing time. The `ONLY_RANGE` keyword can be used to specify
+a range of atoms to integrate (between `iat1.i` and `iat2.i`, both
+included). Several `ONLY` and `ONLY_RANGE` can be given in the same
+command.
 
 Not all the properties defined by the
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) keyword are
@@ -1304,6 +1308,7 @@ be used with the BADER keyword:
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
       [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+      [ONLY_RANGE iat1.i iat2.i]
 ~~~
 The BADER algorithm uses the reference field to calculate the QTAIM
 basins. This field must be defined on a grid. BADER assigns grid nodes
@@ -1399,7 +1404,7 @@ integral for the all-electron density.
 Hirshfeld atomic properties can be calculated using the HIRSHFELD
 keyword:
 ~~~
-HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
+HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
 ~~~
 There are two ways in which this keyword operates. If the reference
 field is a grid, then a grid integration of all properties defined as
@@ -1415,13 +1420,16 @@ The WCUBE option writes cube files for the Hirshfeld weights of each
 nucleus, with file names `<root>_wcube_xx.cube`, where `xx` is the
 atom identifier from the complete atom list. The ONLY keyword
 restricts the integration to only certain atoms, given by their
-identifiers from the complete atom list.
+identifiers from the complete atom list. The `ONLY_RANGE` keyword can
+be used to specify a range of atoms to integrate (between `iat1.i`
+and `iat2.i`, both included). Several `ONLY` and `ONLY_RANGE` can be
+given in the same command.
 
 If the reference field is not a grid, HIRSHFELD carries out the
 integration using the selected [molecular
-mesh](/critic2/manual/misc/#c2-meshtype). In this case, WCUBE and ONLY
-cannot be used, and only the volume and the Hirshfeld atomic electron
-populations are calculated.
+mesh](/critic2/manual/misc/#c2-meshtype). In this case, `WCUBE`,
+`ONLY`, and `ONLY_RANGE` cannot be used, and only the volume and the
+Hirshfeld atomic electron populations are calculated.
 
 It is also possible to calculate the Hirshfeld overlap populations of
 scalar field $$f({\bf r})$$, defined as:
@@ -1461,6 +1469,7 @@ promolecular density over its Voronoi region.
 Voronoi atomic properties can be calculated using the VORONOI keyword:
 ~~~
 VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
+        [ONLY_RANGE iat1.i iat2.i]
 ~~~
 Only the grid integration case has been implemented, so the reference
 field must be a grid. All properties defined as
@@ -1480,7 +1489,10 @@ the complete atom list). Otherwise, plot all of them. The basin
 surfaces are colored by the value of the reference field, in the
 default gnuplot scale. The ONLY keyword restricts the integration to
 only certain atoms, given by their identifiers from the complete atom
-list.
+list. The `ONLY_RANGE` keyword can be used to specify a range of
+atoms to integrate (between `iat1.i` and `iat2.i`, both
+included). Several `ONLY` and `ONLY_RANGE` can be given in the same
+command.
 
 For an example see the [calculation of Voronoi deformation density
 (VDD) charges](/critic2/examples/example_11_01_simple-integration/#c2-voronoi).
