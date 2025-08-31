@@ -396,13 +396,17 @@ some sample input files and more details.
 ### Hirshfeld Overlap Populations {#c2-hirshfeldovlp}
 
 ~~~
-INTEGRABLE id.s OVERLAP
+INTEGRABLE id.s OVERLAP [HIDE_SELF_OVERLAPS] [OUTPUT_CUTOFF cut.r]
 ~~~
 In the case of the calculation of Hirshfeld atomic properties
 ([HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld) keyword), the
 `OVERLAP` keyword activates the calculation of the atomic overlap
 populations, related to interatomic bond orders. See
 [below](#c2-hirshfeld) for the definition.
+
+If `HIDE_SELF_OVERLAPS` is given, hide the overlap of an atom with
+itself. If `OUTPUT_CUTOFF` is given followed by a real number
+(`cut.r`), do not print Hirshfeld overlaps lower than this value.
 
 ## Bisection (INTEGRALS and SPHEREINTEGRALS) {#c2-integrals}
 
@@ -1436,7 +1440,8 @@ represent the bond order according to the Hirshfeld partitioning. The
 calculation of Hirshfeld overlap populations is possible only with
 fields given as grids. Use the `OVERLAP` keyword in
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) to activate
-the calculation of these properties (see [above](#c2-hirshfeldovlp)).
+the calculation of these properties (see [above](#c2-hirshfeldovlp)
+for this keyword and its options).
 
 For an example, see the
 [calculation of Hirshfeld
