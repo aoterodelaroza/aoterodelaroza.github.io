@@ -396,13 +396,17 @@ some sample input files and more details.
 ### Hirshfeld Overlap Populations {#c2-hirshfeldovlp}
 
 ~~~
-INTEGRABLE id.s OVERLAP
+INTEGRABLE id.s OVERLAP [HIDE_SELF_OVERLAPS] [OUTPUT_CUTOFF cut.r]
 ~~~
 In the case of the calculation of Hirshfeld atomic properties
 ([HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld) keyword), the
 `OVERLAP` keyword activates the calculation of the atomic overlap
 populations, related to interatomic bond orders. See
 [below](#c2-hirshfeld) for the definition.
+
+If `HIDE_SELF_OVERLAPS` is given, hide the overlap of an atom with
+itself. If `OUTPUT_CUTOFF` is given followed by a real number
+(`cut.r`), do not print Hirshfeld overlaps lower than this value.
 
 ## Bisection (INTEGRALS and SPHEREINTEGRALS) {#c2-integrals}
 
@@ -1184,6 +1188,7 @@ COLOR_ALLOCATE {0|1}
 ~~~
 YT [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
    [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+   [ONLY_RANGE iat1.i iat2.i]
 ~~~
 The [Yu and Trinkle (YT) method](https://doi.org/10.1063/1.3553716)
 calculates the attraction basins of the reference fields and computes
@@ -1252,8 +1257,8 @@ DISCARD "$rho < 1e-7"
 The arithmetic expression may include any field, not just the
 reference field.
 
-By using the JSON keyword a JavaScript Object Notation (JSON) file is
-created containing the molecular or crystal structure, information
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
 about the reference field and the results of the integration.
 
 The ONLY keyword restricts the integration to only the atoms given by
@@ -1265,7 +1270,10 @@ is also the integer ID from the list of atoms in the unit cell (see
 the [notation](/critic2/manual/inputoutput/#c2-notation)). The ONLY
 keyword is useful for delocalization index calculations in large
 systems, where restricting the integration to only a handful of atoms
-saves computing time.
+saves computing time. The `ONLY_RANGE` keyword can be used to specify
+a range of atoms to integrate (between `iat1.i` and `iat2.i`, both
+included). Several `ONLY` and `ONLY_RANGE` can be given in the same
+command.
 
 Not all the properties defined by the
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) keyword are
@@ -1300,6 +1308,7 @@ be used with the BADER keyword:
 ~~~
 BADER [NNM] [NOATOMS] [WCUBE] [BASINS [OBJ|PLY|OFF] [ibasin.i]] [RATOM ratom.r]
       [DISCARD expr.s] [JSON file.json] [ONLY iat1.i iat2.i ...]
+      [ONLY_RANGE iat1.i iat2.i]
 ~~~
 The BADER algorithm uses the reference field to calculate the QTAIM
 basins. This field must be defined on a grid. BADER assigns grid nodes
@@ -1395,7 +1404,8 @@ integral for the all-electron density.
 Hirshfeld atomic properties can be calculated using the HIRSHFELD
 keyword:
 ~~~
-HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...]
+HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
+          [JSON file.json]
 ~~~
 There are two ways in which this keyword operates. If the reference
 field is a grid, then a grid integration of all properties defined as
@@ -1411,16 +1421,24 @@ The WCUBE option writes cube files for the Hirshfeld weights of each
 nucleus, with file names `<root>_wcube_xx.cube`, where `xx` is the
 atom identifier from the complete atom list. The ONLY keyword
 restricts the integration to only certain atoms, given by their
-identifiers from the complete atom list.
+identifiers from the complete atom list. The `ONLY_RANGE` keyword can
+be used to specify a range of atoms to integrate (between `iat1.i`
+and `iat2.i`, both included). Several `ONLY` and `ONLY_RANGE` can be
+given in the same command.
 
 If the reference field is not a grid, HIRSHFELD carries out the
 integration using the selected [molecular
-mesh](/critic2/manual/misc/#c2-meshtype). In this case, WCUBE and ONLY
-cannot be used, and only the volume and the Hirshfeld atomic electron
-populations are calculated.
+mesh](/critic2/manual/misc/#c2-meshtype). In this case, `WCUBE`,
+`ONLY`, and `ONLY_RANGE` cannot be used, and only the volume and the
+Hirshfeld atomic electron populations are calculated.
 
-It is also possible to calculate the Hirshfeld overlap populations of
-scalar field $$f({\bf r})$$, defined as:
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
+about the reference field and the results of the integration.
+
+It is also possible to calculate the [Hirshfeld overlap
+populations](https://doi.org/10.1002/ejic.200500489) of scalar field
+$$f({\bf r})$$, defined as:
 
 $$
 \begin{equation}
@@ -1436,7 +1454,8 @@ represent the bond order according to the Hirshfeld partitioning. The
 calculation of Hirshfeld overlap populations is possible only with
 fields given as grids. Use the `OVERLAP` keyword in
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) to activate
-the calculation of these properties (see [above](#c2-hirshfeldovlp)).
+the calculation of these properties (see [above](#c2-hirshfeldovlp)
+for this keyword and its options).
 
 For an example, see the
 [calculation of Hirshfeld
@@ -1456,6 +1475,7 @@ promolecular density over its Voronoi region.
 Voronoi atomic properties can be calculated using the VORONOI keyword:
 ~~~
 VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
+        [ONLY_RANGE iat1.i iat2.i] [JSON file.json]
 ~~~
 Only the grid integration case has been implemented, so the reference
 field must be a grid. All properties defined as
@@ -1475,7 +1495,14 @@ the complete atom list). Otherwise, plot all of them. The basin
 surfaces are colored by the value of the reference field, in the
 default gnuplot scale. The ONLY keyword restricts the integration to
 only certain atoms, given by their identifiers from the complete atom
-list.
+list. The `ONLY_RANGE` keyword can be used to specify a range of
+atoms to integrate (between `iat1.i` and `iat2.i`, both
+included). Several `ONLY` and `ONLY_RANGE` can be given in the same
+command.
+
+By using the `JSON` keyword a JavaScript Object Notation (JSON) file
+is created containing the molecular or crystal structure, information
+about the reference field and the results of the integration.
 
 For an example see the [calculation of Voronoi deformation density
 (VDD) charges](/critic2/examples/example_11_01_simple-integration/#c2-voronoi).
