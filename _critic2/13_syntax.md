@@ -1010,6 +1010,7 @@ WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
 WRITE file.frac
 WRITE file.pdb
 WRITE BULK
+  ROOT root.s
   RATTLE nstruct.i [MAG mag.r]
   ...
 ENDWRITE/END
