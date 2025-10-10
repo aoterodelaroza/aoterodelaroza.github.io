@@ -313,10 +313,11 @@ the transformed structures that most resemble each other, that is, the
 ones that generated the final DIFF score. This is done by using the
 `WRITE` option:
 ~~~
-COMPAREVC xtal1.cif xtal2.cif WRITE
+COMPAREVC xtal1.cif xtal2.cif WRITE compare-final.res
 ~~~
 which generates a `.res` file (`compare-final.res`) containing the
-deformed structure 1. In addition, a second file is written
+deformed structure 1. Any file format written by critic2 can be used
+in the WRITE option. In addition, a second file is written
 (`compare-final.xy`) with the diffraction pattern for this same
 structure. The powder diffraction patterns
 of the original structures can be generated and plotted for
@@ -379,7 +380,7 @@ XRPD FIT background.xy 40
 Lastly, we run the comparison of the crystal structure with the
 experimental powder pattern represented by the `.peaks` file:
 ~~~
-COMPAREVC expt_relaxed.cif compare.peaks WRITE
+COMPAREVC expt_relaxed.cif compare.peaks WRITE compare-final.res
 ~~~
 The output is:
 ~~~
