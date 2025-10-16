@@ -248,7 +248,7 @@ CRYSTAL file.ins
 CRYSTAL file.16
 CRYSTAL file.21
 CRYSTAL file.dmain
-CRYSTAL file.cube
+CRYSTAL file.{cube|cub}
 CRYSTAL file.bincube
 CRYSTAL file.struct
 CRYSTAL [file.]{POSCAR,CONTCAR,vasp,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR1,AECCAR2,PARCHG} [at1.s at2.s ...|POTCAR]
@@ -527,7 +527,7 @@ LIST
 [LOAD](/critic2/manual/fields/#c2-load)
 : Load a scalar field.
 ~~~
-LOAD file.cube
+LOAD file.{cube|cub}
 LOAD file.bincube
 LOAD file_{DEN|PAWDEN|ELF|ELF|POT|VHA|VHXC|VXC|GDEN1|
            GDEN2|GDEN3|LDEN|KDEN}
@@ -647,7 +647,7 @@ MOLECULE file.zmat [border.r] [CUBIC|CUBE]
 MOLECULE file.dat [border.r] [CUBIC|CUBE]
 MOLECULE file.pgout [border.r] [CUBIC|CUBE]
 MOLECULE file.gen [border.r] [CUBIC|CUBE]
-MOLECULE file.cube
+MOLECULE file.{cube|cub}
 MOLECULE file.bincube
 MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)

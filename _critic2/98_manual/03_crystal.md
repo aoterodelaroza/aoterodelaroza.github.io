@@ -20,7 +20,7 @@ CRYSTAL file.ins
 CRYSTAL file.16
 CRYSTAL file.21
 CRYSTAL file.dmain
-CRYSTAL file.cube
+CRYSTAL file.{cube|cub}
 CRYSTAL file.bincube
 CRYSTAL file.struct
 CRYSTAL [file.]{POSCAR,CONTCAR,vasp,CHGCAR,CHG,ELFCAR,AECCAR0,AECCAR1,AECCAR2,PARCHG} [at1.s at2.s ...|POTCAR]
@@ -90,7 +90,7 @@ keyword. The output of the CRYSTAL keyword is explained
 [here](/critic2/manual/inputoutput/#c2-simplecrystal). A detailed list
 of the file formats understood by critic2 follows.
 
-### Cube Files (cube, bincube)
+### Cube Files (cube, cub, bincube)
 
 Gaussian cube files read using CRYSTAL are assumed to represent a
 periodic system. This format is used by Quantum ESPRESSO and other
