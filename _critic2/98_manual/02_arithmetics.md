@@ -321,9 +321,10 @@ wavefunction fields.
 
 The following chemical functions require both a molecular wavefunction
 and basis set information (at present, this can only be read from a
-Gaussian fchk file). In addition, it is necessary to have critic2
-compiled with the [libcint library](/critic2/installation/#c2-libcint) to
-calculate the molecular integrals involved.
+Gaussian fchk file or a molden file). In addition, it is necessary to
+have critic2 compiled with the
+[libcint library](/critic2/installation/#c2-libcint) to calculate the
+molecular integrals involved.
 
 * `mep(id)`: molecular electrostatic potential.
 
