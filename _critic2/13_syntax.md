@@ -539,6 +539,7 @@ LOAD file.qub
 LOAD file.xsf
 LOAD file_fmt
 LOAD file.txt
+LOAD file.DAT
 LOAD file.grid
 LOAD file.{clmsum|clmup|clmdn} file.struct
 LOAD file.{RHO,BADER,DRHO,LDOS,VT,VH}
