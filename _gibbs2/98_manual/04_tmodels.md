@@ -242,7 +242,7 @@ keyword sets a cutoff for the negative frequencies. If a frequency is
 less than -abs(`inegcut.r`), the point is deactivated. If a frequency
 is between -abs(`inegcut.r`) and 0, the point remains active, but that
 frequency is discarded (and the phDOS renormalized to the correct
-value). The units of `inegcut.r` are cm-1. The default value is 20
+value). The units of `inegcut.r` are cm-1. The default value is 1000
 cm-1.
 ~~~
 SET NORENORMALIZE
