@@ -851,11 +851,11 @@ This keyword can be used to edit the currently loaded molecular or
 crystal structure. The syntax of the EDIT environment is:
 ~~~
 EDIT
-  DELETE {ATOM|ATOMS} id1.i id2.i ...
-  DELETE {MOLECULE|MOLECULES} id1.i id2.i ...
-  DELETE {HYDROGEN|HYDROGENS}
-  MOVE id.i x.r y.r z.r [BOHR|ANG] [RELATIVE]
-  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
+ DELETE {ATOM|ATOMS} id1.i id2.i ...
+ DELETE {MOLECULE|MOLECULES} id1.i id2.i ...
+ DELETE {HYDROGEN|HYDROGENS}
+ MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
+ CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
 ENDEDIT
 ~~~
 Each line in the `EDIT` environment carries out an edit in the
@@ -871,7 +871,8 @@ structure. The list of possible editing actions includes:
 
 * `DELETE {HYDROGEN|HYDROGENS}`: delete all hydrogens.
 
-* `MOVE`: moves atom with complete list ID `id.i` to position `x.r y.r
+* `MOVE`: moves atom with complete list ID `id.i` (or non-equivalent
+  list ID `id.i`, if the `NNEQ` flag is present) to position `x.r y.r
   z.r`. If the system is a crystal, the coordinates are fractional; if
   it is a molecule, the coordinates are Cartesian (default angstrom,
   unless changed with
