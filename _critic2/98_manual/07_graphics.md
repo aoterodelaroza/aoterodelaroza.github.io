@@ -5,7 +5,7 @@ permalink: /critic2/manual/graphics/
 excerpt: "Make graphical representations of scalar fields and structures"
 sidebar:
   - repo: "critic2"
-    nav: "critic2_manual"
+	nav: "critic2_manual"
 toc: true
 toc_label: "Graphical representations"
 toc_sticky: true
@@ -42,8 +42,8 @@ point.
 
 ~~~
 LINE x0.r y0.r z0.r x1.r y1.r z1.r npts.i [FILE file.s]
-     [FIELD id.s|"expr.s"] [GX|GY|GZ|GMOD|HXX|HXY|HXZ|HYX|HYY|
-     HYZ|HZX|HZY|HZZ|LAP]
+	 [FIELD id.s|"expr.s"] [GX|GY|GZ|GMOD|HXX|HXY|HXZ|HYX|HYY|
+	 HYZ|HZX|HZY|HZZ|LAP]
 ~~~
 Calculate a line from (`x0.r`, `y0.r`, `z0.r`) to (`x1.r`, `y1.r`,
 `z1.r`) with `npts.i` points. The units for the two endpoints (x0 and
@@ -64,12 +64,12 @@ of the Hessian (HXX,...) and the Laplacian of the reference (or the
 
 ~~~
 PLANE x0.r y0.r z0.r x1.r y1.r z1.r x2.r y2.r z2.r nx.i ny.i
-      [SCALE sx.r sy.r] [EXTENDX zx0.r zx1.r] [EXTENDY zy0.r zy1.r]
-      [FILE file.s] [FIELD id.s/"expr"]
-      [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP]
-      [CONTOUR {LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
-      BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]]
-      [RELIEF zmin.r zmax.r] [LABELZ labelz.r]
+	  [SCALE sx.r sy.r] [EXTENDX zx0.r zx1.r] [EXTENDY zy0.r zy1.r]
+	  [FILE file.s] [FIELD id.s/"expr"]
+	  [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP]
+	  [CONTOUR {LOG niso.i [zmin.r zmax.r]|ATAN niso.i [zmin.r zmax.r]|
+	  BADER|LIN niso.i [rini.r rend.r]|i1.r i2.r ...}] [COLORMAP [LOG|ATAN]]
+	  [RELIEF zmin.r zmax.r] [LABELZ labelz.r]
 ~~~
 Calculate the value (or derivatives) of the reference field on a
 plane. The results are written to a file, with default name
@@ -131,10 +131,10 @@ shown as a label in the plot.
 
 ~~~
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r nx.i ny.i nz.i [FILE file.s] [FIELD id.s/"expr"]
-     [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER] [ORTHO]
+	 [F,GX,GY,GZ,GMOD,HXX,HXY,HXZ,HYY,HYZ,HZZ,LAP] [HEADER] [ORTHO]
 CUBE x0.r y0.r z0.r x1.r y1.r z1.r lpp.r ...
 CUBE CELL {lpp.r|nx.i ny.i nz.i} ...
-CUBE GRID [SHIFT ix.i iy.i iz.i] ...
+CUBE GRID [SHIFT ix.i iy.i iz.i] [NEWCELL a.s na.i b.s nb.i c.s nc.i] ...
 CUBE MLWF ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
 CUBE WANNIER ibnd.i nRx.i nRy.i nRz.i [SPIN ispin.i] ...
 CUBE UNK ibnd.i ik.i [SPIN ispin.i] ...
@@ -169,7 +169,7 @@ number of points on each axis can be indicated by giving three
 integers (`nx.i`, `ny.i`, and `nz.i`) corresponding to the number of
 points in the x-, y-, and z-axis respectively. If a single number
 (`lpp.r`) is found, then the number of points is the length of the
-axis divided by `lpp.r` (lpp means "length per point"). The 
+axis divided by `lpp.r` (lpp means "length per point"). The
 units for `lpp.r` are angstrom for molecules and bohr for crystals
 unless the [UNITS](/critic2/manual/inputoutput/#c2-units) keyword is
 used.
@@ -180,10 +180,24 @@ indicated field or expression is used; otherwise, the reference field
 is used. The GRID keyword is useful when combined with LOAD and
 arithmetic operations to read, manipulate, and then save grids to an
 external file. If GRID is used, both the geometry of the grid and the
-number of points are taken from the parent grid field. The SHIFT
-keyword is used for shifting the origin of the grid to a different
-point. The origin of the shifted grid is the position of point `ix.i`,
-`iy.i`, `iz.i` in the old grid.
+number of points are taken from the parent grid field.
+
+The SHIFT option to GRID is used for shifting the origin of the grid
+to a different point. The origin of the shifted grid is the position
+of point `ix.i`, `iy.i`, `iz.i` in the old grid. The NEWCELL option to
+grid is used to create supercells or swap crystallographic axes when
+writing the cell. The `a.s`, `b.s` and `c.s` must be one of "a", "b"
+or "c" and `na.i`, `nb.i` and `nc.i` are integers. For example:
+~~~
+CUBE GRID NEWCELL b 2 c 1 a 3
+~~~
+tells critic2 to build a new grid from the grid currently loaded as
+the reference field. The new grid has as crystallographic a axis the
+b axis of the old grid multiplied by two, the new b axis is the old c
+axis, and the new c axis is the old a axis multiplied by 3. The three
+letters (a, b, and c) must appear once, and only once, in the
+command. The integers giving the axis multiplier must be greater than
+zero.
 
 The MLWF, WANNIER, UNK, and PSINK keywords are similar to GRID in that
 they dump a scalar field on a grid to a file directly. These keywords
