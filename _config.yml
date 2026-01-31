@@ -1,5 +1,5 @@
 # Theme settings
-remote_theme: mmistakes/minimal-mistakes@4.14.2
+# remote_theme: mmistakes/minimal-mistakes@4.14.2
 minimal_mistakes_skin: "dirt" # "air", "aqua", "contrast", "default", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings: {{ site.blah }}
@@ -28,6 +28,7 @@ markdown: kramdown
 highlighter: rouge
 excerpt_separator: "\n\n"
 plugins:
+  - jekyll-remote-theme
   - jekyll-include-cache
   - jemoji
   - jekyll-gist
