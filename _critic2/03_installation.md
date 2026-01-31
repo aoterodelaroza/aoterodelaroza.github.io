@@ -178,6 +178,27 @@ cmake ..
 Once cmake generates the cache variables, the variables need not be
 set again, unless you delete the build directory.
 
+## Graphical User Interface {#c2-gui}
+
+To build the critic2 graphical user interface, use:
+~~~
+cmake -DENABLE_GUI=ON ..
+~~~
+and then compile as indicated above. Compiling the GUI requires the
+[GLFW library](https://www.glfw.org/) and, optionally, also the
+[freetype library](http://freetype.org/) if you want the fonts to look
+nice. On Linux, you can typically get both of them from the software
+repository.
+
+Once compiled, the GUI will be enabled in the generated `critic2`
+binary. You can open any number of files with the GUI using:
+~~~
+critic2 -g *.*
+~~~
+**Note: The critic2 graphical interface is not even close to
+finished.** Suggestions for improvement are welcome but there is still
+lots of work to be done.
+
 ## External Libraries {#c2-libraries}
 
 ### Readline {#c2-readline}
@@ -253,3 +274,4 @@ See the [chemical
 functions](/critic2/manual/arithmetics/#availchemfun) and the
 [MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual for
 usage.
+
