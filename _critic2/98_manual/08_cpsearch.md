@@ -369,7 +369,7 @@ paths. Likewise, every oxygen is bonded to six Mg, but there are no
 O-O bond paths.
 
 The final part of the output from AUTO contains a detailed list of all
-the non-equivalent critical points found, together with an exahustive
+the non-equivalent critical points found, together with an exhaustive
 list of properties calculated at those points. More properties can be
 calculated by using the
 [POINTPROP](/critic2/manual/cpsearch/#c2-pointprop) keyword:
@@ -421,7 +421,7 @@ complete list of CPs):
   24 (3,-1) b -0.00  1.81 -1.04 b06 2.7e-1 2.8e-13 -9.6e-1
   25 (3,1 ) r -0.00 -0.00  0.00 r01 2.0e-2 1.0e-15 1.6e-1
 ~~~
-Each row contains the CP identfier, the rank and signature, the type
+Each row contains the CP identifier, the rank and signature, the type
 of critical point, the position in Cartesian coordinates (angstrom
 by default), the name, and the value, gradient and Laplacian of the
 reference field at that point.
@@ -453,7 +453,7 @@ n(12)    H      0     0     0     0     0     0
  [...]
 n(12)    H      0     0     0     0     1     0
 ~~~
-These lists have the same meaning as in the crsytal example.
+These lists have the same meaning as in the crystal example.
 
 Finally, the output gives an exhaustive list of properties at the
 critical points. As in the case of crystals, the list of properties
@@ -532,14 +532,14 @@ use `DISCARD "$rho < 1e-5"`.
 
 ### Visualization of Critical Points
 
-Critic2 does not come with a graphical interface to visualize the
-results of your calculations (yet). This can be a problem when the
-list of critical points is very large, if you want to identify one
-particular critical point among many, or if you need to calculate
-distances between atoms and/or critical points. However, there are
-some molecular visualization programs that can be used to read the
-output of critic2, and this section describes the most comfortable
-procedures to do so at present.
+Identifying which critical point is which can be a problem when the
+list of CPs is very large. It is also a problem if you need to
+calculate distances between atoms and/or critical points. Critic2
+comes with a [graphical interface
+(GUI)](/critic2/installation/#c2-gui) to visualize the results of your
+calculations. Although it is not complete, the GUI will allow you to
+measure distances and identify critical points; see below for how to
+use other programs.
 
 The key to critical point visualization is the CPREPORT keyword. When
 used with one of the available output file formats, critic2 will write
@@ -548,15 +548,22 @@ critical points are labeled as "Xn" (nuclear CP), "Xb" (bonds), "Xr"
 (rings), and "Xc" (cages). The list of critical points is written to
 the output in the same order as in critic2's complete critical point
 list, unless one of the special keywords to modify the plotting region
-is used (e.g. MOLMOTIF). This means that, if your graphical program
-gives you the atom labels, atom number n in the GUI will correspond
-exactly to critical point number n in critic2.
+is used (e.g. MOLMOTIF). This means that atom number n in the GUI will
+correspond exactly to critical point number n in critic2.
 
-The challenege, therefore, is to make external programs understand
-that we have objects (critical points) that should be treated like
-atoms, but are not atoms. An easy (and sometimes very convenient) way
-of doing this is to replace the critical point labels ("Xb", "Xr",...)
-with atoms we know are not present in our system (e.g. H).
+The recommended method for CP visualization is: run your critical
+point search with AUTO and save it to an FHIaims input file using:
+```
+CPREPORT file.in [GRAPH]
+```
+Optionally, use the `GRAPH` keyword if you also want the gradient
+paths. Then, open the generated file with the GUI:
+```
+critic2 -g file.in
+```
+The labels on the critical points correspond to the complete CP list
+in the `AUTO` output. You can measure distances, angles, etc. by
+double clicking with the mouse.
 
 #### Deprecated Visualization Method Using avogadro
 
@@ -591,7 +598,7 @@ The capability of avogadro to handle periodic systems is limited, and
 more recent versions of avogadro have taken the program in a somewhat
 confusing direction, so the above may not apply in your case.
 
-#### Recommended Visualization Method Using vmd
+#### Deprecated Visualization Method Using vmd
 
 The current best way of visualizing the critical points in your system
 is using a vmd script. Write the critical points using:
@@ -703,7 +710,7 @@ are written, in addition to the atoms). The critical points are
 written using special symbols: Xn for a nuclear CP, Xb for a bond, Xr
 for a ring, and Xc for cage. Miscellaneous or unassigned critical
 points, and points along a gradient path are labeled Xz. Unless
-special options are used to change the region being writteh by
+special options are used to change the region being written by
 CPREPORT (such as MOLMOTIF, BURST, etc.), the atoms and critical
 points in the output file are in the same order as in critic2's
 complete critical point list.
@@ -711,7 +718,7 @@ complete critical point list.
 Critic2 can also write the structure and critical point information
 for the reference field to a JavaScript Object Notation (JSON) file by
 indicating a file with extension `.json`. The generated JSON file
-contains the system geometry, the field details, and essentialy the
+contains the system geometry, the field details, and essentially the
 same information as in the SHORT, LONG, and VERYLONG reports.
 
 The `.test` file format is used in critic2's internal tests. This file
@@ -755,7 +762,7 @@ fields, at those critical points.
 To obtain more information at the critical points of the reference
 field, the procedure in critic2 is to register a field or an
 arithmetic expression involving known fields in the "properties
-list", accesible using the POINTPROP keyword, with syntax:
+list", accessible using the POINTPROP keyword, with syntax:
 ~~~
 POINTPROP name.s "expr.s"
 POINTPROP shorthand.s
@@ -809,7 +816,7 @@ activates the calculation of the Thomas-Fermi kinetic energy density
 with arithmetic expressions involving known fields. The keyword
 [CLEAR](/critic2/manual/arithmetics/#c2-clear)
 deletes all the properties in the list. The list of properties can be
-accesed at any time using POINTPROP LIST.
+accessed at any time using POINTPROP LIST.
 
 ## Examples
 
