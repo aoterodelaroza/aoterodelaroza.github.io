@@ -39,6 +39,7 @@ NCIPLOT
   CUBE x0.r y0.r z0.r x1.r y1.r z1.r
   CUBE file1.xyz file2.xyz ...
   MOLMOTIF
+  INTERPOLATION {GRID|FOURIER}
   FRAGMENT file.xyz
   FRAGMENT
    x.r y.r z.r # (in angstrom!)
@@ -292,6 +293,23 @@ the whole system. The default is 0.75 (i.e. 75%). This keyword is
 useful to remove NCI domains that are unrelated to the selected
 fragments.
 
+If the reference field is a grid, the `INTERPOLATION` keyword can be
+used to select whether the derivatives of the field are calculated via
+Fourier transform (`FOURIER`) or by direct differentiation of the
+interpolant (`GRID`). If the system is periodic and the field is
+smooth, that is, if it corresponds to a pseudized valence density
+(e.g. a CHGCAR), then Fourier transform is the optimal choice.
+However, if the field contains severe oscillations, the derivatives
+calculated via Fourier transform will be subject to aliasing errors
+and therefore will be noisy. Derivatives of a grid field calculated by
+differentiation of the interpolant are noisy, as described in
+[Otero-de-la-Roza, J. Chem. Phys. 156, 224116 (2022)](https://doi.org/10.1063/5.0090232).
+The amount of noise increases with the steepeness of the field and
+with the order of the derivative. If the grid contains an all-electron
+density, the [SMOOTHRHO](/critic2/manual/fields/#c2-addload)
+interpolation method combined with differentiation of the interpolant
+(`INTERPOLATION GRID`) is strongly recommended.
+
 ## Tips for Using NCIPLOT
 
 Some tips for using the NCIPLOT keyword efficiently:
@@ -301,15 +319,24 @@ Some tips for using the NCIPLOT keyword efficiently:
   the dimensions of the grids used in NCIPLOT are the same as the
   reference field.
 
-* If the reference field that provides the density for NCIPLOT is a
-  grid field, then it is usually much faster if core-augmentation
-  (ZPSP field option) is not used. The reason is that if
-  the core augmentation is not present, the reduced density gradient
-  and the Hessian components are calculated by Fourier transform,
-  leading to smoother derivatives.  However, not using the core
-  augmentation can sometimes result in noisy Hessian components, which
-  may result in alternate blue/red domains (because of a spurious
-  change of sign caused by numerical inaccuracies).
+* When running NCIPLOT from a density grid: If the grid contains the
+  pseudized density (from a calculation with pseudopotentials, for
+  instance, a CHGCAR), it is usually faster and better if
+  core-augmentation (ZPSP field option) is not used. The reason is
+  that if the core augmentation is not present, the reduced density
+  gradient and the Hessian components are calculated by Fourier
+  transform, leading to smoother derivatives. However, not using the
+  core augmentation can sometimes result in noisy Hessian components,
+  which may result in alternate blue/red domains (because of a
+  spurious change of sign caused by numerical inaccuracies).
+
+* When running NCIPLOT from a density grid: if the reference field
+  contains an all-electron density, the recommended method is
+  differentiation of the interpolant (activated with the
+  `INTERPOLATION GRID` keyword) combined with the
+  [SMOOTHRHO](/critic2/manual/fields/#c2-addload) interpolation
+  method. This method is much slower than using Fourier transform but
+  the noise in the derivatives is elimited.
 
 * Older versions of VMD have problems dealing with non-orthogonal
   cells. There's little critic2 can do about this. To work around this

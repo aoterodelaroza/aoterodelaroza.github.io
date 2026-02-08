@@ -703,6 +703,7 @@ NCIPLOT
   CUBE x0.r y0.r z0.r x1.r y1.r z1.r
   CUBE file1.xyz file2.xyz ...
   MOLMOTIF
+  INTERPOLATION {GRID|FOURIER}
   FRAGMENT file.xyz
   FRAGMENT
    x.r y.r z.r # (in angstrom, use it with xyz)
