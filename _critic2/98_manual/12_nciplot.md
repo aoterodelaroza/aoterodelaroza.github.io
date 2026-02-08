@@ -293,6 +293,8 @@ the whole system. The default is 0.75 (i.e. 75%). This keyword is
 useful to remove NCI domains that are unrelated to the selected
 fragments.
 
+## Interpolation of Derivatives when the Reference Field is a Grid
+
 If the reference field is a grid, the `INTERPOLATION` keyword can be
 used to select whether the derivatives of the field are calculated via
 Fourier transform (`FOURIER`) or by direct differentiation of the
