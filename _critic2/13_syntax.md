@@ -1001,7 +1001,7 @@ WRITE file.abin
 WRITE file.elk
 WRITE file.gau
 WRITE file.cif [NOSYM|NOSYMM]
-WRITE file.d12 [NOSYM|NOSYMM] [NOEXTERNAL]
+WRITE file.d12 [NOSYM|NOSYMM] [EXTERNAL]
 WRITE file.res [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
