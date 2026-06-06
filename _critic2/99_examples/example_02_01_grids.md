@@ -195,12 +195,10 @@ The Ewald energy contribution can be calculated using the
 [EWALD](/critic2/manual/structure/#c2-ewald) keyword, which requires
 specifying the atomic charges for each atom in the system. In this
 calculation, the Ti pseudopotential provides 4 valence electrons and
-the O pseudopotential 6 electrons. We first indicate these charges to
-critic2 using the [Q keyword](/critic2/manual/crystal/#c2-charge),
-and then calculate the Ewald energy:
+the O pseudopotential 6 electrons. We pass these charges to the EWALD
+keyword to calculate the Ewald energy:
 ```
-Q Ti 4 O 6
-EWALD
+EWALD Ti 4 O 6
 ```
 which gives:
 ```

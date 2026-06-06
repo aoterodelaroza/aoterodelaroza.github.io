@@ -185,19 +185,6 @@ LIST
 ~~~
 The LIST keyword lists all named variables and fields.
 
-## Special Fields
-
-Some special fields are defined from the crystal (or molecular)
-structure alone. For now, the only available special field is `ewald`,
-that can be accessed using `$ewald` in arithmetic expressions, and
-gives the value of the Ewald potential using the current existing
-charges. Atomic charges can be set with the
-[Q keyword](/critic2/manual/crystal/#c2-charge). For instance:
-~~~
-cube cell field "2 * $ewald"
-~~~
-calculates a grid using 2 times the value of the Ewald potential.
-
 ## List of Available Functions {#availchemfun}
 
 Arithmetic expressions can use any of the functions in the critic2

@@ -664,19 +664,6 @@ experimental noise in the atomic positions or cell parameters. The
 ANALYSIS keyword does not change the crystal structure or its symmetry
 operations.
 
-## Atomic Charge Options {#c2-charge}
-
-The Q (or QAT) keyword can be used to change the atomic charge after
-CRYSTAL or MOLECULE:
-~~~
-{Q|QAT} at1.s q1.r [at2.s q2.r] ...
-~~~
-This command changes the atomic charge (Q, QAT) of the atomic species
-`at1.s`, `at2.s`,.... Real numbers for the charges are acceptable. The
-charges (Q) are used only in the calculation the point-charge
-electrostatic energy using
-[EWALD](/critic2/manual/structure/#c2-ewald).
-
 ## Loading Multiple Crystal Structures {#c2-reset}
 
 Critic2 can only work with one structure at a given time. However,

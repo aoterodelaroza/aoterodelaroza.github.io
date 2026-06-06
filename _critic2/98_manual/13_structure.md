@@ -732,9 +732,12 @@ the list that did match an atom or CP.
 The EWALD keyword calculates the electrostatic energy of the lattice
 of point charges using Ewald's method:
 ~~~
-EWALD
+EWALD at1.s q1.r [at2.s q2.r] ...
 ~~~
-The atomic charges are defined using the Q keyword.
+The atomic charges are required and are given as pairs of atomic
+species (`at1.s`, `at2.s`,...) and charges (`q1.r`, `q2.r`,...). Real
+numbers for the charges are acceptable. All atoms in the system must
+be assigned a non-zero charge.
 
 ## Reorder Atoms in a Molecule or Molecular Crystal (MOLREORDER) {#c2-molreorder}
 
