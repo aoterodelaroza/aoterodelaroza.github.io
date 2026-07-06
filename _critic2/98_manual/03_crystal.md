@@ -618,6 +618,7 @@ SYMM/NOSYMM).
 {SYMM|SYM} ANALYSIS
 {SYMM|SYM} REFINE
 {SYMM|SYM} WHOLEMOLS
+{SYMM|SYM} DELETE id1.i [id2.i ...]
 NOSYMM|NOSYM
 ~~~
 Without any other keywords, the SYM keyword writes the space group
@@ -652,9 +653,18 @@ eliminates symmetry operations from the space group in such a way that
 the asymmetric unit is composed of whole molecules. This is useful
 when generating `.res` files as input for the DMACRYS program.
 
+The DELETE keyword removes one or more symmetry operations from the
+space group, reducing the crystal symmetry to a subgroup. The indices
+`id1.i`, `id2.i`,... refer to the operations from the list of symmetry
+operations in the output. critic2 finds the largest subgroup (one of
+them if there are several) that contains none of the deleted
+operations. As a result, deleting an operation may remove additional
+operations required to maintain group closure. The identity (operation
+1) cannot be deleted.
+
 If the symmetry is recalculated for a loaded crystal (with the
-`eps.r`, CLEAR, RECALC, REFINE, or WHOLEMOLS options), then all fields
-are unloaded and all critical point lists are cleared.
+`eps.r`, CLEAR, RECALC, REFINE, WHOLEMOLS, or DELETE options), then all
+fields are unloaded and all critical point lists are cleared.
 
 The ANALYSIS keyword explores different values of the precision
 parameter (`eps.r`) and outputs the calculated space group symbol for
