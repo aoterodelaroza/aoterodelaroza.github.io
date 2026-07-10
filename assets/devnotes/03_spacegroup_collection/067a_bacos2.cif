@@ -1,0 +1,46 @@
+data_stdin
+_audit_creation_method 'critic2'
+_audit_creation_date 2026-7-10
+_chemical_formula_sum 'Ba Co S2'
+_cell_formula_units_Z 4
+_cell_length_a         6.4413000000
+_cell_length_b         6.4926000000
+_cell_length_c         8.9406000000
+_cell_angle_alpha        90.0000
+_cell_angle_beta        90.0000
+_cell_angle_gamma        90.0000
+_cell_volume           373.902905
+_space_group_crystal_system orthorhombic
+_space_group_IT_number 67
+_space_group_name_H-M_alt 'Cmme'
+_space_group_name_Hall '-C 2a 2'
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+ 1 'x,y,z'
+ 2 '-x,-y,-z'
+ 3 '-x,-1/2-y,z'
+ 4 '-x,-1/2+y,-z'
+ 5 '-x,y,z'
+ 6 'x,-y,-z'
+ 7 'x,-1/2-y,z'
+ 8 'x,-1/2+y,-z'
+ 9 '-1/2+x,-1/2+y,z'
+ 10 '-1/2-x,-1/2-y,-z'
+ 11 '-1/2-x,-y,z'
+ 12 '-1/2-x,y,-z'
+ 13 '-1/2-x,-1/2+y,z'
+ 14 '-1/2+x,-1/2-y,-z'
+ 15 '-1/2+x,-y,z'
+ 16 '-1/2+x,y,-z'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Ba1   Ba    0.00000000000000 0.25000000000000 0.19810000000000 1.0000 
+Co1   Co    0.00000000000000 0.25000000000000 0.59320000000000 1.0000 
+S1    S     0.00000000000000 0.25000000000000 0.84960000000000 1.0000 
+S2    S     0.25000000000000 0.50000000000000 0.50000000000000 1.0000 
