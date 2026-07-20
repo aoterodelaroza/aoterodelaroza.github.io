@@ -195,6 +195,18 @@ binary. You can open any number of files with the GUI using:
 ~~~
 critic2 -g *.*
 ~~~
+On HiDPI (high pixel density) displays, the GUI scales the fonts and
+the interface elements using the scaling factor reported by the
+operating system. If the interface comes out too small or too large,
+you can override this factor with the `CRITIC2_UI_SCALE` environment
+variable:
+~~~
+export CRITIC2_UI_SCALE=1.5
+~~~
+A value of 1.0 means no scaling; higher values make the interface
+bigger. This is useful, for instance, if your display is scaled (e.g.
+at 150%) but the system reports it as unscaled.
+
 **Note: The critic2 graphical interface is not even close to
 finished.** Suggestions for improvement are welcome but there is still
 lots of work to be done.
