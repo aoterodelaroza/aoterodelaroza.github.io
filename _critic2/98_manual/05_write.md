@@ -388,6 +388,7 @@ case of crystals, the cell vectors are written using the `CRYST1` and
 WRITE BULK
   ROOT root.s
   RATTLE nstruct.i [MAG mag.r]
+  MD ff.s [T temp.r] [STEP dt.r] [INI nini.i] [GEN ngen.i] [STRIDE nstride.i]
   ...
 ENDWRITE/END
 ~~~
@@ -404,12 +405,42 @@ The name of the generated structure files can be changed with the
 corresponding structure number. The format for the generated file is
 guessed from the extension of `root.s`.
 
+Like [EDIT](/critic2/manual/structure/#c2-edit), WRITE BULK also
+accepts a single subcommand on the same line (for instance,
+`WRITE BULK MD uff`), in which case the `ENDWRITE` (or `END`)
+terminator is not needed.
+
 Each line in the body of a WRITE BULK adds more structures to be
 written. The `RATTLE` keyword generates `nstruct.i` files with the
 same structure as the currently loaded molecule or crystal but with
 the atoms randomly displaced by a distance equal to `mag.r` (default:
 bohr for crystals and angstrom for molecules unless changed using the
 [UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
+
+The `MD` keyword generates structures by sampling snapshots from an NVT
+(constant-temperature) molecular dynamics run driven by the force
+field `ff.s`. The force field is one of the identifiers listed in the
+[force fields](/critic2/manual/structure/#c2-forcefields) section (for
+example, `uff` or `dreiding`; the `gfn2`, `gfn1`, and `gfnff` methods
+require the optional [tblite](/critic2/installation/#c2-tblite) and
+[xtb](/critic2/installation/#c2-xtb) libraries). The dynamics runs on a
+copy of the structure, so the loaded geometry is left unchanged. The
+optional keywords, which may be given in any order, are:
+
+* `T temp.r`: the thermostat temperature, in kelvin (default: 300).
+* `STEP dt.r`: the integration time step, in atomic units (default:
+  20, roughly 0.48 fs).
+* `INI nini.i`: the number of equilibration steps run before any
+  snapshot is collected (default: 1000).
+* `GEN ngen.i`: the number of snapshots (structures) to generate and
+  write (default: 100).
+* `STRIDE nstride.i`: the number of dynamics steps between successive
+  collected snapshots, taken after the equilibration steps (default:
+  1). Use a larger stride to decorrelate the generated structures.
+
+The MD run therefore advances `nini.i + ngen.i * nstride.i` steps in
+total and writes `ngen.i` structures. As with `RATTLE`, the generated
+files are named after `root.s` (or the run root, by default).
 
 ## Writing a .mols File for DMACRYS/NEIGHCRYS (MAKEMOLSNC) {#c2-makemolsnc}
 ~~~

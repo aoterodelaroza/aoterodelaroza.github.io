@@ -341,6 +341,7 @@ EDIT
  DELETE {HYDROGEN|HYDROGENS}
  MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
+ RELAX ff.s [thresh.r]
 ENDEDIT
 ~~~
 
@@ -1011,6 +1012,7 @@ WRITE file.pdb
 WRITE BULK
   ROOT root.s
   RATTLE nstruct.i [MAG mag.r]
+  MD ff.s [T temp.r] [STEP dt.r] [INI nini.i] [GEN ngen.i] [STRIDE nstride.i]
   ...
 ENDWRITE/END
 ~~~

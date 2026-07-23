@@ -287,3 +287,60 @@ functions](/critic2/manual/arithmetics/#availchemfun) and the
 [MOLCALC](/critic2/manual/misc/#c2-molcalc) sections of the manual for
 usage.
 
+### tblite {#c2-tblite}
+
+[tblite](https://github.com/tblite/tblite) is a library implementing
+the GFN-xTB family of semiempirical tight-binding methods. In critic2,
+it provides the `gfn2` (GFN2-xTB) and `gfn1` (GFN1-xTB) energies,
+forces, and stresses used for geometry relaxation
+([EDIT RELAX](/critic2/manual/structure/#c2-edit)), molecular-dynamics
+sampling ([WRITE BULK MD](/critic2/manual/write/#c2-writebulk)), and
+the interactive dynamics window of the graphical user interface. This
+library is optional; if critic2 is built without it, these two methods
+are simply unavailable.
+
+To build critic2 with tblite support, compile it and install it (its
+meson build installs a `tblite.pc` pkg-config file), then configure
+critic2 with `USE_TBLITE=ON`:
+~~~
+cmake -DUSE_TBLITE=ON ..
+~~~
+The build system locates the library through pkg-config
+(`tblite.pc` on your `PKG_CONFIG_PATH`) or the `TBLITE_DIR` environment
+variable. If it is installed in a non-standard location, you can point
+critic2 at it directly with the `TBLITE_INCLUDE_DIRS` and
+`TBLITE_LIBRARIES` variables:
+~~~
+cmake -DUSE_TBLITE=ON \
+      -DTBLITE_INCLUDE_DIRS=/home/user/git/tblite/_install/include \
+      -DTBLITE_LIBRARIES=/home/user/git/tblite/_install/lib/libtblite.so ..
+~~~
+
+### xtb {#c2-xtb}
+
+[xtb](https://github.com/grimme-lab/xtb) is the semiempirical extended
+tight-binding program package from the Grimme group. In critic2, its
+library is used to provide the `gfnff` (GFN-FF) general force field for
+energies, forces, and stresses, available in the same places as the
+tblite methods above
+([EDIT RELAX](/critic2/manual/structure/#c2-edit),
+[WRITE BULK MD](/critic2/manual/write/#c2-writebulk), and the
+interactive dynamics GUI window). This library is optional; without it,
+the `gfnff` force field is unavailable.
+
+To build critic2 with xtb support, compile and install xtb (its build
+installs an `xtb.pc` pkg-config file), then configure critic2 with
+`USE_XTB=ON`:
+~~~
+cmake -DUSE_XTB=ON ..
+~~~
+As with tblite, the library is found through pkg-config (`xtb.pc`) or
+the `XTB_DIR` environment variable, and a non-standard installation can
+be pointed to directly with the `XTB_INCLUDE_DIRS` and `XTB_LIBRARIES`
+variables:
+~~~
+cmake -DUSE_XTB=ON \
+      -DXTB_INCLUDE_DIRS=/home/user/git/xtb/_install/include \
+      -DXTB_LIBRARIES=/home/user/git/xtb/_install/lib/libxtb.so ..
+~~~
+

@@ -859,8 +859,13 @@ EDIT
  DELETE {HYDROGEN|HYDROGENS}
  MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
+ RELAX ff.s [thresh.r]
 ENDEDIT
 ~~~
+The `EDIT` keyword also accepts a single edit action on the same line
+(for instance, `EDIT RELAX uff`), in which case the `ENDEDIT` (or
+`END`) terminator is not needed.
+
 Each line in the `EDIT` environment carries out an edit in the
 structure. The list of possible editing actions includes:
 
@@ -893,6 +898,53 @@ structure. The list of possible editing actions includes:
   units. If RELATIVE is given, add `r.r` to the current value of the
   parameter. If FRACTION is given, multiply the current value of the
   parameter with `r.r`.
+
+* `RELAX ff.s [thresh.r]`: relax the currently loaded structure to its
+  nearest local energy minimum using the force field `ff.s`, then
+  replace the structure with the relaxed geometry. The optimization
+  uses the [FIRE algorithm](https://doi.org/10.1103/PhysRevLett.97.170201)
+  and echoes the energy and the maximum atomic force at each step to
+  the output. Convergence is declared when the maximum atomic force
+  falls below `thresh.r`, in hartree/bohr (default: `1e-4`). For
+  crystals, only the atomic positions are relaxed; the unit cell is
+  kept fixed.
+
+  The force field `ff.s` is one of the identifiers listed under
+  [Force fields for geometry relaxation and dynamics](#c2-forcefields)
+  below.
+
+## Force Fields for Geometry Relaxation and Dynamics {#c2-forcefields}
+
+Critic2 can use several force fields to compute energies, forces, and
+stresses for a molecule or crystal. These are used by the
+[EDIT RELAX](#c2-edit) action, by the
+[WRITE BULK MD](/critic2/manual/write/#c2-writebulk) keyword, and by
+the interactive dynamics window of the graphical user interface.
+
+The available force-field identifiers (`ff.s`) are:
+
+* `uff`: the built-in [Universal Force Field
+  (UFF)](https://doi.org/10.1021/ja00051a040). Applicable to any
+  system.
+
+* `dreiding`: the built-in [DREIDING force
+  field](https://doi.org/10.1021/j100389a010). Available only when
+  every atom in the system is parametrized by DREIDING.
+
+* `tip4p`: the built-in TIP4P water model. Available only for systems
+  made up entirely of water molecules.
+
+* `gfn2` (or `gfn2-xtb`): the [GFN2-xTB](https://doi.org/10.1021/acs.jctc.8b01176)
+  semiempirical tight-binding method. Requires compiling critic2 with
+  the [tblite library](/critic2/installation/#c2-tblite).
+
+* `gfn1` (or `gfn1-xtb`): the [GFN1-xTB](https://doi.org/10.1021/acs.jctc.7b00118)
+  semiempirical tight-binding method. Requires the
+  [tblite library](/critic2/installation/#c2-tblite).
+
+* `gfnff` (or `gfn-ff`): the [GFN-FF](https://doi.org/10.1002/anie.202004239)
+  general force field. Requires compiling critic2 with the
+  [xtb library](/critic2/installation/#c2-xtb).
 
 ## Fit experimental X-ray powder diffraction patterns (XRPD) {#c2-xrpd}
 
