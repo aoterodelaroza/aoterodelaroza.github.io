@@ -921,6 +921,13 @@ stresses for a molecule or crystal. These are used by the
 [WRITE BULK MD](/critic2/manual/write/#c2-writebulk) keyword, and by
 the interactive dynamics window of the graphical user interface.
 
+All of these operations are **fixed-cell**: for crystals, only the
+atomic positions evolve, and the unit cell (both its volume and its
+shape) is held fixed. Critic2 does not currently relax the lattice or
+run variable-cell dynamics (there is no barostat), so the cell
+parameters of the generated or relaxed structures are always those of
+the input structure.
+
 The available force-field identifiers (`ff.s`) are:
 
 * `uff`: the built-in [Universal Force Field

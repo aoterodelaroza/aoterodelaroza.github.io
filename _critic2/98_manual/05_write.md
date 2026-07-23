@@ -424,8 +424,11 @@ field `ff.s`. The force field is one of the identifiers listed in the
 example, `uff` or `dreiding`; the `gfn2`, `gfn1`, and `gfnff` methods
 require the optional [tblite](/critic2/installation/#c2-tblite) and
 [xtb](/critic2/installation/#c2-xtb) libraries). The dynamics runs on a
-copy of the structure, so the loaded geometry is left unchanged. The
-optional keywords, which may be given in any order, are:
+copy of the structure, so the loaded geometry is left unchanged. For
+crystals, only the atomic positions evolve; the unit cell (both its
+volume and its shape) is held fixed throughout the run, as required by
+the NVT ensemble. The optional keywords, which may be given in any
+order, are:
 
 * `T temp.r`: the thermostat temperature, in kelvin (default: 300).
 * `STEP dt.r`: the integration time step, in atomic units (default:
