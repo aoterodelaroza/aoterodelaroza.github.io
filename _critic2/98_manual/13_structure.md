@@ -442,7 +442,7 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
         [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
-NEWCELL NICE [inice.i]
+NEWCELL NICE [inice.i] [MINDISP]
 ~~~
 The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`),
 (`x2.r` `y2.r` `z2.r`), and (`x3.r` `y3.r` `z3.r`) in
@@ -511,15 +511,43 @@ The keyword `NICE` can be used to activate a mode of operation of
 `NEWCELL` that does not effect any cell transformation. Instead,
 `NICE` examines all possible supercells of the currently loaded cell
 containing a number of cells up to `inice.i` (default: 64). For a
-given integer `n` between 1 and `inice.i`, all supercells with size
-`n` (i.e. comprising `n` current cells) are examined and the
+given integer `n` between 1 and `inice.i`, all distinct supercells
+with size `n` (i.e. comprising `n` current cells) are examined and the
 transformation to the "nicest" supercell is reported. The niceness of
 a supercell is a number between 0 and 1 determined by the size of the
 largest sphere it can contain (higher is nicer). The nicest supercell
-possible is cubic and has a niceness of 1. In the output of `NEWCELL
-NICE`, the NEWCELL transformations for all supercells with sizes
-between 1 and `inice.i` are reported, together with their niceness and
-the radius of the largest sphere they can contain.
+possible is cubic and has a niceness of 1. Supercells related by a
+symmetry operation of the crystal are the same supercell up to
+orientation and are considered only once; each supercell is reported
+in the basis with the largest inscribed sphere.
+
+For each size, the output of `NEWCELL NICE` gives the radius of the
+largest sphere the chosen supercell can contain (`rmax`), its
+niceness, the number of symmetry operations of the crystal that are
+compatible with the supercell lattice (`nops`), the number of
+independent atoms (`nindep`) and of displaced structures (`ndisp`)
+that the finite-difference phonon calculation in `VIBRATIONS
+CREATE_DISPLACEMENTS` would need in that supercell, and the
+transformation to use with `NEWCELL` to obtain it. A supercell keeps
+only those operations of the crystal that map the supercell lattice
+onto itself, and fewer operations means more displaced structures; a
+nice supercell can therefore be expensive for a phonon calculation.
+If several supercells of the same size are equally nice, the one with
+the most symmetry operations is chosen. The symmetry used is the
+current symmetry of the crystal (as found when it was loaded, or as
+modified by `SYM`), so a crystal loaded without symmetry shows six
+displacements per atom.
+
+If `MINDISP` is given, the criterion changes: for each size, the
+supercell with the fewest displaced structures is chosen and, if
+there are several, the nicest of them. This typically selects the
+supercells that keep the whole point group of the crystal, which for
+some sizes may be very skewed (for a tetragonal crystal and a prime
+size `n`, the only such supercell is the 1x1x`n` stack). To make the
+price visible, the table includes an additional column (`rmax0`) with
+the radius of the nicest supercell of the same size. The `NICE`
+option of `VIBRATIONS CREATE_DISPLACEMENTS` uses the same procedure
+to choose the supercell for the phonon calculation.
 
 ## Calculate Atomic Environments (ENVIRON) {#c2-environ}
 

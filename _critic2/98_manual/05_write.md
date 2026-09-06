@@ -387,7 +387,7 @@ case of crystals, the cell vectors are written using the `CRYST1` and
 ~~~
 WRITE BULK
   ROOT root.s
-  RATTLE nstruct.i [MAG mag.r]
+  RATTLE nstruct.i [MAG mag.r] [SEED seed.i]
   MD ff.s [T temp.r] [STEP dt.r] [INI nini.i] [GEN ngen.i] [STRIDE nstride.i]
   ...
 ENDWRITE/END
@@ -413,9 +413,18 @@ terminator is not needed.
 Each line in the body of a WRITE BULK adds more structures to be
 written. The `RATTLE` keyword generates `nstruct.i` files with the
 same structure as the currently loaded molecule or crystal but with
-the atoms randomly displaced by a distance equal to `mag.r` (default:
-bohr for crystals and angstrom for molecules unless changed using the
-[UNITS](/critic2/manual/inputoutput/#c2-units) keyword).
+every atom displaced by a distance equal to `mag.r` (default: 0.02
+angstrom) in an independent random direction, uniformly distributed
+on the sphere. The units of `mag.r` are bohr for crystals and
+angstrom for molecules unless changed using the
+[UNITS](/critic2/manual/inputoutput/#c2-units) keyword. The random
+number generator is seeded from the clock when critic2 starts, so
+the displacements differ from run to run. `SEED seed.i` seeds it with
+the non-negative integer `seed.i` immediately before the structures
+are generated, so that the same seed, structure, `nstruct.i` and
+`mag.r` reproduce the same files (with the same compiler and
+runtime). The seed applies to every random draw that follows it in
+the run, including later `RATTLE` lines without a `SEED`.
 
 The `MD` keyword generates structures by sampling snapshots from an NVT
 (constant-temperature) molecular dynamics run driven by the force
