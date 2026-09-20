@@ -341,7 +341,7 @@ EDIT
  DELETE {HYDROGEN|HYDROGENS}
  MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
- RELAX ff.s [thresh.r]
+ RELAX ff.s [file.s] [thresh.r]
 ENDEDIT
 ~~~
 

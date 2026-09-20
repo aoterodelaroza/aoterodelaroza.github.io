@@ -300,8 +300,11 @@ library is optional; if critic2 is built without it, these two methods
 are simply unavailable.
 
 To build critic2 with tblite support, compile it and install it (its
-meson build installs a `tblite.pc` pkg-config file), then configure
-critic2 with `USE_TBLITE=ON`:
+meson build installs a `tblite.pc` pkg-config file) and then configure
+critic2. `USE_TBLITE` defaults to ON if the library is found at
+configure time, so usually nothing has to be passed; give
+`-DUSE_TBLITE=OFF` to build without it even when it is installed, or
+`-DUSE_TBLITE=ON` to make the build fail loudly if it cannot be found:
 ~~~
 cmake -DUSE_TBLITE=ON ..
 ~~~
@@ -321,7 +324,9 @@ cmake -DUSE_TBLITE=ON \
 [xtb](https://github.com/grimme-lab/xtb) is the semiempirical extended
 tight-binding program package from the Grimme group. In critic2, its
 library is used to provide the `gfnff` (GFN-FF) general force field for
-energies, forces, and stresses, available in the same places as the
+energies and forces of **molecules** (see the
+[force fields](/critic2/manual/structure/#c2-forcefields) section for
+why crystals are excluded), available in the same places as the
 tblite methods above
 ([EDIT RELAX](/critic2/manual/structure/#c2-edit),
 [WRITE BULK MD](/critic2/manual/write/#c2-writebulk), and the
@@ -329,8 +334,10 @@ interactive dynamics GUI window). This library is optional; without it,
 the `gfnff` force field is unavailable.
 
 To build critic2 with xtb support, compile and install xtb (its build
-installs an `xtb.pc` pkg-config file), then configure critic2 with
-`USE_XTB=ON`:
+installs an `xtb.pc` pkg-config file) and then configure critic2. As
+with tblite, `USE_XTB` defaults to ON if the library is found at
+configure time; on Debian and derivatives, installing the `libxtb-dev`
+package is enough. Pass `-DUSE_XTB=OFF` to build without it:
 ~~~
 cmake -DUSE_XTB=ON ..
 ~~~

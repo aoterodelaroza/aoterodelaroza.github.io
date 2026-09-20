@@ -432,7 +432,10 @@ field `ff.s`. The force field is one of the identifiers listed in the
 [force fields](/critic2/manual/structure/#c2-forcefields) section (for
 example, `uff` or `dreiding`; the `gfn2`, `gfn1`, and `gfnff` methods
 require the optional [tblite](/critic2/installation/#c2-tblite) and
-[xtb](/critic2/installation/#c2-xtb) libraries). The dynamics runs on a
+[xtb](/critic2/installation/#c2-xtb) libraries). Unlike
+[EDIT RELAX](/critic2/manual/structure/#c2-edit), this keyword takes no
+potential-file argument, so `eam` can be used here only for systems
+covered by critic2's catalogue of EAM potentials. The dynamics runs on a
 copy of the structure, so the loaded geometry is left unchanged. For
 crystals, only the atomic positions evolve; the unit cell (both its
 volume and its shape) is held fixed throughout the run, as required by

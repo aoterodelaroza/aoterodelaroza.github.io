@@ -887,7 +887,7 @@ EDIT
  DELETE {HYDROGEN|HYDROGENS}
  MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
- RELAX ff.s [thresh.r]
+ RELAX ff.s [file.s] [thresh.r]
 ENDEDIT
 ~~~
 The `EDIT` keyword also accepts a single edit action on the same line
@@ -927,10 +927,11 @@ structure. The list of possible editing actions includes:
   parameter. If FRACTION is given, multiply the current value of the
   parameter with `r.r`.
 
-* `RELAX ff.s [thresh.r]`: relax the currently loaded structure to its
-  nearest local energy minimum using the force field `ff.s`, then
-  replace the structure with the relaxed geometry. The optimization
-  uses the [FIRE algorithm](https://doi.org/10.1103/PhysRevLett.97.170201)
+* `RELAX ff.s [file.s] [thresh.r]`: relax the currently loaded
+  structure to its nearest local energy minimum using the force field
+  `ff.s`, then replace the structure with the relaxed geometry. The
+  optimization uses the
+  [FIRE algorithm](https://doi.org/10.1103/PhysRevLett.97.170201)
   and echoes the energy and the maximum atomic force at each step to
   the output. Convergence is declared when the maximum atomic force
   falls below `thresh.r`, in hartree/bohr (default: `1e-4`). For
@@ -939,7 +940,11 @@ structure. The list of possible editing actions includes:
 
   The force field `ff.s` is one of the identifiers listed under
   [Force fields for geometry relaxation and dynamics](#c2-forcefields)
-  below.
+  below. The optional `file.s` applies to the `eam` force field only,
+  and is the potential file to use; if it is absent, critic2 picks one
+  from its own catalogue of potentials (see `eam` below). A file name
+  that would parse as a number must be given as such: an argument that
+  is a valid number is always read as `thresh.r`.
 
 ## Force Fields for Geometry Relaxation and Dynamics {#c2-forcefields}
 
@@ -966,6 +971,24 @@ The available force-field identifiers (`ff.s`) are:
   field](https://doi.org/10.1021/j100389a010). Available only when
   every atom in the system is parametrized by DREIDING.
 
+* `eam`: a tabulated [embedded-atom
+  method](https://doi.org/10.1103/PhysRevB.29.6443) (EAM) potential,
+  read from a file in the LAMMPS/DYNAMO `setfl` (`.eam.alloy`) or
+  `eam/fs` (`.eam.fs`) format. This is the force field of choice for
+  metals, where UFF is qualitatively wrong.
+
+  The potential file can be given explicitly on the
+  [EDIT RELAX](#c2-edit) line. Otherwise critic2 uses the first
+  potential in its catalogue (the `eam/` subdirectory of the critic2
+  data directory) whose elements cover every species in the system,
+  and the potential actually used is echoed to the output. The
+  shipped catalogue covers Ag, Al, Au, Co, Cr, Cu, Fe, Mg, Mo, Ni, Pb,
+  Pd, Pt, Ta, Ti, V, W and Zr, plus a number of specifically fitted
+  alloy potentials. For any other element, supply the file explicitly
+  or add it to the catalogue with the `tools/add-eam-potential.sh`
+  script; see the `README` in the catalogue directory for the sources,
+  the citations to use, and their licences.
+
 * `tip4p`: the built-in TIP4P water model. Available only for systems
   made up entirely of water molecules.
 
@@ -979,7 +1002,13 @@ The available force-field identifiers (`ff.s`) are:
 
 * `gfnff` (or `gfn-ff`): the [GFN-FF](https://doi.org/10.1002/anie.202004239)
   general force field. Requires compiling critic2 with the
-  [xtb library](/critic2/installation/#c2-xtb).
+  [xtb library](/critic2/installation/#c2-xtb). **Available for
+  molecules only.** The xtb library does compute periodic GFN-FF
+  energies, but it wraps atoms back into the unit cell on every
+  evaluation while holding the GFN-FF bond topology fixed at the
+  geometry it was built from, so the energy is discontinuous whenever
+  an atom crosses a cell face, and it does not make the GFN-FF stress
+  available through its interface.
 
 ## Fit experimental X-ray powder diffraction patterns (XRPD) {#c2-xrpd}
 
