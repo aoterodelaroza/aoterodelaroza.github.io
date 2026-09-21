@@ -5,7 +5,7 @@ permalink: /critic2/manual/crystal/
 excerpt: "Reading a crystal structure in critic2."
 sidebar:
   - repo: "critic2"
-    nav: "critic2_manual"
+	nav: "critic2_manual"
 toc: true
 toc_label: "Crystal Structures"
 toc_sticky: true
@@ -49,9 +49,11 @@ CRYSTAL file.magres
 CRYSTAL file.alm.in
 CRYSTAL file.in # akaikkr input file
 CRYSTAL file.sys
+CRYSTAL file.{gin,grs} [istruct.i] # (GULP input or restart file)
+CRYSTAL file.{gout,got} [istruct.i] # (GULP output)
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
-         FCHK|MOLDEN|GAUSSIAN|SIESTA|FPLO|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM] ...
+		 FCHK|MOLDEN|GAUSSIAN|SIESTA|FPLO|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
+		 FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM|GULP_IN|GULP_OUT] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -336,6 +338,32 @@ program (used along with the
 [SPRKKR program](https://www.ebert.cup.uni-muenchen.de/index.php/en/repository/SPRKKR/lang,en-gb/))
 can be read as periodic systems. Only 3D systems are supported.
 
+### GULP Inputs and Outputs (gin, grs, gout, got) {#c2-gulp}
+
+Critic2 reads the structures in [GULP](https://gulp.curtin.edu.au/)
+input files (`.gin`), including the restart files written by the
+`dump` option (`.grs`), and in GULP output files (`.gout` or
+`.got`). Both 3D (`cell` or `vectors` plus `fractional` or
+`cartesian`) and 0D (`cartesian` without a cell) structures are
+supported; surfaces and polymers (2D and 1D) are not. Shells and
+dummy (`X`) atoms are discarded and only the cores are kept. The
+GULP labels (element symbol plus type number, e.g. `C1`) become the
+species names, and partial site occupancies are read.
+
+Space groups given with the `space` option (as an ITA number or a
+Hermann-Mauguin symbol) are expanded using the spglib database of
+Hall symbols, including the `origin 1|2` settings, explicit origin
+shifts (`origin x y z`), and rhombohedral groups given on either
+hexagonal or rhombohedral axes. The `symmetry_operator` option is not
+supported.
+
+An input file may contain several configurations. By default, the
+last one is read; an optional `istruct.i` integer selects
+configuration number `istruct.i` instead. The same applies to
+output files, where the available structures are the input echo of
+every configuration followed by the final geometry of every
+completed optimization, in file order.
+
 ### Files with Other Extensions
 
 If the crystal structure file you want to read does not have one of
@@ -398,6 +426,10 @@ specifying the required format. The allowed keywords are:
 - `XYZ`: an `.xyz` file.
 
 - `MAGRES`: magresview magres format.
+
+- `GULP_IN`: a GULP input or restart file.
+
+- `GULP_OUT`: a GULP output file.
 
 ### Manual Specification of the Crystal Structure (CRYSTAL Environment)
 
@@ -537,10 +569,10 @@ relevant library entry in this case reads:
 ~~~
 STRUCTURE B1 rock_salt rocksalt NaCl
   CRYSTAL
-    SPG f m -3 m
-    CELL 5.6402 5.6402 5.6402 90 90 90 ANG
-    NEQ 0.0 0.0 0.0 na
-    NEQ 0.5 0.5 0.5 cl
+	SPG f m -3 m
+	CELL 5.6402 5.6402 5.6402 90 90 90 ANG
+	NEQ 0.0 0.0 0.0 na
+	NEQ 0.5 0.5 0.5 cl
   ENDCRYSTAL
 ENDSTRUCTURE
 ~~~

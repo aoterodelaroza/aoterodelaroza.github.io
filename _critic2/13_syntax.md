@@ -275,9 +275,11 @@ CRYSTAL file.magres
 CRYSTAL file.alm.in
 CRYSTAL file.in # akaikkr input file
 CRYSTAL file.sys
+CRYSTAL file.{gin,grs} [istruct.i] # (GULP input or restart file)
+CRYSTAL file.{gout,got} [istruct.i] # (GULP output)
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
          FCHK|MOLDEN|GAUSSIAN|SIESTA|FPLO|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM] ...
+         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM|GULP_IN|GULP_OUT] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -654,11 +656,12 @@ MOLECULE file.{cube|cub}
 MOLECULE file.bincube
 MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
+MOLECULE file.{gin,grs,gout,got} [istruct.i] # (GULP input/output, clusters)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|MOL2|WFN|WFX|
           FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-          FHIAIMS_IN|FHIAIMS_OUT|FRAC] ...
+          FHIAIMS_IN|FHIAIMS_OUT|FRAC|GULP_IN|GULP_OUT] ...
 MOLECULE
  NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
  atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
