@@ -110,8 +110,8 @@ critic2 in a pipe command. In addition, If no `-q` is given, a copy of
 each input line read by critic2 is written to the output, preceded by
 a "%%" prefix. This helps identify the different parts of the output
 in long runs. The `-r` option tells critic2 where to find its data
-files. If /path/to/critic2 is given, the data files (wfc, dic, etc.)
-should be in /path/to/critic2/dat. Normally, the data directory is
+files. If /path/to/critic2 is given, the data files (atomic
+densities, structure libraries, etc.) should be in /path/to/critic2/dat. Normally, the data directory is
 located automatically by critic2 either at the `--prefix` location
 indicated by the user during configuration or via the `CRITIC_HOME`
 variable (see [Installation](/critic2/installation/)).

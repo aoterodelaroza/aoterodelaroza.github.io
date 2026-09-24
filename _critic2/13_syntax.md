@@ -432,7 +432,8 @@ ENDGRDVEC/END
 [HIRSHFELD](/critic2/manual/integrate/#c2-hirshfeld)
 : Calculate the Hirshfeld (stockholder) atomic properties.
 ~~~
-HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
+HIRSHFELD [ITERATIVE [TOL tol.r] [MAXIT maxit.i]] [WCUBE]
+          [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
           [JSON file.json]
 ~~~
 

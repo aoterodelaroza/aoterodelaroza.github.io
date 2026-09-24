@@ -1404,7 +1404,8 @@ integral for the all-electron density.
 Hirshfeld atomic properties can be calculated using the HIRSHFELD
 keyword:
 ~~~
-HIRSHFELD [WCUBE] [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
+HIRSHFELD [ITERATIVE [TOL tol.r] [MAXIT maxit.i]] [WCUBE]
+          [ONLY iat1.i iat2.i ...] [ONLY_RANGE iat1.i iat2.i]
           [JSON file.json]
 ~~~
 There are two ways in which this keyword operates. If the reference
@@ -1429,8 +1430,8 @@ given in the same command.
 If the reference field is not a grid, HIRSHFELD carries out the
 integration using the selected [molecular
 mesh](/critic2/manual/misc/#c2-meshtype). In this case, `WCUBE`,
-`ONLY`, and `ONLY_RANGE` cannot be used, and only the volume and the
-Hirshfeld atomic electron populations are calculated.
+`ONLY`, `ONLY_RANGE`, and `JSON` cannot be used, and only the volume
+and the Hirshfeld atomic electron populations are calculated.
 
 By using the `JSON` keyword a JavaScript Object Notation (JSON) file
 is created containing the molecular or crystal structure, information
@@ -1456,6 +1457,83 @@ fields given as grids. Use the `OVERLAP` keyword in
 [INTEGRABLE](/critic2/manual/integrate/#c2-integrable) to activate
 the calculation of these properties (see [above](#c2-hirshfeldovlp)
 for this keyword and its options).
+
+### Iterative Hirshfeld (Hirshfeld-I) {#c2-hirshfeldi}
+
+The `ITERATIVE` keyword activates the [iterative Hirshfeld
+method](https://doi.org/10.1063/1.2715563) (Hirshfeld-I). In
+Hirshfeld-I, the reference density of each atom is not that of the
+neutral free atom, but that of the free atom or ion carrying the
+atomic population given by the partition itself. The reference
+populations are found self-consistently, starting from the neutral
+atoms:
+
+$$
+\begin{equation}
+N_{\rm A}^{(i+1)} = \int \frac{\rho_{\rm A}^{(i)}({\bf r})}{\rho_{\rm pro}^{(i)}({\bf r})}
+\rho({\bf r}) d{\bf r}
+\end{equation}
+$$
+
+where $$\rho_{\rm A}^{(i)}$$ is the free-atom density of atom A with
+$$N_{\rm A}^{(i)}$$ electrons and $$\rho_{\rm pro}^{(i)}$$ is the
+corresponding promolecular density. For a non-integer number of
+electrons $$N$$, the reference density is the linear interpolation
+between the densities of the two integer charge states that bracket
+it:
+
+$$
+\begin{equation}
+\rho_{\rm A}^{N}({\bf r}) = (1 - f)\,\rho_{\rm A}^{n_0}({\bf r})
++ f\,\rho_{\rm A}^{n_0+1}({\bf r})
+\end{equation}
+$$
+
+with $$n_0 = \lfloor N \rfloor$$ and $$f = N - n_0$$.
+
+The iteration stops when the largest change in any atomic population
+between two consecutive iterations is smaller than `tol.r` electrons
+(`TOL` keyword, default: 1e-7), or after `maxit.i` iterations (`MAXIT`
+keyword, default: 200). A warning is issued if the populations are not
+converged. Populations of symmetry-equivalent atoms are kept equal
+throughout. Convergence is usually monotonic and takes a few tens of
+iterations; each iteration is a full integration over the grid or
+mesh, so a larger `TOL` saves time in large systems.
+
+Once the populations are converged, critic2 writes a table with the
+Hirshfeld-I atomic populations ($$N_{\rm HI}$$) and charges
+($$q_{\rm HI} = Z - N_{\rm HI}$$), and the range of charge states
+available for each atom. The rest of the calculation then proceeds as
+in a normal HIRSHFELD run, but using the Hirshfeld-I weights: the
+integrable properties (grids) or populations and volumes (meshes),
+the `WCUBE` weights, and the Hirshfeld overlap populations all
+correspond to the converged reference densities.
+
+The free-atom and free-ion densities are taken from critic2's atomic
+density library (all-electron, spin-restricted, scalar-relativistic
+B86bPBE densities, fitted to sums of Slater-type functions). The
+library contains a limited number of charge states for each element
+(the neutral atom, the singly charged cation and anion, and other
+ions that are chemically relevant). If the population of an atom
+falls outside the available range, it is kept at the last available
+charge state, the atom is marked as "pinned" in the output, and a
+warning is issued.
+
+If the reference field is a grid from a pseudopotential calculation,
+it contains only the valence density. In this case, use the `ZPSP`
+option (see [LOAD](/critic2/manual/fields/#c2-addload)) to give the
+number of valence electrons of each atom. The Hirshfeld-I weights are
+always calculated with all-electron reference densities, and the
+frozen-core electrons ($$Z - Z_{\rm PSP}$$) of each atom are added to
+its integrated valence population. The integrable properties in the
+final table, however, correspond to the valence field only. Critic2
+issues a warning if the total population differs from the total
+nuclear charge by more than 1.5 electrons: a population that is too
+small suggests a valence density without `ZPSP`, and a population
+that is too large suggests `ZPSP` used with an all-electron density,
+or a grid that is too coarse to integrate the density near the
+nuclei. All-electron densities are best integrated with a molecular
+mesh (for instance, from a wavefunction file) rather than a grid.
 
 For an example, see the
 [calculation of Hirshfeld

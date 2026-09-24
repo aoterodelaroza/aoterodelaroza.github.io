@@ -654,7 +654,15 @@ how many electrons are added by each nucleus. For atom `at1.s`, the
 value passed to ZPSP (`q1.r`) must correspond to the
 number of valence electrons for that atom. The use of ZPSP in LOAD
 activates the calculation of the core contribution, which is added to
-the field's value. Most of the time, core augmentation
+the field's value. The core densities are those of the neutral free
+atoms (all-electron B86bPBE, frozen orbitals), and they are available
+only for the usual pseudopotential cores of each element: closed-shell
+cores ([He], [Ne], [Ar], [Ar]3d10, ...), including semicore choices,
+and the f-in-core cores of the lanthanides and actinides. This covers,
+for instance, all the PAW potentials distributed with VASP. If the
+core for a given ZPSP is not available, critic2 stops with an error
+message listing the valid ZPSP values for that element. A ZPSP equal
+to the atomic number means the atom has no core. Most of the time, core augmentation
 is not entirely satisfactory, and is best avoided if possible (e.g. by
 writing the all-electron density using the PAW transformation, if PAW
 is being used).
