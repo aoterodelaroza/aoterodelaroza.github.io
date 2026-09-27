@@ -237,9 +237,15 @@ diagonal of the Hessian is less than `edeg.r` in absolute value.
 
 Because finding the CPs can be an expensive task in large structures,
 the CP list for the current field can be saved to a checkpoint file
-using the CHK keyword. This keyword generates a `<root>.chk_cps` file
-where the list of critical points is stored. It can be accessed in
-subsequent critic2 runs by using the CHK keyword in AUTO. For
+using the CHK keyword. This keyword generates a checkpoint file
+where the list of critical points is stored. The name of this file
+is the name of the file the reference field was read from with
+`.chk_cps` appended (e.g. `rho.cube.chk_cps`) or `<root>.chk_cps`
+if the reference field was not read from a file (e.g. a promolecular
+density). The checkpoint file can be accessed in subsequent critic2
+runs by using the CHK keyword in AUTO. The checkpoint is ignored,
+with a warning, if it does not correspond to the current structure
+and reference field. For
 instance, to read the CPs from the checkpoint file and skip any
 calculation in AUTO, you can do:
 ~~~
