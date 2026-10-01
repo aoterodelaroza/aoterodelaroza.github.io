@@ -104,7 +104,7 @@ AUTO SEED PAIR [DIST dist.r] [NPTS n.i]
 AUTO SEED TRIPLET [DIST dist.r]
 AUTO SEED LINE [X0 x0.r y0.r z0.r] [X1 x0.r y0.r z0.r] [NPTS n.i]
 AUTO SEED POINT [X0 x0.r y0.r z0.r]
-AUTO SEED MESH
+AUTO SEED MESH [SMALL|NORMAL|GOOD|VERYGOOD|AMAZING]
 ~~~
 
 <a id="key-bader"></a>

@@ -32,7 +32,7 @@ AUTO SEED TRIPLET [DIST dist.r]
 AUTO SEED LINE [X0 x0.r y0.r z0.r] [X1 x0.r y0.r z0.r]
                [NPTS n.i]
 AUTO SEED POINT [X0 x0.r y0.r z0.r]
-AUTO SEED MESH
+AUTO SEED MESH [SMALL|NORMAL|GOOD|VERYGOOD|AMAZING]
 ~~~
 
 The search for the critical points (CP) of a scalar field (the points
@@ -151,9 +151,19 @@ immediately following SEED. This keyword can be:
   angstrom unless changed by
   [UNITS](/critic2/manual/inputoutput/#c2-units)).
 
-* MESH: place seeds at the nodes of a molecular integration mesh. The
-  type of mesh can be controlled with the
-  [MESHTYPE](/critic2/manual/misc/#c2-meshtype) keyword.
+* MESH: place seeds at the nodes of a molecular integration mesh
+  (the radial shells times the angular grids around each atom). The
+  quality of the mesh is selected with the SMALL, NORMAL, GOOD,
+  VERYGOOD, and AMAZING keywords (default: SMALL), which have the
+  same meaning as in [MESHTYPE](/critic2/manual/misc/#c2-meshtype)
+  but are independent of it. To keep the number of seeds manageable,
+  particularly in crystals, only the grids of the symmetry-unique
+  atoms are used (the search results are replicated by symmetry), and
+  each grid is pruned to the points in the Voronoi region of its atom
+  (the rest of the space is covered by the grids of the other atoms)
+  that are farther from the nucleus than NUCEPS (NUCEPSH for
+  hydrogen). Most of the points of a heavy atom's grid are in its
+  core, and a search started there would end at the nucleus.
 
 Multiple SEED keywords can be given in the same AUTO command. For
 instance:
