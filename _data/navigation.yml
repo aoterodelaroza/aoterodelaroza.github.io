@@ -17,8 +17,8 @@ critic2:
     url: /critic2/
     children:
       - title: "Download"
-        url: /critic2/
-      - title: "Installation"
+        url: /critic2/download/
+      - title: "Building from Source"
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
@@ -40,8 +40,8 @@ critic2_manual:
     url: /critic2/
     children:
       - title: "Download"
-        url: /critic2/
-      - title: "Installation"
+        url: /critic2/download/
+      - title: "Building from Source"
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/
@@ -92,8 +92,8 @@ critic2_examples:
     url: /critic2/
     children:
       - title: "Download"
-        url: /critic2/
-      - title: "Installation"
+        url: /critic2/download/
+      - title: "Building from Source"
         url: /critic2/installation/
       - title: "Quick Start Guide"
         url: /critic2/quickstart/

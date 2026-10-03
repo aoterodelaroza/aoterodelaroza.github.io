@@ -1,87 +1,44 @@
 ---
 layout: single
-title: "Installation"
+title: "Building from Source"
 permalink: /critic2/installation/
-excerpt: "Installation of the critic2 program."
+excerpt: "Compiling and installing critic2 from its source code."
 sidebar:
   - repo: "critic2"
     nav: "critic2"
 toc: true
-toc_label: "Installation of Critic2"
+toc_label: "Building critic2"
 toc_sticky: true
 ---
 
-## Installation Instructions
+**Most users do not need to compile critic2.** Ready-to-run packages
+for Windows, macOS, and Linux, including the graphical interface, are
+on the [download page](/critic2/download/). Build critic2 from source
+if you want the development version, need to tune it for a particular
+machine (e.g. a computing cluster), or use a system for which there is
+no package.
+
+## Requirements
 
 To build critic2, you will need:
 
 * A [relatively modern](#whichcompilerswork) Fortran compiler.
 
-* A C compiler.
+* A C compiler (and a C++ compiler for the graphical interface).
 
-* The [cmake](#c2-usecmake) build system.
-
-* The make program.
+* The [cmake](https://cmake.org/) build system and the make program.
 
 * Optionally, a few [additional libraries](#c2-libraries).
 
 These tools may already be available on your machine but, if they are
 not, they can be typically installed using a software package
-manager (`apt`, `rpm`, etc. on Linux; [homebrew](https://brew.sh/) on macOS).
+manager (`apt`, `dnf`, etc. on Linux; [homebrew](https://brew.sh/) on
+macOS; [MSYS2](https://www.msys2.org/) on Windows).
 
-On macOS, the simplest option is to let homebrew do everything: it
-installs the compilers and libraries, builds critic2 (including the
-graphical interface), and puts it in your path. See
-[macOS: Installing with Homebrew](#c2-homebrew) below.
+## Build Using cmake {#c2-usecmake}
 
-### Build Using configure/make {#c2-useconfigure}
-
-**These instructions only apply to old versions of critic2; the
-configure/make build system has been removed from the development
-version.** You need to run:
-~~~
-autoreconf
-~~~
-Prepare for compilation by doing:
-~~~
-./configure
-~~~
-Use `configure --help` for information about the different
-compilation options. The `--prefix` option to `configure` sets the
-installation path. More details about `configure` can be found in the
-`INSTALL` file included in the distribution. Once critic2 is configured,
-compile the program using:
-~~~
-make
-~~~
-This should create the critic2 executable inside the `src/`
-subdirectory.
-
-### Installing and Setting up the Environment
-
-Critic2 can be installed to the `prefix` directory by doing:
-~~~
-make install
-~~~
-However, the binary can be used directly from the source directory by
-setting the `CRITIC_HOME` environment variable. It must point to the
-root directory of the distribution:
-~~~
-export CRITIC_HOME=/home/alberto/programs/critic2
-~~~
-This variable is necessary for critic2 to find the atomic densities
-and other files. These files should be in `${CRITIC_HOME}/dat/`.
-
-Critic2 is parallelized with OpenMP for shared-memory architectures
-(unless disabled during compilation). You change the number of
-parallel threads by setting the `OMP_NUM_THREADS` environment
-variable.
-
-### Build Using cmake {#c2-usecmake}
-
-Using cmake is the recommended installation procedure, and the only
-way to build critic2 in recent versions. Change to the critic2 root
-directory and make a subdirectory for the compilation:
+Change to the critic2 root directory and make a subdirectory for the
+compilation:
 ~~~
 mkdir build
 cd build
@@ -118,178 +75,70 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug
 This version gives more informative errors when the program crashes,
 but it is slower.
 
-### macOS: Installing with Homebrew {#c2-homebrew}
+## Installing and Setting up the Environment {#c2-install}
 
-[Homebrew](https://brew.sh/) is a package manager for macOS: a program
-that downloads, compiles, and installs other programs together with
-everything they need. Critic2 is distributed for homebrew through its
-own repository of installation recipes (a "tap"),
-[aoterodelaroza/homebrew-critic2](https://github.com/aoterodelaroza/homebrew-critic2).
-The recipe compiles the current development version of critic2 on
-your machine.
+Critic2 can be installed to the `prefix` directory by doing:
+~~~
+make install
+~~~
+However, the binary can be used directly from the build directory by
+setting the `CRITIC_HOME` environment variable. It must point to the
+root directory of the distribution:
+~~~
+export CRITIC_HOME=/home/alberto/programs/critic2
+~~~
+This variable is necessary for critic2 to find the atomic densities
+and other files. These files should be in `${CRITIC_HOME}/dat/`.
+An installed critic2 finds its data files by itself, even if the
+installation directory is moved somewhere else afterwards.
 
-**1. Open a terminal.** All the steps below are commands that you type
-(or paste) in the Terminal application. To open it, press Cmd-Space,
-type `Terminal`, and press Return. After pasting each command, press
-Return to run it.
+Critic2 is parallelized with OpenMP for shared-memory architectures
+(unless disabled during compilation). You change the number of
+parallel threads by setting the `OMP_NUM_THREADS` environment
+variable.
 
-**2. Install the command line tools.** These are Apple's compilers and
-developer tools, which homebrew needs:
-~~~
-xcode-select --install
-~~~
-A window appears asking whether you want to install the tools. Click
-Install, accept the license, and wait until it finishes. If the
-command says that the command line tools are already installed, you
-can go on to the next step.
+## macOS {#c2-homebrew}
 
-**3. Install homebrew.** Run the installer from the
-[homebrew website](https://brew.sh/):
+The [homebrew](https://brew.sh/) recipe for critic2 can compile the
+current development version on your Mac:
 ~~~
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install --HEAD aoterodelaroza/critic2/critic2
 ~~~
-The installer asks for your password (the one you use to log in to
-your Mac). Nothing appears on the screen while you type it; this is
-normal. Type it and press Return. Then it shows what it is going to
-install and asks you to press Return again to continue. The
-installation takes a few minutes.
+This installs the compilers and libraries critic2 needs and builds it
+with the graphical interface (see the
+[download page](/critic2/download/#c2-macos) for how to set up
+homebrew). To rebuild it later with the latest version of the code,
+use `brew upgrade --fetch-HEAD critic2`. Alternatively, install the compilers
+(`brew install gcc cmake`) and the optional libraries with homebrew and
+build critic2 with cmake as indicated above.
 
-At the end, the installer prints a "Next steps" section with a few
-commands that make the `brew` command available in your terminal.
-**Run them; homebrew does not work otherwise.** On an Apple Silicon
-Mac, these commands are:
-~~~
-echo >> ~/.zprofile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-~~~
-(On an Intel Mac, homebrew installs in `/usr/local` and this step is
-usually not needed.) If in doubt, copy the commands from the
-installer's output. Check that homebrew works with:
-~~~
-brew --version
-~~~
-which should print the homebrew version.
+## Windows {#c2-windows}
 
-**4. Install critic2.**
-~~~
-brew install aoterodelaroza/critic2/critic2
-~~~
-This command adds the critic2 tap, downloads the libraries critic2
-needs (the gcc compilers, libxc, nlopt, openblas, hdf5, glfw,...), and
-then compiles and installs critic2. The first time, it takes a while,
-mostly because of the downloads. When it finishes, the `critic2`
-command is ready to use. You do not need to set `CRITIC_HOME`: the
-homebrew version of critic2 knows where to find its data files.
-
-**5. Using critic2.** Critic2 is used from the terminal in the same way
-as on any other system (see the [quickstart guide](/critic2/quickstart/)
-and the [manual](/critic2/manual/)):
-~~~
-critic2 input.cri              # output to the screen
-critic2 input.cri output.cro   # output to a file
-critic2 -g structure.cif       # open a file in the graphical interface
-~~~
-The graphical interface must be launched from a terminal on the Mac's
-own screen (not through an ssh connection). Some additional tips:
-
-* Input files must be plain text. If you use TextEdit to write them,
-  convert the document to plain text first (Format > Make Plain Text);
-  otherwise, TextEdit saves rich text and changes the quotes, and
-  critic2 will not be able to read the file.
-
-* Apple Silicon processors have performance and efficiency cores. In
-  parallel runs, critic2 usually works best with as many threads as
-  performance cores (four in the M1). To make this permanent, add the
-  `OMP_NUM_THREADS` variable to your `~/.zprofile`:
-  ~~~
-  echo 'export OMP_NUM_THREADS=4' >> ~/.zprofile
-  ~~~
-
-* If the graphical interface looks too small or too large, use the
-  `CRITIC2_UI_SCALE` variable (see [Graphical User Interface](#c2-gui)).
-
-**Updating critic2.** To rebuild critic2 with the current development
-version, use:
-~~~
-brew update
-brew reinstall critic2
-~~~
-Note that `brew upgrade` does not work for this purpose: the recipe
-always builds the latest critic2, but its version number does not
-change with every update of the code, so `brew upgrade` usually thinks
-there is nothing new. To keep the other homebrew programs and
-libraries up to date, run `brew upgrade` from time to time.
-
-**Uninstalling critic2.**
-~~~
-brew uninstall critic2
-brew untap aoterodelaroza/critic2
-~~~
-
-**If something goes wrong.** If the installation fails, the logs of
-the compilation are in `~/Library/Logs/Homebrew/critic2/`. Please,
-open an [issue](https://github.com/aoterodelaroza/critic2/issues)
-and attach them, together with the output of `brew config`.
+The Windows packages are cross-compiled from Linux with the MinGW-w64
+compilers. The procedure, including a script that downloads and builds
+all the dependencies, is in the "Windows builds" section of the
+`INSTALL` file in the critic2 distribution. Critic2 can also be built
+natively in an [MSYS2](https://www.msys2.org/) UCRT64 shell with cmake,
+as on Linux.
 
 ## Which Compilers Work? {#whichcompilerswork}
 
-Critic2 uses some features from the more modern Fortran standards,
-which may not be available in some older compilers. In consequence,
-not all compilers may be able to generate the binary and, even if they
-do, the binary may be broken. Two versions of critic2 are
-distributed. The **development** version, corresponding to the master
-branch of the repository, and the **stable** version, in the stable
-branch. Only patches addressing serious bugs will be introduced in the
-stable version; all new development happens in the development
-version. The stable version is compilable with all versions of
-gfortran starting at 4.9. All Intel fortran compiler versions from
-2011 onwards also compile the stable code.
-
-The development version can be compiled with gfortran-6 and later and
-with Intel fortran 2019 and later, although some recent versions of
-Intel fortran may cause problems if aggressive optimization is
-used. All other compilers tested have issues, and fail to produce a
-working binary. This is the list of compilers tested:
-
-* gfortran 4.8: critic2 cannot be compiled because allocatable
-  components in user-defined types are not supported in this and older
-  versions.
-* gfortran 4.9 through 5.4 (and possibly older and newer gfortran-5):
-  the code compiles correctly but there are errors allocating and
-  deallocating the global field array (`sy%f`) and other complex
-  user-defined types. The program is usable, but problems will arise
-  if more than one crystal structure or more than 10 scalar fields are
-  loaded.
-* gfortran 6.x and above: no errors.
-* ifort, all versions from 12.1 up to 18.0.3: catastrophic internal
-  compiler errors of unknown origin.
-* ifort, version 2019.0.3.199: it compiles but inexplicable segmentation
-  faults with nonsensical tracebacks are thrown when using YT or
-  BADER and when loading and unloading fields.
-* ifort, version 2019.0.5.281: if aggressive optimization is used (`-O2`
-  and `-O3` flags), the compiler may freeze while compiling
-  `systemmod@proc.f90`.
-* Portland Group Fortran compiler (pgfortran), version 17.3. There are
-  two important compiler problems: i) passing subroutines and
-  functions whose interface includes multidimensional arrays as
-  arguments or function results does not work, and ii) internal
-  compiler error when compiling meshmod.f90.
-
-In summary: **Only recent versions of gfortran and ifort are
-guaranteed to work with the development version. If you cannot use
-gfortran 6 or newer or ifort 2019 or newer, download the stable
-version.** I do not think this is because of errors in the critic2
-code (though if you find that it is, please let me know). If your
-compiler throws an internal compiler error while trying to build
-critic2, you may want to consider submitting a bug report to the
-compiler developers.
+Critic2 uses features from the modern Fortran standards (2008 and
+later) that are not correctly implemented in some compilers. The
+current version can be compiled with gfortran 6 and later and with
+Intel Fortran (ifort 2019 or later, and ifx). Some recent versions of
+Intel Fortran may cause problems if aggressive optimization is used.
+Other compilers (older gfortran and ifort, the Portland Group
+compiler, ...) fail to produce a working binary. If your compiler
+throws an internal compiler error while trying to build critic2, you
+may want to consider submitting a bug report to the compiler
+developers.
 
 You can choose the compiler by setting the FC and CC environment
 variables to the path of your preferred compiler and then building in
 the usual way:
 ~~~
-export FC=/usr/bin/gfortran-6 CC=/usr/bin/gcc-6
+export FC=/usr/bin/gfortran-14 CC=/usr/bin/gcc-14
 mkdir build
 cd build
 cmake ..
@@ -314,21 +163,9 @@ binary. You can open any number of files with the GUI using:
 ~~~
 critic2 -g *.*
 ~~~
-On HiDPI (high pixel density) displays, the GUI scales the fonts and
-the interface elements using the scaling factor reported by the
-operating system. If the interface comes out too small or too large,
-you can override this factor with the `CRITIC2_UI_SCALE` environment
-variable:
-~~~
-export CRITIC2_UI_SCALE=1.5
-~~~
-A value of 1.0 means no scaling; higher values make the interface
-bigger. This is useful, for instance, if your display is scaled (e.g.
-at 150%) but the system reports it as unscaled.
-
-**Note: The critic2 graphical interface is not even close to
-finished.** Suggestions for improvement are welcome but there is still
-lots of work to be done.
+See the [download page](/critic2/download/#c2-gui) for some notes on
+using the graphical interface, including how to change its size on
+HiDPI displays.
 
 ## External Libraries {#c2-libraries}
 

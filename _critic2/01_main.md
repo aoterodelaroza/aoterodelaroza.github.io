@@ -16,27 +16,23 @@ search: true
 Critic2 is a program for the analysis of quantum mechanical
 calculation results in molecules and periodic solids.
 
-* The **development version** works only with recent compilers (see
-  [here](/critic2/installation/#whichcompilerswork)) but has the latest features.\\
-  Version **1.2**:
-  [critic2-1.2.zip](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.2.zip),
-  [critic2-1.2.tar.gz](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.2.tar.gz).
+<a href="/critic2/download/" class="btn btn--primary btn--large">Download critic2 for Windows, macOS, or Linux</a>
 
-* The **stable version** works with almost any f90/f03 Fortran
-  compiler. Only serious bugs are fixed in the stable version, so it
-  is seriously outdated by now.\\
-  Version **1.1**:
-  [critic2-1.1stable.zip](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1stable.zip),
-  [critic2-1.1stable.tar.gz](https://github.com/aoterodelaroza/critic2/archive/refs/tags/1.1stable.tar.gz).
-
-Alternatively, clone the git repository for the **latest version** of the code:
+The [download page](/critic2/download/) has ready-to-run packages of
+the latest release, including the graphical interface. The source code
+of each release is on the
+[releases page](https://github.com/aoterodelaroza/critic2/releases).
+To get the **development version**, which has the latest features and
+bug fixes, clone the git repository and
+[build it from source](/critic2/installation/):
 ~~~
 git clone https://github.com/aoterodelaroza/critic2.git
 ~~~
-or visit the [github page](https://github.com/aoterodelaroza/critic2).
-This manual and the examples refer to the latest version only. If you
-find a bug in either the stable or development versions, chances are
-it is already fixed in the github repository.
+This manual and the examples refer to the development version. The
+old stable version
+([1.1stable](https://github.com/aoterodelaroza/critic2/releases/tag/1.1stable)),
+which compiles with almost any Fortran compiler, is no longer
+maintained.
 
 ## Features
 
