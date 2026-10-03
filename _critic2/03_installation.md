@@ -29,46 +29,10 @@ These tools may already be available on your machine but, if they are
 not, they can be typically installed using a software package
 manager (`apt`, `rpm`, etc. on Linux; [homebrew](https://brew.sh/) on macOS).
 
-### Build Using cmake {#c2-usecmake}
-
-Using cmake is the recommended installation procedure, and the only
-way to build critic2 in recent versions. Change to the critic2 root
-directory and make a subdirectory for the compilation:
-~~~
-mkdir build
-cd build
-~~~
-Then do:
-~~~
-cmake ..
-~~~
-There are a number of compilation options that can be passed to cmake,
-the most relevant of which is `-DCMAKE_INSTALL_PREFIX=prefix`, which
-sets the installation directory. You can tweak this and other
-compilation options using one of the multiple cmake interfaces, like
-ccmake (use `ccmake ..` from the `build` directory). To build the
-program, do:
-~~~
-make
-~~~
-You can use `make -j n` to use `n` cores for the compilation. Running
-make creates the `critic2` binary in `build/src/`.
-
-Some build options for advanced users: If you need to compile a static
-version of critic2, use:
-~~~
-cmake .. -DBUILD_STATIC=ON
-~~~
-The binary generated using this option can be copied to a different
-computer (with the same architecture), even if it does not have the
-compiler libraries, but you will need static versions of all the
-libraries (with extension `.a`) for the static build to work.
-To compile a version with debug flags,
-~~~
-cmake .. -DCMAKE_BUILD_TYPE=Debug
-~~~
-This version gives more informative errors when the program crashes,
-but it is slower.
+On macOS, the simplest option is to let homebrew do everything: it
+installs the compilers and libraries, builds critic2 (including the
+graphical interface), and puts it in your path. See
+[macOS: Installing with Homebrew](#c2-homebrew) below.
 
 ### Build Using configure/make {#c2-useconfigure}
 
@@ -112,6 +76,161 @@ Critic2 is parallelized with OpenMP for shared-memory architectures
 (unless disabled during compilation). You change the number of
 parallel threads by setting the `OMP_NUM_THREADS` environment
 variable.
+
+### Build Using cmake {#c2-usecmake}
+
+Using cmake is the recommended installation procedure, and the only
+way to build critic2 in recent versions. Change to the critic2 root
+directory and make a subdirectory for the compilation:
+~~~
+mkdir build
+cd build
+~~~
+Then do:
+~~~
+cmake ..
+~~~
+There are a number of compilation options that can be passed to cmake,
+the most relevant of which is `-DCMAKE_INSTALL_PREFIX=prefix`, which
+sets the installation directory. You can tweak this and other
+compilation options using one of the multiple cmake interfaces, like
+ccmake (use `ccmake ..` from the `build` directory). To build the
+program, do:
+~~~
+make
+~~~
+You can use `make -j n` to use `n` cores for the compilation. Running
+make creates the `critic2` binary in `build/src/`.
+
+Some build options for advanced users: If you need to compile a static
+version of critic2, use:
+~~~
+cmake .. -DBUILD_STATIC=ON
+~~~
+The binary generated using this option can be copied to a different
+computer (with the same architecture), even if it does not have the
+compiler libraries, but you will need static versions of all the
+libraries (with extension `.a`) for the static build to work.
+To compile a version with debug flags,
+~~~
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+~~~
+This version gives more informative errors when the program crashes,
+but it is slower.
+
+### macOS: Installing with Homebrew {#c2-homebrew}
+
+[Homebrew](https://brew.sh/) is a package manager for macOS: a program
+that downloads, compiles, and installs other programs together with
+everything they need. Critic2 is distributed for homebrew through its
+own repository of installation recipes (a "tap"),
+[aoterodelaroza/homebrew-critic2](https://github.com/aoterodelaroza/homebrew-critic2).
+The recipe compiles the current development version of critic2 on
+your machine.
+
+**1. Open a terminal.** All the steps below are commands that you type
+(or paste) in the Terminal application. To open it, press Cmd-Space,
+type `Terminal`, and press Return. After pasting each command, press
+Return to run it.
+
+**2. Install the command line tools.** These are Apple's compilers and
+developer tools, which homebrew needs:
+~~~
+xcode-select --install
+~~~
+A window appears asking whether you want to install the tools. Click
+Install, accept the license, and wait until it finishes. If the
+command says that the command line tools are already installed, you
+can go on to the next step.
+
+**3. Install homebrew.** Run the installer from the
+[homebrew website](https://brew.sh/):
+~~~
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+~~~
+The installer asks for your password (the one you use to log in to
+your Mac). Nothing appears on the screen while you type it; this is
+normal. Type it and press Return. Then it shows what it is going to
+install and asks you to press Return again to continue. The
+installation takes a few minutes.
+
+At the end, the installer prints a "Next steps" section with a few
+commands that make the `brew` command available in your terminal.
+**Run them; homebrew does not work otherwise.** On an Apple Silicon
+Mac, these commands are:
+~~~
+echo >> ~/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+~~~
+(On an Intel Mac, homebrew installs in `/usr/local` and this step is
+usually not needed.) If in doubt, copy the commands from the
+installer's output. Check that homebrew works with:
+~~~
+brew --version
+~~~
+which should print the homebrew version.
+
+**4. Install critic2.**
+~~~
+brew install aoterodelaroza/critic2/critic2
+~~~
+This command adds the critic2 tap, downloads the libraries critic2
+needs (the gcc compilers, libxc, nlopt, openblas, hdf5, glfw,...), and
+then compiles and installs critic2. The first time, it takes a while,
+mostly because of the downloads. When it finishes, the `critic2`
+command is ready to use. You do not need to set `CRITIC_HOME`: the
+homebrew version of critic2 knows where to find its data files.
+
+**5. Using critic2.** Critic2 is used from the terminal in the same way
+as on any other system (see the [quickstart guide](/critic2/quickstart/)
+and the [manual](/critic2/manual/)):
+~~~
+critic2 input.cri              # output to the screen
+critic2 input.cri output.cro   # output to a file
+critic2 -g structure.cif       # open a file in the graphical interface
+~~~
+The graphical interface must be launched from a terminal on the Mac's
+own screen (not through an ssh connection). Some additional tips:
+
+* Input files must be plain text. If you use TextEdit to write them,
+  convert the document to plain text first (Format > Make Plain Text);
+  otherwise, TextEdit saves rich text and changes the quotes, and
+  critic2 will not be able to read the file.
+
+* Apple Silicon processors have performance and efficiency cores. In
+  parallel runs, critic2 usually works best with as many threads as
+  performance cores (four in the M1). To make this permanent, add the
+  `OMP_NUM_THREADS` variable to your `~/.zprofile`:
+  ~~~
+  echo 'export OMP_NUM_THREADS=4' >> ~/.zprofile
+  ~~~
+
+* If the graphical interface looks too small or too large, use the
+  `CRITIC2_UI_SCALE` variable (see [Graphical User Interface](#c2-gui)).
+
+**Updating critic2.** To rebuild critic2 with the current development
+version, use:
+~~~
+brew update
+brew reinstall critic2
+~~~
+Note that `brew upgrade` does not work for this purpose: the recipe
+always builds the latest critic2, but its version number does not
+change with every update of the code, so `brew upgrade` usually thinks
+there is nothing new. To keep the other homebrew programs and
+libraries up to date, run `brew upgrade` from time to time.
+
+**Uninstalling critic2.**
+~~~
+brew uninstall critic2
+brew untap aoterodelaroza/critic2
+~~~
+
+**If something goes wrong.** If the installation fails, the logs of
+the compilation are in `~/Library/Logs/Homebrew/critic2/`. Please,
+open an [issue](https://github.com/aoterodelaroza/critic2/issues)
+and attach them, together with the output of `brew config`.
 
 ## Which Compilers Work? {#whichcompilerswork}
 
