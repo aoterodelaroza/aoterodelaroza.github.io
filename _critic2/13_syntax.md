@@ -728,6 +728,7 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 NEWCELL NICE [inice.i] [MINDISP]
+NEWCELL REACH [ireach.i] [MINDISP]
 ~~~
 
 <a id="key-nosym"></a><a id="key-nosymm"></a>

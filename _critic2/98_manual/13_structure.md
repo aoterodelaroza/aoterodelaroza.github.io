@@ -443,6 +443,7 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 NEWCELL NICE [inice.i] [MINDISP]
+NEWCELL REACH [ireach.i] [MINDISP]
 ~~~
 The new unit cell is given by the vectors (`x1.r` `y1.r` `z1.r`),
 (`x2.r` `y2.r` `z2.r`), and (`x3.r` `y3.r` `z3.r`) in
@@ -548,6 +549,32 @@ price visible, the table includes an additional column (`rmax0`) with
 the radius of the nicest supercell of the same size. The `NICE`
 option of `VIBRATIONS CREATE_DISPLACEMENTS` uses the same procedure
 to choose the supercell for the phonon calculation.
+
+The keyword `REACH` works like `NICE` (it does not transform the cell
+either) but uses a different criterion to rank the supercells. For
+each size `n` between 1 and `ireach.i` (default: 64), all distinct
+supercells of size `n` are examined and the one with the longest
+reach is reported. The reach of a supercell is half the length of the
+shortest lattice vector of the superlattice: two atoms closer than the
+reach can never be mistaken for periodic images of each other in the
+supercell. Unlike the niceness, the reach depends only on the
+superlattice and not on the choice of supercell basis, so each
+supercell is reported in its Delaunay-reduced basis (the cell
+obtained by applying `NEWCELL DELAUNAY` to it).
+
+For each size, the output of `NEWCELL REACH` gives the reach of the
+chosen supercell (`reach`), the number of compatible symmetry
+operations (`nops`), the number of independent atoms (`nindep`) and of
+displaced structures (`ndisp`), and the transformation to use with
+`NEWCELL` to obtain it, all with the same meaning as in `NICE`. Many
+supercells of the same size often share the longest reach; in that
+case, the one with the most symmetry operations is chosen, then the
+one with the fewest displaced structures, then the nicest. If
+`MINDISP` is given, the supercell with the longest reach among those
+with the fewest displaced structures is chosen, and an additional
+column (`reach0`) gives the reach of the longest-reach supercell of
+the same size, for comparison. `NICE` and `REACH` cannot be used in
+the same `NEWCELL` command.
 
 ## Calculate Atomic Environments (ENVIRON) {#c2-environ}
 
