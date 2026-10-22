@@ -419,8 +419,13 @@ program is called its "dialect".
 * Orca writes spherical primitives only. The "5d", etc. keywords are
   ignored in an orca molden file.
   
-* The MO coefficients corresponding to shells with angular momentum f
-  and above have flipped sign.
+* Some MO coefficients of the f and g shells have flipped sign. The
+  spherical functions in a shell are written in the order $$m = 0,
+  +1, -1, +2, -2, +3, -3, +4, -4$$, and the coefficients with flipped
+  sign are those for $$\vert m\vert = 3$$ in the f shells and
+  $$\vert m\vert \geq 3$$ in the g shells. All other coefficients,
+  including those for the f and g functions with $$\vert m\vert \leq
+  2$$, have the usual sign.
 
 * The contraction coefficients are multiplied by a constant that is
   different from the normalization constant of a GTF. In particular,
