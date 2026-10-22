@@ -284,7 +284,7 @@ solution.
 |----------+--------+---------------------------------------------------------------|
 | xtb      | molden | 6.7.1 (GFN1-xTB and GFN2-xTB)                                 |
 |----------+--------+---------------------------------------------------------------|
-| PySCF    | molden | 2.14.0 (Cartesian basis sets only, see below)                 |
+| PySCF    | molden | 2.14.0                                                        |
 
 The limitations for each of these formats are listed below, along with
 notes on their particularities. Primitives with angular momentum of h
@@ -354,13 +354,13 @@ in critic2 at the moment, and I have no way of checking whether these
 follow the "official" molden format or not. But each program seems to
 have its own individual opinion on how to write these files anyway. In
 the following, the particular version of the molden file written by a
-program is called its "dialect". Critic2 implements five dialects:
-generic, psi4, orca, xtb, and ADF (STOs).
+program is called its "dialect". Critic2 implements six dialects:
+generic, psi4, orca, xtb, PySCF, and ADF (STOs).
 
 * The dialect can be given explicitly by the user, either with a
-  keyword after the file name (`LOAD file.molden PSI4`, `ORCA`, or
-  `XTB`) or before it (`LOAD MOLDEN_PSI4 file`, `MOLDEN_ORCA`, or
-  `MOLDEN_XTB`). This is always the safest option.
+  keyword after the file name (`LOAD file.molden PSI4`, `ORCA`, `XTB`,
+  or `PYSCF`) or before it (`LOAD MOLDEN_PSI4 file`, `MOLDEN_ORCA`,
+  `MOLDEN_XTB`, or `MOLDEN_PYSCF`). This is always the safest option.
 
 * If no dialect is given, critic2 guesses it from the contents of the
   file (not from its extension: `.molden` and `.molden.input` are
@@ -373,6 +373,9 @@ generic, psi4, orca, xtb, and ADF (STOs).
 
   - xtb: the `[Title]` block is empty (the line after `[Title]` is
     already the next tag).
+
+  - PySCF: the line right after `[Molden Format]` contains "made by
+    pyscf".
 
   - psi4: the line right after `[Molden Format]` is `[Atoms] (AU)`
     (psi4 writes neither a title nor a program line).
@@ -390,9 +393,7 @@ generic, psi4, orca, xtb, and ADF (STOs).
   contraction coefficients are not multiplied by any normalization
   constant, and the MO coefficients of Cartesian shells refer to
   Cartesian functions that are normalized individually. The other GTO
-  dialects are deviations from this convention, described below. The
-  generic dialect works, for instance, with molden files written by
-  PySCF (see the note on spherical shells below).
+  dialects are deviations from this convention, described below.
 
 * The primitive order is:
 
@@ -425,13 +426,14 @@ generic, psi4, orca, xtb, and ADF (STOs).
 
   If several of these keywords appear in the same file, the last one
   that refers to the d and f shells is the one that counts, and "9g"
-  applies regardless of the order. Some programs (orca, PySCF) write
-  "5d", "7f", and "9g" on separate lines to indicate that d, f, and g
-  shells are all spherical, but critic2 reads this as Cartesian d and
-  spherical f and g. Orca files are not affected because they are
-  always read as spherical (see below), but PySCF molden files with
-  spherical basis sets are currently read incorrectly
-  ([issue #87](https://github.com/aoterodelaroza/critic2/issues/87)).
+  applies regardless of the order. This is the literal reading of the
+  keywords, and it is used in the generic, psi4, and xtb dialects.
+  However, some programs (orca, PySCF) write "5d", "7f", and "9g" on
+  separate lines to indicate that d, f, and g shells are all
+  spherical, which in the literal reading would give Cartesian d
+  shells. Orca files are always read as spherical, and in the PySCF
+  dialect the keywords add up instead (see below and
+  [issue #87](https://github.com/aoterodelaroza/critic2/issues/87)).
   
 * ROHF and fractional-occupation wavefunctions are currently not
   supported by critic2 with molden files.
@@ -535,6 +537,49 @@ N(l,\alpha_k) = \frac{2^{l+3/4} \alpha_k^{l/2+3/4}}{\pi^{3/4} \sqrt{(2l-1)!!}}
   SOCl2 and 58 for Fe(CO)5). The density and the dipole
   moment calculated by critic2 agree with the values printed by xtb
   for GFN1-xTB and GFN2-xTB.
+
+### PySCF Molden File
+
+* Critic2 will use the PySCF dialect if no indication is given by the
+  user and the line after `[Molden Format]` contains the words "made
+  by pyscf" (PySCF writes its version there). The following was
+  determined from the molden writer in PySCF 2.14.0
+  (`pyscf/tools/molden.py`) and verified by comparing the electron
+  density calculated by critic2 with the density calculated by PySCF
+  for spherical and Cartesian basis sets up to g shells, RHF, RKS, and
+  UHF wavefunctions, and a basis set with ECPs.
+
+* For spherical basis sets, PySCF writes the "5d", "7f", and "9g"
+  keywords on separate lines, which means that the d, f, and g shells
+  are all spherical. In the PySCF dialect, the keywords add up: the d
+  shells are spherical if "5d", "5d7f", or "5d10f" appear, the f shells
+  are spherical if "5d", "5d7f", or "7f" appear, and the g shells are
+  spherical if "9g" appears. In the literal reading of the other
+  dialects, "7f" after "5d" makes the d shells Cartesian, which is
+  wrong for these files.
+
+* For Cartesian basis sets, PySCF writes the "6d", "10f", and "15g"
+  keywords, which critic2 ignores (Cartesian is the default). PySCF
+  normalizes each Cartesian function individually before writing the
+  file, as in the generic dialect.
+
+* The contraction coefficients are not multiplied by any normalization
+  constant, and the spherical functions are in the usual order
+  ($$m = 0, +1, -1, \ldots$$). Apart from the treatment of the
+  spherical keywords, the PySCF dialect is the same as the generic
+  dialect.
+
+* PySCF does not write h and higher shells by default (they are
+  removed from the basis set before writing the file), so the density
+  from a molden file with such a basis set is approximate.
+
+* If the basis set has ECPs, PySCF writes a `[core]` block with the
+  number of core electrons on each atom. Critic2 ignores this block,
+  so the density is that of the valence electrons only, the same as
+  in PySCF.
+
+* ROHF wavefunctions are written by PySCF with occupations 1 and 2,
+  and they are not supported (see above).
 
 ### ADF Molden File (with STOs)
 
