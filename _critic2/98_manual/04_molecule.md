@@ -140,8 +140,8 @@ at.s x.r y.r z.r
 
 * postg output file (pgout).
 
-* molden format (psi4, ADF, orca, etc.). The molden.input extension is
-  the same as molden (used by orca).
+* molden format (psi4, ADF, orca, xtb, etc.). The molden.input
+  extension is the same as molden (used by orca and xtb).
 
 The input molecule is enclosed in a box that is larger (default: 10
 angstrom) in all directions than the minimal box encompassing the

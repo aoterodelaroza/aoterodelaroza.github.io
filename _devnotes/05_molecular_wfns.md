@@ -276,13 +276,15 @@ solution.
 |          | wfx    | g09(B.01,C.01,D.01,E.01), g16(A.03,B.01,C.01)                 |
 |          | fchk   | g03(E.01), g09(A.02,B.01,C.01,D.01,E.01), g16(A.03,B.01,C.01) |
 |----------+--------+---------------------------------------------------------------|
-| psi4     | molden | 1.1, 1.4                                                      |
+| psi4     | molden | 1.1, 1.4, 1.9.1                                               |
 |----------+--------+---------------------------------------------------------------|
 | orca     | wfn    | 4.0                                                           |
 |          | wfx    | 4.2                                                           |
-|          | molden | 4.0, 4.2                                                      |
+|          | molden | 4.0, 4.2, 5.0.3, 6.1.0                                        |
 |----------+--------+---------------------------------------------------------------|
-| xtb      | molden | 6.7.1                                                         |
+| xtb      | molden | 6.7.1 (GFN1-xTB and GFN2-xTB)                                 |
+|----------+--------+---------------------------------------------------------------|
+| PySCF    | molden | 2.14.0 (Cartesian basis sets only, see below)                 |
 
 The limitations for each of these formats are listed below, along with
 notes on their particularities. Primitives with angular momentum of h
@@ -352,11 +354,45 @@ in critic2 at the moment, and I have no way of checking whether these
 follow the "official" molden format or not. But each program seems to
 have its own individual opinion on how to write these files anyway. In
 the following, the particular version of the molden file written by a
-program is called its "dialect".
+program is called its "dialect". Critic2 implements five dialects:
+generic, psi4, orca, xtb, and ADF (STOs).
 
-* If there is no indication from the user regarding which dialect the
-  molden file uses, critic2 tries to guess the dialect. If the guess
-  fails, critic2 uses the psi4 dialect by default.
+* The dialect can be given explicitly by the user, either with a
+  keyword after the file name (`LOAD file.molden PSI4`, `ORCA`, or
+  `XTB`) or before it (`LOAD MOLDEN_PSI4 file`, `MOLDEN_ORCA`, or
+  `MOLDEN_XTB`). This is always the safest option.
+
+* If no dialect is given, critic2 guesses it from the contents of the
+  file (not from its extension: `.molden` and `.molden.input` are
+  treated the same way). The checks are made in this order:
+
+  - ADF (STOs): the file contains an `[STO]` block.
+
+  - orca: the line after the `[Title]` tag contains the words
+    "created by orca_2mkl".
+
+  - xtb: the `[Title]` block is empty (the line after `[Title]` is
+    already the next tag).
+
+  - psi4: the line right after `[Molden Format]` is `[Atoms] (AU)`
+    (psi4 writes neither a title nor a program line).
+
+  - generic: none of the above. In this case, critic2 prints a warning
+    suggesting that the dialect be given explicitly.
+
+  The psi4 and xtb checks are heuristic and only reflect the files
+  written by the versions in the table above. A file written by
+  another program that happens to look like one of these may be read
+  with the wrong dialect, which is why giving the dialect explicitly
+  is recommended.
+
+* The generic dialect follows the usual molden convention: the
+  contraction coefficients are not multiplied by any normalization
+  constant, and the MO coefficients of Cartesian shells refer to
+  Cartesian functions that are normalized individually. The other GTO
+  dialects are deviations from this convention, described below. The
+  generic dialect works, for instance, with molden files written by
+  PySCF (see the note on spherical shells below).
 
 * The primitive order is:
 
@@ -368,6 +404,9 @@ program is called its "dialect".
   
   - g shell: xxxx, yyyy, zzzz, xxxy, xxxz, xyyy, yyyz, xzzz, yzzz,
     xxyy, xxzz, yyzz, xxyz, xyyz, xyzz.
+
+  The spherical functions in a shell are written in the order
+  $$m = 0, +1, -1, +2, -2, +3, -3, +4, -4$$.
     
 * Spherical primitives are possible in a molden file. They are
   indicated by the "5d", "7f", "5d7f", "5d10f", and "9g" keywords,
@@ -383,13 +422,30 @@ program is called its "dialect".
   - "7f": the f shells are spherical but the d shells are Cartesian.
 
   - "9g": the g shells are spherical.
+
+  If several of these keywords appear in the same file, the last one
+  that refers to the d and f shells is the one that counts, and "9g"
+  applies regardless of the order. Some programs (orca, PySCF) write
+  "5d", "7f", and "9g" on separate lines to indicate that d, f, and g
+  shells are all spherical, but critic2 reads this as Cartesian d and
+  spherical f and g. Orca files are not affected because they are
+  always read as spherical (see below), but PySCF molden files with
+  spherical basis sets are currently read incorrectly
+  ([issue #87](https://github.com/aoterodelaroza/critic2/issues/87)).
   
 * ROHF and fractional-occupation wavefunctions are currently not
   supported by critic2 with molden files.
 
 * SP shells are not implemented.
 
+* If the file contains several wavefunctions (several `[Molden
+  Format]` tags), only the first one is read and a warning is
+  printed.
+
 ### Psi4 Molden File
+
+* Critic2 will use the psi4 dialect if no indication is given by the
+  user and the `[Atoms] (AU)` tag comes right after `[Molden Format]`.
 
 * Psi4 does not write SP shells. The SP shells are already unpacked
   into the corresponding s and p shells in the molden file.
@@ -397,27 +453,48 @@ program is called its "dialect".
 * The contraction coefficients are not multiplied by any normalization
   constant.
 
+* The MO coefficients of the Cartesian shells refer to Cartesian
+  functions that all have the normalization constant of the
+  $$x^l$$, $$y^l$$, and $$z^l$$ functions in the same shell, instead
+  of being normalized individually. Critic2 multiplies the MO
+  coefficient of the $$x^iy^jz^k$$ function ($$l = i+j+k$$) by:
+\begin{equation}
+\sqrt{\frac{(2i-1)!!(2j-1)!!(2k-1)!!}{(2l-1)!!}}
+\end{equation}
+  For instance, the coefficients of the xy functions in a d shell are
+  divided by $$\sqrt{3}$$, and those of the xx, yy, and zz functions
+  are unchanged. Spherical shells are not affected. Before this
+  correction, critic2 gave the wrong electron density for psi4 molden
+  files with Cartesian basis sets.
+
 * The molecular coordinates in the molden file are different from the
   input file (the molecule is, at least, translated).
 
-* Either due to a bug in critic2, in psi4, or a misunderstanding
-  regarding the molden format, psi4 molden files with Cartesian
-  primitives do not to work properly in critic2.
-
 * Psi4 does not write h primitives to the molden file (but the file is
   still generated!).
+
+* Psi4 fchk files with Cartesian g shells give an electron density
+  that does not agree with the density calculated by psi4 itself (the
+  corresponding molden file does). The Cartesian d and f fchk files and
+  all spherical fchk files are fine.
 
 ### Orca Molden File
 
 * Critic2 will use the orca molden dialect if no indication is given
   by the user and the words "created by orca_2mkl" appear under the
-  [TITLE] tag.
+  [TITLE] tag. Orca writes files with the `.molden.input` extension,
+  but the dialect is detected from the contents, not from the
+  extension.
 
 * Orca does not write SP shells. The SP shells are already unpacked
   into the corresponding s and p shells in the molden file.
   
-* Orca writes spherical primitives only. The "5d", etc. keywords are
-  ignored in an orca molden file.
+* Orca writes spherical primitives only. In a file written by
+  orca_2mkl (with the title above), the "5d", etc. keywords are
+  ignored and all shells are read as spherical. This is also true if
+  the orca dialect is given explicitly by the user. If the orca dialect
+  is forced on a file that was not written by orca_2mkl, the keywords
+  are used as in the generic dialect.
   
 * Some MO coefficients of the f and g shells have flipped sign. The
   spherical functions in a shell are written in the order $$m = 0,
@@ -425,7 +502,8 @@ program is called its "dialect".
   sign are those for $$\vert m\vert = 3$$ in the f shells and
   $$\vert m\vert \geq 3$$ in the g shells. All other coefficients,
   including those for the f and g functions with $$\vert m\vert \leq
-  2$$, have the usual sign.
+  2$$, have the usual sign. This was verified with orca 5.0.3 and
+  6.1.0 by comparing with the wfx files generated by orca_2aim.
 
 * The contraction coefficients are multiplied by a constant that is
   different from the normalization constant of a GTF. In particular,
@@ -437,6 +515,26 @@ N(l,\alpha_k) = \frac{2^{l+3/4} \alpha_k^{l/2+3/4}}{\pi^{3/4} \sqrt{(2l-1)!!}}
   where $$\alpha_k$$ are their respective exponents. This is the
   normalization factor for the AOs with angular terms $$x^l$$,
   $$y^l$$, and $$z^l$$ within that shell.
+
+### Xtb Molden File
+
+* Critic2 will use the xtb dialect if no indication is given by the
+  user and the `[Title]` block is empty. Xtb writes the molden file
+  as `molden.input` (with the `--molden` option), but the dialect is
+  detected from the contents, so the file can be renamed.
+
+* The contraction coefficients are multiplied by the same constant as
+  in orca files ($$N(l,\alpha_k)$$, see above).
+
+* Xtb writes no "5d", etc. keywords and its shells are Cartesian. Unlike
+  in orca files, the shells are not forced to be spherical, and the MO
+  coefficients are used as given (there are no sign flips).
+
+* Xtb uses a minimal valence basis set, so integrating the electron
+  density gives the number of valence electrons (e.g. 26 for
+  SOCl2 and 58 for Fe(CO)5). The density and the dipole
+  moment calculated by critic2 agree with the values printed by xtb
+  for GFN1-xTB and GFN2-xTB.
 
 ### ADF Molden File (with STOs)
 
