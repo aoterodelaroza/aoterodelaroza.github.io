@@ -41,6 +41,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
+CRYSTAL dgrid_aims.dat # (FHIaims output dgrid)
 CRYSTAL file.frac
 CRYSTAL file.cell
 CRYSTAL file.geom
@@ -54,7 +55,7 @@ CRYSTAL file.{gin,grs} [istruct.i] # (GULP input or restart file)
 CRYSTAL file.{gout,got} [istruct.i] # (GULP output)
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
 		 FCHK|MOLDEN|GAUSSIAN|SIESTA|FPLO|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-		 FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM|GULP_IN|GULP_OUT|FDF] ...
+		 FHIAIMS_IN|FHIAIMS_OUT|FHIAIMS_DGRID|FRAC|CELL|GEOM|GULP_IN|GULP_OUT|FDF] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -302,7 +303,7 @@ for the system as well as the k-point information and the converged
 Kohn-Sham states. It is mostly used in the calculation of
 delocalization indices in periodic solids.
 
-### FHIaims Inputs and Outputs (in, in.next_step, out, own) {#c2-fhi}
+### FHIaims Inputs and Outputs (in, in.next_step, out, own, dgrid_aims.dat) {#c2-fhi}
 
 Crystal (and molecular) structures can be loaded from an FHIaims
 "geometry.in" input file. Only the `atom`, `atom_frac`, and
@@ -316,6 +317,16 @@ The crystal or molecular structure can also be loaded from an FHIaims
 output file, which is assumed to have a `.out` or `.own` extension. In the
 case of a geometry optimization, the last available geometry in the
 output file is read.
+
+Finally, the structure can be read from the `dgrid_aims.dat` file
+written by FHIaims when the `output dgrid` keyword is used, which
+contains the atomic positions and the lattice vectors as well as the
+Kohn-Sham wavefunction (see the
+[LOAD keyword](/critic2/manual/fields/#c2-fhiaims)). This file is
+recognized by its `.dat` extension and the contents of its first line;
+the `FHIAIMS_DGRID` keyword forces the format. Reading the structure
+from `dgrid_aims.dat` guarantees that it is in the same frame of
+reference as the FHIaims wavefunction, which is required to LOAD it.
 
 ### TINKER frac Format (frac) {#c2-tinkerfrac}
 
@@ -450,6 +461,8 @@ specifying the required format. The allowed keywords are:
 - `FHIAIMS_IN`: an FHIaims input file (`geometry.in`).
 
 - `FHIAIMS_OUT`: an FHIaims output file.
+
+- `FHIAIMS_DGRID`: an FHIaims `dgrid_aims.dat` file.
 
 - `FRAC`: a TINKER `.frac` file.
 

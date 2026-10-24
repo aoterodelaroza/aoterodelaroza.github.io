@@ -267,6 +267,7 @@ CRYSTAL file.axsf [istruct.i [xnudge.r]]
 CRYSTAL file.pwc
 CRYSTAL file.{in,in.next_step} # (geometry.in, FHIaims input)
 CRYSTAL file.{out,own} # (FHIaims output)
+CRYSTAL dgrid_aims.dat # (FHIaims output dgrid)
 CRYSTAL file.frac
 CRYSTAL file.cell
 CRYSTAL file.geom
@@ -280,7 +281,7 @@ CRYSTAL file.{gout,got} [istruct.i] # (GULP output)
 CRYSTAL file.fdf # (SIESTA input)
 CRYSTAL [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|WFN|WFX|
          FCHK|MOLDEN|GAUSSIAN|SIESTA|FPLO|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-         FHIAIMS_IN|FHIAIMS_OUT|FRAC|CELL|GEOM|GULP_IN|GULP_OUT|FDF] ...
+         FHIAIMS_IN|FHIAIMS_OUT|FHIAIMS_DGRID|FRAC|CELL|GEOM|GULP_IN|GULP_OUT|FDF] ...
 CRYSTAL
  SPG [hall.i|ita.i HM|spg.s]
  CELL a.r b.r c.r alpha.r beta.r gamma.r [ANG|ANGSTROM|BOHR|AU]
@@ -558,13 +559,14 @@ LOAD file.wfx
 LOAD file.fchk [READVIRTUAL]
 LOAD file.molden [READVIRTUAL] [ORCA|PSI4|XTB|PYSCF]
 LOAD file.molden.input [READVIRTUAL] [ORCA|PSI4|XTB|PYSCF]
+LOAD dgrid_aims.dat # (FHIaims output dgrid)
 LOAD file.pwc [file.chk [filedn.chk]] [SPIN spin.i] [KPT k1.i k2.i...]
               [BAND b1.i b2.i ...] [ERANGE emin.r emax.r]
 LOAD COPY id.s [TO id2.s]
 LOAD PROMOLECULAR
 LOAD PROMOLECULAR [FRAGMENT file.xyz]
 LOAD [WIEN|ELK|PI|CUBE|BINCUBE|ABINIT|VASP|VASPNOV|QUB|XSF|ELKGRID|SIESTA|FPLO|DFTB|
-      WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|MOLDEN_XTB|MOLDEN_PYSCF|FCHK|PWC] file
+      WFN|WFX|MOLDEN|MOLDEN_ORCA|MOLDEN_PSI4|MOLDEN_XTB|MOLDEN_PYSCF|FCHK|PWC|FHIAIMS] file
 LOAD ... [NEAREST|TRILINEAR|TRISPLINE|TRICUBIC|SMOOTHRHO [NENV nenv.i] [FDMAX fdmax.r]]
          [EXACT|APPROXIMATE] [RHONORM|VNORM] [NOCORE] [NUMERICAL|ANALYTICAL]
          [TYPNUC {-3,-1,1,3}] [NORMALIZE n.r] [{NAME|ID} id.s]
@@ -658,13 +660,14 @@ MOLECULE file.{cube|cub}
 MOLECULE file.bincube
 MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
+MOLECULE dgrid_aims.dat [border.r] [CUBIC|CUBE] # (FHIaims output dgrid)
 MOLECULE file.{gin,grs,gout,got} [istruct.i] # (GULP input/output, clusters)
 MOLECULE file.fdf # (SIESTA input)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|MOL2|WFN|WFX|
           FCHK|MOLDEN|GAUSSIAN|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-          FHIAIMS_IN|FHIAIMS_OUT|FRAC|GULP_IN|GULP_OUT|FDF] ...
+          FHIAIMS_IN|FHIAIMS_OUT|FHIAIMS_DGRID|FRAC|GULP_IN|GULP_OUT|FDF] ...
 MOLECULE
  NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
  atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]

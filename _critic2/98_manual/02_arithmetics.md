@@ -135,7 +135,8 @@ Using these flags to select virtual orbitals requires a file format
 that contains information about them (wfn and wfx do not work). In
 addition, the molecular wavefunction field has to be loaded using the
 [READVIRTUAL keyword](/critic2/manual/fields/#c2-load). Also, in
-unrestricted molecular wavefunction fields, one can access the spin
+unrestricted molecular wavefunction fields and spin-polarized FHIaims
+fields, one can access the spin
 densities:
 
 + `up`: up-spin density.

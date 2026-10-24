@@ -197,7 +197,8 @@ assumed, with damping function coefficients `a1.r` and `a2.r` and
 functional selector `chf.s`. The latter can be either a keyword for a
 functional (`blyp`, `b3lyp`, etc.) or a number between 0 and 1
 indicating the fraction of exact exchange. The molecular XDM code can
-be used only with wavefunction fields and DFTB fields.
+be used only with wavefunction fields, DFTB+ fields, and FHIaims
+fields.
 
 The rest of the information in this section applies to the XDM GRID
 keyword. XDM GRID uses the electron density (RHO), the kinetic energy

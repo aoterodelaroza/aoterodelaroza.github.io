@@ -35,13 +35,14 @@ MOLECULE file.{cube|cub}
 MOLECULE file.bincube
 MOLECULE file.{in,in.next_step} # (geometry.in, FHIaims input)
 MOLECULE file.{out,own} # (FHIaims output)
+MOLECULE dgrid_aims.dat [border.r] [CUBIC|CUBE] # (FHIaims output dgrid)
 MOLECULE file.{gin,grs,gout,got} [istruct.i] # (GULP input/output, clusters)
 MOLECULE file.fdf # (SIESTA input)
 MOLECULE file.cif
 MOLECULE ...
 MOLECULE [CIF|SHELX|21|CUBE|BINCUBE|WIEN|ABINIT|ELK|QE_IN|QE_OUT|CRYSTAL|XYZ|MOL2|WFN|WFX|
           FCHK|MOLDEN|GAUSSIAN|GJF|ZMAT|SIESTA|XSF|GEN|VASP|PWC|AXSF|DAT|PGOUT|ORCA|DMAIN|
-          FHIAIMS_IN|FHIAIMS_OUT|FRAC|GULP_IN|GULP_OUT|FDF] ...
+          FHIAIMS_IN|FHIAIMS_OUT|FHIAIMS_DGRID|FRAC|GULP_IN|GULP_OUT|FDF] ...
 MOLECULE
   NEQ x.r y.r z.r atom.s [ANG/ANGSTROM] [BOHR/AU]
   atom.s x.r y.r z.r [ANG/ANGSTROM] [BOHR/AU]
@@ -212,7 +213,7 @@ save disk space and reading/writing time. Binary cube files have
 extension .bincube, and contain essentially the same information as a
 usual cube file.
 
-### FHIaims Inputs and Outputs (in, in.next_step, out, own) {#c2-fhi}
+### FHIaims Inputs and Outputs (in, in.next_step, out, own, dgrid_aims.dat) {#c2-fhi}
 
 Molecular (and crystal) structures can be loaded from an FHIaims
 "geometry.in" input file. Alternatively, you can also load the
@@ -223,6 +224,15 @@ The molecular structure can also be loaded from an FHIaims output
 file, which is assumed to have a .out or .own extension. In the case
 of a geometry optimization, the last available geometry in the output
 file is read.
+
+The molecular structure can also be read from the `dgrid_aims.dat`
+file written by FHIaims when the `output dgrid` keyword is used, which
+contains the atomic positions as well as the Kohn-Sham wavefunction
+(see the [LOAD keyword](/critic2/manual/fields/#c2-fhiaims)). This
+file is recognized by its `.dat` extension and the contents of its
+first line (the same extension is used for psi4 output files); the
+`FHIAIMS_DGRID` keyword forces the format. The `border.r`, `CUBIC`,
+and `CUBE` options work as in an xyz file.
 
 ### Other Crystallographic Formats (cif, scf.in,...)
 
@@ -267,6 +277,8 @@ specifying the required format. The allowed keywords are:
 - `FHIAIMS_IN`: an FHIaims input file (`geometry.in`).
 
 - `FHIAIMS_OUT`: an FHIaims output file.
+
+- `FHIAIMS_DGRID`: an FHIaims `dgrid_aims.dat` file.
 
 - `ORCA`: an ORCA output file.
 
