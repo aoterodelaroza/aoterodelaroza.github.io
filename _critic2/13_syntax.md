@@ -988,13 +988,12 @@ VORONOI [BASINS [OBJ|PLY|OFF] [ibasin.i]] [ONLY iat1.i iat2.i ...]
 [WRITE](/critic2/manual/write/#c2-write)
 : Write the crystal structure to an external file.
 ~~~
-WRITE file.{xyz,gjf,cml} [SPHERE rad.r [x0.r y0.r z0.r]]
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
-      [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r]
-      [NMER nmer.i]
-WRITE file.{obj,ply,off} [SPHERE rad.r [x0.r y0.r z0.r]]
-      [CUBE side.r [x0.r y0.r z0.r]] [BORDER] [ix.i iy.i iz.i]
-      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
+WRITE file.ext [ix.i iy.i iz.i] [BORDER]
+      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
+      [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
+      [format-specific options]
+WRITE file.{xyz,gjf,cml}
+WRITE file.{obj,ply,off} [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
 WRITE file.pwi [rklength.r]
 WRITE file.tess
@@ -1017,6 +1016,7 @@ WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
 WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
+WRITE file.alm.in
 WRITE file.frac
 WRITE file.pdb
 WRITE BULK

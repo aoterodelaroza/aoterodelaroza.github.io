@@ -43,12 +43,12 @@ multiple structures.
 
 ## Writing the Structure (WRITE) {#c2-write}
 ~~~
-WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER]
+WRITE file.ext [ix.i iy.i iz.i] [BORDER]
       [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
       [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
-WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER]
-      [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
-      [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
+      [format-specific options]
+WRITE file.{xyz,gjf,cml}
+WRITE file.{obj,ply,off} [CELL] [MOLCELL]
 WRITE file.scf.in [rklength.r]
 WRITE file.pwi [rklength.r]
 WRITE file.tess
@@ -59,6 +59,7 @@ WRITE file.elk
 WRITE file.gau
 WRITE file.cif [NOSYM|NOSYMM]
 WRITE file.d12 [NOSYM|NOSYMM] [EXTERNAL]
+WRITE file.res [NOSYM|NOSYMM]
 WRITE file.m
 WRITE file.db
 WRITE file.gin
@@ -70,6 +71,7 @@ WRITE file.hsd
 WRITE file.gen
 WRITE file.pyscf
 WRITE file.in [rklength.r] [CARTESIAN] ## FHIaims geometry.in
+WRITE file.alm.in
 WRITE file.frac
 WRITE file.pdb
 ~~~
@@ -78,21 +80,59 @@ A number of file formats can be written by critic2. As in CRYSTAL and
 MOLECULE, the type of file is detected by the extension (`.xyz`,
 `.in`, `.cri`, etc.).
 
-### Molecular File Formats (xyz, gjf, cml)
+The fragment options (`ix.i iy.i iz.i`, BORDER, SPHERE, CUBE,
+MOLMOTIF, ONEMOTIF, ENVIRON, and NMER) select a finite piece of the
+structure, and can be combined with any output format. They are
+described in the next section. The remaining keywords are specific to
+a particular format and are described in the corresponding sections
+below.
+
+### Fragment Options and Molecular File Formats (xyz, gjf, cml)
 
 With this command:
 ~~~
-WRITE file.{xyz,gjf,cml} [ix.i iy.i iz.i] [BORDER]
+WRITE file.ext [ix.i iy.i iz.i] [BORDER]
       [SPHERE rad.r [x0.r y0.r z0.r]] [CUBE side.r [x0.r y0.r z0.r]]
       [MOLMOTIF] [ONEMOTIF] [ENVIRON dist.r] [NMER nmer.i]
 ~~~
-WRITE generates an xyz file containing a finite
-piece of the crystal (if the structure was loaded with CRYSTAL) or the
-molecule (resp. MOLECULE). Alternatively, if the `.gjf`
-extension is used, a template for a Gaussian input file is
-written. If cml is used, a Chemical Markup Language file (xml-style)
-is created, containing the same molecular fragment (see below). The number of
-cells used in each direction is given by `ix.i`,
+WRITE generates a file containing a finite piece of the crystal (if
+the structure was loaded with CRYSTAL) or the molecule
+(resp. MOLECULE). If the `.xyz` extension is used, an xyz file is
+written. If the `.gjf` extension is used, a template for a Gaussian
+input file is written. If cml is used, a Chemical Markup Language file
+(xml-style) is created, containing the same molecular fragment (see
+below).
+
+The fragment options can be combined with any of the other output
+formats as well. In that case, the selected fragment is treated as a
+molecule and written using the molecular variant of the format, if the
+format has one (for instance, a `geometry.in` for FHIaims without
+lattice vectors, or a pyscf script that creates a `Mole` object). If
+the format is only defined for periodic structures (for instance, cif
+or VASP's `POSCAR`), the fragment is written inside a box, in the same
+way as when a molecule is loaded with the MOLECULE keyword. Note that
+this applies to the `ix.i iy.i iz.i` integers as well: `WRITE
+file.cif 2 2 2` writes the atoms in a 2x2x2 block of cells as a
+molecule in a box, not a supercell. Use
+[NEWCELL](/critic2/manual/structure/#c2-newcell) to build supercells.
+For instance,
+~~~
+CRYSTAL LIBRARY urea
+WRITE urea.in ONEMOTIF NMER 1
+~~~
+writes one FHIaims `geometry.in` template for each of the two
+molecules in the urea unit cell (`urea_monomer_1.in` and
+`urea_monomer_2.in`), and
+~~~
+WRITE urea.gjf MOLMOTIF NMER 2
+~~~
+writes Gaussian input templates for all monomers and dimers in the
+completed molecular motif. In the formats that accept a k-point
+length (`rklength.r`, see below), a single real number is interpreted
+as the k-point length and three integers are interpreted as `ix.i
+iy.i iz.i`.
+
+The number of cells used in each direction is given by `ix.i`,
 `iy.i`, and `iz.i` (default: 1, 1, 1). For the purpose of its graphical
 representation, it is sometimes convenient to include atoms that are
 almost exactly at the edge of the cell. For instance, the NaCl crystal
@@ -184,7 +224,7 @@ WRITE file.{obj,ply,off} [ix.i iy.i iz.i] [BORDER]
       [MOLMOTIF] [ONEMOTIF] [CELL] [MOLCELL]
 ~~~
 In this case, however, the generated files are graphical
-representations.
+representations, and the ENVIRON and NMER options are ignored.
 
 The OBJ output is the Wavefront OBJ format. The OBJ format is a
 three-dimensional model representation, that is, it uses vertices and
@@ -366,6 +406,15 @@ FHIaims calculation is written. The template `control.in` specifies a
 uniform k-point grid in the `k_grid` keyword with a density given by
 the length parameter `rklength.r`. See the
 [KPOINTS](/critic2/manual/structure/#c2-kpoints) keyword for details.
+
+### ALAMODE (alm.in)
+
+A template input file for the ALAMODE program (`MODE = suggest`) can
+be written using the `.alm.in` extension (note that `.in` alone
+generates an FHIaims input and `scf.in` generates a QE input). The
+template contains the cell, the species and the atomic positions. The
+remaining keywords (prefix, interaction order, cutoffs) are
+placeholders that must be adapted by the user.
 
 ### TINKER frac Files (frac)
 
