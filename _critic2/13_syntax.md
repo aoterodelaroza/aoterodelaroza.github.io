@@ -154,9 +154,9 @@ BUNDLEPLOT x.r y.r z.r
 
 <a id="key-bz"></a>
 [BZ](/critic2/manual/structure/#c2-bz)
-: Print the geometry of the Brillouin zone.
+: Print the geometry of the Brillouin zone and, optionally, the special k-points and band path.
 ~~~
-BZ
+BZ [SPECIAL]
 ~~~
 
 <a id="key-clear"></a>

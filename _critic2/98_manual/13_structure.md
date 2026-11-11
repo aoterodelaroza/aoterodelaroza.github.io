@@ -898,10 +898,35 @@ KPOINTS, the k-point grid dimensions are calculated only for that value.
 
 The BZ keyword:
 ~~~
-BZ
+BZ [SPECIAL]
 ~~~
 calculates and prints the geometry of the Brillouin cell for the
-currently loaded crystal.
+currently loaded crystal: the reciprocal lattice vectors and
+parameters, the vertices and faces of the first Brillouin zone, and
+the lattice vectors of the neighboring cells that share a face with it.
+The reciprocal lattice vectors follow the crystallographic convention
+($${\rm a}^* = ({\rm b}\times{\rm c})/V$$, with no factor of
+$$2\pi$$).
+
+If the SPECIAL keyword is given, critic2 also prints the special
+(high-symmetry) k-points of the Brillouin zone and the suggested band
+structure path, following the HPKOT method of
+[Hinuma et al., Comput. Mater. Sci. 128 (2017) 140](https://doi.org/10.1016/j.commatsci.2016.10.015)
+as implemented in [SeeK-path](https://github.com/giovannipizzi/seekpath).
+The space group is found with spglib and used to assign the crystal to
+one of the 29 extended Bravais lattices of HPKOT (e.g. cF2, tI1, mC3),
+which determines the set of points and the path. The points are
+labeled as in HPKOT (GAMMA, X, L, SIGMA_0, ...), and their coordinates
+are given in the reciprocal cell of the crystal as loaded, regardless
+of the orientation or the setting of the cell, together with their
+distance to the origin. If the cell of the crystal is not primitive
+(for instance, a centered conventional cell), a second table gives the
+coordinates in the standard primitive reciprocal cell of HPKOT, along
+with the primitive reciprocal lattice vectors expressed in the
+reciprocal basis of the crystal. The band path is written as a list of
+point labels, with consecutive segments joined by hyphens and
+discontinuities marked with a vertical bar (for instance,
+`GAMMA-X-U | K-GAMMA-L-W-X`).
 
 ## Edit the structure (EDIT) {#c2-edit}
 
