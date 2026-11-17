@@ -271,6 +271,16 @@ therefore can only be used with fields that provide the one-electron
 wavefunctions. At present, this is only available for molecular
 wavefunction fields.
 
+These functions are calculated from the one-electron wavefunctions
+only. If the field has a core density that does not come from orbitals
+(the EDFs in a wfx file calculated with effective core potentials, or
+core augmentation with `ZPSP`), the core contributes to the density
+and its derivatives but not to these functions, which are therefore
+valence-only quantities. In particular, `kkin(id)` is `gkin(id)` minus
+one fourth of the valence Laplacian (`$id:lv`), and `elf`, `lol`, and
+`xhole` are calculated with the valence density (`$id:v`) and its
+gradient, so they are the valence ELF, LOL, and exchange hole.
+
 * `gkin(id)` [`GKIN`]: the kinetic energy density, G-version
   ($$\sum_i{\bf \nabla}\psi_i\cdot{\bf \nabla}\psi_i /2$$).[^bader1][^bader2]
 
