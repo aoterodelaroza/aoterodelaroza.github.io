@@ -9,8 +9,8 @@ _cell_angle_gamma        90.0000
 _cell_volume          2687.822196
 _space_group_crystal_system cubic
 _space_group_IT_number 203
-_space_group_name_H-M_alt 'Fd-3'
-_space_group_name_Hall 'F 2 2 3 -1d'
+_space_group_name_H-M_alt 'F 2/d -3'
+_space_group_name_Hall '-F 2uv 2vw 3'
 loop_
 _space_group_symop_operation_xyz
   'x,y,z'

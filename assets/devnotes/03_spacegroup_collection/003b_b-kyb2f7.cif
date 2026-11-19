@@ -9,8 +9,8 @@ _cell_angle_gamma       115.9400
 _cell_volume           159.299351
 _space_group_crystal_system monoclinic
 _space_group_IT_number 3
-_space_group_name_H-M_alt 'P2'
-_space_group_name_Hall 'P 2y'
+_space_group_name_H-M_alt 'P 1 1 2'
+_space_group_name_Hall 'P 2'
 loop_
 _space_group_symop_operation_xyz
   'x,y,z'

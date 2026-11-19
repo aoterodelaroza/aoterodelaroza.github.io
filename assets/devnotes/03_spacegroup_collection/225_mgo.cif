@@ -9,7 +9,7 @@ _cell_angle_gamma        90.0000
 _cell_volume            74.671646
 _space_group_crystal_system cubic
 _space_group_IT_number 225
-_space_group_name_H-M_alt 'Fm-3m'
+_space_group_name_H-M_alt 'F 4/m -3 2/m'
 _space_group_name_Hall '-F 4 2 3'
 loop_
 _space_group_symop_operation_xyz

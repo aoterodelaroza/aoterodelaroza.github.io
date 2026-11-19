@@ -9,8 +9,8 @@ _cell_angle_gamma        90.0000
 _cell_volume           156.759780
 _space_group_crystal_system orthorhombic
 _space_group_IT_number 64
-_space_group_name_H-M_alt 'Cmce'
-_space_group_name_Hall '-C 2bc 2'
+_space_group_name_H-M_alt 'C 2/c 2/m 2_1/e'
+_space_group_name_Hall '-C 2bc 2bc'
 loop_
 _space_group_symop_operation_xyz
   'x,y,z'

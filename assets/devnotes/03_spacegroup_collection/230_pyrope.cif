@@ -9,7 +9,7 @@ _cell_angle_gamma        90.0000
 _cell_volume          1503.484707
 _space_group_crystal_system cubic
 _space_group_IT_number 230
-_space_group_name_H-M_alt 'Ia-3d'
+_space_group_name_H-M_alt 'I 4_1/a -3 2/d'
 _space_group_name_Hall '-I 4bd 2c 3'
 loop_
 _space_group_symop_operation_xyz

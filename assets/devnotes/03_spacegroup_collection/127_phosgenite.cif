@@ -9,7 +9,7 @@ _cell_angle_gamma        90.0000
 _cell_volume           591.479885
 _space_group_crystal_system tetragonal
 _space_group_IT_number 127
-_space_group_name_H-M_alt 'P4/mbm'
+_space_group_name_H-M_alt 'P 4/m 2_1/b m'
 _space_group_name_Hall '-P 4 2ab'
 loop_
 _space_group_symop_operation_xyz

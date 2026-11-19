@@ -9,8 +9,8 @@ _cell_angle_gamma        90.3100
 _cell_volume            89.536051
 _space_group_crystal_system monoclinic
 _space_group_IT_number 6
-_space_group_name_H-M_alt 'Pm'
-_space_group_name_Hall 'P -2y'
+_space_group_name_H-M_alt 'P 1 1 m'
+_space_group_name_Hall 'P -2'
 loop_
 _space_group_symop_operation_xyz
   'x,y,z'

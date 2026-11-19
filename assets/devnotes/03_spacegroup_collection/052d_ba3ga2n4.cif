@@ -9,8 +9,8 @@ _cell_angle_gamma        90.0000
 _cell_volume           656.349620
 _space_group_crystal_system orthorhombic
 _space_group_IT_number 52
-_space_group_name_H-M_alt 'Pnna'
-_space_group_name_Hall '-P 2a 2bc'
+_space_group_name_H-M_alt 'P 2/c 2_1/n 2/n'
+_space_group_name_Hall '-P 2ab 2c'
 loop_
 _space_group_symop_operation_xyz
   'x,y,z'

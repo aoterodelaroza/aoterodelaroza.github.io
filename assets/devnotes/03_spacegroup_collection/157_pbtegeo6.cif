@@ -9,7 +9,7 @@ _cell_angle_gamma       120.0000
 _cell_volume           125.080746
 _space_group_crystal_system trigonal
 _space_group_IT_number 157
-_space_group_name_H-M_alt 'P31m'
+_space_group_name_H-M_alt 'P 3 1 m'
 _space_group_name_Hall 'P 3 -2'
 loop_
 _space_group_symop_operation_xyz
