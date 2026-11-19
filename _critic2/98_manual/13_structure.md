@@ -442,7 +442,8 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
         [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
-NEWCELL ORIENT {HKL h.i k.i l.i|UVW u.i v.i w.i} [A|B|C] [ORIGIN x0.r y0.r z0.r]
+NEWCELL ORIENT {HKL h.i k.i l.i|UVW u.i v.i w.i} [A|B|C] [PRIMITIVE]
+        [ORIGIN x0.r y0.r z0.r]
 NEWCELL NICE [inice.i] [MINDISP]
 NEWCELL REACH [ireach.i] [MINDISP]
 ~~~
@@ -511,7 +512,10 @@ which case the new cell is not primitive. If the lattice has no vector
 perpendicular to the plane, which is the usual case in lattices with
 low symmetry, or if that vector crosses more than 100 planes, the
 third axis is the lattice vector that goes from one plane to the next,
-chosen as close to the normal as possible. With
+chosen as close to the normal as possible. The PRIMITIVE keyword
+requests this last choice of the third axis in all cases, so the new
+cell is always primitive, at the cost of an axis that in general is
+not perpendicular to the plane. With
 `UVW`, the indices are a lattice direction referred to the current
 cell: one axis of the new cell is the shortest lattice vector along
 [uvw], and the other two are the shortest lattice vectors that
@@ -525,17 +529,18 @@ are not perpendicular to [uvw]. For directions with very large
 indices, the search for the shortest vectors is not carried out, and
 the two axes are short lattice vectors close to perpendicular to
 [uvw], but not necessarily the shortest. The optional `A`, `B` or `C`
-keyword chooses the axis of the new cell that is perpendicular to the
-plane (HKL) or along the direction (UVW); the default is C. The other
-two axes follow in cyclic order, so the new cell is always
+keyword chooses the axis of the new cell that goes out of the plane
+(HKL) or along the direction (UVW); the default is C. The other two
+axes follow in cyclic order, so the new cell is always
 right-handed. The search uses the whole lattice, centering vectors
 included, so the result does not depend on whether the current cell
-is primitive: the UVW cell is always primitive, and the HKL cell is
-primitive unless the axis perpendicular to the plane crosses several
-planes. As in the first form
+is primitive: the UVW cell is always primitive (PRIMITIVE has no
+effect on it), and the HKL cell is primitive unless the axis
+perpendicular to the plane crosses several planes. As in the first form
 of NEWCELL, the optional ORIGIN keyword translates the origin of the
 new cell to `x0.r` `y0.r` `z0.r`, in crystallographic coordinates of
-the original cell. For instance, in the conventional cell of a
+the original cell. The axis, PRIMITIVE and ORIGIN can be given in any
+order after the indices. For instance, in the conventional cell of a
 face-centered cubic metal:
 ~~~
 CRYSTAL LIBRARY cu
@@ -543,7 +548,12 @@ NEWCELL ORIENT HKL 1 1 1
 ~~~
 gives a hexagonal cell with three atoms: a and b are in the (111)
 plane at 120 degrees, and c is perpendicular to it and spans the three
-close-packed layers of the stacking sequence. In the same crystal,
+close-packed layers of the stacking sequence. With PRIMITIVE,
+~~~
+NEWCELL ORIENT HKL 1 1 1 PRIMITIVE
+~~~
+a and b are the same but c goes to the next close-packed layer, and
+the cell is a primitive cell with one atom. In the same crystal,
 ~~~
 NEWCELL ORIENT UVW 1 1 0
 ~~~
