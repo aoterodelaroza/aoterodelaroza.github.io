@@ -294,6 +294,26 @@ A simple cif file is generated if the `.cif` extension is used. If
 NOSYM (or NOSYMM) is used, the cif file is written without symmetry
 (i.e. in the P1 space group).
 
+Note that the space group symbols written to the cif file
+(`_space_group_name_H-M_alt` and `_space_group_name_Hall`) identify
+the space group type, but not its setting. Critic2 takes these symbols
+from the space group identification in spglib, which always returns
+the short Hermann-Mauguin and Hall symbols for the first tabulated
+setting of the space group type (unique axis b and cell choice 1 in
+monoclinic groups, the abc setting in orthorhombic groups, origin
+choice 1, and hexagonal axes in rhombohedral groups), regardless of
+the setting of the crystal. Therefore, if the crystal is in any other
+setting (for instance, P2_1/n, Pbnm, or the origin choice 2 of
+Fd-3m), these two entries do not correspond to the cell written to
+the file and should be disregarded. The cell parameters, the atomic
+coordinates, the symmetry operations, and the space group number
+(`_space_group_IT_number`) are written independently of the two
+symbols and are correct in all settings, so programs that build the
+crystal from the list of symmetry operations are not affected. The
+Hall and Hermann-Mauguin symbols for all settings of each space group
+type are listed in the [space group crystal
+collection](/devnotes/space-group-collection/).
+
 ### SHELX (res)
 
 The `.res` extension writes a SHELX file in res format. If NOSYM (or

@@ -17,6 +17,15 @@ adapted from the database in
 the International Tables for Crystallography, Volume B. The * in the
 first column is the default ITA setting.
 
+The `_space_group_name_H-M_alt` and `_space_group_name_Hall` entries
+in each cif file are the full H-M symbol and the Hall symbol for the
+corresponding setting in the table (the `=` in the Hall symbols of
+the table is written as `"` in the cif files). These two entries were
+corrected after generating the files, because critic2 writes the
+symbols for the first setting of each space group type regardless of
+the setting of the crystal (see the [cif file
+format](/critic2/manual/write/#crystallographic-information-file-cif) in the manual).
+
 Download the whole collection: [spg-collection.tar.xz](/assets/devnotes/03_spacegroup_collection/spg-collection.tar.xz).
 
 |   | Hall-num | c:n      | sys          | Hall             | H-M (full)          | H-M (short) | Example                                                                                                      |
@@ -254,10 +263,10 @@ Download the whole collection: [spg-collection.tar.xz](/assets/devnotes/03_space
 |   |      231 | 49:cab   | orthorhombic | -P 2a 2          | P 2/m 2/a 2/a       | Pmaa        | [cif](/assets/devnotes/03_spacegroup_collection/049b_beta-ta2o5.cif)                                         |
 |   |      232 | 49:bca   | orthorhombic | -P 2b 2b         | P 2/b 2/m 2/b       | Pbmb        | [cif](/assets/devnotes/03_spacegroup_collection/049c_beta-ta2o5.cif)                                         |
 |   |      233 | 50:1     | orthorhombic | P 2 2 -1ab       | P 2/b 2/a 2/n       | Pban        | Ru8C208H328N8O8F60P18 ([cif](/assets/devnotes/03_spacegroup_collection/050a_ru8c208h328n8o8f60p18.cif))      |
-| * |      234 | 50:2     | orthorhombic | -P 2ab 2b        | P 2/b 2/a 2/n       | Pban        | [cif](/assets/devnotes/03_spacegroup_collection/050b_ru8c208h328n8o8f60p18.cif)                              |
-|   |      235 | 50:1cab  | orthorhombic | P 2 2 -1bc       | P 2/n 2/c 2/b       | Pncb        | [cif](/assets/devnotes/03_spacegroup_collection/050c_ru8c208h328n8o8f60p18.cif)                              |
-|   |      236 | 50:2cab  | orthorhombic | -P 2b 2bc        | P 2/n 2/c 2/b       | Pncb        | [cif](/assets/devnotes/03_spacegroup_collection/050d_ru8c208h328n8o8f60p18.cif)                              |
-|   |      237 | 50:1bca  | orthorhombic | P 2 2 -1ac       | P 2/c 2/n 2/a       | Pcna        | [cif](/assets/devnotes/03_spacegroup_collection/050e_ru8c208h328n8o8f60p18.cif)                              |
+| * |      234 | 50:2     | orthorhombic | -P 2ab 2b        | P 2/b 2/a 2/n       | Pban        | [cif](/assets/devnotes/03_spacegroup_collection/050d_ru8c208h328n8o8f60p18.cif)                              |
+|   |      235 | 50:1cab  | orthorhombic | P 2 2 -1bc       | P 2/n 2/c 2/b       | Pncb        | [cif](/assets/devnotes/03_spacegroup_collection/050b_ru8c208h328n8o8f60p18.cif)                              |
+|   |      236 | 50:2cab  | orthorhombic | -P 2b 2bc        | P 2/n 2/c 2/b       | Pncb        | [cif](/assets/devnotes/03_spacegroup_collection/050e_ru8c208h328n8o8f60p18.cif)                              |
+|   |      237 | 50:1bca  | orthorhombic | P 2 2 -1ac       | P 2/c 2/n 2/a       | Pcna        | [cif](/assets/devnotes/03_spacegroup_collection/050c_ru8c208h328n8o8f60p18.cif)                              |
 |   |      238 | 50:2bca  | orthorhombic | -P 2a 2c         | P 2/c 2/n 2/a       | Pcna        | [cif](/assets/devnotes/03_spacegroup_collection/050f_ru8c208h328n8o8f60p18.cif)                              |
 | * |      239 | 51       | orthorhombic | -P 2a 2a         | P 2_1/m 2/m 2/a     | Pmma        | Valleriite, Cu2Fe4S7 ([cif](/assets/devnotes/03_spacegroup_collection/051a_valleriite.cif))                  |
 |   |      240 | 51:ba-c  | orthorhombic | -P 2b 2          | P 2/m 2_1/m 2/b     | Pmmb        | [cif](/assets/devnotes/03_spacegroup_collection/051b_valleriite.cif)                                         |
@@ -424,8 +433,8 @@ Download the whole collection: [spg-collection.tar.xz](/assets/devnotes/03_space
 | * |      401 | 124      | tetragonal   | -P 4 2c          | P 4/m 2/c 2/c       | P4/mcc      | CoNb4P ([cif](/assets/devnotes/03_spacegroup_collection/124_conb4p.cif))                                     |
 |   |      402 | 125:1    | tetragonal   | P 4 2 -1ab       | P 4/n 2/b 2/m       | P4/nbm      | C44H56Cl8La4N8Na20O48 ([cif](/assets/devnotes/03_spacegroup_collection/125a_c44h56cl8la4n8na20o48.cif))      |
 | * |      403 | 125:2    | tetragonal   | -P 4a 2b         | P 4/n 2/b 2/m       | P4/nbm      | [cif](/assets/devnotes/03_spacegroup_collection/125b_c44h56cl8la4n8na20o48.cif)                              |
-|   |      404 | 126:1    | tetragonal   | P 4 2 -1n        | P 4/n 2/n 2/c       | P4/nnc      | Torbernite, Cu(UO2)2(PO4)2.12H2O ([cif](/assets/devnotes/03_spacegroup_collection/126a_torbernite.cif))      |
-| * |      405 | 126:2    | tetragonal   | -P 4a 2bc        | P 4/n 2/n 2/c       | P4/nnc      | [cif](/assets/devnotes/03_spacegroup_collection/126b_torbernite.cif)                                         |
+|   |      404 | 126:1    | tetragonal   | P 4 2 -1n        | P 4/n 2/n 2/c       | P4/nnc      | Torbernite, Cu(UO2)2(PO4)2.12H2O ([cif](/assets/devnotes/03_spacegroup_collection/126b_torbernite.cif))      |
+| * |      405 | 126:2    | tetragonal   | -P 4a 2bc        | P 4/n 2/n 2/c       | P4/nnc      | [cif](/assets/devnotes/03_spacegroup_collection/126a_torbernite.cif)                                         |
 | * |      406 | 127      | tetragonal   | -P 4 2ab         | P 4/m 2_1/b m       | P4/mbm      | Phosgenite, Pb2Cl2(CO3) ([cif](/assets/devnotes/03_spacegroup_collection/127_phosgenite.cif))                |
 | * |      407 | 128      | tetragonal   | -P 4 2n          | P 4/m 2_1/n c       | P4/mnc      | Apophyllite, KCa4Si8O28F ([cif](/assets/devnotes/03_spacegroup_collection/128_apophyllite.cif))              |
 |   |      408 | 129:1    | tetragonal   | P 4ab 2ab -1ab   | P 4/n 2_1/m m       | P4/nmm      | Matlockite, PbClF ([cif](/assets/devnotes/03_spacegroup_collection/129a_matlockite.cif))                     |
