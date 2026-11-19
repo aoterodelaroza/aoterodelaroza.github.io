@@ -439,11 +439,12 @@ The NEWCELL keyword transforms the unit cell used to describe the
 current crystal structure to a new cell:
 ~~~
 NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVERSE]
-        [ORIGIN x0.r y0.r z0.r]
+        [ORIGIN {x0.r y0.r z0.r|ATOM id.i|INVERSION}]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
 NEWCELL ORIENT {HKL h.i k.i l.i|UVW u.i v.i w.i} [A|B|C] [PRIMITIVE]
-        [ORIGIN x0.r y0.r z0.r]
+        [ORIGIN {x0.r y0.r z0.r|ATOM id.i|INVERSION}]
+NEWCELL ORIGIN {x0.r y0.r z0.r|ATOM id.i|CM|CENTER|INVERSION}
 NEWCELL NICE [inice.i] [MINDISP]
 NEWCELL REACH [ireach.i] [MINDISP]
 ~~~
@@ -463,7 +464,32 @@ of the old cell in the new coordinate system. A NEWCELL transformation
 is the inverse of the same transformation using the INV keyword.
 Optionally, if an ORIGIN vector is given, (`x0.r` `y0.r` `z0.r`), the
 cell origin is translated to x0. The units of x0 are crystallographic
-coordinates of the original cell.
+coordinates of the original cell. Instead of the vector, the new
+origin can be one of:
+
+* `ATOM id.i`: the atom with complete-list ID `id.i`.
+
+* `CM`: the center of mass of the atoms in the cell.
+
+* `CENTER`: the point that puts the atoms in the middle of the
+  cell. This acts only along the axes that have vacuum (a slab, a
+  chain, or a molecule in a box); it is an error if there is none.
+
+* `INVERSION`: the inversion center of the space group closest to the
+  current origin. It is an error if the space group has no inversion
+  center.
+
+The ATOM and INVERSION origins refer to the original cell. CM and
+CENTER depend on the contents of the cell, so they can only be used
+when ORIGIN is given on its own, not together with the lattice vectors
+of a new cell. Along the axes that have vacuum, CM first gathers the
+atoms on one side of it, so the result does not depend on whether the
+slab or the molecule straddles the cell boundary. When the ORIGIN
+keyword is used on its own, only the origin is moved and the lattice
+vectors stay the same:
+~~~
+NEWCELL ORIGIN ATOM 3
+~~~
 
 The NEWCELL keyword is useful for building supercells or for
 performing routine but tedious crystallographic transformations. For
@@ -538,10 +564,11 @@ is primitive: the UVW cell is always primitive (PRIMITIVE has no
 effect on it), and the HKL cell is primitive unless the axis
 perpendicular to the plane crosses several planes. As in the first form
 of NEWCELL, the optional ORIGIN keyword translates the origin of the
-new cell to `x0.r` `y0.r` `z0.r`, in crystallographic coordinates of
-the original cell. The axis, PRIMITIVE and ORIGIN can be given in any
-order after the indices. For instance, in the conventional cell of a
-face-centered cubic metal:
+new cell, to a point in crystallographic coordinates of the original
+cell or to one of the other choices (ATOM or INVERSION). The
+axis, PRIMITIVE and ORIGIN can be given in any order after the
+indices. For instance, in the conventional cell of a face-centered
+cubic metal:
 ~~~
 CRYSTAL LIBRARY cu
 NEWCELL ORIENT HKL 1 1 1
