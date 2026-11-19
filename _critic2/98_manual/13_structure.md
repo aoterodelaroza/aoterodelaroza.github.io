@@ -442,6 +442,7 @@ NEWCELL {x1.r y1.r z1.r x2.r y2.r z2.r x3.r y3.r z3.r|n1.i n2.i n3.i} [INV|INVER
         [ORIGIN x0.r y0.r z0.r]
 NEWCELL [{PRIMSTD|STANDARD|PRIMITIVE} [REFINE]]
 NEWCELL [NIGGLI|DELAUNAY]
+NEWCELL ORIENT {HKL h.i k.i l.i|UVW u.i v.i w.i} [A|B|C] [ORIGIN x0.r y0.r z0.r]
 NEWCELL NICE [inice.i] [MINDISP]
 NEWCELL REACH [ireach.i] [MINDISP]
 ~~~
@@ -499,7 +500,58 @@ transformed to:
 * DELAUNAY: Delaunay-reduced cell for the current lattice. Use a
   NEWCELL PRIMITIVE first to get the primitive Delaunay cell.
 
-The origin is not translated by any of these keywords. The REFINE
+The ORIENT keyword finds a cell with one of its axes oriented
+relative to the lattice. With `HKL`, the indices are the Miller
+indices of a family of lattice planes, referred to the current
+cell. Two of the axes of the new cell are the shortest lattice vectors
+in the plane, at an obtuse angle, and the third axis is the shortest
+lattice vector perpendicular to the plane, on the side to which the
+(hkl) normal points. This vector may cross several lattice planes, in
+which case the new cell is not primitive. If the lattice has no vector
+perpendicular to the plane, which is the usual case in lattices with
+low symmetry, or if that vector crosses more than 100 planes, the
+third axis is the lattice vector that goes from one plane to the next,
+chosen as close to the normal as possible. With
+`UVW`, the indices are a lattice direction referred to the current
+cell: one axis of the new cell is the shortest lattice vector along
+[uvw], and the other two are the shortest lattice vectors that
+complete a primitive cell with it, at an obtuse angle. The first of
+them is the shortest lattice vector that can be an axis next to
+[uvw], and the second is the shortest that goes with both. If several
+vectors of the same length can be the first, the one that allows the
+shortest second vector is used and, if they are still equivalent, the
+one closest to perpendicular to [uvw]. In general, these two vectors
+are not perpendicular to [uvw]. For directions with very large
+indices, the search for the shortest vectors is not carried out, and
+the two axes are short lattice vectors close to perpendicular to
+[uvw], but not necessarily the shortest. The optional `A`, `B` or `C`
+keyword chooses the axis of the new cell that is perpendicular to the
+plane (HKL) or along the direction (UVW); the default is C. The other
+two axes follow in cyclic order, so the new cell is always
+right-handed. The search uses the whole lattice, centering vectors
+included, so the result does not depend on whether the current cell
+is primitive: the UVW cell is always primitive, and the HKL cell is
+primitive unless the axis perpendicular to the plane crosses several
+planes. As in the first form
+of NEWCELL, the optional ORIGIN keyword translates the origin of the
+new cell to `x0.r` `y0.r` `z0.r`, in crystallographic coordinates of
+the original cell. For instance, in the conventional cell of a
+face-centered cubic metal:
+~~~
+CRYSTAL LIBRARY cu
+NEWCELL ORIENT HKL 1 1 1
+~~~
+gives a hexagonal cell with three atoms: a and b are in the (111)
+plane at 120 degrees, and c is perpendicular to it and spans the three
+close-packed layers of the stacking sequence. In the same crystal,
+~~~
+NEWCELL ORIENT UVW 1 1 0
+~~~
+gives a primitive cell with one atom, in which c is the
+nearest-neighbor vector along [110] and a and b are two other
+nearest-neighbor vectors.
+
+The origin is not translated by the other keywords. The REFINE
 keyword can be used in combination with STANDARD, PRIMITIVE, or
 PRIMSTD. If REFINE is used, then the atomic positions are idealized
 according to the space group symmetry operations. For instance, an
