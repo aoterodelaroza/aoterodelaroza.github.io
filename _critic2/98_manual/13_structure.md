@@ -1028,6 +1028,7 @@ EDIT
  DELETE {HYDROGEN|HYDROGENS}
  MOVE id.i x.r y.r z.r [BOHR|ANG] [NNEQ] [RELATIVE]
  CELLMOVE {A|B|C|ALPHA|BETA|GAMMA|V|VOL|VOLUME} r.r [BOHR|ANG] [RELATIVE] [FRACTION]
+ VACUUM {A|B|C} len.r [BOHR|ANG] [CENTER|BOTTOM] [CUT x.r] [ORTHOGONAL] [KEEPMOL]
  RELAX ff.s [file.s] [thresh.r]
 ENDEDIT
 ~~~
@@ -1067,6 +1068,51 @@ structure. The list of possible editing actions includes:
   units. If RELATIVE is given, add `r.r` to the current value of the
   parameter. If FRACTION is given, multiply the current value of the
   parameter with `r.r`.
+
+* `VACUUM`: set the vacuum along the given axis to `len.r` (crystals
+  only). The contents of the cell are cut by a plane parallel to the
+  other two axes, and the cell is made longer or shorter along the
+  axis until the distance between the atoms on both sides of the cut
+  is `len.r`. This distance is measured along the perpendicular to the
+  other two axes. The units are bohr unless changed with
+  [UNITS](/critic2/manual/inputoutput/#c2-units) or with the BOHR and
+  ANG keywords. Unlike `CELLMOVE`, which keeps the fractional
+  coordinates and stretches the structure, `VACUUM` does not change
+  any interatomic distance within the slab, and it can also be used to
+  reduce or remove the vacuum of a slab. The new cell cannot be less
+  than 1 bohr high along the perpendicular to the other two axes.
+
+  By default, the cut is made in the middle of the largest empty gap
+  along the axis, which is the existing vacuum in a slab and the
+  widest spacing between atomic planes in a bulk crystal (the first
+  one from the origin of the cell, if several spacings are equal).
+  With `CUT x.r`, the cell is cut at fractional coordinate `x.r`
+  along the axis instead: the atoms below the cut go to the top of the
+  slab, and an atom exactly at the cut stays at the bottom. For
+  instance, in a cell with atomic planes at fractional coordinates 0
+  and 1/2 along c, `CUT 0.5` gives a slab whose bottom plane is the
+  one at 1/2.
+
+  The slab is placed in the middle of the new cell (CENTER, the
+  default) or with its lowest atom at fractional coordinate zero and
+  all the vacuum above it (BOTTOM). The new axis has the same
+  direction as the old one, so the fractional coordinates of the atoms
+  along the other two axes do not change. If ORTHOGONAL is given, the
+  axis is made perpendicular to the other two instead, and the atoms
+  keep their Cartesian positions. This is only meaningful if there is
+  enough vacuum to separate the slab from its periodic images, because
+  it changes how they are stacked. If KEEPMOL is given, the molecules
+  are kept whole, and so are the bonded layers and chains that are not
+  periodic along the axis: the cut divides the centers of the molecules
+  instead of the atoms, so no molecule is cut (if the molecules on both sides
+  of the cut interlock, the vacuum is measured between the atoms that
+  reach the farthest). For instance, a (111) slab of a cubic crystal,
+  three cells thick and with 15 angstrom of vacuum, is:
+~~~
+NEWCELL ORIENT HKL 1 1 1
+NEWCELL 1 1 3
+EDIT VACUUM C 15 ANG
+~~~
 
 * `RELAX ff.s [file.s] [thresh.r]`: relax the currently loaded
   structure to its nearest local energy minimum using the force field
