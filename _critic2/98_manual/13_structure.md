@@ -1106,8 +1106,11 @@ structure. The list of possible editing actions includes:
   periodic along the axis: the cut divides the centers of the molecules
   instead of the atoms, so no molecule is cut (if the molecules on both sides
   of the cut interlock, the vacuum is measured between the atoms that
-  reach the farthest). For instance, a (111) slab of a cubic crystal,
-  three cells thick and with 15 angstrom of vacuum, is:
+  reach the farthest). If the cell already has the requested vacuum,
+  with the slab at the requested position and, with ORTHOGONAL, the
+  axis already perpendicular to the other two, the structure is left
+  as it is. For instance, a (111) slab of a cubic crystal, three cells
+  thick and with 15 angstrom of vacuum, is:
 ~~~
 NEWCELL ORIENT HKL 1 1 1
 NEWCELL 1 1 3
